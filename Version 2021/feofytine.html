@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4.6 Feofytine-a | Eerstelijnsrapportage Westerschelde</title>
+  <meta name="description" content="4.6 Feofytine-a | Eerstelijnsrapportage Westerschelde" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4.6 Feofytine-a | Eerstelijnsrapportage Westerschelde" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4.6 Feofytine-a | Eerstelijnsrapportage Westerschelde" />
+  
+  
+  
+
+<meta name="author" content="Deltares, Rijkswaterstaat" />
+
+
+<meta name="date" content="2021-07-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="chlorofyl.html"/>
+<link rel="next" href="zuurstofverbruik.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<style>
+.zoomDiv {
+  opacity: 0;
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 50;
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 0px 50px #888888;
+  max-height:100%;
+  overflow: scroll;
+}
+
+.zoomImg {
+  width: 100%;
+}
+</style>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').prepend("<div class=\"zoomDiv\"><img src=\"\" class=\"zoomImg\"></div>");
+    // onClick function for all plots (img's)
+    $('img:not(.zoomImg)').click(function() {
+      $('.zoomImg').attr('src', $(this).attr('src'));
+      $('.zoomDiv').css({opacity: '1', width: '80%'});
+    });
+    // onClick function for zoomImg
+    $('img.zoomImg').click(function() {
+      $('.zoomDiv').css({opacity: '0', width: '0%'});
+    });
+  });
+</script>
+
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="navbar/navbar.css" type="text/css" />
+<link rel="stylesheet" href="style/deltares.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="http://www.deltares.nl"><img src="Figuren/Logos/logo.png" style="width: 175px;"></a></li>
+<li><a href="http://www.rws.nl"><img src="Figuren/Logos/Rijkswaterstaat-logo-e1473888123824-1-300x300.jpg" style="width: 175px;"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Voorwoord</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="samenvatting.html"><a href="samenvatting.html"><i class="fa fa-check"></i><b>1.1</b> Samenvatting</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="inleiding.html"><a href="inleiding.html"><i class="fa fa-check"></i><b>2</b> Inleiding</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="achtergrond.html"><a href="achtergrond.html"><i class="fa fa-check"></i><b>2.1</b> Achtergrond</a></li>
+<li class="chapter" data-level="2.2" data-path="doelstelling.html"><a href="doelstelling.html"><i class="fa fa-check"></i><b>2.2</b> Doelstelling</a></li>
+<li class="chapter" data-level="2.3" data-path="verwerkte-data.html"><a href="verwerkte-data.html"><i class="fa fa-check"></i><b>2.3</b> Verwerkte data</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="verwerkte-data.html"><a href="verwerkte-data.html#ontbrekende-data"><i class="fa fa-check"></i><b>2.3.1</b> Ontbrekende data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="leeswijzer.html"><a href="leeswijzer.html"><i class="fa fa-check"></i><b>2.4</b> Leeswijzer</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="hydro.html"><a href="hydro.html"><i class="fa fa-check"></i><b>3</b> Hydrodynamiek</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="waterstanden.html"><a href="waterstanden.html"><i class="fa fa-check"></i><b>3.1</b> Waterstanden</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="waterstanden.html"><a href="waterstanden.html#hydroInfoMeting"><i class="fa fa-check"></i><b>3.1.1</b> Informatie over de metingen</a></li>
+<li class="chapter" data-level="3.1.2" data-path="waterstanden.html"><a href="waterstanden.html#hydroHWLW"><i class="fa fa-check"></i><b>3.1.2</b> Jaargemiddelde hoog- en laagwaterstanden</a></li>
+<li class="chapter" data-level="3.1.3" data-path="waterstanden.html"><a href="waterstanden.html#hydroGetijslag"><i class="fa fa-check"></i><b>3.1.3</b> Jaargemiddelde getijslag</a></li>
+<li class="chapter" data-level="3.1.4" data-path="waterstanden.html"><a href="waterstanden.html#hydroGetijcomponenten"><i class="fa fa-check"></i><b>3.1.4</b> Getijcomponenten</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="golven.html"><a href="golven.html"><i class="fa fa-check"></i><b>3.2</b> Golven</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="golven.html"><a href="golven.html#golvenInfoMeting"><i class="fa fa-check"></i><b>3.2.1</b> Informatie over de metingen</a></li>
+<li class="chapter" data-level="3.2.2" data-path="golven.html"><a href="golven.html#golvenHoogte"><i class="fa fa-check"></i><b>3.2.2</b> Golfhoogte</a></li>
+<li class="chapter" data-level="3.2.3" data-path="golven.html"><a href="golven.html#golvenPeriode"><i class="fa fa-check"></i><b>3.2.3</b> Golfperiode</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html"><i class="fa fa-check"></i><b>4</b> Oppervlaktewater - Fysisch-chemische parameters</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="oppInfoMetingen.html"><a href="oppInfoMetingen.html"><i class="fa fa-check"></i><b>4.1</b> Informatie over de metingen</a></li>
+<li class="chapter" data-level="4.2" data-path="saliniteit.html"><a href="saliniteit.html"><i class="fa fa-check"></i><b>4.2</b> Saliniteit</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="saliniteit.html"><a href="saliniteit.html#saliniteit-jaargemiddelde"><i class="fa fa-check"></i><b>4.2.1</b> Jaargemiddelde</a></li>
+<li class="chapter" data-level="4.2.2" data-path="saliniteit.html"><a href="saliniteit.html#saliniteit-winterzomer"><i class="fa fa-check"></i><b>4.2.2</b> Gemiddelde waarde in de zomer en de winter</a></li>
+<li class="chapter" data-level="4.2.3" data-path="saliniteit.html"><a href="saliniteit.html#saliniteit-maandgemiddelde"><i class="fa fa-check"></i><b>4.2.3</b> Maandgemiddelde</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="watertemp.html"><a href="watertemp.html"><i class="fa fa-check"></i><b>4.3</b> Watertemperatuur</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="watertemp.html"><a href="watertemp.html#watertemp-jaargemiddelde"><i class="fa fa-check"></i><b>4.3.1</b> Jaargemiddelde</a></li>
+<li class="chapter" data-level="4.3.2" data-path="watertemp.html"><a href="watertemp.html#watertemp-winterzomer"><i class="fa fa-check"></i><b>4.3.2</b> Gemiddelde waarde in de zomer en de winter</a></li>
+<li class="chapter" data-level="4.3.3" data-path="watertemp.html"><a href="watertemp.html#watertemp-maandgemiddelde"><i class="fa fa-check"></i><b>4.3.3</b> Maandgemiddelde</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="zuurstof.html"><a href="zuurstof.html"><i class="fa fa-check"></i><b>4.4</b> Zuurstof</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="zuurstof.html"><a href="zuurstof.html#zuurstof-jaar-verzadiging"><i class="fa fa-check"></i><b>4.4.1</b> Jaargemiddelde verzadigingspercentage zuurstof</a></li>
+<li class="chapter" data-level="4.4.2" data-path="zuurstof.html"><a href="zuurstof.html#zuurstof-jaar-gehalte"><i class="fa fa-check"></i><b>4.4.2</b> Jaargemiddelde zuurstofgehalte</a></li>
+<li class="chapter" data-level="4.4.3" data-path="zuurstof.html"><a href="zuurstof.html#zuurstof-maand-verzadiging"><i class="fa fa-check"></i><b>4.4.3</b> Maandgemiddelde verzadigingspercentage zuurstof</a></li>
+<li class="chapter" data-level="4.4.4" data-path="zuurstof.html"><a href="zuurstof.html#zuurstof-maand-gehalte"><i class="fa fa-check"></i><b>4.4.4</b> Maandgemiddelde zuurstofgehalte</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="chlorofyl.html"><a href="chlorofyl.html"><i class="fa fa-check"></i><b>4.5</b> Chlorofyl-a</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="chlorofyl.html"><a href="chlorofyl.html#chlorofyl-jaar"><i class="fa fa-check"></i><b>4.5.1</b> Jaargemiddelde</a></li>
+<li class="chapter" data-level="4.5.2" data-path="chlorofyl.html"><a href="chlorofyl.html#chlorofyl-zomerwinter"><i class="fa fa-check"></i><b>4.5.2</b> Gemiddelde waardes in de zomer en de winter</a></li>
+<li class="chapter" data-level="4.5.3" data-path="chlorofyl.html"><a href="chlorofyl.html#chlorofyl-maand"><i class="fa fa-check"></i><b>4.5.3</b> Maandgemiddelde</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="feofytine.html"><a href="feofytine.html"><i class="fa fa-check"></i><b>4.6</b> Feofytine-a</a></li>
+<li class="chapter" data-level="4.7" data-path="zuurstofverbruik.html"><a href="zuurstofverbruik.html"><i class="fa fa-check"></i><b>4.7</b> Chemisch en biochemisch zuurstofverbruik</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="zuurstofverbruik.html"><a href="zuurstofverbruik.html#chemisch-zuurstofgebruik"><i class="fa fa-check"></i><b>4.7.1</b> Chemisch zuurstofgebruik</a></li>
+<li class="chapter" data-level="4.7.2" data-path="zuurstofverbruik.html"><a href="zuurstofverbruik.html#biochemisch-zuurstofgebruik"><i class="fa fa-check"></i><b>4.7.2</b> Biochemisch zuurstofgebruik</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="lichtklimaat.html"><a href="lichtklimaat.html"><i class="fa fa-check"></i><b>4.8</b> Lichtklimaat</a>
+<ul>
+<li class="chapter" data-level="4.8.1" data-path="lichtklimaat.html"><a href="lichtklimaat.html#doorzicht"><i class="fa fa-check"></i><b>4.8.1</b> Doorzicht</a></li>
+<li class="chapter" data-level="4.8.2" data-path="lichtklimaat.html"><a href="lichtklimaat.html#extinctiecoef"><i class="fa fa-check"></i><b>4.8.2</b> Extinctiecoefficient</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="zwevende-stof.html"><a href="zwevende-stof.html"><i class="fa fa-check"></i><b>4.9</b> Zwevende stof</a>
+<ul>
+<li class="chapter" data-level="4.9.1" data-path="zwevende-stof.html"><a href="zwevende-stof.html#zwevende-stof-jaar"><i class="fa fa-check"></i><b>4.9.1</b> Jaargemiddelden</a></li>
+<li class="chapter" data-level="4.9.2" data-path="zwevende-stof.html"><a href="zwevende-stof.html#zwevende-stof-zomerwinter"><i class="fa fa-check"></i><b>4.9.2</b> Gemiddelde waardes in de zomer en de winter</a></li>
+</ul></li>
+<li class="chapter" data-level="4.10" data-path="nutrienten.html"><a href="nutrienten.html"><i class="fa fa-check"></i><b>4.10</b> Nutrienten</a>
+<ul>
+<li class="chapter" data-level="4.10.1" data-path="nutrienten.html"><a href="nutrienten.html#stikstof"><i class="fa fa-check"></i><b>4.10.1</b> Stikstof</a></li>
+<li class="chapter" data-level="4.10.2" data-path="nutrienten.html"><a href="nutrienten.html#part-gebonden-stikstof"><i class="fa fa-check"></i><b>4.10.2</b> Particulair gebonden stikstof</a></li>
+<li class="chapter" data-level="4.10.3" data-path="nutrienten.html"><a href="nutrienten.html#ammonium"><i class="fa fa-check"></i><b>4.10.3</b> Ammonium</a></li>
+<li class="chapter" data-level="4.10.4" data-path="nutrienten.html"><a href="nutrienten.html#nitriet"><i class="fa fa-check"></i><b>4.10.4</b> Nitriet</a></li>
+<li class="chapter" data-level="4.10.5" data-path="nutrienten.html"><a href="nutrienten.html#nitraat"><i class="fa fa-check"></i><b>4.10.5</b> Nitraat</a></li>
+<li class="chapter" data-level="4.10.6" data-path="nutrienten.html"><a href="nutrienten.html#orthofosfaat"><i class="fa fa-check"></i><b>4.10.6</b> Orthofosfaat</a></li>
+<li class="chapter" data-level="4.10.7" data-path="nutrienten.html"><a href="nutrienten.html#totaal-fosfaat"><i class="fa fa-check"></i><b>4.10.7</b> Totaal fosfaat</a></li>
+<li class="chapter" data-level="4.10.8" data-path="nutrienten.html"><a href="nutrienten.html#part-gebonden-fosfaat"><i class="fa fa-check"></i><b>4.10.8</b> Particulair gebonden fosfaat</a></li>
+<li class="chapter" data-level="4.10.9" data-path="nutrienten.html"><a href="nutrienten.html#silicaat"><i class="fa fa-check"></i><b>4.10.9</b> Silicaat</a></li>
+<li class="chapter" data-level="4.10.10" data-path="nutrienten.html"><a href="nutrienten.html#organisch-koolstof"><i class="fa fa-check"></i><b>4.10.10</b> Organisch koolstof</a></li>
+</ul></li>
+<li class="chapter" data-level="4.11" data-path="cnp-ratio.html"><a href="cnp-ratio.html"><i class="fa fa-check"></i><b>4.11</b> C:N:P ratio’s</a></li>
+<li class="chapter" data-level="4.12" data-path="metalen.html"><a href="metalen.html"><i class="fa fa-check"></i><b>4.12</b> Metalen</a>
+<ul>
+<li class="chapter" data-level="4.12.1" data-path="metalen.html"><a href="metalen.html#boor"><i class="fa fa-check"></i><b>4.12.1</b> Boor</a></li>
+<li class="chapter" data-level="4.12.2" data-path="metalen.html"><a href="metalen.html#boor-fil"><i class="fa fa-check"></i><b>4.12.2</b> Boor na filtratie</a></li>
+<li class="chapter" data-level="4.12.3" data-path="metalen.html"><a href="metalen.html#chroom"><i class="fa fa-check"></i><b>4.12.3</b> Chroom</a></li>
+<li class="chapter" data-level="4.12.4" data-path="metalen.html"><a href="metalen.html#chroom-fil"><i class="fa fa-check"></i><b>4.12.4</b> Chroom na filtratie</a></li>
+<li class="chapter" data-level="4.12.5" data-path="metalen.html"><a href="metalen.html#koper"><i class="fa fa-check"></i><b>4.12.5</b> Koper</a></li>
+<li class="chapter" data-level="4.12.6" data-path="metalen.html"><a href="metalen.html#koper-fil"><i class="fa fa-check"></i><b>4.12.6</b> Koper na filtratie</a></li>
+<li class="chapter" data-level="4.12.7" data-path="metalen.html"><a href="metalen.html#uranium"><i class="fa fa-check"></i><b>4.12.7</b> Uranium</a></li>
+<li class="chapter" data-level="4.12.8" data-path="metalen.html"><a href="metalen.html#uranium-fil"><i class="fa fa-check"></i><b>4.12.8</b> Uranium na filtratie</a></li>
+<li class="chapter" data-level="4.12.9" data-path="metalen.html"><a href="metalen.html#vanadium"><i class="fa fa-check"></i><b>4.12.9</b> Vanadium</a></li>
+<li class="chapter" data-level="4.12.10" data-path="metalen.html"><a href="metalen.html#vanadium-fil"><i class="fa fa-check"></i><b>4.12.10</b> Vanadium na filtratie</a></li>
+<li class="chapter" data-level="4.12.11" data-path="metalen.html"><a href="metalen.html#zink"><i class="fa fa-check"></i><b>4.12.11</b> Zink</a></li>
+<li class="chapter" data-level="4.12.12" data-path="metalen.html"><a href="metalen.html#zink-fil"><i class="fa fa-check"></i><b>4.12.12</b> Zink na filtratie</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="zwevend-stof.html"><a href="zwevend-stof.html"><i class="fa fa-check"></i><b>5</b> Zwevend stof - Fysisch-chemische parameters</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="zwevend-info-metingen.html"><a href="zwevend-info-metingen.html"><i class="fa fa-check"></i><b>5.1</b> Informatie over de metingen</a></li>
+<li class="chapter" data-level="5.2" data-path="korrelgrootteverdeling.html"><a href="korrelgrootteverdeling.html"><i class="fa fa-check"></i><b>5.2</b> Korrelgrootteverdeling</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="korrelgrootteverdeling.html"><a href="korrelgrootteverdeling.html#korrelgrootteverdeling-tot63"><i class="fa fa-check"></i><b>5.2.1</b> Korrelgroottefractie tot 63 <span class="math inline">\(\mu\)</span>m</a></li>
+<li class="chapter" data-level="5.2.2" data-path="korrelgrootteverdeling.html"><a href="korrelgrootteverdeling.html#korrelgrootteverdeling-tot2"><i class="fa fa-check"></i><b>5.2.2</b> Korrelgroottefractie tot 2 <span class="math inline">\(\mu\)</span>m</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="zwevend-metalen.html"><a href="zwevend-metalen.html"><i class="fa fa-check"></i><b>5.3</b> Metalen</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="zwevend-metalen.html"><a href="zwevend-metalen.html#zwevend-arseen"><i class="fa fa-check"></i><b>5.3.1</b> Arseen</a></li>
+<li class="chapter" data-level="5.3.2" data-path="zwevend-metalen.html"><a href="zwevend-metalen.html#zwevend-cadmium"><i class="fa fa-check"></i><b>5.3.2</b> Cadmium</a></li>
+<li class="chapter" data-level="5.3.3" data-path="zwevend-metalen.html"><a href="zwevend-metalen.html#zwevend-chroom"><i class="fa fa-check"></i><b>5.3.3</b> Chroom</a></li>
+<li class="chapter" data-level="5.3.4" data-path="zwevend-metalen.html"><a href="zwevend-metalen.html#zwevend-kobalt"><i class="fa fa-check"></i><b>5.3.4</b> Kobalt</a></li>
+<li class="chapter" data-level="5.3.5" data-path="zwevend-metalen.html"><a href="zwevend-metalen.html#zwevend-koper"><i class="fa fa-check"></i><b>5.3.5</b> Koper</a></li>
+<li class="chapter" data-level="5.3.6" data-path="zwevend-metalen.html"><a href="zwevend-metalen.html#zwevend-kwik"><i class="fa fa-check"></i><b>5.3.6</b> Kwik</a></li>
+<li class="chapter" data-level="5.3.7" data-path="zwevend-metalen.html"><a href="zwevend-metalen.html#zwevend-lood"><i class="fa fa-check"></i><b>5.3.7</b> Lood</a></li>
+<li class="chapter" data-level="5.3.8" data-path="zwevend-metalen.html"><a href="zwevend-metalen.html#zwevend-vanadium"><i class="fa fa-check"></i><b>5.3.8</b> Vanadium</a></li>
+<li class="chapter" data-level="5.3.9" data-path="zwevend-metalen.html"><a href="zwevend-metalen.html#zwevend-zink"><i class="fa fa-check"></i><b>5.3.9</b> Zink</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="zwevend-PAK.html"><a href="zwevend-PAK.html"><i class="fa fa-check"></i><b>5.4</b> Polycyclische aromatische koolwaterstoffen (PAK’s)</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="zwevend-PAK.html"><a href="zwevend-PAK.html#zwevend-antraceen"><i class="fa fa-check"></i><b>5.4.1</b> Antraceen</a></li>
+<li class="chapter" data-level="5.4.2" data-path="zwevend-PAK.html"><a href="zwevend-PAK.html#zwevend-Benzoapyreen"><i class="fa fa-check"></i><b>5.4.2</b> Benzo[<em>a</em>]antraceen</a></li>
+<li class="chapter" data-level="5.4.3" data-path="zwevend-PAK.html"><a href="zwevend-PAK.html#zwevend-Benzoghiperyleen"><i class="fa fa-check"></i><b>5.4.3</b> Benzo[<em>g,h,i</em>]peryleen</a></li>
+<li class="chapter" data-level="5.4.4" data-path="zwevend-PAK.html"><a href="zwevend-PAK.html#zwevend-Benzoaantraceen"><i class="fa fa-check"></i><b>5.4.4</b> Benzo[<em>a</em>]antraceen</a></li>
+<li class="chapter" data-level="5.4.5" data-path="zwevend-PAK.html"><a href="zwevend-PAK.html#zwevend-Benzokfluorantheen"><i class="fa fa-check"></i><b>5.4.5</b> Benzo[<em>k</em>]fluorantheen</a></li>
+<li class="chapter" data-level="5.4.6" data-path="zwevend-PAK.html"><a href="zwevend-PAK.html#zwevend-chryseen"><i class="fa fa-check"></i><b>5.4.6</b> Chryseen</a></li>
+<li class="chapter" data-level="5.4.7" data-path="zwevend-PAK.html"><a href="zwevend-PAK.html#zwevend-fenanthreen"><i class="fa fa-check"></i><b>5.4.7</b> Fenanthreen</a></li>
+<li class="chapter" data-level="5.4.8" data-path="zwevend-PAK.html"><a href="zwevend-PAK.html#zwevend-fluorantheen"><i class="fa fa-check"></i><b>5.4.8</b> Fluorantheen</a></li>
+<li class="chapter" data-level="5.4.9" data-path="zwevend-PAK.html"><a href="zwevend-PAK.html#zwevend-indeno"><i class="fa fa-check"></i><b>5.4.9</b> Indeno[<em>1,2,3-c,d</em>]pyreen</a></li>
+<li class="chapter" data-level="5.4.10" data-path="zwevend-PAK.html"><a href="zwevend-PAK.html#zwevend-naftaleen"><i class="fa fa-check"></i><b>5.4.10</b> Naftaleen</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="zwevend-PCB.html"><a href="zwevend-PCB.html"><i class="fa fa-check"></i><b>5.5</b> Polychloorbifenylen (PCB’s)</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="zwevend-PCB.html"><a href="zwevend-PCB.html#zwevend-PCB180"><i class="fa fa-check"></i><b>5.5.1</b> PCB180</a></li>
+<li class="chapter" data-level="5.5.2" data-path="zwevend-PCB.html"><a href="zwevend-PCB.html#zwevend-PCB138"><i class="fa fa-check"></i><b>5.5.2</b> PCB138</a></li>
+<li class="chapter" data-level="5.5.3" data-path="zwevend-PCB.html"><a href="zwevend-PCB.html#zwevend-PCB153"><i class="fa fa-check"></i><b>5.5.3</b> PCB153</a></li>
+<li class="chapter" data-level="5.5.4" data-path="zwevend-PCB.html"><a href="zwevend-PCB.html#zwevend-PCB101"><i class="fa fa-check"></i><b>5.5.4</b> PCB101</a></li>
+<li class="chapter" data-level="5.5.5" data-path="zwevend-PCB.html"><a href="zwevend-PCB.html#zwevend-PCB52"><i class="fa fa-check"></i><b>5.5.5</b> PCB52</a></li>
+<li class="chapter" data-level="5.5.6" data-path="zwevend-PCB.html"><a href="zwevend-PCB.html#zwevend-PCB118"><i class="fa fa-check"></i><b>5.5.6</b> PCB118</a></li>
+<li class="chapter" data-level="5.5.7" data-path="zwevend-PCB.html"><a href="zwevend-PCB.html#zwevend-PCB28"><i class="fa fa-check"></i><b>5.5.7</b> PCB28</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="zwevend-overig.html"><a href="zwevend-overig.html"><i class="fa fa-check"></i><b>5.6</b> Overige stoffen</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="zwevend-overig.html"><a href="zwevend-overig.html#zwevend-dieldrin"><i class="fa fa-check"></i><b>5.6.1</b> Dieldrin</a></li>
+<li class="chapter" data-level="5.6.2" data-path="zwevend-overig.html"><a href="zwevend-overig.html#zwevend-Hexachloorbenzeen"><i class="fa fa-check"></i><b>5.6.2</b> Hexachloorbenzeen</a></li>
+<li class="chapter" data-level="5.6.3" data-path="zwevend-overig.html"><a href="zwevend-overig.html#zwevend-Tributyltin"><i class="fa fa-check"></i><b>5.6.3</b> Tributyltin</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="bodem.html"><a href="bodem.html"><i class="fa fa-check"></i><b>6</b> Bodem - Fysisch-chemische parameters</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="bodem-info-metingen.html"><a href="bodem-info-metingen.html"><i class="fa fa-check"></i><b>6.1</b> Informatie over de metingen</a></li>
+<li class="chapter" data-level="6.2" data-path="bodem-metalen.html"><a href="bodem-metalen.html"><i class="fa fa-check"></i><b>6.2</b> Metalen</a></li>
+<li class="chapter" data-level="6.3" data-path="bodem-PAK.html"><a href="bodem-PAK.html"><i class="fa fa-check"></i><b>6.3</b> Polycyclische Aromatische Koolwaterstoffen (PAK’s)</a></li>
+<li class="chapter" data-level="6.4" data-path="bodem-PCB.html"><a href="bodem-PCB.html"><i class="fa fa-check"></i><b>6.4</b> Polychloorbifenylen (PCB’s)</a></li>
+<li class="chapter" data-level="6.5" data-path="bodem-organotin.html"><a href="bodem-organotin.html"><i class="fa fa-check"></i><b>6.5</b> Organotinverbindingen</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="biota.html"><a href="biota.html"><i class="fa fa-check"></i><b>7</b> Biota - Fysisch-chemische parameters</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="biota-metingen.html"><a href="biota-metingen.html"><i class="fa fa-check"></i><b>7.1</b> Informatie over de metingen</a></li>
+<li class="chapter" data-level="7.2" data-path="biota-bot.html"><a href="biota-bot.html"><i class="fa fa-check"></i><b>7.2</b> Bot</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="biota-bot.html"><a href="biota-bot.html#biota-bot-metalen"><i class="fa fa-check"></i><b>7.2.1</b> Metalen</a></li>
+<li class="chapter" data-level="7.2.2" data-path="biota-bot.html"><a href="biota-bot.html#biota-bot-PCB"><i class="fa fa-check"></i><b>7.2.2</b> Polychloorbifenylen (PCB’s)</a></li>
+<li class="chapter" data-level="7.2.3" data-path="biota-bot.html"><a href="biota-bot.html#biota-bot-PBDE"><i class="fa fa-check"></i><b>7.2.3</b> Polybroomdifenylethers (PBDE’s)</a></li>
+<li class="chapter" data-level="7.2.4" data-path="biota-bot.html"><a href="biota-bot.html#biota-bot-organochloor"><i class="fa fa-check"></i><b>7.2.4</b> Organochloorbestrijdingsmiddelen</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="biota-mosselen.html"><a href="biota-mosselen.html"><i class="fa fa-check"></i><b>7.3</b> Mosselen</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="biota-mosselen.html"><a href="biota-mosselen.html#biota-mosselen-metalen"><i class="fa fa-check"></i><b>7.3.1</b> Metalen</a></li>
+<li class="chapter" data-level="7.3.2" data-path="biota-mosselen.html"><a href="biota-mosselen.html#biota-mossel-PAK"><i class="fa fa-check"></i><b>7.3.2</b> Polycyclische Aromatische Koolwaterstoffen (PAK’s)</a></li>
+<li class="chapter" data-level="7.3.3" data-path="biota-mosselen.html"><a href="biota-mosselen.html#biota-mossel-PCB"><i class="fa fa-check"></i><b>7.3.3</b> Polychloorbifenylen (PCB’s)</a></li>
+<li class="chapter" data-level="7.3.4" data-path="biota-mosselen.html"><a href="biota-mosselen.html#biota-mossel-PBDE"><i class="fa fa-check"></i><b>7.3.4</b> Gebromeerde vlamvertragers (PBDE’s)</a></li>
+<li class="chapter" data-level="7.3.5" data-path="biota-mosselen.html"><a href="biota-mosselen.html#biota-mossel-organotin"><i class="fa fa-check"></i><b>7.3.5</b> Organotinverbindingen</a></li>
+<li class="chapter" data-level="7.3.6" data-path="biota-mosselen.html"><a href="biota-mosselen.html#biota-mossel-organochloor"><i class="fa fa-check"></i><b>7.3.6</b> Organochloorbestrijdingsmiddelen</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="fytoplankton.html"><a href="fytoplankton.html"><i class="fa fa-check"></i><b>8</b> Fytoplankton</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="fyto-soorten.html"><a href="fyto-soorten.html"><i class="fa fa-check"></i><b>8.1</b> Indeling soorten</a></li>
+<li class="chapter" data-level="8.2" data-path="fyto-info-metingen.html"><a href="fyto-info-metingen.html"><i class="fa fa-check"></i><b>8.2</b> Informatie over de metingen</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="fyto-info-metingen.html"><a href="fyto-info-metingen.html#fyto-metingen-stations"><i class="fa fa-check"></i><b>8.2.1</b> Stations en jaren</a></li>
+<li class="chapter" data-level="8.2.2" data-path="fyto-info-metingen.html"><a href="fyto-info-metingen.html#fyto-metingen-figuren"><i class="fa fa-check"></i><b>8.2.2</b> Figuren</a></li>
+<li class="chapter" data-level="8.2.3" data-path="fyto-info-metingen.html"><a href="fyto-info-metingen.html#fyto-metingen-trendbreuk"><i class="fa fa-check"></i><b>8.2.3</b> Trendbreuk</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="fyto-resultaten-station.html"><a href="fyto-resultaten-station.html"><i class="fa fa-check"></i><b>8.3</b> Resultaten per station</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="fyto-resultaten-station.html"><a href="fyto-resultaten-station.html#fyto-resultaten-schaar"><i class="fa fa-check"></i><b>8.3.1</b> Schaar van Ouden Doel</a></li>
+<li class="chapter" data-level="8.3.2" data-path="fyto-resultaten-station.html"><a href="fyto-resultaten-station.html#fyto-resultaten-hansweert"><i class="fa fa-check"></i><b>8.3.2</b> Hansweert geul</a></li>
+<li class="chapter" data-level="8.3.3" data-path="fyto-resultaten-station.html"><a href="fyto-resultaten-station.html#fyto-resultaten-vlis"><i class="fa fa-check"></i><b>8.3.3</b> Vlissingen boei SSVH</a></li>
+<li class="chapter" data-level="8.3.4" data-path="fyto-resultaten-station.html"><a href="fyto-resultaten-station.html#fyto-resultaten-walch2km"><i class="fa fa-check"></i><b>8.3.4</b> Walcheren 2 km uit de kust</a></li>
+<li class="chapter" data-level="8.3.5" data-path="fyto-resultaten-station.html"><a href="fyto-resultaten-station.html#fyto-resultaten-walch20km"><i class="fa fa-check"></i><b>8.3.5</b> Walcheren 20 km uit de kust</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="fyto-resultaten-groep.html"><a href="fyto-resultaten-groep.html"><i class="fa fa-check"></i><b>8.4</b> Resultaten per groep</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="fyto-resultaten-groep.html"><a href="fyto-resultaten-groep.html#fyto-resultaten-auto-blauw"><i class="fa fa-check"></i><b>8.4.1</b> Autotroof - Blauwwieren</a></li>
+<li class="chapter" data-level="8.4.2" data-path="fyto-resultaten-groep.html"><a href="fyto-resultaten-groep.html#fyto-resultaten-auto-dia"><i class="fa fa-check"></i><b>8.4.2</b> Autotroof - Diatomeeën</a></li>
+<li class="chapter" data-level="8.4.3" data-path="fyto-resultaten-groep.html"><a href="fyto-resultaten-groep.html#fyto-resultaten-auto-dino"><i class="fa fa-check"></i><b>8.4.3</b> Autotroof - Dinoflagellaten</a></li>
+<li class="chapter" data-level="8.4.4" data-path="fyto-resultaten-groep.html"><a href="fyto-resultaten-groep.html#fyto-resultaten-auto-groen"><i class="fa fa-check"></i><b>8.4.4</b> Autotroof - Groenwieren</a></li>
+<li class="chapter" data-level="8.4.5" data-path="fyto-resultaten-groep.html"><a href="fyto-resultaten-groep.html#fyto-resultaten-auto-phaeo"><i class="fa fa-check"></i><b>8.4.5</b> Autotroof - Phaeocystis</a></li>
+<li class="chapter" data-level="8.4.6" data-path="fyto-resultaten-groep.html"><a href="fyto-resultaten-groep.html#fyto-resultaten-auto-overig"><i class="fa fa-check"></i><b>8.4.6</b> Autotroof - overig</a></li>
+<li class="chapter" data-level="8.4.7" data-path="fyto-resultaten-groep.html"><a href="fyto-resultaten-groep.html#fyto-resultaten-hetero-dino"><i class="fa fa-check"></i><b>8.4.7</b> Heterotroof - Dinoflagellaten</a></li>
+<li class="chapter" data-level="8.4.8" data-path="fyto-resultaten-groep.html"><a href="fyto-resultaten-groep.html#fyto-resultaten-hetero-overig"><i class="fa fa-check"></i><b>8.4.8</b> Heterotroof - overig</a></li>
+<li class="chapter" data-level="8.4.9" data-path="fyto-resultaten-groep.html"><a href="fyto-resultaten-groep.html#fyto-resultaten-mix-dino"><i class="fa fa-check"></i><b>8.4.9</b> Mixotroof - dinoflagellaten</a></li>
+<li class="chapter" data-level="8.4.10" data-path="fyto-resultaten-groep.html"><a href="fyto-resultaten-groep.html#fyto-resultaten-mix-overig"><i class="fa fa-check"></i><b>8.4.10</b> Mixotroof - overig</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>9</b> References</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="BijlageA-overzicht-data.html"><a href="BijlageA-overzicht-data.html"><i class="fa fa-check"></i><b>A</b> Overzicht gebruikte data</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="BijlageA-gemeten-data.html"><a href="BijlageA-gemeten-data.html"><i class="fa fa-check"></i><b>A.1</b> Gemeten data</a></li>
+<li class="chapter" data-level="A.2" data-path="BijlageA-hydrodynamiek.html"><a href="BijlageA-hydrodynamiek.html"><i class="fa fa-check"></i><b>A.2</b> Hydrodynamiek</a></li>
+<li class="chapter" data-level="A.3" data-path="BijlageA-fysisch.html"><a href="BijlageA-fysisch.html"><i class="fa fa-check"></i><b>A.3</b> Fysisch-chemische parameters</a>
+<ul>
+<li class="chapter" data-level="A.3.1" data-path="BijlageA-fysisch.html"><a href="BijlageA-fysisch.html#BijlageA-fysisch-oppwater"><i class="fa fa-check"></i><b>A.3.1</b> Oppervlaktewater (compartiment 10)</a></li>
+<li class="chapter" data-level="A.3.2" data-path="BijlageA-fysisch.html"><a href="BijlageA-fysisch.html#BijlageA-fysisch-zwevend"><i class="fa fa-check"></i><b>A.3.2</b> Zwevend stof (compartiment 50)</a></li>
+<li class="chapter" data-level="A.3.3" data-path="BijlageA-fysisch.html"><a href="BijlageA-fysisch.html#BijlageA-fysisch-bodem"><i class="fa fa-check"></i><b>A.3.3</b> Bodem (compartiment 40)</a></li>
+<li class="chapter" data-level="A.3.4" data-path="BijlageA-fysisch.html"><a href="BijlageA-fysisch.html#BijlageA-fysisch-biota"><i class="fa fa-check"></i><b>A.3.4</b> Biota (compartiment 60)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="BijlageB-meetdichtheid.html"><a href="BijlageB-meetdichtheid.html"><i class="fa fa-check"></i><b>B</b> Meetdichtheidmatrices</a>
+<ul>
+<li class="chapter" data-level="B.1" data-path="BijlageB-meetdichtheid-oppwater.html"><a href="BijlageB-meetdichtheid-oppwater.html"><i class="fa fa-check"></i><b>B.1</b> Oppervlaktewater</a>
+<ul>
+<li class="chapter" data-level="B.1.1" data-path="BijlageB-meetdichtheid-oppwater.html"><a href="BijlageB-meetdichtheid-oppwater.html#BijlageB-meetdichtheid-oppwater-schaar"><i class="fa fa-check"></i><b>B.1.1</b> Schaar van Ouden Doel</a></li>
+<li class="chapter" data-level="B.1.2" data-path="BijlageB-meetdichtheid-oppwater.html"><a href="BijlageB-meetdichtheid-oppwater.html#BijlageB-meetdichtheid-oppwater-hansweertgeul"><i class="fa fa-check"></i><b>B.1.2</b> Hansweert geul</a></li>
+<li class="chapter" data-level="B.1.3" data-path="BijlageB-meetdichtheid-oppwater.html"><a href="BijlageB-meetdichtheid-oppwater.html#BijlageB-meetdichtheid-oppwater-terneuzen"><i class="fa fa-check"></i><b>B.1.3</b> Terneuzen boei 20</a></li>
+<li class="chapter" data-level="B.1.4" data-path="BijlageB-meetdichtheid-oppwater.html"><a href="BijlageB-meetdichtheid-oppwater.html#BijlageB-meetdichtheid-oppwater-vlissingen"><i class="fa fa-check"></i><b>B.1.4</b> Vlissingen boei SSVH</a></li>
+<li class="chapter" data-level="B.1.5" data-path="BijlageB-meetdichtheid-oppwater.html"><a href="BijlageB-meetdichtheid-oppwater.html#BijlageB-meetdichtheid-oppwater-walcheren2km"><i class="fa fa-check"></i><b>B.1.5</b> Walcheren 2 km uit de kust</a></li>
+<li class="chapter" data-level="B.1.6" data-path="BijlageB-meetdichtheid-oppwater.html"><a href="BijlageB-meetdichtheid-oppwater.html#BijlageB-meetdichtheid-oppwater-walcheren20km"><i class="fa fa-check"></i><b>B.1.6</b> Walcheren 20 km uit de kust</a></li>
+</ul></li>
+<li class="chapter" data-level="B.2" data-path="BijlageB-meetdichtheid-zwevend.html"><a href="BijlageB-meetdichtheid-zwevend.html"><i class="fa fa-check"></i><b>B.2</b> Zwevende stof</a>
+<ul>
+<li class="chapter" data-level="B.2.1" data-path="BijlageB-meetdichtheid-zwevend.html"><a href="BijlageB-meetdichtheid-zwevend.html#BijlageB-meetdichtheid-zwevend-schaar"><i class="fa fa-check"></i><b>B.2.1</b> Schaar van Ouden Doel</a></li>
+<li class="chapter" data-level="B.2.2" data-path="BijlageB-meetdichtheid-zwevend.html"><a href="BijlageB-meetdichtheid-zwevend.html#BijlageB-meetdichtheid-zwevend-vlissingen"><i class="fa fa-check"></i><b>B.2.2</b> Vlissingen boei SSVH</a></li>
+</ul></li>
+<li class="chapter" data-level="B.3" data-path="BijlageB-meetdichtheid-biota.html"><a href="BijlageB-meetdichtheid-biota.html"><i class="fa fa-check"></i><b>B.3</b> Biota</a>
+<ul>
+<li class="chapter" data-level="B.3.1" data-path="BijlageB-meetdichtheid-biota.html"><a href="BijlageB-meetdichtheid-biota.html#BijlageB-meetdichtheid-biota-bot"><i class="fa fa-check"></i><b>B.3.1</b> Bot</a></li>
+<li class="chapter" data-level="B.3.2" data-path="BijlageB-meetdichtheid-biota.html"><a href="BijlageB-meetdichtheid-biota.html#BijlageB-meetdichtheid-biota-mossel"><i class="fa fa-check"></i><b>B.3.2</b> Mosselen</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="BijlageC-fytoplankton.html"><a href="BijlageC-fytoplankton.html"><i class="fa fa-check"></i><b>C</b> Indeling fytoplankton</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Eerstelijnsrapportage Westerschelde</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="shortcut icon" type="image/jpg" href="navbar/images/icon-deltares.svg"/>
+</head>
+<body>
+
+<nav class="navigation-bar">
+    <a href="index.html"><i class="fa fa-home"></i></a>
+    <div class="logos">
+        <img class="logo" src="navbar/images/deltares_logo.png" />
+        <img class="logo" src="navbar/images/Rijkswaterstaat-logo-e1473888123824-1-300x300.jpg" />
+    </div>
+</nav>
+
+</body>
+</html>
+<div id="feofytine" class="section level2" number="4.6">
+<h2><span class="header-section-number">4.6</span> Feofytine-a</h2>
+<table>
+<caption><span id="tab:fysischFeofytine">Tabel 4.6: </span>Gemiddelde, minimale en maximale waardes van feofytine in <span class="math inline">\(\mu\)</span> g/L in het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="left">Station</th>
+<th align="right">Gemiddelde</th>
+<th align="right">Maximum</th>
+<th align="right">Minimum</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Hansweert geul</td>
+<td align="right">0.38</td>
+<td align="right">2.20</td>
+<td align="right">0.01</td>
+</tr>
+<tr class="even">
+<td align="left">Terneuzen boei 20</td>
+<td align="right">0.38</td>
+<td align="right">16.60</td>
+<td align="right">0.01</td>
+</tr>
+<tr class="odd">
+<td align="left">Vlissingen boei SSVH</td>
+<td align="right">0.35</td>
+<td align="right">2.51</td>
+<td align="right">0.01</td>
+</tr>
+<tr class="even">
+<td align="left">Wielingen</td>
+<td align="right">0.26</td>
+<td align="right">0.98</td>
+<td align="right">0.02</td>
+</tr>
+<tr class="odd">
+<td align="left">Walcheren 2 km uit de kust</td>
+<td align="right">0.25</td>
+<td align="right">2.00</td>
+<td align="right">0.01</td>
+</tr>
+<tr class="even">
+<td align="left">Walcheren 20 km uit de kust</td>
+<td align="right">0.11</td>
+<td align="right">1.20</td>
+<td align="right">0.01</td>
+</tr>
+</tbody>
+</table>
+<p>Feofytine-a wordt gelijk met chlorofyl-a gemeten. Het is een afbraakproduct van chlorofyl-a, en wordt daarom gezien als een maat voor detritus (dood organisch materiaal). De dataset wordt in Figuur <a href="feofytine.html#fig:fysischFeofytineJaar">4.18</a> weergegeven als jaargemiddelde waardes, inclusief de minimaal en maximaal gemeten waardes. Daarnaast zijn in Tabel <a href="feofytine.html#tab:fysischFeofytine">4.6</a> zijn de gemiddelde, minimale en maximale waardes per station weergegeven.</p>
+<p>Voor het station Schaar van Ouden doel zijn slecht enkele waarnemingen in 1996 en 1997 beschikbaar en dat station is daarom niet opgenomen in deze rapportage. In plaats daarvan is het station Wielingen meegenomen. De stations zijn gerangschikt in stroomafwaartse richting. In stroomafwaartse richting neemt de hoeveelheid feofytine-a af, zie Figuur <a href="feofytine.html#fig:gemiddeldfeofytine">4.20</a>. Ook lijken op de meeste stations de gehaltes feofytine-a licht af te nemen in de tijd. Specifiek voor Hansweert neemt de hoeveelheid feofytine af met 0.02 <span class="math inline">\(\mu\)</span> g/L per jaar met enige significantie.</p>
+<!-- \begin{table}[!ht] -->
+<!--  \centering -->
+<!--  \input{../Figuren/Fysisch/Feofytine/meanvalues.tex} -->
+<!--  \caption[Waardes van het feofytine in het oppervlaktewater]{Gemiddelde, minimale en maximale waardes van feofytine in $\mu$ g/L in het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data tussen 1996 en 2018.}  -->
+<!--  \label{tab:fysisch_feofytine} -->
+<!-- \end{table} -->
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Feofytine/jaar.png} -->
+<!--  \caption[Jaarlijks gemiddelde feofytine in het oppervlaktewater]{Jaarlijks gemiddelde, minimum en maximum van feofytine in het oppervlaktewater van de Westerschelde en de monding.} -->
+<!--  \label{fig:fysisch_feofytine_jaar} -->
+<!-- \end{figure}  -->
+<div class="figure" style="text-align: center"><span id="fig:fysischFeofytineJaar"></span>
+<img src="Figuren/Fysisch/Feofytine/Jaar.png" alt="Jaarlijks gemiddelde, minimum en maximum van feofytine in het oppervlaktewater van de Westerschelde en de monding." width="85%" />
+<p class="caption">
+Figuur 4.18: Jaarlijks gemiddelde, minimum en maximum van feofytine in het oppervlaktewater van de Westerschelde en de monding.
+</p>
+</div>
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Chlorofyl/gemiddelde_waardes.png} -->
+<!--  \caption[Gemiddelde chlorofyl per station op een kaart]{Gemiddelde chlorofyl per station berekend op alle beschikbare data tussen 1997 en 2018} -->
+<!--  \label{fig:gemiddeldchlorofyl} -->
+<!-- \end{figure}  -->
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldchlorofyl"></span>
+<img src="Figuren/Fysisch/Chlorofyl/gemiddelde_waardes.png" alt="Gemiddelde chlorofyl per station berekend op alle beschikbare data vanaf 1997." width="85%" />
+<p class="caption">
+Figuur 4.19: Gemiddelde chlorofyl per station berekend op alle beschikbare data vanaf 1997.
+</p>
+</div>
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Feofytine/gemiddelde_waardes.png} -->
+<!--  \caption[Gemiddelde feofytine per station op een kaart]{Gemiddelde feofytine per station berekend op alle beschikbare data tussen 1997 en 2018} -->
+<!--  \label{fig:gemiddeldfeofytine} -->
+<!-- \end{figure}  -->
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldfeofytine"></span>
+<img src="Figuren/Fysisch/Feofytine/gemiddelde_waardes.png" alt="Gemiddelde feofytine per station berekend op alle beschikbare data vanaf 1997." width="85%" />
+<p class="caption">
+Figuur 4.20: Gemiddelde feofytine per station berekend op alle beschikbare data vanaf 1997.
+</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="chlorofyl.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="zuurstofverbruik.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "section"
+},
+"toc_float": {
+"collapsed": true,
+"smooth_scroll": false
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
