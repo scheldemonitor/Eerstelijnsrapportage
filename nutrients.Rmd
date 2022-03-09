@@ -1,0 +1,569 @@
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F,message = F,
+                      warning = F, comment = F,
+                      out.width = "90%" )
+# source("r/getDataFunctions.R")
+require(smwfs)
+require(tidyverse)
+require(lubridate)
+require(sf)
+require(leaflet)
+
+source("R/functions.R")
+
+# wat te doen met valuesigns? nakijken in matlab scripts
+# hoe wordt statistiek berekend? nakijken in matlab scripts
+
+```
+
+
+
+```{r downloadNutrientData, include = F}
+
+trendstations <- c("Schaar van Ouden Doel", "Hansweert geul", "Terneuzen boei 20",
+"Vlissingen boei SSVH", "not_Wielingen", "Walcheren 2 km uit de kust",
+"Walcheren 20 km uit de kust")
+
+
+frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_FysChem_opp_test_1998_2020.csv"
+df <- read_delim(frozendatapath, delim = ",")
+
+# replace below partly by clean function in package smsfs
+df <- df %>% 
+  # mutate(value = as.numeric(value)) %>%
+  filter(stationname %in% trendstations) %>%
+  mutate(stationname = factor(stationname, levels = trendstations)) %>%
+  filter(valuesign != ">") %>%
+  mutate(value = case_when(
+    valuesign == "=" ~ value,
+    valuesign == "<" ~ 0.5 * value
+  ))
+
+
+```
+
+# Nutriënten {#nutrienten}
+
+Nutriënten zijn vooral van belang voor de biologische activiteit in de Westerschelde. Stikstof (N) en fosfor (P) zijn van belang omdat het voedingsstoffen (nutriënten) zijn, die als gevolg van puntlozingen en diffuse bronnen in verhoogde concentraties aanwezig kunnen zijn, en aanleiding kunnen geven tot eutrofiëring. 
+
+Stikstof komt in het oppervlaktewater voor in verschillende vormen:
+* anorganisch:
+  + ammonium ($NH_4^+$);
+  + nitriet ($NO_2^-$);
+  + nitraat ($NO_3^-$);
+* organisch (meestal gemeten samen met ammonium als ‘Kjeldahl-stikstof’):
+  + opgelost, bv. in de vorm van humuszuren;
+  + particulair, bv. materiaal afkomstig van lozingen of van algengroei.
+
+De som van alle anorganische en organische vormen van stikstof duiden we aan als totaal stikstof. De som van alle vormen van anorganisch stikstof en opgelost organisch stikstof duiden we aan als opgelost stikstof. Particulair stikstof bestaat voor het overgrote deel uit organisch materiaal.
+
+Ammonium wordt in het water door bacteriën omgezet in nitriet en vervolgens in nitraat. Omdat ammonium vaak aanwezig is in ongezuiverde of deels gezuiverde lozingen, en omdat de omzetting naar nitraat enige tijd in beslag neemt, is de aanwezigheid van ammonium meestal een aanwijzing voor de aanwezigheid van lozingen. Dit verschijnsel is sterker in de winter, omdat dan de omzettingen langzamer verlopen. Organisch stikstof kan in het water aanwezig zijn als gevolg van lozingen, maar ook als gevolg van de opname van anorganisch stikstof door algen.
+
+Door de menging van relatief nutriëntenrijk zoet water en relatief nutriëntenarm zout water, zijn de concentraties van totaal stikstof in een estuarium als regel bovenstrooms hoger dan benedenstrooms. Voor andere specifieke deelparameters spelen verschillende biochemische processen een rol, die ertoe leiden dat er een minder directe relatie tussen het gemeten gehalte en de gemeten saliniteit kan bestaan. Door seizoensgebonden biochemische processen in de bovenloop laten veel rivieren in hun benedenloop en hun estuarium een seizoensmatige fluctuatie van het stikstofgehalte zien, met hoge gehaltes in de winter en lage gehaltes in de zomer. De opname door algen in het voorjaar kan dit beeld voor de anorganische fractie versterken.
+
+Fosfor komt in het oppervlaktewater in de volgende vormen voor:
+* anorganisch
+  + orthofosfaat (opgelost, o-$PO_4^{3-}$);
+  + gebonden aan slib
+* organisch
+  + opgelost, bv. in de vorm van humuszuren;
+  + particulair, bv. materiaal afkomstig van lozingen of van algengroei.
+
+De som van alle anorganische en organische vormen van fosfor duiden we aan als totaal fosfaat. De som van orthofosfaat en opgelost organisch fosfor duiden we aan als opgelost fosfaat. De som van aan slib gebonden anorganisch en organisch fosfor duiden we aan als particulair gebonden fosfaat.
+
+Anorganisch fosfor is in significante mate gebonden aan slibdeeltjes. De bindingsvorm kan verschillen (adsorptie, precipitatie van fosforhoudende mineralen). Organisch fosfor kan in het water aanwezig zijn als gevolg van lozingen, maar ook als gevolg van de opname van anorganisch fosfor door algen.
+
+Door de menging van relatief nutriëntenrijk zoet water en relatief nutriëntenarm zout water, zijn ook de concentraties van totaal fosfaat in principe bovenstrooms hoger dan benedenstrooms. De relatie met de saliniteit is minder eenduidig voor fosfaat dan voor stikstof, omdat een relatief grote fractie fosfaat particulair is. Deze particulaire fractie kan vanuit de bodem worden nageleverd. Met name de Zeeschelde bevat grote hoeveelheden fijn slib dat (net als andere antropogeen belaste rivieren) een grote hoeveelheid geadsorbeerde fosfaten bevat. Voor specifieke deelparameters spelen daarnaast verschillende biochemische processen een rol, die ertoe leiden dat er een minder directe relatie tussen het gemeten gehalte en de gemeten saliniteit kan bestaan.
+
+Silicium is een relevante parameter omdat diatomeeën (kiezelwieren) opgelost anorganisch silicium (silicaat) opnemen bij hun groei. De beschikbaarheid van silicaat stuurt dus mede de algensoortensamenstelling en biomassa. Silicaat komt voor in rivierwater. De concentratie is voornamelijk afhankelijk van de geologische en hydrologische kenmerken van het stroomgebied. Veel minder dan bij stikstof en fosfor is er sprake van concentratieverhoging als gevolg van lozingen van afvalwater. 
+
+Door de menging van relatief silicaatrijk zoet water en relatief silicaatarm zout water, zijn de concentraties van silicaat in een estuarium als regel bovenstrooms hoger dan benedenstrooms. De opname van silicaat door diatomeeën in het voorjaar zorgt vaak voor een sterke seizoensvariatie in de concentratie van silicaat.
+
+Net als in de Eerstelijnsrapportage 2015 is ervoor gekozen (in tegenstelling tot eerdere rapportages) om nutrienten in dit rapport te presenteren als jaargemiddelde (in plaats van tijdseries). De reden hiervoor is dat deze methode de lezer meer inzicht geeft in de temporale trends.
+
+## Stikstof {#stikstof}
+
+Opgelost stikstof (DN) is de som van alle vormen van anorganisch stikstof (ammonium, nitriet, nitraat) en opgelost organisch stikstof. Figuur \@ref(fig:fysischStikstofFil) toont de jaargemiddelden per station, samen met de minimaal en maximaal gemeten waardes per jaar.  Daarnaast zijn in Tabel \@ref(tab:fysischStikstofFilTab) de gemiddelde, minimale en maximale waardes per station weergegeven. In Schaar van Ouden Doel is het opgelost stikstofgehalte niet bepaald. In plaats daarvan is station Wielingen gepresenteerd. De stations zijn gerangschikt in stroomafwaartse richting.
+
+Deze resultaten laten zien dat de opgelost stikstofgehaltes sterk afnemen in stroomafwaartse richting, zie Figuur \@ref(fig:gemiddeldestikstoffil). Op de bovenstroomse stations zijn de gehaltes van opgelost stikstof immers hoger dan benedenstrooms. Daarnaast hebben alle stations een duidelijke seizoensvariatie (niet weergegeven). De hoeveelheden stikstof na filtratie zijn veel hoger dan particulair gebonden stikstof, wat betekent dat het merendeel van het stikstof in de Westerschelde is opgelost. Daarnaast is een dalende trend waarneembaar over de periode vanaf 2000, vooral in het oostelijk deel van de Westerschelde door een afname in stikstof lozingen. Deze dalende trend is het grootst bij Hansweert (-0,09 mg/L per jaar) en statistisch significant, en leek de laatste jaren wel wat af te vlakken.
+
+
+```{r fysischStikstofFilTab}
+options(scipen=999)
+parname = "Stikstof in mg/l na filtratie in oppervlaktewater"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van het opgelost stikstofgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+
+```{r fysischStikstofFil, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het stikstofgehalte in het oppervlaktewater van de Westerschelde en de monding."}
+
+parname = "Stikstof in mg/l na filtratie in oppervlaktewater"
+plotTrends(df, parname)
+```
+```{r gemiddeldestikstoffil, fig.cap="Gemiddelde stikstofgehalte na filtratie per station berekend op alle beschikbare data vanaf 1996."}
+
+parname = "Stikstof in mg/l na filtratie in oppervlaktewater"
+
+plotMedianMap(df, parname = parname)
+```
+
+
+## Particulair gebonden stikstof {#part-gebonden-stikstof}
+
+Figuur \@ref(fig:fysischStikstofPar) toont de jaargemiddelden per station, samen met de minimaal en maximaal gemeten waardes per jaar.  Daarnaast zijn in Tabel \@ref(tab:fysischStikstofParTab) de gemiddelde, minimale en maximale waardes per station weergegeven. In Schaar van Ouden Doel is het particulair gebonden stikstofgehalte niet bepaald. In plaats daarvan is station Wielingen gepresenteerd. De stations zijn gerangschikt in stroomafwaartse richting.
+
+De concentraties particulair stikstof tonen een totaal ander verloop dan opgelost stikstof. Er zijn geen duidelijke longitudinale of temporele gradiënten waarneembaar, zie Figuur \@ref(fig:gemiddeldestikstofpar). Net als voor zwevend stof fluctueert de concentratie sterk, en zijn de gehaltes op de meeste stations vergelijkbaar, behalve op Walcheren 20 km uit de kust. De gehaltes particulair stikstof vormen maar een heel klein deel van de concentratie totaal stikstof. 
+
+
+```{r fysischStikstofParTab}
+
+parname = "Stikstof in mg/l particulair gebonden in oppervlaktewater"
+dt <- statTable(df, parname, rounding)
+# dt <- tex2dt("Figuren/Fysisch/Stikstof_par/meanvalues.tex")
+knitr::kable(dt, 
+             # col.names = c("Station","Gemiddelde","Maximum","Minimum"),
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel  en de trend en p waarde van de trend van het particulair stikstofgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+
+
+```{r fysischStikstofPar, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het particulair stikstofgehalte in het oppervlaktewater van de Westerschelde en de monding."}
+parname = "Stikstof in mg/l particulair gebonden in oppervlaktewater"
+plotTrends(df, parname)
+```
+
+
+
+
+
+
+```{r gemiddeldestikstofpar, fig.cap="Gemiddelde hoeveelheid particulair stikstofgehalte na filtratie per station berekend op alle beschikbare data vanaf 1996."}
+
+parname = "Stikstof in mg/l particulair gebonden in oppervlaktewater"
+
+plotMedianMap(df, parname)
+```
+
+## Ammonium {#ammonium}
+
+Figuur \@ref(fig:fysischAmmonium) toont de jaargemiddelden ammonium per station, samen met de minimaal en maximaal gemeten waardes per jaar.  Daarnaast zijn in Tabel \@ref(tab:fysischAmmoniumTab) de gemiddelde, minimale en maximale waardes per station weergegeven. De stations zijn gerangschikt in stroomafwaartse richting.
+
+In benedenstroomse richting nemen de concentraties van ammonium sterk af, zie Figuur \@ref(fig:gemiddeldeammonium). Op het station Schaar van Ouden Doel, en in mindere mate Hansweert, zijn hoge pieken waarneembaar. Ook zijn bij Schaar van Ouden Doel en Hansweert de maxima over de periode 1996-2006 afgenomen. Sinds 2006 lijkt de situatie stabiel. Ammoniumconcentraties zijn laag en hebben maar een klein aandeel in totaal stikstof. De minima liggen vaak tegen de detectielimiet (0.01 mg/L) waardoor trends moeilijker waar te nemen zijn. 
+
+*Let op: de y-assen van subfiguren van Figuur \@ref(fig:fysischAmmonium) verschillen. Y-assen voor de linker en rechter figuur zijn wel hetzelfde.*
+
+
+
+```{r fysischAmmoniumTab}
+parname = "Ammonium in mg/l uitgedrukt in stikstof / na filtratie in oppervlaktewater"
+dt <- statTable(df, parname, 3)
+knitr::kable(dt, 
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel van het ammoniumgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+
+
+```{r fysischAmmonium, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het ammoniumgehalte in het oppervlaktewater van de Westerschelde en de monding."}
+
+parname = "Ammonium in mg/l uitgedrukt in stikstof / na filtratie in oppervlaktewater"
+plotTrends(df, parname) + coord_cartesian(ylim = c(0,0.5))
+```
+
+```{r gemiddeldeammonium, fig.cap="Gemiddelde ammoniumgehalte per station berekend op alle beschikbare data vanaf 1996."}
+
+parname = "Ammonium in mg/l uitgedrukt in stikstof / na filtratie in oppervlaktewater"
+plotMedianMap(df, parname)
+```
+
+## Nitriet {#nitriet}
+
+Figuur \@ref(fig:fysischNitriet) toont de jaargemiddelden nitriet per station, samen met de minimaal en maximaal gemeten waardes per jaar.  Daarnaast zijn in Tabel \@ref(tab:fysischNitrietTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+
+In benedenstroomse richting nemen de concentraties van nitriet af, zie Figuur \@ref(fig:gemiddeldenitriet). Op het station Schaar van Ouden Doel en in mindere mate de stations benedenstrooms, zijn relatief hoge pieken waarneembaar. Nitriet concentraties zijn laag in vergelijking met nitraat. Bij Schaar van Ouden Doel,  Hansweert en Terneuzen lijken de concentraties te dalen, tot ca. het jaar 2000. Sinds 2006 wordt bij Schaar van Ouden Doel en de stations in de monding regelmatig de detectiegrens (0.01 mg/L) bereikt, waardoor de jaargemiddelde waardes beïnvloed worden. Overal is er in het estuarium een licht dalende trend waarneembaar, die het sterkst is bij Schaar van Oude doel. 
+
+
+
+```{r fysischNitrietTab}
+parname = "Nitriet in mg/l uitgedrukt in stikstof / na filtratie in oppervlaktewater"
+dt <- statTable(df, parname, 3)
+knitr::kable(dt,
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel van het nitrietgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+
+
+```{r fysischNitriet, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het nitrietgehalte in het oppervlaktewater van de Westerschelde en de monding."}
+
+parname = "Nitriet in mg/l uitgedrukt in stikstof / na filtratie in oppervlaktewater"
+plotTrends(df, parname)
+```
+
+
+
+
+
+
+```{r gemiddeldenitriet, fig.cap="Gemiddelde nitrietgehalte per station berekend op alle beschikbare data vanaf 1996."}
+
+parname = "Nitriet in mg/l uitgedrukt in stikstof / na filtratie in oppervlaktewater"
+plotMedianMap(df, parname)
+```
+
+## Nitraat {#nitraat}
+
+Figuur \@ref(fig:fysischNitraat) toont de jaargemiddelden per station, samen met de minimaal en maximaal gemeten waardes per jaar.  Daarnaast zijn in Tabel \@ref(tab:fysischNitraatTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+
+Deze resultaten laten zien dat de nitraatgehaltes sterk afnemen in stroomafwaartse richting, zie ook Figuur \@ref(fig:gemiddeldenitraat). Daarnaast is een dalende trend waarneembaar vanaf 2000, vooral in het oostelijk deel van de Westerschelde. Deze trend is beperkt statistische significant te noemen. De laatste jaren, sinds ca. 2009, zijn de gemiddelde nitraatgehaltes redelijk stabiel voor alle stations behalve Schaar van Ouden Doel.%trend van tot 0.14 mg/L per jaar
+
+
+
+```{r fysischNitraatTab}
+
+parname <- "Nitraat in mg/l uitgedrukt in stikstof / na filtratie in oppervlaktewater"
+dt <- statTable(df, parname, 3)
+knitr::kable(dt, 
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel van het nitraatfgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+
+
+```{r fysischNitraat, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het nitraatgehalte in het oppervlaktewater van de Westerschelde en de monding."}
+
+parname <- "Nitraat in mg/l uitgedrukt in stikstof / na filtratie in oppervlaktewater"
+plotTrends(df, parname) + coord_cartesian(ylim = c(0,6))
+```
+
+
+```{r gemiddeldenitraat, fig.cap="Gemiddelde nitraatgehalte per station berekend op alle beschikbare data vanaf 1996."}
+parname <- "Nitraat in mg/l uitgedrukt in stikstof / na filtratie in oppervlaktewater"
+plotMedianMap(df, parname)
+```
+
+
+## Orthofosfaat {#orthofosfaat}
+
+Figuur \@ref(fig:fysischOrthofosfaat) toont de jaargemiddelden orthofosfaat per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischOrthofosfaatTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Voor deze variabele is er slechts data vanaf 2009 tot en met 2018.
+
+De orthosfosfaatconcentraties na filtratie nemen af in stroomafwaartse richting, zie ook Figuur \@ref(fig:gemiddeldeorthofosfaat). Enkele hoge pieken vallen op in de meetdata, bijvoorbeeld op de stations Walcheren 2 km uit de kust en Walcheren 20 km uit de kust in het jaar 2010. In 2016 werd een dergelijke piek waargenomen voor de hoeveelheid orthofosfaat bij station Schaar van Ouden Doel. In 2017 en 2018 was deze piek niet meer aanwezig en bleef het gemiddelde ongeveer op het niveau van 2016. De resultaten van de overige stations illustreren dat de concentraties de laatste jaren redelijk constant in de tijd zijn.
+
+
+
+```{r fysischOrthofosfaatTab}
+
+parname <- "Orthofosfaat in mg/l Uitgedrukt in Fosfor / Na filtratie in oppervlaktewater" 
+dt <- statTable(df, parname, 3)
+knitr::kable(dt, 
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel van het orthofosfaatgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+
+
+```{r fysischOrthofosfaat, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het orthofosfaatgehalte in het oppervlaktewater van de Westerschelde en de monding."}
+
+parname <- "Orthofosfaat in mg/l Uitgedrukt in Fosfor / Na filtratie in oppervlaktewater" 
+plotTrends(df, parname) +
+  coord_cartesian(ylim = c(0, 0.3))
+```
+
+
+
+
+
+
+```{r gemiddeldeorthofosfaat, fig.cap="Gemiddelde orthofosfaatgehalte per station berekend op alle beschikbare data vanaf 1996."}
+
+parname <- "Orthofosfaat in mg/l Uitgedrukt in Fosfor / Na filtratie in oppervlaktewater" 
+plotMedianMap(df, parname)
+```
+
+## Totaal fosfaat {#totaal-fosfaat}
+
+Figuur \@ref(fig:fysischFosfaatFil) toont de jaargemiddelden fosfaat na filtratie per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischFosfaatFilTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Bij Schaar van Ouden Doel wordt het fosfaat na filtratie niet bepaald. In plaats daarvan is station Wielingen gepresenteerd. De stations zijn gerangschikt in stroomafwaartse richting.
+
+De resultaten lijken sprekend op die van orthofosfaat, vooral op de bovenstroomse stations, zie ook Figuur \@ref(fig:gemiddeldefosfaatfil). Dit komt doordat fosfaat na filtratie de som is van orthofosfaat, hydrolysbaar fosfaat en opgelost organisch fosfor. Het gehalte opgelost organisch fosfor is dus blijkbaar laag. De pieken in de meetwaardes bij Walcheren 2 km uit de kust en Walcheren 20 km uit de kust in 2010 komen dus ook hier weer terug. In de richting van de zee is de concentratie opgelost fosfaat een beetje hoger dan die van orthofosfaat. Dat verschil is de organische opgeloste fractie, die niet wordt gemeten in de orthofosfaatanalyse. Er is een dalende trend bij de stations in de Westerschelde (i.e. Hansweert, Terneuzen en Vlissingen) tot 0.004 mg/L maar deze is alleen bij Hansweert significant. In Vlissingen is de daling relatief gelijk aan die van Hansweert en statistisch ook significant, maar in mindere mate.
+
+
+
+```{r fysischFosfaatFilTab}
+parname <- "Fosfaat, totaal in mg/l na filtratie in oppervlaktewater"
+dt <- statTable(df, parname, 3)
+knitr::kable(dt, 
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel van het fosfaatgehalte na filtratie in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+
+
+```{r fysischFosfaatFil, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het fosfaatgehalte in het oppervlaktewater van de Westerschelde en de monding."}
+parname <- "Fosfaat, totaal in mg/l na filtratie in oppervlaktewater"
+plotTrends(df, parname) + coord_cartesian(ylim = c(0,0.25))
+```
+
+## Particulair gebonden fosfaat {#part-gebonden-fosfaat}
+
+Figuur \@ref(fig:fysischFosfaatPar) toont de jaargemiddelden particulair gebonden fosfaat per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischFosfaatParTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Bij Schaar van Ouden Doel wordt het  particulair gebonden fosfaat niet bepaald. In plaats daarvan is station Wielingen gepresenteerd. De stations zijn gerangschikt in stroomafwaartse richting.
+
+De concentraties particulair gebonden fosfaat tonen geen duidelijke longitudinale of temporele gradiënten, zie Figuur \@ref(fig:gemiddeldefosfaatpar). Net als voor zwevend stof fluctueert de concentratie sterk, en zijn de gehaltes op de meeste stations vergelijkbaar, behalve op Walcheren 20 km uit de kust, waar de gemeten gehaltes een stuk lager zijn. Bij Hansweert dalen de gemiddelde concentraties particulair gebonden fosfaat. Bij de andere stations zijn geen duidelijke trends te zien. Het opvallend hoge maximum gemeten bij station Vlissingen boei in 2016 is waarschijnlijk een incidentele waarde, gezien de maximale waardes in 2017 en 2018.
+
+
+
+```{r fysischFosfaatParTab}
+
+parname = "Fosfaat, totaal in mg/l particulair gebonden in oppervlaktewater" 
+dt <- statTable(df, parname, 3)
+knitr::kable(dt,
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel van het particulair gebonden fosfaatgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+
+
+```{r fysischFosfaatPar, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het particulair gebonden fosfaatgehalte in het oppervlaktewater van de Westerschelde en de monding."}
+parname = "Fosfaat, totaal in mg/l particulair gebonden in oppervlaktewater" 
+plotTrends(df, parname)
+```
+
+
+
+```{r gemiddeldefosfaatfil, fig.cap="Gemiddelde fosfaatgehalte na filtratie per station berekend op alle beschikbare data vanaf 1996."}
+
+parname <- "Fosfaat, totaal in mg/l na filtratie in oppervlaktewater"
+plotMedianMap(df, parname)
+```
+
+
+
+```{r gemiddeldefosfaatpar, fig.cap="Gemiddelde particulair gebonden fosfaatgehalte per station berekend op alle beschikbare data vanaf 1996."}
+
+parname = "Fosfaat, totaal in mg/l particulair gebonden in oppervlaktewater" 
+plotMedianMap(df, parname)
+```
+
+## Silicaat {#silicaat}
+
+Figuur \@ref(fig:fysischSilicaat) toont de jaargemiddelden silicaat per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischSilicaatTab) de gemiddelde, minimale en maximale waardes per station weergegeven. De stations zijn gerangschikt in stroomafwaartse richting.
+
+De resultaten laten duidelijk zien dat de concentraties afnemen in de richting van de zee, zie Figuur \@ref(fig:gemiddeldesilicaat). Het valt op dat voor station Schaar van Ouden Doel, Hansweert geul en Terneuzen boei 20 de minima vanaf ca. 2007 tot 2013 naar nul gingen, m.a.w. er trad destijds siliciumuitputting op. 
+
+
+
+```{r fysischSilicaatTab}
+
+parname <- "Silicaat in mg/l uitgedrukt in silicium na filtratie in oppervlaktewater"
+dt <- statTable(df, parname, 3)
+knitr::kable(dt, 
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel van het silicaatgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+
+
+```{r fysischSilicaat, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het silicaatgehalte in het oppervlaktewater van de Westerschelde en de monding."}
+
+parname <- "Silicaat in mg/l uitgedrukt in silicium na filtratie in oppervlaktewater"
+plotTrends(df, parname)
+```
+
+
+```{r gemiddeldesilicaat, fig.cap="Gemiddelde silicaatgehalte per station berekend op alle beschikbare data vanaf 1996."}
+
+parname <- "Silicaat in mg/l uitgedrukt in silicium na filtratie in oppervlaktewater"
+plotMedianMap(df, parname)
+```
+
+## Organisch koolstof {#organisch-koolstof}
+
+In deze paragraaf worden de metingen weergegeven van particulair organisch koolstof (POC) en opgelost organisch koolstof (DOC). Dit is alle koolstof van organische oorsprong die particulair gebonden respectievelijk opgelost aanwezig is.
+
+### Opgelost organisch koolstof {#opgelost-organisch-koolstof}
+
+Figuur \@ref(fig:fysischKoolstofOpg} toont de jaargemiddelden per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischKoolstofOpgTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Bij Schaar van Ouden Doel wordt het opgelost organisch koolstof niet bepaald. In plaats daarvan is station Wielingen gepresenteerd. De stations zijn gerangschikt in stroomafwaartse richting.
+
+
+
+
+De gehaltes dalen in stroomafwaartse richting (met toenemende saliniteit), zie ook Figuur \@ref(fig:gemiddeldekoolstofopg). In het estuarium treedt een dalende trend op. Specifiek stations Hansweert geul en Terneuzen boei 20 dalen  0.06 tot 0.07 mg/L per jaar (met beperkte statistische significantie). Deze afname wordt mogelijk verklaard door een afname in DOC lozingen. De laatste jaren zet de dalende trend niet door en lijkt de concentratie zich te stabiliseren (met jaarlijkse variaties). Voor de Walcheren locaties is een lichte stijging zichtbaar sinds 2016 die niet voor de overige stations wordt waargenomen.
+
+
+
+
+```{r fysischKoolstofOpgTab}
+
+parname <- "Opgelost organisch koolstof in mg/l na filtratie in oppervlaktewater"
+dt <- statTable(df, parname, 3)
+knitr::kable(dt, 
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel van het opgelost koolstofhehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+
+```{r fysischKoolstofOpg, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het opgelost koolstofgehalte in het oppervlaktewater van de Westerschelde en de monding."}
+
+parname <- "Opgelost organisch koolstof in mg/l na filtratie in oppervlaktewater"
+plotTrends(df, parname)
+```
+
+
+### Particulair gebonden organisch koolstof {#part-gebonden-organisch-koolstof}
+
+#### Jaargemiddelden {#part-gebonden-organisch-koolstof-jaar}
+
+Figuur \@ref(fig:fysischKoolstofPar) toont de jaargemiddelden particulair gebonden organisch koolstof per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischKoolstofParTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Bij Schaar van Ouden Doel wordt het particulair organisch koolstof niet bepaald. In plaats daarvan is station Wielingen gepresenteerd. De stations zijn gerangschikt in stroomafwaartse richting.
+
+De hoeveelheid particulair organisch koolstof varieert sterk van jaar tot jaar. Ver uit de kust (Walcheren 20 km uit de kust) is de concentratie een stuk lager dan op de andere stations. Er zijn geen duidelijke temporele trends waarneembaar, zie ook Figuur \@ref(fig:gemiddeldekoolstofpar).
+
+
+
+```{r fysischKoolstofPar}
+
+parname <- "Particulair organisch koolstof in mg/l particulair gebonden in oppervlaktewater"
+dt <- statTable(df, parname, 3)
+knitr::kable(dt, 
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel van het opgelost koolstofhehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+
+```{r gemiddeldekoolstofpart, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het opgelost koolstofgehalte in het oppervlaktewater van de Westerschelde en de monding."}
+
+parname <- "Particulair organisch koolstof in mg/l particulair gebonden in oppervlaktewater"
+plotTrends(df, parname)
+```
+
+
+#### Jaargemiddelden per seizoen {#part-gebonden-organisch-koolstof-zomerwinter}
+
+Figuur \@ref(fig:fysischKoolstofParZomerWinter) toont het seizoensgemiddelde gehalte particulaire koolstofgehalte per station voor de periode 1996-2018. Er is geen duidelijk verschil tussen zomer en winterwaarden, wat laat zien dat de fytoplanktonbloei wegvalt in de achtergrondwaarden. Ook is de variatie per station beperkt te noemen.
+
+
+
+```{r fysischKoolstofParZomerWinter, fig.cap="Gemiddeld waardes voor de hoeveelheid particulaire koolstofgehalte gedurende de zomer en de winter in het oppervlaktewater van de Westerschelde en de monding."}
+
+# knitr::include_graphics("Figuren/Fysisch/Koolstof_par/Zomer_winter.png")
+
+parname <- "Particulair organisch koolstof in mg/l particulair gebonden in oppervlaktewater"
+plotTrendsSeizoen(df, parname, sf = F)
+
+```
+
+
+
+```{r gemiddeldekoolstofopg, fig.cap="Gemiddelde opgeloste koolstofgehalte per station berekend op alle beschikbare data vanaf 1996."}
+# knitr::include_graphics("Figuren/Fysisch/Koolstof_opg/gemiddelde_waardes.png")
+parname <- "Opgelost organisch koolstof in mg/l na filtratie in oppervlaktewater"
+plotMedianMap(df, parname)
+```
+
+
+
+```{r gemiddeldekoolstofpar, fig.cap="Gemiddelde particulaire koolstofgehalte per station berekend op alle beschikbare data vanaf 1996."}
+# knitr::include_graphics("Figuren/Fysisch/Koolstof_par/gemiddelde_waardes.png")
+
+parname <- "Particulair organisch koolstof in mg/l particulair gebonden in oppervlaktewater"
+plotMedianMap(df, parname)
+```
+
+## C:N:P ratio's {#cnp-ratio}
+
+De molaire C:N:P ratio’s zijn berekend uit jaargemiddelden van particulair organisch koolstof (POC), particulair gebonden stikstof (PN) en particulair gebonden fosfaat (PP). De molaire NC-ratio  en de molaire PC-ratio zijn uitgedrukt ten opzichte van een gehalte C van 106, om de vergelijking met de zogenaamde Redfield-ratio (C:N:P = 106:16:1) mogelijk te maken:
+
+$$\frac{N}{C} = 106*\frac{{PN/14}}{{POC/12}}$$
+$$\frac{P}{C} = 106*\frac{{PP/31}}{{POC/12}}$$
+
+De Redfield-ratio gaat over de verhoudingen van organisch C, N en P in particulair materiaal. Omdat totaal N en P in particulair materiaal gemeten zijn, zit er ook particulair anorganisch P (PAP) bij. Dit leidt tot een overschatting van de hoeveelheid P in de data ten opzichte van de Redfield-ratio. Er is geen particulair anorganisch N.
+
+Figuur \@ref(fig:fysischNJaar), Figuur \@ref(fig:fysischPJaar) en Figuur \@ref(fig:fysischNPJaar) tonen de jaarwaardes per station. De gemiddelde waardes in de zomer en winter kunnen worden gevonden in Figuur \@ref(fig:fysischNzw), Figuur \@ref(fig:fysischPzw) en Figuur \@ref(fig:fysischNPzw). Daarnaast zijn in Tabel \@ref(tab:fysischCNP) de gemiddelde waardes te vinden. De gemiddelde waardes uit Figuur \@ref(fig:fysischNJaar) en Figuur \@ref(fig:fysischPJaar) kunnen het best worden vergeleken met Tabel \@ref(tab:fysischCNP).
+
+Bij Walcheren 20 km komen de hoogste stikstofratios voor en over het algemeen neemt de N-C-ratio toe naar mate men verder uit het estuarium gaat. Dit kan verklaard worden door een afname van terrestrisch materiaal (met lage N-C ratio) en toename van vers organisch materiaal (hoge N-C ratio) in stroomafwaartse richting. Een tegenoverstelde trend is zichtbaar voor de P-C-ratio's aangezien de laagste waarde wordt gevonden bij Walcheren 20 km en over het algemeen neemt de fosforratio toe naar mate men verder in het estuarium komt. Dit kan verklaard worden door een hogere bijdrage van anorganisch particulair P in stroomopwaartse richting. Bij Walcheren 20 km is de stoichiometrische verhouding ook het dichtst bij Redfield. Dit vertaalt zich ook in de N:P ratio die het hoogst is bij Walcheren 20 km en het laagst bij Hansweert Geul.
+
+De N-C-ratio (stikstof) is over het algemeen hoger in de zomerperiode, als er meer algen zijn. De P-C-ratio (fosfor) is over het algemeen hoger in de winterperiode, als de hoeveelheid particulair gebonden fosfaat over het algemeen hoger is. Dit is ook terug te zien in de N:P ratio, met hogere waarden in de zomer dan in de winter.
+
+
+
+```{r fysischCNP}
+
+parname1a = "Stikstof in mg/l na filtratie in oppervlaktewater"
+parname1b = "Stikstof in mg/l particulair gebonden in oppervlaktewater"
+parname2a = "Fosfaat, totaal in mg/l na filtratie in oppervlaktewater"
+parname2b = "Fosfaat, totaal in mg/l particulair gebonden in oppervlaktewater"
+parname3a <- "Particulair organisch koolstof in mg/l particulair gebonden in oppervlaktewater"
+parname3b <- "Opgelost organisch koolstof in mg/l na filtratie in oppervlaktewater"
+
+parname1 = "stikstof totaal in mg/l in oppervlaktewater"
+parname2 = "fosfor totaal in mg/l in oppervlaktewater"
+parname3 = "koolstof totaal in mg/l in oppervlaktewater"
+
+newparname = "N/C"
+# calculate ratio; this can be more automized, but perhaps not worth the trouble
+# Later ALLE ratios hierin berekenen en behandelen als parameter
+
+dfm <- df %>%
+  filter(parametername %in% c(parname1a, parname1b, parname2a, parname2b, parname3a, parname3b)) %>%
+  pivot_wider(id_cols = c(latitude, longitude, datetime, stationname), names_from = parametername, values_from = value) %>%
+  mutate(!!newparname := (!!as.name(parname1a) + !!as.name(parname1b))/(!!as.name(parname2a) + !!as.name(parname2b))) %>%
+  select(latitude, longitude, datetime, stationname, !!as.name(newparname)) %>%
+  pivot_longer(cols = !!as.name(newparname), names_to = "parametername")
+
+
+# dt <- tex2dt("Figuren/Fysisch/CNP/meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Afkorting","C-ratio","N-ratio","P-ratio"),
+#              caption = "Gemiddelde molaire C-N-P-ratio uitgedrukt ten opzichte van een gehalte C van 106 gemiddeld over alle data van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+
+
+<!-- ```{r fysischNJaar, fig.cap="De molaire N-C-ratio, N uitgedrukt ten opzichte van een gehalte C van 106, gemiddeld over een jaar in het oppervlaktewater van de Westerschelde en de monding."} -->
+<!-- knitr::include_graphics("Figuren/Fysisch/CNP/N_jaar.png") -->
+<!-- ``` -->
+
+
+<!-- ```{r fysischPJaar, fig.cap="De molaire P-C-ratio, P uitgedrukt ten opzichte van een gehalte C van 106, gemiddeld over een jaar in het oppervlaktewater van de Westerschelde en de monding."} -->
+<!-- knitr::include_graphics("Figuren/Fysisch/CNP/P_jaar.png") -->
+<!-- ``` -->
+
+
+
+```{r fysischNPJaar, fig.cap="De molaire N-P-ratio, N uitgedrukt ten opzichte van een gehalte P, gemiddeld over een jaar in het oppervlaktewater van de Westerschelde en de monding."}
+
+# knitr::include_graphics("Figuren/Fysisch/CNP/NP_jaar.png")
+
+parname1a = "Stikstof in mg/l na filtratie in oppervlaktewater"
+parname1b = "Stikstof in mg/l particulair gebonden in oppervlaktewater"
+parname2a = "Fosfaat, totaal in mg/l na filtratie in oppervlaktewater"
+parname2b = "Fosfaat, totaal in mg/l particulair gebonden in oppervlaktewater"
+newparname = "N/C"
+
+# calculate ratio; this can be more automized, but perhaps not worth the trouble
+# Later ALLE ratios hierin berekenen en behandelen als parameter
+dfm <- df %>% #st_drop_geometry() %>%
+  filter(parametername %in% c(parname1a, parname1b, parname2a, parname2b)) %>%
+  pivot_wider(id_cols = c(latitude, longitude, datetime, stationname), names_from = parametername, values_from = value) %>%
+  mutate(!!newparname := (!!as.name(parname1a) + !!as.name(parname1b))/(!!as.name(parname2a) + !!as.name(parname2b))) %>%
+  select(latitude, longitude, datetime, stationname, !!as.name(newparname)) %>%
+  pivot_longer(cols = !!as.name(newparname), names_to = "parametername")
+
+plotTrends(dfm, parname = newparname, sf = F)
+
+```
+
+
+
+<!-- ```{r fysischNzw, fig.cap="De molaire N-C-ratio, N uitgedrukt ten opzichte van een gehalte C van 106, gemiddeld over de zomer en winterperiode in het oppervlaktewater van de Westerschelde en de monding."} -->
+<!-- knitr::include_graphics("Figuren/Fysisch/CNP/N_Zomer_winter.png") -->
+<!-- ``` -->
+
+
+
+<!-- ```{r fysischPzw, fig.cap="De molaire P-C-ratio, P uitgedrukt ten opzichte van een gehalte C van 106, gemiddeld over de zomer en winterperiode in het oppervlaktewater van de Westerschelde en de monding."} -->
+<!-- knitr::include_graphics("Figuren/Fysisch/CNP/P_Zomer_winter.png") -->
+<!-- ``` -->
+
+
+
+```{r fysischNPzw, fig.cap="De molaire N-P-ratio, N uitgedrukt ten opzichte van een gehalte P, gemiddeld over de zomer en winterperiode in het oppervlaktewater van de Westerschelde en de monding."}
+
+# knitr::include_graphics("Figuren/Fysisch/CNP/NP_Zomer_winter.png")
+
+plotTrendsSeizoen(dfm, parname = newparname, sf = F)
+
+```

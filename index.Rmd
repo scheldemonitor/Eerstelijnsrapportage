@@ -1,0 +1,44 @@
+---
+title: "Concept Eerstelijnsrapportage Westerschelde (IN ONTWIKKELING)"
+subtitle: 2020
+author: "Deltares"
+date: '`r Sys.Date()`'
+documentclass: book
+# bibliography: 
+biblio-style: apalike
+link-citations: yes
+---
+# Voorwoord
+
+```{r, message=FALSE, warning=FALSE, include=FALSE}
+# options(tinytex.verbose = TRUE)
+knitr::opts_chunk$set(echo = FALSE,	message = FALSE, warning = FALSE)
+
+# Set the newest year for use in the report
+dataJaar <- 2020
+```
+
+```{r logos, out.width="30%"}
+
+knitr::include_graphics("www/logo.png")
+knitr::include_graphics("www/Rijkswaterstaat-logo-e1473888123824-1-300x300.jpg")
+```
+
+De informatie op deze website is op dit moment onder constructie en bedoeld voor een beperkt publiek. Niets van deze website mag worden gebruikt door derden.
+
+This website is a test version. Nothing from this website may be used.
+
+Deze eerstelijnsrapportage is gemaakt door Deltares in opdracht van Rijkswaterstaat en bevat data t/m `r dataJaar`. De basis voor dit rapport is gemaakt door dr. F.M. Kleissen. Het verwerken, analyseren en toevoegen van de data uit `r dataJaar` in dit rapport is gedaan door dr. W. Stolte en B. van Rongen.
+
+## Samenvatting
+
+Deze rapportage bevat de beschikbare hydrodynamische, fysisch-chemische en biologische data in de periode 1996 tot en met `r dataJaar` voor de Westerschelde en de monding. Het is een eerste weergave van de beschikbare data en beschrijft enkel ‘wat men in de meetresultaten ziet’. Het bevat een interpretatie van de gegevens op basis van een eenvoudige analyse. De rapportage is opgesteld in het kader van de OntwikkelingsSchets 2010 en vormt een van de bouwstenen voor de vergunningverlening van de derde verdieping van het Schelde-estuarium.
+
+## Versie {#rapportversie}
+
+* Concept versie 28-04-2021: bevat data t/m `r dataJaar`, missend in deze versie is:
+  + Golven: locatie Cadzand, 
+  + Bodem: heel hoofdstuk en data, 
+  + Biota: alle data voor `r dataJaar`, figuren opgenomen met data t/m `r dataJaar-1`
+  + Bijlage: meetdichtheid tabellen hebben nog niet de `r dataJaar` gegevens
+  

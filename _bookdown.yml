@@ -1,0 +1,18 @@
+
+delete_merged_file: true
+new_session: true
+rmd_files: [
+  "index.Rmd",
+  #"werkwijze.Rmd",
+  "01_inleiding.Rmd",
+  "02_hydro.Rmd",
+  "03_oppwater.Rmd",
+  "04_zwevendstof.Rmd",
+  "05_bodem.Rmd",
+  "07_fytoplankton.Rmd" 
+]
+
+language:
+  label:
+    fig: "Figuur "
+    tab: "Tabel "

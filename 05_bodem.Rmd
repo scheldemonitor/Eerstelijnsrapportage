@@ -1,0 +1,296 @@
+<!-- TO DO:
+- bijlage referentie
+- figuren headers bijwerken met percentiele ipv min-max
+- merge fractie en geen fractie parameters tot 1 tijdserie
+- Som PCB mist nog data
+- Tributyltin heeft 2 parnames voor de complete serie
+
+-->
+```{r setupBodem, include=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE,
+	out.width = "85%",
+	fig.align='center'
+)
+require(smwfs)
+require(tidyverse)
+require(lubridate)
+require(sf)
+require(leaflet)
+
+source("R/functions.R")
+
+dataJaar <- 2020
+
+trendstations <- c('Schaar van Ouden Doel',
+"Bath boei 68",
+"Bath boei 71",
+"Speelmansgat",
+"Kruiningen Perkpolder",
+"Hansweert boei OHMG",
+"Hansweert boei 4",
+"Baarland drempel",
+"Terneuzen boei WPT2",
+"Borssele drempel",
+"Vlissingen boei SSVH",
+"Wielingen oost"
+)
+
+frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_FysChem_bodem_test_1998_2020.csv"
+# frozendatapath <- "c:/Users/ronge_bb/R/Data/Data_FysChem_bodem_test_1998_2020.csv"
+```
+
+```{r downloadBodem, include = F}
+# Set year for use in the report
+
+df <- read_delim(frozendatapath, delim = ",")
+
+df_clean <- df %>% 
+  filter(stationname %in% trendstations) %>% 
+  mutate(stationname = factor(stationname, levels = trendstations)) %>%
+  repair_limits() %>%
+  group_by(parametername, stationname) %>%
+  mutate(across(value, remove_outliers))
+
+```
+
+# Bodem - Fysisch-chemische parameters {#bodem}
+
+## Informatie over de metingen {#bodem-info-metingen}
+Eens in de drie jaar worden monsters genomen van het bodemmateriaal in de Westerschelde. Figuur \@ref(fig:meetstationsBodem) laat de 12 bemonsteringslocaties zien die in 2016 zijn gebruikt. De locatie Walcheren 2 km uit de kust is sinds 2010 niet meer gemeten. Resultaten van dit station zijn terug te vinden in de Eerstelijnsrapportage 2010. 
+
+
+```{r meetstationsBodem, fig.cap="Ligging van de meetstations voor het bodemmateriaal"}
+plotLocations(df_clean)
+# knitr::include_graphics("Figuren/Meetstations_bodem.png")
+```
+
+## Metalen {#bodem-metalen}
+In Figuur \@ref(fig:arseenBodem) t/m Figuur \@ref(fig:zinkBodem) zijn de metalen in het bodemsediment in de Westerschelde weergegeven. Op de horizontale as zijn de stations gerangschikt van west (links) naar oost (rechts). Globaal gezien laten de meeste metalen laten op de meeste stations een afnemende trend in de tijd zien, die voor sommige metalen en stations sterker zijn dan voor andere. Daarnaast is voor sommige metalen (cadmium, koper, kwik en zink) te zien dat de hoeveelheid metaal in de richting van de Noordzee afneemt.
+
+```{r arseenBodem, fig.height = 12, fig.cap="Arseen in het bodemsediment in de Westerschelde"}
+#knitr::include_graphics("Figuren/Fysisch/Bodem/bar_arseen.png")
+
+parname = "Arseen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+# plotTrendsLimits(df_clean, parname) + facet_wrap(~Station, ncol = 4)
+```
+
+```{r cadmiumBodem, fig.cap="Cadmium in het bodemsediment in de Westerschelde"}
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_cadmium.png")
+
+parname = "Cadmium in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+```{r chroomBodem, fig.cap="Chroom in het bodemsediment in de Westerschelde"}
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_chroom.png")
+
+parname = "Chroom in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+```{r koperBodem, fig.cap="Koper in het bodemsediment in de Westerschelde"}
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_koper.png")
+
+parname = "Koper in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+```{r kwikBodem, fig.cap="Kwik in het bodemsediment in de Westerschelde"}
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_kwik.png")
+
+parname = "Kwik in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+```{r loodBodem, fig.cap="Lood in het bodemsediment in de Westerschelde"}
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_lood.png")
+
+parname = "Lood in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+```{r zinkBodem, fig.cap="Zink in het bodemsediment in de Westerschelde"}
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_zink.png")
+
+parname = "Zink in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+## Polycyclische Aromatische Koolwaterstoffen (PAK's) {#bodem-PAK}
+De PAK’s zijn afzonderlijk weergegeven in Figuur \@ref(fig:antraceenBodem) t/m Figuur \@ref(fig:indeno-pyreenBodem). De PAK’s zijn in hogere gehaltes aanwezig richting de Vlaams-Nederlandse grens. Ook bij Hansweert boei OHMG zijn in het verleden hoge gehaltes gemeten. Er is geen consistente temporele trend waar te nemen, maar de gemiddeldes liggen in de periode na 2007 over het algemeen lager dan in de periode voor 2007.
+<!-- %maar de gehaltes in 2016 zijn meestal wel hoger dan in 2013. -->
+<!-- %CHECK THIS STATEMENT! -->
+
+```{r antraceenBodem, fig.cap="Antraceen in het bodemsediment in de Westerschelde"}
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_antraceen.png")
+
+parname = "Antraceen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+```{r benzo-antraceenBodem, fig.cap="Benzo(a)antraceen in het bodemsediment in de Westerschelde"}
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_benzo(a)antraceen.png")
+
+parname = "Benzo(a)antraceen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+```{r benzo-pyreenBodem, fig.cap="Benzo(a)pyreen in het bodemsediment in de Westerschelde"}
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_benzo(a)pyreen.png")
+
+parname = "Benzo(a)pyreen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+```{r benzo-peryleenBodem, fig.cap="Benzo(g,h,i)peryleen in het bodemsediment in de Westerschelde"}
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_benzo(g,h,i)peryleen.png")
+
+parname = "Benzo(g,h,i)peryleen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+```{r benzo-fluorantheenBodem, fig.cap="Benzo(k)fluorantheen in het bodemsediment in de Westerschelde"}
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_benzo(k)fluorantheen.png")
+
+parname = "Benzo(k)fluorantheen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+```{r chryseenBodem, fig.cap="Chryseen in het bodemsediment in de Westerschelde"}
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_chryseen.png")
+
+parname = "Chryseen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+```{r fenanthreenBodem, fig.cap="Fenanthreen in het bodemsediment in de Westerschelde"}
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_fenanthreen.png")
+
+parname = "Fenantreen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+```{r fluorantheenBodem, fig.cap="Fluorantheen in het bodemsediment in de Westerschelde"}
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_fluorantheen.png")
+
+parname = "Fluorantheen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+```{r indeno-pyreenBodem, fig.cap="Indeno(1,2,3-c,d)pyreen in het bodemsediment in de Westerschelde"}
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_indeno(1,2,3-c,d)pyreen.png")
+
+parname = "Indeno(1,2,3-c,d)pyreen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+## Polychloorbifenylen (PCB's) {#bodem-PCB}
+
+De PCB’s in het bodemsediment worden zowel afzonderlijk als gesommeerd weergegeven. In Figuur \@ref(fig:PCB180Bodem) t/m Figuur \@ref(fig:PCB28Bodem) zijn de onderstaande PCB’s afzonderlijk weergegeven. In Figuur \@ref(fig:SomPCBBodem) is de sommatie van de PCB’s weergegeven. De volgende PCB’s zijn gerapporteerd en gesommeerd:
+
+* 2,2',3,4,4',5,5'-heptachloorbifenyl (PCB180)
+* 2,2',3,4,4',5'-hexachloorbifenyl (PCB138)
+* 2,2',4,4',5,5'-hexachloorbifenyl (PCB153)
+* 2,2',4,5,5'-pentachloorbifenyl (PCB101)
+* 2,2',5,5'-tetrachloorbifenyl (PCB52)
+* 2,3',4,4',5-pentachloorbifenyl (PCB118)
+* 2,4,4'-trichloorbifenyl (PCB28)
+
+```{r PCB180Bodem, fig.cap="PCB180 in het bodemsediment in de Westerschelde"}
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',3,4,4',5,5'-heptachloorbifenyl.png")
+
+parname = "2,2',3,4,4',5,5'-Heptachloorbifenyl (PCB180) in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+```{r PCB138Bodem, fig.cap="PCB138 in het bodemsediment in de Westerschelde"}
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',3,4,4',5'-hexachloorbifenyl.png")
+
+parname = "2,2',3,4,4',5'-Hexachloorbifenyl (PCB138) in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+```{r PCB153Bodem, fig.cap="PCB153 in het bodemsediment in de Westerschelde"}
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',4,4',5,5'-hexachloorbifenyl.png")
+
+parname = "2,2',4,4',5,5'-Hexachloorbifenyl (PCB153) in ug/kg drooggewicht in sediment"
+#plotTrends(df, parname, trend = F)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+```{r PCB101Bodem, fig.cap="PCB101 in het bodemsediment in de Westerschelde"}
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',4,5,5'-pentachloorbifenyl.png")
+
+parname = "2,2',4,5,5'-Pentachloorbifenyl (PCB101) in ug/kg drooggewicht in sediment"
+#plotTrends(df, parname, trend = F)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+```{r PCB52Bodem, fig.cap="PCB52 in het bodemsediment in de Westerschelde"}
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',5,5'-tetrachloorbifenyl.png")
+
+parname = "2,2',5,5'-Tetrachloorbifenyl (PCB52) in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+```{r PCB118Bodem, fig.cap="PCB118 in het bodemsediment in de Westerschelde"}
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,3',4,4',5-pentachloorbifenyl.png")
+
+parname = "2,3',4,4',5-Pentachloorbifenyl (PCB118) in ug/kg drooggewicht in sediment"
+#plotTrends(df, parname, trend = F)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+```{r PCB28Bodem, fig.cap="PCB28 in het bodemsediment in de Westerschelde"}
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,4,4'-trichloorbifenyl.png")
+
+parname = "2,4,4'-Trichloorbifenyl (PCB28) in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+De hoeveelheid PCB’s neemt af in de richting van de Noordzee. Met name bij de oostelijke stations lijken de gehaltes af te nemen in de tijd.%, hoewel de gehaltes in 2016 wel hoger zijn dan in 2013.
+<!-- %CHECK THIS STATEMENT! -->
+
+```{r SomPCBBodem, fig.cap="Som van de PCB's in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_SomPCBs.png")
+
+# parname = "Chryseen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+# #plotTrends(df, parname, trend = F)
+# plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+## Organotinverbindingen {#bodem-organotin}
+Tributyltin is de enige organotinverbinding die wordt gemeten in het bodemsediment. In Figuur \@ref(fig:tributyltinBodem) is de hoeveelheid tributyltin over de jaren weergegeven per station. De gehaltes in 2010, 2013 en 2016 zijn sterk lager dan die van 2001 en 2004. Ruimtelijk gezien zijn er grote variaties.
+<!-- %CHECK THIS STATEMENT! -->
+
+```{r tributyltinBodem, fig.cap="Tributyltin in het bodemsediment in de Westerschelde"}
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_tributyltin(kation).png")
+
+parname = "Tributyltin in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
