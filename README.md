@@ -8,7 +8,7 @@ Deltares maakt elk jaar een eerstelijnsrapportage voor Rijkswaterstaat over de m
 
 De rapportage haalt de data uit de Scheldemonitor (https://www.scheldemonitor.org) via een WFS service. Daarna worden bewerkingen op deze data gedaan, grafieken en tabellen gemaakt, en kaartjes gemaakt. De gebruikte software voor de opzet van de rapportage is R met de packages Rmarkdown and Bookdown.
 
-Deze versie is een testversie. Het bevat slechts een klein deel van de volledige rapportage. De bedoeling is om op termijn de scripts voor het opbouwen van de volledige rapportage op deze repository te zetten. 
+Deze versie is in ontwikkeling. Verwacht wordt om een volledige rapportage op te leveren in de eerste helft van 2021. 
 
 ## Betrokkenen
 
