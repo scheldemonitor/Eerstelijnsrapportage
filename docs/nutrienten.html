@@ -1,0 +1,2207 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Nutriënten | Concept Eerstelijnsrapportage Westerschelde (IN ONTWIKKELING)</title>
+  <meta name="description" content="5 Nutriënten | Concept Eerstelijnsrapportage Westerschelde (IN ONTWIKKELING)" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Nutriënten | Concept Eerstelijnsrapportage Westerschelde (IN ONTWIKKELING)" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Nutriënten | Concept Eerstelijnsrapportage Westerschelde (IN ONTWIKKELING)" />
+  
+  
+  
+
+<meta name="author" content="Deltares" />
+
+
+<meta name="date" content="2021-12-22" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="fysisch-oppwater.html"/>
+<link rel="next" href="zwevend-stof.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<style>
+.zoomDiv {
+  opacity: 0;
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 50;
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 0px 50px #888888;
+  max-height:100%; 
+  overflow: scroll;
+}
+
+.zoomImg {
+  width: 100%;
+}
+</style>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').prepend("<div class=\"zoomDiv\"><img src=\"\" class=\"zoomImg\"></div>");
+    // onClick function for all plots (img's)
+    $('img:not(.zoomImg):not(.logo)').click(function() {
+      $('.zoomImg').attr('src', $(this).attr('src'));
+      $('.zoomDiv').css({opacity: '1', width: '60%'});
+    });
+    // onClick function for zoomImg
+    $('img.zoomImg').click(function() {
+      $('.zoomDiv').css({opacity: '0', width: '0%'});
+    });
+  });
+</script>
+
+
+
+<link rel="stylesheet" href="navbar\navbar.css" type="text/css" />
+<link rel="stylesheet" href="style\deltares.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Voorwoord</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#samenvatting"><i class="fa fa-check"></i><b>1.1</b> Samenvatting</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#rapportversie"><i class="fa fa-check"></i><b>1.2</b> Versie</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="inleiding.html"><a href="inleiding.html"><i class="fa fa-check"></i><b>2</b> Inleiding</a><ul>
+<li class="chapter" data-level="2.1" data-path="inleiding.html"><a href="inleiding.html#achtergrond"><i class="fa fa-check"></i><b>2.1</b> Achtergrond</a></li>
+<li class="chapter" data-level="2.2" data-path="inleiding.html"><a href="inleiding.html#doelstelling"><i class="fa fa-check"></i><b>2.2</b> Doelstelling</a></li>
+<li class="chapter" data-level="2.3" data-path="inleiding.html"><a href="inleiding.html#verwerkte-data"><i class="fa fa-check"></i><b>2.3</b> Verwerkte data</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="inleiding.html"><a href="inleiding.html#ontbrekende-data"><i class="fa fa-check"></i><b>2.3.1</b> Ontbrekende data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="inleiding.html"><a href="inleiding.html#leeswijzer"><i class="fa fa-check"></i><b>2.4</b> Leeswijzer</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="hydro.html"><a href="hydro.html"><i class="fa fa-check"></i><b>3</b> Hydrodynamiek</a><ul>
+<li class="chapter" data-level="3.1" data-path="hydro.html"><a href="hydro.html#waterstanden"><i class="fa fa-check"></i><b>3.1</b> Waterstanden</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="hydro.html"><a href="hydro.html#hydroInfoMeting"><i class="fa fa-check"></i><b>3.1.1</b> Informatie over de metingen</a></li>
+<li class="chapter" data-level="3.1.2" data-path="hydro.html"><a href="hydro.html#hydroHWLW"><i class="fa fa-check"></i><b>3.1.2</b> Jaargemiddelde hoog- en laagwaterstanden</a></li>
+<li class="chapter" data-level="3.1.3" data-path="hydro.html"><a href="hydro.html#hydroGetijslag"><i class="fa fa-check"></i><b>3.1.3</b> Jaargemiddelde getijslag</a></li>
+<li class="chapter" data-level="3.1.4" data-path="hydro.html"><a href="hydro.html#hydroGetijcomponenten"><i class="fa fa-check"></i><b>3.1.4</b> Getijcomponenten</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="hydro.html"><a href="hydro.html#golven"><i class="fa fa-check"></i><b>3.2</b> Golven IN ONTWIKKELING</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="hydro.html"><a href="hydro.html#golvenInfoMeting"><i class="fa fa-check"></i><b>3.2.1</b> Informatie over de metingen</a></li>
+<li class="chapter" data-level="3.2.2" data-path="hydro.html"><a href="hydro.html#golvenHoogte"><i class="fa fa-check"></i><b>3.2.2</b> Golfhoogte</a></li>
+<li class="chapter" data-level="3.2.3" data-path="hydro.html"><a href="hydro.html#golvenPeriode"><i class="fa fa-check"></i><b>3.2.3</b> Golfperiode</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html"><i class="fa fa-check"></i><b>4</b> Oppervlaktewater - Fysisch-chemische parameters</a><ul>
+<li class="chapter" data-level="4.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#oppInfoMetingen"><i class="fa fa-check"></i><b>4.1</b> Informatie over de metingen</a></li>
+<li class="chapter" data-level="4.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#saliniteit"><i class="fa fa-check"></i><b>4.2</b> Saliniteit</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#saliniteit-jaargemiddelde"><i class="fa fa-check"></i><b>4.2.1</b> Jaargemiddelde</a></li>
+<li class="chapter" data-level="4.2.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#saliniteit-winterzomer"><i class="fa fa-check"></i><b>4.2.2</b> Gemiddelde waarde in de zomer en de winter</a></li>
+<li class="chapter" data-level="4.2.3" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#saliniteit-maandgemiddelde"><i class="fa fa-check"></i><b>4.2.3</b> Maandgemiddelde</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#watertemp"><i class="fa fa-check"></i><b>4.3</b> Watertemperatuur</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#watertemp-jaargemiddelde"><i class="fa fa-check"></i><b>4.3.1</b> Jaargemiddelde</a></li>
+<li class="chapter" data-level="4.3.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#watertemp-winterzomer"><i class="fa fa-check"></i><b>4.3.2</b> Gemiddelde waarde in de zomer en de winter</a></li>
+<li class="chapter" data-level="4.3.3" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#watertemp-maandgemiddelde"><i class="fa fa-check"></i><b>4.3.3</b> Maandgemiddelde</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zuurstof"><i class="fa fa-check"></i><b>4.4</b> Zuurstof</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zuurstof-jaar-verzadiging"><i class="fa fa-check"></i><b>4.4.1</b> Jaargemiddelde verzadigingspercentage zuurstof</a></li>
+<li class="chapter" data-level="4.4.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zuurstof-jaar-gehalte"><i class="fa fa-check"></i><b>4.4.2</b> Jaargemiddelde zuurstofgehalte</a></li>
+<li class="chapter" data-level="4.4.3" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zuurstof-maand-verzadiging"><i class="fa fa-check"></i><b>4.4.3</b> Maandgemiddelde verzadigingspercentage zuurstof</a></li>
+<li class="chapter" data-level="4.4.4" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zuurstof-maand-gehalte"><i class="fa fa-check"></i><b>4.4.4</b> Maandgemiddelde zuurstofgehalte</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#chlorofyl"><i class="fa fa-check"></i><b>4.5</b> Chlorofyl-a</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#chlorofyl-jaar"><i class="fa fa-check"></i><b>4.5.1</b> Jaargemiddelde</a></li>
+<li class="chapter" data-level="4.5.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#chlorofyl-zomerwinter"><i class="fa fa-check"></i><b>4.5.2</b> Gemiddelde waardes in de zomer en de winter</a></li>
+<li class="chapter" data-level="4.5.3" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#chlorofyl-maand"><i class="fa fa-check"></i><b>4.5.3</b> Maandgemiddelde</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#feofytine"><i class="fa fa-check"></i><b>4.6</b> Feofytine-a</a></li>
+<li class="chapter" data-level="4.7" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zuurstofverbruik"><i class="fa fa-check"></i><b>4.7</b> Chemisch en biochemisch zuurstofverbruik</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#chemisch-zuurstofgebruik"><i class="fa fa-check"></i><b>4.7.1</b> Chemisch zuurstofgebruik</a></li>
+<li class="chapter" data-level="4.7.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#biochemisch-zuurstofgebruik"><i class="fa fa-check"></i><b>4.7.2</b> Biochemisch zuurstofgebruik</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#lichtklimaat"><i class="fa fa-check"></i><b>4.8</b> Lichtklimaat</a><ul>
+<li class="chapter" data-level="4.8.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#doorzicht"><i class="fa fa-check"></i><b>4.8.1</b> Doorzicht</a></li>
+<li class="chapter" data-level="4.8.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#extinctiecoef"><i class="fa fa-check"></i><b>4.8.2</b> Extinctiecoefficient</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zwevende-stof"><i class="fa fa-check"></i><b>4.9</b> Zwevende stof</a><ul>
+<li class="chapter" data-level="4.9.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zwevende-stof-jaar"><i class="fa fa-check"></i><b>4.9.1</b> Jaargemiddelden</a></li>
+<li class="chapter" data-level="4.9.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zwevende-stof-zomerwinter"><i class="fa fa-check"></i><b>4.9.2</b> Gemiddelde waardes in de zomer en de winter</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="nutrienten.html"><a href="nutrienten.html"><i class="fa fa-check"></i><b>5</b> Nutriënten</a><ul>
+<li class="chapter" data-level="5.1" data-path="nutrienten.html"><a href="nutrienten.html#stikstof"><i class="fa fa-check"></i><b>5.1</b> Stikstof</a></li>
+<li class="chapter" data-level="5.2" data-path="nutrienten.html"><a href="nutrienten.html#part-gebonden-stikstof"><i class="fa fa-check"></i><b>5.2</b> Particulair gebonden stikstof</a></li>
+<li class="chapter" data-level="5.3" data-path="nutrienten.html"><a href="nutrienten.html#ammonium"><i class="fa fa-check"></i><b>5.3</b> Ammonium</a></li>
+<li class="chapter" data-level="5.4" data-path="nutrienten.html"><a href="nutrienten.html#nitriet"><i class="fa fa-check"></i><b>5.4</b> Nitriet</a></li>
+<li class="chapter" data-level="5.5" data-path="nutrienten.html"><a href="nutrienten.html#nitraat"><i class="fa fa-check"></i><b>5.5</b> Nitraat</a></li>
+<li class="chapter" data-level="5.6" data-path="nutrienten.html"><a href="nutrienten.html#orthofosfaat"><i class="fa fa-check"></i><b>5.6</b> Orthofosfaat</a></li>
+<li class="chapter" data-level="5.7" data-path="nutrienten.html"><a href="nutrienten.html#totaal-fosfaat"><i class="fa fa-check"></i><b>5.7</b> Totaal fosfaat</a></li>
+<li class="chapter" data-level="5.8" data-path="nutrienten.html"><a href="nutrienten.html#part-gebonden-fosfaat"><i class="fa fa-check"></i><b>5.8</b> Particulair gebonden fosfaat</a></li>
+<li class="chapter" data-level="5.9" data-path="nutrienten.html"><a href="nutrienten.html#silicaat"><i class="fa fa-check"></i><b>5.9</b> Silicaat</a></li>
+<li class="chapter" data-level="5.10" data-path="nutrienten.html"><a href="nutrienten.html#organisch-koolstof"><i class="fa fa-check"></i><b>5.10</b> Organisch koolstof</a><ul>
+<li class="chapter" data-level="5.10.1" data-path="nutrienten.html"><a href="nutrienten.html#opgelost-organisch-koolstof"><i class="fa fa-check"></i><b>5.10.1</b> Opgelost organisch koolstof</a></li>
+<li class="chapter" data-level="5.10.2" data-path="nutrienten.html"><a href="nutrienten.html#part-gebonden-organisch-koolstof"><i class="fa fa-check"></i><b>5.10.2</b> Particulair gebonden organisch koolstof</a></li>
+</ul></li>
+<li class="chapter" data-level="5.11" data-path="nutrienten.html"><a href="nutrienten.html#cnp-ratio"><i class="fa fa-check"></i><b>5.11</b> C:N:P ratio’s</a></li>
+<li class="chapter" data-level="5.12" data-path="nutrienten.html"><a href="nutrienten.html#metalen"><i class="fa fa-check"></i><b>5.12</b> Metalen</a><ul>
+<li class="chapter" data-level="5.12.1" data-path="nutrienten.html"><a href="nutrienten.html#boor"><i class="fa fa-check"></i><b>5.12.1</b> Boor</a></li>
+<li class="chapter" data-level="5.12.2" data-path="nutrienten.html"><a href="nutrienten.html#boor-fil"><i class="fa fa-check"></i><b>5.12.2</b> Boor na filtratie</a></li>
+<li class="chapter" data-level="5.12.3" data-path="nutrienten.html"><a href="nutrienten.html#chroom"><i class="fa fa-check"></i><b>5.12.3</b> Chroom</a></li>
+<li class="chapter" data-level="5.12.4" data-path="nutrienten.html"><a href="nutrienten.html#chroom-fil"><i class="fa fa-check"></i><b>5.12.4</b> Chroom na filtratie</a></li>
+<li class="chapter" data-level="5.12.5" data-path="nutrienten.html"><a href="nutrienten.html#koper"><i class="fa fa-check"></i><b>5.12.5</b> Koper</a></li>
+<li class="chapter" data-level="5.12.6" data-path="nutrienten.html"><a href="nutrienten.html#koper-fil"><i class="fa fa-check"></i><b>5.12.6</b> Koper na filtratie</a></li>
+<li class="chapter" data-level="5.12.7" data-path="nutrienten.html"><a href="nutrienten.html#uranium"><i class="fa fa-check"></i><b>5.12.7</b> Uranium</a></li>
+<li class="chapter" data-level="5.12.8" data-path="nutrienten.html"><a href="nutrienten.html#uranium-fil"><i class="fa fa-check"></i><b>5.12.8</b> Uranium na filtratie</a></li>
+<li class="chapter" data-level="5.12.9" data-path="nutrienten.html"><a href="nutrienten.html#vanadium"><i class="fa fa-check"></i><b>5.12.9</b> Vanadium</a></li>
+<li class="chapter" data-level="5.12.10" data-path="nutrienten.html"><a href="nutrienten.html#vanadium-fil"><i class="fa fa-check"></i><b>5.12.10</b> Vanadium na filtratie</a></li>
+<li class="chapter" data-level="5.12.11" data-path="nutrienten.html"><a href="nutrienten.html#zink"><i class="fa fa-check"></i><b>5.12.11</b> Zink</a></li>
+<li class="chapter" data-level="5.12.12" data-path="nutrienten.html"><a href="nutrienten.html#zink-fil"><i class="fa fa-check"></i><b>5.12.12</b> Zink na filtratie</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="zwevend-stof.html"><a href="zwevend-stof.html"><i class="fa fa-check"></i><b>6</b> Zwevend stof - Fysisch-chemische parameters</a><ul>
+<li class="chapter" data-level="6.1" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-info-metingen"><i class="fa fa-check"></i><b>6.1</b> Informatie over de metingen</a></li>
+<li class="chapter" data-level="6.2" data-path="zwevend-stof.html"><a href="zwevend-stof.html#korrelgrootteverdeling"><i class="fa fa-check"></i><b>6.2</b> Korrelgrootteverdeling</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="zwevend-stof.html"><a href="zwevend-stof.html#korrelgrootteverdeling-tot63"><i class="fa fa-check"></i><b>6.2.1</b> Korrelgroottefractie tot 63 <span class="math inline">\(\mu\)</span>m</a></li>
+<li class="chapter" data-level="6.2.2" data-path="zwevend-stof.html"><a href="zwevend-stof.html#korrelgrootteverdeling-tot2"><i class="fa fa-check"></i><b>6.2.2</b> Korrelgroottefractie tot 2 <span class="math inline">\(\mu\)</span>m</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-metalen"><i class="fa fa-check"></i><b>6.3</b> Metalen</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-arseen"><i class="fa fa-check"></i><b>6.3.1</b> Arseen</a></li>
+<li class="chapter" data-level="6.3.2" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-cadmium"><i class="fa fa-check"></i><b>6.3.2</b> Cadmium</a></li>
+<li class="chapter" data-level="6.3.3" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-chroom"><i class="fa fa-check"></i><b>6.3.3</b> Chroom</a></li>
+<li class="chapter" data-level="6.3.4" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-kobalt"><i class="fa fa-check"></i><b>6.3.4</b> Kobalt</a></li>
+<li class="chapter" data-level="6.3.5" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-koper"><i class="fa fa-check"></i><b>6.3.5</b> Koper</a></li>
+<li class="chapter" data-level="6.3.6" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-kwik"><i class="fa fa-check"></i><b>6.3.6</b> Kwik</a></li>
+<li class="chapter" data-level="6.3.7" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-lood"><i class="fa fa-check"></i><b>6.3.7</b> Lood</a></li>
+<li class="chapter" data-level="6.3.8" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-vanadium"><i class="fa fa-check"></i><b>6.3.8</b> Vanadium</a></li>
+<li class="chapter" data-level="6.3.9" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-zink"><i class="fa fa-check"></i><b>6.3.9</b> Zink</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PAK"><i class="fa fa-check"></i><b>6.4</b> Polycyclische aromatische koolwaterstoffen (PAK’s)</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-antraceen"><i class="fa fa-check"></i><b>6.4.1</b> Antraceen</a></li>
+<li class="chapter" data-level="6.4.2" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-Benzoapyreen"><i class="fa fa-check"></i><b>6.4.2</b> Benzo[<em>a</em>]pyreen</a></li>
+<li class="chapter" data-level="6.4.3" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-Benzoghiperyleen"><i class="fa fa-check"></i><b>6.4.3</b> Benzo[<em>g,h,i</em>]peryleen</a></li>
+<li class="chapter" data-level="6.4.4" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-Benzoaantraceen"><i class="fa fa-check"></i><b>6.4.4</b> Benzo[<em>a</em>]antraceen</a></li>
+<li class="chapter" data-level="6.4.5" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-Benzokfluorantheen"><i class="fa fa-check"></i><b>6.4.5</b> Benzo[<em>k</em>]fluorantheen</a></li>
+<li class="chapter" data-level="6.4.6" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-chryseen"><i class="fa fa-check"></i><b>6.4.6</b> Chryseen</a></li>
+<li class="chapter" data-level="6.4.7" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-fenanthreen"><i class="fa fa-check"></i><b>6.4.7</b> Fenanthreen</a></li>
+<li class="chapter" data-level="6.4.8" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-fluorantheen"><i class="fa fa-check"></i><b>6.4.8</b> Fluorantheen</a></li>
+<li class="chapter" data-level="6.4.9" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-indeno"><i class="fa fa-check"></i><b>6.4.9</b> Indeno[<em>1,2,3-c,d</em>]pyreen</a></li>
+<li class="chapter" data-level="6.4.10" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-naftaleen"><i class="fa fa-check"></i><b>6.4.10</b> Naftaleen</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PCB"><i class="fa fa-check"></i><b>6.5</b> Polychloorbifenylen (PCB’s)</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PCB180"><i class="fa fa-check"></i><b>6.5.1</b> PCB180</a></li>
+<li class="chapter" data-level="6.5.2" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PCB138"><i class="fa fa-check"></i><b>6.5.2</b> PCB138</a></li>
+<li class="chapter" data-level="6.5.3" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PCB153"><i class="fa fa-check"></i><b>6.5.3</b> PCB153</a></li>
+<li class="chapter" data-level="6.5.4" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PCB101"><i class="fa fa-check"></i><b>6.5.4</b> PCB101</a></li>
+<li class="chapter" data-level="6.5.5" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PCB52"><i class="fa fa-check"></i><b>6.5.5</b> PCB52</a></li>
+<li class="chapter" data-level="6.5.6" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PCB118"><i class="fa fa-check"></i><b>6.5.6</b> PCB118</a></li>
+<li class="chapter" data-level="6.5.7" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PCB28"><i class="fa fa-check"></i><b>6.5.7</b> PCB28</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-overig"><i class="fa fa-check"></i><b>6.6</b> Overige stoffen</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-dieldrin"><i class="fa fa-check"></i><b>6.6.1</b> Dieldrin</a></li>
+<li class="chapter" data-level="6.6.2" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-Hexachloorbenzeen"><i class="fa fa-check"></i><b>6.6.2</b> Hexachloorbenzeen</a></li>
+<li class="chapter" data-level="6.6.3" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-Tributyltin"><i class="fa fa-check"></i><b>6.6.3</b> Tributyltin</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="bodem.html"><a href="bodem.html"><i class="fa fa-check"></i><b>7</b> Bodem - Fysisch-chemische parameters</a><ul>
+<li class="chapter" data-level="7.1" data-path="bodem.html"><a href="bodem.html#bodem-info-metingen"><i class="fa fa-check"></i><b>7.1</b> Informatie over de metingen</a></li>
+<li class="chapter" data-level="7.2" data-path="bodem.html"><a href="bodem.html#bodem-metalen"><i class="fa fa-check"></i><b>7.2</b> Metalen</a></li>
+<li class="chapter" data-level="7.3" data-path="bodem.html"><a href="bodem.html#bodem-PAK"><i class="fa fa-check"></i><b>7.3</b> Polycyclische Aromatische Koolwaterstoffen (PAK’s)</a></li>
+<li class="chapter" data-level="7.4" data-path="bodem.html"><a href="bodem.html#bodem-PCB"><i class="fa fa-check"></i><b>7.4</b> Polychloorbifenylen (PCB’s)</a></li>
+<li class="chapter" data-level="7.5" data-path="bodem.html"><a href="bodem.html#bodem-organotin"><i class="fa fa-check"></i><b>7.5</b> Organotinverbindingen</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="fytoplankton.html"><a href="fytoplankton.html"><i class="fa fa-check"></i><b>8</b> Fytoplankton</a><ul>
+<li class="chapter" data-level="8.1" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-soorten"><i class="fa fa-check"></i><b>8.1</b> Indeling soorten</a></li>
+<li class="chapter" data-level="8.2" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-info-metingen"><i class="fa fa-check"></i><b>8.2</b> Informatie over de metingen</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-metingen-stations"><i class="fa fa-check"></i><b>8.2.1</b> Stations en jaren</a></li>
+<li class="chapter" data-level="8.2.2" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-metingen-figuren"><i class="fa fa-check"></i><b>8.2.2</b> Figuren</a></li>
+<li class="chapter" data-level="8.2.3" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-metingen-trendbreuk"><i class="fa fa-check"></i><b>8.2.3</b> Trendbreuk</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-station"><i class="fa fa-check"></i><b>8.3</b> Resultaten per station</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-schaar"><i class="fa fa-check"></i><b>8.3.1</b> Schaar van Ouden Doel</a></li>
+<li class="chapter" data-level="8.3.2" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-hansweert"><i class="fa fa-check"></i><b>8.3.2</b> Hansweert geul</a></li>
+<li class="chapter" data-level="8.3.3" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-vlis"><i class="fa fa-check"></i><b>8.3.3</b> Vlissingen boei SSVH</a></li>
+<li class="chapter" data-level="8.3.4" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-walch2km"><i class="fa fa-check"></i><b>8.3.4</b> Walcheren 2 km uit de kust</a></li>
+<li class="chapter" data-level="8.3.5" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-walch20km"><i class="fa fa-check"></i><b>8.3.5</b> Walcheren 20 km uit de kust</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-groep"><i class="fa fa-check"></i><b>8.4</b> Resultaten per groep</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-auto-blauw"><i class="fa fa-check"></i><b>8.4.1</b> Autotroof - Blauwwieren</a></li>
+<li class="chapter" data-level="8.4.2" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-auto-dia"><i class="fa fa-check"></i><b>8.4.2</b> Autotroof - Diatomeeën</a></li>
+<li class="chapter" data-level="8.4.3" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-auto-dino"><i class="fa fa-check"></i><b>8.4.3</b> Autotroof - Dinoflagellaten</a></li>
+<li class="chapter" data-level="8.4.4" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-auto-groen"><i class="fa fa-check"></i><b>8.4.4</b> Autotroof - Groenwieren</a></li>
+<li class="chapter" data-level="8.4.5" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-auto-phaeo"><i class="fa fa-check"></i><b>8.4.5</b> Autotroof - Phaeocystis</a></li>
+<li class="chapter" data-level="8.4.6" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-auto-overig"><i class="fa fa-check"></i><b>8.4.6</b> Autotroof - overig</a></li>
+<li class="chapter" data-level="8.4.7" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-hetero-dino"><i class="fa fa-check"></i><b>8.4.7</b> Heterotroof - Dinoflagellaten</a></li>
+<li class="chapter" data-level="8.4.8" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-hetero-overig"><i class="fa fa-check"></i><b>8.4.8</b> Heterotroof - overig</a></li>
+<li class="chapter" data-level="8.4.9" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-mix-dino"><i class="fa fa-check"></i><b>8.4.9</b> Mixotroof - dinoflagellaten</a></li>
+<li class="chapter" data-level="8.4.10" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-mix-overig"><i class="fa fa-check"></i><b>8.4.10</b> Mixotroof - overig</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Concept Eerstelijnsrapportage Westerschelde (IN ONTWIKKELING)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="shortcut icon" type="image/jpg" href="navbar/images/icon-deltares.svg"/>
+</head>
+<body>
+
+<nav class="navigation-bar">
+    <a href="index.html"><i class="fa fa-home"></i></a>
+    <div class="logos">
+        <img class="logo" src="navbar/images/deltares_logo.png" />
+        <img class="logo" src="navbar/images/Rijkswaterstaat-logo-e1473888123824-1-300x300.jpg" />
+    </div>
+</nav>
+
+</body>
+</html>
+<div id="nutrienten" class="section level1">
+<h1><span class="header-section-number">5</span> Nutriënten</h1>
+<p>Nutriënten zijn vooral van belang voor de biologische activiteit in de Westerschelde. Stikstof (N) en fosfor (P) zijn van belang omdat het voedingsstoffen (nutriënten) zijn, die als gevolg van puntlozingen en diffuse bronnen in verhoogde concentraties aanwezig kunnen zijn, en aanleiding kunnen geven tot eutrofiëring.</p>
+<p>Stikstof komt in het oppervlaktewater voor in verschillende vormen:
+* anorganisch:
++ ammonium (<span class="math inline">\(NH_4^+\)</span>);
++ nitriet (<span class="math inline">\(NO_2^-\)</span>);
++ nitraat (<span class="math inline">\(NO_3^-\)</span>);
+* organisch (meestal gemeten samen met ammonium als ‘Kjeldahl-stikstof’):
++ opgelost, bv. in de vorm van humuszuren;
++ particulair, bv. materiaal afkomstig van lozingen of van algengroei.</p>
+<p>De som van alle anorganische en organische vormen van stikstof duiden we aan als totaal stikstof. De som van alle vormen van anorganisch stikstof en opgelost organisch stikstof duiden we aan als opgelost stikstof. Particulair stikstof bestaat voor het overgrote deel uit organisch materiaal.</p>
+<p>Ammonium wordt in het water door bacteriën omgezet in nitriet en vervolgens in nitraat. Omdat ammonium vaak aanwezig is in ongezuiverde of deels gezuiverde lozingen, en omdat de omzetting naar nitraat enige tijd in beslag neemt, is de aanwezigheid van ammonium meestal een aanwijzing voor de aanwezigheid van lozingen. Dit verschijnsel is sterker in de winter, omdat dan de omzettingen langzamer verlopen. Organisch stikstof kan in het water aanwezig zijn als gevolg van lozingen, maar ook als gevolg van de opname van anorganisch stikstof door algen.</p>
+<p>Door de menging van relatief nutriëntenrijk zoet water en relatief nutriëntenarm zout water, zijn de concentraties van totaal stikstof in een estuarium als regel bovenstrooms hoger dan benedenstrooms. Voor andere specifieke deelparameters spelen verschillende biochemische processen een rol, die ertoe leiden dat er een minder directe relatie tussen het gemeten gehalte en de gemeten saliniteit kan bestaan. Door seizoensgebonden biochemische processen in de bovenloop laten veel rivieren in hun benedenloop en hun estuarium een seizoensmatige fluctuatie van het stikstofgehalte zien, met hoge gehaltes in de winter en lage gehaltes in de zomer. De opname door algen in het voorjaar kan dit beeld voor de anorganische fractie versterken.</p>
+<p>Fosfor komt in het oppervlaktewater in de volgende vormen voor:
+* anorganisch
++ orthofosfaat (opgelost, o-<span class="math inline">\(PO_4^{3-}\)</span>);
++ gebonden aan slib
+* organisch
++ opgelost, bv. in de vorm van humuszuren;
++ particulair, bv. materiaal afkomstig van lozingen of van algengroei.</p>
+<p>De som van alle anorganische en organische vormen van fosfor duiden we aan als totaal fosfaat. De som van orthofosfaat en opgelost organisch fosfor duiden we aan als opgelost fosfaat. De som van aan slib gebonden anorganisch en organisch fosfor duiden we aan als particulair gebonden fosfaat.</p>
+<p>Anorganisch fosfor is in significante mate gebonden aan slibdeeltjes. De bindingsvorm kan verschillen (adsorptie, precipitatie van fosforhoudende mineralen). Organisch fosfor kan in het water aanwezig zijn als gevolg van lozingen, maar ook als gevolg van de opname van anorganisch fosfor door algen.</p>
+<p>Door de menging van relatief nutriëntenrijk zoet water en relatief nutriëntenarm zout water, zijn ook de concentraties van totaal fosfaat in principe bovenstrooms hoger dan benedenstrooms. De relatie met de saliniteit is minder eenduidig voor fosfaat dan voor stikstof, omdat een relatief grote fractie fosfaat particulair is. Deze particulaire fractie kan vanuit de bodem worden nageleverd. Met name de Zeeschelde bevat grote hoeveelheden fijn slib dat (net als andere antropogeen belaste rivieren) een grote hoeveelheid geadsorbeerde fosfaten bevat. Voor specifieke deelparameters spelen daarnaast verschillende biochemische processen een rol, die ertoe leiden dat er een minder directe relatie tussen het gemeten gehalte en de gemeten saliniteit kan bestaan.</p>
+<p>Silicium is een relevante parameter omdat diatomeeën (kiezelwieren) opgelost anorganisch silicium (silicaat) opnemen bij hun groei. De beschikbaarheid van silicaat stuurt dus mede de algensoortensamenstelling en biomassa. Silicaat komt voor in rivierwater. De concentratie is voornamelijk afhankelijk van de geologische en hydrologische kenmerken van het stroomgebied. Veel minder dan bij stikstof en fosfor is er sprake van concentratieverhoging als gevolg van lozingen van afvalwater.</p>
+<p>Door de menging van relatief silicaatrijk zoet water en relatief silicaatarm zout water, zijn de concentraties van silicaat in een estuarium als regel bovenstrooms hoger dan benedenstrooms. De opname van silicaat door diatomeeën in het voorjaar zorgt vaak voor een sterke seizoensvariatie in de concentratie van silicaat.</p>
+<p>Net als in de Eerstelijnsrapportage 2015 is ervoor gekozen (in tegenstelling tot eerdere rapportages) om nutrienten in dit rapport te presenteren als jaargemiddelde (in plaats van tijdseries). De reden hiervoor is dat deze methode de lezer meer inzicht geeft in de temporale trends.</p>
+<div id="stikstof" class="section level2">
+<h2><span class="header-section-number">5.1</span> Stikstof</h2>
+<p>Opgelost stikstof (DN) is de som van alle vormen van anorganisch stikstof (ammonium, nitriet, nitraat) en opgelost organisch stikstof. Figuur <a href="nutrienten.html#fig:fysischStikstofFil">5.1</a> toont de jaargemiddelden per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel <a href="nutrienten.html#tab:fysischStikstofFilTab">5.1</a> de gemiddelde, minimale en maximale waardes per station weergegeven. In Schaar van Ouden Doel is het opgelost stikstofgehalte niet bepaald. In plaats daarvan is station Wielingen gepresenteerd. De stations zijn gerangschikt in stroomafwaartse richting.</p>
+<p>Deze resultaten laten zien dat de opgelost stikstofgehaltes sterk afnemen in stroomafwaartse richting, zie Figuur <a href="nutrienten.html#fig:gemiddeldestikstoffil">5.2</a>. Op de bovenstroomse stations zijn de gehaltes van opgelost stikstof immers hoger dan benedenstrooms. Daarnaast hebben alle stations een duidelijke seizoensvariatie (niet weergegeven). De hoeveelheden stikstof na filtratie zijn veel hoger dan particulair gebonden stikstof, wat betekent dat het merendeel van het stikstof in de Westerschelde is opgelost. Daarnaast is een dalende trend waarneembaar over de periode vanaf 2000, vooral in het oostelijk deel van de Westerschelde door een afname in stikstof lozingen. Deze dalende trend is het grootst bij Hansweert (-0,09 mg/L per jaar) en statistisch significant, en leek de laatste jaren wel wat af te vlakken.</p>
+<table>
+<caption><span id="tab:fysischStikstofFilTab">Tabel 5.1: </span>Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van het opgelost stikstofgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="center">Station</th>
+<th align="center">Mediaan</th>
+<th align="center">90-perc</th>
+<th align="center">10-perc</th>
+<th align="center">Trend</th>
+<th align="center">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Hansweert geul</td>
+<td align="center">2.160</td>
+<td align="center">4.000</td>
+<td align="center">1.320</td>
+<td align="center">-0.093</td>
+<td align="center">0.000</td>
+</tr>
+<tr class="even">
+<td align="center">Terneuzen boei 20</td>
+<td align="center">1.690</td>
+<td align="center">3.070</td>
+<td align="center">1.000</td>
+<td align="center">-0.086</td>
+<td align="center">0.000</td>
+</tr>
+<tr class="odd">
+<td align="center">Vlissingen boei SSVH</td>
+<td align="center">0.768</td>
+<td align="center">1.540</td>
+<td align="center">0.461</td>
+<td align="center">-0.021</td>
+<td align="center">0.000</td>
+</tr>
+<tr class="even">
+<td align="center">Walcheren 2 km uit de kust</td>
+<td align="center">0.410</td>
+<td align="center">0.821</td>
+<td align="center">0.198</td>
+<td align="center">-0.015</td>
+<td align="center">0.000</td>
+</tr>
+<tr class="odd">
+<td align="center">Walcheren 20 km uit de kust</td>
+<td align="center">0.271</td>
+<td align="center">0.557</td>
+<td align="center">0.144</td>
+<td align="center">-0.003</td>
+<td align="center">0.157</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:fysischStikstofFil"></span>
+<img src="_main_files/figure-html/fysischStikstofFil-1.png" alt="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het stikstofgehalte in het oppervlaktewater van de Westerschelde en de monding." width="85%" />
+<p class="caption">
+Figuur 5.1: Jaarlijks mediaan, 10-percentiel en 90-percentiel van het stikstofgehalte in het oppervlaktewater van de Westerschelde en de monding.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldestikstoffil"></span>
+<div id="htmlwidget-1435b9e99ee1e517bc71" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1435b9e99ee1e517bc71">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.43701537,51.34742676,51.41288731,51.548099075188,51.657788],[4.01438853,3.82569972,3.56579345,3.4095522481203,3.219213],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#FDE725","#6BC761","#3D5589","#461F68","#440154"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #461D67 6.82901005823187%, #443C84 17.4166225516146%, #3A5A8B 28.0042350449974%, #2F758E 38.5918475383801%, #238E8C 49.1794600317628%, #30A781 59.7670725251456%, #51BE6F 70.3546850185283%, #85D24E 80.9422975119111%, #C8E037 91.5299100052938%, #FDE725 "],"labels":["0.4","0.6","0.8","1.0","1.2","1.4","1.6","1.8","2.0"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.0682901005823187,"p_n":0.915299100052938},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.34742676,51.657788],"lng":[3.219213,4.01438853]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 5.2: Gemiddelde stikstofgehalte na filtratie per station berekend op alle beschikbare data vanaf 1996.
+</p>
+</div>
+</div>
+<div id="part-gebonden-stikstof" class="section level2">
+<h2><span class="header-section-number">5.2</span> Particulair gebonden stikstof</h2>
+<p>Figuur <a href="nutrienten.html#fig:fysischStikstofPar">5.3</a> toont de jaargemiddelden per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel <a href="nutrienten.html#tab:fysischStikstofParTab">5.2</a> de gemiddelde, minimale en maximale waardes per station weergegeven. In Schaar van Ouden Doel is het particulair gebonden stikstofgehalte niet bepaald. In plaats daarvan is station Wielingen gepresenteerd. De stations zijn gerangschikt in stroomafwaartse richting.</p>
+<p>De concentraties particulair stikstof tonen een totaal ander verloop dan opgelost stikstof. Er zijn geen duidelijke longitudinale of temporele gradiënten waarneembaar, zie Figuur <a href="nutrienten.html#fig:gemiddeldestikstofpar">5.4</a>. Net als voor zwevend stof fluctueert de concentratie sterk, en zijn de gehaltes op de meeste stations vergelijkbaar, behalve op Walcheren 20 km uit de kust. De gehaltes particulair stikstof vormen maar een heel klein deel van de concentratie totaal stikstof.</p>
+<table>
+<caption><span id="tab:fysischStikstofParTab">Tabel 5.2: </span>Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van het particulair stikstofgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="left">Station</th>
+<th align="right">Mediaan</th>
+<th align="right">90-perc</th>
+<th align="right">10-perc</th>
+<th align="right">Trend</th>
+<th align="right">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Hansweert geul</td>
+<td align="right">0.180</td>
+<td align="right">0.301</td>
+<td align="right">0.098</td>
+<td align="right">-0.001</td>
+<td align="right">0.144</td>
+</tr>
+<tr class="even">
+<td align="left">Terneuzen boei 20</td>
+<td align="right">0.187</td>
+<td align="right">0.371</td>
+<td align="right">0.086</td>
+<td align="right">-0.001</td>
+<td align="right">0.456</td>
+</tr>
+<tr class="odd">
+<td align="left">Vlissingen boei SSVH</td>
+<td align="right">0.205</td>
+<td align="right">0.465</td>
+<td align="right">0.099</td>
+<td align="right">0.003</td>
+<td align="right">0.093</td>
+</tr>
+<tr class="even">
+<td align="left">Walcheren 2 km uit de kust</td>
+<td align="right">0.154</td>
+<td align="right">0.353</td>
+<td align="right">0.082</td>
+<td align="right">-0.001</td>
+<td align="right">0.420</td>
+</tr>
+<tr class="odd">
+<td align="left">Walcheren 20 km uit de kust</td>
+<td align="right">0.062</td>
+<td align="right">0.129</td>
+<td align="right">0.034</td>
+<td align="right">0.001</td>
+<td align="right">0.024</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:fysischStikstofPar"></span>
+<img src="_main_files/figure-html/fysischStikstofPar-1.png" alt="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het particulair stikstofgehalte in het oppervlaktewater van de Westerschelde en de monding." width="85%" />
+<p class="caption">
+Figuur 5.3: Jaarlijks mediaan, 10-percentiel en 90-percentiel van het particulair stikstofgehalte in het oppervlaktewater van de Westerschelde en de monding.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldestikstofpar"></span>
+<div id="htmlwidget-5b23d8c4ac71a6f6db40" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5b23d8c4ac71a6f6db40">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.43701537,51.34742676,51.41288731,51.5481018955224,51.657788],[4.01438853,3.82569972,3.56579345,3.40955682089552,3.219213],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#8CD547","#ACDB3E","#FDE725","#34B17C","#440154"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #462F77 12.5874125874126%, #3C568A 26.5734265734266%, #2E798D 40.5594405594406%, #2A9A87 54.5454545454546%, #45BB74 68.5314685314686%, #8CD547 82.5174825174825%, #E7E42E 96.5034965034965%, #FDE725 "],"labels":["0.08","0.10","0.12","0.14","0.16","0.18","0.20"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.125874125874126,"p_n":0.965034965034965},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.34742676,51.657788],"lng":[3.219213,4.01438853]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 5.4: Gemiddelde hoeveelheid particulair stikstofgehalte na filtratie per station berekend op alle beschikbare data vanaf 1996.
+</p>
+</div>
+</div>
+<div id="ammonium" class="section level2">
+<h2><span class="header-section-number">5.3</span> Ammonium</h2>
+<p>Figuur <a href="nutrienten.html#fig:fysischAmmonium">5.5</a> toont de jaargemiddelden ammonium per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel <a href="nutrienten.html#tab:fysischAmmoniumTab">5.3</a> de gemiddelde, minimale en maximale waardes per station weergegeven. De stations zijn gerangschikt in stroomafwaartse richting.</p>
+<p>In benedenstroomse richting nemen de concentraties van ammonium sterk af, zie Figuur <a href="nutrienten.html#fig:gemiddeldeammonium">5.6</a>. Op het station Schaar van Ouden Doel, en in mindere mate Hansweert, zijn hoge pieken waarneembaar. Ook zijn bij Schaar van Ouden Doel en Hansweert de maxima over de periode 1996-2006 afgenomen. Sinds 2006 lijkt de situatie stabiel. Ammoniumconcentraties zijn laag en hebben maar een klein aandeel in totaal stikstof. De minima liggen vaak tegen de detectielimiet (0.01 mg/L) waardoor trends moeilijker waar te nemen zijn.</p>
+<p><em>Let op: de y-assen van subfiguren van Figuur <a href="nutrienten.html#fig:fysischAmmonium">5.5</a> verschillen. Y-assen voor de linker en rechter figuur zijn wel hetzelfde.</em></p>
+<table>
+<caption><span id="tab:fysischAmmoniumTab">Tabel 5.3: </span>Jaarlijks mediaan, 10-percentiel en 90-percentiel van het ammoniumgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="left">Station</th>
+<th align="right">Mediaan</th>
+<th align="right">90-perc</th>
+<th align="right">10-perc</th>
+<th align="right">Trend</th>
+<th align="right">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Schaar van Ouden Doel</td>
+<td align="right">0.210</td>
+<td align="right">0.679</td>
+<td align="right">0.043</td>
+<td align="right">0.000</td>
+<td align="right">0.961</td>
+</tr>
+<tr class="even">
+<td align="left">Hansweert geul</td>
+<td align="right">0.042</td>
+<td align="right">0.123</td>
+<td align="right">0.013</td>
+<td align="right">0.000</td>
+<td align="right">0.638</td>
+</tr>
+<tr class="odd">
+<td align="left">Terneuzen boei 20</td>
+<td align="right">0.057</td>
+<td align="right">0.150</td>
+<td align="right">0.021</td>
+<td align="right">-0.001</td>
+<td align="right">0.061</td>
+</tr>
+<tr class="even">
+<td align="left">Vlissingen boei SSVH</td>
+<td align="right">0.046</td>
+<td align="right">0.092</td>
+<td align="right">0.014</td>
+<td align="right">-0.001</td>
+<td align="right">0.013</td>
+</tr>
+<tr class="odd">
+<td align="left">Walcheren 2 km uit de kust</td>
+<td align="right">0.036</td>
+<td align="right">0.081</td>
+<td align="right">0.006</td>
+<td align="right">0.000</td>
+<td align="right">0.712</td>
+</tr>
+<tr class="even">
+<td align="left">Walcheren 20 km uit de kust</td>
+<td align="right">0.017</td>
+<td align="right">0.045</td>
+<td align="right">0.002</td>
+<td align="right">0.000</td>
+<td align="right">0.965</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:fysischAmmonium"></span>
+<img src="_main_files/figure-html/fysischAmmonium-1.png" alt="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het ammoniumgehalte in het oppervlaktewater van de Westerschelde en de monding." width="85%" />
+<p class="caption">
+Figuur 5.5: Jaarlijks mediaan, 10-percentiel en 90-percentiel van het ammoniumgehalte in het oppervlaktewater van de Westerschelde en de monding.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldeammonium"></span>
+<div id="htmlwidget-dc8e7079d12a941348c3" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-dc8e7079d12a941348c3">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.3505439768063,51.43701537,51.34742676,51.41288731,51.5481191313869,51.6578071162791],[4.2507880313089,4.01438853,3.82569972,3.56579345,3.40958476642336,3.21924423255814],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#FDE725","#463078","#424686","#45357E","#46276F","#440154"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #450858 1.52889349572428%, #462D75 11.8942731277533%, #414A87 22.2596527597823%, #33668E 32.6250323918114%, #2C7F8D 42.9904120238404%, #289888 53.3557916558694%, #33B07D 63.7211712878984%, #66C564 74.0865509199275%, #97D842 84.4519305519565%, #DDE331 94.8173101839855%, #FDE725 "],"labels":["0.02","0.04","0.06","0.08","0.10","0.12","0.14","0.16","0.18","0.20"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.0152889349572428,"p_n":0.948173101839855},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.34742676,51.6578071162791],"lng":[3.21924423255814,4.2507880313089]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 5.6: Gemiddelde ammoniumgehalte per station berekend op alle beschikbare data vanaf 1996.
+</p>
+</div>
+</div>
+<div id="nitriet" class="section level2">
+<h2><span class="header-section-number">5.4</span> Nitriet</h2>
+<p>Figuur <a href="nutrienten.html#fig:fysischNitriet">5.7</a> toont de jaargemiddelden nitriet per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel <a href="nutrienten.html#tab:fysischNitrietTab">5.4</a> de gemiddelde, minimale en maximale waardes per station weergegeven.</p>
+<p>In benedenstroomse richting nemen de concentraties van nitriet af, zie Figuur <a href="nutrienten.html#fig:gemiddeldenitriet">5.8</a>. Op het station Schaar van Ouden Doel en in mindere mate de stations benedenstrooms, zijn relatief hoge pieken waarneembaar. Nitriet concentraties zijn laag in vergelijking met nitraat. Bij Schaar van Ouden Doel, Hansweert en Terneuzen lijken de concentraties te dalen, tot ca. het jaar 2000. Sinds 2006 wordt bij Schaar van Ouden Doel en de stations in de monding regelmatig de detectiegrens (0.01 mg/L) bereikt, waardoor de jaargemiddelde waardes beïnvloed worden. Overal is er in het estuarium een licht dalende trend waarneembaar, die het sterkst is bij Schaar van Oude doel.</p>
+<table>
+<caption><span id="tab:fysischNitrietTab">Tabel 5.4: </span>Jaarlijks mediaan, 10-percentiel en 90-percentiel van het nitrietgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="left">Station</th>
+<th align="right">Mediaan</th>
+<th align="right">90-perc</th>
+<th align="right">10-perc</th>
+<th align="right">Trend</th>
+<th align="right">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Schaar van Ouden Doel</td>
+<td align="right">0.040</td>
+<td align="right">0.100</td>
+<td align="right">0.005</td>
+<td align="right">-0.003</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">Hansweert geul</td>
+<td align="right">0.028</td>
+<td align="right">0.062</td>
+<td align="right">0.011</td>
+<td align="right">-0.001</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">Terneuzen boei 20</td>
+<td align="right">0.027</td>
+<td align="right">0.065</td>
+<td align="right">0.013</td>
+<td align="right">-0.001</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">Vlissingen boei SSVH</td>
+<td align="right">0.015</td>
+<td align="right">0.028</td>
+<td align="right">0.007</td>
+<td align="right">-0.001</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">Walcheren 2 km uit de kust</td>
+<td align="right">0.007</td>
+<td align="right">0.016</td>
+<td align="right">0.001</td>
+<td align="right">0.000</td>
+<td align="right">0.062</td>
+</tr>
+<tr class="even">
+<td align="left">Walcheren 20 km uit de kust</td>
+<td align="right">0.004</td>
+<td align="right">0.010</td>
+<td align="right">0.000</td>
+<td align="right">0.000</td>
+<td align="right">0.304</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:fysischNitriet"></span>
+<img src="_main_files/figure-html/fysischNitriet-1.png" alt="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het nitrietgehalte in het oppervlaktewater van de Westerschelde en de monding." width="85%" />
+<p class="caption">
+Figuur 5.7: Jaarlijks mediaan, 10-percentiel en 90-percentiel van het nitrietgehalte in het oppervlaktewater van de Westerschelde en de monding.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldenitriet"></span>
+<div id="htmlwidget-d1cf35a877a4bfb34556" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d1cf35a877a4bfb34556">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.3505439768063,51.43701537,51.34742676,51.41288731,51.5481191313869,51.6578071162791],[4.2507880313089,4.01438853,3.82569972,3.56579345,3.40958476642336,3.21924423255814],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#FDE725","#3AB878","#33B07C","#36618C","#46216A","#440154"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #450E5C 2.77777777777778%, #443A83 16.6666666666667%, #36618C 30.5555555555556%, #2A838D 44.4444444444444%, #2FA383 58.3333333333333%, #5CC26A 72.2222222222222%, #A3DA40 86.1111111111111%, #FDE725 "],"labels":["0.005","0.010","0.015","0.020","0.025","0.030","0.035"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.0277777777777778,"p_n":0.861111111111111},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.34742676,51.6578071162791],"lng":[3.21924423255814,4.2507880313089]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 5.8: Gemiddelde nitrietgehalte per station berekend op alle beschikbare data vanaf 1996.
+</p>
+</div>
+</div>
+<div id="nitraat" class="section level2">
+<h2><span class="header-section-number">5.5</span> Nitraat</h2>
+<p>Figuur <a href="nutrienten.html#fig:fysischNitraat">5.9</a> toont de jaargemiddelden per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel <a href="nutrienten.html#tab:fysischNitraatTab">5.5</a> de gemiddelde, minimale en maximale waardes per station weergegeven.</p>
+<p>Deze resultaten laten zien dat de nitraatgehaltes sterk afnemen in stroomafwaartse richting, zie ook Figuur <a href="nutrienten.html#fig:gemiddeldenitraat">5.10</a>. Daarnaast is een dalende trend waarneembaar vanaf 2000, vooral in het oostelijk deel van de Westerschelde. Deze trend is beperkt statistische significant te noemen. De laatste jaren, sinds ca. 2009, zijn de gemiddelde nitraatgehaltes redelijk stabiel voor alle stations behalve Schaar van Ouden Doel.%trend van tot 0.14 mg/L per jaar</p>
+<table>
+<caption><span id="tab:fysischNitraatTab">Tabel 5.5: </span>Jaarlijks mediaan, 10-percentiel en 90-percentiel van het nitraatfgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="left">Station</th>
+<th align="right">Mediaan</th>
+<th align="right">90-perc</th>
+<th align="right">10-perc</th>
+<th align="right">Trend</th>
+<th align="right">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Schaar van Ouden Doel</td>
+<td align="right">3.120</td>
+<td align="right">4.680</td>
+<td align="right">1.720</td>
+<td align="right">-0.119</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">Hansweert geul</td>
+<td align="right">1.840</td>
+<td align="right">3.430</td>
+<td align="right">1.060</td>
+<td align="right">-0.085</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">Terneuzen boei 20</td>
+<td align="right">1.440</td>
+<td align="right">2.710</td>
+<td align="right">0.781</td>
+<td align="right">-0.080</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">Vlissingen boei SSVH</td>
+<td align="right">0.494</td>
+<td align="right">1.260</td>
+<td align="right">0.232</td>
+<td align="right">-0.018</td>
+<td align="right">0.001</td>
+</tr>
+<tr class="odd">
+<td align="left">Walcheren 2 km uit de kust</td>
+<td align="right">0.196</td>
+<td align="right">0.652</td>
+<td align="right">0.005</td>
+<td align="right">-0.017</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">Walcheren 20 km uit de kust</td>
+<td align="right">0.080</td>
+<td align="right">0.421</td>
+<td align="right">0.005</td>
+<td align="right">-0.004</td>
+<td align="right">0.021</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:fysischNitraat"></span>
+<img src="_main_files/figure-html/fysischNitraat-1.png" alt="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het nitraatgehalte in het oppervlaktewater van de Westerschelde en de monding." width="85%" />
+<p class="caption">
+Figuur 5.9: Jaarlijks mediaan, 10-percentiel en 90-percentiel van het nitraatgehalte in het oppervlaktewater van de Westerschelde en de monding.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldenitraat"></span>
+<div id="htmlwidget-b47b6006cbac3b17a95f" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b47b6006cbac3b17a95f">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.3505103925,51.43701537,51.34742676,51.41288731,51.5481193296703,51.6578071162791],[4.25103639375,4.01438853,3.82569972,3.56579345,3.40958508791209,3.21924423255814],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#FDE725","#2EA284","#2A838D","#45327A","#45135E","#440154"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #45327B 13.8016121072545%, #37608C 30.2516861325876%, #27888D 46.7017601579207%, #33AF7D 63.1518341832538%, #80D052 79.6019082085869%, #E5E42F 96.0519822339201%, #FDE725 "],"labels":["0.5","1.0","1.5","2.0","2.5","3.0"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.138016121072545,"p_n":0.960519822339201},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.34742676,51.6578071162791],"lng":[3.21924423255814,4.25103639375]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 5.10: Gemiddelde nitraatgehalte per station berekend op alle beschikbare data vanaf 1996.
+</p>
+</div>
+</div>
+<div id="orthofosfaat" class="section level2">
+<h2><span class="header-section-number">5.6</span> Orthofosfaat</h2>
+<p>Figuur <a href="nutrienten.html#fig:fysischOrthofosfaat">5.11</a> toont de jaargemiddelden orthofosfaat per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel <a href="nutrienten.html#tab:fysischOrthofosfaatTab">5.6</a> de gemiddelde, minimale en maximale waardes per station weergegeven. Voor deze variabele is er slechts data vanaf 2009 tot en met 2018.</p>
+<p>De orthosfosfaatconcentraties na filtratie nemen af in stroomafwaartse richting, zie ook Figuur <a href="nutrienten.html#fig:gemiddeldeorthofosfaat">5.12</a>. Enkele hoge pieken vallen op in de meetdata, bijvoorbeeld op de stations Walcheren 2 km uit de kust en Walcheren 20 km uit de kust in het jaar 2010. In 2016 werd een dergelijke piek waargenomen voor de hoeveelheid orthofosfaat bij station Schaar van Ouden Doel. In 2017 en 2018 was deze piek niet meer aanwezig en bleef het gemiddelde ongeveer op het niveau van 2016. De resultaten van de overige stations illustreren dat de concentraties de laatste jaren redelijk constant in de tijd zijn.</p>
+<table>
+<caption><span id="tab:fysischOrthofosfaatTab">Tabel 5.6: </span>Jaarlijks mediaan, 10-percentiel en 90-percentiel van het orthofosfaatgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="left">Station</th>
+<th align="right">Mediaan</th>
+<th align="right">90-perc</th>
+<th align="right">10-perc</th>
+<th align="right">Trend</th>
+<th align="right">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Schaar van Ouden Doel</td>
+<td align="right">0.140</td>
+<td align="right">0.201</td>
+<td align="right">0.097</td>
+<td align="right">-0.003</td>
+<td align="right">0.002</td>
+</tr>
+<tr class="even">
+<td align="left">Hansweert geul</td>
+<td align="right">0.116</td>
+<td align="right">0.163</td>
+<td align="right">0.071</td>
+<td align="right">-0.003</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">Terneuzen boei 20</td>
+<td align="right">0.096</td>
+<td align="right">0.126</td>
+<td align="right">0.056</td>
+<td align="right">-0.002</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">Vlissingen boei SSVH</td>
+<td align="right">0.046</td>
+<td align="right">0.072</td>
+<td align="right">0.016</td>
+<td align="right">-0.001</td>
+<td align="right">0.002</td>
+</tr>
+<tr class="odd">
+<td align="left">Walcheren 2 km uit de kust</td>
+<td align="right">0.025</td>
+<td align="right">0.042</td>
+<td align="right">0.005</td>
+<td align="right">-0.001</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">Walcheren 20 km uit de kust</td>
+<td align="right">0.014</td>
+<td align="right">0.031</td>
+<td align="right">0.003</td>
+<td align="right">0.000</td>
+<td align="right">0.003</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:fysischOrthofosfaat"></span>
+<img src="_main_files/figure-html/fysischOrthofosfaat-1.png" alt="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het orthofosfaatgehalte in het oppervlaktewater van de Westerschelde en de monding." width="85%" />
+<p class="caption">
+Figuur 5.11: Jaarlijks mediaan, 10-percentiel en 90-percentiel van het orthofosfaatgehalte in het oppervlaktewater van de Westerschelde en de monding.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldeorthofosfaat"></span>
+<div id="htmlwidget-44bc40010cca6e55cf2e" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-44bc40010cca6e55cf2e">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.3505455696147,51.43701537,51.34742676,51.41288731,51.5481191313869,51.6578071162791],[4.25079311211909,4.01438853,3.82569972,3.56579345,3.40958476642336,3.21924423255814],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#FDE725","#85D24E","#34B37B","#3E5289","#46236C","#440154"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #461661 4.57256461232604%, #424586 20.4771371769384%, #306F8E 36.3817097415507%, #26958A 52.286282306163%, #42BA75 68.1908548707754%, #95D843 84.0954274353877%, #FDE725 100%, #FDE725 "],"labels":["0.02","0.04","0.06","0.08","0.10","0.12","0.14"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.0457256461232604,"p_n":1},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.34742676,51.6578071162791],"lng":[3.21924423255814,4.25079311211909]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 5.12: Gemiddelde orthofosfaatgehalte per station berekend op alle beschikbare data vanaf 1996.
+</p>
+</div>
+</div>
+<div id="totaal-fosfaat" class="section level2">
+<h2><span class="header-section-number">5.7</span> Totaal fosfaat</h2>
+<p>Figuur <a href="nutrienten.html#fig:fysischFosfaatFil">5.13</a> toont de jaargemiddelden fosfaat na filtratie per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel <a href="nutrienten.html#tab:fysischFosfaatFilTab">5.7</a> de gemiddelde, minimale en maximale waardes per station weergegeven. Bij Schaar van Ouden Doel wordt het fosfaat na filtratie niet bepaald. In plaats daarvan is station Wielingen gepresenteerd. De stations zijn gerangschikt in stroomafwaartse richting.</p>
+<p>De resultaten lijken sprekend op die van orthofosfaat, vooral op de bovenstroomse stations, zie ook Figuur <a href="nutrienten.html#fig:gemiddeldefosfaatfil">5.15</a>. Dit komt doordat fosfaat na filtratie de som is van orthofosfaat, hydrolysbaar fosfaat en opgelost organisch fosfor. Het gehalte opgelost organisch fosfor is dus blijkbaar laag. De pieken in de meetwaardes bij Walcheren 2 km uit de kust en Walcheren 20 km uit de kust in 2010 komen dus ook hier weer terug. In de richting van de zee is de concentratie opgelost fosfaat een beetje hoger dan die van orthofosfaat. Dat verschil is de organische opgeloste fractie, die niet wordt gemeten in de orthofosfaatanalyse. Er is een dalende trend bij de stations in de Westerschelde (i.e. Hansweert, Terneuzen en Vlissingen) tot 0.004 mg/L maar deze is alleen bij Hansweert significant. In Vlissingen is de daling relatief gelijk aan die van Hansweert en statistisch ook significant, maar in mindere mate.</p>
+<table>
+<caption><span id="tab:fysischFosfaatFilTab">Tabel 5.7: </span>Jaarlijks mediaan, 10-percentiel en 90-percentiel van het fosfaatgehalte na filtratie in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="left">Station</th>
+<th align="right">Mediaan</th>
+<th align="right">90-perc</th>
+<th align="right">10-perc</th>
+<th align="right">Trend</th>
+<th align="right">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Hansweert geul</td>
+<td align="right">0.124</td>
+<td align="right">0.172</td>
+<td align="right">0.079</td>
+<td align="right">-0.003</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">Terneuzen boei 20</td>
+<td align="right">0.102</td>
+<td align="right">0.133</td>
+<td align="right">0.064</td>
+<td align="right">-0.003</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">Vlissingen boei SSVH</td>
+<td align="right">0.054</td>
+<td align="right">0.078</td>
+<td align="right">0.025</td>
+<td align="right">-0.001</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">Walcheren 2 km uit de kust</td>
+<td align="right">0.031</td>
+<td align="right">0.050</td>
+<td align="right">0.012</td>
+<td align="right">-0.001</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">Walcheren 20 km uit de kust</td>
+<td align="right">0.021</td>
+<td align="right">0.038</td>
+<td align="right">0.009</td>
+<td align="right">-0.001</td>
+<td align="right">0.002</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:fysischFosfaatFil"></span>
+<img src="_main_files/figure-html/fysischFosfaatFil-1.png" alt="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het fosfaatgehalte in het oppervlaktewater van de Westerschelde en de monding." width="85%" />
+<p class="caption">
+Figuur 5.13: Jaarlijks mediaan, 10-percentiel en 90-percentiel van het fosfaatgehalte in het oppervlaktewater van de Westerschelde en de monding.
+</p>
+</div>
+</div>
+<div id="part-gebonden-fosfaat" class="section level2">
+<h2><span class="header-section-number">5.8</span> Particulair gebonden fosfaat</h2>
+<p>Figuur <a href="nutrienten.html#fig:fysischFosfaatPar">5.14</a> toont de jaargemiddelden particulair gebonden fosfaat per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel <a href="nutrienten.html#tab:fysischFosfaatParTab">5.8</a> de gemiddelde, minimale en maximale waardes per station weergegeven. Bij Schaar van Ouden Doel wordt het particulair gebonden fosfaat niet bepaald. In plaats daarvan is station Wielingen gepresenteerd. De stations zijn gerangschikt in stroomafwaartse richting.</p>
+<p>De concentraties particulair gebonden fosfaat tonen geen duidelijke longitudinale of temporele gradiënten, zie Figuur <a href="nutrienten.html#fig:gemiddeldefosfaatpar">5.16</a>. Net als voor zwevend stof fluctueert de concentratie sterk, en zijn de gehaltes op de meeste stations vergelijkbaar, behalve op Walcheren 20 km uit de kust, waar de gemeten gehaltes een stuk lager zijn. Bij Hansweert dalen de gemiddelde concentraties particulair gebonden fosfaat. Bij de andere stations zijn geen duidelijke trends te zien. Het opvallend hoge maximum gemeten bij station Vlissingen boei in 2016 is waarschijnlijk een incidentele waarde, gezien de maximale waardes in 2017 en 2018.</p>
+<table>
+<caption><span id="tab:fysischFosfaatParTab">Tabel 5.8: </span>Jaarlijks mediaan, 10-percentiel en 90-percentiel van het particulair gebonden fosfaatgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="left">Station</th>
+<th align="right">Mediaan</th>
+<th align="right">90-perc</th>
+<th align="right">10-perc</th>
+<th align="right">Trend</th>
+<th align="right">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Hansweert geul</td>
+<td align="right">0.050</td>
+<td align="right">0.092</td>
+<td align="right">0.023</td>
+<td align="right">-0.002</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">Terneuzen boei 20</td>
+<td align="right">0.050</td>
+<td align="right">0.119</td>
+<td align="right">0.021</td>
+<td align="right">-0.001</td>
+<td align="right">0.070</td>
+</tr>
+<tr class="odd">
+<td align="left">Vlissingen boei SSVH</td>
+<td align="right">0.046</td>
+<td align="right">0.120</td>
+<td align="right">0.020</td>
+<td align="right">0.000</td>
+<td align="right">0.739</td>
+</tr>
+<tr class="even">
+<td align="left">Walcheren 2 km uit de kust</td>
+<td align="right">0.033</td>
+<td align="right">0.075</td>
+<td align="right">0.015</td>
+<td align="right">-0.001</td>
+<td align="right">0.022</td>
+</tr>
+<tr class="odd">
+<td align="left">Walcheren 20 km uit de kust</td>
+<td align="right">0.010</td>
+<td align="right">0.017</td>
+<td align="right">0.006</td>
+<td align="right">0.000</td>
+<td align="right">0.173</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:fysischFosfaatPar"></span>
+<img src="_main_files/figure-html/fysischFosfaatPar-1.png" alt="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het particulair gebonden fosfaatgehalte in het oppervlaktewater van de Westerschelde en de monding." width="85%" />
+<p class="caption">
+Figuur 5.14: Jaarlijks mediaan, 10-percentiel en 90-percentiel van het particulair gebonden fosfaatgehalte in het oppervlaktewater van de Westerschelde en de monding.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldefosfaatfil"></span>
+<div id="htmlwidget-322125fd4589c126d989" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-322125fd4589c126d989">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.43701537,51.34742676,51.41288731,51.5481021729323,51.657788],[4.01438853,3.82569972,3.56579345,3.40955727067669,3.219213],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#FDE725","#7FCF53","#34648D","#46256E","#440154"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #433F84 18.2974559686889%, #30738E 37.866927592955%, #2EA184 57.4363992172211%, #74CB5B 77.0058708414873%, #E8E42E 96.5753424657534%, #FDE725 "],"labels":["0.04","0.06","0.08","0.10","0.12"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.182974559686889,"p_n":0.965753424657534},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.34742676,51.657788],"lng":[3.219213,4.01438853]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 5.15: Gemiddelde fosfaatgehalte na filtratie per station berekend op alle beschikbare data vanaf 1996.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldefosfaatpar"></span>
+<div id="htmlwidget-f79592a72d916e6ba972" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f79592a72d916e6ba972">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.43701537,51.34742676,51.41288731,51.5481018955224,51.657788],[4.01438853,3.82569972,3.56579345,3.40955682089552,3.219213],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#FDE725","#FDE725","#C3DF39","#2EA284","#440154"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #440254 0.174694285001249%, #462F77 12.6528574993761%, #3E5289 25.1310207137509%, #30728E 37.6091839281258%, #21908C 50.0873471425006%, #33AD7E 62.5655103568755%, #6BC761 75.0436735712503%, #ADDC3E 87.5218367856252%, #FDE725 "],"labels":["0.010","0.015","0.020","0.025","0.030","0.035","0.040","0.045"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.00174694285001249,"p_n":0.875218367856252},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.34742676,51.657788],"lng":[3.219213,4.01438853]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 5.16: Gemiddelde particulair gebonden fosfaatgehalte per station berekend op alle beschikbare data vanaf 1996.
+</p>
+</div>
+</div>
+<div id="silicaat" class="section level2">
+<h2><span class="header-section-number">5.9</span> Silicaat</h2>
+<p>Figuur <a href="nutrienten.html#fig:fysischSilicaat">5.17</a> toont de jaargemiddelden silicaat per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel <a href="nutrienten.html#tab:fysischSilicaatTab">5.9</a> de gemiddelde, minimale en maximale waardes per station weergegeven. De stations zijn gerangschikt in stroomafwaartse richting.</p>
+<p>De resultaten laten duidelijk zien dat de concentraties afnemen in de richting van de zee, zie Figuur <a href="nutrienten.html#fig:gemiddeldesilicaat">5.18</a>. Het valt op dat voor station Schaar van Ouden Doel, Hansweert geul en Terneuzen boei 20 de minima vanaf ca. 2007 tot 2013 naar nul gingen, m.a.w. er trad destijds siliciumuitputting op.</p>
+<table>
+<caption><span id="tab:fysischSilicaatTab">Tabel 5.9: </span>Jaarlijks mediaan, 10-percentiel en 90-percentiel van het silicaatgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="left">Station</th>
+<th align="right">Mediaan</th>
+<th align="right">90-perc</th>
+<th align="right">10-perc</th>
+<th align="right">Trend</th>
+<th align="right">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Schaar van Ouden Doel</td>
+<td align="right">2.880</td>
+<td align="right">5.050</td>
+<td align="right">1.080</td>
+<td align="right">-0.052</td>
+<td align="right">0.051</td>
+</tr>
+<tr class="even">
+<td align="left">Hansweert geul</td>
+<td align="right">1.200</td>
+<td align="right">2.980</td>
+<td align="right">0.282</td>
+<td align="right">-0.020</td>
+<td align="right">0.150</td>
+</tr>
+<tr class="odd">
+<td align="left">Terneuzen boei 20</td>
+<td align="right">1.110</td>
+<td align="right">2.350</td>
+<td align="right">0.208</td>
+<td align="right">-0.044</td>
+<td align="right">0.002</td>
+</tr>
+<tr class="even">
+<td align="left">Vlissingen boei SSVH</td>
+<td align="right">0.423</td>
+<td align="right">1.180</td>
+<td align="right">0.081</td>
+<td align="right">-0.009</td>
+<td align="right">0.049</td>
+</tr>
+<tr class="odd">
+<td align="left">Walcheren 2 km uit de kust</td>
+<td align="right">0.250</td>
+<td align="right">0.650</td>
+<td align="right">0.020</td>
+<td align="right">-0.009</td>
+<td align="right">0.010</td>
+</tr>
+<tr class="even">
+<td align="left">Walcheren 20 km uit de kust</td>
+<td align="right">0.120</td>
+<td align="right">0.392</td>
+<td align="right">0.014</td>
+<td align="right">-0.001</td>
+<td align="right">0.338</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:fysischSilicaat"></span>
+<img src="_main_files/figure-html/fysischSilicaat-1.png" alt="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het silicaatgehalte in het oppervlaktewater van de Westerschelde en de monding." width="85%" />
+<p class="caption">
+Figuur 5.17: Jaarlijks mediaan, 10-percentiel en 90-percentiel van het silicaatgehalte in het oppervlaktewater van de Westerschelde en de monding.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldesilicaat"></span>
+<div id="htmlwidget-32ef8fdefaff1e029466" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-32ef8fdefaff1e029466">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.3505439768063,51.43701537,51.34742676,51.41288731,51.5481191313869,51.6578071162791],[4.2507880313089,4.01438853,3.82569972,3.56579345,3.40958476642336,3.21924423255814],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#FDE725","#2F768D","#306E8E","#462A73","#461661","#440154"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #45327B 13.7931034482759%, #34648D 31.9419237749546%, #21908C 50.0907441016334%, #43BA75 68.2395644283122%, #A5DA40 86.3883847549909%, #FDE725 "],"labels":["0.5","1.0","1.5","2.0","2.5"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.137931034482759,"p_n":0.863883847549909},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.34742676,51.6578071162791],"lng":[3.21924423255814,4.2507880313089]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 5.18: Gemiddelde silicaatgehalte per station berekend op alle beschikbare data vanaf 1996.
+</p>
+</div>
+</div>
+<div id="organisch-koolstof" class="section level2">
+<h2><span class="header-section-number">5.10</span> Organisch koolstof</h2>
+<p>In deze paragraaf worden de metingen weergegeven van particulair organisch koolstof (POC) en opgelost organisch koolstof (DOC). Dit is alle koolstof van organische oorsprong die particulair gebonden respectievelijk opgelost aanwezig is.</p>
+<div id="opgelost-organisch-koolstof" class="section level3">
+<h3><span class="header-section-number">5.10.1</span> Opgelost organisch koolstof</h3>
+<p>Figuur @ref(fig:fysischKoolstofOpg} toont de jaargemiddelden per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel <a href="nutrienten.html#tab:fysischKoolstofOpgTab">5.10</a> de gemiddelde, minimale en maximale waardes per station weergegeven. Bij Schaar van Ouden Doel wordt het opgelost organisch koolstof niet bepaald. In plaats daarvan is station Wielingen gepresenteerd. De stations zijn gerangschikt in stroomafwaartse richting.</p>
+<p>De gehaltes dalen in stroomafwaartse richting (met toenemende saliniteit), zie ook Figuur <a href="nutrienten.html#fig:gemiddeldekoolstofopg">5.22</a>. In het estuarium treedt een dalende trend op. Specifiek stations Hansweert geul en Terneuzen boei 20 dalen 0.06 tot 0.07 mg/L per jaar (met beperkte statistische significantie). Deze afname wordt mogelijk verklaard door een afname in DOC lozingen. De laatste jaren zet de dalende trend niet door en lijkt de concentratie zich te stabiliseren (met jaarlijkse variaties). Voor de Walcheren locaties is een lichte stijging zichtbaar sinds 2016 die niet voor de overige stations wordt waargenomen.</p>
+<table>
+<caption><span id="tab:fysischKoolstofOpgTab">Tabel 5.10: </span>Jaarlijks mediaan, 10-percentiel en 90-percentiel van het opgelost koolstofhehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="left">Station</th>
+<th align="right">Mediaan</th>
+<th align="right">90-perc</th>
+<th align="right">10-perc</th>
+<th align="right">Trend</th>
+<th align="right">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Schaar van Ouden Doel</td>
+<td align="right">5.00</td>
+<td align="right">7.00</td>
+<td align="right">3.880</td>
+<td align="right">-0.111</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">Hansweert geul</td>
+<td align="right">3.02</td>
+<td align="right">4.11</td>
+<td align="right">2.440</td>
+<td align="right">-0.053</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">Terneuzen boei 20</td>
+<td align="right">2.54</td>
+<td align="right">3.43</td>
+<td align="right">2.070</td>
+<td align="right">-0.049</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">Vlissingen boei SSVH</td>
+<td align="right">1.89</td>
+<td align="right">2.43</td>
+<td align="right">1.540</td>
+<td align="right">-0.009</td>
+<td align="right">0.038</td>
+</tr>
+<tr class="odd">
+<td align="left">Walcheren 2 km uit de kust</td>
+<td align="right">1.36</td>
+<td align="right">1.79</td>
+<td align="right">1.090</td>
+<td align="right">0.003</td>
+<td align="right">0.466</td>
+</tr>
+<tr class="even">
+<td align="left">Walcheren 20 km uit de kust</td>
+<td align="right">1.19</td>
+<td align="right">1.60</td>
+<td align="right">0.892</td>
+<td align="right">0.002</td>
+<td align="right">0.333</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:fysischKoolstofOpg"></span>
+<img src="_main_files/figure-html/fysischKoolstofOpg-1.png" alt="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het opgelost koolstofgehalte in het oppervlaktewater van de Westerschelde en de monding." width="85%" />
+<p class="caption">
+Figuur 5.19: Jaarlijks mediaan, 10-percentiel en 90-percentiel van het opgelost koolstofgehalte in het oppervlaktewater van de Westerschelde en de monding.
+</p>
+</div>
+</div>
+<div id="part-gebonden-organisch-koolstof" class="section level3">
+<h3><span class="header-section-number">5.10.2</span> Particulair gebonden organisch koolstof</h3>
+<div id="part-gebonden-organisch-koolstof-jaar" class="section level4">
+<h4><span class="header-section-number">5.10.2.1</span> Jaargemiddelden</h4>
+<p>Figuur <a href="#fig:fysischKoolstofPar"><strong>??</strong></a> toont de jaargemiddelden particulair gebonden organisch koolstof per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel <a href="#tab:fysischKoolstofParTab"><strong>??</strong></a> de gemiddelde, minimale en maximale waardes per station weergegeven. Bij Schaar van Ouden Doel wordt het particulair organisch koolstof niet bepaald. In plaats daarvan is station Wielingen gepresenteerd. De stations zijn gerangschikt in stroomafwaartse richting.</p>
+<p>De hoeveelheid particulair organisch koolstof varieert sterk van jaar tot jaar. Ver uit de kust (Walcheren 20 km uit de kust) is de concentratie een stuk lager dan op de andere stations. Er zijn geen duidelijke temporele trends waarneembaar, zie ook Figuur <a href="nutrienten.html#fig:gemiddeldekoolstofpar">5.23</a>.</p>
+<table>
+<caption><span id="tab:fysischKoolstofPar">Tabel 5.11: </span>Jaarlijks mediaan, 10-percentiel en 90-percentiel van het opgelost koolstofhehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="left">Station</th>
+<th align="right">Mediaan</th>
+<th align="right">90-perc</th>
+<th align="right">10-perc</th>
+<th align="right">Trend</th>
+<th align="right">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Hansweert geul</td>
+<td align="right">1.300</td>
+<td align="right">2.200</td>
+<td align="right">0.684</td>
+<td align="right">-0.009</td>
+<td align="right">0.186</td>
+</tr>
+<tr class="even">
+<td align="left">Terneuzen boei 20</td>
+<td align="right">1.440</td>
+<td align="right">2.600</td>
+<td align="right">0.608</td>
+<td align="right">-0.008</td>
+<td align="right">0.504</td>
+</tr>
+<tr class="odd">
+<td align="left">Vlissingen boei SSVH</td>
+<td align="right">1.300</td>
+<td align="right">3.250</td>
+<td align="right">0.626</td>
+<td align="right">0.031</td>
+<td align="right">0.047</td>
+</tr>
+<tr class="even">
+<td align="left">Walcheren 2 km uit de kust</td>
+<td align="right">1.080</td>
+<td align="right">2.400</td>
+<td align="right">0.488</td>
+<td align="right">0.008</td>
+<td align="right">0.364</td>
+</tr>
+<tr class="odd">
+<td align="left">Walcheren 20 km uit de kust</td>
+<td align="right">0.379</td>
+<td align="right">0.869</td>
+<td align="right">0.200</td>
+<td align="right">0.011</td>
+<td align="right">0.000</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldekoolstofpart"></span>
+<img src="_main_files/figure-html/gemiddeldekoolstofpart-1.png" alt="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het opgelost koolstofgehalte in het oppervlaktewater van de Westerschelde en de monding." width="85%" />
+<p class="caption">
+Figuur 5.20: Jaarlijks mediaan, 10-percentiel en 90-percentiel van het opgelost koolstofgehalte in het oppervlaktewater van de Westerschelde en de monding.
+</p>
+</div>
+</div>
+<div id="part-gebonden-organisch-koolstof-zomerwinter" class="section level4">
+<h4><span class="header-section-number">5.10.2.2</span> Jaargemiddelden per seizoen</h4>
+<p>Figuur <a href="nutrienten.html#fig:fysischKoolstofParZomerWinter">5.21</a> toont het seizoensgemiddelde gehalte particulaire koolstofgehalte per station voor de periode 1996-2018. Er is geen duidelijk verschil tussen zomer en winterwaarden, wat laat zien dat de fytoplanktonbloei wegvalt in de achtergrondwaarden. Ook is de variatie per station beperkt te noemen.</p>
+<div class="figure" style="text-align: center"><span id="fig:fysischKoolstofParZomerWinter"></span>
+<img src="_main_files/figure-html/fysischKoolstofParZomerWinter-1.png" alt="Gemiddeld waardes voor de hoeveelheid particulaire koolstofgehalte gedurende de zomer en de winter in het oppervlaktewater van de Westerschelde en de monding." width="85%" />
+<p class="caption">
+Figuur 5.21: Gemiddeld waardes voor de hoeveelheid particulaire koolstofgehalte gedurende de zomer en de winter in het oppervlaktewater van de Westerschelde en de monding.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldekoolstofopg"></span>
+<div id="htmlwidget-2bb2a94eaf86bcf99647" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2bb2a94eaf86bcf99647">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.3505414032865,51.43701537,51.34742676,51.41288731,51.5481017583643,51.657788],[4.25078981841828,4.01438853,3.82569972,3.56579345,3.40955659851301,3.219213],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#FDE725","#258B8C","#316D8E","#433F84","#461560","#440154"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #46226A 8.13648293963255%, #414786 21.259842519685%, #316A8E 34.3832020997375%, #268A8C 47.50656167979%, #31A980 60.6299212598425%, #65C465 73.753280839895%, #A9DB3F 86.8766404199475%, #FDE725 100%, #FDE725 "],"labels":["1.5","2.0","2.5","3.0","3.5","4.0","4.5","5.0"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.0813648293963255,"p_n":1},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.34742676,51.657788],"lng":[3.219213,4.25078981841828]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 5.22: Gemiddelde opgeloste koolstofgehalte per station berekend op alle beschikbare data vanaf 1996.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldekoolstofpar"></span>
+<div id="htmlwidget-a2c56650e22b9e0cac63" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a2c56650e22b9e0cac63">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.43701537,51.34742676,51.41288731,51.5481018955224,51.657788],[4.01438853,3.82569972,3.56579345,3.40955682089552,3.219213],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#A8DB3F","#FDE725","#A8DB3F","#35B67A","#440154"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #450B59 1.97926484448634%, #424686 20.8294062205467%, #2F778D 39.679547596607%, #2FA483 58.5296889726673%, #76CB5A 77.3798303487276%, #E6E42E 96.229971724788%, #FDE725 "],"labels":["0.4","0.6","0.8","1.0","1.2","1.4"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.0197926484448634,"p_n":0.96229971724788},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.34742676,51.657788],"lng":[3.219213,4.01438853]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 5.23: Gemiddelde particulaire koolstofgehalte per station berekend op alle beschikbare data vanaf 1996.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="cnp-ratio" class="section level2">
+<h2><span class="header-section-number">5.11</span> C:N:P ratio’s</h2>
+<p>De molaire C:N:P ratio’s zijn berekend uit jaargemiddelden van particulair organisch koolstof (POC), particulair gebonden stikstof (PN) en particulair gebonden fosfaat (PP). De molaire NC-ratio en de molaire PC-ratio zijn uitgedrukt ten opzichte van een gehalte C van 106, om de vergelijking met de zogenaamde Redfield-ratio (C:N:P = 106:16:1) mogelijk te maken:</p>
+<p><span class="math display">\[\frac{N}{C} = 106*\frac{{PN/14}}{{POC/12}}\]</span>
+<span class="math display">\[\frac{P}{C} = 106*\frac{{PP/31}}{{POC/12}}\]</span></p>
+<p>De Redfield-ratio gaat over de verhoudingen van organisch C, N en P in particulair materiaal. Omdat totaal N en P in particulair materiaal gemeten zijn, zit er ook particulair anorganisch P (PAP) bij. Dit leidt tot een overschatting van de hoeveelheid P in de data ten opzichte van de Redfield-ratio. Er is geen particulair anorganisch N.</p>
+<p>Figuur <a href="#fig:fysischNJaar"><strong>??</strong></a>, Figuur <a href="#fig:fysischPJaar"><strong>??</strong></a> en Figuur <a href="nutrienten.html#fig:fysischNPJaar">5.24</a> tonen de jaarwaardes per station. De gemiddelde waardes in de zomer en winter kunnen worden gevonden in Figuur <a href="#fig:fysischNzw"><strong>??</strong></a>, Figuur <a href="#fig:fysischPzw"><strong>??</strong></a> en Figuur <a href="nutrienten.html#fig:fysischNPzw">5.25</a>. Daarnaast zijn in Tabel <a href="#tab:fysischCNP"><strong>??</strong></a> de gemiddelde waardes te vinden. De gemiddelde waardes uit Figuur <a href="#fig:fysischNJaar"><strong>??</strong></a> en Figuur <a href="#fig:fysischPJaar"><strong>??</strong></a> kunnen het best worden vergeleken met Tabel <a href="#tab:fysischCNP"><strong>??</strong></a>.</p>
+<p>Bij Walcheren 20 km komen de hoogste stikstofratios voor en over het algemeen neemt de N-C-ratio toe naar mate men verder uit het estuarium gaat. Dit kan verklaard worden door een afname van terrestrisch materiaal (met lage N-C ratio) en toename van vers organisch materiaal (hoge N-C ratio) in stroomafwaartse richting. Een tegenoverstelde trend is zichtbaar voor de P-C-ratio’s aangezien de laagste waarde wordt gevonden bij Walcheren 20 km en over het algemeen neemt de fosforratio toe naar mate men verder in het estuarium komt. Dit kan verklaard worden door een hogere bijdrage van anorganisch particulair P in stroomopwaartse richting. Bij Walcheren 20 km is de stoichiometrische verhouding ook het dichtst bij Redfield. Dit vertaalt zich ook in de N:P ratio die het hoogst is bij Walcheren 20 km en het laagst bij Hansweert Geul.</p>
+<p>De N-C-ratio (stikstof) is over het algemeen hoger in de zomerperiode, als er meer algen zijn. De P-C-ratio (fosfor) is over het algemeen hoger in de winterperiode, als de hoeveelheid particulair gebonden fosfaat over het algemeen hoger is. Dit is ook terug te zien in de N:P ratio, met hogere waarden in de zomer dan in de winter.</p>
+<div class="figure" style="text-align: center"><span id="fig:fysischNPJaar"></span>
+<img src="_main_files/figure-html/fysischNPJaar-1.png" alt="De molaire N-P-ratio, N uitgedrukt ten opzichte van een gehalte P, gemiddeld over een jaar in het oppervlaktewater van de Westerschelde en de monding." width="85%" />
+<p class="caption">
+Figuur 5.24: De molaire N-P-ratio, N uitgedrukt ten opzichte van een gehalte P, gemiddeld over een jaar in het oppervlaktewater van de Westerschelde en de monding.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:fysischNPzw"></span>
+<img src="_main_files/figure-html/fysischNPzw-1.png" alt="De molaire N-P-ratio, N uitgedrukt ten opzichte van een gehalte P, gemiddeld over de zomer en winterperiode in het oppervlaktewater van de Westerschelde en de monding." width="85%" />
+<p class="caption">
+Figuur 5.25: De molaire N-P-ratio, N uitgedrukt ten opzichte van een gehalte P, gemiddeld over de zomer en winterperiode in het oppervlaktewater van de Westerschelde en de monding.
+</p>
+</div>
+</div>
+<div id="metalen" class="section level2">
+<h2><span class="header-section-number">5.12</span> Metalen</h2>
+<p>Metalen in het oppervlaktewater worden zowel voor als na filtratie gemeten. Voor de volgende metalen in het oppervlaktewater worden de metingen gepresenteerd:
+* Boor (B)
+* Chroom (Cr)
+* Koper (Cu)
+* Uranium (U)
+* Vanadium (V)
+* Zink (Zn)</p>
+<p>Voor Schaar van Ouden Doel zijn de meeste meetgegevens beschikbaar, circa twee metingen per maand. Voor de andere stations (Hansweert geul, Terneuzen boei 20, Vlissingen boei SSVH en Walcheren 2 km uit de kust) is pas sinds 2009 maandelijks gemeten. Voor 2010 is maar een enkele meetwaarde aanwezig in de dataset. Voor station Walcheren 20 km uit de kust zijn geen gegevens beschikbaar. Voor sommige stations vielen in 2009 en 2010 de gemeten waardes steeds onder de detectiegrens van de apparatuur. In 2011 lijkt dit probleem verholpen. Dit betekent wel dat de waardes voor 2009 en 2010 voor alle stations behalve Schaar van Ouden Doel voorzichtig moeten worden geïnterpreteerd, omdat de gemiddelden worden beïnvloed door de detectiegrens van de meetapparatuur. Hierna presenteren we steeds jaargemiddelden en minimum- en maximumwaardes per jaar. Merk op dat voor sommige metalen een verschillende verticale as is gebruikt voor de totale concentraties versus de gehaltes na filtratie.</p>
+<div id="boor" class="section level3">
+<h3><span class="header-section-number">5.12.1</span> Boor</h3>
+<p>Figuur <a href="nutrienten.html#fig:fysischMetalenBoorTotaal">5.26</a> toont de jaargemiddelden boor per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel <a href="nutrienten.html#tab:fysischMetalenBoorTotaalTab">5.12</a> zijn de gemiddelde, minimale en maximale waardes per station weergegeven.</p>
+<p>Voor alle stations geldt dat er lage tot beperkte correlatie is. Het totale boorgehalte stroomopwaarts neemt af, zoals ook te zien in Figuur <a href="nutrienten.html#fig:gemiddeldeboortotaal">5.28</a>.</p>
+<table>
+<caption><span id="tab:fysischMetalenBoorTotaalTab">Tabel 5.12: </span>Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van boor (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="center">Station</th>
+<th align="center">Mediaan</th>
+<th align="center">90-perc</th>
+<th align="center">10-perc</th>
+<th align="center">Trend</th>
+<th align="center">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Schaar van Ouden Doel</td>
+<td align="center">1200</td>
+<td align="center">2000</td>
+<td align="center">590</td>
+<td align="center">-1.01</td>
+<td align="center">0.959</td>
+</tr>
+<tr class="even">
+<td align="center">Hansweert geul</td>
+<td align="center">2260</td>
+<td align="center">3060</td>
+<td align="center">1550</td>
+<td align="center">-19.60</td>
+<td align="center">0.634</td>
+</tr>
+<tr class="odd">
+<td align="center">Terneuzen boei 20</td>
+<td align="center">2680</td>
+<td align="center">3420</td>
+<td align="center">1990</td>
+<td align="center">-116.00</td>
+<td align="center">0.002</td>
+</tr>
+<tr class="even">
+<td align="center">Vlissingen boei SSVH</td>
+<td align="center">3220</td>
+<td align="center">3960</td>
+<td align="center">2430</td>
+<td align="center">-21.80</td>
+<td align="center">0.563</td>
+</tr>
+<tr class="odd">
+<td align="center">Walcheren 2 km uit de kust</td>
+<td align="center">3980</td>
+<td align="center">4420</td>
+<td align="center">3300</td>
+<td align="center">-18.20</td>
+<td align="center">0.346</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:fysischMetalenBoorTotaal"></span>
+<img src="_main_files/figure-html/fysischMetalenBoorTotaal-1.png" alt="Jaarlijks gemiddelde, minimum en maximum van het totale boorgehalte in het oppervlaktewater van de Westerschelde en de monding" width="85%" />
+<p class="caption">
+Figuur 5.26: Jaarlijks gemiddelde, minimum en maximum van het totale boorgehalte in het oppervlaktewater van de Westerschelde en de monding
+</p>
+</div>
+</div>
+<div id="boor-fil" class="section level3">
+<h3><span class="header-section-number">5.12.2</span> Boor na filtratie</h3>
+<p>Figuur <a href="nutrienten.html#fig:fysischMetalenBoor">5.27</a> toont de jaargemiddelden boor na filtratie per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel <a href="nutrienten.html#tab:fysischMetalenBoorTab">5.13</a> zijn de gemiddelde, minimale en maximale waardes per station weergegeven.</p>
+<p>De concentraties van boor na filtratie (opgelost) verschillen qua orde van grootte relatief weinig van de totaalconcentraties, wat betekent dat er relatief weinig boor particulair gebonden is. In stroomafwaartse richting nemen de gemiddelde boorgehaltes na filtratie toe, zie Figuur <a href="nutrienten.html#fig:gemiddeldeboorfil">5.29</a>. De data laten geen significante temporele trends zien.</p>
+<table>
+<caption><span id="tab:fysischMetalenBoorTab">Tabel 5.13: </span>Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van boor na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="center">Station</th>
+<th align="center">Mediaan</th>
+<th align="center">90-perc</th>
+<th align="center">10-perc</th>
+<th align="center">Trend</th>
+<th align="center">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Schaar van Ouden Doel</td>
+<td align="center">1190</td>
+<td align="center">1900</td>
+<td align="center">596</td>
+<td align="center">-15.1</td>
+<td align="center">0.342</td>
+</tr>
+<tr class="even">
+<td align="center">Hansweert geul</td>
+<td align="center">2240</td>
+<td align="center">2980</td>
+<td align="center">1560</td>
+<td align="center">-85.4</td>
+<td align="center">0.066</td>
+</tr>
+<tr class="odd">
+<td align="center">Terneuzen boei 20</td>
+<td align="center">2550</td>
+<td align="center">3340</td>
+<td align="center">1900</td>
+<td align="center">-83.7</td>
+<td align="center">0.062</td>
+</tr>
+<tr class="even">
+<td align="center">Vlissingen boei SSVH</td>
+<td align="center">3010</td>
+<td align="center">3830</td>
+<td align="center">2360</td>
+<td align="center">-88.9</td>
+<td align="center">0.046</td>
+</tr>
+<tr class="odd">
+<td align="center">Walcheren 2 km uit de kust</td>
+<td align="center">3790</td>
+<td align="center">4280</td>
+<td align="center">3150</td>
+<td align="center">30.3</td>
+<td align="center">0.244</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:fysischMetalenBoor"></span>
+<img src="_main_files/figure-html/fysischMetalenBoor-1.png" alt="Jaarlijks gemiddelde, minimum en maximum van het gefilterde boorgehalte in het oppervlaktewater van de Westerschelde en de monding" width="85%" />
+<p class="caption">
+Figuur 5.27: Jaarlijks gemiddelde, minimum en maximum van het gefilterde boorgehalte in het oppervlaktewater van de Westerschelde en de monding
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldeboortotaal"></span>
+<div id="htmlwidget-dcc83f29863520979a4e" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-dcc83f29863520979a4e">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.3505305048259,51.43701537,51.34742676,51.41288731,51.5481548909091],[4.25110349661692,4.01438853,3.82569972,3.56579345,3.40964274545455],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#440154","#30738E","#279789","#5DC269","#FDE725"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #462972 10.7719928186715%, #395C8B 28.7253141831239%, #27888D 46.6786355475763%, #34B27C 64.6319569120287%, #8CD647 82.5852782764811%, #FDE725 "],"labels":["1,500","2,000","2,500","3,000","3,500"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.107719928186715,"p_n":0.825852782764811},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.34742676,51.5481548909091],"lng":[3.40964274545455,4.25110349661692]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 5.28: Gemiddelde totale boorgehalte station berekend op alle beschikbare data vanaf 1996.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldeboorfil"></span>
+<div id="htmlwidget-498f5f3514791de160ec" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-498f5f3514791de160ec">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.3505381444473,51.43701537,51.34742676,51.41288731,51.5481540810811],[4.25114471840617,4.01438853,3.82569972,3.56579345,3.40964143243243],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#440154","#2E798D","#26958A","#4FBD70","#FDE725"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #462D75 11.9230769230769%, #35628D 31.1538461538462%, #22918C 50.3846153846154%, #4CBD71 69.6153846153846%, #B6DD3C 88.8461538461538%, #FDE725 "],"labels":["1,500","2,000","2,500","3,000","3,500"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.119230769230769,"p_n":0.888461538461538},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.34742676,51.5481540810811],"lng":[3.40964143243243,4.25114471840617]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 5.29: Gemiddelde gefilterde boorgehalte station berekend op alle beschikbare data vanaf 1996.
+</p>
+</div>
+</div>
+<div id="chroom" class="section level3">
+<h3><span class="header-section-number">5.12.3</span> Chroom</h3>
+<p>Figuur <a href="nutrienten.html#fig:fysischMetalenChroomTotaal">5.30</a> toont de jaargemiddelden chroom per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel <a href="nutrienten.html#tab:fysischMetalenChroomTotaalTab">5.14</a> zijn de gemiddelde, minimale en maximale waardes per station weergegeven.</p>
+<p>Het station Schaar van Ouden Doel laat een vrij grote variatie zien tussen de jaren, maar ook binnen een jaar, getuige het grote verschil tussen de minimum- en maximumwaardes. Er zijn geen significante temporele trends in chroom concentraties op de verschillende station, bahalve voor Wacheren waar een significante afnemende trend te zien is. Ondanks een verglijkbare R is de afnemende trend bij Vlissingen statistich niet significant. Bij 7 vrijheidsgraden (9 jaren data) is de trend pas significant bij R&gt;0.666 (p=0.05). In stroomafwaartse richting nemen de concentraties af, zie ook Figuur <a href="nutrienten.html#fig:gemiddeldechroomtotaal">5.32</a>.</p>
+<table>
+<caption><span id="tab:fysischMetalenChroomTotaalTab">Tabel 5.14: </span>Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van chroom (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="center">Station</th>
+<th align="center">Mediaan</th>
+<th align="center">90-perc</th>
+<th align="center">10-perc</th>
+<th align="center">Trend</th>
+<th align="center">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Schaar van Ouden Doel</td>
+<td align="center">5.91</td>
+<td align="center">13.80</td>
+<td align="center">2.200</td>
+<td align="center">0.227</td>
+<td align="center">0.002</td>
+</tr>
+<tr class="even">
+<td align="center">Hansweert geul</td>
+<td align="center">2.50</td>
+<td align="center">4.75</td>
+<td align="center">1.200</td>
+<td align="center">-0.001</td>
+<td align="center">0.989</td>
+</tr>
+<tr class="odd">
+<td align="center">Terneuzen boei 20</td>
+<td align="center">2.50</td>
+<td align="center">6.46</td>
+<td align="center">0.809</td>
+<td align="center">0.099</td>
+<td align="center">0.048</td>
+</tr>
+<tr class="even">
+<td align="center">Vlissingen boei SSVH</td>
+<td align="center">3.14</td>
+<td align="center">7.87</td>
+<td align="center">1.010</td>
+<td align="center">-0.023</td>
+<td align="center">0.832</td>
+</tr>
+<tr class="odd">
+<td align="center">Walcheren 2 km uit de kust</td>
+<td align="center">1.33</td>
+<td align="center">3.25</td>
+<td align="center">0.500</td>
+<td align="center">-0.082</td>
+<td align="center">0.124</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:fysischMetalenChroomTotaal"></span>
+<img src="_main_files/figure-html/fysischMetalenChroomTotaal-1.png" alt="Jaarlijks gemiddelde, minimum en maximum van het totale chroomgehalte in het oppervlaktewater van de Westerschelde en de monding" width="85%" />
+<p class="caption">
+Figuur 5.30: Jaarlijks gemiddelde, minimum en maximum van het totale chroomgehalte in het oppervlaktewater van de Westerschelde en de monding
+</p>
+</div>
+</div>
+<div id="chroom-fil" class="section level3">
+<h3><span class="header-section-number">5.12.4</span> Chroom na filtratie</h3>
+<p>Figuur <a href="nutrienten.html#fig:fysischMetalenChroomFil">5.31</a> toont de jaargemiddelden chroom na filtratie per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel <a href="nutrienten.html#tab:fysischMetalenChroomFilTab">5.15</a> zijn de gemiddelde, minimale en maximale waardes per station weergegeven.</p>
+<p>Voor alle stations zijn de resultaten sterk beïnvloed door de detectiegrens van 1 tot 5 <span class="math inline">\(\mu\)</span>g/l. Oudere metingen (van voor 2012) hebben een hogere detectiegrens dan daarna. Uit het overzicht kan duidelijk worden gezien dat een groot deel van de concentraties onder de detectiegrens liggen. De gerapporteerde concentraties zijn dan ook sterk beïnvloed door deze detectiegrens. Wanneer de waardes regelmatig onder de detectiegrens vallen, zullen de minima, trends en gemiddelden hogere waardes tonen dan daadwerkelijk opgetreden.</p>
+<table>
+<caption><span id="tab:fysischMetalenChroomFilTab">Tabel 5.15: </span>Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van chroom na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="center">Station</th>
+<th align="center">Mediaan</th>
+<th align="center">90-perc</th>
+<th align="center">10-perc</th>
+<th align="center">Trend</th>
+<th align="center">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Schaar van Ouden Doel</td>
+<td align="center">0.25</td>
+<td align="center">0.60</td>
+<td align="center">0.025</td>
+<td align="center">-0.010</td>
+<td align="center">0.073</td>
+</tr>
+<tr class="even">
+<td align="center">Hansweert geul</td>
+<td align="center">0.25</td>
+<td align="center">2.50</td>
+<td align="center">0.050</td>
+<td align="center">-0.224</td>
+<td align="center">0.009</td>
+</tr>
+<tr class="odd">
+<td align="center">Terneuzen boei 20</td>
+<td align="center">0.25</td>
+<td align="center">1.12</td>
+<td align="center">0.050</td>
+<td align="center">-0.012</td>
+<td align="center">0.787</td>
+</tr>
+<tr class="even">
+<td align="center">Vlissingen boei SSVH</td>
+<td align="center">0.25</td>
+<td align="center">1.11</td>
+<td align="center">0.113</td>
+<td align="center">-0.012</td>
+<td align="center">0.787</td>
+</tr>
+<tr class="odd">
+<td align="center">Walcheren 2 km uit de kust</td>
+<td align="center">0.25</td>
+<td align="center">0.56</td>
+<td align="center">0.109</td>
+<td align="center">-0.210</td>
+<td align="center">0.005</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:fysischMetalenChroomFil"></span>
+<img src="_main_files/figure-html/fysischMetalenChroomFil-1.png" alt="Jaarlijks gemiddelde, minimum en maximum van het gefilterde chroomgehalte in het oppervlaktewater van de Westerschelde en de monding" width="85%" />
+<p class="caption">
+Figuur 5.31: Jaarlijks gemiddelde, minimum en maximum van het gefilterde chroomgehalte in het oppervlaktewater van de Westerschelde en de monding
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldechroomtotaal"></span>
+<div id="htmlwidget-f22c9ba8e2c0a8162d2d" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f22c9ba8e2c0a8162d2d">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.3505391377954,51.43701537,51.34742676,51.41288731,51.5481548909091],[4.25078931477954,4.01438853,3.82569972,3.56579345,3.40964274545455],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#FDE725","#3D5389","#3D5389","#2F778D","#440154"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #45125E 3.7117903930131%, #45347D 14.6288209606987%, #3D5389 25.5458515283843%, #306F8E 36.4628820960699%, #268A8C 47.3799126637555%, #2FA383 58.296943231441%, #4ABC72 69.2139737991266%, #82D151 80.1310043668122%, #C5DF38 91.0480349344978%, #FDE725 "],"labels":["1.5","2.0","2.5","3.0","3.5","4.0","4.5","5.0","5.5"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.037117903930131,"p_n":0.910480349344978},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.34742676,51.5481548909091],"lng":[3.40964274545455,4.25078931477954]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 5.32: Gemiddelde totale chroomgehalte station berekend op alle beschikbare data vanaf 1996.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldechroomfil"></span>
+<div id="htmlwidget-a06b3c5f954926310371" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a06b3c5f954926310371">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.3505262766062,51.43701537,51.34742676,51.41288731,51.5481540810811],[4.25078318439201,4.01438853,3.82569972,3.56579345,3.40964143243243],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#21908C","#21908C","#21908C","#21908C","#21908C"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#21908C , #21908C %, #21908C "],"labels":[""],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":null,"p_n":[]},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.34742676,51.5481540810811],"lng":[3.40964143243243,4.25078318439201]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 5.33: Gemiddelde gefilterde chroomgehalte station berekend op alle beschikbare data vanaf 1996.
+</p>
+</div>
+</div>
+<div id="koper" class="section level3">
+<h3><span class="header-section-number">5.12.5</span> Koper</h3>
+<p>Figuur <a href="nutrienten.html#fig:fysischMetalenKoperTotaal">5.34</a> toont de jaargemiddelden koper per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel <a href="nutrienten.html#tab:fysischMetalenKoperTotaalTab">5.16</a> zijn de gemiddelde, minimale en maximale waardes per station weergegeven.</p>
+<p>Het station Schaar van Ouden Doel toont de hoogste concentraties. Het station laat een vrij grote variatie zien tussen de jaren, maar ook binnen een jaar, getuige het grote verschil tussen de minimum- en maximumwaardes. In stroomafwaartse richting nemen de concentraties af, zie <a href="nutrienten.html#fig:gemiddeldekopertotaal">5.36</a>. In 2010 is er maar weinig meetdata beschikbaar. Bij Walcheren 2 km uit de kust komen de meetwaardes soms onder de detectiegrens (1 <span class="math inline">\(\mu\)</span>g/L). Een significante temporele trend kan echter niet worden afgeleid.</p>
+<table>
+<caption><span id="tab:fysischMetalenKoperTotaalTab">Tabel 5.16: </span>Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van koper (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="center">Station</th>
+<th align="center">Mediaan</th>
+<th align="center">90-perc</th>
+<th align="center">10-perc</th>
+<th align="center">Trend</th>
+<th align="center">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Schaar van Ouden Doel</td>
+<td align="center">6.92</td>
+<td align="center">11.70</td>
+<td align="center">4.46</td>
+<td align="center">-0.001</td>
+<td align="center">0.975</td>
+</tr>
+<tr class="even">
+<td align="center">Hansweert geul</td>
+<td align="center">2.95</td>
+<td align="center">5.05</td>
+<td align="center">1.89</td>
+<td align="center">-0.016</td>
+<td align="center">0.850</td>
+</tr>
+<tr class="odd">
+<td align="center">Terneuzen boei 20</td>
+<td align="center">2.80</td>
+<td align="center">6.00</td>
+<td align="center">1.47</td>
+<td align="center">0.021</td>
+<td align="center">0.628</td>
+</tr>
+<tr class="even">
+<td align="center">Vlissingen boei SSVH</td>
+<td align="center">2.50</td>
+<td align="center">5.21</td>
+<td align="center">1.13</td>
+<td align="center">-0.007</td>
+<td align="center">0.935</td>
+</tr>
+<tr class="odd">
+<td align="center">Walcheren 2 km uit de kust</td>
+<td align="center">1.60</td>
+<td align="center">3.13</td>
+<td align="center">1.00</td>
+<td align="center">-0.032</td>
+<td align="center">0.400</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:fysischMetalenKoperTotaal"></span>
+<img src="_main_files/figure-html/fysischMetalenKoperTotaal-1.png" alt="Jaarlijks gemiddelde, minimum en maximum van het totale kopergehalte in het oppervlaktewater van de Westerschelde en de monding" width="85%" />
+<p class="caption">
+Figuur 5.34: Jaarlijks gemiddelde, minimum en maximum van het totale kopergehalte in het oppervlaktewater van de Westerschelde en de monding
+</p>
+</div>
+</div>
+<div id="koper-fil" class="section level3">
+<h3><span class="header-section-number">5.12.6</span> Koper na filtratie</h3>
+<p>Figuur <a href="nutrienten.html#fig:fysischMetalenKoperFil">5.35</a> toont de jaargemiddelden koper na filtratie per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel <a href="nutrienten.html#tab:fysischMetalenKoperFilTab">5.17</a> zijn de gemiddelde, minimale en maximale waardes per station weergegeven.</p>
+<p>Station Schaar van Ouden Doel laat de hoogste concentraties zien, in stroomafwaartse richting nemen de concentraties af, zie <a href="nutrienten.html#fig:gemiddeldekoperfil">5.37</a>. Het station Schaar van Ouden Doel laat een vrij grote variatie zien tussen de jaren, maar ook binnen een jaar, getuige het grote verschil tussen de minimum- en maximumwaardes. Bij de stations Vlissingen boei SSVH en Walcheren 2 km uit de kust wordt de laatste jaren regelmatig de detectiegrens (1 <span class="math inline">\(\mu\)</span>g/L) bereikt. De gemiddelden en minima op dit station zijn dus in werkelijkheid lager dan hier weergegeven. Bij Vlissingen boei SSVH en Walcheren 2 km uit de kust treedt een marginale stijgende trend op met beperkte statistische significantie. Het valt op dat dit niet kan worden gedetecteerd uit de total koperconcentratie, zie Tabel <a href="nutrienten.html#tab:fysischMetalenKoperTotaalTab">5.16</a>.</p>
+<table>
+<caption><span id="tab:fysischMetalenKoperFilTab">Tabel 5.17: </span>Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van koper na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="center">Station</th>
+<th align="center">Mediaan</th>
+<th align="center">90-perc</th>
+<th align="center">10-perc</th>
+<th align="center">Trend</th>
+<th align="center">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Schaar van Ouden Doel</td>
+<td align="center">2.740</td>
+<td align="center">3.79</td>
+<td align="center">1.750</td>
+<td align="center">0.017</td>
+<td align="center">0.334</td>
+</tr>
+<tr class="even">
+<td align="center">Hansweert geul</td>
+<td align="center">1.680</td>
+<td align="center">2.70</td>
+<td align="center">0.996</td>
+<td align="center">0.031</td>
+<td align="center">0.123</td>
+</tr>
+<tr class="odd">
+<td align="center">Terneuzen boei 20</td>
+<td align="center">1.400</td>
+<td align="center">2.30</td>
+<td align="center">0.789</td>
+<td align="center">0.023</td>
+<td align="center">0.103</td>
+</tr>
+<tr class="even">
+<td align="center">Vlissingen boei SSVH</td>
+<td align="center">0.900</td>
+<td align="center">2.00</td>
+<td align="center">0.500</td>
+<td align="center">0.030</td>
+<td align="center">0.034</td>
+</tr>
+<tr class="odd">
+<td align="center">Walcheren 2 km uit de kust</td>
+<td align="center">0.672</td>
+<td align="center">1.89</td>
+<td align="center">0.500</td>
+<td align="center">0.027</td>
+<td align="center">0.309</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:fysischMetalenKoperFil"></span>
+<img src="_main_files/figure-html/fysischMetalenKoperFil-1.png" alt="Jaarlijks gemiddelde, minimum en maximum van het gefilterde kopergehalte in het oppervlaktewater van de Westerschelde en de monding" width="85%" />
+<p class="caption">
+Figuur 5.35: Jaarlijks gemiddelde, minimum en maximum van het gefilterde kopergehalte in het oppervlaktewater van de Westerschelde en de monding
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldekopertotaal"></span>
+<div id="htmlwidget-59c619728c9ceedcad65" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-59c619728c9ceedcad65">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.3505402725352,51.43701537,51.34742676,51.41288731,51.5481548909091],[4.25078956704225,4.01438853,3.82569972,3.56579345,3.40964274545455],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#FDE725","#3E5389","#404B87","#443B83","#440154"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #462069 7.6056338028169%, #3D558A 26.3849765258216%, #29848D 45.1643192488263%, #34B17C 63.943661971831%, #8DD647 82.7230046948357%, #FDE725 "],"labels":["2","3","4","5","6"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.076056338028169,"p_n":0.827230046948357},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.34742676,51.5481548909091],"lng":[3.40964274545455,4.25078956704225]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 5.36: Gemiddelde totale kopergehalte station berekend op alle beschikbare data vanaf 1996.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldekoperfil"></span>
+<div id="htmlwidget-350a21948029b14148fb" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-350a21948029b14148fb">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.3505465485159,51.43701537,51.34742676,51.41288731,51.5481292836879],[4.2507861854417,4.01438853,3.82569972,3.56579345,3.40960122695035],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#FDE725","#248D8C","#316C8E","#462A73","#440154"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #443881 15.8607350096712%, #2E788D 40.0386847195358%, #34B17C 64.2166344294004%, #B3DC3D 88.394584139265%, #FDE725 "],"labels":["1.0","1.5","2.0","2.5"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.158607350096712,"p_n":0.88394584139265},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.34742676,51.5481292836879],"lng":[3.40960122695035,4.2507861854417]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 5.37: Gemiddelde gefilterde kopergehalte station berekend op alle beschikbare data vanaf 1996.
+</p>
+</div>
+</div>
+<div id="uranium" class="section level3">
+<h3><span class="header-section-number">5.12.7</span> Uranium</h3>
+<p>Figuur <a href="nutrienten.html#fig:fysischMetalenUraniumTotaal">5.38</a> toont de jaargemiddelden uranium per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel <a href="nutrienten.html#tab:fysischMetalenUraniumTotaalTab">5.18</a> zijn de gemiddelde, minimale en maximale waardes per station weergegeven.</p>
+<p>Hoewel er slechts een beperkte hoeveelheid datapunten bekend is, lijkt de hoeveelheid uranium af te nemen wanneer men verder in het estuarium komt (gemiddeld 3,1 <span class="math inline">\(\mu\)</span>g/L op zee en 1,6 <span class="math inline">\(\mu\)</span>g/L bij Schaar van Ouden Doel), zie ook Figuur <a href="nutrienten.html#fig:gemiddeldeuratotaal">5.40</a>. De minimale en maximale waardes rondom het gemiddelde (spreiding) is wel vergelijkbaar op zee en in het estuarium. De afname van het uranium bij Hansweert, Terneuzen en Vlissingen van 0,13-0,15 <span class="math inline">\(\mu\)</span>g/L per jaar en is statistisch significant.</p>
+<table>
+<caption><span id="tab:fysischMetalenUraniumTotaalTab">Tabel 5.18: </span>Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van uranium (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="center">Station</th>
+<th align="center">Mediaan</th>
+<th align="center">90-perc</th>
+<th align="center">10-perc</th>
+<th align="center">Trend</th>
+<th align="center">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Schaar van Ouden Doel</td>
+<td align="center">1.60</td>
+<td align="center">2.00</td>
+<td align="center">1.21</td>
+<td align="center">0.011</td>
+<td align="center">0.182</td>
+</tr>
+<tr class="even">
+<td align="center">Hansweert geul</td>
+<td align="center">1.88</td>
+<td align="center">2.38</td>
+<td align="center">1.24</td>
+<td align="center">-0.055</td>
+<td align="center">0.025</td>
+</tr>
+<tr class="odd">
+<td align="center">Terneuzen boei 20</td>
+<td align="center">2.15</td>
+<td align="center">2.65</td>
+<td align="center">1.55</td>
+<td align="center">-0.087</td>
+<td align="center">0.005</td>
+</tr>
+<tr class="even">
+<td align="center">Vlissingen boei SSVH</td>
+<td align="center">2.62</td>
+<td align="center">3.09</td>
+<td align="center">1.90</td>
+<td align="center">-0.070</td>
+<td align="center">0.005</td>
+</tr>
+<tr class="odd">
+<td align="center">Walcheren 2 km uit de kust</td>
+<td align="center">3.15</td>
+<td align="center">3.37</td>
+<td align="center">2.62</td>
+<td align="center">0.028</td>
+<td align="center">0.018</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:fysischMetalenUraniumTotaal"></span>
+<img src="_main_files/figure-html/fysischMetalenUraniumTotaal-1.png" alt="Jaarlijks gemiddelde, minimum en maximum van het totale uraniumgehalte in het oppervlaktewater van de Westerschelde en de monding." width="85%" />
+<p class="caption">
+Figuur 5.38: Jaarlijks gemiddelde, minimum en maximum van het totale uraniumgehalte in het oppervlaktewater van de Westerschelde en de monding.
+</p>
+</div>
+</div>
+<div id="uranium-fil" class="section level3">
+<h3><span class="header-section-number">5.12.8</span> Uranium na filtratie</h3>
+<p>Figuur <a href="nutrienten.html#fig:fysischMetalenUraniumFil">5.39</a> toont de jaargemiddelden uranium na filtratie per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel <a href="nutrienten.html#tab:fysischMetalenUraniumFilTab">5.19</a> zijn de gemiddelde, minimale en maximale waardes per station weergegeven.</p>
+<p>Het station Schaar van Ouden Doel laat een vrij constant beeld zien over de gehele periode. In stroomafwaartse richting nemen de gehaltes toe, zie ook Figuur <a href="nutrienten.html#fig:gemiddeldeurafil">5.41</a>. De concentraties van uranium na filtratie (opgelost) verschillen qua orde van grootte relatief weinig van de totaalconcentraties en derhalve zien we een soortgelijke temporele afname voor stations Hansweert, Terneuzen en Vlissingen als in de vorige paragraaf die statistisch significant is.</p>
+<table>
+<caption><span id="tab:fysischMetalenUraniumFilTab">Tabel 5.19: </span>Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van uranium na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="center">Station</th>
+<th align="center">Mediaan</th>
+<th align="center">90-perc</th>
+<th align="center">10-perc</th>
+<th align="center">Trend</th>
+<th align="center">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Schaar van Ouden Doel</td>
+<td align="center">1.55</td>
+<td align="center">1.90</td>
+<td align="center">1.20</td>
+<td align="center">0.001</td>
+<td align="center">0.945</td>
+</tr>
+<tr class="even">
+<td align="center">Hansweert geul</td>
+<td align="center">1.85</td>
+<td align="center">2.35</td>
+<td align="center">1.22</td>
+<td align="center">-0.093</td>
+<td align="center">0.010</td>
+</tr>
+<tr class="odd">
+<td align="center">Terneuzen boei 20</td>
+<td align="center">2.11</td>
+<td align="center">2.66</td>
+<td align="center">1.55</td>
+<td align="center">-0.103</td>
+<td align="center">0.001</td>
+</tr>
+<tr class="even">
+<td align="center">Vlissingen boei SSVH</td>
+<td align="center">2.50</td>
+<td align="center">3.07</td>
+<td align="center">1.88</td>
+<td align="center">-0.103</td>
+<td align="center">0.005</td>
+</tr>
+<tr class="odd">
+<td align="center">Walcheren 2 km uit de kust</td>
+<td align="center">3.14</td>
+<td align="center">3.34</td>
+<td align="center">2.71</td>
+<td align="center">0.021</td>
+<td align="center">0.237</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:fysischMetalenUraniumFil"></span>
+<img src="_main_files/figure-html/fysischMetalenUraniumFil-1.png" alt="Jaarlijks gemiddelde, minimum en maximum van het gefilterde uraniumgehalte in het oppervlaktewater van de Westerschelde en de monding" width="85%" />
+<p class="caption">
+Figuur 5.39: Jaarlijks gemiddelde, minimum en maximum van het gefilterde uraniumgehalte in het oppervlaktewater van de Westerschelde en de monding
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldeuratotaal"></span>
+<div id="htmlwidget-c7b046ed7a3a1bff62b7" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c7b046ed7a3a1bff62b7">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.3505305048259,51.43701537,51.34742676,51.41288731,51.5481548909091],[4.25110349661692,4.01438853,3.82569972,3.56579345,3.40964274545455],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#440154","#433F84","#316D8E","#35B67A","#FDE725"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #440154 0%, #463078 12.9032258064516%, #3D5489 25.8064516129032%, #2F758E 38.7096774193548%, #25948A 51.6129032258065%, #34B27C 64.5161290322581%, #76CC5A 77.4193548387097%, #C0DE3A 90.3225806451613%, #FDE725 "],"labels":["1.6","1.8","2.0","2.2","2.4","2.6","2.8","3.0"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0,"p_n":0.903225806451613},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.34742676,51.5481548909091],"lng":[3.40964274545455,4.25110349661692]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 5.40: Gemiddelde totale uraniumgehalte station berekend op alle beschikbare data vanaf 1996.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldeurafil"></span>
+<div id="htmlwidget-4d137ecc9551acca2ffa" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4d137ecc9551acca2ffa">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.3505381444473,51.43701537,51.34742676,51.41288731,51.5481540810811],[4.25114471840617,4.01438853,3.82569972,3.56579345,3.40964143243243],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#440154","#434084","#316C8E","#30A781","#FDE725"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #45105D 3.14465408805032%, #443780 15.7232704402516%, #3A5B8B 28.3018867924528%, #2E7A8D 40.8805031446541%, #289888 53.4591194968554%, #35B57A 66.0377358490566%, #7CCE56 78.6163522012579%, #C6DF38 91.1949685534591%, #FDE725 "],"labels":["1.6","1.8","2.0","2.2","2.4","2.6","2.8","3.0"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.0314465408805032,"p_n":0.911949685534591},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.34742676,51.5481540810811],"lng":[3.40964143243243,4.25114471840617]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 5.41: Gemiddelde gefilterde uraniumgehalte station berekend op alle beschikbare data vanaf 1996.
+</p>
+</div>
+</div>
+<div id="vanadium" class="section level3">
+<h3><span class="header-section-number">5.12.9</span> Vanadium</h3>
+<p>Figuur <a href="nutrienten.html#fig:fysischMetalenVanTotaal">5.42</a> toont de jaargemiddelden vanadium per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel <a href="nutrienten.html#tab:fysischMetalenVanTotaalTab">5.20</a> zijn de gemiddelde, minimale en maximale waardes per station weergegeven.</p>
+<p>Hoewel er slechts beperkte hoeveelheid datapunten bekend zijn, lijkt de hoeveelheid vanadium toe te nemen wanneer men verder in het estuarium komt (gemiddeld 3,6 <span class="math inline">\(\mu\)</span>g/L op zee en 10,2 <span class="math inline">\(\mu\)</span>g/L bij Schaar van Ouden Doel), zie ook Figuur <a href="nutrienten.html#fig:gemiddeldevanatotaal">5.44</a>. Algemeen, constateren we geen duidelijk significante (statistische) lineaire trends over de tijd, hoewel Schaar van Oudel Doel met 0.6 <span class="math inline">\(\mu\)</span>g/L afneemt.</p>
+<table>
+<caption><span id="tab:fysischMetalenVanTotaalTab">Tabel 5.20: </span>Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van vanadium (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="center">Station</th>
+<th align="center">Mediaan</th>
+<th align="center">90-perc</th>
+<th align="center">10-perc</th>
+<th align="center">Trend</th>
+<th align="center">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Schaar van Ouden Doel</td>
+<td align="center">8.77</td>
+<td align="center">14.10</td>
+<td align="center">5.69</td>
+<td align="center">-0.007</td>
+<td align="center">0.936</td>
+</tr>
+<tr class="even">
+<td align="center">Hansweert geul</td>
+<td align="center">4.53</td>
+<td align="center">7.00</td>
+<td align="center">2.80</td>
+<td align="center">-0.036</td>
+<td align="center">0.699</td>
+</tr>
+<tr class="odd">
+<td align="center">Terneuzen boei 20</td>
+<td align="center">4.52</td>
+<td align="center">9.72</td>
+<td align="center">2.90</td>
+<td align="center">-0.157</td>
+<td align="center">0.183</td>
+</tr>
+<tr class="even">
+<td align="center">Vlissingen boei SSVH</td>
+<td align="center">4.89</td>
+<td align="center">10.90</td>
+<td align="center">2.51</td>
+<td align="center">-0.114</td>
+<td align="center">0.441</td>
+</tr>
+<tr class="odd">
+<td align="center">Walcheren 2 km uit de kust</td>
+<td align="center">2.80</td>
+<td align="center">5.51</td>
+<td align="center">1.81</td>
+<td align="center">-0.018</td>
+<td align="center">0.519</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:fysischMetalenVanTotaal"></span>
+<img src="_main_files/figure-html/fysischMetalenVanTotaal-1.png" alt="Jaarlijks gemiddelde, minimum en maximum van het totale vanadiumgehalte in het oppervlaktewater van de Westerschelde en de monding." width="85%" />
+<p class="caption">
+Figuur 5.42: Jaarlijks gemiddelde, minimum en maximum van het totale vanadiumgehalte in het oppervlaktewater van de Westerschelde en de monding.
+</p>
+</div>
+</div>
+<div id="vanadium-fil" class="section level3">
+<h3><span class="header-section-number">5.12.10</span> Vanadium na filtratie</h3>
+<p>Figuur <a href="nutrienten.html#fig:fysischMetalenVanadiumFil">5.43</a> toont de jaargemiddelden vanadium na filtratie per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel <a href="nutrienten.html#tab:fysischMetalenVanadiumFilTab">5.21</a> zijn de gemiddelde, minimale en maximale waardes per station weergegeven.</p>
+<p>Alle stations laten een vrij constant beeld zien. In stroomafwaartse richting nemen de gehaltes af, zie ook Figuur <a href="nutrienten.html#fig:gemiddeldevanafil">5.45</a>. De concentraties van vanadium na filtratie (opgelost) zijn lager dan de totaalconcentraties. We constateren geen duidelijke (statistische) lineare trends over de tijd.</p>
+<table>
+<caption><span id="tab:fysischMetalenVanadiumFilTab">Tabel 5.21: </span>Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van vanadium na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="center">Station</th>
+<th align="center">Mediaan</th>
+<th align="center">90-perc</th>
+<th align="center">10-perc</th>
+<th align="center">Trend</th>
+<th align="center">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Schaar van Ouden Doel</td>
+<td align="center">3.00</td>
+<td align="center">4.20</td>
+<td align="center">2.40</td>
+<td align="center">-0.081</td>
+<td align="center">0.000</td>
+</tr>
+<tr class="even">
+<td align="center">Hansweert geul</td>
+<td align="center">1.98</td>
+<td align="center">2.72</td>
+<td align="center">1.48</td>
+<td align="center">-0.076</td>
+<td align="center">0.033</td>
+</tr>
+<tr class="odd">
+<td align="center">Terneuzen boei 20</td>
+<td align="center">1.84</td>
+<td align="center">2.53</td>
+<td align="center">1.38</td>
+<td align="center">-0.083</td>
+<td align="center">0.001</td>
+</tr>
+<tr class="even">
+<td align="center">Vlissingen boei SSVH</td>
+<td align="center">1.50</td>
+<td align="center">1.97</td>
+<td align="center">1.12</td>
+<td align="center">-0.056</td>
+<td align="center">0.001</td>
+</tr>
+<tr class="odd">
+<td align="center">Walcheren 2 km uit de kust</td>
+<td align="center">1.39</td>
+<td align="center">1.69</td>
+<td align="center">1.08</td>
+<td align="center">-0.007</td>
+<td align="center">0.328</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:fysischMetalenVanadiumFil"></span>
+<img src="_main_files/figure-html/fysischMetalenVanadiumFil-1.png" alt="Jaarlijks gemiddelde, minimum en maximum van het gefilterde vanadiumgehalte in het oppervlaktewater van de Westerschelde en de monding." width="85%" />
+<p class="caption">
+Figuur 5.43: Jaarlijks gemiddelde, minimum en maximum van het gefilterde vanadiumgehalte in het oppervlaktewater van de Westerschelde en de monding.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldevanatotaal"></span>
+<div id="htmlwidget-2b33f626370b2ed34ee6" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2b33f626370b2ed34ee6">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.3505368113882,51.43701537,51.34742676,51.41288731,51.5481548909091],[4.25115021398458,4.01438853,3.82569972,3.56579345,3.40964274545455],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#FDE725","#395D8B","#395C8B","#316C8E","#440154"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #45115D 3.43096234309624%, #424485 20.1673640167364%, #30718E 36.9037656903766%, #289888 53.6401673640167%, #51BE6F 70.3765690376569%, #AADB3F 87.1129707112971%, #FDE725 "],"labels":["3","4","5","6","7","8"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.0343096234309624,"p_n":0.871129707112971},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.34742676,51.5481548909091],"lng":[3.40964274545455,4.25115021398458]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 5.44: Gemiddelde totale vanadiumgehalte station berekend op alle beschikbare data vanaf 1996.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldevanafil"></span>
+<div id="htmlwidget-e87c44dccadce2224a86" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e87c44dccadce2224a86">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.3505381444473,51.43701537,51.34742676,51.41288731,51.5481540810811],[4.25114471840617,4.01438853,3.82569972,3.56579345,3.40964143243243],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#FDE725","#30708E","#3B598A","#461D67","#440154"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #440456 0.619195046439643%, #463078 13.0030959752322%, #3E5389 25.3869969040248%, #30738E 37.7708978328173%, #21908C 50.1547987616099%, #33AD7E 62.5386996904025%, #6BC762 74.9226006191951%, #ACDB3E 87.3065015479876%, #FBE726 99.6904024767802%, #FDE725 "],"labels":["1.4","1.6","1.8","2.0","2.2","2.4","2.6","2.8","3.0"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.00619195046439643,"p_n":0.996904024767802},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.34742676,51.5481540810811],"lng":[3.40964143243243,4.25114471840617]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 5.45: Gemiddelde gefilterde Vanadiumgehalte station berekend op alle beschikbare data vanaf 1996.
+</p>
+</div>
+</div>
+<div id="zink" class="section level3">
+<h3><span class="header-section-number">5.12.11</span> Zink</h3>
+<p>Figuur <a href="nutrienten.html#fig:fysischMetalenZinkTotaal">5.46</a> toont de jaargemiddelden zink per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel <a href="nutrienten.html#tab:fysischMetalenZinkTotaalTab">5.22</a> zijn de gemiddelde, minimale en maximale waardes per station weergegeven.</p>
+<p>Bij Schaar van Ouden Doel worden veruit de hoogste concentraties gemeten, die over de gehele meetperiode rond hetzelfde gemiddelde schommelen. In stroomafwaartse richting worden de concentraties lager, zie ook Figuur <a href="nutrienten.html#fig:gemiddeldezinktotaal">5.48</a>. De trends bij deze stations worden sterk beïnvloed door de jaren 2009 en 2010, waarbij respectievelijk de detectiegrens en het aantal metingen meespeelt in de resultaten. Er zijn geen (statistisch) significante veranderingen in de tijd.</p>
+<p><em>Let op: de y-assen van subfiguren van Figuur <a href="nutrienten.html#fig:fysischMetalenZinkTotaal">5.46</a> verschillen.</em></p>
+<table>
+<caption><span id="tab:fysischMetalenZinkTotaalTab">Tabel 5.22: </span>Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van zink (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="center">Station</th>
+<th align="center">Mediaan</th>
+<th align="center">90-perc</th>
+<th align="center">10-perc</th>
+<th align="center">Trend</th>
+<th align="center">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Schaar van Ouden Doel</td>
+<td align="center">37.00</td>
+<td align="center">70.0</td>
+<td align="center">20.60</td>
+<td align="center">-0.037</td>
+<td align="center">0.905</td>
+</tr>
+<tr class="even">
+<td align="center">Hansweert geul</td>
+<td align="center">12.20</td>
+<td align="center">20.5</td>
+<td align="center">5.00</td>
+<td align="center">0.075</td>
+<td align="center">0.833</td>
+</tr>
+<tr class="odd">
+<td align="center">Terneuzen boei 20</td>
+<td align="center">11.80</td>
+<td align="center">24.0</td>
+<td align="center">5.00</td>
+<td align="center">0.020</td>
+<td align="center">0.937</td>
+</tr>
+<tr class="even">
+<td align="center">Vlissingen boei SSVH</td>
+<td align="center">9.98</td>
+<td align="center">25.0</td>
+<td align="center">4.64</td>
+<td align="center">0.004</td>
+<td align="center">0.993</td>
+</tr>
+<tr class="odd">
+<td align="center">Walcheren 2 km uit de kust</td>
+<td align="center">5.90</td>
+<td align="center">12.6</td>
+<td align="center">2.48</td>
+<td align="center">0.110</td>
+<td align="center">0.429</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:fysischMetalenZinkTotaal"></span>
+<img src="_main_files/figure-html/fysischMetalenZinkTotaal-1.png" alt="Jaarlijks gemiddelde, minimum en maximum van het totale zinkgehalte in het oppervlaktewater van de Westerschelde en de monding." width="85%" />
+<p class="caption">
+Figuur 5.46: Jaarlijks gemiddelde, minimum en maximum van het totale zinkgehalte in het oppervlaktewater van de Westerschelde en de monding.
+</p>
+</div>
+</div>
+<div id="zink-fil" class="section level3">
+<h3><span class="header-section-number">5.12.12</span> Zink na filtratie</h3>
+<p>Figuur <a href="nutrienten.html#fig:fysischMetalenZinkFil">5.47</a> toont de jaargemiddelden zink na filtratie per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel <a href="nutrienten.html#tab:fysischMetalenZinkFilTab">5.23</a> zijn de gemiddelde, minimale en maximale waardes per station weergegeven.</p>
+<p>Het station Schaar van Ouden Doel laat een behoorlijke variatie zien tussen de jaren, maar ook binnen een jaar, gezien de verschillen tussen de minimum en de maximumwaardes. De periode 2000-2008 laat een stijgende trend zien, daarna nemen de concentraties opgelost zink af. In stroomafwaartse richting nemen de gehaltes af, zie ook Figuur <a href="nutrienten.html#fig:gemiddeldezinkfil">5.49</a>. Voor Schaar van Ouden Doel zijn de concentraties van zink na filtratie (opgelost) veel lager dan de totaalconcentraties, voor de overige stations is dit verschil minder groot. Vooral tot 2009 wordt regelmatig de detectiegrens bereikt. Na enkele uitschieters in de gemeten maxima van 2015, zijn zowel de maxima als de gemiddelden sinds 2016 weer terug op het niveau van de voorgaande jaren. Het lijkt erop dat over de gehele dataset de concentratie gefilterd zink op zee toeneemt in de tijd (Walcheren 2 km uit de kust).</p>
+<table>
+<caption><span id="tab:fysischMetalenZinkFilTab">Tabel 5.23: </span>Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van zink na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="center">Station</th>
+<th align="center">Mediaan</th>
+<th align="center">90-perc</th>
+<th align="center">10-perc</th>
+<th align="center">Trend</th>
+<th align="center">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Schaar van Ouden Doel</td>
+<td align="center">9.00</td>
+<td align="center">14.50</td>
+<td align="center">4.700</td>
+<td align="center">0.117</td>
+<td align="center">0.196</td>
+</tr>
+<tr class="even">
+<td align="center">Hansweert geul</td>
+<td align="center">3.01</td>
+<td align="center">5.60</td>
+<td align="center">0.960</td>
+<td align="center">0.030</td>
+<td align="center">0.560</td>
+</tr>
+<tr class="odd">
+<td align="center">Terneuzen boei 20</td>
+<td align="center">2.25</td>
+<td align="center">4.89</td>
+<td align="center">0.500</td>
+<td align="center">0.031</td>
+<td align="center">0.489</td>
+</tr>
+<tr class="even">
+<td align="center">Vlissingen boei SSVH</td>
+<td align="center">1.42</td>
+<td align="center">3.64</td>
+<td align="center">0.291</td>
+<td align="center">0.087</td>
+<td align="center">0.005</td>
+</tr>
+<tr class="odd">
+<td align="center">Walcheren 2 km uit de kust</td>
+<td align="center">1.70</td>
+<td align="center">3.36</td>
+<td align="center">0.150</td>
+<td align="center">0.141</td>
+<td align="center">0.006</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:fysischMetalenZinkFil"></span>
+<img src="_main_files/figure-html/fysischMetalenZinkFil-1.png" alt="Jaarlijks gemiddelde, minimum en maximum van het gefilterde zinkgehalte in het oppervlaktewater van de Westerschelde en de monding." width="85%" />
+<p class="caption">
+Figuur 5.47: Jaarlijks gemiddelde, minimum en maximum van het gefilterde zinkgehalte in het oppervlaktewater van de Westerschelde en de monding.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldezinktotaal"></span>
+<div id="htmlwidget-303e5efe36c03c240e13" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-303e5efe36c03c240e13">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.3505402725352,51.43701537,51.34742676,51.41288731,51.5481548909091],[4.25078956704225,4.01438853,3.82569972,3.56579345,3.40964274545455],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#FDE725","#424485","#434185","#453079","#440154"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #453079 13.1972351711943%, #395D8B 29.2718212506028%, #29858D 45.3464073300113%, #32AB7F 61.4209934094197%, #77CC5A 77.4955794888282%, #D5E134 93.5701655682366%, #FDE725 "],"labels":["10","15","20","25","30","35"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.131972351711943,"p_n":0.935701655682366},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.34742676,51.5481548909091],"lng":[3.40964274545455,4.25078956704225]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 5.48: Gemiddelde totale zinkgehalte station berekend op alle beschikbare data vanaf 1996.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:gemiddeldezinkfil"></span>
+<div id="htmlwidget-8ad312c3283deba82cef" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8ad312c3283deba82cef">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.3505459521127,51.43701537,51.34742676,51.41288731,51.5481346338028],[4.25078765633803,4.01438853,3.82569972,3.56579345,3.40960990140845],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#FDE725","#424686","#462A72","#440154","#45125E"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #462069 7.59075907590759%, #424686 20.7920792079208%, #316A8E 33.993399339934%, #26898C 47.1947194719472%, #31A881 60.3960396039604%, #64C466 73.5973597359736%, #A8DB3F 86.7986798679868%, #FDE725 100%, #FDE725 "],"labels":["2","3","4","5","6","7","8","9"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.0759075907590759,"p_n":1},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.34742676,51.5481346338028],"lng":[3.40960990140845,4.25078765633803]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 5.49: Gemiddelde gefilterde zinkgehalte station berekend op alle beschikbare data vanaf 1996.
+</p>
+</div>
+
+<!-- TO DO:
+- bijlage referentie
+- figuren headers bijwerken met percentiele ipv min-max
+
+-->
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="fysisch-oppwater.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="zwevend-stof.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+},
+"toc_float": {
+"collapsed": false,
+"smooth_scroll": false
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

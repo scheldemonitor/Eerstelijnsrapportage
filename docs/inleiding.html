@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Inleiding | Concept Eerstelijnsrapportage Westerschelde (IN ONTWIKKELING)</title>
+  <meta name="description" content="2 Inleiding | Concept Eerstelijnsrapportage Westerschelde (IN ONTWIKKELING)" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Inleiding | Concept Eerstelijnsrapportage Westerschelde (IN ONTWIKKELING)" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Inleiding | Concept Eerstelijnsrapportage Westerschelde (IN ONTWIKKELING)" />
+  
+  
+  
+
+<meta name="author" content="Deltares" />
+
+
+<meta name="date" content="2022-02-17" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="hydro.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
+<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<style>
+.zoomDiv {
+  opacity: 0;
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 50;
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 0px 50px #888888;
+  max-height:100%; 
+  overflow: scroll;
+}
+
+.zoomImg {
+  width: 100%;
+}
+</style>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').prepend("<div class=\"zoomDiv\"><img src=\"\" class=\"zoomImg\"></div>");
+    // onClick function for all plots (img's)
+    $('img:not(.zoomImg):not(.logo)').click(function() {
+      $('.zoomImg').attr('src', $(this).attr('src'));
+      $('.zoomDiv').css({opacity: '1', width: '60%'});
+    });
+    // onClick function for zoomImg
+    $('img.zoomImg').click(function() {
+      $('.zoomDiv').css({opacity: '0', width: '0%'});
+    });
+  });
+</script>
+
+
+
+
+<link rel="stylesheet" href="navbar/navbar.css" type="text/css" />
+<link rel="stylesheet" href="style/deltares.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Voorwoord</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#samenvatting"><i class="fa fa-check"></i><b>1.1</b> Samenvatting</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#rapportversie"><i class="fa fa-check"></i><b>1.2</b> Versie</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="inleiding.html"><a href="inleiding.html"><i class="fa fa-check"></i><b>2</b> Inleiding</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="inleiding.html"><a href="inleiding.html#achtergrond"><i class="fa fa-check"></i><b>2.1</b> Achtergrond</a></li>
+<li class="chapter" data-level="2.2" data-path="inleiding.html"><a href="inleiding.html#doelstelling"><i class="fa fa-check"></i><b>2.2</b> Doelstelling</a></li>
+<li class="chapter" data-level="2.3" data-path="inleiding.html"><a href="inleiding.html#verwerkte-data"><i class="fa fa-check"></i><b>2.3</b> Verwerkte data</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="inleiding.html"><a href="inleiding.html#ontbrekende-data"><i class="fa fa-check"></i><b>2.3.1</b> Ontbrekende data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="inleiding.html"><a href="inleiding.html#leeswijzer"><i class="fa fa-check"></i><b>2.4</b> Leeswijzer</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="hydro.html"><a href="hydro.html"><i class="fa fa-check"></i><b>3</b> Hydrodynamiek</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="hydro.html"><a href="hydro.html#waterstanden"><i class="fa fa-check"></i><b>3.1</b> Waterstanden</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="hydro.html"><a href="hydro.html#hydroInfoMeting"><i class="fa fa-check"></i><b>3.1.1</b> Informatie over de metingen</a></li>
+<li class="chapter" data-level="3.1.2" data-path="hydro.html"><a href="hydro.html#hydroHWLW"><i class="fa fa-check"></i><b>3.1.2</b> Jaargemiddelde hoog- en laagwaterstanden</a></li>
+<li class="chapter" data-level="3.1.3" data-path="hydro.html"><a href="hydro.html#hydroGetijslag"><i class="fa fa-check"></i><b>3.1.3</b> Jaargemiddelde getijslag</a></li>
+<li class="chapter" data-level="3.1.4" data-path="hydro.html"><a href="hydro.html#hydroGetijcomponenten"><i class="fa fa-check"></i><b>3.1.4</b> Getijcomponenten</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="hydro.html"><a href="hydro.html#golven"><i class="fa fa-check"></i><b>3.2</b> Golven IN ONTWIKKELING</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="hydro.html"><a href="hydro.html#golvenInfoMeting"><i class="fa fa-check"></i><b>3.2.1</b> Informatie over de metingen</a></li>
+<li class="chapter" data-level="3.2.2" data-path="hydro.html"><a href="hydro.html#golvenHoogte"><i class="fa fa-check"></i><b>3.2.2</b> Golfhoogte</a></li>
+<li class="chapter" data-level="3.2.3" data-path="hydro.html"><a href="hydro.html#golvenPeriode"><i class="fa fa-check"></i><b>3.2.3</b> Golfperiode</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html"><i class="fa fa-check"></i><b>4</b> Oppervlaktewater - Fysisch-chemische parameters</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#oppInfoMetingen"><i class="fa fa-check"></i><b>4.1</b> Informatie over de metingen</a></li>
+<li class="chapter" data-level="4.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#saliniteit"><i class="fa fa-check"></i><b>4.2</b> Saliniteit</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#saliniteit-jaargemiddelde"><i class="fa fa-check"></i><b>4.2.1</b> Jaarlijkse waarden</a></li>
+<li class="chapter" data-level="4.2.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#saliniteit-winterzomer"><i class="fa fa-check"></i><b>4.2.2</b> Zomer- en winterwaarden</a></li>
+<li class="chapter" data-level="4.2.3" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#saliniteit-maandgemiddelde"><i class="fa fa-check"></i><b>4.2.3</b> Maandelijkse waarden</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#watertemp"><i class="fa fa-check"></i><b>4.3</b> Watertemperatuur</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#watertemp-jaargemiddelde"><i class="fa fa-check"></i><b>4.3.1</b> Jaarlijkse waarden</a></li>
+<li class="chapter" data-level="4.3.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#watertemp-winterzomer"><i class="fa fa-check"></i><b>4.3.2</b> Zomer- en de winterwaarden</a></li>
+<li class="chapter" data-level="4.3.3" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#watertemp-maandgemiddelde"><i class="fa fa-check"></i><b>4.3.3</b> Maandelijkse waarden</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zuurstof"><i class="fa fa-check"></i><b>4.4</b> Zuurstof</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zuurstof-jaar-verzadiging"><i class="fa fa-check"></i><b>4.4.1</b> jaarmediane verzadigingspercentage zuurstof</a></li>
+<li class="chapter" data-level="4.4.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zuurstof-jaar-gehalte"><i class="fa fa-check"></i><b>4.4.2</b> jaarmediane zuurstofgehalte</a></li>
+<li class="chapter" data-level="4.4.3" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zuurstof-maand-verzadiging"><i class="fa fa-check"></i><b>4.4.3</b> Maandelijkse waarden verzadigingspercentage zuurstof</a></li>
+<li class="chapter" data-level="4.4.4" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zuurstof-maand-gehalte"><i class="fa fa-check"></i><b>4.4.4</b> Maandelijkse waarden zuurstofgehalte</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#chlorofyl"><i class="fa fa-check"></i><b>4.5</b> Chlorofyl-a</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#chlorofyl-jaar"><i class="fa fa-check"></i><b>4.5.1</b> Jaarlijkse waarden</a></li>
+<li class="chapter" data-level="4.5.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#chlorofyl-zomerwinter"><i class="fa fa-check"></i><b>4.5.2</b> Zomer- en winterwaardes</a></li>
+<li class="chapter" data-level="4.5.3" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#chlorofyl-maand"><i class="fa fa-check"></i><b>4.5.3</b> Maandelijkse waarden</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#feofytine"><i class="fa fa-check"></i><b>4.6</b> Feofytine-a</a></li>
+<li class="chapter" data-level="4.7" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zuurstofverbruik"><i class="fa fa-check"></i><b>4.7</b> Chemisch en biochemisch zuurstofverbruik</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#chemisch-zuurstofgebruik"><i class="fa fa-check"></i><b>4.7.1</b> Chemisch zuurstofgebruik</a></li>
+<li class="chapter" data-level="4.7.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#biochemisch-zuurstofgebruik"><i class="fa fa-check"></i><b>4.7.2</b> Biochemisch zuurstofgebruik</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#lichtklimaat"><i class="fa fa-check"></i><b>4.8</b> Lichtklimaat</a>
+<ul>
+<li class="chapter" data-level="4.8.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#doorzicht"><i class="fa fa-check"></i><b>4.8.1</b> Doorzicht</a></li>
+<li class="chapter" data-level="4.8.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#extinctiecoef"><i class="fa fa-check"></i><b>4.8.2</b> Extinctiecoefficient</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zwevende-stof"><i class="fa fa-check"></i><b>4.9</b> Zwevende stof</a>
+<ul>
+<li class="chapter" data-level="4.9.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zwevende-stof-jaar"><i class="fa fa-check"></i><b>4.9.1</b> Jaarlijkse waarden</a></li>
+<li class="chapter" data-level="4.9.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zwevende-stof-zomerwinter"><i class="fa fa-check"></i><b>4.9.2</b> Gemiddelde waardes in de zomer en de winter</a></li>
+<li class="chapter" data-level="4.9.3" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#afwijking-van-het-langjarig-gemiddelde-anomalie"><i class="fa fa-check"></i><b>4.9.3</b> Afwijking van het langjarig gemiddelde (anomalie)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.10" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#nutrienten"><i class="fa fa-check"></i><b>4.10</b> Nutriënten</a>
+<ul>
+<li class="chapter" data-level="4.10.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#stikstof"><i class="fa fa-check"></i><b>4.10.1</b> Totaal opgelost stikstof</a></li>
+<li class="chapter" data-level="4.10.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#part-gebonden-stikstof"><i class="fa fa-check"></i><b>4.10.2</b> Particulair gebonden stikstof</a></li>
+<li class="chapter" data-level="4.10.3" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#ammonium"><i class="fa fa-check"></i><b>4.10.3</b> Ammonium</a></li>
+<li class="chapter" data-level="4.10.4" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#nitriet"><i class="fa fa-check"></i><b>4.10.4</b> Nitriet</a></li>
+<li class="chapter" data-level="4.10.5" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#nitraat"><i class="fa fa-check"></i><b>4.10.5</b> Nitraat</a></li>
+<li class="chapter" data-level="4.10.6" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#orthofosfaat"><i class="fa fa-check"></i><b>4.10.6</b> Orthofosfaat</a></li>
+<li class="chapter" data-level="4.10.7" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#totaal-fosfaat"><i class="fa fa-check"></i><b>4.10.7</b> Totaal opgelost fosfaat</a></li>
+<li class="chapter" data-level="4.10.8" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#part-gebonden-fosfaat"><i class="fa fa-check"></i><b>4.10.8</b> Particulair gebonden fosfaat</a></li>
+<li class="chapter" data-level="4.10.9" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#silicaat"><i class="fa fa-check"></i><b>4.10.9</b> Silicaat</a></li>
+</ul></li>
+<li class="chapter" data-level="4.11" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#organisch-koolstof"><i class="fa fa-check"></i><b>4.11</b> Organisch koolstof</a>
+<ul>
+<li class="chapter" data-level="4.11.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#opgelost-organisch-koolstof"><i class="fa fa-check"></i><b>4.11.1</b> Opgelost organisch koolstof</a></li>
+<li class="chapter" data-level="4.11.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#part-gebonden-organisch-koolstof"><i class="fa fa-check"></i><b>4.11.2</b> Particulair gebonden organisch koolstof</a></li>
+</ul></li>
+<li class="chapter" data-level="4.12" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#cnp-ratio"><i class="fa fa-check"></i><b>4.12</b> C:N:P ratio’s</a></li>
+<li class="chapter" data-level="4.13" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#metalen"><i class="fa fa-check"></i><b>4.13</b> Metalen</a>
+<ul>
+<li class="chapter" data-level="4.13.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#boor"><i class="fa fa-check"></i><b>4.13.1</b> Boor</a></li>
+<li class="chapter" data-level="4.13.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#boor-fil"><i class="fa fa-check"></i><b>4.13.2</b> Boor na filtratie</a></li>
+<li class="chapter" data-level="4.13.3" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#chroom"><i class="fa fa-check"></i><b>4.13.3</b> Chroom</a></li>
+<li class="chapter" data-level="4.13.4" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#chroom-fil"><i class="fa fa-check"></i><b>4.13.4</b> Chroom na filtratie</a></li>
+<li class="chapter" data-level="4.13.5" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#koper"><i class="fa fa-check"></i><b>4.13.5</b> Koper</a></li>
+<li class="chapter" data-level="4.13.6" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#koper-fil"><i class="fa fa-check"></i><b>4.13.6</b> Koper na filtratie</a></li>
+<li class="chapter" data-level="4.13.7" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#uranium"><i class="fa fa-check"></i><b>4.13.7</b> Uranium</a></li>
+<li class="chapter" data-level="4.13.8" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#uranium-fil"><i class="fa fa-check"></i><b>4.13.8</b> Uranium na filtratie</a></li>
+<li class="chapter" data-level="4.13.9" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#vanadium"><i class="fa fa-check"></i><b>4.13.9</b> Vanadium</a></li>
+<li class="chapter" data-level="4.13.10" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#vanadium-fil"><i class="fa fa-check"></i><b>4.13.10</b> Vanadium na filtratie</a></li>
+<li class="chapter" data-level="4.13.11" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zink"><i class="fa fa-check"></i><b>4.13.11</b> Zink</a></li>
+<li class="chapter" data-level="4.13.12" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zink-fil"><i class="fa fa-check"></i><b>4.13.12</b> Zink na filtratie</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="zwevend-stof.html"><a href="zwevend-stof.html"><i class="fa fa-check"></i><b>5</b> Zwevend stof - Fysisch-chemische parameters</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-info-metingen"><i class="fa fa-check"></i><b>5.1</b> Informatie over de metingen</a></li>
+<li class="chapter" data-level="5.2" data-path="zwevend-stof.html"><a href="zwevend-stof.html#korrelgrootteverdeling"><i class="fa fa-check"></i><b>5.2</b> Korrelgrootteverdeling</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="zwevend-stof.html"><a href="zwevend-stof.html#korrelgrootteverdeling-tot63"><i class="fa fa-check"></i><b>5.2.1</b> Korrelgroottefractie tot 63 <span class="math inline">\(\mu\)</span>m</a></li>
+<li class="chapter" data-level="5.2.2" data-path="zwevend-stof.html"><a href="zwevend-stof.html#korrelgrootteverdeling-tot2"><i class="fa fa-check"></i><b>5.2.2</b> Korrelgroottefractie tot 2 <span class="math inline">\(\mu\)</span>m</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-metalen"><i class="fa fa-check"></i><b>5.3</b> Metalen</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-arseen"><i class="fa fa-check"></i><b>5.3.1</b> Arseen</a></li>
+<li class="chapter" data-level="5.3.2" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-cadmium"><i class="fa fa-check"></i><b>5.3.2</b> Cadmium</a></li>
+<li class="chapter" data-level="5.3.3" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-chroom"><i class="fa fa-check"></i><b>5.3.3</b> Chroom</a></li>
+<li class="chapter" data-level="5.3.4" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-kobalt"><i class="fa fa-check"></i><b>5.3.4</b> Kobalt</a></li>
+<li class="chapter" data-level="5.3.5" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-koper"><i class="fa fa-check"></i><b>5.3.5</b> Koper</a></li>
+<li class="chapter" data-level="5.3.6" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-kwik"><i class="fa fa-check"></i><b>5.3.6</b> Kwik</a></li>
+<li class="chapter" data-level="5.3.7" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-lood"><i class="fa fa-check"></i><b>5.3.7</b> Lood</a></li>
+<li class="chapter" data-level="5.3.8" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-vanadium"><i class="fa fa-check"></i><b>5.3.8</b> Vanadium</a></li>
+<li class="chapter" data-level="5.3.9" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-zink"><i class="fa fa-check"></i><b>5.3.9</b> Zink</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PAK"><i class="fa fa-check"></i><b>5.4</b> Polycyclische aromatische koolwaterstoffen (PAK’s)</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-antraceen"><i class="fa fa-check"></i><b>5.4.1</b> Antraceen</a></li>
+<li class="chapter" data-level="5.4.2" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-Benzoapyreen"><i class="fa fa-check"></i><b>5.4.2</b> Benzo[<em>a</em>]pyreen</a></li>
+<li class="chapter" data-level="5.4.3" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-Benzoghiperyleen"><i class="fa fa-check"></i><b>5.4.3</b> Benzo[<em>g,h,i</em>]peryleen</a></li>
+<li class="chapter" data-level="5.4.4" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-Benzoaantraceen"><i class="fa fa-check"></i><b>5.4.4</b> Benzo[<em>a</em>]antraceen</a></li>
+<li class="chapter" data-level="5.4.5" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-Benzokfluorantheen"><i class="fa fa-check"></i><b>5.4.5</b> Benzo[<em>k</em>]fluorantheen</a></li>
+<li class="chapter" data-level="5.4.6" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-chryseen"><i class="fa fa-check"></i><b>5.4.6</b> Chryseen</a></li>
+<li class="chapter" data-level="5.4.7" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-fenanthreen"><i class="fa fa-check"></i><b>5.4.7</b> Fenanthreen</a></li>
+<li class="chapter" data-level="5.4.8" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-fluorantheen"><i class="fa fa-check"></i><b>5.4.8</b> Fluorantheen</a></li>
+<li class="chapter" data-level="5.4.9" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-indeno"><i class="fa fa-check"></i><b>5.4.9</b> Indeno[<em>1,2,3-c,d</em>]pyreen</a></li>
+<li class="chapter" data-level="5.4.10" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-naftaleen"><i class="fa fa-check"></i><b>5.4.10</b> Naftaleen</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PCB"><i class="fa fa-check"></i><b>5.5</b> Polychloorbifenylen (PCB’s)</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PCB180"><i class="fa fa-check"></i><b>5.5.1</b> PCB180</a></li>
+<li class="chapter" data-level="5.5.2" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PCB138"><i class="fa fa-check"></i><b>5.5.2</b> PCB138</a></li>
+<li class="chapter" data-level="5.5.3" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PCB153"><i class="fa fa-check"></i><b>5.5.3</b> PCB153</a></li>
+<li class="chapter" data-level="5.5.4" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PCB101"><i class="fa fa-check"></i><b>5.5.4</b> PCB101</a></li>
+<li class="chapter" data-level="5.5.5" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PCB52"><i class="fa fa-check"></i><b>5.5.5</b> PCB52</a></li>
+<li class="chapter" data-level="5.5.6" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PCB118"><i class="fa fa-check"></i><b>5.5.6</b> PCB118</a></li>
+<li class="chapter" data-level="5.5.7" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PCB28"><i class="fa fa-check"></i><b>5.5.7</b> PCB28</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-overig"><i class="fa fa-check"></i><b>5.6</b> Overige stoffen</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-dieldrin"><i class="fa fa-check"></i><b>5.6.1</b> Dieldrin</a></li>
+<li class="chapter" data-level="5.6.2" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-Hexachloorbenzeen"><i class="fa fa-check"></i><b>5.6.2</b> Hexachloorbenzeen</a></li>
+<li class="chapter" data-level="5.6.3" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-Tributyltin"><i class="fa fa-check"></i><b>5.6.3</b> Tributyltin</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="bodem.html"><a href="bodem.html"><i class="fa fa-check"></i><b>6</b> Bodem - Fysisch-chemische parameters</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="bodem.html"><a href="bodem.html#bodem-info-metingen"><i class="fa fa-check"></i><b>6.1</b> Informatie over de metingen</a></li>
+<li class="chapter" data-level="6.2" data-path="bodem.html"><a href="bodem.html#bodem-metalen"><i class="fa fa-check"></i><b>6.2</b> Metalen</a></li>
+<li class="chapter" data-level="6.3" data-path="bodem.html"><a href="bodem.html#bodem-PAK"><i class="fa fa-check"></i><b>6.3</b> Polycyclische Aromatische Koolwaterstoffen (PAK’s)</a></li>
+<li class="chapter" data-level="6.4" data-path="bodem.html"><a href="bodem.html#bodem-PCB"><i class="fa fa-check"></i><b>6.4</b> Polychloorbifenylen (PCB’s)</a></li>
+<li class="chapter" data-level="6.5" data-path="bodem.html"><a href="bodem.html#bodem-organotin"><i class="fa fa-check"></i><b>6.5</b> Organotinverbindingen</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="fytoplankton.html"><a href="fytoplankton.html"><i class="fa fa-check"></i><b>7</b> Fytoplankton</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-soorten"><i class="fa fa-check"></i><b>7.1</b> Indeling soorten</a></li>
+<li class="chapter" data-level="7.2" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-info-metingen"><i class="fa fa-check"></i><b>7.2</b> Informatie over de metingen</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-metingen-stations"><i class="fa fa-check"></i><b>7.2.1</b> Stations en jaren</a></li>
+<li class="chapter" data-level="7.2.2" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-metingen-figuren"><i class="fa fa-check"></i><b>7.2.2</b> Figuren</a></li>
+<li class="chapter" data-level="7.2.3" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-metingen-trendbreuk"><i class="fa fa-check"></i><b>7.2.3</b> Trendbreuk</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-station"><i class="fa fa-check"></i><b>7.3</b> Resultaten per station</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-schaar"><i class="fa fa-check"></i><b>7.3.1</b> Schaar van Ouden Doel</a></li>
+<li class="chapter" data-level="7.3.2" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-hansweert"><i class="fa fa-check"></i><b>7.3.2</b> Hansweert geul</a></li>
+<li class="chapter" data-level="7.3.3" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-vlis"><i class="fa fa-check"></i><b>7.3.3</b> Vlissingen boei SSVH</a></li>
+<li class="chapter" data-level="7.3.4" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-walch2km"><i class="fa fa-check"></i><b>7.3.4</b> Walcheren 2 km uit de kust</a></li>
+<li class="chapter" data-level="7.3.5" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-walch20km"><i class="fa fa-check"></i><b>7.3.5</b> Walcheren 20 km uit de kust</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-groep"><i class="fa fa-check"></i><b>7.4</b> Resultaten per groep</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-auto-blauw"><i class="fa fa-check"></i><b>7.4.1</b> Autotroof - Blauwwieren</a></li>
+<li class="chapter" data-level="7.4.2" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-auto-dia"><i class="fa fa-check"></i><b>7.4.2</b> Autotroof - Diatomeeën</a></li>
+<li class="chapter" data-level="7.4.3" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-auto-dino"><i class="fa fa-check"></i><b>7.4.3</b> Autotroof - Dinoflagellaten</a></li>
+<li class="chapter" data-level="7.4.4" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-auto-groen"><i class="fa fa-check"></i><b>7.4.4</b> Autotroof - Groenwieren</a></li>
+<li class="chapter" data-level="7.4.5" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-auto-phaeo"><i class="fa fa-check"></i><b>7.4.5</b> Autotroof - Phaeocystis</a></li>
+<li class="chapter" data-level="7.4.6" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-auto-overig"><i class="fa fa-check"></i><b>7.4.6</b> Autotroof - overig</a></li>
+<li class="chapter" data-level="7.4.7" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-hetero-dino"><i class="fa fa-check"></i><b>7.4.7</b> Heterotroof - Dinoflagellaten</a></li>
+<li class="chapter" data-level="7.4.8" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-hetero-overig"><i class="fa fa-check"></i><b>7.4.8</b> Heterotroof - overig</a></li>
+<li class="chapter" data-level="7.4.9" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-mix-dino"><i class="fa fa-check"></i><b>7.4.9</b> Mixotroof - dinoflagellaten</a></li>
+<li class="chapter" data-level="7.4.10" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-mix-overig"><i class="fa fa-check"></i><b>7.4.10</b> Mixotroof - overig</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Concept Eerstelijnsrapportage Westerschelde (IN ONTWIKKELING)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="shortcut icon" type="image/jpg" href="navbar/images/icon-deltares.svg"/>
+</head>
+<body>
+
+<nav class="navigation-bar">
+    <a href="index.html"><i class="fa fa-home"></i></a>
+    <div class="logos">
+        <img class="logo" src="navbar/images/deltares_logo.png" />
+        <img class="logo" src="navbar/images/Rijkswaterstaat-logo-e1473888123824-1-300x300.jpg" />
+    </div>
+</nav>
+
+</body>
+</html>
+<div id="inleiding" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Inleiding</h1>
+<div id="achtergrond" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Achtergrond</h2>
+<p>De projecten in de OntwikkelingsSchets 2010 (OS2010) hebben als doel verschillende veranderingen in het Schelde-esturium te bewerkstelligen. Het betreft verruiming van de vaargeul, aanleg van gebieden met gedempt getij en ontpolderingen. Het doel van deze projecten is verbetering van de toegankelijkheid (scheepvaart), vergroting van de veiligheid tegen overstromingen en verbetering van de natuurwaarde en natuurlijkheid van het systeem.</p>
+<p>Deze projecten kunnen ook niet gewenste neveneffecten hebben op het functioneren van het estuarium. De resultaten van deze projecten worden gemonitord via geïntegreerde systeemmonitoring. Naast OS2010 zijn er nog andere programma’s die invloed hebben op de kwaliteiten van het systeem, zoals maatregelen ten behoeve van de Kaderrichtlijn Water (KRW) en emissievergunningen (e.g. de rioolwaterzuiveringen in Vlaanderen).</p>
+<p>Voor de monitoring en de ontwikkelingen rond de derde verruiming in het kader van de Ontwikkelingsschets 2010 (OS2010) dienen gevalideerde data en datarapporten geleverd te worden. Deze datarapportage betreft de zogenaamde eerstelijnsrapportage van de monitoring van de Westerschelde en de monding. Elk jaar wordt er een nieuwe eerstelijnsrapportage opgeleverd (<span class="citation">@ELR2010</span>, <span class="citation">@ELR2011</span>, <span class="citation">@ELR2012</span>, <span class="citation">@ELR2013</span>, <span class="citation">@ELR2014</span>, <span class="citation">@ELR2015</span>, <span class="citation">@ERL2016</span>, <span class="citation">@ERL2017</span>). Dit is de negende eerstelijnsrapportage.</p>
+</div>
+<div id="doelstelling" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Doelstelling</h2>
+<p>De eerstelijnsrapportage is een eerste weergave van de beschikbare data en beschrijft enkel ‘wat men in de meetresultaten ziet’. Het bevat een interpretatie van de gegevens op basis van een eenvoudige analyse. Er worden geen oorzaak-gevolg relaties geanalyseerd.</p>
+</div>
+<div id="verwerkte-data" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Verwerkte data</h2>
+<p>In deze eerstelijnsrapportage zijn data die gemeten zijn in de periode 1996 t/m 2019 voor de Westerschelde en de monding weergegeven. De data zijn opgedeeld in drie hoofdgroepen: hydrodynamische, fysisch-chemische en biologische parameters. Niet alle beschikbare parameters in deze groepen zijn weergegeven, maar er is in overleg met RWS-WVL een selectie gemaakt. Er zijn hierbij parameters geselecteerd die nog niet in een ander kader gerapporteerd worden en die belangrijk zijn voor het functioneren van het estuarium.</p>
+<p>Naast deze datarapportage worden er aparte rapportages uitgevoerd voor o.a. macrofauna, vissen, kustbroedvogels, hoogwatervogeltellingen en zeehonden. Daarnaast worden enkele parameters uitgewerkt door andere instanties. Dit geldt o.a. voor de geomorfologie, primaire productie en vegetatie-ecotopenkaarten. Deze data zijn daarom niet in deze rapportage opgenomen.</p>
+<p>Een groot aantal van de fysisch-chemische en biologische parameters in de Westerschelde wordt gemeten in het kader van de ‘Monitoring Waterstaatkundige Toestand des Lands’ (i.e. MWTL). Deze parameters kennen de volgende onderverdeling: oppervlaktewater (compartiment 10), zwevende stof (compartiment 50), bodem (compartiment 40; iedere 3 jaar gemeten) en biota (compartiment 60).</p>
+<p>Bodemgegevens worden iedere 3 jaar gemeten en gerapporteerd. De meest recente bodemgegevens komen uit 2019, en zijn opgenomen in deze Eerstelijnsrapportage.</p>
+<p>Daarnaast zijn er enkele parameters die voorheen wel werden gemeten en nu niet meer. Tot en met 2015 werden er continu metingen uitgevoerd om saliniteit, temperatuur, zuurstofgehalte, troebelheid, lichtstraling en fluorescentie te bepalen. Sinds 2016 zijn deze niet meer gemeten. Golfrichting is tot en met 2014 gemeten en gerapporteerd. Daarna zijn deze metingen niet meer uitgevoerd. Een overzicht is te vinden in bijlage <a href="#BijlageA-overzicht-data"><strong>??</strong></a>.</p>
+<p>Om de data inzichtelijker te maken zijn gemiddelden, maxima en minima bepaald. Wanneer er wordt gesproken over een gemiddelden tijdens de zomer- en winterperiode wordt respectievelijk gesproken over april tot en met september en oktober tot en met maart. Daarnaast is de lineaire trend en bijhorende correlatiecoëfficiënt berekend. De correlatiecoëfficiënt (<span class="math inline">\(R\)</span>) is voor Eerstelijnsrapportage 2015 voor het eerst gepresenteerd en is een maat voor het gezamenlijk variëren van twee of meer variabelen. Een correlatiecoëfficiënt van +1 betekent dat er een lineair verband is tussen de variabelen, wat wil zeggen dat de ene variabele volledig uit de andere is te herleiden via een lineaire relatie. Een correlatiecoëfficiënt van 0 wil zeggen dat er totaal geen lineaire samenhang is. De significantie van deze correlatiecoëfficiënt hangt af van het aantal datapunten dat is meegenomen in de analyse. In het veelvoorkomende geval dat er data beschikbaar is over alle jaren tussen 2000 en 2019, bestaat de dataset dus uit 19 variabelen (17 vrijheidsgraden) en is de correlatie significant (p=0.05) als deze 0,468 of meer bedraagt. Voor minder datapunten moet de correlatie hoger liggen om significant te zijn. Hier is in de tabellen rekening mee gehouden.</p>
+<!-- % De volgende tabel kan worden gebruikt varieren in het aantal vrijheidsgraden -->
+<!-- %N 0.05 -->
+<!-- %1 0.997 -->
+<!-- %2 0.950 -->
+<!-- %3 0.878 -->
+<!-- %4 0.811 -->
+<!-- %5 0.754 -->
+<!-- %6 0.707 -->
+<!-- %7 0.666 -->
+<!-- %8 0.632 -->
+<!-- %9 0.602 -->
+<!-- %10    0.576 -->
+<!-- %11    0.553 -->
+<!-- %12    0.532 -->
+<!-- %13    0.514 -->
+<!-- %15    0.482 -->
+<!-- %16    0.468 -->
+<!-- %17    0.456 -->
+<!-- %18    0.444 -->
+<p>Het bepalen van deze parameters (i.e. gemiddelden, trend en R) is altijd gedaan vanaf 2000 zodat deze niet direct worden beïnvloedt door de tweede verruiming in 1997-1998. De trend wordt weergegeven in een eenheid per jaar en kan zowel negatief (-) als positief zijn (+). Indien er een significante correlatie is geconstateerd, worden de trend en correlatiecoëfficiënt dikgedrukt weergegeven in de tabel.</p>
+<p>In de figuren met gemiddelden op een kaart wordt gebruik gemaakt van coördinaten in het stelsel van de Rijksdriehoeksmeting of kortweg Rijksdriehoekscoördinaten (ook wel: RD-coördinaten). Hierdoor staat er op de x-as de afkorting RDx [m] en op de y-as RDy [m]. Wat simpelweg betekent de respectievelijke x- en y-as uitgezet in meters in Rijksdriehoekscoördinaten.</p>
+<div id="ontbrekende-data" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Ontbrekende data</h3>
+<p>In eerdere rapportage is de beschikbare data van 1 januari 2018 t/m 31 december 2018 toegevoegd aan de gegevens die gepresenteerd zijn in de voorgaande eerstelijnsrapportages van de Westerschelde. De data uit 2018 is echter niet volledig. In Tabel <a href="inleiding.html#tab:missingDatatab">2.1</a> staat een overzicht van de ontbrekende data in 2018. De ontbrekende data kan de resultaten beïnvloeden, vooral als er gemiddelden uit berekend worden. In voorkomende gevallen is een opmerking bij de figuur toegevoegd.</p>
+<p>In de huidige rapportage is de beschikbare data van 1 januari 2019 t/m 31 december 2019 toegevoegd. De enige data die ontbreekt uit dit jaar zijn golf gegevens bij de locatie Cadzand.</p>
+<table>
+<caption><span id="tab:missingDatatab">Tabel 2.1: </span>De missende data in 2018 voor de Eerstelijnsrapportage van de Westerschelde per groep, parameter en locatie.</caption>
+<thead>
+<tr class="header">
+<th align="left">Groep</th>
+<th align="left">Parameter</th>
+<th align="left">Locatie</th>
+<th align="left">Missend</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Hydrodynamiek</td>
+<td align="left">Waterstanden</td>
+<td align="left">Baalhoek</td>
+<td align="left">juli &amp; september 2018</td>
+</tr>
+<tr class="even">
+<td align="left">Hydrodynamiek</td>
+<td align="left">Waterstanden</td>
+<td align="left">Gat van Borssele</td>
+<td align="left">01-07-2018 - 31-12-2018</td>
+</tr>
+<tr class="odd">
+<td align="left">Hydrodynamiek</td>
+<td align="left">Waterstanden</td>
+<td align="left">Breskens voorhaven</td>
+<td align="left">01-01-2018 - 30-04-2018</td>
+</tr>
+<tr class="even">
+<td align="left">Hydrodynamiek</td>
+<td align="left">Waterstanden</td>
+<td align="left">Breskens voorhaven</td>
+<td align="left">juli 2018</td>
+</tr>
+<tr class="odd">
+<td align="left">Hydrodynamiek</td>
+<td align="left">Waterstanden</td>
+<td align="left">Overloop van Hansweert</td>
+<td align="left">01-01-2018 - 07-03-2018</td>
+</tr>
+<tr class="even">
+<td align="left">Hydrodynamiek</td>
+<td align="left">Waterstanden</td>
+<td align="left">Overloop van Hansweert</td>
+<td align="left">juli 2018</td>
+</tr>
+<tr class="odd">
+<td align="left">Hydrodynamiek</td>
+<td align="left">Waterstanden</td>
+<td align="left">Vlakte van de Raan</td>
+<td align="left">juli &amp; september 2018</td>
+</tr>
+<tr class="even">
+<td align="left">Hydrodynamiek</td>
+<td align="left">Waterstanden</td>
+<td align="left">Vlakte van de Raan</td>
+<td align="left">29-11-2018 - 14-12-2018</td>
+</tr>
+<tr class="odd">
+<td align="left">Hydrodynamiek</td>
+<td align="left">Waterstanden</td>
+<td align="left">Schaar van de Noord</td>
+<td align="left">juli &amp; september 2018</td>
+</tr>
+<tr class="even">
+<td align="left">Hydrodynamiek</td>
+<td align="left">Waterstanden</td>
+<td align="left">Walsoorden</td>
+<td align="left">juli &amp; september 2018</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="leeswijzer" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Leeswijzer</h2>
+<p>Hoofdstuk <a href="hydro.html#hydro">3</a> bevat de hydrodynamiek. Op een groot aantal stations in de Westerschelde, de monding en de Noordzee worden hoog- en laagwaterstanden gepresenteerd over de periode 1950 tot heden. Ook de getijslag en de M2, M4 en S2-componenten van het getij worden weergegeven. Voor de golven wordt de golfhoogte en golfperiode getoond op meerdere stations in de Westerschelde en de monding. Voor een tweetal stations (Cadzand en Deurloo) in de monding wordt ook de golfrichting weergegeven.
+<!-- % update: ontbrekende data! --></p>
+<p>Hoofdstuk <a href="fysisch-oppwater.html#fysisch-oppwater">4</a> bevat de fysisch-chemische parameters die gemeten zijn in het oppervlaktewater in het kader van MWTL (Monitoring Waterstaatskundige Toestand des Lands) vaartochten. Naast de periodieke metingen die in eerdere eerstelijnsrapportage al aan de orde kwamen, is er in deze rapportage ook een aantal continue metingen in oppervlaktewater opgenomen. Continue metingen zijn tussen 2012 - 2014 uitgevoerd.
+<!-- % update: ontbrekende data! --></p>
+<p>Hoofdstuk <a href="zwevend-stof.html#zwevend-stof">5</a> bevat de fysisch-chemische monitoring in het zwevende stof. Zwevende stof wordt ook in het kader van het kader van MWTL-vaartochten gemeten. De data wordt gepresenteerd voor twee stations te weten Vlissingen boei SSVH en Schaar van Ouden Doel.
+<!-- % update: ontbrekende data! --></p>
+<p>Hoofdstuk <a href="bodem.html#bodem">6</a> wordt elke drie jaar geactualiseerd met nieuwe gegevens. De laatste bodemmonsters zijn genomen in 2019 en geanalyseerd in het laboratorium. De resultaten van deze fysisch-chemische monitoring in de bodem zijn opgenomen in dit hoofdstuk.
+<!-- % update: ontbrekende data! --></p>
+<p>Hoofdstuk <a href="#biota"><strong>??</strong></a> betreft de biota. Voor de biota zijn de metingen in bot (<em>Platichthys Flesus</em>) en mossel (<em>Mytilus Edulis</em>) opgenomen. Het monitoringsplan is in 2000 aangepast waarbij er bij twee stations in plaats van drie station in de Westerschelde biota verzameld wordt.
+<!-- % update: ontbrekende data! --></p>
+<p>De resultaten van fytoplankton zijn opgenomen in Hoofdstuk <a href="fytoplankton.html#fytoplankton">7</a>. Fytoplankton wordt gemonitord bij vijf stations in de Westerschelde sinds 1996. Fytoplankton wordt in deze Eerstelijnsrapportage op een pragmatische wijze gegroepeerd. Hoofstuk <a href="fytoplankton.html#fytoplankton">7</a> en Bijlage <a href="#BijlageC-fytoplankton"><strong>??</strong></a> geven een overzicht van de gehanteerde indeling.</p>
+
+<!-- TO DO:
+- Check of alles werkt.
+- bijlage referentie
+- tabel, cdf en andere figuren Golven
+
+-->
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="hydro.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+},
+"toc_float": {
+"collapsed": false,
+"smooth_scroll": false
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
