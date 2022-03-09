@@ -1,0 +1,776 @@
+<!-- TO DO:
+- Check of alles werkt.
+- bijlage referentie
+
+-->
+```{r setupBiota, include=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE,
+	out.width = "85%",
+	fig.align='center'
+)
+```
+
+```{r}
+# Load function to write Latex table structure to R 
+source("Rscripts/tex2Rtable.R")
+
+# Set year for use in the report
+dataJaar <- 2019
+```
+
+# Biota - Fysisch-chemische parameters {#biota}
+
+## Informatie over de metingen {#biota-metingen}
+
+De fysisch-chemische parameters in biota worden geanalyseerd aan de hand van Bot (*Platichthys flesus*) en mosselen (*Mytilus edulis*). Bot wordt eens per jaar op een vaste locatie gevangen. In 2010 is de monitoring aangepast en worden mosselen één keer per jaar zowel uitgehangen als verzameld op twee respectievelijk drie verschillende locaties. 
+<!-- % opmerking over ontbrekende metingen op locaties Hansweert, Vlissingen, Hoedekenskerke en Hooge Platen? -->
+
+Figuur \@ref(fig:meetstationsBiota) toont de meetlocaties voor bot (geel) en mosselen. Bij mosselen wordt een onderscheid gemaakt tussen actieve monitoring (het uithangen van korven met mosselen voor een periode van zes weken; rood) en passieve monitoring, waarbij mosselen worden gezocht (blauw).
+
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Meetstations_biota.png} -->
+<!--  \caption[Ligging van de meetstations voor biota]{Ligging van de meetstations voor biota. Locaties van bemonstering mossel zijn gecodeerd met kleur (actief=rood, passief=blauw) en bot (geel).} -->
+<!-- \label{fig:meetstations_biota} -->
+<!-- \end{figure}  -->
+
+```{r meetstationsBiota, fig.cap="Ligging van de meetstations voor biota. Locaties van bemonstering mossel zijn gecodeerd met kleur (actief=rood, passief=blauw) en bot (geel)."}
+knitr::include_graphics("Figuren/Meetstations_biota.png")
+```
+
+De meetdata worden gepresenteerd door middel van jaargemiddelden, en de minimale en maximale waarde die in elk jaar gemeten is. Bij het middelen van parameters over een bepaalde periode is de datadichtheid van belang. Een overzicht van het aantal metingen per parameter, per station, per jaar is daarom opgenomen in Bijlage \@ref(BijlageB-meetdichtheid-biota). Daarnaast is het van belang om te realiseren dat station Middelgat, Brouwersplaat, Molenplaat een deelgebied is. Dat betekent dat data in een groter deelgebied wordt ingewonnen. Net als in de Eerstelijnsrapportage van 2015 is er geen TEQ (Toxic Equivalent) bepaald (in tegenstelling tot voorgaande  Eerstelijnsrapportages), aangezien dit niet leidt tot andere patronen dan wanneer de gemeten data wordt gepresenteerd. 
+
+Voor het visziektenonderzoek wordt in de periode augustus/september in de Westerschelde (locatie Middelgat, Brouwersplaat, Molenplaat) een bemonstering van bot uitgevoerd. Hierbij worden een tot drie vistrekken gedaan, waarbij maximaal 250 vissen per trek worden gevangen. Voor het chemisch onderzoek worden uit deze set drie lengteklassen bemonsterd (20,0-24,9 cm, 25,0-29,9 cm en >30 cm) . De Eerstelijnsrapportage beperkt zich tot de middelste klasse: 25,0-29,9 cm. Uit deze klasse worden 20 mannelijke vissen genomen en gepoold tot 10 submonsters van twee vissen. Vijf submonsters worden gebruikt voor de analyse van metalen en vijf voor organische microverontreinigingen. Deze analyses worden, afhankelijk van de soort analyse, uitgevoerd in spierweefsel, leverweefsel of galvloeistof. 
+
+In de rapportage wordt hier als volgt mee omgegaan: 
+
+* Metalen
+  + Cadmium (lever)
+  + Koper (lever)
+  + Kwik (spierweefsel)
+  + Lood (lever)
+  + Zink (lever)
+* Polychloorbifenylen (PCB’s): som van de gemeten waarden (lever)
+* Polybroomdifenylethers (PBDE’s): som van de gemeten waarden (lever)
+* Organochloorbestrijdingsmiddelen (lever): zowel hexachloorbenzeen (HCB) als hexachloorbutadieen (HxClbtDen)
+
+Per meetlocatie van actieve monitoring (Vlissingen boei SSVH en Hansweert boei OHMG, zie rode markers in Figuur \@ref(fig:meetstationsBiota)) zijn 2x 50 stuks levende en verwaterde mosselen nodig. Deze meting werd twee keer per jaar uitgevoerd. Tot 2006 in de maanden maart en november, daarna in januari en september/oktober. Sinds 2010 wordt nog maar één keer per jaar gemeten, in oktober. De passieve monitoring vond altijd al maar één keer per jaar plaats. Voor passieve monitoring worden mosselen gezocht op de Hooge Platen (tot en met 2013), bij Hoedekenskerke boei 4 (tot en met 2013) en bij Knuitershoek (sinds 2011), zie blauwe markers in Figuur \@ref(fig:meetstationsBiota). De monsterneming vindt plaats in het najaar en per keer moeten minimaal vijf mosselen per locatie worden verzameld. Bij afwezigheid van mosselen kunnen ook kokkels (*Cerastoderma edule*) of Japanse Oesters (*Crassostrea gigas*) worden gebruikt. 
+<!-- % opmerking over ontbrekende metingen op locaties Hansweert, Vlissingen, Hoedekenskerke en Hooge Platen? -->
+
+De volgende parameters worden gerapporteerd:
+
+* Metalen (actieve en passieve monitoring)
+  + Arseen
+  + Cadmium
+  + Chroom
+  + Koper
+  + Kwik
+  + Lood
+  + Nikkel
+  + Zink
+* Polycyclische Aromatische Koolwaterstoffen (PAK’s): som van Borneff (actieve monitoring)
+* Polychloorbifenylen (PCB’s). Passieve monitoring voor Knuitershoek en actieve monitoring voor alle overige stations. Som van de gemeten waarden, zowel in droog als natgewicht.
+* Polybroomdifenylethers (PBDE’s). Passieve monitoring voor alleen Knuitershoek.
+* Organotinverbindingen. Alleen passieve monitoring voor Knuitershoek. Voor overige stations actieve monitoring. Som van de gemeten waarden omgerekend naar drooggewicht.
+* Organochloorbestrijdingsmiddelen: zowel hexachloorbenzeen (HCB) als hexachloorbutadieen (HxClbtDen) omgerekend naar drooggewicht.
+
+De mosselen die worden verzameld bij Knuitershoek worden op meer verschillende parameters geanalyseerd dan de monsters van andere locaties. Hierdoor zijn sommige parameters alleen voor Knuitershoek beschikbaar. In principe worden de gemeten parameters weergegeven in hoeveelheid t.o.v. het drooggewicht. Indien de parameter in de data is aangeleverd in natgewicht (passieve monitoring) wordt deze omgerekend naar drooggewicht. Hierbij is eerst de betreffende parameter omgerekend aan de hand van de gemiddelde hoeveelheid vocht in de monsters in dezelfde week en daarna gemiddeld.
+
+## Bot {#biota-bot}
+
+De gemeten bot data wordt hier uitgesplitst in metalen, polychloorbifenylen (PCB's), polybroomdifenylethers (PBDE's) en organochloorbestrijdingsmiddelen. Over het algemeen is de indruk dat het gehalte organische verontreinigingen de laatste jaren is afgenomen. Let op dat het slechts beperkt mogelijk om de gemeten bot data statistisch te analyseren op basis van het gemiddelde, omdat de verdelingen erg scheef kunnen liggen ten opzichte van het gemiddelde.
+
+### Metalen {#biota-bot-metalen}
+
+De metalen in bot worden sinds 1996 ingemeten en zijn weergegeven in Figuur \@ref(fig:botMetaal) als natgewicht. Lood laat geen significante trend zien, deze variabele wordt pas sinds 2009 gemeten. Koper en zink in bot nemen toe in de tijd, hoewel deze variabelen ook pas sinds 2009 worden bemeten. Koper heeft een hoge correlatiecoëfficient en zink een middelmatige. Cadmium en kwik worden langer gemeten en de concentraties in bot nemen toe in de tijd met hoge correlatie voor kwik en lage correlatie voor cadmium. 
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering  -->
+<!-- \input{../Figuren/Biota/1_bot_metalen.tex}  -->
+<!-- \caption[Waardes van het metaalgehalte in bot]{Gemiddelde, minimale en maximale waardes van het metaalgehalte in ug/kg in bot bij Middelgat, Brouwersplaat, Molenplaat in de Westerschelde berekend op alle beschikbare data tussen 1996 en 2018.}  -->
+<!-- \label{tab:biota_bot_metaal}  -->
+<!-- \end{table}  -->
+
+```{r biotaBotMetaal}
+dt <- tex2dt("Figuren/Biota/1_bot_metalen.tex")
+knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+             caption = "Gemiddelde, minimale en maximale waardes van het metaalgehalte in ug/kg in bot bij Middelgat, Brouwersplaat, Molenplaat in de Westerschelde berekend op alle beschikbare data vanaf 1996.")
+```
+
+<!-- \begin{figure}[h!]  -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Biota/1_Bot_metaal.png}  -->
+<!-- \caption[Jaarlijks gemiddelde waardes voor metaal in bot]{Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van diverse metalen in bot bij Middelgat, Brouwersplaat, Molenplaat in de Westerschelde. Metaal in bot wordt sinds 1996 ingemeten (start van de grafiek).}  -->
+<!-- \label{fig:bot_metaal}  -->
+<!-- \end{figure}  -->
+
+```{r botMetaal, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van diverse metalen in bot bij Middelgat, Brouwersplaat, Molenplaat in de Westerschelde. Metaal in bot wordt sinds 1996 ingemeten (start van de grafiek)."}
+knitr::include_graphics("Figuren/Biota/1_Bot_metaal.png")
+```
+
+### Polychloorbifenylen (PCB's) {#biota-bot-PCB}
+
+De polychloorbifenylen (PCB's) zijn gemeten in de lever van bot. Figuur \@ref(fig:botPCB) toont de sommatie van de PCB’s die in de periode 1996-`r dataJaar`  zijn gemeten. 
+
+Het betreft de volgende PCB's (in ug/kg Natgewicht (Lever) in Organisme (biota)):
+
+* '2,2',3,3',4,4',5,5',6-nonachloorbifenyl 
+* '2,2',3,3',4,4',5,5'-octachloorbifenyl
+* '2,2',3,3',4,4'-hexachloorbifenyl
+* '2,2',3,3',5,5',6,6'-octachloorbifenyl
+* '2,2',3,4',5',6-hexachloorbifenyl 
+* '2,2',3,4',5,5',6-heptachloorbifenyl 
+* '2,2',3,4,4',5,5'-heptachloorbifenyl 
+* '2,2',3,4,4',5-hexachloorbifenyl 
+* '2,2',3,4,4'-pentachloorbifenyl 
+* '2,2',3,4,5'-pentachloorbifenyl 
+* '2,2',3,4,5,5'-hexachloorbifenyl 
+* '2,2',3,5,5',6-hexachloorbifenyl 
+* '2,2',4,4',5,5''-hexachloorbifenyl 
+* '2,2',4,4'-tetrachloorbifenyl 
+* '2,2',4,5'-tetrachloorbifenyl 
+* '2,2',4,5,5'-pentachloorbifenyl 
+* '2,2',5,5'-tetrachloorbifenyl 
+* '2,3',4,4',5-pentachloorbifenyl 
+* '2,3,3',4',6-pentachloorbifenyl 
+* '2,3,3',4'-tetrachloorbifenyl 
+* '2,3,3',4,4',5-hexachloorbifenyl 
+* '2,3,3',4,4'-pentachloorbifenyl 
+* '2,4',5-trichloorbifenyl 
+* '2,4,4'-trichloorbifenyl 
+* Som PCB138 en PCB163
+
+Voor de PCB’s is het lastig om een uitspraak te doen over een trend, aangezien de grafiek grote flucaties over de tijd laat zien. In 2007 en 2010 waren de gesommeerde waardes bijvoorbeeld relatief hoog. De PCB met het grootste aandeel in de gesommeerde waarde is '2,2'',4,4'',5,5''-hexachloorbifenyl met een jaarlijkgemiddelde waarde van 1000 $\mu$g/kg. De gemiddelde, minimale en maximale jaarlijks gesommeerde waardes voor PCB's zijn te vinden in Tabel \@ref(tab:biotaBotPCB).
+
+<!-- \begin{table}[H] -->
+<!--  \centering  -->
+<!-- \input{../Figuren/Biota/Bot_PCB.tex}  -->
+<!-- \caption[Waardes PCB's in bot]{Gemiddelde, minimale en maximale waardes van de gesommeerde hoeveelheid PCB's in bot ug/kg bij Middelgat, Brouwersplaat, Molenplaat in de Westerschelde berekend op alle beschikbare data tussen 1996 en 2018.}  -->
+<!-- \label{tab:biota_bot_PCB}  -->
+<!-- \end{table}  -->
+
+```{r biotaBotPCB}
+dt <- tex2dt("Figuren/Biota/Bot_PCB.tex")
+knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+             caption = "Gemiddelde, minimale en maximale waardes van de gesommeerde hoeveelheid PCB's in bot ug/kg bij Middelgat, Brouwersplaat, Molenplaat in de Westerschelde berekend op alle beschikbare data vanaf 1996.")
+```
+
+<!-- \begin{figure}[H]  -->
+<!--  \centering  -->
+<!--  \includegraphics[width=0.8\linewidth]{../Figuren/Biota/Bot_PCB.png}  -->
+<!-- \caption[Jaarlijks gemiddelde waardes voor PCB's in bot]{Jaarlijks gesommeerde waardes van PCB's in ug/kg in bot bij Middelgat, Brouwersplaat, Molenplaat in de Westerschelde}  -->
+<!-- \label{fig:bot_PCB}  -->
+<!-- \end{figure}  -->
+
+```{r botPCB, fig.cap="Jaarlijks gesommeerde waardes van PCB's in ug/kg in bot bij Middelgat, Brouwersplaat, Molenplaat in de Westerschelde."}
+knitr::include_graphics("Figuren/Biota/Bot_PCB.png")
+```
+
+### Polybroomdifenylethers (PBDE's) {#biota-bot-PBDE}
+
+De polybroomdifenylethers (PBDE's) zijn gemeten in de lever van bot. De volgende PBDE’s zijn gesommeerd in Figuur \@ref(fig:botPBDE) (in ug/kg Natgewicht (Lever) in Organisme (biota)):
+
+* 2,2',4,4',5,5'-hexabroomdifenylether
+* 2,2',4,4',5-pentabroomdifenylether
+* 2,2',4,4',6-pentabroomdifenylether
+* 2,2',4,4'-tetrabroomdifenylether
+
+Omdat er maar enkele datapunten zijn, kan er moeilijk een harde uitspraak worden gedaan over de hoeveelheden PBDE's in bot. Ten opzichte van 2010 lijkt er een daling op te treden van 4 $\mu$g/kg per jaar, een daling die een sterke correlatie kent. Dit hangt samen met de incidentele waarde van 2000. De gemiddelde, minimale en maximale jaarlijks gesommeerde waardes voor PBDE's zijn te vinden in Tabel \@ref(tab:biotaBotPBDE). 
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering  -->
+<!-- \input{../Figuren/Biota/Bot_PBDE.tex}  -->
+<!-- \caption[Waardes PBDE in bot]{Gemiddelde, minimale en maximale waardes van de gesommeerde hoeveelheid PBDE's in bot ug/kg bij Middelgat, Brouwersplaat, Molenplaat in de Westerschelde berekend op alle beschikbare data tussen 2010 en 2018.}  -->
+<!-- \label{tab:biota_bot_PBDE}  -->
+<!-- \end{table}  -->
+
+```{r biotaBotPBDE}
+dt <- tex2dt("Figuren/Biota/Bot_PBDE.tex")
+knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+             caption = "Gemiddelde, minimale en maximale waardes van de gesommeerde hoeveelheid PBDE's in bot ug/kg bij Middelgat, Brouwersplaat, Molenplaat in de Westerschelde berekend op alle beschikbare data vanaf 2010.")
+```
+
+<!-- \begin{figure}[h!]  -->
+<!--  \centering  -->
+<!--  \includegraphics[width=0.8\linewidth]{../Figuren/Biota/Bot_PBDE.png}  -->
+<!-- \caption[Jaarlijks gemiddelde waardes voor PBDE's in bot]{Jaarlijks gesommeerde waardes van PBDE's in bot bij Middelgat, Brouwersplaat, Molenplaat in de Westerschelde}  -->
+<!-- \label{fig:bot_PBDE}  -->
+<!-- \end{figure}  -->
+
+```{r botPBDE, fig.cap="Jaarlijks gesommeerde waardes van PBDE's in bot bij Middelgat, Brouwersplaat, Molenplaat in de Westerschelde."}
+knitr::include_graphics("Figuren/Biota/Bot_PBDE.png")
+```
+
+### Organochloorbestrijdingsmiddelen {#biota-bot-organochloor}
+
+Figuur \@ref(fig:botOrganochloor) en Tabel \@ref(tab:biotaBotChloor) laat de waardes voor hexachloorbenzeen en hexachloorbutadieenin in bot bij Middelgat, Brouwersplaat, Molenplaat in de Westerschelde zien. 
+
+* De gemiddelde hoeveelheden hexachloorbenzeen (HCB) in bot varieerde voor 2012 rond de 2 $\mu$g/kg met uitschieters richting de 8 $\mu$g/kg . In 2012 is er een erg hoge waarde van 20 $\mu$g/kg gemeten, maar in de daaropvolgende jaren is deze waarde weer afgenomen. In 2016 is een lichte verdere daling waargenomen, wat ervoor zorgt dat de hoeveelheid hexachloorbenzeen stabiliseert rond de 1 $\mu$g/kg.
+* Hexachloorbutadieen wordt pas sinds 2009 gemeten, waardoor het lastig is iets te zeggen over een trend. Tot op heden zitten er  grote fluctuaties over tijd in de gehaltes hexachloorbutadieen in bot. 
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering  -->
+<!-- \input{../Figuren/Biota/bot_chloor.tex}  -->
+<!-- \caption[Waardes van het gehalte organochloorbestrijdingsmiddelen in bot]{Gemiddelde, minimale en maximale waardes van het gehalte organochloorbestrijdingsmiddelen in ug/kg in bot bij Middelgat, Brouwersplaat, Molenplaat in de Westerschelde berekend op alle beschikbare data tussen 1996 en 2018.}  -->
+<!-- \label{tab:biota_bot_chloor}  -->
+<!-- \end{table}  -->
+
+```{r biotaBotChloor}
+dt <- tex2dt("Figuren/Biota/bot_chloor.tex")
+knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+             caption = "Gemiddelde, minimale en maximale waardes van het gehalte organochloorbestrijdingsmiddelen in ug/kg in bot bij Middelgat, Brouwersplaat, Molenplaat in de Westerschelde berekend op alle beschikbare data vanaf 1996.")
+```
+
+<!-- \begin{figure}[h!]  -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Biota/Bot_hexecloor.png}  -->
+<!-- \caption[Jaarlijks gemiddelde waardes voor organochloorbestrijdingsmiddelen in bot]{Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van twee type organochloorbestrijdingsmiddelen in bot bij Middelgat, Brouwersplaat, Molenplaat in de Westerschelde}  -->
+<!-- \label{fig:bot_organochloor}  -->
+<!-- \end{figure}  -->
+
+```{r botOrganochloor, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van twee type organochloorbestrijdingsmiddelen in bot bij Middelgat, Brouwersplaat, Molenplaat in de Westerschelde."}
+knitr::include_graphics("Figuren/Biota/Bot_hexecloor.png")
+```
+
+## Mosselen {#biota-mosselen}
+
+Voor de analyse van verontreinigingen in mossel is bij de actieve monitoring (uithangen op locaties Hansweert boei OHMG en Vlissingen boei SSVH) steeds een gehalte in drooggewicht gegeven. Bij de passieve monitoring (Hoedekenskerke boei 4, Hooge Platen, Knuitershoek) wordt het gehalte in natgewicht omgerekend naar drooggewicht. Van de Hooge Platen zijn minder gegevens beschikbaar dan van de andere stations. Locatie Knuitershoek is pas sinds 2011 opgenomen in de monitoring. 
+
+*Bij veel stations is er slechts beperkt data beschikbaar (een meetpunt per jaar) waardoor de gemiddelde, minimum en maximale waarde van het desbetreffende jaar allemaal dezelfde waarde hebben. Tot en met 2013 wordt voor het merendeel van de stations het merendeel van de parameters ingemeten. In de jaren daarna (2014 en 2015) worden niet alle, in deze Eerstelijnsrappotage gepresenteerde, parameters meer overal ingemeten. Andere parameters, bijvoorbeeld Cesium 134, worden overal nog wel bepaald. Voor station Knuitershoek worden alle parameters gepresteerd in deze Eerstelijnsrapportage vanaf 2011 weergegeven. Dit is dus niet het geval voor andere stations.*
+
+### Metalen {#biota-mosselen-metalen}
+
+#### Arseen {#biota-mosselen-arseen}
+
+De gehalten arseen (zie Figuur \@ref(fig:mosselArseen)) schommelen rond de 10 tot 15 mg/kg (zie Tabel \@ref(tab:biotaMosselMetaal)). In de metingen in drooggewicht, bij Vlissingen boei SSVH, neemt de hoeveelheid arseen af. Bij de metingen in natgewicht (omgerekend naar drooggewicht; Hoedekenskerke boei 4, Hooge Platen en Knuitershoek) nemen de arseengehaltes toe. Deze toename heeft enige significantie bij Kuitershoek waar de hoeveelheid arseen met 1.5 $\mu$g/kg per jaar toeneemt. %Deze geobserveerde trend heeft een hoge correlatiecoëfficiënt.
+
+<!-- \begin{table}[H] -->
+<!--  \centering  -->
+<!-- \input{../Figuren/Biota/arseen.tex}  -->
+<!-- \caption[Waardes van het arseengehalte in mosselen]{Gemiddelde, minimale en maximale waardes van het gehalte arseen in mg/kg (drooggewicht) berekend op alle beschikbare data tussen 1996 en 2018. Metingen voor Hoedekenskerke boei 4, Hooge Platen en Knuitershoek zijn omgerekend van nat naar drooggewicht (aangegeven met een sterretje).} -->
+<!-- \label{tab:biota_mossel_metaal}  -->
+<!-- \end{table}  -->
+
+```{r biotaMosselMetaal}
+dt <- tex2dt("Figuren/Biota/arseen.tex")
+knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+             caption = "Gemiddelde, minimale en maximale waardes van het gehalte arseen in mg/kg (drooggewicht) berekend op alle beschikbare data vanaf 1996. Metingen voor Hoedekenskerke boei 4, Hooge Platen en Knuitershoek zijn omgerekend van nat naar drooggewicht (aangegeven met een sterretje).")
+```
+
+<!-- \begin{figure}[H] -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Biota/arseen.png}  -->
+<!-- \caption[Jaarlijks gemiddelde waardes voor arseen in mosselen]{Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor arseen in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd.}  -->
+<!-- \label{fig:mossel_arseen}  -->
+<!-- \end{figure}  -->
+
+```{r mosselArseen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor arseen in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd."}
+knitr::include_graphics("Figuren/Biota/arseen.png")
+```
+
+#### Cadmium {#biota-mosselen-cadmium}
+
+Bij cadmium (zie Figuur \@ref(fig:mosselCadmium)) zit er een groot verschil in de waarden actieve versus passieve verworven, zoals te zien is in Tabel \@ref(tab:biotaMosselCadmium). Bij actieve monitoring hangen korven met mosselen in het water, terwijl bij passieve monitoring mosselen in contact staan met de bodem. Accumulatie van cadmium in de bodem kan op deze manier ook tot hogere cadmiumgehalten in mosselen leiden. Bij Hansweert boei OHMG neemt cadmium toe, met een beperkte correlatie. Verder is er een grote variatie tussen de verschillende meetstations en jaren te zien. Station Knuitershoek laat een flinke stijging van de hoeveelheid cadmium zien, een stijging die ook statistisch significant is. 
+
+<!-- \begin{table}[H] -->
+<!--  \centering  -->
+<!-- \input{../Figuren/Biota/cadmium.tex}  -->
+<!-- \caption[Waardes van het cadmiumgehalte in mosselen]{Gemiddelde, minimale en maximale waardes van het gehalte cadmium in mg/kg (drooggewicht) berekend op alle beschikbare data tussen 1996 en 2018. Metingen voor Hoedekenskerke boei 4, Hooge Platen en Knuitershoek zijn omgerekend van nat naar drooggewicht (aangegeven met een sterretje).} -->
+<!-- \label{tab:biota_cadmium}  -->
+<!-- \end{table}  -->
+
+```{r biotaMosselCadmium}
+dt <- tex2dt("Figuren/Biota/cadmium.tex")
+knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+             caption = "Gemiddelde, minimale en maximale waardes van het gehalte cadmium in mg/kg (drooggewicht) berekend op alle beschikbare data vanaf 1996. Metingen voor Hoedekenskerke boei 4, Hooge Platen en Knuitershoek zijn omgerekend van nat naar drooggewicht (aangegeven met een sterretje).")
+```
+
+<!-- \begin{figure}[H] -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Biota/cadmium.png}  -->
+<!-- \caption[Jaarlijks gemiddelde waardes voor cadmium in mosselen]{Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor cadmium in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd.}  -->
+<!-- \label{fig:mossel_cadmium}  -->
+<!-- \end{figure}  -->
+
+```{r mosselCadmium, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor cadmium in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd."}
+knitr::include_graphics("Figuren/Biota/cadmium.png")
+```
+
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Biota/arseen_gemiddelde_waardes.png} -->
+<!--  \caption[Gemiddelde arseen in mosselen per station op een kaart]{Gemiddelde arseen in mosselen per station berekend op alle beschikbare data tussen 1996 en 2018} -->
+<!--  \label{fig:gemiddeld_mos_arseen} -->
+<!-- \end{figure}  -->
+
+```{r gemiddeldmosselArseen, fig.cap="Gemiddelde arseen in mosselen per station berekend op alle beschikbare data vanaf 1996."}
+knitr::include_graphics("Figuren/Biota/arseen_gemiddelde_waardes.png")
+```
+
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Biota/cadmium_gemiddelde_waardes.png} -->
+<!--  \caption[Gemiddelde cadmium in mosselen per station op een kaart]{Gemiddelde cadmium in mosselen per station berekend op alle beschikbare data tussen 1996 en 2018} -->
+<!--  \label{fig:gemiddeld_mos_cadmium} -->
+<!-- \end{figure}  -->
+
+```{r gemiddeldmosselCadmium, fig.cap="Gemiddelde cadmium in mosselen per station berekend op alle beschikbare data vanaf 1996."}
+knitr::include_graphics("Figuren/Biota/cadmium_gemiddelde_waardes.png")
+```
+
+#### Chroom {#biota-mosselen-chroom}
+
+De gehalten chroom (zie Figuur \@ref(fig:mosselChroom)) in mosselen in drooggewicht variëren gemiddeld tussen en 2 en 4 mg/kg (zie Tabel \@ref(tab:biotaMosselChroom)). Bij station Hansweert boei OHMG en Hoedenkerke boei 4 zijn uitschieters richting de 15 mg/kg gemeten (in verschillende jaren). Er is geen significante trend waarneembaar voor geen van de stations.  
+ 
+<!-- \begin{table}[H] -->
+<!--  \centering  -->
+<!-- \input{../Figuren/Biota/chroom.tex}  -->
+<!-- \caption[Waardes van het chroomgehalte in mosselen]{Gemiddelde, minimale en maximale waardes van het gehalte chroom in mg/kg (drooggewicht) berekend op alle beschikbare data tussen 1996 en 2018. Metingen voor Hoedekenskerke boei 4, Hooge Platen en Knuitershoek zijn omgerekend van nat naar drooggewicht (aangegeven met een sterretje).} -->
+<!-- \label{tab:biota_chroom}  -->
+<!-- \end{table}  -->
+
+```{r biotaMosselChroom}
+dt <- tex2dt("Figuren/Biota/chroom.tex")
+knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+             caption = "Gemiddelde, minimale en maximale waardes van het gehalte chroom in mg/kg (drooggewicht) berekend op alle beschikbare data vanaf 1996. Metingen voor Hoedekenskerke boei 4, Hooge Platen en Knuitershoek zijn omgerekend van nat naar drooggewicht (aangegeven met een sterretje).")
+```
+
+<!-- \begin{figure}[H] -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Biota/chroom.png}  -->
+<!-- \caption[Jaarlijks gemiddelde waardes voor chroom in mosselen]{Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor chroom in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd.}  -->
+<!-- \label{fig:mossel_chroom}  -->
+<!-- \end{figure}  -->
+
+```{r mosselChroom, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor chroom in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd."}
+knitr::include_graphics("Figuren/Biota/chroom.png")
+```
+
+#### Koper {#biota-mosselen-koper}
+
+Het gehalte koper in mossel (zie Figuur \@ref(fig:mosselKoper)) varieert gemiddeld rond de 9-13 mg/kg (zie Tabel \@ref(tab:biotaMosselKoper)). Er zijn op de meeste stations geen temporele trends voor koper, behalve bij Knuitershoek waar het kopergehalte van 2009 tot 2017 in mosselen toeneemt, maar in 2018 weer daalt en bij Vlissingen waar het kopergehalte juist wat afneemt.
+
+<!-- \begin{table}[H] -->
+<!--  \centering  -->
+<!-- \input{../Figuren/Biota/koper.tex}  -->
+<!-- \caption[Waardes van het kopergehalte in mosselen]{Gemiddelde, minimale en maximale waardes van het gehalte koper in mg/kg (drooggewicht) berekend op alle beschikbare data tussen 1996 en 2018. Metingen voor Hoedekenskerke boei 4, Hooge Platen en Knuitershoek zijn omgerekend van nat naar drooggewicht (aangegeven met een sterretje).} -->
+<!-- \label{tab:biota_mossel_koper}  -->
+<!-- \end{table}  -->
+
+```{r biotaMosselKoper}
+dt <- tex2dt("Figuren/Biota/koper.tex")
+knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+             caption = "Gemiddelde, minimale en maximale waardes van het gehalte koper in mg/kg (drooggewicht) berekend op alle beschikbare data vanaf 1996. Metingen voor Hoedekenskerke boei 4, Hooge Platen en Knuitershoek zijn omgerekend van nat naar drooggewicht (aangegeven met een sterretje).")
+```
+
+<!-- \begin{figure}[H] -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Biota/koper.png}  -->
+<!-- \caption[Jaarlijks gemiddelde waardes voor koper in mosselen]{Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor koper in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd.}  -->
+<!-- \label{fig:mossel_koper}  -->
+<!-- \end{figure}  -->
+
+```{r mosselKoper, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor koper in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd."}
+knitr::include_graphics("Figuren/Biota/koper.png")
+```
+
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Biota/chroom_gemiddelde_waardes.png} -->
+<!--  \caption[Gemiddelde chroom in mosselen per station op een kaart]{Gemiddelde chroom in mosselen per station berekend op alle beschikbare data tussen 1996 en 2018} -->
+<!--  \label{fig:gemiddeld_mos_chroom} -->
+<!-- \end{figure}  -->
+
+```{r gemiddeldmosselChroom, fig.cap="Gemiddelde chroom in mosselen per station berekend op alle beschikbare data vanaf 1996."}
+knitr::include_graphics("Figuren/Biota/chroom_gemiddelde_waardes.png")
+```
+
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Biota/koper_gemiddelde_waardes.png} -->
+<!--  \caption[Gemiddelde koper in mosselen per station op een kaart]{Gemiddelde koper in mosselen per station berekend op alle beschikbare data tussen 1996 en 2018} -->
+<!--  \label{fig:gemiddeld_mos_koper} -->
+<!-- \end{figure}  -->
+
+```{r gemiddeldmosselKoper, fig.cap="Gemiddelde koper in mosselen per station berekend op alle beschikbare data vanaf 1996."}
+knitr::include_graphics("Figuren/Biota/koper_gemiddelde_waardes.png")
+```
+
+#### Kwik {#biota-mossel-kwik}
+
+Gemiddeld zit er 0,2 mg/kg kwik in het drooggewicht van mosselen in de Westerschelde (zie Figuur \@ref(fig:mosselKwik) en Tabel \@ref(tab:biotaMosselKwik)). Er zijn geen duidelijke trends te herkennen op de meeste stations. Alleen bij station Knuitershoek wordt een stijging in kwik in mosselen in de periode 2011-2017 gemeten met een beperkte correlatie.
+
+<!-- \begin{table}[H] -->
+<!--  \centering  -->
+<!-- \input{../Figuren/Biota/kwik.tex}  -->
+<!-- \caption[Waardes van het kwikgehalte in mosselen]{Gemiddelde, minimale en maximale waardes van het gehalte kwik in mg/kg (drooggewicht) berekend op alle beschikbare data tussen 1996 en 2016. Metingen voor Hoedekenskerke boei 4, Hooge Platen en Knuitershoek zijn omgerekend van nat naar drooggewicht (aangegeven met een sterretje).} -->
+<!-- \label{tab:biota_kwik}  -->
+<!-- \end{table}  -->
+
+```{r biotaMosselKwik}
+dt <- tex2dt("Figuren/Biota/kwik.tex")
+knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+             caption = "Gemiddelde, minimale en maximale waardes van het gehalte kwik in mg/kg (drooggewicht) berekend op alle beschikbare data vanaf 1996. Metingen voor Hoedekenskerke boei 4, Hooge Platen en Knuitershoek zijn omgerekend van nat naar drooggewicht (aangegeven met een sterretje).")
+```
+
+<!-- \begin{figure}[H] -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Biota/kwik.png}  -->
+<!-- \caption[Jaarlijks gemiddelde waardes voor kwik in mosselen]{Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor kwik in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd.}  -->
+<!-- \label{fig:mossel_kwik}  -->
+<!-- \end{figure}  -->
+
+```{r mosselKwik, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor kwik in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd."}
+knitr::include_graphics("Figuren/Biota/kwik.png")
+```
+
+#### Lood {#biota-mossel-lood}
+
+Er zit zo'n 3 tot 5 mg/kg lood in het drooggewicht van mosselen in de Westerschelde (zie Tabel \@ref(tab:biotaMosselLood)). Er lijkt een licht dalende trend in de metingen te zitten van 0.06 tot 0.24 mg/kg per jaar bij Hansweert boei OHMg, Vlissingen boei SSVH en Hooge Platen. Bij Hansweert boei OHMG en Vlissingen boei SSVH is de detectiegrens van 2 mg/kg inmiddels bereikt, zie Figuur \@ref(fig:mosselLood). Bij station Knuitershoek lijkt een afname plaats te hebben gevonden van 2011 t/m 2018, maar er is geen significante trend waar te nemen. Daarnaast is de waarde in 2019 weer toegenomen.
+
+<!-- \begin{table}[H] -->
+<!--  \centering  -->
+<!-- \input{../Figuren/Biota/lood.tex}  -->
+<!-- \caption[Waardes van het loodgehalte in mosselen]{Gemiddelde, minimale en maximale waardes van het gehalte lood in mg/kg (drooggewicht) berekend op alle beschikbare data tussen 1996 en 2018. Metingen voor Hoedekenskerke boei 4, Hooge Platen en Knuitershoek zijn omgerekend van nat naar drooggewicht (aangegeven met een sterretje).} -->
+<!-- \label{tab:biota_mossel_lood}  -->
+<!-- \end{table}  -->
+
+```{r biotaMosselLood}
+dt <- tex2dt("Figuren/Biota/lood.tex")
+knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+             caption = "Gemiddelde, minimale en maximale waardes van het gehalte lood in mg/kg (drooggewicht) berekend op alle beschikbare data vanaf 1996. Metingen voor Hoedekenskerke boei 4, Hooge Platen en Knuitershoek zijn omgerekend van nat naar drooggewicht (aangegeven met een sterretje).")
+```
+
+<!-- \begin{figure}[H] -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Biota/lood.png}  -->
+<!-- \caption[Jaarlijks gemiddelde waardes voor lood in mosselen]{Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor lood in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd.}  -->
+<!-- \label{fig:mossel_lood}  -->
+<!-- \end{figure}  -->
+
+```{r mosselLood, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor lood in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd."}
+knitr::include_graphics("Figuren/Biota/lood.png")
+```
+
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Biota/kwik_gemiddelde_waardes.png} -->
+<!--  \caption[Gemiddelde kwik in mosselen per station op een kaart]{Gemiddelde kwik in mosselen per station berekend op alle beschikbare data tussen 1996 en 2018} -->
+<!--  \label{fig:gemiddeld_mos_kwik} -->
+<!-- \end{figure}  -->
+
+```{r gemiddeldmosselKwik, fig.cap="Gemiddelde kwik in mosselen per station berekend op alle beschikbare data vanaf 1996."}
+knitr::include_graphics("Figuren/Biota/kwik_gemiddelde_waardes.png")
+```
+
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Biota/lood_gemiddelde_waardes.png} -->
+<!--  \caption[Gemiddelde lood in mosselen per station op een kaart]{Gemiddelde lood in mosselen per station berekend op alle beschikbare data tussen 1996 en 2018} -->
+<!--  \label{fig:gemiddeld_mos_lood} -->
+<!-- \end{figure}  -->
+
+```{r gemiddeldmosselLood, fig.cap="Gemiddelde lood in mosselen per station berekend op alle beschikbare data vanaf 1996."}
+knitr::include_graphics("Figuren/Biota/lood_gemiddelde_waardes.png")
+```
+
+#### Nikkel {#biota-mossel-nikkel}
+
+De gehalten nikkel (zie Figuur \@ref(fig:mosselNikkel)) schommelen tussen de 2 tot 6 mg/kg (zie Tabel \@ref(tab:biotaMosselNikkel)). In de metingen in drooggewicht (Hansweert boei OHMG en Vlissingen boei SSVH) en natgewicht (omgerekend naar drooggewicht; Hoedekenskerke boei 4, Hooge Platen) lijken de nikkelgehaltes iets af te nemen. Het station Knuitershoek is een uitzondering met een stijgende hoeveelheid voor nikkel in mosselen tot 2015, al is er een afname gemeten ten opzichte van 2015 in 2016, 2017, 2018 en 2019.
+
+
+```{r biotaMosselNikkel}
+dt <- tex2dt("Figuren/Biota/nikkel.tex")
+knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+             caption = "Gemiddelde, minimale en maximale waardes van het gehalte nikkel in mg/kg (drooggewicht) berekend op alle beschikbare data vanaf 1996. Metingen voor Hoedekenskerke boei 4, Hooge Platen en Knuitershoek zijn omgerekend van nat naar drooggewicht (aangegeven met een sterretje).")
+```
+
+
+```{r mosselNikkel, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor nikkel in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd."}
+knitr::include_graphics("Figuren/Biota/nikkel.png")
+```
+
+#### Zink {#biota-mossel-zink}
+
+De gehalten zink variëren zowel over de meetstations als over de tijd. Bij Hoedekenskerke boei 4 en Knuitershoek zijn de gehaltes van zink het hoogst (zie Tabel \@ref(tab:biotaMosselZink)) en zitten er uitschieters in de dataset. Bij Hoedekenskerke boei 4, Vlissingen boei SSVH en Hooge platen neemt de hoeveelheid zink af in de tijd, deze trend heeft een lage of matige correlatie, zie Figuur \@ref(fig:mosselZink). Bij Knuitershoek neemt zink in mosselen af met een matige correlatie. 
+
+
+
+```{r biotaMosselZink}
+dt <- tex2dt("Figuren/Biota/zink.tex")
+knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+             caption = "Gemiddelde, minimale en maximale waardes van het gehalte zink in mg/kg (drooggewicht) berekend op alle beschikbare data vanaf 1996. Metingen voor Hoedekenskerke boei 4, Hooge Platen en Knuitershoek zijn omgerekend van nat naar drooggewicht (aangegeven met een sterretje).")
+```
+
+
+```{r mosselZink, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor zink in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd."}
+knitr::include_graphics("Figuren/Biota/zink.png")
+```
+
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Biota/nikkel_gemiddelde_waardes.png} -->
+<!--  \caption[Gemiddelde nikkel in mosselen per station op een kaart]{Gemiddelde nikkel in mosselen per station berekend op alle beschikbare data tussen 1996 en 2018} -->
+<!--  \label{fig:gemiddeld_mos_nikkel} -->
+<!-- \end{figure}  -->
+
+```{r gemiddeldmosselNikkel, fig.cap="Gemiddelde nikkel in mosselen per station berekend op alle beschikbare data vanaf 1996."}
+knitr::include_graphics("Figuren/Biota/nikkel_gemiddelde_waardes.png")
+```
+
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Biota/zink_gemiddelde_waardes.png} -->
+<!--  \caption[Gemiddelde zink in mosselen per station op een kaart]{Gemiddelde zink in mosselen per station berekend op alle beschikbare data tussen 1996 en 2018} -->
+<!--  \label{fig:gemiddeld_mos_zink} -->
+<!-- \end{figure}  -->
+
+```{r gemiddeldmosselZink, fig.cap="Gemiddelde zink in mosselen per station berekend op alle beschikbare data vanaf 1996."}
+knitr::include_graphics("Figuren/Biota/zink_gemiddelde_waardes.png")
+```
+
+### Polycyclische Aromatische Koolwaterstoffen (PAK’s) {#biota-mossel-PAK}
+
+Polycyclische Aromatische Koolwaterstoffen (PAK’s) behoren tot een groep van enkele honderden organische stoffen die zijn opgebouwd uit twee of meer benzeenringen. Het zijn hydrofobe, (veelal) vaste stoffen, waarbij afhankelijk van de toename in het molecuulgewicht (aantal benzeenringen) onderscheid gemaakt wordt tussen een beperkt aantal “vluchtige” (bijvoorbeeld naftaleen) en de overige grote meerderheid van “niet-vluchtige” PAK’s (bijvoorbeeld benzo(a)pyreen).
+
+Naast de verschillen in fysisch-chemische eigenschappen, zijn er onderling grote verschillen in risico's voor mensen en ecosystemen. Voor het vaststellen van risico's worden daarom veelal één of meerdere PAK’s geselecteerd als gidsstoffen voor de blootstelling aan PAK-mengsels. Hier is som van de concentraties van 6 PAK’s (“de 6 van Borneff”) gebruikt om de trends in ruimte en tijd te bekijken. De 6 PAK’s van Borneff zijn: benzo[*a*]pyreen, benzo[*b*]fluorantheen, benzo[*g,h,i*]peryleen, benzo[*k*]fluorantheen, fluorantheen, indeno[*1,2,3-c,d*]pyreen.
+
+Tussen 1995-2008 werden monsters bij Hoedenskerke boei 4 geanalyeerd op PAK. Sinds 2011 wordt dit gedaan bij Knuitershoek. Figuur \@ref(fig:mosselPAK) toont de gemeten gehalten van PAK’s in mosselen (6 van Borneff) bij beide stations. De fluctatie over tijd is groot en de gemiddelde waarde bij Hoedekenskerke verschilt niet significant met die bij Knuitershoek, zie Tabel \@ref(tab:biotaMosselPAK). De hoeveelheid PAK's in mosselen namen af bij Hoedenskerke boei 4, maar lijken bij Knuitershoek sinds 2014 toe te nemen. De tijdreeks is echter nog te kort om harde uitspraken te doen over trends bij Knuitershoek. 
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering  -->
+<!-- \input{../Figuren/Biota/Mossel_PAK.tex}  -->
+<!-- \caption[Waardes voor PAK's in mosselen]{Gemiddelde, minimale en maximale waardes van van de 6 PAK’s van Borneff in mossel bij Hoedekenskerke boei 4 en Knuitershoek berekend op alle beschikbare data tussen 1996 en 2018. Waardes zijn in natgewicht gepresenteerd.} -->
+<!-- \label{tab:mossel_PAK1}  -->
+<!-- \end{table}  -->
+
+```{r biotaMosselPAK}
+dt <- tex2dt("Figuren/Biota/Mossel_PAK.tex")
+knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+             caption = "Gemiddelde, minimale en maximale waardes van van de 6 PAK’s van Borneff in mossel bij Hoedekenskerke boei 4 en Knuitershoek berekend op alle beschikbare data vanaf 1996. Waardes zijn in natgewicht gepresenteerd.")
+```
+
+<!-- \begin{figure}[!ht] -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Biota/Mossel_PAK.png}  -->
+<!-- \caption[Jaarlijks gesommeerde waardes voor PAK's in mosselen]{Jaarlijks gesommeerde waarde van de 6 PAK’s van Borneff in mossel bij Hoedekenskerke boei 4 en Knuitershoek. Waardes zijn in natgewicht gepresenteerd.}  -->
+<!-- \label{fig:mossel_PAK}  -->
+<!-- \end{figure}  -->
+
+```{r mosselPAK, fig.cap="Jaarlijks gesommeerde waarde van de 6 PAK’s van Borneff in mossel bij Hoedekenskerke boei 4 en Knuitershoek. Waardes zijn in natgewicht gepresenteerd."}
+knitr::include_graphics("Figuren/Biota/Mossel_PAK.png")
+```
+
+### Polychloorbifenylen (PCB’s) {#biota-mossel-PCB}
+
+Voor de sommatie van polychloorbifenylen (PCB’s) wordt een onderscheid gemaakt tussen de actieve en de passieve monitoring. Bij de actieve monitoring worden andere PCB’s gemeten dan bij de passieve monitoring, en bij de passieve monitoring wordt alleen bij locatie Knuitershoek voldoende analyse van PCB’s uitgevoerd dat een sommatie zinvol is. 
+<!-- %UPDATE?! -->
+<!-- %\textit{Bij de actieve monitoring, bij locaties Hansweert en Vlissingen, zijn de data van 2015 nog niet beschikbaar.} -->
+
+De volgende polychloorbifenylen zijn regelmatig gemeten bij de actieve monitoring en worden gesommeerd weergegeven in ug/kg drooggewicht in organisme (biota):
+
+* 2,2',3,3',4,4',5-heptachloorbifenyl 
+* 2,2',3,4',5,5',6-heptachloorbifenyl 
+* 2,2',3,4,4',5'-hexachloorbifenyl 
+* 2,2',4,4',5,5'-hexachloorbifenyl 
+* 2,2',4,5,5'-pentachloorbifenyl 
+* 2,2',5,5'-tetrachloorbifenyl 
+* 2,2',5-trichloorbifenyl 
+* 2,3',4,4',5-pentachloorbifenyl 
+* 2,3,3',4,4'-pentachloorbifenyl 
+* 2,4',5-trichloorbifenyl 
+* 2,4,4'-trichloorbifenyl
+
+De volgende polychloorbifenylen zijn regelmatig gemeten bij de passieve monitoring (Knuitershoek) en worden gesommeerd weergegeven in ug/kg Natgewicht in Organisme (biota):
+
+* 2,2',3,3',4,4',5,5',6-nonachloorbifenyl  
+* 2,2',3,3',4,4',5,5'-octachloorbifenyl  
+* 2,2',3,3',5,5',6,6'-octachloorbifenyl  
+* 2,2',3,4',5',6-hexachloorbifenyl  
+* 2,2',3,4',5,5',6-heptachloorbifenyl  
+* 2,2',3,4,4',5,5'-heptachloorbifenyl  
+* 2,2',3,4,4',5-hexachloorbifenyl  
+* 2,2',3,4,4'-pentachloorbifenyl  
+* 2,2',3,4,5'-pentachloorbifenyl  
+* 2,2',3,4,5,5'-hexachloorbifenyl  
+* 2,2',3,5,5',6-hexachloorbifenyl  
+* 2,2',4,4',5,5'-hexachloorbifenyl  
+* 2,2',4,4'-tetrachloorbifenyl  
+* 2,2',4,5'-tetrachloorbifenyl  
+* 2,2',4,5,5'-pentachloorbifenyl  
+* 2,2',5,5'-tetrachloorbifenyl  
+* 2,3',4,4',5-pentachloorbifenyl  
+* 2,3,3',4',6-pentachloorbifenyl  
+* 2,3,3',4'-tetrachloorbifenyl  
+* 2,3,3',4,4',5-hexachloorbifenyl  
+* 2,3,3',4,4'-pentachloorbifenyl  
+* 2,4',5-trichloorbifenyl  
+* 2,4,4'-trichloorbifenyl  
+* Som PCB138 en PCB163
+
+De hoeveelheden PCB’s nemen bij Hansweert boei OHMG en Vlissingen boei SSVH af in de tijd (Figuur \@ref(fig:mosselPCBdroog)). Daarnaast zijn de waarden bij het meer bovenstroomse station Hansweert boei OHMG groter dan bij Vlissingen boei SSVH. Bij de passieve monitoring (Knuitershoek) constateren we juist een stijging, zie Figuur \@ref(fig:mosselPCBnat), al heeft deze laatste trend een beperkte correlatie. De gesommeerde PCB waardes bij Knuitershoek zijn niet omgerekend van natgewicht naar droogewicht, aangezien er bij passieve monitoring gedeeltelijk andere PCB's worden gesommeerd dan voor actieve monitoring. Een dergelijke omgerekende gesommeerde waarde zal dus niet leiden tot een mogelijke vergelijking tussen stations Hansweert boei OHMG en Vlissingen boei SSVH (actief gemeten) en Knuitershoek (passief gemeten).
+
+<!-- \begin{table}[!ht] -->
+<!-- \centerfloat -->
+<!-- \input{../Figuren/Biota/Mossel_PCB_natendroog.tex}  -->
+<!-- \caption[Waardes voor PCB's in mosselen]{Gemiddelde, minimale en maximale waardes van PCB's (nat en droog) in mossel bij diverse stations berekend op alle beschikbare data tussen 1996 en 2018.} -->
+<!-- \label{tab:mossel_PAK}  -->
+<!-- \end{table}  -->
+
+```{r biotaMosselPCBnatdroog}
+dt <- tex2dt("Figuren/Biota/Mossel_PCB_natendroog.tex")
+knitr::kable(dt, col.names = c("Station","Variabele","Gemiddelde","Maximum","Minimum","Trend","R"),
+             caption = "Gemiddelde, minimale en maximale waardes van PCB's (nat en droog) in mossel bij diverse stations berekend op alle beschikbare data vanaf 1996.")
+```
+
+<!-- \begin{figure}[H] -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Biota/Mossel_PCB_droog.png}  -->
+<!-- \caption[Jaarlijks gesommeerde waardes voor PCB's (droog) in mosselen]{Jaarlijks gesommeerde waarde van de PCB's in mossel bij Hansweert boei OHMG en Vlissingen boei SSVH. Waardes zijn in drooggewicht gepresenteerd.}  -->
+<!-- \label{fig:mossel_PCB_droog}  -->
+<!-- \end{figure}  -->
+
+```{r mosselPCBdroog, fig.cap="Jaarlijks gesommeerde waarde van de PCB's in mossel bij Hansweert boei OHMG en Vlissingen boei SSVH. Waardes zijn in drooggewicht gepresenteerd."}
+knitr::include_graphics("Figuren/Biota/Mossel_PCB_droog.png")
+```
+
+<!-- \begin{figure}[H] -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Biota/Mossel_PCB_nat.png}  -->
+<!-- \caption[Jaarlijks gesommeerde waardes voor PCB's (nat) in mosselen]{Jaarlijks gesommeerde waarde van de PCB's in mossel bij Knuitershoek. Waardes zijn in natgewicht gepresenteerd.}  -->
+<!-- \label{fig:mossel_PCB_nat}  -->
+<!-- \end{figure}  -->
+
+```{r mosselPCBnat, fig.cap="Jaarlijks gesommeerde waarde van de PCB's in mossel bij Hansweert boei OHMG en Vlissingen boei SSVH. Waardes zijn in natgewicht gepresenteerd."}
+knitr::include_graphics("Figuren/Biota/Mossel_PCB_nat.png")
+```
+
+### Gebromeerde vlamvertragers (PBDE’s) {#biota-mossel-PBDE}
+
+De gebromeerde vlamvertragers (polybroomdifenylethers, PBDE’s) zijn gemeten in mossel op de locatie Knuitershoek. Het betreft een passieve monitoring en de PBDE’s zijn hier eveneens als sommatie weergegeven. De volgende PBDE’s zijn gesommeerd in Figuur \@ref(fig:mosselPBDEnat) en Tabel \@ref(tab:biotaMosselPBDE) in ug/kg Natgewicht in Organisme (biota):
+
+* 2,2',3,4,4',5',6-heptabroomdifenylether  
+* 2,2',3,4,4'-pentabroomdifenylether  
+* 2,2',4,4',5,5'-hexabroomdifenylether  
+* 2,2',4,4',5-pentabroomdifenylether  
+* 2,2',4,4',6-pentabroomdifenylether  
+* 2,2',4,4'-tetrabroomdifenylether  
+* 2,3',4,4'-tetrabroomdifenylether  
+* 2,4,4'-tribroomdifenylether  
+
+Omdat er maar enkele datapunten zijn, kan er geen harde uitspraak worden gedaan over de hoeveelheden PBDE’s in mossel. Na een kleine daling in 2014 was de waarden van 2015 weer rond de 0,4 - 0,5 $\mu$g/kg (vergelijkbaar met de waarde in 2012 en 2013). In 2016 en 2017 is de waarde verder toegenomen tot boven de 0,5 $\mu$g/kg. In 2018 en 2019 is er echter weer een afname tot ongeveer 0,3 $\mu$g/kg gemeten. Er is geen statistisch significante trend.
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering  -->
+<!-- \input{../Figuren/Biota/Mossel_PBDE.tex}  -->
+<!-- \caption[Waardes voor PBDE's in mosselen]{Gemiddelde, minimale en maximale waardes van PBDE's in mossel bij Knuitershoek berekend op alle beschikbare data tussen 1996 en 2018.} -->
+<!-- \label{tab:mossel_PBDE2}  -->
+<!-- \end{table}  -->
+
+```{r biotaMosselPBDE}
+dt <- tex2dt("Figuren/Biota/Mossel_PBDE.tex")
+knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+             caption = "Gemiddelde, minimale en maximale waardes van PBDE's in mossel bij Knuitershoek berekend op alle beschikbare data vanaf 1996.")
+```
+
+<!-- \begin{figure}[H] -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Biota/Mossel_PBDE.png}  -->
+<!-- \caption[Jaarlijks gesommeerde waardes voor PBDE's (nat) in mosselen]{Jaarlijks gesommeerde waarde van de PBDE's in mossel bij Knuitershoek. Waardes zijn in natgewicht gepresenteerd.}  -->
+<!-- \label{fig:mossel_PBDE_nat}  -->
+<!-- \end{figure}  -->
+
+```{r mosselPBDEnat, fig.cap="Jaarlijks gesommeerde waarde van de PBDE's in mossel bij Hansweert boei OHMG en Vlissingen boei SSVH. Waardes zijn in natgewicht gepresenteerd."}
+knitr::include_graphics("Figuren/Biota/Mossel_PBDE.png")
+```
+
+### Organotinverbindingen {#biota-mossel-organotin}
+
+De organotinverbindingen (dibutyltin, difenyltin, monobutyltin, monofenyltin, trifenyltin, tributyltin) in mossel worden gesommeerd weergegeven. Bij de locaties Hansweert boei OHMG en Vlissingen boei SSVH (de actieve monitoring) wordt bij de metingen van difenyltin en monofenyltin regelmatig de detectiegrens bereikt. De sommatie van de waarden geeft hierdoor een hogere waarde dan in werkelijkheid (zie Tabel \@ref(tab:biotaMosselOrgano)). Er is bij deze stations wel een duidelijke afnemende trend te zien, zie Figuur \@ref(fig:mosselOrgano). Bij de locatie Knuitershoek (passieve monitoring; omgerekend van nat naar drooggewicht) is de waarde na 2015, na een uitschieter in 2014, weer gestabiliseerd rond 180 tot 200 $\mu$g/kg. De meetreeks is hier echter nog te kort om een zinnige uitspraak te doen over trends.
+
+<!-- \begin{table}[!ht] -->
+<!-- \centerfloat -->
+<!-- \input{../Figuren/Biota/Mossel_organo.tex}  -->
+<!-- \caption[Waardes voor PBDE's in mosselen]{Gemiddelde, minimale en maximale waardes van PBDE's in mossel bij Knuitershoek berekend op alle beschikbare data tussen 2001 en 2018. Waardes zijn in drooggewicht gepresenteerd.} -->
+<!-- \label{tab:mossel_organo}  -->
+<!-- \end{table}  -->
+
+```{r biotaMosselOrgano}
+dt <- tex2dt("Figuren/Biota/Mossel_organo.tex")
+knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+             caption = "Gemiddelde, minimale en maximale waardes van PBDE's in mossel bij Knuitershoek berekend op alle beschikbare data vanaf 2001. Waardes zijn in drooggewicht gepresenteerd.")
+```
+
+<!-- \begin{figure}[H] -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Biota/Mossel_organo.png}  -->
+<!-- \caption[Jaarlijks gesommeerde waardes voor organotinverbindingen's in mosselen]{Jaarlijks gesommeerde waarde van de organotinverbindingen in mossel voor 3 stations in de Westerschelde. Waardes zijn in drooggewicht gepresenteerd.}  -->
+<!-- \label{fig:mossel_organo}  -->
+<!-- \end{figure}  -->
+
+```{r mosselOrgano, fig.cap="Jaarlijks gesommeerde waarde van de organotinverbindingen in mossel voor 3 stations in de Westerschelde. Waardes zijn in drooggewicht gepresenteerd."}
+knitr::include_graphics("Figuren/Biota/Mossel_organo.png")
+```
+
+### Organochloorbestrijdingsmiddelen {#biota-mossel-organochloor}
+
+#### Hexachloorbenzeen {#biota-mossel-Hexachloorbenzeen}
+
+Voor hexachloorbenzeen (HCB) zien we bij Hansweert boei OHMG en Hoedekenskerke boei 4 en in mindere mate bij Vlissingen boei SSVH een daling van de hoeveelheden tot ca. 2010, daarna zien we een lichte stijging. Vooral bij Vlissingen boei SSVH zijn de metingen beïnvloed door de detectiegrens van de meetapparatuur, bij andere stations is dit voor enkele jaren ook zo. Over de gehele periode is er geen significante trend, behalve bij Hooge Platen. De Hooge Platen wordt pas sinds 2009 bemeten. Sindsdien is er een forse stijging waar te nemen (0,22 $\mu$g/kg), maar die is vooral beïnvloed door de meetwaarde van 2013. De ordegrootte van de waarden is voor de meeste stations vergelijkbaar, alleen Hoedekenskerke boei 4 (2013), Hooge Platen (2013) en Knuitershoek (2013 en 2015) laten enkele hogere waarden zien, zie Tabel \@ref(tab:biotaMosselHexachloorbenzeen) en Figuur \@ref(fig:mosselHexachloorbenzeen). In 2016 was de waarde van Knuitershoek weer in de orde grootte van de waarde in 2014 en de waardes voor 2013 maar vervolgens is de concentratie in 2017 weer op het niveau van 2012 en 2015 en in 2018 en 2019 weer afgenomen naar eerdere lage waardes. Er is bij Knuitershoek dus een grote variatie te zien.
+
+<!-- \begin{table}[H] -->
+<!-- \centerfloat -->
+<!-- \input{../Figuren/Biota/hexachloorbenzeen.tex}  -->
+<!-- \caption[Waardes van het gehalte organochloorbestrijdingsmiddelen in mosselen]{Gemiddelde, minimale en maximale waardes van het gehalte hexachloorbenzeen in ug/kg in in mosselen bij een aantal verschillende stations berekend op alle beschikbare data tussen 1996 en 2018. Waardes zijn in drooggewicht gepresenteerd.} -->
+<!-- \label{tab:biota_mossel_hexachloorbenzeen}  -->
+<!-- \end{table}  -->
+
+```{r biotaMosselHexachloorbenzeen}
+dt <- tex2dt("Figuren/Biota/hexachloorbenzeen.tex")
+knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+             caption = "Gemiddelde, minimale en maximale waardes van het gehalte hexachloorbenzeen in ug/kg in in mosselen bij een aantal verschillende stations berekend op alle beschikbare data vanaf 1996. Waardes zijn in drooggewicht gepresenteerd.")
+```
+
+<!-- \begin{figure}[H] -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Biota/hexachloorbenzeen.png}  -->
+<!-- \caption[Jaarlijks gemiddelde waardes voor hexachloorbenzeen in mosselen]{Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor het gehalte hexachloorbenzeen in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd.}  -->
+<!-- \label{fig:biota_mossel_hexachloorbenzeen}  -->
+<!-- \end{figure}  -->
+
+```{r mosselHexachloorbenzeen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor het gehalte hexachloorbenzeen in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd."}
+knitr::include_graphics("Figuren/Biota/hexachloorbenzeen.png")
+```
+
+#### Hexachloorbutadieen {#biota-mossel-Hexachloorbutadieen}
+\subsubsection{Hexachloorbutadieen}
+De metingen van hexachloorbutadieen (HxClbtDen) worden sinds 2011 gemeten bij Knuitershoek, Hansweert boei OHMG en Vlissingen boei SSVH. Vanaf 2015 wordt hexachloorbutadieen alleen nog Knuitershoek gemeten. 
+
+Bij de actieve monitoring zijn de meetwaarden echter niet groter dan de detectiegrens, zie Tabel \@ref(tab:biotaMosselHexachloorbutadieen). Bij Knuitershoek fluctueert de hoeveelheid HxClbtDen over de tijd zonder een duidelijk waargenomen trend (Figuur \@ref(fig:mosselHexachloorbutadieen)).
+
+<!-- \begin{table}[H] -->
+<!-- \centerfloat -->
+<!-- \input{../Figuren/Biota/Hexachloorbutadieen.tex}  -->
+<!-- \caption[Waardes van het gehalte organochloorbestrijdingsmiddelen in mosselen]{Gemiddelde, minimale en maximale waardes van het gehalte hexachloorbutadieen in ug/kg in in mosselen bij een aantal verschillende stations berekend op alle beschikbare data tussen 1996 en 2018. Waardes zijn in drooggewicht gepresenteerd.} -->
+<!-- \label{tab:biotaHexachloorbutadieen}  -->
+<!-- \end{table}  -->
+
+```{r biotaMosselHexachloorbutadieen}
+dt <- tex2dt("Figuren/Biota/Hexachloorbutadieen.tex")
+knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+             caption = "Gemiddelde, minimale en maximale waardes van het gehalte hexachloorbutadieen in ug/kg in in mosselen bij een aantal verschillende stations berekend op alle beschikbare data vanaf 1996. Waardes zijn in drooggewicht gepresenteerd.")
+```
+
+<!-- \begin{figure}[H] -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Biota/Hexachloorbutadieen.png}  -->
+<!-- \caption[Jaarlijks gemiddelde waardes voor hexachloorbutadieen in mosselen]{Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor het hexachloorbutadieen in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd.}  -->
+<!-- \label{fig:mosseHexachloorbutadieen}  -->
+<!-- \end{figure}  -->
+
+```{r mosselHexachloorbutadieen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor het gehalte hexachloorbutadieen in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd."}
+knitr::include_graphics("Figuren/Biota/Hexachloorbutadieen.png")
+```

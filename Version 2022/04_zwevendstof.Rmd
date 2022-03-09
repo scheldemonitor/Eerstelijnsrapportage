@@ -1,0 +1,888 @@
+ TO DO:
+- bijlage referentie
+- figuren headers bijwerken met percentiele ipv min-max
+
+
+```{r setupZwevend, include=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE,
+	out.width = "85%",
+	fig.align='center'
+)
+require(smwfs)
+require(tidyverse)
+require(lubridate)
+require(sf)
+require(leaflet)
+
+source("R/functions.R")
+
+# Set year for use in the report
+dataJaar <- 2019
+
+trendstations <- c("Schaar van Ouden Doel", "Vlissingen boei SSVH")
+
+frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_FysChem_zwevend_test_1998_2020.csv"
+# frozendatapath <- "c:/Users/ronge_bb/R/Data/Data_FysChem_zwevend_test_1998_2020.csv"
+
+```
+
+```{r downloadZwevend, include = F}
+
+df_original <- read_delim(frozendatapath, delim = ",")
+
+df <- df_original %>% 
+  filter(stationname %in% trendstations) %>% 
+  mutate(stationname = factor(stationname, levels = trendstations)) %>%
+  repair_limits() %>%
+  group_by(parametername, stationname) %>%
+  mutate(across(value, remove_outliers))
+
+# replace below partly by clean function in package smsfs
+# df <- df %>% 
+#   # mutate(value = as.numeric(value)) %>%
+#   filter(stationname %in% trendstations) %>%
+#   mutate(stationname = factor(stationname, levels = trendstations)) %>%
+#   filter(valuesign != ">") %>%
+#   mutate(value = case_when(
+#     valuesign == "=" ~ value,
+#     valuesign == "<" ~ 0.5 * value
+#   ))
+
+```
+
+# Zwevend stof - Fysisch-chemische parameters {#zwevend-stof}
+
+Voor de bepaling van de fysisch-chemische parameters in het oppervlaktewater en in zwevend stof vinden in het kader van MWTL vaartochten plaats, waarbij op vaste punten monsters worden genomen op ca. 1,5 m onder het wateroppervlak. In dit hoofdstuk zijn de metingen in zwevend stof opgenomen. In het algemeen geldt dat sinds 1998 de waardes van de verontreinigingen zijn afgenomen. Er zijn indicaties dat deze afnemende trend minder lijkt te worden en dat de concentraties lijken zich te stabiliseren en de data van 2018 passen in dit beeld.
+
+## Informatie over de metingen {#zwevend-info-metingen}
+
+Voor de bepaling van de fysisch-chemische parameters in het zwevend stof vinden in het kader van MWTL maandelijkse vaartochten (tochtnummer 11) plaats, die de locaties Schaar van Ouden Doel en Vlissingen boei SSVH bemonsteren. Bij Schaar van Ouden Doel wordt maandelijks gemeten en bij Vlissingen eens per kwartaal. De monsters worden genomen met een doorstroomcentrifuge, waarbij een bepaalde hoeveelheid slib moet worden verzameld en afgeleverd aan het laboratorium voor analyse. In verband met het getij wordt ook altijd de saliniteit gemeten, zie Paragraaf \@ref(saliniteit). De stations zijn gepresenteerd in Figuur \@ref(fig:meetstationsZwevend) en zijn steeds gerangschikt in stroomafwaartse richting.
+
+```{r meetstationsZwevend, fig.cap="Ligging van de meetstations voor het zwevende stof"}
+# knitr::include_graphics("Figuren/Meetstations_zwevend.png")
+plotLocations(df)
+```
+
+De meetdata worden gepresenteerd door middel van jaargemiddelden, en de minimale en maximale waarde die in elk jaar gemeten is. Voor sommige parameters zijn ook maandgemiddelden en/of seizoensgemiddelden weergegeven. Als er slechts een meting per maand beschikbaar is (of minder), zijn deze waardes gepresenteerd. Bij het middelen van parameters over een bepaalde periode is de datadichtheid van belang. Een overzicht van het aantal metingen per parameter, per station, per jaar is daarom opgenomen in Bijlage \@ref(BijlageB-meetdichtheid-zwevend).
+
+Voor sommige parameters geldt dat de meetwaarde gelijk of lager is dan de detectiegrens van het meetinstrument. Indien dit het geval is, wordt dit beschreven in de begeleidende tekst en de detectiegrens meegenomen als meetwaarde. Hierdoor kunnen gemiddelden een iets hogere waarde weergeven dan wanneer gemiddeld was over de waarden die daadwerkelijk hebben plaatsgevonden. Daarnaast is meestal een lineaire trendlijn vanaf het jaar 2000 toegevoegd, zodat de trend niet direct beïnvloed wordt door de tweede verruiming in 1997-1998. Gemiddelde, minimale en maximale waardes in bijgevoegde tabellen zijn gebaseerd over de tijdsperiode weergegeven in de bijbehorende figuren.
+
+## Korrelgrootteverdeling {#korrelgrootteverdeling}
+
+In de resultaten hebben we het minerale aandeel van de korrelgrootteverdeling weergegeven, dat wil zeggen dat kalk en organische stof verwijderd zijn, als percentage van het totale gewicht van het monster. De korrelgroottefractie kleiner dan 2 $\mu$m wordt bij Schaar van Ouden Doel enkel vanaf 1998 weergegeven. Na 1997 heeft er een methodiekverandering plaatsgevonden waardoor de gegevens van voor 1998 niet vergelijkbaar zijn met die van na 1998.
+
+### Korrelgroottefractie tot 63 $\mu$m {#korrelgrootteverdeling-tot63}
+
+Figuur \@ref(fig:zwevendKorrelgroottefractietot63um) toont het jaargemiddelde korrelgroottefractie tot 63 $\mu$m per station voor de periode vanaf 1997 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendKorrelgroottefractietot63umTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+
+De korrelgroottefractie kleiner dan 63 $\mu$m ligt rond 60\% bij Vlissingen boei SSVH en rond de 70\% bij Schaar van Ouden Doel. Er zijn geen significante temporele trends bij beide stations.
+
+```{r zwevendKorrelgroottefractietot63umTab}
+# dt <- tex2dt("Figuren/Zwevend/Korrelgroottefractietot63um_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum"),
+#              caption = "Waardes voor de korrelgroottefractie in \\% tot 63 $\\mu$m voor 2 stations.")
+
+parname = "Korrelgroottefractie tot 63 um in % drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van korrelgrootte tot 63 $\\mu$m (%) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendKorrelgroottefractietot63um, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van de korrelgroottefractie tot 63$\\mu$m voor 2 stations."}
+#knitr::include_graphics("Figuren/Zwevend/Korrelgroottefractietot63um.png")
+
+plotTrends(df, parname, trend = F)
+plotTrendsLimits(df, parname, trend = F) + ggtitle("test met aantallen metingen per jaar")
+```
+
+### Korrelgroottefractie tot 2 $\mu$m {#korrelgrootteverdeling-tot2}
+
+Figuur \@ref(fig:zwevendKorrelgroottefractietot2um) toont het jaargemiddelde korrelgroottefractie tot 2 $\mu$m per station voor de periode vanaf 1997 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendKorrelgroottefractietot2umTab) zijn de gemiddelde, minimale en maximale waardes per station weergegeven. 
+
+De korrelgroottefractie kleiner dan 2 $\mu$m ligt rond 35\% bij Schaar van Ouden Doel net als bij Vlissingen. 
+
+```{r zwevendKorrelgroottefractietot2umTab}
+# dt <- tex2dt("Figuren/Zwevend/Korrelgroottefractietot2um_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum"),
+#              caption = "Waardes voor de korrelgroottefractie in \\% tot 2 $\\mu$m voor beide stations.")
+
+parname = "Korrelgroottefractie tot 2 um in % drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van korrelgrootte tot 2 $\\mu$m (%) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendKorrelgroottefractietot2um, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van de korrelgroottefractie tot 2$\\mu$m voor beide stations"}
+#knitr::include_graphics("Figuren/Zwevend/Korrelgroottefractietot2um.png")
+
+plotTrends(df, parname, trend = F)
+```
+
+## Metalen {#zwevend-metalen}
+
+In deze paragraaf presenteren we de volgende metalen gedetecteerd in zwevende stof. 
+
+* Arseen (As, Figuur \@ref(fig:zwevendArseen))
+* Cadmium (Cd Figuur \@ref(fig:zwevendCadmium))
+* Chroom (Cr, Figuur \@ref(fig:zwevendChroom))
+* Kobalt (Co,  Figuur \@ref(fig:zwevendKobalt))
+* Koper (Cu,  Figuur \@ref(fig:zwevendKoper))
+* Kwik (Hg,  Figuur \@ref(fig:zwevendKwik))
+* Lood (Pb,  Figuur \@ref(fig:zwevendLood))
+* Vanadium (V,  Figuur \@ref(fig:zwevendVanadium))
+* Zink (Zn,  Figuur \@ref(fig:zwevendZink))
+
+### Arseen {#zwevend-arseen}
+
+Figuur \@ref(fig:zwevendArseen) toont het jaargemiddelde arseen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendArseenTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+
+De concentraties arseen in zwevende stof nemen iets af in stroomafwaartse richting. Bij Schaar van Ouden Doel zijn slechts enkele meetwaarden beschikbaar. Sinds 2011 nemen de waarden af. Over de gehele meetperiode is de trend niet significant. Bij Vlissingen boei SSVH is er een licht dalende trend (-0,18 mg/kg per jaar) in de periode 2000-2012 die  statistisch significant is.
+
+```{r zwevendArseenTab}
+# dt <- tex2dt("Figuren/Zwevend/Arseen_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+#              caption = "Waardes voor Arseen in mg/kg voor beide stations.")
+
+parname = "Arseen in mg/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van arseen (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendArseen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Arseen voor beide stations."}
+#knitr::include_graphics("Figuren/Zwevend/Arseen.png")
+
+plotTrends(df, parname)
+plotTrendsLimits(df, parname)
+```
+
+### Cadmium {#zwevend-cadmium}
+
+Figuur \@ref(fig:zwevendCadmium) toont het jaargemiddelde Cadmium per station voor de periode vanaf 1997 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendCadmiumTab) zijn de gemiddelde, minimale en maximale waardes per station weergegeven. 
+
+De concentraties cadmium in zwevende stof nemen sterk af in stroomafwaartse richting (factor 5 tussen de twee stations). Bij Schaar van Ouden Doel is er een dalende trend van 0,13 mg/kg per jaar aanwezig die statistisch significant is. De waardes bij Vlissingen zijn constant over tijd.
+
+```{r zwevendCadmiumTab}
+# dt <- tex2dt("Figuren/Zwevend/Cadmium_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+#              caption = "Waardes voor Cadmium in mg/kg voor beide stations.")
+
+parname = "Cadmium in mg/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van cadmium (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+
+```{r zwevendCadmium, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Cadmium voor beide stations."}
+#knitr::include_graphics("Figuren/Zwevend/Cadmium.png")
+
+plotTrends(df, parname)
+plotTrendsLimits(df, parname)
+```
+
+### Chroom {#zwevend-chroom}
+
+Figuur \@ref(fig:zwevendChroom) toont het jaargemiddelde chroom per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendChroomTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+
+De concentraties chroom in zwevende stof nemen af in stroomafwaartse richting. Bij Schaar van Ouden Doel zit sinds 2005 weinig verandering in de gemeten chroomgehaltes. De situatie bij Vlissingen boei SSVH toont voor de periode 1996-2011 een stabiele situatie, maar sinds 2012 liggen de waarden een stuk lager. Over de gehele dataset neemt het hoeveelheid chroom in zwevende stof af met 1,8 mg/kg per jaar. Een trend die statistisch significant is.
+
+```{r zwevendChroomTab}
+# dt <- tex2dt("Figuren/Zwevend/Chroom_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+#              caption = "Waardes voor Chroom in mg/kg voor beide stations.")
+
+parname = "Chroom in mg/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van chroom (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendChroom, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Chroom voor beide stations."}
+#knitr::include_graphics("Figuren/Zwevend/Chroom.png")
+
+plotTrends(df, parname)
+plotTrendsLimits(df, parname)
+```
+
+### Kobalt {#zwevend-kobalt}
+
+Figuur \@ref(fig:zwevendKobalt) toont het jaargemiddelde kobalt per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendKobaltTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+
+De concentraties kobalt in zwevende stof nemen af in stroomafwaartse richting.  Bij Vlissingen is de correlatie in de data het duidelijkst. De kobaltconcentraties nemen af in de tijd, echter wel met lage significantie. Bij Schaar van Ouden Doel is er geen significante trend waarneembaar.
+
+```{r zwevendKobaltTab}
+# dt <- tex2dt("Figuren/Zwevend/Kobalt_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+#              caption = "Waardes voor Kobalt in mg/kg voor beide stations.")
+
+parname = "Kobalt in mg/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van kobalt (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendKobalt, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Kobalt voor beide stations."}
+#knitr::include_graphics("Figuren/Zwevend/Kobalt.png")
+
+plotTrends(df, parname)
+```
+
+### Koper {#zwevend-koper}
+
+Figuur \@ref(fig:zwevendKoper) toont het jaargemiddelde koper per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendKoperTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+
+De concentraties koper in zwevende stof nemen sterk af in stroomafwaartse richting (factor 2,7) . Er zijn sterke uitschieters in koperconcentraties op beide stations.De reden hiervoor is onbekend. Dit heeft wel invloed op de analyse van de trend die door de uitschieters niet meer significant is.    
+
+```{r zwevendKoperTab}
+# dt <- tex2dt("Figuren/Zwevend/Koper_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum"),
+#              caption = "Waardes voor Koper in mg/kg voor beide stations.")
+
+parname = "Koper in mg/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van koper (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendKoper, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Koper voor beide stations."}
+# knitr::include_graphics("Figuren/Zwevend/Koper.png")
+
+plotTrends(df, parname)
+```
+
+### Kwik {#zwevend-kwik} 
+ 
+Figuur \@ref(fig:zwevendKwik) toont het jaargemiddelde kwik per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendKwikTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+
+De concentraties kwik in zwevende stof nemen af in stroomafwaartse richting (factor 3). Op beide stations is een dalende trend van 0,01 tot 0,02 mg/kg per jaar aanwezig. Beide trends hebben een hoge statistische correlatie. Dit zijn de grootste correlaties gevonden voor de fyshisch-chemische parameters in zwevende stof.
+
+```{r zwevendKwikTab}
+# dt <- tex2dt("Figuren/Zwevend/Kwik_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+#              caption = "Waardes voor Kwik in mg/kg voor beide stations.")
+
+parname = "Kwik in mg/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van kwik (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendKwik, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Kwik voor beide stations."}
+#knitr::include_graphics("Figuren/Zwevend/Kwik.png")
+
+plotTrends(df, parname)
+```
+
+### Lood {#zwevend-lood}
+
+Figuur \@ref(fig:zwevendLood) toont het jaargemiddelde lood per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendLoodTab) zijn de gemiddelde, minimale en maximale waardes per station weergegeven. 
+
+De concentraties lood in zwevende stof nemen af in stroomafwaartse richting (factor 2,3). Bij Schaar van Ouden Doel is een dalende trend aanwezig, maar lijken de meetwaarden de laatste paar jaar stabiel. Bij Vlissingen boei SSVH zijn de gemeten waarden over de beschouwde periode ongeveer constant. De berekende trend over de gehele dataset is echter voor beide negatief (afname). De afname is sterker voor Schaar van Ouden Doel.
+
+```{r zwevendLoodTab}
+# dt <- tex2dt("Figuren/Zwevend/Lood_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+#              caption = "Waardes voor Lood in mg/kg voor beide stations.")
+
+parname = "Lood in mg/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van lood (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendLood, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Lood voor beide stations."}
+#knitr::include_graphics("Figuren/Zwevend/Lood.png")
+
+plotTrends(df, parname)
+```
+
+### Vanadium {#zwevend-vanadium}
+
+Figuur \@ref(fig:zwevendVanadium) toont het jaargemiddelde Vanadium per station voor de periode vanaf 2005 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendVanadiumTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+
+De concentraties vanadium in zwevend stof laten geen duidelijke ruimtelijke gradiënt zien. Er lijken weinig veranderingen op de treden. Bij Vlissingen boei SSVH zijn de waarden voor 2012 en 2013 een stuk lager dan de periode daarvoor hetgeen zich uit in een dalende trend van 2,3 mg/kg per jaar met een statistische significantie.
+
+```{r zwevendVanadiumTab}
+# dt <- tex2dt("Figuren/Zwevend/Vanadium_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+#              caption = "Waardes voor Vanadium in mg/kg voor beide stations.")
+
+parname = "Vanadium in mg/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van vanadium (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendVanadium, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Vanadium voor beide stations."}
+#knitr::include_graphics("Figuren/Zwevend/Vanadium.png")
+
+plotTrends(df, parname)
+```
+
+### Zink {#zwevend-zink}
+
+Figuur \@ref(fig:zwevendZink) toont het jaargemiddelde zink per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendZinkTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+
+De concentraties zink in zwevende stof nemen sterk af in stroomafwaartse richting (factor 3,1). Bij beide stations is er een dalende trend die een statistische beperkt correlatie heeft. Bij Schaar van Ouden Doel is deze trend sterker dan bij station Vlissingen, waar de metingen meer constant over tijd zijn.
+
+```{r zwevendZinkTab}
+# dt <- tex2dt("Figuren/Zwevend/Zink_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+#              caption = "Waardes voor Zink in mg/kg voor beide stations.")
+
+parname = "Zink in mg/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van zink (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendZink, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Zink voor beide stations."}
+#knitr::include_graphics("Figuren/Zwevend/Zink.png")
+
+plotTrends(df, parname)
+```
+
+## Polycyclische aromatische koolwaterstoffen (PAK’s) {#zwevend-PAK}
+
+In deze paragraaf presenteren we de concentraties in zwevend stof van de volgende polycyclische aromatische koolwaterstoffen:
+
+* Antraceen (Figuur \@ref(fig:zwevendAntraceen))
+* Benzo[*a*]antraceen (Figuur \@ref(fig:zwevendBenzoaantraceen))
+* Benzo[*a*]pyreen (Figuur \@ref(fig:zwevendBenzoapyreen))
+* Benzo[*g,h,i*]peryleen (Figuur \@ref(fig:zwevendBenzoghiperyleen))
+* Benzo[*k*]fluorantheen (Figuur \@ref(fig:zwevendBenzokfluorantheen))
+* Chryseen (Figuur \@ref(fig:zwevendChryseen))
+* Fenanthreen (Figuur \@ref(fig:zwevendFenanthreen))
+* Fluorantheen (Figuur \@ref(fig:zwevendFluorantheen))
+* Indeno[*1,2,3-c,d*]pyreen (Figuur \@ref(fig:zwevendIndeno))
+* Naftaleen (Figuur \@ref(fig:zwevendNaftaleen))
+
+Polycyclische aromatische koolwaterstoffen (PAK's) zijn organische verbindingen die bestaan uit gekoppelde aromatische ringen (bijvoorbeeld benzeenringen) maar geen heteroatomen of functionele groepen bevatten. PAK's ontstaan bij onvolledige verbranding of verkoling van diverse koolstof bevattende materialen (@W1989).
+
+Voor alle getoonde PAK’s is er een duidelijke ruimtelijke gradiënt waarneembaar, met hogere concentraties bij Schaar van Ouden Doel en lagere concentraties bij Vlissingen boei SSVH. De verschillen tussen de minimale en maximale waarde zijn bij Schaar van Ouden Doel groter dan bij Vlissingen boei SSVH. Daarnaast is er in alle/veel gevallen een dalende trend zichtbaar, die het sterkst is bij Schaar van Ouden Doel. De meetreeksen bevatten enkele waarden die onder de detectiegrens vallen, waardoor de gemiddelden (en minima) wat hoger zijn uitgevallen.
+
+### Antraceen {#zwevend-antraceen}
+
+Figuur \@ref(fig:zwevendAntraceen) toont het jaargemiddelde antraceen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendAntraceenTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Beide stations hebben een afnemende trend. Voor Schaar van Ouden Doel is de trend sterker en statistisch significanter. In 2019 zien we echter een relatief sterke toename in de jaargemiddeldes van antraceen.
+
+```{r zwevendAntraceenTab}
+# dt <- tex2dt("Figuren/Zwevend/Antraceen_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+#              caption = "Waardes voor Antraceen in mg/kg voor beide stations.")
+
+parname = "Antraceen in mg/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van antraceen (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendAntraceen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Antraceen voor beide stations."}
+#knitr::include_graphics("Figuren/Zwevend/Antraceen.png")
+
+plotTrends(df, parname)
+```
+
+### Benzo[*a*]pyreen {#zwevend-Benzoapyreen}
+<!-- \subsection {\texorpdfstring{Benzo[\textit{a}]pyreen}{Benzo[\textit{a}]pyreen}}  -->
+Figuur \@ref(fig:zwevendBenzoapyreen) toont het jaargemiddelde Benzo[*a*]pyreen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendBenzoapyreenTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Beide stations hebben een afnemende trend. Voor Schaar van Ouden Doel is de trend sterker en statistisch significanter.
+
+```{r zwevendBenzoapyreenTab}
+# dt <- tex2dt("Figuren/Zwevend/Benzoapyreen_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+#              caption = "Waardes voor Benzoapyreen in mg/kg voor beide stations.")
+
+parname = "Benzo(a)pyreen in mg/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van benzo(a)pyreen (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendBenzoapyreen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Benzoapyreen voor beide stations."}
+# knitr::include_graphics("Figuren/Zwevend/Benzoapyreen.png")
+
+plotTrends(df, parname)
+```
+
+### Benzo[*g,h,i*]peryleen {#zwevend-Benzoghiperyleen}
+<!-- \subsection {\texorpdfstring{Benzo[\textit{g,h,i}]peryleen}{Benzo[\textit{g,h,i}]peryleen}}  -->
+Figuur \@ref(fig:zwevendBenzoghiperyleen) toont het jaargemiddelde Benzo[*g,h,i*]peryleen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendBenzoghiperyleenTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Schaal van Ouden Doel heeft hogere waardes benzoperyleen in zwevend stof vergeleken met Vlissingen. Beide stations hebben een afnemende trend, hoewel de trend en de correlatie verschilt per station.
+
+```{r zwevendBenzoghiperyleenTab}
+# dt <- tex2dt("Figuren/Zwevend/Benzoperyleen_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+#              caption = "Waardes voor Benzoperyleen in mg/kg voor beide stations.")
+
+parname = "Benzo(g,h,i)peryleen in mg/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van benzo(g,h,i)peryleen (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendBenzoghiperyleen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Benzoperyleen voor beide stations."}
+# knitr::include_graphics("Figuren/Zwevend/Benzoperyleen.png")
+
+plotTrends(df, parname)
+```
+
+### Benzo[*a*]antraceen {#zwevend-Benzoaantraceen}
+<!-- \subsection {\texorpdfstring{Benzo[\textit{a}]antraceen}{Benzo[\textit{a}]antraceen}} -->
+Figuur \@ref(fig:zwevendBenzoaantraceen) toont het jaargemiddelde Benzo[*a*]antraceen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendBenzoaantraceenTab) de gemiddelde, minimale en maximale waardes per station weergegeven.  Schaal van Ouden Doel heeft hogere waardes Benzo[*a*]antraceen in zwevend stof vergeleken met Vlissingen. Beide stations hebben een afnemende trend, hoewel de trend en de correlatie verschilt per station.
+
+```{r zwevendBenzoaantraceenTab}
+# dt <- tex2dt("Figuren/Zwevend/Benzoaantraceen_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+#              caption = "Waardes voor Benzoaantraceen in mg/kg voor beide stations.")
+
+parname = "Benzo(a)antraceen in mg/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van benzo(a)antraceen (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendBenzoaantraceen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Benzoaantraceen voor beide stations."}
+# knitr::include_graphics("Figuren/Zwevend/Benzoaantraceen.png")
+
+plotTrends(df, parname)
+```
+
+### Benzo[*k*]fluorantheen {#zwevend-Benzokfluorantheen}
+<!-- \subsection {\texorpdfstring{Benzo[\textit{k}]fluorantheen}{Benzo[\textit{k}]fluorantheen}} -->
+Figuur \@ref(fig:zwevendBenzokfluorantheen) toont het jaargemiddelde Benzo[*k*]fluorantheen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendBenzokfluorantheenTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Schaal van Ouden Doel heeft hogere waardes Benzo[*k*]fluorantheen in zwevend stof vergeleken met Vlissingen en daarnaast neemt deze hoeveelheid sterker af bij Schaar van Ouden Doel. Voor beide stations is deze afnemende trend statistisch significant (R van 0,55 - 0,95). De concentraties bij Vlissingen zijn echter sinds 2016 wel iets toegenomen. Hierdoor is de significantie van de trend ten opzichte van voor 2016 dan ook afgenomen. 
+
+*In 2019 is het gemiddelde en maximum bij Vlissingen boei SSVH erg hoog. Dit lijkt op een verkeerde meting, hiaat of een FillValue. In een volgende versie van het rapport zullen we dit uitgezocht hebben.*
+
+```{r zwevendBenzokfluorantheenTab}
+# dt <- tex2dt("Figuren/Zwevend/Benzokfluorantheen_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+#              caption = "Waardes voor Benzokfluorantheen in mg/kg voor beide stations.")
+
+parname = "Benzo(k)fluorantheen in mg/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt,
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van benzo(k)fluorantheen (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendBenzokfluorantheen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Benzokfluorantheen voor beide stations."}
+# knitr::include_graphics("Figuren/Zwevend/Benzokfluorantheen.png")
+
+plotTrends(df, parname)
+```
+
+### Chryseen {#zwevend-chryseen}
+
+Figuur \@ref(fig:zwevendChryseen) toont het jaargemiddelde chryseen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendChryseenTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Beide stations hebben een afnemende trend, hoewel de trend en de correlatie verschilt per station.
+
+```{r zwevendChryseenTab}
+# dt <- tex2dt("Figuren/Zwevend/Chryseen_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum"),
+#              caption = "Waardes voor Chryseen in mg/kg voor beide stations.")
+
+parname = "Chryseen in mg/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van chryseen (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendChryseen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Chryseen voor beide stations."}
+# knitr::include_graphics("Figuren/Zwevend/Chryseen.png")
+
+plotTrends(df, parname)
+```
+
+### Fenanthreen {#zwevend-fenanthreen}
+
+Figuur \@ref(fig:zwevendFenanthreen) toont het jaargemiddelde fenanthreen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendFenanthreenTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Beide stations hebben een afnemende trend, hoewel de trend en de correlatie verschilt per station.
+
+```{r zwevendFenanthreenTab}
+# dt <- tex2dt("Figuren/Zwevend/Fenanthreen_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+#              caption = "Waardes voor Fenanthreen in mg/kg voor beide stations.")
+
+parname = "Fenantreen in mg/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van fenanthreen (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendFenanthreen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Fenanthreen voor beide stations."}
+# knitr::include_graphics("Figuren/Zwevend/Fenanthreen.png")
+
+plotTrends(df, parname)
+```
+
+### Fluorantheen {#zwevend-fluorantheen}
+
+Figuur \@ref(fig:zwevendFluorantheen) toont het jaargemiddelde fluorantheen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendFluorantheenTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Beide stations constateren we een afnemende trend, hoewel Vlissingen boei SSHV net significant.
+
+```{r zwevendFluorantheenTab}
+# dt <- tex2dt("Figuren/Zwevend/Fluorantheen_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+#              caption = "Waardes voor Fluorantheen in mg/kg voor beide stations.")
+
+parname = "Fluorantheen in mg/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van fluorantheen (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+
+```{r zwevendFluorantheen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Fluorantheen voor beide stations."}
+# knitr::include_graphics("Figuren/Zwevend/Fluorantheen.png")
+
+plotTrends(df, parname)
+```
+
+### Indeno[*1,2,3-c,d*]pyreen {#zwevend-indeno}
+<!-- \subsection {\texorpdfstring{Indeno[\textit{1,2,3-c,d}]pyreen}{Indeno[\textit{1,2,3-c,d}]pyreen}}  -->
+Figuur \@ref(fig:zwevendIndeno) toont het jaargemiddelde Indeno[\textit{1,2,3-c,d}]pyreen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendIndenoTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Deze neemt statistisch significant af bij Schaar van Ouden Doel.
+
+
+```{r zwevendIndenoTab}
+# dt <- tex2dt("Figuren/Zwevend/Indeno_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+#              caption = "Waardes voor Indeno[*1,2,3-c,d*]pyreen in mg/kg voor beide stations.")
+
+parname = "Indeno(1,2,3-c,d)pyreen in mg/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van indeno(1,2,3-c,d)pyreen (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+ 
+```{r zwevendIndeno, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Indeno[*1,2,3-c,d*]pyreen voor beide stations."}
+# knitr::include_graphics("Figuren/Zwevend/Indeno.png")
+
+plotTrends(df, parname)
+```
+ 
+### Naftaleen {#zwevend-naftaleen}
+
+Figuur \@ref(fig:zwevendNaftaleen) toont het jaargemiddelde naftaleen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendNaftaleenTab) de gemiddelde, minimale en maximale waardes per station weergegeven. We constateren geen temporale trend.
+
+```{r zwevendNaftaleenTab}
+# dt <- tex2dt("Figuren/Zwevend/Naftaleen_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum"),
+#              caption = "Waardes voor Naftaleen in mg/kg voor beide stations.")
+
+parname = "Naftaleen in mg/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van naftaleen (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendNaftaleen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Naftaleen voor beide stations."}
+# knitr::include_graphics("Figuren/Zwevend/Naftaleen.png")
+
+plotTrends(df, parname)
+```
+
+## Polychloorbifenylen (PCB’s) {#zwevend-PCB}
+
+In deze paragraaf presenteren we de gemeten gehalten van de volgende PCB’s in zwevende stof:
+
+* 2,2’,3,4,4’,5,5’-heptachloorbifenyl (PCB180, Figuur \@ref(fig:zwevendPCB180))
+* 2,2’,3,4,4’,5’-hexachloorbifenyl (PCB138, Figuur \@ref(fig:zwevendPCB138))
+* 2,2’,4,4’,5,5’-hexachloorbifenyl (PCB153, Figuur \@ref(fig:zwevendPCB153))
+* 2,2’,4,5,5’-pentachloorbifenyl (PCB101, Figuur \@ref(fig:zwevendPCB101))
+* 2,2’,5,5’-tetrachloorbifenyl (PCB52, Figuur \@ref(fig:zwevendPCB52))
+* 2,3’,4,4’,5-pentachloorbifenyl (PCB118, Figuur \@ref(fig:zwevendPCB118))
+* 2,4,4’-trichloorbifenyl (PCB28, Figuur \@ref(fig:zwevendPCB28))
+
+Polychloorbifenylen (PCB’s) zijn vanaf 1930 op grote schaal toegepast in industrie en techniek. Sinds de jaren 70 is duidelijk geworden dat PCB’s het milieu en in het bijzonder de fauna sterk verontreinigen. Dit houdt de grootste risico’s in voor dieren die aan het eind van een voedselketen staan en vis consumeren. (Bron: http://www.chemischefeitelijkheden.nl/Uploads/Magazines/h012.pdf).
+
+Voor alle getoonde PCB's is er een duidelijke ruimtelijke gradiënt waarneembaar, met hogere concentraties bij Schaar van Ouden Doel en lagere concentraties bij Vlissingen boei SSVH. Daarnaast is er in alle/veel gevallen een dalende trend zichtbaar, die het sterkst is bij Schaar van Ouden Doel. De meetreeksen bevatten enkele waarden die onder de detectiegrens vallen, waardoor de gemiddelden (en minima) wat hoger zijn uitgevallen.
+
+### PCB180 {#zwevend-PCB180}
+
+Figuur \@ref(fig:zwevendPCB180) toont het jaargemiddelde PCB180 per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendPCB180Tab) de gemiddelde, minimale en maximale waardes per station weergegeven. Voor beide stations constateren we een afnemende lineaire trend rond de 0,06 tot 0,26 $\mu$g/kg per jaar. Voor station Vlissingen is deze afname minder groot dan voor station Schaar van Ouden Doel, maar deze trend heeft wel een hogere correlatie coëfficiënt.
+
+```{r zwevendPCB180Tab}
+# dt <- tex2dt("Figuren/Zwevend/PCB180_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+#              caption = "Waardes voor de PCB180 in $\\mu$g/kg voor beide stations.")
+
+parname = "2,2',3,4,4',5,5'-Heptachloorbifenyl (PCB180) in ug/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van PCB180 (ug/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+ 
+```{r zwevendPCB180, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB180 voor beide stations."}
+# knitr::include_graphics("Figuren/Zwevend/PCB180.png")
+
+plotTrends(df, parname)
+```
+ 
+### PCB138 {#zwevend-PCB138}
+
+Figuur \@ref(fig:zwevendPCB138) toont het jaargemiddelde PCB138 per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendPCB138Tab) de gemiddelde, minimale en maximale waardes per station weergegeven. Voor beide stations constateren we een afnemende lineaire trend rond de 0,10 tot 0,59 $\mu$g/kg per jaar. Voor station Vlissingen is de correlatie coëfficient lager.
+
+```{r zwevendPCB138Tab}
+# dt <- tex2dt("Figuren/Zwevend/PCB138_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+#              caption = "Waardes voor de PCB138 in $\\mu$g/kg voor beide stations.")
+
+parname = "2,2',3,4,4',5'-Hexachloorbifenyl (PCB138) in ug/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van PCB138 (ug/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendPCB138, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB138 voor beide stations."}
+# knitr::include_graphics("Figuren/Zwevend/PCB138.png")
+
+plotTrends(df, parname)
+```
+
+### PCB153 {#zwevend-PCB153}
+
+Figuur \@ref(fig:zwevendPCB153) toont het jaargemiddelde PCB153 per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendPCB153Tab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+
+Bij station Schaar van Ouden Doel constateren we een afnemende trend met een hoge correlatie. Voor Vlissingen is er een lagere statistische afnemende lineaire trend van 0,1 $\mu$g/kg per jaar. Dit komt door de relatief hoge waardes in 2003 en 2008.
+
+```{r zwevendPCB153Tab}
+# dt <- tex2dt("Figuren/Zwevend/PCB153_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+#              caption = "Waardes voor de PCB153 in $\\mu$g/kg voor beide stations.")
+
+parname = "2,2',4,4',5,5'-Hexachloorbifenyl (PCB153) in ug/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van PCB153 (ug/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendPCB153, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB153 voor beide stations."}
+# knitr::include_graphics("Figuren/Zwevend/PCB153.png")
+
+plotTrends(df, parname)
+```
+ 
+### PCB101 {#zwevend-PCB101}
+
+Figuur \@ref(fig:zwevendPCB101) toont het jaargemiddelde PCB101 per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendPCB101Tab) de gemiddelde, minimale en maximale waardes per station weergegeven. Voor beide stations constateren we een afnemende lineaire trend rond de 0,06 tot 0,38 $\mu$g/kg per jaar. Voor station Vlissingen is deze afname minder groot dan voor station Schaar van Ouden Doel.
+
+```{r zwevendPCB101Tab}
+# dt <- tex2dt("Figuren/Zwevend/PCB101_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+#              caption = "Waardes voor de PCB101 in $\\mu$g/kg voor beide stations.")
+
+parname = "2,2',4,5,5'-Pentachloorbifenyl (PCB101) in ug/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van PCB101 (ug/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendPCB101, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB101 voor beide stations."}
+# knitr::include_graphics("Figuren/Zwevend/PCB101.png")
+
+plotTrends(df, parname)
+
+```
+
+### PCB52 {#zwevend-PCB52}
+
+Figuur \@ref(fig:zwevendPCB52) toont het jaargemiddelde PCB52 per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendPCB52Tab)  de gemiddelde, minimale en maximale waardes per station weergegeven. Voor Schaar van Ouden Doel constateren we een afnemende lineaire trend van 0,20 $\mu$g/kg per jaar die beperkt statistisch significant te noemen is. Er is geen significante trend bij Vlissingen. 
+
+```{r zwevendPCB52Tab}
+# dt <- tex2dt("Figuren/Zwevend/PCB52_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+#              caption = "Waardes voor de PCB52 in $\\mu$g/kg voor beide stations.")
+
+parname = "2,2',5,5'-Tetrachloorbifenyl (PCB52) in ug/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van PCB52 (ug/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendPCB52, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB52 voor beide stations."}
+# knitr::include_graphics("Figuren/Zwevend/PCB52.png")
+
+plotTrends(df, parname)
+
+```
+ 
+### PCB118 {#zwevend-PCB118}
+
+Figuur \@ref(fig:zwevendPCB118) toont het jaargemiddelde PCB118 per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendPCB118Tab) de gemiddelde, minimale en maximale waardes per station weergegeven. Voor beide stations constateren we een afnemende lineaire trend rond de 0,04 tot 0,29 $\mu$g/kg per jaar.  Voor station Vlissingen de trend een hogere correlatie coëfficiënt.
+
+```{r zwevendPCB118Tab}
+# dt <- tex2dt("Figuren/Zwevend/PCB118_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+#              caption = "Waardes voor de PCB118 in $\\mu$g/kg voor beide stations.")
+
+parname = "2,3',4,4',5-Pentachloorbifenyl (PCB118) in ug/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van PCB118 (ug/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendPCB118, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB118 voor beide stations."}
+# knitr::include_graphics("Figuren/Zwevend/PCB118.png")
+
+plotTrends(df, parname)
+```
+
+### PCB28 {#zwevend-PCB28}
+
+Figuur \@ref(fig:zwevendPCB28) toont het jaargemiddelde PCB28 per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendPCB28Tab) de gemiddelde, minimale en maximale waardes per station weergegeven. Voor beide stations neemt de hoeveelheid PCB28 af. Voor Schaar van Ouden Doel is de trend hoger vergeleken met Vlissingen. De hoge waarde in 2017 bij Schaar van Ouden Doel lijkt een uitschieter. Het is de vraag of deze meegenomen moet worden in de berekening van het gemiddelde.  
+
+```{r zwevendPCB28Tab}
+# dt <- tex2dt("Figuren/Zwevend/PCB28_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum"),
+#              caption = "Waardes voor de PCB28 in $\\mu$g/kg voor beide stations.")
+
+parname = "2,4,4'-Trichloorbifenyl (PCB28) in ug/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van PCB28 (ug/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendPCB28, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB28 voor beide stations."}
+# knitr::include_graphics("Figuren/Zwevend/PCB28.png")
+
+plotTrends(df, parname)
+```
+
+## Overige stoffen {#zwevend-overig}
+
+In deze paragraaf presenteren we de volgende overige stoffen in zwevende stof:
+
+* Dieldrin (Figuur \@ref(fig:zwevendDieldrin))
+* Hexachloorbenzeen (Figuur \@ref(fig:zwevendHexachloorbenzeen))
+* Tributyltin (Figuur \@ref(fig:zwevendTributyltin))
+
+### Dieldrin {#zwevend-dieldrin}
+
+Figuur \@ref(fig:zwevendDieldrin) toont het jaargemiddelde dieldrin per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendDieldrinTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+
+Het gehalte dieldrin wordt alleen bij Schaar van Ouden Doel bepaald en beïnvloed door de detectiegrens van 0,5 mg/l, dit laten de minima duidelijk zien. In werkelijkheid zullen de minima en gemiddelden dus lager zijn. De dalende trend sinds de incidentele piek in 2006 is niet significant. Sinds 2010 volgde uit 40\% van de metingen een waarde van 0,5 mg/l. In 2018, net als in 2016 en 2017, volgde uit alle metingen een waarde van 1 mg/l. Hierdoor zijn de gemiddelde, minimale en maximale waarde gelijk. Dit kan er op duiden dat de detectie grens is verschoven of dat de meetapparatuur niet meer functioneert.
+
+```{r zwevendDieldrinTab}
+# dt <- tex2dt("Figuren/Zwevend/Dieldrin_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum"),
+#              caption = "Waardes voor de Dieldrin in $\\mu$g/kg voor beide stations.")
+
+parname = "Dieldrin in ug/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van dieldrin (ug/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendDieldrin, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Dieldrin voor beide stations."}
+# knitr::include_graphics("Figuren/Zwevend/Dieldrin.png")
+
+plotTrends(df, parname)
+```
+ 
+### Hexachloorbenzeen {#zwevend-Hexachloorbenzeen}
+
+Figuur \@ref(fig:zwevendHexachloorbenzeen) toont het jaargemiddelde hexachloorbenzeen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendHexachloorbenzeenTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+
+Bij Vlissingen boei SSVH is het gehalte hexachloorbenzeen zeer laag en wordt steeds de detectiegrens van 0,5 mg/l bereikt, waardoor de minima en gemiddelden worden bepaald. In werkelijkheid zijn de gehaltes dus nog lager. Over de gehele dataset is geen trend te herkennen.
+
+```{r zwevendHexachloorbenzeenTab}
+# dt <- tex2dt("Figuren/Zwevend/Hexachloorbenzeen_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum"),
+#              caption = "Waardes voor de Hexachloorbenzeen in $\\mu$g/kg voor beide stations.")
+
+parname = "Hexachloorbenzeen in ug/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van hexachloorbenzeen (ug/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+ 
+```{r zwevendHexachloorbenzeen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Hexachloorbenzeen voor beide stations."}
+# knitr::include_graphics("Figuren/Zwevend/Hexachloorbenzeen.png")
+
+plotTrends(df, parname)
+```
+ 
+### Tributyltin {#zwevend-Tributyltin}
+
+Figuur \@ref(fig:zwevendTributyltin) toont het jaargemiddelde tributyltin per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendTributyltinTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+
+In 2012 worden de waarden van tribultyltin (TBT) bij Schaar van Ouden Doel niet meer uitgedrukt in tin, de oude metingen (wel uitgedrukt in tin) zijn door te vermenigvuldigen met factor 2,444 omgerekend naar tribultyltin. Bij Schaar van Ouden Doel dalen de gehaltes tribultyltin sterk. Bij Vlissingen boei SSVH is een dalende trend aanwezig. De waarden bij Vlissingen boei SSVH zijn lager dan bij Schaar van Ouden Doel. Bij Vlissingen boei SSVH wordt de laatste jaren zelfs de detectiegrens bereikt (3 $\mu$g/kg). Over de gehele dataset is er een duidelijke dalende trend van -5,2 tot -7,4 $\mu$g/kg te herkennen die voor beide stations een hoge correlatiecoëfficiënt heeft. Deze daling lijkt wel af te nemen met stabiliserende waardes in de laatste jaren. Voor Vlissingen was in 2017 geen data beschikbaar.
+
+```{r zwevendTributyltinTab}
+# dt <- tex2dt("Figuren/Zwevend/Tributyltin_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
+#              caption = "Waardes voor de Tributyltin in $\\mu$g/kg voor beide stations.")
+
+parname = "Tributyltin in ug/kg drooggewicht in zwevend stof"
+rounding = 3
+dt <- statTable(df, parname, rounding)
+knitr::kable(dt, 
+             align = 'c',
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van tributyltin (ug/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+```
+
+```{r zwevendTributyltin, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Tributyltin voor beide stations."}
+# knitr::include_graphics("Figuren/Zwevend/Tributyltin.png")
+
+plotTrends(df, parname)
+```
+ 

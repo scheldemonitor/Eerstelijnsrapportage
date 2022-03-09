@@ -1,0 +1,892 @@
+<!-- TO DO:
+- Bijlage C tabel toevoegen met tex2dt of andere manier
+- Bijlage C tabel laatste kolom
+
+-->
+
+```{r setupBijlage, include=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE,
+	out.width = "85%",
+	fig.align='center'
+)
+```
+
+```{r}
+# Load function to write Latex table structure to R 
+source("Rscripts/tex2Rtable.R")
+
+# Set year for use in the report
+dataJaar <- 2019
+```
+
+# References
+
+<div id="refs"></div>
+
+# (APPENDIX) Appendix {-} 
+
+# Overzicht gebruikte data {#BijlageA-overzicht-data}
+
+Alle data in dit rapport is geleverd door VLIZ en Rijkswaterstaat. 
+
+## Gemeten data {#BijlageA-gemeten-data}
+
+Deze rapportage bevat de beschikbare hydrodynamische, fysisch-chemische en biologische data in de periode 1996 - `r dataJaar` voor de Westerschelde en de monding. Bepaalde data wordt (al enige tijd) niet meer gemeten en opgenomen in de rapportage. Dit betreft:
+
+* Continu meting; opgenomen in rapportages tot en met 2016
+  + Eerstelijnsrapportage Westerschelde 2015
+  + Eerstelijnsrapportage Westerschelde 2014
+  + Eerstelijnsrapportage Westerschelde 2013
+  + Eerstelijnsrapportage Westerschelde 2012
+
+* Golfrichting; opgenomen in rapportages tot en met 2015
+  + Eerstelijnsrapportage Westerschelde 2014
+  + Eerstelijnsrapportage Westerschelde 2013
+  + Eerstelijnsrapportage Westerschelde 2012
+  + Eerstelijnsrapportage Westerschelde 2010
+
+## Hydrodynamiek {#BijlageA-hydrodynamiek}
+
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Tabellen/hydro.png} -->
+<!-- \end{figure}  -->
+
+```{r bijlageAHydroFig}
+knitr::include_graphics("Figuren/Tabellen/hydro.png")
+```
+
+## Fysisch-chemische parameters {#BijlageA-fysisch}
+
+### Oppervlaktewater (compartiment 10) {#BijlageA-fysisch-oppwater}
+
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Tabellen/water.png} -->
+<!-- \end{figure}  -->
+
+```{r bijlageAFysischOppwaterFig}
+knitr::include_graphics("Figuren/Tabellen/water.png")
+```
+
+### Zwevend stof (compartiment 50) {#BijlageA-fysisch-zwevend}
+
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Tabellen/zwevend.png} -->
+<!-- \end{figure}  -->
+
+```{r bijlageAFysischZwevendFig}
+knitr::include_graphics("Figuren/Tabellen/zwevend.png")
+```
+
+### Bodem (compartiment 40) {#BijlageA-fysisch-bodem}
+
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Tabellen/bodem.png} -->
+<!-- \end{figure}  -->
+
+```{r bijlageAFysischBodemFig}
+knitr::include_graphics("Figuren/Tabellen/bodem.png")
+```
+
+### Biota (compartiment 60) {#BijlageA-fysisch-biota}
+
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Tabellen/biota.png} -->
+<!-- \end{figure}  -->
+
+```{r bijlageAFysischBiotaFig}
+knitr::include_graphics("Figuren/Tabellen/biota.png")
+```
+
+# Meetdichtheidmatrices {#BijlageB-meetdichtheid}
+
+## Oppervlaktewater {#BijlageB-meetdichtheid-oppwater}
+
+### Schaar van Ouden Doel {#BijlageB-meetdichtheid-oppwater-schaar}
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering -->
+<!--   \caption[Meetdichtheidsmatrices oppervlaktewater Schaar van Ouden Doel]{Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Schaar van Ouden Doel met hierin  het aantal metingen per parameter en per jaar}.  -->
+<!--  \input{../Figuren/Meetdichtheid/schaar_opp.tex} -->
+<!-- \end{table} -->
+
+```{r meetdichtheidOppwaterSchaar}
+dt <- tex2dt("Figuren/Meetdichtheid/schaar_opp.tex")
+knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Schaar van Ouden Doel met hierin  het aantal metingen per parameter en per jaar.")
+```
+
+### Hansweert geul {#BijlageB-meetdichtheid-oppwater-hansweertgeul}
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering -->
+<!--   \caption[Meetdichtheidsmatrices oppervlaktewater Hansweert geul]{Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Hansweert geul met hierin het aantal metingen per parameter en per jaar}.  -->
+<!--  \input{../Figuren/Meetdichtheid/hans_opp.tex} -->
+<!-- \end{table} -->
+
+```{r meetdichtheidOppwaterHans}
+dt <- tex2dt("Figuren/Meetdichtheid/hans_opp.tex")
+knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Hansweert geul met hierin  het aantal metingen per parameter en per jaar.")
+```
+
+### Terneuzen boei 20 {#BijlageB-meetdichtheid-oppwater-terneuzen}
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering -->
+<!--   \caption[Meetdichtheidsmatrices oppervlaktewater Terneuzen boei 20]{Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Terneuzen boei 20 met hierin het aantal metingen per parameter en per jaar}.  -->
+<!--  \input{../Figuren/Meetdichtheid/tern_opp.tex} -->
+<!-- \end{table} -->
+
+```{r meetdichtheidOppwaterTerneuzen}
+dt <- tex2dt("Figuren/Meetdichtheid/tern_opp.tex")
+knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Terneuzen boei 20 met hierin  het aantal metingen per parameter en per jaar.")
+```
+
+### Vlissingen boei SSVH {#BijlageB-meetdichtheid-oppwater-vlissingen}
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering -->
+<!--   \caption[Meetdichtheidsmatrices oppervlaktewater Vlissingen boei SSVH]{Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Vlissingen boei SSVH met hierin het aantal metingen per parameter en per jaar}.  -->
+<!--  \input{../Figuren/Meetdichtheid/vlis_opp.tex} -->
+<!-- \end{table} -->
+
+```{r meetdichtheidOppwaterVlissingen}
+dt <- tex2dt("Figuren/Meetdichtheid/vlis_opp.tex")
+knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Vlissingen boei SSVH met hierin  het aantal metingen per parameter en per jaar.")
+```
+
+### Walcheren 2 km uit de kust {#BijlageB-meetdichtheid-oppwater-walcheren2km}
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering -->
+<!--   \caption[Meetdichtheidsmatrices oppervlaktewater Walcheren 2 km uit de kust]{Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Walcheren 2 km uit de kust met hierin het aantal metingen per parameter en per jaar}.  -->
+<!--  \input{../Figuren/Meetdichtheid/w2_opp.tex} -->
+<!-- \end{table} -->
+
+```{r meetdichtheidOppwaterWal2km}
+dt <- tex2dt("Figuren/Meetdichtheid/w2_opp.tex")
+knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Walcheren 2 km uit de kust met hierin  het aantal metingen per parameter en per jaar.")
+```
+
+### Walcheren 20 km uit de kust {#BijlageB-meetdichtheid-oppwater-walcheren20km}
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering -->
+<!--   \caption[Meetdichtheidsmatrices oppervlaktewater Walcheren 20 km uit de kust]{Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Walcheren 20 km uit de kust met hierin het aantal metingen per parameter en per jaar}.  -->
+<!--  \input{../Figuren/Meetdichtheid/w20_opp.tex} -->
+<!-- \end{table} -->
+
+```{r meetdichtheidOppwaterWal20km}
+dt <- tex2dt("Figuren/Meetdichtheid/w20_opp.tex")
+knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Walcheren 20 km uit de kust met hierin  het aantal metingen per parameter en per jaar.")
+```
+
+## Zwevende stof {#BijlageB-meetdichtheid-zwevend}
+
+### Schaar van Ouden Doel {#BijlageB-meetdichtheid-zwevend-schaar}
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering -->
+<!--   \caption[Meetdichtheidsmatrices zwevende stof Schaar van Ouden Doel]{Meetdichtheidsmatrices voor metingen in het zwevende stof bij Schaar van Ouden Doel met hierin het aantal metingen per parameter en per jaar}.  -->
+<!--  \input{../Figuren/Meetdichtheid/schaar_zwevend.tex} -->
+<!-- \end{table} -->
+
+```{r meetdichtheidZwevendSchaar}
+dt <- tex2dt("Figuren/Meetdichtheid/schaar_zwevend.tex")
+knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen in het zwevende stof bij Schaar van Ouden Doel met hierin  het aantal metingen per parameter en per jaar.")
+```
+
+### Vlissingen boei SSVH {#BijlageB-meetdichtheid-zwevend-vlissingen}
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering -->
+<!--   \caption[Meetdichtheidsmatrices zwevende stof Vlissingen boei SSV]{Meetdichtheidsmatrices voor metingen in het zwevende stof bij Vlissingen boei SSVH met hierin het aantal metingen per parameter en per jaar}.  -->
+<!--  \input{../Figuren/Meetdichtheid/vlis_zwevend.tex} -->
+<!-- \end{table} -->
+
+```{r meetdichtheidZwevendVlissingen}
+dt <- tex2dt("Figuren/Meetdichtheid/vlis_zwevend.tex")
+knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen in het zwevende stof bij Vlissingen boei SSVH met hierin  het aantal metingen per parameter en per jaar.")
+```
+
+<!-- %\clearpage -->
+<!-- %\section{Bodem} -->
+<!-- %\label{meetdichtheid_bodem} -->
+<!-- %\subsection{Schaar van Ouden Doel} -->
+<!-- %\begin{table}[!ht] -->
+<!-- % \centering -->
+<!-- %  \caption[Meetdichtheidsmatrices zwevende stof Schaar van Ouden Doel]{Meetdichtheidsmatrices voor metingen in het zwevende stof bij Schaar van Ouden Doel met hierin het aantal metingen per parameter en per jaar}.  -->
+<!-- % \input{../Figuren/Meetdichtheid/schaar_zwevend.tex} -->
+<!-- %\end{table} -->
+
+## Biota {#BijlageB-meetdichtheid-biota}
+
+### Bot {#BijlageB-meetdichtheid-biota-bot}
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering -->
+<!--   \caption[Meetdichtheidsmatrices bot]{Meetdichtheidsmatrices voor metingen biota bot bij Middelgat met hierin het aantal metingen per parameter en per jaar}.  -->
+<!--  \input{../Figuren/Meetdichtheid/bot.tex} -->
+<!-- \end{table} -->
+
+```{r meetdichtheidBiotaBot}
+dt <- tex2dt("Figuren/Meetdichtheid/bot.tex")
+knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen biota bot bij Middelgat met hierin het aantal metingen per parameter en per jaar.")
+```
+
+### Mosselen {#BijlageB-meetdichtheid-biota-mossel}
+
+#### Metaal - natgewicht {#BijlageB-meetdichtheid-biota-mossel-metaal-nat}
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering -->
+<!--   \caption[Meetdichtheidsmatrices metaal in mosselen Hoedekenskerke]{Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Hoedekenskerke boei 4 met hierin het aantal metingen per parameter en per jaar}.  -->
+<!--  \input{../Figuren/Meetdichtheid/metaal_1a.tex} -->
+<!-- \end{table} -->
+
+```{r meetdichtheidBiotaMosselMetaal1a}
+dt <- tex2dt("Figuren/Meetdichtheid/metaal_1a.tex")
+knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Hoedekenskerke boei 4 met hierin het aantal metingen per parameter en per jaar.")
+```
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering -->
+<!--   \caption[Meetdichtheidsmatrices metaal in mosselen Hooge Platen]{Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Hooge Platen met hierin het aantal metingen per parameter en per jaar}.  -->
+<!--  \input{../Figuren/Meetdichtheid/metaal_2a.tex} -->
+<!-- \end{table} -->
+
+```{r meetdichtheidBiotaMosselMetaal2a}
+dt <- tex2dt("Figuren/Meetdichtheid/metaal_2a.tex")
+knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Hooge Platen met hierin het aantal metingen per parameter en per jaar.")
+```
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering -->
+<!--   \caption[Meetdichtheidsmatrices metaal in mosselen Knuitershoek]{Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Knuitershoek met hierin het aantal metingen per parameter en per jaar}.  -->
+<!--  \input{../Figuren/Meetdichtheid/metaal_3a.tex} -->
+<!-- \end{table} -->
+
+```{r meetdichtheidBiotaMosselMetaal3a}
+dt <- tex2dt("Figuren/Meetdichtheid/metaal_3a.tex")
+knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Knuitershoek met hierin het aantal metingen per parameter en per jaar.")
+```
+
+#### Metaal - drooggewicht {#BijlageB-meetdichtheid-biota-mossel-metaal-droog}
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering -->
+<!--   \caption[Meetdichtheidsmatrices metaal in mosselen Hansweert boei OHMG]{Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Hansweert boei OHMG met hierin het aantal metingen per parameter en per jaar}.  -->
+<!--  \input{../Figuren/Meetdichtheid/metaal_1b.tex} -->
+<!-- \end{table} -->
+
+```{r meetdichtheidBiotaMosselMetaal1b}
+dt <- tex2dt("Figuren/Meetdichtheid/metaal_1b.tex")
+knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Hansweert boei OHMG met hierin het aantal metingen per parameter en per jaar.")
+```
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering -->
+<!--   \caption[Meetdichtheidsmatrices metaal in mosselen Vlissingen boei SSVH]{Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Vlissingen boei SSVH met hierin het aantal metingen per parameter en per jaar}.  -->
+<!--  \input{../Figuren/Meetdichtheid/metaal_2b.tex} -->
+<!-- \end{table} -->
+
+```{r meetdichtheidBiotaMosselMetaal2b}
+dt <- tex2dt("Figuren/Meetdichtheid/metaal_2b.tex")
+knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Vlissingen boei SSVH met hierin het aantal metingen per parameter en per jaar.")
+```
+
+#### PAK en PCB - drooggewicht {#BijlageB-meetdichtheid-biota-mossel-PAK-PCB-droog}
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering -->
+<!--   \caption[Meetdichtheidsmatrices PAK en PCB in mosselen Hansweert boei OHMG]{Meetdichtheidsmatrices voor metingen biota mosselen PAK en PCB bij Hansweert boei OHMG met hierin het aantal metingen per parameter en per jaar}.  -->
+<!--  \input{../Figuren/Meetdichtheid/droog_1.tex} -->
+<!-- \end{table} -->
+
+```{r meetdichtheidBiotaMosselPCBdroog1}
+dt <- tex2dt("Figuren/Meetdichtheid/droog_1.tex")
+knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen biota mosselen PAK en PCB bij Hansweert boei OHMG met hierin het aantal metingen per parameter en per jaar.")
+```
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering -->
+<!--   \caption[Meetdichtheidsmatrices PAK en PCB in mosselen Vlissingen boei SSVH]{Meetdichtheidsmatrices voor metingen biota mosselen PAK en PCB bij Vlissingen boei SSVH met hierin het aantal metingen per parameter en per jaar}.  -->
+<!--  \input{../Figuren/Meetdichtheid/droog_2.tex} -->
+<!-- \end{table} -->
+
+```{r meetdichtheidBiotaMosselPCBdroog2}
+dt <- tex2dt("Figuren/Meetdichtheid/droog_2.tex")
+knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen biota mosselen PAK en PCB bij Vlissingen boei SSVH met hierin het aantal metingen per parameter en per jaar.")
+```
+
+#### PAK en PCB - natgewicht {#BijlageB-meetdichtheid-biota-mossel-PAK-PCB-nat}
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering -->
+<!--   \caption[Meetdichtheidsmatrices PCB en PBDEs in mosselen Knuitershoek]{Meetdichtheidsmatrices voor metingen biota mosselen PCB en PBDEs bij Knuitershoek met hierin het aantal metingen per parameter en per jaar}.  -->
+<!--  \input{../Figuren/Meetdichtheid/nat_1.tex} -->
+<!-- \end{table} -->
+
+```{r meetdichtheidBiotaMosselPCBnat1}
+dt <- tex2dt("Figuren/Meetdichtheid/nat_1.tex")
+knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen biota mosselen PCB en PBDEs bij Knuitershoek met hierin het aantal metingen per parameter en per jaar.")
+```
+
+#### Overige {#BijlageB-meetdichtheid-biota-mossel-overig}
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering -->
+<!--   \caption[Meetdichtheidsmatrices overige in mosselen Knuitershoek]{Meetdichtheidsmatrices voor metingen biota mosselen overige bij Knuitershoek met hierin het aantal metingen per parameter en per jaar}.  -->
+<!--  \input{../Figuren/Meetdichtheid/overige_1.tex} -->
+<!-- \end{table} -->
+
+```{r meetdichtheidBiotaMosseloverig}
+dt <- tex2dt("Figuren/Meetdichtheid/overige_1.tex")
+knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen biota mosselen overige bij Knuitershoek met hierin het aantal metingen per parameter en per jaar.")
+```
+
+# Indeling fytoplankton {#BijlageC-fytoplankton}
+
+```{r indelingFytoplanktonBijlage}
+dt <- tex2dt("Figuren/Tabellen/fytoplankton.tex")
+knitr::kable(dt, col.names = c("Naam","Code","BTX","AphiaID","Trofie","Groep"),
+             caption = "Indeling van fytoplankton in trofies en groepen.")
+```
+
+<!-- % Please add the following required packages to your document preamble: -->
+<!-- % \usepackage[table,xcdraw]{xcolor} -->
+<!-- % If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer} -->
+
+<!-- \begin{longtable}{| p{.15\textwidth} |p{.15\textwidth} |p{.15\textwidth} |p{.12\textwidth} |p{.14\textwidth} |p{.15\textwidth} |}  -->
+<!-- \hline -->
+<!-- \rowcolor[HTML]{EFEFEF}  -->
+<!-- Naam                                      & Code     & BTX        & AphiaID & Trofie            & Groep           \\ \hline -->
+<!-- Achnanthes                                & ACHNSPEC & 5232301000 & 149191  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Actinastrum                               & ACNASPEC & 5115201000 & 160542  & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Actinastrum hantzschii                    & ACNAHANT & 5115201030 & 160543  & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Actiniscus pentasterias                   & ACNIPENT & 5257101010 & 109717  & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Actinocyclus normanii                     & ACCYNORM & 5231301030 & 148945  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Actinocyclus octonarius                   & ACCYOCTO & 5231301020 & 149164  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Actinoptychus senarius                    & ACPTSENA & 5231201020 & 148948  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Actinoptychus splendens                   & ACPTSPLE & 5231201010 & 148949  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Alexandrium                               & ALEXSPEC & 5253401000 & 109470  & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Alexandrium ostenfeldii                   & ALEXOSTE & 5253401050 & 109712  & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Alexandrium tamarense                     & ALEXTAMA & 5252801040 & 109714  & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Amphidinium                               & AMDISPEC & 5252101000 & 109473  & Beide of onbekend & Dinoflagellaten \\ \hline -->
+<!-- Amphidinium crassum                       & AMDICRAS & 5252101100 & 109726  & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Amphidinium longum                        & AMDILONG & 5252101030 & 109741  & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Amphidinium sphenoides                    & AMDISPHE & 5252101040 & 109754  & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Amphora                                   & AMRASPEC & 5232403000 & 149200  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Amphora {[}2{]}                           & AMHR     & 99999X0061 &         & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Anabaena                                  & ANNASPEC & 5614601000 & 146585  & Autotroof         & Blauwwieren     \\ \hline -->
+<!-- Ankistrodesmus                            & ANKISPEC & 5115301000 & 163489  & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Apedinella spinifera                      & APEDSPIN & 5211602010 & 248097  & Autotroof         & Overig          \\ \hline -->
+<!-- Aphanizomenon                             & APNISPEC & 5614603000 & 160567  & Autotroof         & Blauwwieren     \\ \hline -->
+<!-- Aphanothece                               & APTHSPEC & 5611102000 & 146715  & Autotroof         & Blauwwieren     \\ \hline -->
+<!-- Asterionella formosa                      & ASRIFORM & 5232101010 & 148954  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Asterionella glacialis                    & ASRIGLAC & 5232101030 & 149139  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Asterionella kariana                      & ASRIKARI & 5232101040 & 251745  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Asterionellopsis glacialis                & ASTEGLAC & 99999X0063 & 149139  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Asteroplanus kariana                      & ASOPKARI & 99999X0064 & 251745  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Attheya                                   & ATTHSPEC & 5231601000 & 160519  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Aulacodiscus argus                        & AUDIARGU & 5231302010 & 149280  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Aulacoseira                               & AUSESPEC & 5231116000 & 148959  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Aulacoseira ambigua                       & AUSEAMBI & 5231106010 & 148960  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Aulacoseira granulata                     & AUSEGRAN & 5231106070 & 148961  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Auliscus sculptus                         & AULISCUL & 5231303010 & 699641  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Bacillaria paxillifer                     & BALAPAXI & 5232601010 & 558243  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Bacteriastrum delicatulum                 & BAASDELI & 5231501030 & 164108  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Bacteriastrum hyalinum                    & BAASHYAL & 5231501010 & 149119  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Bellerochea malleus                       & BELLMALL & 5231602010 & 447730  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Biddulphia alternans                      & BIDDALTE & 99999X0066 & 699394  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Biota                                     & BIOT     & 99999X0067 &         & Beide of onbekend & Overig          \\ \hline -->
+<!-- Botryococcaceae                           & BOTRYOAE & 5114800000 & 493881  & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Botryococcus                              & BOOCSPEC & 5114801000 & 248103  & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Brachiomonas                              & BRACSPEC & 5111101000 & 345436  & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Brockmanniella                            & BROC     & 99999X0068 & 149136  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Brockmanniella brockmannii                & BROCBROC & 5232114010 & 149137  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Cachonina niei                            & CACHNIEI & 5252705010 & 233620  & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Calycomonas                               & CACOSPEC & 5216102000 & 160548  & Autotroof         & Overig          \\ \hline -->
+<!-- Campylodiscus                             & CADISPEC & 5232701000 & 149616  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Campylosira cymbelliformis                & CASICYMB & 5232130010 & 149357  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Centrales                                 & CENTRALE & 5231000000 & 341285  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Cerataulina pelagica                      & CELIPELA & 5231604010 & 149619  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Cerataulus radiatus                       & CELURADI & 5231605010 & 178126  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Cerataulus turgidus                       & CELUTURG & 5231605020 & 162980  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Ceratium furca                            & CETIFUCA & 5253101050 & 495659  & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Ceratium fusus                            & CETIFUSU & 5253101070 & 495660  & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Ceratium horridum                         & CETIHORR & 5253101090 & 495666  & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Ceratium horridum {[}1{]}                 & CETIHORI & 99999X0069 &         & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Ceratium lineatum                         & CETILINE & 5253101100 & 495674  & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Ceratium macroceros (F)                   & CETIMACR & 5253101123 & 670002  & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Ceratoneis                                & CERA     & 99999X0070 & 149003  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Ceratoneis gracilis                       & CERAGRAC & 99999X0071 & 149570  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros                               & CTCESPEC & 5231502000 & 148985  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros affinis                       & CTCEAFFI & 5231502010 & 149241  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros anastomosans                  & CTCEANAS & 5231502020 & 149292  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros armatus                       & CTCEARMA & 5231502030 & 149299  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros borealis                      & CTCEBOLI & 5231502050 & 149124  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros ceratosporus                  & CTCECERA & 5231502070 & 149297  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros compressus                    & CTCECOMP & 5231502090 & 149129  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros constrictus cf                & CTCECOCF & 5231502990 & 156609  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros contortus                     & CTCECONT & 5231502520 & 149129  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros convolutus                    & CTCECONV & 5231502100 & 156611  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros coronatus                     & CTCECORO & 5231502110 & 163026  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros costatus                      & CTCECOST & 5231502120 & 149289  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros crinitus                      & CTCECRIN & 5231502130 & 149171  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros curvisetus                    & CTCECURV & 5231502510 & 149221  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros danicus                       & CTCEDANI & 5231502150 & 149120  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros debilis                       & CTCEDEBI & 5231502160 & 149219  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros decipiens                     & CTCEDECI & 5231502170 & 149126  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros densus                        & CTCEDENS & 5231502180 & 149121  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros diadema                       & CTCEDIAD & 5231502190 & 149128  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros didymus                       & CTCEDIDY & 5231502200 & 149122  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros eibenii                       & CTCEEIBE & 5231502230 & 160521  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros gracilis                      & CTCEGRAC & 5231502260 & 149297  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros lauderi                       & CTCELAUD & 5231502290 & 160523  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros lorenzianus                   & CTCELORE & 5231502300 & 156617  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros lorenzianus f. forceps        & CTCELOfo & 5231502301 & 549193  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros pseudocurvisetus              & CTCEPSCU & 5232102540 & 178229  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros seiracanthus                  & CTCESEIR & 5231502390 & 163118  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros septentrionalis               & CTCESEPT & 5231502400 & 162823  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros similis                       & CTCESIMI & 5231502410 & 149127  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros simplex                       & CTCESIMP & 5231502420 & 149294  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros simplex var. calcitrans       & CTCESIca & 5231502421 & 163013  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros socialis                      & CTCESOCI & 5231502430 & 149123  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros sp 6010                       & CTCESPXX & 5231502980 & 148985  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros subtilis                      & CTCESUTI & 5231502440 & 156621  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros tenuissimus (F)               & CHAETENU &            & 156623  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros teres                         & CTCETERE & 5231502450 & 149125  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chaetoceros tortissimus                   & CTCETORT & 5231502460 & 163161  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Chattonella                               & CHATSPEC & 6631104000 & 233776  & Autotroof         & Overig          \\ \hline -->
+<!-- Chlamydomonas                             & CHLASPEC & 5111103000 & 178583  & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Chlorophyceae                             & CHPHYCAE & 5110000000 & 802     & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Chlorophyta                               & CHLOROPH & 5100000000 & 801     & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Choanoflagellatea                         & CHGE     &            & 25      & Heterotroof       & Overig          \\ \hline -->
+<!-- Choanoflagellida                          & CHGE     & 99999X0073 & 25      & Heterotroof       & Overig          \\ \hline -->
+<!-- Chromista {[}1{]}                         & CHIT     &            & 7       & Autotroof         & Overig          \\ \hline -->
+<!-- Chromobiota                               & CHBI     & 99999X0074 & 368660  & Autotroof         & Overig          \\ \hline -->
+<!-- Chromophyta (A)                           & CHROMOPH & 5200000000 &         & Autotroof         & Overig          \\ \hline -->
+<!-- Chroococcales                             & CHROOCOC & 5611000000 & 146543  & Autotroof         & Blauwwieren     \\ \hline -->
+<!-- Chrysochromulina                          & CHSOSPEC & 5211503000 & 115090  & Autotroof         & Overig          \\ \hline -->
+<!-- Chrysochromulina 2629                     & CHSOSPXX & 5211503001 &         & Autotroof         & Overig          \\ \hline -->
+<!-- Chrysococcus                              & CHCSSPEC & 5211201000 & 248110  & Autotroof         & Overig          \\ \hline -->
+<!-- Chrysomonadales                           & CHRYSOMO & 5211000000 &         & Autotroof         & Overig          \\ \hline -->
+<!-- Chrysomonadales sp. 1                     & CHRYSOMA & 521100000A &         & Autotroof         & Overig          \\ \hline -->
+<!-- Chrysophyceae                             & CHRYSOPH & 5210000000 & 146230  & Autotroof         & Overig          \\ \hline -->
+<!-- Closterium                                & CLUMSPEC & 5122202000 & 162725  & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Cochlodinium                              & COCHSPEC & 5252106000 & 109474  & Beide of onbekend & Dinoflagellaten \\ \hline -->
+<!-- Coelastrum                                & COTRSPEC & 5115202000 & 160550  & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Corethron criophilum                      & CORECRIO & 5231401010 & 149110  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Corymbellus aureus                        & COBEAURE & 5211502010 & 162519  & Autotroof         & Overig          \\ \hline -->
+<!-- Coscinodiscophyceae                       & COOP     & 99999X0076 & 148971  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Coscinodiscus                             & CSDISPEC & 5231101000 & 148917  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Coscinodiscus centralis                   & CSDICENT & 5231101020 & 149159  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Coscinodiscus concinnus                   & CSDICONC & 5231101030 & 148992  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Coscinodiscus curvatulus                  & CSDICURV & 5231101040 & 149266  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Coscinodiscus granii                      & CSDIGRAN & 5231101070 & 149271  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Coscinodiscus jonesianus                  & CSDIJONE & 5231101080 & 163178  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Coscinodiscus jonesianus var. commutatus  & CSDIJOco & 5231101081 & 148991  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Coscinodiscus perforatus                  & CSDIPERF & 5231101170 & 149272  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Coscinodiscus perforatus var. pavillardii & CSDIPEpa & 5231101172 & 179616  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Coscinodiscus radiatus                    & CSDIRADI & 5231101180 & 149158  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Coscinodiscus rothii                      & CSDIROTH & 5231101190 & 162761  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Coscinodiscus stellaris                   & CSDISTEL & 5231101250 & 149653  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Coscinodiscus wailesii                    & CSDIWAIL & 5231101220 & 156632  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Cosmarium                                 & CSMASPEC & 5122208000 & 478557  & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Craspedomonadaceae                        & CRASPEAE & 6641100000 &         & Heterotroof       & Overig          \\ \hline -->
+<!-- Crucigenia                                & CRUCSPEC & 5115204000 & 178617  & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Crucigenia quadrata                       & CRUCQUAD & 5115204090 & 178962  & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Cryptomonadaceae                          & CRMONAAE & 6621100000 & 17644   & Beide of onbekend & Overig          \\ \hline -->
+<!-- Cryptomonadales                           & CRYPTOMO & 6621000000 & 17640   & Beide of onbekend & Overig          \\ \hline -->
+<!-- Cryptomonas                               & CRMOSPEC & 6621103000 & 106282  & Autotroof         & Overig          \\ \hline -->
+<!-- Cryptophyceae                             & CRYPTOPH & 6620000000 & 17639   & Autotroof         & Overig          \\ \hline -->
+<!-- Cyanophyceae                              & CYANOPAE & 5610000000 & 146542  & Autotroof         & Blauwwieren     \\ \hline -->
+<!-- Cyanophyta                                & CYANOPHY & 5600000000 & 146537  & Autotroof         & Blauwwieren     \\ \hline -->
+<!-- Cyclostephanos dubius                     & CYPHDUBI & 5231110020 & 148996  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Cyclotella                                & CYTESPEC & 5231103000 & 148905  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Cyclotella {[}1{]}                        & CYCO     & 99999X0077 &         & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Cyclotella caspia                         & CYTECASP & 5231103040 & 163196  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Cyclotella meneghiniana                   & CYTEMENE & 5231103110 & 148909  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Cyclotella scaldensis                     & CYTESCAL & 5231103230 & 148906  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Cyclotella striata                        & CYTESTRI & 5231103170 & 148911  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Cylindrotheca closterium                  & CYTHCLOS & 5232602010 & 149004  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Cylindrotheca gracilis                    & CYTHGRAC & 5232602020 & 149570  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Cymatosira belgica                        & CYSIBELG & 5232105010 & 149012  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Dactyliosolen fragilissimus               & DAENFRAG & 99999X0078 & 149310  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Dactyliosolen phuketensis                 & DAENPHUK & 5231408010 & 248064  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Dactylococcopsis                          & DACOSPEC & 5611105000 & 146579  & Autotroof         & Blauwwieren     \\ \hline -->
+<!-- Delphineis minutissima                    & DELPMINU & 5232116020 & 621926  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Delphineis surirella                      & DELPSURI & 5232116040 & 149180  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Detonula                                  & DETOSPEC & 5231402000 & 149285  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Detonula confervacea                      & DETOCONF & 5231402010 & 149286  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Detonula pumila                           & DETOPUMI & 5231402020 & 149647  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Diatoma tenuis                            & DIATTENU & 5232106020 & 149014  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Dictyocha                                 & DIOCSPEC & 5211901000 & 157258  & Autotroof         & Overig          \\ \hline -->
+<!-- Dictyocha speculum                        & DIOCSPUL & 5211902010 & 157260  & Autotroof         & Overig          \\ \hline -->
+<!-- Dictyosphaerium                           & DIOSSPEC & 5114901000 & 178623  & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Dinobryon                                 & DIBRSPEC & 5211203000 & 157240  & Autotroof         & Overig          \\ \hline -->
+<!-- Dinobryon faculiferum                     & DIBRFACU & 5211203220 & 160553  & Autotroof         & Overig          \\ \hline -->
+<!-- Dinobryon petiolatum                      & DIBRPETI & 5211203230 & 160553  & Autotroof         & Overig          \\ \hline -->
+<!-- Dinophyceae                               & DINOPHYC & 5250000000 & 146203  & Beide of onbekend & Dinoflagellaten \\ \hline -->
+<!-- Dinophysis acuminata                      & DISIACUM & 5252502010 & 109603  & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Dinophysis acuta                          & DISIACUT & 5252502020 & 109604  & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Dinophysis rotundata                      & DISIROTU & 5252502050 & 162793  & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Diploneis                                 & DINESPEC & 5232410000 & 149018  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Diplopsalis                               & DILISPEC & 5252701000 & 109515  & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Diplopsalis gr                            & DIPLOPg  & 5252701001 & 109515  & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Diplopsalis lenticula                     & DILILENT & 5252701040 & 110001  & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Diplopsalopsis asymmetrica                & DIlOASYM & 5252709010 & 155560  & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Diplopsalopsis orbicularis                & DILOORBI & 5252711010 & 110139  & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Dissodinium pseudolunula                  & DINIPSLU & 5255102020 & 110332  & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Ditylum brightwellii                      & DITYBRIG & 5231606010 & 149023  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Ebria tripartita                          & EBRITRIP & 5212101010 & 118051  & Heterotroof       & Overig          \\ \hline -->
+<!-- Emiliania huxleyi                         & EMILHUXL & 5211801010 & 115104  & Autotroof         & Overig          \\ \hline -->
+<!-- Entomoneis                                & ENTOSPEC & 5232402000 & 156598  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Eucampia zodiacus                         & EUPIZODI & 5231607010 & 149131  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Euglena (B)                               & EUGLSPEC & 6611204000 & 8012    & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Euglenaceae (B)                           & EUNAENAE & 6611200000 & 21001   & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Euglenophyceae (B)                        & EUGLENOP & 6610000000 & 582177  & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Eukaryota (G)                             & EUKA     & 99999X0080 &         & Autotroof         & Overig          \\ \hline -->
+<!-- Eunotogramma dubium                       & EUTODUBI & 5231701010 & 345464  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Eutreptiaceae (B)                         & EUTREPAE & 6611100000 & 17655   & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Eutreptiella (B)                          & EUELSPEC & 6611103000 & 17657   & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Fibrocapsa japonica                       & FIBRJAPO & 6631105010 & 233761  & Autotroof         & Overig          \\ \hline -->
+<!-- Fragilaria                                & FRLASPEC & 5232108000 & 149028  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Fragilaria islandica                      & FRLAISLA & 5232108130 & 149239  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Fragilaria oblonga                        & FRLAOBLO & 5232108330 & 345475  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Fragilaria ulna                           & FRLAULNA & 5232118190 & 447744  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Fragilaria ulna var. acus                 & FRLAULac & 5232118010 & 418636  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Fragilariaceae                            &          &            & 148952  & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Fragilidium subglobosum                   & FRLISUGL & 5253502010 & 109705  & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Glenodinium danicum                       & GLUMDANI & 5252702050 & 110146  & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Glenodinium foliaceum                     & GLUMFOLI & 5252702080 & 110154  & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Gloeodiniales (C)                         & GLOEODIN & 5254000000 & 146250 & Beide of onbekend & Dinoflagellaten \\ \hline -->
+<!-- Gloeotila                                 & GLTISPEC & 5116104000 & 577860 & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Goniochloris                              & GOCHSPEC & 5224102000 & 600926 & Autotroof         & Overig          \\ \hline -->
+<!-- Gonyaulax                                 & GOAUSPEC & 5252801000 & 109519 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Gonyaulax digitale                        & GOAUDIGI & 5252801060 & 110015 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Gonyaulax spinifera                       & GOAUSPIN & 5252801030 & 110041 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Gonyaulax triacantha                      & GOAUTRIA & 5252801050 & 110007 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Guinardia delicatula                      & GUINDELI & 99999X0084 & 149112 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Guinardia flaccida                        & GUINFLAC & 5231403010 & 149132 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Guinardia striata                         & GUINSTRI & 99999X0085 & 149113 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Gymnodiniaceae                            & GYMNODAE & 5252100000 & 109410 & Beide of onbekend & Dinoflagellaten \\ \hline -->
+<!-- Gymnodinium                               & GYDISPEC & 5252102000 & 109475 & Beide of onbekend & Dinoflagellaten \\ \hline -->
+<!-- Gymnodinium heterostriatum                & GYDIHETE & 5252102070 & 232778 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Gymnodinium marinum                       & GYDIMARI & 5252102100 & 109811 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Gymnodinium mikimotoi                     & GYDIMIKI & 5252103130 & 233024 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Gymnodinium sanguineum                    & GYDISANG & 5252102160 & 232546 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Gymnodinium simplex                       & GYDISIMP & 5252102120 & 109831 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Gyrodinium                                & GYROSPEC & 5252103000 & 109476 & Beide of onbekend & Dinoflagellaten \\ \hline -->
+<!-- Gyrodinium britannicum                    & GYROBRIT & 5252103050 & 109843 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Gyrodinium calyptoglyphe                  & GYROCALY & 5252103060 & 109844 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Gyrodinium lachryma                       & GYROLACH & 5252103030 & 109859 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Gyrodinium resplendens                    & GYRORESP & 5252103140 & 109874 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Gyrodinium spirale                        & GYROSPIR & 5252103040 & 109876 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Gyrosigma                                 & GYSISPEC & 5232414000 & 149033 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Gyrosigma balticum                        & GYSIBALT & 5232414040 & 149493 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Gyrosigma fasciola                        & GYSIFASC & 5232414080 & 149494 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Halosphaeraceae (H)                       & HALOSPAE & 5141200000 & 21004  & Autotroof         & Overig          \\ \hline -->
+<!-- Haslea                                    & HASLSPEC & 5232421700 & 149210 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Haslea sp 5640                            & HASLVYFD & 5232421710 & 149210 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Helicotheca                               & HETHSPEC & 5231609000 & 157438 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Helicotheca tamesis                       & HECOTAME & 5231609010 & 157440 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Herdmania litoralis                       & HERDLITO & 5252111010 & 109894 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Heterocapsa                               & HECASPEC & 5223102000 & 109540 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Heterocapsa lanceolata (I)                & HECALANC &            & 233615 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Heterocapsa minima                        & HECAMINI & 5253102020 & 233619 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Heterocapsa niei                          & HECANIEI & 99999X0087 & 233620 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Heterocapsa rotundata                     & HECAROTU & 5252104010 & 110152 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Heterocapsa rotundata cf                  & HECAROCF & 5252104990 & 110152 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Heterocapsa triquetra                     & HECATRIQ & 5253102010 & 110153 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Heterosigma akashiwo                      & HESIAKAS & 6631107010 & 160585 & Autotroof         & Overig          \\ \hline -->
+<!-- Hormogonales                              & HORMOGON & 5614000000 &        & Autotroof         & Blauwwieren     \\ \hline -->
+<!-- Katodinium asymmetricum                   & KATOASYM & 5252104020 & 109882 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Katodinium glaucum                        & KATOGLAU & 5252103020 & 109885 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Khakista (J)                              & KHAK     & 99999X0089 & 576884 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Kirchneriella                             & KIRCSPEC & 5115109000 & 163108 & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Kofoidinium velleloides                   & KOFOVELL & 5252302010 & 109920 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Koliella                                  & KOLISPEC & 5116111000 & 160588 & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Kolkwitziellaceae                         & KOKW     & 99999X0091 & 109430 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Kryptoperidinium foliaceum                & KRYPFOLI & 99999X0092 & 110154 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Lagerheimia                               & LARHSPEC & 5115110000 & 178609 & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Lagerheimia genevensis                    & LARHGENE & 5115110020 & 178610 & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Lauderia annulata                         & LAUDANNU & 5231404010 & 149135 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Lebouraia minuta                          & LEBOMINU & 5252717010 & 110204 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Lennoxia faveolata                        & LENNFAVE & 5232620010 & 549205 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Leptocylindrus danicus                    & LECYDANI & 5231405010 & 149106 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Leptocylindrus minimus                    & LECYMINI & 5231405020 & 149039 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Leucocryptos                              & LECRSPEC & 6621105000 & 17651  & Heterotroof       & Overig          \\ \hline -->
+<!-- Leucocryptos marina                       & LECRMARI & 6621105010 & 119077 & Heterotroof       & Overig          \\ \hline -->
+<!-- Licmophora                                & LICMSPEC & 5232111000 & 149342 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Limnothrix                                & LIMNSPEC & 5614714000 & 177506 & Autotroof         & Blauwwieren     \\ \hline -->
+<!-- Lithodesmium undulatum                    & LIMIUNDU & 5231608010 & 149322 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Mediopyxis helysia                        & MEDIHELY & 5231614010 & 345485 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Melosira                                  & MELOSPEC & 5231106000 & 149042 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Melosira dubia                            & MELODUBI & 5231106060 & 149243 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Melosira moniliformis                     & MELOMONI & 5231106110 & 418547 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Melosira moniliformis var. octogona       & MELOMOoc & 5231106111 & 673330 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Melosira nummuloides                      & MELONUMM & 5231106120 & 149044 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Melosira varians                          & MELOVARI & 5231106150 & 149043 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Melosira westii                           & MELOWEST & 5231106160 & 149251 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Membraneis challengeri                    & MEISCHAL & 5232434010 & 341546 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Meringosphaera                            & MEGOSPEC & 5211603000 & 115075 & Autotroof         & Overig          \\ \hline -->
+<!-- Merismopedia                              & MEPESPEC & 5611112000 & 146545 & Autotroof         & Blauwwieren     \\ \hline -->
+<!-- Mesoporos perforatus                      & MEPOPERF & 5251103010 & 232516 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Meuniera membranacea                      & MEUNMEMB & 99999X0094 & 149145 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Micracanthodinium                         & MICASPEC & 5253001000 & 109510 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Micracanthodinium setiferum               & MICASETI & 5253001010 & 109993 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Micractinium                              & MITISPEC & 5114504000 & 163478 & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Microcystis                               & MICYSPEC & 5611113000 & 146557 & Autotroof         & Blauwwieren     \\ \hline -->
+<!-- Micromonas                                & MICRSPEC & 5141104400 & 134533 & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Micromonas pusilla                        & MIMOPUSI & 99999X0095 & 134564 & Autotroof         & Overig          \\ \hline -->
+<!-- Minutocellus polymorphus                  & MICEPOLY & 5231801010 & 464449 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Minutocellus scriptus                     & MICESCRI & 5231801020 & 573486 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Monoraphidium                             & MORASPEC & 5115308000 & 160590 & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Monoraphidium contortum                   & MORACONT & 5115308020 & 160591 & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Monoraphidium griffithii                  & MORAGRIF & 5115308040 & 248134 & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Monoraphidium komarkovae                  & MORAKOMA & 5115308070 & 163100 & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Mougeotia                                 & MOUGSPEC & 5121103000 & 248137 & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Myrionecta rubra (D)                      & MYNERUBR & 6771D23010 & 292896 & Heterotroof       & Overig          \\ \hline -->
+<!-- Navicula                                  & NAVISPEC & 5232417000 & 149142 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Navicula {[}2{]}                          & NAUL     & 99999X0096 &        & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Navicula distans                          & NAVIDIST & 5232417630 & 149143 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Nematodinium armatum                      & NENIARMA & 5252108010 & 109907 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Neocalyptrella robusta (K)                & NELAROBA &            & 345491 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Nitzschia                                 & NITZSPEC & 5232604000 & 149045 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Nitzschia bilobata                        & NITZBILO & 5232604130 & 149587 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Nitzschia coarctata                       & NITZCOAR & 5232604210 & 176409 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Nitzschia fruticosa                       & NITZFRUT & 5232604380 & 149602 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Nitzschia longissima                      & NITZLONG & 5232604610 & 149150 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Nitzschia reversa                         & NITZREVE & 5232414610 & 248139 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Nitzschia sigma                           & NITZSIGM & 5232604860 & 149213 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Noctiluca                                 & NOCTSPEC & 5252301000 & 109500 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Noctiluca scintillans                     & NOCTSCIN & 5252301020 & 109921 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Oblea rotunda                             & OBLEROTU & 5252710010 & 110155 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Odontella                                 & ODONSPEC & 5231611000 & 148963 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Odontella aurita                          & ODONAURI & 5231603010 & 149050 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Odontella aurita var. minima              & ODONAUmi & 5231603012 & 345492 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Odontella granulata                       & ODONGRAN & 5231603020 & 149156 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Odontella mobiliensis                     & ODONMOBI & 5231603040 & 164116 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Odontella regia                           & ODONREGI & 5231603060 & 149094 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Odontella rhombus                         & ODONRHOM & 5231603070 & 149157 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Odontella rhombus f. trigona              & ODONRHtr & 5231603072 & 163292 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Odontella sinensis                        & ODONSINE & 5231603090 & 149095 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Odontella subaequa                        & ODONSUAE & 5231603100 & 162953 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Ondetermineerbare alg (E)                 & ALGINDET & 9999930000 &        & Beide of onbekend & Overig          \\ \hline -->
+<!-- Oocystis                                  & OOCYSPEC & 5115113000 & 178611 & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Oscillatoria                              & OSCISPEC & 5614705000 & 146549 & Autotroof         & Blauwwieren     \\ \hline -->
+<!-- Oxyrrhis marina                           & OXYRMARI & 5252401010 & 109902 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Oxytoxum                                  & OXYTSPEC & 5252803000 & 109528 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Oxytoxum mediterraneum                    & OXYMEDI  & 5252803010 & 110102 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Paralia marina                            & PARAMARI & 5231114010 & 149055 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Paralia sulcata                           & PALISULC & 5231106130 & 149055 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Parlibellus delognei                      & PARBDELO & 5232433010 & 595701 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Paulinella                                & PAULINSP & 6842B31000 & 136779 & Autotroof         & Overig          \\ \hline -->
+<!-- Paulinella ovalis (L)                     & PAINOVAL & 99999X0100 & 136903 & Autotroof         & Overig          \\ \hline -->
+<!-- Paulsenella                               & PASESPEC & 5255106000 & 109447 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Pediastrum                                & PEASSPEC & 5114403000 & 160561 & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Pediastrum boryanum                       & PEASBORY & 5114403040 & 160562 & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Pediastrum duplex                         & PEASDUPL & 5114403080 & 164061 & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Pennales                                  & PENNALES & 5232000000 &        & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Peridiniaceae                             & PERIDIAE & 5252700000 & 109433 & Beide of onbekend & Dinoflagellaten \\ \hline -->
+<!-- Peridiniaceae sp 5                        & PERIDIAF & 525270000F & 109433 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Peridiniales                              & PERIDINI & 5252000000 & 591151 & Beide of onbekend & Dinoflagellaten \\ \hline -->
+<!-- Phacus (B)                                & PHCUSPEC & 6611206000 & 163339 & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Phaeocystis                               & PHCYSPEC & 5214102000 & 115088 & Autotroof         & Phaeocystis     \\ \hline -->
+<!-- Plagiogrammopsis vanheurckii              & PLMOVANH & 5232114040 & 149057 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Plagiotropis                              & PLTR     & 99999X0102 & 149516 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Planctonema                               & PLNESPEC & 5116105000 & 162715 & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Planktothrix agardhii                     & PLANAGAR & 5614705040 & 146552 & Autotroof         & Blauwwieren     \\ \hline -->
+<!-- Pleurosigma                               & PLMASPEC & 5232422000 & 149181 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Pleurosigma affine                        & PLMAAFFI & 5232422120 & 149182 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Pleurosigma angulatum                     & PLMAANGU & 5232422030 & 149183 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Pleurosigma planctonicum                  & PLMAPLAN & 5232422160 & 231883 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Pleurosigma simonsenii (M)                & PLMASIMO &            & 231884 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Podosira stelliger                        & PODOSTEL & 5231107020 & 149060 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Polykrikos                                & POKRSPEC & 5252201000 & 109485 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Polykrikos schwartzii                     & POKRSCHW & 5252201010 & 341581 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Prasinophyceae                            & PRASINAE & 5140000000 & 17329  & Autotroof         & Groenwieren     \\ \hline -->
+<!-- Preperidinium meunierii                   & PREPMEUN & 5252702111 & 109927 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Prorocentrum                              & PRORSPEC & 5251102000 & 109566 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Prorocentrum aporum                       & PRORAPOR & 5251102060 & 110291 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Prorocentrum balticum                     & PRORBALT & 5251101010 & 110293 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Prorocentrum lima                         & PRORLIMA & 5251102030 & 110301 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Prorocentrum micans                       & PRORMICA & 5251102010 & 110303 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Prorocentrum minimum                      & PRORMINI & 5251102080 & 110304 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Prorocentrum scutellum                    & PRORSCUT & 5251102070 & 110314 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Prorocentrum triestinum                   & PRORTRIE & 5251102020 & 110316 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Protaspis glans                           & PRTAGLAN & 5258101010 & 137294 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Proterythropsis                           & PRRY     &            & 231794 & Beide of onbekend & Dinoflagellaten \\ \hline -->
+<!-- Protoceratium reticulatum                 & PRCERETI & 5252901010 & 110321 & Autotroof         & Dinoflagellaten \\ \hline -->
+<!-- Protomonadales                            & PROTOMON & 6641000000 &        & Heterotroof       & Overig          \\ \hline -->
+<!-- Protoperidinium                           & PRPESPEC & 5252713000 & 109553 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium achromaticum              & PRPEACHR & 5252703010 & 110205 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium bipes                     & PRPEBIPE & 5252713010 & 110208 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium brevipes                  & PRPEBREV & 5252713020 & 110210 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium cerasus                   & PRPECERA & 5252713030 & 162749 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium claudicans                & PRPECLAU & 5252703280 & 163862 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium conicoides                & PRPECOCO & 5252703290 & 110212 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium conicum                   & PRPECOCU & 5252713040 & 110213 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium curvipes                  & PRPECURV & 5252703300 & 163934 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium denticulatum              & PRPEDENT & 5252703310 & 110216 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium depressum                 & PRPEDEPR & 5252713060 & 110217 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium divergens                 & PRPEDIVE & 5252713080 & 110219 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium excentricum               & PRPEEXCE & 5252703320 & 110220 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium granii                    & PRPEGRAN & 5252713100 & 110223 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium leonis                    & PRPELEON & 5252703330 & 110229 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium marielebouriae            & PRPEMARI & 5252713110 & 110231 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium minutum                   & PRPEMINU & 5252703530 & 110233 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium mite                      & PRPEMITE & 5252703340 & 110234 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium oblongum                  & PRPEOBLO & 5252703350 & 110238 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium oblongum cf               & PRPEOBCF & 5252703990 & 110238 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium oblongum var. latidorsale & PROTOBLO & 5252703351 & 233231 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium obtusum                   & PRPEOBTU & 5252713120 & 110239 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium ovatum                    & PRPEOVAT & 5252713140 & 110241 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium pallidum                  & PRPEPALL & 5252703360 & 110244 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium parthenopes               & PRPEPART & 5252703420 & 233050 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium pellucidum                & PRPEPELL & 5252703370 & 110245 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium pentagonum                & PRPEPENT & 5252703390 & 110247 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium punctulatum               & PRPEPUNC & 5252703400 & 110248 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium pyriforme                 & PRPEPYRI & 5252713150 & 110249 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium steinii                   & PRPESTEI & 5252713170 & 110257 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium subinerme                 & PRPESUIN & 5252703630 & 110259 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium thorianum                 & PRPETHOR & 5252703410 & 110260 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Protoperidinium thulense                  & PRPETHUL & 5252713190 & 232861 & Heterotroof       & Dinoflagellaten \\ \hline -->
+<!-- Prymnesiaceae                             & PRYMNEAE & 5211500000 & 115073 & Autotroof         & Overig          \\ \hline -->
+<!-- Pseudanabaena                             & PSDAANBA & 5614707000 & 177588 & Autotroof         & Blauwwieren     \\ \hline -->
+<!-- Pseudochattonella (F)                     & PSEC     &            & 531445 & Autotroof         & Overig          \\ \hline -->
+<!-- Pseudokephyrion                           & PSKESPEC & 5211210000 & 162741 & Autotroof         & Overig          \\ \hline -->
+<!-- Pseudo-nitzschia                          & PSNISPEC & 5232606000 & 149151 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Pseudo-nitzschia americana complex        & PSNIAMCO & 5232606061 & 478556 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Pseudo-nitzschia delicatissima            & PSNIDELI & 5232606010 & 149153 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Pseudo-nitzschia delicatissima cf         & PSNIDECF & 5232606980 & 149153 & Autotroof         & Diatomeeën      \\ \hline -->
+<!-- Pseudo-nitzschia fraudulenta         & PSNIFRAU & 5232606020 & 246606 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Pseudo-nitzschia granii              & PSNIGRAN & 5232606040 & 375883 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Pseudo-nitzschia pseudodelicatissima & PSNIPSDE & 5232606030 & 156548 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Pseudo-nitzschia pungens             & PSNIPUNG & 5232604790 & 160528 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Pseudo-nitzschia pungens cf          & PSNIPUNG & 5232606990 & 160528 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Pseudo-nitzschia seriata             & PSNISERI & 5232604850 & 149152 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Pseudo-nitzschia sp 269014           & PSNISPEA & 5232606060 & 149151 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Pseudo-nitzschia subpacifica         & PSNISUBP & 5232606090 & 418222 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Pseudo-nitzschia turgidula           & PSNITURG & 5232606050 & 246609 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Pseudo-nitzschia turgidula cf        & PSNITUCF & 5232606100 & 246609 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Pseudopedinella                      & PSPESPEC & 5211604000 & 160599 & Autotroof   & Overig          \\ \hline -->
+<!-- Pseudopodosira westii                & PSOPWEST & 99999X0107 & 577639 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Pteromonas                           & PTERSPEC & 5111203000 & 172469 & Autotroof   & Groenwieren     \\ \hline -->
+<!-- Pterosperma                          & PTSPSPEC & 5141203000 & 160595 & Autotroof   & Groenwieren     \\ \hline -->
+<!-- Pterosperma parallelum (H)           & PTERPARA & 5141203040 & 341609 & Autotroof   & Overig          \\ \hline -->
+<!-- Pyramimonas                          & PYRASPEC & 5141201000 & 134529 & Autotroof   & Groenwieren     \\ \hline -->
+<!-- Pyramimonas longicauda               & PYRALONG & 5140201070 & 160513 & Autotroof   & Groenwieren     \\ \hline -->
+<!-- Pyrophacus horologium                & PYPHHORO & 5253501010 & 110266 & Autotroof   & Dinoflagellaten \\ \hline -->
+<!-- Raphidophyceae                       & RADOPHEA & 6630000000 & 160581 & Autotroof   & Overig          \\ \hline -->
+<!-- Rhabdonema                           & RBNESPEC & 5232115000 & 157072 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Rhaphoneis                           & RHAPSPEC & 5232116000 & 149065 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Rhaphoneis amphiceros                & RHAPAMPH & 5232116010 & 149066 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Rhizosolenia                         & RZSOSPEC & 5231406000 & 149069 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Rhizosolenia alata                   & RZSOALAT & 5231406010 & 149168 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Rhizosolenia delicatula              & RZSODELI & 5231406030 & 149112 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Rhizosolenia fragilissima            & RZSOFRAG & 5231406060 & 149310 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Rhizosolenia hebetata                & RZSOHEBE & 5231406070 & 149070 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Rhizosolenia hebetata f. semispina   & RZSOHEse & 5231406071 & 149071 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Rhizosolenia imbricata               & RZSOIMBR & 5231406080 & 149116 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Rhizosolenia indica                  & RZSOINDI & 5231406150 & 345513 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Rhizosolenia pungens                 & RZSOPUNG & 5231406160 & 547544 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Rhizosolenia robusta                 & RZSOROBU & 5231406110 & 149311 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Rhizosolenia setigera                & RZSOSETI & 5231406120 & 149115 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Rhizosolenia shrubsolei              & RZSOSHRU & 5231406081 & 149116 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Rhizosolenia similoides              & RZSOSIMI & 5231406170 & 160531 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Rhizosolenia spec 6989               & RZSOSPEA & 5231406990 &        & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Rhizosolenia stolterfothii           & RZSOSTOL & 5231406130 & 149113 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Rhizosolenia styliformis             & RZSOSTYL & 5231406140 & 149629 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Roperia tesselata                    & ROPETESS & 5231304010 & 149105 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Scenedesmaceae {[}1{]}               & SCES     & 99999X0110 & 160541 & Autotroof   & Groenwieren     \\ \hline -->
+<!-- Scenedesmus                          & SCENSPEC & 5115211000 & 160602 & Autotroof   & Groenwieren     \\ \hline -->
+<!-- Scenedesmus bicaudatus               & SCENBICA & 5115211120 & 572077 & Autotroof   & Groenwieren     \\ \hline -->
+<!-- Scenedesmus brevispina               & SCENBREV & 5115211160 &        & Autotroof   & Groenwieren     \\ \hline -->
+<!-- Scenedesmus falcatus                 & SCENFALC & 5115211370 & 162928 & Autotroof   & Groenwieren     \\ \hline -->
+<!-- Scenedesmus intermedius              & SCENINTE & 5115211450 & 248159 & Autotroof   & Groenwieren     \\ \hline -->
+<!-- Scenedesmus lefevrei                 & SCENLEFE & 5115211470 & 248160 & Autotroof   & Groenwieren     \\ \hline -->
+<!-- Scenedesmus quadricauda              & SCENQUAD & 5115211620 & 248156 & Autotroof   & Groenwieren     \\ \hline -->
+<!-- Scrippsiella                         & SCRISPEC & 5252712000 & 109545 & Autotroof   & Dinoflagellaten \\ \hline -->
+<!-- Scrippsiella trochoidea              & SCRITROC & 5252702190 & 110172 & Autotroof   & Dinoflagellaten \\ \hline -->
+<!-- Skeletonema                          & SKELSPEC & 5231109000 & 149073 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Skeletonema costatum                 & SKELCOST & 5231109010 & 149074 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Skeletonema potamos                  & SKELPOTA & 5231109020 & 163390 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Skeletonema subsalsum                & SKELSUSA & 5231109030 & 149075 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Snowella                             & SNOWSPEC & 5611121000 & 146644 & Autotroof   & Blauwwieren     \\ \hline -->
+<!-- Spatulodinium pseudonoctiluca        & SPATPSNO & 5252303010 & 109923 & Heterotroof & Dinoflagellaten \\ \hline -->
+<!-- Spirulina                            & SPRUSPEC & 5614710000 & 146541 & Autotroof   & Blauwwieren     \\ \hline -->
+<!-- Stauroneis membranacea               & STNEMEMB & 5232418170 & 149145 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Stephanodiscus                       & STDISPEC & 5231110000 & 149079 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Stephanodiscus hantzschii            & STDIHANT & 5231110030 & 149080 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Stephanopyxis palmeriana             & STPYPALM & 5231111010 & 231888 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Stephanopyxis turris                 & STPYTURR & 5231111020 & 149631 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Striatella unipunctata               & STRIUNIP & 5232117020 & 149177 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Surirella                            & SURISPEC & 5232704000 & 149084 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Surirella fastuosa                   & SURIFAST & 5232704090 & 149615 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Telonema subtilis                    & TEMASUBT & 6641305010 & 118075 & Heterotroof & Overig          \\ \hline -->
+<!-- Tetraedron                           & TEONSPEC & 5115115000 & 178949 & Autotroof   & Groenwieren     \\ \hline -->
+<!-- Tetraselmis                          & TESESPEC & 5141103000 & 134526 & Autotroof   & Groenwieren     \\ \hline -->
+<!-- Tetrastrum                           & TETRSPEC & 5115214000 & 162934 & Autotroof   & Groenwieren     \\ \hline -->
+<!-- Tetrastrum staurogeniaeforme         & TETRSTAU & 5115214090 & 162935 & Autotroof   & Groenwieren     \\ \hline -->
+<!-- Thalassionema frauenfeldii           & THNEFRAU & 5232121020 & 176352 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Thalassionema nitzschioides          & THNENITZ & 5232121010 & 149093 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Thalassiosira                        & THSISPEC & 5231112000 & 148912 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Thalassiosira angstii                & THSIANGS & 5231112130 & 148936 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Thalassiosira anguste-lineata        & THSIANTE & 5231102020 & 148914 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Thalassiosira baltica                & THSIBALT & 5231112010 & 156690 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Thalassiosira baltica var. batava    & THSIBAba & 5231112011 &        & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Thalassiosira decipiens              & THSIDECI & 5231112020 & 148913 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Thalassiosira delicatula             & THSIDELI & 5231112250 &        & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Thalassiosira eccentrica             & THSIECCE & 5231101050 & 148922 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Thalassiosira fallax                 & THSIFALL & 5231112240 & 149099 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Thalassiosira gravida                & THSIGRAV & 5231112040 & 149102 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Thalassiosira hendeyi                & THSIHEND & 5231112260 & 148923 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Thalassiosira lacustris              & THSILACU & 5231101100 & 163494 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Thalassiosira leptopa                & THSILEPT & 5231101110 & 149103 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Thalassiosira levanderi              & THSILEVA & 5231112150 & 149308 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Thalassiosira nodulolineata          & THSINODU & 5231112310 & 148929 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Thalassiosira nordenskioeldii        & THSINORD & 5231112080 & 148931 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Thalassiosira rotula                 & THSIROTU & 5231112100 & 148942 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Thalassiosira sp 1                   & THSISSPA & 5231112001 & 148912 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Thalassiosira subtilis               & THSISUTI & 5231112110 & 149101 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Torodinium                           & TOROSPEC & 5252107000 & 109479 & Autotroof   & Dinoflagellaten \\ \hline -->
+<!-- Torodinium robustum                  & TOROROBU & 5252107010 & 109889 & Autotroof   & Dinoflagellaten \\ \hline -->
+<!-- Trachelomonas (B)                    & TRLOSPEC & 6611208000 & 163247 & Autotroof   & Groenwieren     \\ \hline -->
+<!-- Trachydiscus                         & TRDISPEC & 5224109000 &        & Autotroof   & Overig          \\ \hline -->
+<!-- Trachyneis aspera                    & TRNEASPE & 5232428010 & 149147 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Triceratium alternans                & TRICALTE & 5231610010 & 149655 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Triceratium favus                    & TRICFAVU & 5231610030 & 149170 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Tropidoneis                          & TROPSPEC & 5232429000 & 149518 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Tryblionella coarctata               & TRYBCOAR & 99999X0114 & 176409 & Autotroof   & Diatomeeën      \\ \hline -->
+<!-- Ulothricaceae                        & ULOTHRAE & 5116100000 & 143790 & Autotroof   & Groenwieren     \\ \hline -->
+<!-- Ulothrix                             & ULOTSPEC & 5116110000 & 144287 & Autotroof   & Groenwieren     \\ \hline -->
+<!-- Ulotrichales                         & ULOTHRIC & 5116000000 & 824    & Autotroof   & Groenwieren     \\ \hline -->
+<!-- Warnowia                             & WARNSPEC & 5252110000 & 109491 & Heterotroof & Dinoflagellaten \\ \hline -->
+<!-- \end{longtable} -->

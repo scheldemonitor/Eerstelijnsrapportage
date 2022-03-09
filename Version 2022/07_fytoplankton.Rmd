@@ -1,0 +1,450 @@
+
+```{r setupFytoplankton, include=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE,
+	out.width = "85%",
+	fig.align='center'
+)
+```
+
+```{r laadData}
+
+fytoplankton <- read_delim("n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/fytoplankton.csv", delim = ";")
+
+## FIX STATIONNAMES (ZIJN NU SOMS CODES, SOMS NAMEN). TERUGMELDEN AAN VLIZ EN RWS !!!!
+
+fytoplankton <- fytoplankton %>%
+  mutate(stationname = case_when(
+    grepl(pattern = "schaar", stationname, ignore.case = T) ~ "Schaar van Ouden Doel",
+    grepl(pattern = "hans", stationname, ignore.case = T) ~ "Hansweert Geul",
+    grepl(pattern = "vliss", stationname, ignore.case = T) ~ "Vlissingen Boei SSVH",
+    grepl(pattern = "walcheren 2 ", stationname, ignore.case = T) | stationname == "WALCRN2" ~ "Walcheren 2 km uit de kust",
+    grepl(pattern = "walcheren 20", stationname, ignore.case = T) | stationname == "WALCRN20" ~ "Walcheren 20 km uit de kust"
+  ))
+
+specieslist <- readxl::read_excel(
+  "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/generic/Fytoplankton/Specieslist_zelfuitgebreid_jh.xlsx",
+  col_names = F)
+
+names(specieslist) <- c(
+  "soortnaam",
+  "soortcode",
+  "TWN",
+  "TWN2",
+  "soortnaam2",
+  "trofie",
+  "groep",
+  "groepcode"
+)
+
+df.fyt <- fytoplankton %>% 
+  left_join(specieslist, by = c(scientificname = "soortnaam"))
+
+df.fyt.groep <- df.fyt %>% 
+  drop_na(groep) %>%
+  unite("groep", c(trofie, groep), sep = " - ") %>%
+  group_by(stationname, observationdate, groep) %>% 
+  summarize(value = sum(value)/1e6) %>%
+  select(
+    stationname,
+    datetime = observationdate,
+    parametername = groep,
+    value
+  ) %>% ungroup()
+
+dataJaar <- 2020
+```
+
+# Fytoplankton {#fytoplankton}
+
+## Indeling soorten {#fyto-soorten}
+
+De fytoplankton data bestaan uit bijna 500 verschillende soorten. Om deze toch op een compacte en zinvolle manier te kunnen presenteren en analyseren, wordt een indeling gemaakt, waarbij meerdere soorten gegroepeerd kunnen worden. In eerste instantie is een opdeling naar trofiegraad, autotroof of heterotroof, voor de hand liggend. Er zijn echter ook groepen, vooral bij de 'Dinoflagellaten' ('pantserwieren'), bijvoorbeeld de *Gymnodiniaceae*, waarbij het niet altijd duidelijk is wat de trofiegraad is. Daarmee bestaat er nog een derde categorie beide of onbekend, die we mixotroof noemen. Ook de (soms grote) groep ondetermineerbare algen valt in deze categorie. 
+
+Ook op taxonomisch niveau is een opdeling zinvol. De belangrijkste groep binnen het fytoplankton in de Westerschelde wordt gevormd door de 'Diatomeeën' oftewel 'kiezelwieren'. De 'Dinoflagellaten' oftewel 'pantserwieren' zijn wat betreft aantallen veel minder belangrijk. Een belangrijke voorjaarssoort in het mondingsgebied van de Westerschelde is *Phaeocystis Globosa*, die als aparte groep ‘Phaeocystis’ wordt meegenomen. Alleen op de locatie Schaar van Ouden Doel vormen grote aantallen 'Blauwwieren' en 'Groenwieren' soms een belangrijk deel van het fytoplankton, vandaar dat deze ook onderscheiden zijn. Voor de 'Groenwieren' is er van uitgegaan dat deze worden gevormd door de *Chlorophyceaea*, de *Prasinophyceae* en de *Euglenophyceae* (@Tomas1997), alhoewel (@Hoek1995) de *Euglenophycea* weer buiten de groenwieren plaatsen. Soorten die buiten de hierboven genoemde groepen vallen zijn samengenomen als de groep 'Overig'. Niet alle groepen zijn van hetzelfde taxonomische niveau, maar deze indeling is in eerste instantie wel de meest pragmatische. De heterotrofe organismen bevatten wel de heterotrofe 'Dinoflagellaten', maar niet de ciliaten (met uitzondering van *Myrionecta Rubra*). *Myrionecta rubra* is een ciliaat (een dier, dus heterotroof) die in de geannoteerde soortenlijst 1990-2008 (@Koeman2009) toch als autotroof is ingedeeld vanwege de in het dier aanwezige endosymbiontische algen. Bij de verdere indeling is in de tabel (zie Bijlage \@ref(BijlageC-fytoplankton)) *Myrionecta Rubra* geplaatst onder 'Heterotroof - Overig'.
+
+Bovenstaande leidt tot de volgende pragmatische indeling, gepresenteerd in Tabel \@ref(tab:indelingFytoplankton). Deze indeling is opgesteld door Bert Wetsteijn (RWS-WVL).
+
+<!-- \begin{table}[h!]  -->
+<!-- \centering -->
+<!-- \caption[Groepsindeling fytoplankton]{Groepsindeling fytoplankton. Getallen tussen haakjes is de nummering per gedetermineerde groep van deze Eerstelijnsrapportage} -->
+<!-- \label{fytoplankton_indelnig} -->
+<!-- \begin{tabular}{c | c | cl} -->
+<!--   & Trofiegraad         &    \\ -->
+<!--   \rowcolor[HTML]{EFEFEF} -->
+<!-- Autotroof           & Heterotroof         & Mixotroof   \\ -->
+<!-- Blauwwieren (1)      	& Dinoflagellaten (7) & Dinoflagellaten (9) \\ -->
+<!-- Diatomeeën  (2)	 		& Overig (8)          & Overig (10)         \\ -->
+<!-- Dinoflagellaten (3)     &                     &                     \\ -->
+<!-- Phaeocystis (4)     		&                     &                     \\ -->
+<!-- Groenwieren (5)     	&                     &                     \\ -->
+<!-- Overig (6)          		&                     &                     -->
+<!-- \end{tabular} -->
+<!-- \end{table} -->
+
+```{r indelingFytoplankton}
+# dt <- data.frame(
+#   col1 = c("Blauwwieren (1)","Diatomeeën (2)","Dinoflagellaten (3)","Phaeocystis (4)","Groenwieren (5)","Overig (6)"),
+#   col2 = c("Dinoflagellaten (7)","Overig (8)","","","",""),
+#   col3 = c("Dinoflagellaten (9)","Overig (10)","","","","")
+# )
+# knitr::kable(dt, col.names = c("Autotroof","Heterotroof","Mixotroof"), caption = "Groepsindeling fytoplankton. Getallen tussen haakjes is de nummering per gedetermineerde groep van deze Eerstelijnsrapportage.")
+
+df.fyt %>% 
+  distinct(scientificname, trofie, groep) %>%
+  group_by(trofie, groep) %>% 
+  summarize(n = n()) %>% 
+  pivot_wider(id_cols = groep, names_from = trofie, values_from = n, values_fill = 0) %>% 
+  knitr::kable(caption = "Aantal soorten per groep en trofieniveau")
+```
+
+## Informatie over de metingen {#fyto-info-metingen}
+
+### Stations en jaren {#fyto-metingen-stations}
+
+Fytoplankton is gemeten op de stations Schaar van Ouden Doel, Hansweert geul, Vlissingen boei SSVH, Walcheren 2 km uit de kust en Walcheren 20 km uit de kust, zie Figuur \@ref(fig:meetstationsFyto). Er is meetdata van meer dan 500 soorten fytoplanton over een periode van 1996 tot en met `r dataJaar` voor alle stations. Voor 2015 is geen data gemeten bij Walcheren 2 km uit de kust en Walcheren 20 km uit de kust.
+
+Opvallend is dat bij ieder station na 2008  minder fytoplankton in de categorien heterotroof en mixotroof overig is gemeten. Om de oorzaak vast te stellen is vervolgonderzoek noodzakelijk.
+
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Meetstations_fyto.png} -->
+<!--  \caption{Ligging van de meetstations voor het fytoplankton} -->
+<!-- \label{fig:meetstations_fyto} -->
+<!-- \end{figure}  -->
+
+```{r meetstationsFyto, fig.cap="Ligging van de meetstations voor fytoplankton"}
+# knitr::include_graphics("Figuren/Meetstations_fyto.png")
+plotLocations(df.fyt)
+```
+
+### Figuren {#fyto-metingen-figuren}
+
+In de figuren worden per station de gesommeerde hoeveelheid algen per groep per jaar gepresenteerd. Het jaartotaal is de sommatie van zomer (groen)- en wintertotaal (rood). Het zomertotaal bevat de sommatie van alle algen in de groep in de zomerperiode (1 maart t/m 30 september). Het wintertotaal loopt van 1 januari tot en met 28 februari en van 1 oktober tot en met 31 december. Daarnaast is er en blauwe lijn toegevoegd die de gemiddelde waarde over de gehele periode weergeeft. Als kwantitatieve onderbouwing zijn ook tabellen met gemiddelde, minimale en maximale waardes per jaar toegevoegd. 
+
+### Trendbreuk {#fyto-metingen-trendbreuk}
+
+Bij de interpretatie van de MWTL biomonitoringsgegevens fytoplankton zout dient rekening te worden gehouden met een trendbreuk. Deze trendbreuk wordt veroorzaakt doordat vanaf het monsterjaar 2000 de monsters door een ander bureau worden geanalyseerd en gerapporteerd dan in de periode daarvoor. Over deze trendbreuk wordt in verschillende stukken ingegaan (@Peperzak2010, @Zuur). Deze trendbreuk is duidelijk terug te zien de in figuren op de volgende pagina's.
+
+## Resultaten per station {#fyto-resultaten-station}
+
+### Schaar van Ouden Doel {#fyto-resultaten-schaar}
+
+Bij Schaar van Ouden Doel zien we dat vooral de blauwwieren en groenwieren in hoge aantallen worden gevonden, deze groepen bevatten in de Westerschelde veel zoetwatersoorten (zie Tabel \@ref(tab:fytoSchaarJaarTab)). De aantallen zijn het grootst in de zomer, zo laat het kleine verschil tussen het zomertotaal en jaartotaal zien (zie Figuur \@ref(fig:fytoSchaarJaar)), groene vergeleken met rode balkjes). Phaeocystis worden incidenteel waargenomen bij Schaar van Ouden Doel, de saliniteit is te laag voor deze mariene soort. De diatomeeën laten in 2011 een grote piek zien. In 2018 is het aantal autotrofe Dinoflagelaten al een stuk minder dan in 2016 toen er een fors aantal waren gevonden. De trend lijkt echter nog wel aanwezig met een toename sinds 2008-2010. De trends van de overige autotrofe soorten lijken niet duidelijk aanwezig. De blauwwieren vormen in 2016 hierop de uitzondering en hiervan zijn er sinds 2014 duidelijk minder geconstateerd. De groenwieren laten in 2016 t/m 2019 een opvallend lage waarde zien ten opzichte van 2015. De overige heterotrofen laten vanaf circa 2003 een afname zien, die ook terug te zien is bij de groep mixotrofen.
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering  -->
+<!-- \input{../Figuren/Fytoplankton/SchaarvanOudenDoel_meanvalues.tex}  -->
+<!-- \caption[Jaarwaardes voor de fytoplankton bij Schaar van Ouden Doel]{Jaarwaardes voor de tien fytoplanktongroepen bij station Schaar van Ouden Doel. Gesommeerde waardes zijn in miljoenen (10 M of $10^7$ per L).}  -->
+<!-- \label{tab:fyto_Schaar_jaar}  -->
+<!-- \end{table}  -->
+
+```{r fytoSchaarJaarTab}
+# dt <- tex2dt("Figuren/Fytoplankton/SchaarvanOudenDoel_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Groepsnaam","Gemiddelde","Maximum","Minimum"),
+#              caption = "Jaarwaardes voor de tien fytoplanktongroepen bij station Schaar van Ouden Doel. Gesommeerde waardes zijn in miljoenen (10 M of $10^7$ per L).")
+
+fytStatTable(df.fyt.groep,  statname = 'Schaar van Ouden Doel') %>%
+  select(-stationname) %>%
+  rename(groepsnaam = parametername) %>% 
+  knitr::kable(caption = "Gemiddeld celaantal per jaar en groep en trofieniveau bij Schaar van Ouden Doel.")
+```
+
+<!-- \begin{figure}[h!]  -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Fytoplankton/SchaarvanOudenDoel_jaar.png}  -->
+<!-- \caption[Jaarlijks fytoplankton bij Schaar van Ouden Doel]{Jaarlijkse waardes voor fytoplankton in zomer (groen), winter (rood) en gemiddeld (blauw) voor station Schaar van Ouden Doel. De y-as representeert de maximaal gesommeerde gemeten waarde.}  -->
+<!-- \label{fig:fyto_Schaar_jaar}  -->
+<!-- \end{figure}  -->
+
+```{r fytoSchaarJaar, fig.height=8, fig.width=8, fig.cap="Jaarlijkse waardes voor fytoplankton in zomer (groen), winter (rood) en gemiddeld (blauw) voor station Schaar van Ouden Doel. De y-as representeert de maximaal gesommeerde gemeten waarde."}
+
+# knitr::include_graphics("Figuren/Fytoplankton/SchaarvanOudenDoel_jaar.png")
+
+plotTrendFyto(df.fyt.groep, "Schaar van Ouden Doel")
+```
+
+### Hansweert geul {#fyto-resultaten-hansweert}
+
+Voor de blauwwieren bij Hansweert geul zien we ongeveer hetzelfde beeld als bij Schaar van Ouden Doel, wel zijn de aantallen veel lager, zie Tabel \@ref(tab:fytoHansJaarTab). Ook aantallen groenwieren zijn fors lager bij Hansweert geul. De groenwieren komen vooral in de zomer voor, de blauwwieren door het jaar heen, zie Figuur \@ref(fig:fytoHansJaar). Diatomeeën komen bij Hansweert geul juist weer meer voor dan bij Schaar van Ouden Doel. We zien over het algemeen dat de aanwezigheid van diatomeeën vrij constant over de tijd is (net als bij Schaar van Ouden Doel), alleen in 2009 en 2010 kwam deze groep minder voor. Phaeocystis komt incidenteel voor, enkel in de zomerperiode, maar wel in andere jaren dan bij Schaar van Ouden Doel en in veel grotere aantallen, omdat de saliniteit hoger is in Hansweert. In 2016 zijn er erg veel autotrofe dinoflagellaten bij Hansweert geul gevonden, na een negatieve trend sinds 2012. Aantallen zijn ongeveer gelijk aan die bij Schaar van Ouden Doel. Ze zijn voornamelijk waargenomen in de zomerperiode. De overige autotrofen komen vooral in de zomer voor en zijn sinds 2002 wel meer gaan voorkomen bij Hansweert geul. In de periode 2011 tot 2015 zijn er zeer veel overige autotrofe soorten waargenomen. De mixotrofe dinoflagellaten kwamen na 2 jaar van afwezigheid (2009 en 2010) de laatste 5 jaar gemiddeld voor. In 2016 is er weer een sterke afname. Daarvoor werden variërende aantallen gemeten. De overige heterotrofen zijn vooral aanwezig geweest tussen 2000 en 2008. 
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering  -->
+<!-- \input{../Figuren/Fytoplankton/Hansweertgeul_meanvalues.tex}  -->
+<!-- \caption[Jaarwaardes voor de fytoplankton bij Hansweert Geul]{Jaarwaardes voor de tien fytoplanktongroepen bij station Hansweert Geul.  Gesommeerde waardes zijn in miljoenen (10 M of $10^7$ per L).} -->
+<!-- \label{tab:fyto_hans_jaar}  -->
+<!-- \end{table}  -->
+
+```{r fytoHansJaarTab}
+# dt <- tex2dt("Figuren/Fytoplankton/Hansweertgeul_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Groepsnaam","Gemiddelde","Maximum","Minimum"),
+#              caption = "Jaarwaardes voor de tien fytoplanktongroepen bij station Hansweert Geul. Gesommeerde waardes zijn in miljoenen (10 M of $10^7$ per L).")
+#    
+#              
+fytStatTable(df.fyt.groep,  statname = 'Hansweert Geul') %>%
+  select(-stationname) %>%
+  rename(groepsnaam = parametername) %>% 
+  knitr::kable(caption = "Gemiddeld celaantal per jaar en groep en trofieniveau bij Hansweert Geul.")
+```
+
+<!-- \begin{figure}[h!]  -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Fytoplankton/Hansweertgeul_jaar.png}  -->
+<!-- \caption[Jaarlijks fytoplankton bij Hansweert Geul]{Jaarlijks waardes voor fytoplankton in zomer (groen), winter (rood) en gemiddelde over totale periode (blauw onderbroken lijn) voor station Hansweert Geul. De y-as representeert de maximaal gesommeerde gemeten waarde.}  -->
+<!-- \label{fig:fyto_hans_jaar}  -->
+<!-- \end{figure}  -->
+
+```{r fytoHansJaar, fig.height=8, fig.width=8, fig.cap="Jaarlijkse waardes voor fytoplankton in zomer (groen), winter (rood) en gemiddeld (blauw) voor station Hansweert geul. De y-as representeert de maximaal gesommeerde gemeten waarde."}
+# knitr::include_graphics("Figuren/Fytoplankton/Hansweertgeul_jaar.png")
+
+plotTrendFyto(df.fyt.groep, "Hansweert Geul")
+
+```
+
+### Vlissingen boei SSVH {#fyto-resultaten-vlis}
+
+Bij Vlissingen boei SSVH vormen blauwwieren en groenwieren maar een hele kleine groep, zie Tabel \@ref(tab:fytoVlisJaarTab). In 2003 respectievelijk 2002 is een piek waarneembaar, zie Figuur \@ref(fig:fytoVlisJaar). De blauwwieren en groenwieren komen bij Vlissingen boei SSVH in veel mindere mate voor dan bij Schaar van Ouden Doel en Hansweert geul, doordat er hier meer mariene en minder zoetwatersoorten zijn. De diatomeeën variëren van jaar tot jaar komen vooral in de zomer voor. Sinds 2014 was er een positieve trend waarneembaar, maar in 2017 is deze doorbroken door een aanzienlijk lager aantal. In 2018 is de waarde wel weer terug naar ongeveer hetzelfde aantal als voor 2017, maar in 2019 is dit weer lager. Phaeocystis kwam hier meer voor dan bij Hansweert geul en Schaar van Ouden Doel. In 2012 is phaeocystis weer waargenomen bij Vlissingen boei SSVH na enkele jaren van afwezigheid, met een incidentele piek in 2013. In 2019 is weer een relatief hoog aantal vastgesteld. In 2012 en 2016 zien we in de zomer een piek in de autotrofe dinoflagellaten. De heterotrofe dinoflagellaten laten een vrij grote variabiliteit van jaar tot jaar zien zonder duidelijk aanwijsbare trend. Ook de Dinoflagellaten met mixorofe trofiegraad laten geen duidelijke trend zien. De groep overig met autotrofe trofiegraad laat in 2016 een piek zien. De groep met mixotrofe trofiegraad is wel aanwezig in de periode 2011-2016, maar lang niet in zulke grote aantallen als in de periode 2000-2005.
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering  -->
+<!-- \input{../Figuren/Fytoplankton/VlissingenboeiSSVH_meanvalues.tex}  -->
+<!-- \caption[Jaarwaardes voor de fytoplankton bij Vlissingen boei SSVH]{Jaarwaardes voor de tien fytoplanktongroepen bij station Vlissingen boei SSVH.  Gesommeerde waardes zijn in miljoenen (10 M of $10^7$ per L).}  -->
+<!-- \label{tab:fyto_vlis_jaar}  -->
+<!-- \end{table}  -->
+
+```{r fytoVlisJaarTab}
+# dt <- tex2dt("Figuren/Fytoplankton/VlissingenboeiSSVH_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Groepsnaam","Gemiddelde","Maximum","Minimum"),
+#              caption = "Jaarwaardes voor de tien fytoplanktongroepen bij station Vlissingen boei SSVH. Gesommeerde waardes zijn in miljoenen (10 M of $10^7$ per L).")
+
+fytStatTable(df.fyt.groep,  statname = 'Vlissingen Boei SSVH') %>%
+  select(-stationname) %>%
+  rename(groepsnaam = parametername) %>% 
+  knitr::kable(caption = "Gemiddeld celaantal per jaar en groep en trofieniveau bij Vlissingen Boei SSVH.")
+```
+
+<!-- \begin{figure}[h!]  -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Fytoplankton/VlissingenboeiSSVH_jaar.png}  -->
+<!-- \caption[Jaarlijks fytoplankton bij Vlissingen boei SSVH]{Jaarlijks waardes voor fytoplankton in zomer (groen), winter (rood) en gemiddelde over totale periode (blauw onderbroken lijn) voor station Vlissingen boei SSVH. De y-as representeert de maximaal gesommeerde gemeten waarde.}  -->
+<!-- \label{fig:fyto_vlis_jaar}  -->
+<!-- \end{figure}  -->
+
+```{r fytoVlisJaar, fig.height=8, fig.width=8, fig.cap="Jaarlijkse waardes voor fytoplankton in zomer (groen), winter (rood) en gemiddeld (blauw) voor station Vlissingen boei SSVH. De y-as representeert de maximaal gesommeerde gemeten waarde."}
+# knitr::include_graphics("Figuren/Fytoplankton/VlissingenboeiSSVH_jaar.png")
+plotTrendFyto(df.fyt.groep, "Vlissingen Boei SSVH")
+```
+
+### Walcheren 2 km uit de kust {#fyto-resultaten-walch2km}
+
+Qua aantallen zitten er niet hele grote verschillen tussen de fytoplankton waarden bij Vlissingen boei SSVH en Walcheren 2 km uit de kust, zie Tabel \@ref(tab:fytoWal2JaarTab). Blauwwieren en groenwieren vertonen in enkele jaren een hoge waarde, voornamelijk in de zomerperiode (Figuur \@ref(fig:fytoWal2Jaar)). De diatomeeën tonen in het 2010 een hoge waarde, voor de rest fluctueren de waarden. Phaeocystis komt hier meer voor dan bij Hansweert geul en Schaar van Ouden Doel, omdat phaeocystis een mariene soort is. Er is een periode met geen waardes maar de aantallen kunnen sterk variëren van jaar tot jaar zonder een aanwijsbare trend. In 2019 werd een relatief hoge waarde gemeten. Heterotrofe dinoflagellaten komen redelijk constant over de tijd voor, maar de laatste jaren lijkt er een licht afnemende trend. Of dit binnen de variabiliteit valt of daadwerkelijk een trend is zal de komende jaren blijken. Voor dinoflagellaten waarvan de trofiegraad mixotroof is, is in 2008 en in 2013 een grote piek te zien. In 2019 is er een hoge waarde voor 'autotroof overig' De groep ‘heterotroof overig’ is sterk afgenomen na 2008, maar is in 2018 weer met een hogere hoeveelheid gemeten. De groep ‘overig’ met mixotrofe trofiegraad was voornamelijk aanwezig tussen 1999 en 2008. Wel werden ze eerder ook vrij veel in de winter waargenomen, maar nu niet meer. 
+
+*Voor 2015 was er geen fytoplankton data beschikbaar voor dit station.*
+
+
+
+```{r fytoWal2JaarTab}
+# dt <- tex2dt("Figuren/Fytoplankton/Walcheren2kmuitdekust_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Groepsnaam","Gemiddelde","Maximum","Minimum"),
+#              caption = "Jaarwaardes voor de tien fytoplanktongroepen bij station Walcheren 2km uit de kust. Gesommeerde waardes zijn in miljoenen (10 M of $10^7$ per L).")
+
+fytStatTable(df.fyt.groep,  statname = 'Walcheren 2 km uit de kust') %>%
+  select(-stationname) %>%
+  rename(groepsnaam = parametername) %>% 
+  knitr::kable(caption = "Gemiddeld celaantal per jaar en groep en trofieniveau bij Walcheren 2 km uit de kust.")
+```
+
+
+```{r fytoWal2Jaar, fig.height=8, fig.width=8, fig.cap="Jaarlijkse waardes voor fytoplankton in zomer (groen), winter (rood) en gemiddeld (blauw) voor station Walcheren 2km uit de kust. De y-as representeert de maximaal gesommeerde gemeten waarde."}
+# knitr::include_graphics("Figuren/Fytoplankton/Walcheren2kmuitdekust_jaar.png")
+plotTrendFyto(df.fyt.groep, "Walcheren 2 km uit de kust")
+```
+
+### Walcheren 20 km uit de kust {#fyto-resultaten-walch20km}
+
+Bij Walcheren 20 km uit de kust komt minder fytoplankton voor dan bij de andere stations, zie Tabel \@ref(tab:fytoWal20JaarTab). De groenwieren waren in 2002 goed vertegenwoordigd, maar zijn vanaf 2010 goeddeels verdwenen (Figuur \@ref(fig:fytoWal20Jaar)). Het is de vraag in hoeverre de piekwaarden van blauwwieren in 2010 en groenwieren in 2002 betrouwbare meetwaarden zijn, dit lijkt erg hoog voor een station zover uit de kust. Voor de diatomeeën zien we de laatste jaren voornamelijk waardes uit de zomer, met een grote piek in 2014 (compleet gemeten in de zomer). Phaeocystis is sinds 2012 weer waargenomen, nadat deze enkele jaren afwezig was. In 2018 en 2019 is een flink hoger aantal Phaeocystis gemeten dan in de voorgaande jaren. De autotrofe dinoflagellaten zijn sinds 2013 flink toegenomen ten opzichte van de jaren daarvoor. In 2018 werd zelfs de hoogste waarde gemeten over de hele meetperiode, maar in 2019 weer een relatief lage waarde. De overige autotrofen zijn in 2016 in grote hoeveelheden opgedoken maar in 2017 en 2018 weer terug naar het niveau van de jaren daarvoor. De overige heterotrofen nemen af sinds 2006.
+
+*Voor 2015 is er geen nieuwe fytoplankton data beschikbaar voor dit station.*
+
+<!-- \begin{table}[!ht] -->
+<!--  \centering  -->
+<!-- \input{../Figuren/Fytoplankton/Walcheren20kmuitdekust_meanvalues.tex}  -->
+<!-- \caption[Jaarwaardes voor de fytoplankton bij Walcheren 20km uit de kust]{Jaarwaardes voor de tien fytoplanktongroepen bij station Walcheren 20km uit de kust.  Gesommeerde waardes zijn in miljoenen (10 M of $10^7$ per L).}  -->
+<!-- \label{tab:fyto_wal20_jaar}  -->
+<!-- \end{table}  -->
+
+```{r fytoWal20JaarTab}
+# dt <- tex2dt("Figuren/Fytoplankton/Walcheren20kmuitdekust_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Groepsnaam","Gemiddelde","Maximum","Minimum"),
+#              caption = "Jaarwaardes voor de tien fytoplanktongroepen bij station Walcheren 20km uit de kust. Gesommeerde waardes zijn in miljoenen (10 M of $10^7$ per L).")
+
+fytStatTable(df.fyt.groep,  statname = 'Walcheren 20 km uit de kust') %>%
+  select(-stationname) %>%
+  rename(groepsnaam = parametername) %>% 
+  knitr::kable(caption = "Gemiddeld celaantal per jaar en groep en trofieniveau bij Walcheren 20 km uit de kust.")
+```
+
+<!-- \begin{figure}[h!]  -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Fytoplankton/Walcheren20kmuitdekust_jaar.png}  -->
+<!-- \caption[Jaarlijks fytoplankton bij Walcheren 20km uit de kust]{Jaarlijks waardes voor fytoplankton in zomer (groen), winter (rood) en gemiddelde over totale periode (blauw onderbroken lijn) voor station Walcheren 20km uit de kust. De y-as representeert de maximaal gesommeerde gemeten waarde.}  -->
+<!-- \label{fig:fyto_wal20_jaar}  -->
+<!-- \end{figure}  -->
+
+```{r fytoWal20Jaar, fig.height=8, fig.width=8, fig.cap="Jaarlijkse waardes voor fytoplankton in zomer (groen), winter (rood) en gemiddeld (blauw) voor station Walcheren 20km uit de kust. De y-as representeert de maximaal gesommeerde gemeten waarde."}
+# knitr::include_graphics("Figuren/Fytoplankton/Walcheren20kmuitdekust_jaar.png")
+plotTrendFyto(df.fyt.groep, "Walcheren 20 km uit de kust")
+```
+
+## Resultaten per groep {#fyto-resultaten-groep}
+
+### Autotroof - Blauwwieren {#fyto-resultaten-auto-blauw}
+
+In Figuur \@ref(fig:fyto1) is de ontwikkeling van de blauwwieren (autotroof) over de tijd voor alle stations weergegeven. De hoeveelheid gevonden blauwwieren kent een sterke fluctuatie over tijd. Voor 2000 werd een een stuk minder gevonden als gevolg van een andere analyse methode. Vervolgens worden er zeer hoge waardes (200M per L) gevonden tussen 2000-2004. Vandaag de dag is dit een minimaal een factor 10 lager, naast de incidentele piek van 2013 bij Schaar van Ouden Doel. Blauwwieren, met vooral zoetwatersoorten, worden voornamelijk gevonden bij station Hansweert geul en bij Schaar van de Ouden Doel. Er lijkt sinds 2013 een dalende trend te zijn ingezet.
+
+<!-- \begin{figure}[h!]  -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Fytoplankton/1_jaar.png}  -->
+<!-- \caption[Jaarlijks fytoplankton (autotroof - blauwwieren)]{Jaarlijks gesommeerde waardes voor fytoplankton (autotroof - blauwwieren) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer.}  -->
+<!-- \label{fig:fyto_1}  -->
+<!-- \end{figure}  -->
+
+```{r fyto1, fig.cap="Jaarlijks gesommeerde waardes voor fytoplankton (autotroof - blauwwieren) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer."}
+knitr::include_graphics("Figuren/Fytoplankton/1_jaar.png")
+```
+
+### Autotroof - Diatomeeën {#fyto-resultaten-auto-dia}
+
+In Figuur \@ref(fig:fyto2) is de ontwikkeling van de diatomeeën (autotroof) over de tijd voor alle stations weergegeven. Diatomeeën komen tegenwoordig het meest voor bij Vlissingen en in de periode 2000-2005 het meest bij Hansweert geul. Het lijkt er op dat de hoge waardes (> 50M per L) in de periode 2000-2005 tijdelijk waren. Vanaf 2010 is er echter ook een opgaande trend. De opgaande trend wordt de laatste jaren niet doorgetrokken.
+
+<!-- \begin{figure}[h!]  -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Fytoplankton/2_jaar.png}  -->
+<!-- \caption[Jaarlijks fytoplankton (autotroof - diatomeeën)]{Jaarlijks gesommeerde waardes voor fytoplankton (autotroof - diatomeeën) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer.}  -->
+<!-- \label{fig:fyto_2}  -->
+<!-- \end{figure} -->
+
+```{r fyto2, fig.cap="Jaarlijks gesommeerde waardes voor fytoplankton (autotroof - diatomeeën) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer."}
+knitr::include_graphics("Figuren/Fytoplankton/2_jaar.png")
+```
+
+### Autotroof - Dinoflagellaten {#fyto-resultaten-auto-dino}
+
+In Figuur \@ref(fig:fyto3) is de ontwikkeling van de dinoflagellaten (autotroof) over de tijd voor alle stations weergegeven.  Dinoflagellaten (autotroof) komen bij alle stations voor. In de periode voor 2000 waren de aantallen gemiddeld, de vijf tot tien jaar daarna ondergemiddeld en de laatste decennia juist weer bovengemiddeld., wat een gevolg is van de trendbreuk beschreven in Paragraaf \@ref(fyto-metingen-trendbreuk). Voor 2005 werden de hoogte waardes gevonden in Hansweert geul en Vlissingen. De hoogste waarde is gevonden in 2012 bij Hansweert geul. Na 2005 worden hoge waardes ook gevonden bij Schaar van Ouden Doel. In 2016 worden er weer opvallend hoge waardes gevonden bij Hansweert geul, Schaar van Ouden Doel en Vlissingen. In 2017 en 2018 zijn deze waardes al flink afgenomen bij Vlissingen, en in mindere mate bij Schaar van Ouden Doel. Bij Hansweert geul is de waarde in 2018 zelfs nog hoger gemeten dan in 2016. In 2019 is de daling bij Schaar van Ouden Doel doorgezet en is de concentratie bij Hansweert weer afgenomen.
+
+<!-- \begin{figure}[h!]  -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Fytoplankton/3_jaar.png}  -->
+<!-- \caption[Jaarlijks fytoplankton (autotroof - dinoflagellaten)]{Jaarlijks gesommeerde waardes voor fytoplankton (autotroof - dinoflagellaten) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer.}  -->
+<!-- \label{fig:fyto_3}  -->
+<!-- \end{figure}  -->
+
+```{r fyto3, fig.cap="Jaarlijks gesommeerde waardes voor fytoplankton (autotroof - dinoflagellaten) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer."}
+knitr::include_graphics("Figuren/Fytoplankton/3_jaar.png")
+```
+
+### Autotroof - Groenwieren {#fyto-resultaten-auto-groen}
+
+In Figuur \@ref(fig:fyto4) is de ontwikkeling van de groenwieren (autotroof) over de tijd voor alle stations weergegeven. Groenwieren worden voor 2005 gevonden in grote hoeveelheid van >100M per L (voornamelijk bij Schaar van Ouden Doel). Na 2005 worden er incidenteel veel groenwieren aangetroffen (2008 en 2012). In 2013 en 2014 zijn er significant minder groenwieren aangetroffen op alle stations. Vanaf 2016 worden er weinig groenwieren (minder dan 20 M per L). Dit is vergelijkbaar met 3 jaar daarvoor in 2014.
+
+<!-- \begin{figure}[h!]  -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Fytoplankton/4_jaar.png}  -->
+<!-- \caption[Jaarlijks fytoplankton (autotroof - groenwieren)]{Jaarlijks gesommeerde waardes voor fytoplankton (autotroof - groenwieren) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer.}  -->
+<!-- \label{fig:fyto_4}  -->
+<!-- \end{figure}  -->
+
+```{r fyto4, fig.cap="Jaarlijks gesommeerde waardes voor fytoplankton (autotroof - groenwieren) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer."}
+knitr::include_graphics("Figuren/Fytoplankton/4_jaar.png")
+```
+
+### Autotroof - Phaeocystis {#fyto-resultaten-auto-phaeo}
+
+In Figuur \@ref(fig:fyto5) is de ontwikkeling van de phaeocystis (autotroof) over de tijd voor alle stations weergegeven. Phaocystis wordt voornamelijk nabij de kust gevonden (Vlissingen \& Walcheren) en kende in 2013 een grote piek bij Vlissingen. Voor het station Schaar van Ouden Doel wordt er niet tot nauwelijks phaeocystis gevonden. Vanaf 2016 neemt het aantal in Hansweer geul weer toe. Bij Walcheren 2 km en 20 km uit de kust wordt weer meer phaeocystis aangetroffen in 2018 en 2019.
+
+<!-- \begin{figure}[h!]  -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Fytoplankton/5_jaar.png}  -->
+<!-- \caption[Jaarlijks fytoplankton (autotroof - phaeocystis)]{Jaarlijks gesommeerde waardes voor fytoplankton (autotroof - phaeocystis) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer.}  -->
+<!-- \label{fig:fyto_5}  -->
+<!-- \end{figure}  -->
+
+```{r fyto5, fig.cap="Jaarlijks gesommeerde waardes voor fytoplankton (autotroof - phaeocystis) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer."}
+knitr::include_graphics("Figuren/Fytoplankton/5_jaar.png")
+```
+
+### Autotroof - overig {#fyto-resultaten-auto-overig}
+
+In Figuur \@ref(fig:fyto6) is de ontwikkeling van de overige autotroof fytoplankton over de tijd voor alle stations weergegeven. In de groep autotroof overig werd voor 2000 beperkt gevonden. Van 2000 tot 2010 lijkt er een dalende trend te zijn. Vandaag de dag echter worden grote hoeveelheden (>50 M per L) gevonden bij stations Hansweert Geul en Schaar van de Ouden Doel. De hoeveelheden liggen een stuk lager voor stations meer richting zee (<20 M per L). In 2012 was er een piek bij Vlissingen. Voor 2016 is er opvallend veel overige autotroof fytoplankton gevonden bij Vlissingen, Hansweer geul en Schaar van Ouden Doel. Dit lijkt een tijdelijke piek te zijn met duidelijk lager waarden in 2017 en 2018. Al is in 2018 de waarde bij Hansweert geul weer aan de hoge kant.
+
+<!-- \begin{figure}[h!]  -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Fytoplankton/6_jaar.png}  -->
+<!-- \caption[Jaarlijks fytoplankton (autotroof - overig)]{Jaarlijks gesommeerde waardes voor fytoplankton (autotroof - overig) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer.}  -->
+<!-- \label{fig:fyto_6}  -->
+<!-- \end{figure}  -->
+
+```{r fyto6, fig.cap="Jaarlijks gesommeerde waardes voor fytoplankton (autotroof - overig) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer."}
+knitr::include_graphics("Figuren/Fytoplankton/6_jaar.png")
+```
+
+### Heterotroof - Dinoflagellaten {#fyto-resultaten-hetero-dino}
+
+In Figuur \@ref(fig:fyto7) is de ontwikkeling van de dinoflagellaten (heterotroof) over de tijd voor alle stations weergegeven. De hoeveelheid dinoflagellaten (heterotroof) laat geen duidelijke trend zien, met een gemiddelde van ongeveer 0.04 M per L (zwarte lijn, zie Figuur \@ref(fig:fyto7)), maar wel met een vrij grote variabiliteit in de tijd en tussen de stations .  
+
+<!-- \begin{figure}[h!]  -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Fytoplankton/7_jaar.png}  -->
+<!-- \caption[Jaarlijks fytoplankton (heterotroof - dinoflagellaten)]{Jaarlijks gesommeerde waardes voor fytoplankton (heterotroof - dinoflagellaten) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer.}  -->
+<!-- \label{fig:fyto_7}  -->
+<!-- \end{figure}  -->
+
+```{r fyto7, fig.cap="Jaarlijks gesommeerde waardes voor fytoplankton (heterotroof - dinoflagellaten) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer."}
+knitr::include_graphics("Figuren/Fytoplankton/7_jaar.png")
+```
+
+### Heterotroof - overig {#fyto-resultaten-hetero-overig}
+
+In Figuur \@ref(fig:fyto8) is de ontwikkeling van overige heterotroof fytoplankton over de tijd voor alle stations weergegeven. Overige heterotroof fytoplankton was voor 2009 een normaal fenomeen (voornamelijk bij station Schaar van de Ouden Doel) met waardes van >10M per L. Echter, na 2010 liggen de hoeveelheden een stuk lager (< 0.5 M per L, factor 10). In 2013 was er een piek bij Schaar van Ouden Doel van 5 miljoen overige heterotroof fytoplankton per liter. In 2018 lijken de waardes iets toegenomen te zijn bij beide meetstations bij Walcheren.
+
+<!-- \begin{figure}[h!]  -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Fytoplankton/8_jaar.png}  -->
+<!-- \caption[Jaarlijks fytoplankton (heterotroof - overig)]{Jaarlijks gesommeerde waardes voor fytoplankton (heterotroof - overig) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer.}  -->
+<!-- \label{fig:fyto_8}  -->
+<!-- \end{figure}  -->
+
+```{r fyto8, fig.cap="Jaarlijks gesommeerde waardes voor fytoplankton (heterotroof - overig) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer."}
+knitr::include_graphics("Figuren/Fytoplankton/8_jaar.png")
+```
+
+### Mixotroof - dinoflagellaten {#fyto-resultaten-mix-dino}
+
+In Figuur \@ref(fig:fyto9) is de ontwikkeling van de dinoflagellaten (mixotroof) over de tijd voor alle stations weergegeven. Mixotrofe dinoflagellaten worden vrij consistent gevonden over de tijd. Er is geen duidelijk patroon tussen de verschillende stations. Jaren 2009 en 2010 waren een dieptepunt voor de hoeveelheid mixotrofe dinoflagellaten. Vanaf 2016 zijn de waardes zeer laag. 
+
+<!-- \begin{figure}[h!]  -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Fytoplankton/9_jaar.png}  -->
+<!-- \label{fig:fyto_9}  -->
+<!-- \end{figure}  -->
+
+```{r fyto9, fig.cap="Jaarlijks gesommeerde waardes voor fytoplankton (mixotroof - dinoflagellaten) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer."}
+knitr::include_graphics("Figuren/Fytoplankton/9_jaar.png")
+```
+
+### Mixotroof - overig {#fyto-resultaten-mix-overig}
+
+In Figuur \@ref(fig:fyto10) is de ontwikkeling van de overige mixotroof fytoplankton over de tijd voor alle stations weergegeven. Fytoplankton waarvan de status compleet onbekend is wordt voornamelijk gevonden tussen 2000-2005. De hoeveelheden zijn over het algemeen bijna een factor 10 hoger dan de overige categorien. Dat komt vooral doordat tussen 2000-2005 er veel records in database zitten waar het type niet van bekend is, maar waar wel veel van gevonden is.  Vanaf 2016 zijn ce waarden zeer laag.
+
+<!-- \begin{figure}[h!]  -->
+<!--  \centering  -->
+<!--  \includegraphics[width=1\linewidth]{../Figuren/Fytoplankton/10_jaar.png}  -->
+<!-- \caption[Jaarlijks fytoplankton (mixotroof- overig)]{Jaarlijks gesommeerde waardes voor fytoplankton (mixotroof - overig) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer.}  -->
+<!-- \label{fig:fyto_10}  -->
+<!-- \end{figure}  -->
+
+```{r fyto10, fig.cap="Jaarlijks gesommeerde waardes voor fytoplankton (mixotroof - overig) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer."}
+knitr::include_graphics("Figuren/Fytoplankton/10_jaar.png")
+```
