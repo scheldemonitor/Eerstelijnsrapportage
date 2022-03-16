@@ -240,7 +240,6 @@ fig:PCB153Bodem
 fig:PCB101Bodem
 fig:PCB52Bodem
 fig:PCB118Bodem
-fig:SomPCBBodem
 tab:indelingFytoplankton
 fig:meetstationsFyto
 tab:fytoSchaarJaarTab

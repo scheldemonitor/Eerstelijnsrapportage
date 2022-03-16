@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6 Bodem - Fysisch-chemische parameters | Concept Eerstelijnsrapportage Westerschelde (IN ONTWIKKELING)</title>
   <meta name="description" content="6 Bodem - Fysisch-chemische parameters | Concept Eerstelijnsrapportage Westerschelde (IN ONTWIKKELING)" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6 Bodem - Fysisch-chemische parameters | Concept Eerstelijnsrapportage Westerschelde (IN ONTWIKKELING)" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Deltares" />
 
 
-<meta name="date" content="2022-02-17" />
+<meta name="date" content="2022-03-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -34,7 +34,8 @@
 <link rel="prev" href="zwevend-stof.html"/>
 <link rel="next" href="fytoplankton.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -42,7 +43,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -60,7 +60,7 @@
 <script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
+<script src="libs/leaflet-binding-2.1.0/leaflet.js"></script>
 <script src="libs/plotly-binding-4.10.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
@@ -359,9 +359,9 @@
 <div id="bodem-info-metingen" class="section level2" number="6.1">
 <h2><span class="header-section-number">6.1</span> Informatie over de metingen</h2>
 <p>Eens in de drie jaar worden monsters genomen van het bodemmateriaal in de Westerschelde. Figuur <a href="bodem.html#fig:meetstationsBodem">6.1</a> laat de 12 bemonsteringslocaties zien die in 2016 zijn gebruikt. De locatie Walcheren 2 km uit de kust is sinds 2010 niet meer gemeten. Resultaten van dit station zijn terug te vinden in de Eerstelijnsrapportage 2010.</p>
-<div class="figure" style="text-align: center"><span id="fig:meetstationsBodem"></span>
-<div id="htmlwidget-55565d5a71e79c106551" style="width:85%;height:576px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-55565d5a71e79c106551">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.35118367,51.39125109,51.38457499,51.3598786,51.44093528,51.37358639,51.35057204,51.39791179,51.41288731,51.42179439],[4.2509326,4.20718274,4.16568729,4.10962354,3.99090663,3.90094279,3.8255778,3.70610738,3.56579345,3.50388283],10,null,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.2},null,null,null,null,["Schaar van Ouden Doel","Bath boei 68","Bath boei 71","Speelmansgat","Hansweert boei OHMG","Baarland drempel","Terneuzen boei WPT2","Borssele drempel","Vlissingen boei SSVH","Wielingen oost"],{"interactive":false,"permanent":true,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[51.35057204,51.44093528],"lng":[3.50388283,4.2509326]}},"evals":[],"jsHooks":[]}</script>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:meetstationsBodem"></span>
+<div id="htmlwidget-1ff828620a1892b118e5" style="width:85%;height:672px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1ff828620a1892b118e5">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.35118367,51.39125109,51.38457499,51.3598786,51.44093528,51.37358639,51.35057204,51.39791179,51.41288731,51.42179439],[4.2509326,4.20718274,4.16568729,4.10962354,3.99090663,3.90094279,3.8255778,3.70610738,3.56579345,3.50388283],10,null,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.2},null,null,null,null,["Schaar van Ouden Doel","Bath boei 68","Bath boei 71","Speelmansgat","Hansweert boei OHMG","Baarland drempel","Terneuzen boei WPT2","Borssele drempel","Vlissingen boei SSVH","Wielingen oost"],{"interactive":false,"permanent":true,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[51.35057204,51.44093528],"lng":[3.50388283,4.2509326]}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figuur 6.1: Ligging van de meetstations voor het bodemmateriaal
 </p>
@@ -370,43 +370,43 @@ Figuur 6.1: Ligging van de meetstations voor het bodemmateriaal
 <div id="bodem-metalen" class="section level2" number="6.2">
 <h2><span class="header-section-number">6.2</span> Metalen</h2>
 <p>In Figuur <a href="bodem.html#fig:arseenBodem">6.2</a> t/m Figuur <a href="bodem.html#fig:zinkBodem">6.8</a> zijn de metalen in het bodemsediment in de Westerschelde weergegeven. Op de horizontale as zijn de stations gerangschikt van west (links) naar oost (rechts). Globaal gezien laten de meeste metalen laten op de meeste stations een afnemende trend in de tijd zien, die voor sommige metalen en stations sterker zijn dan voor andere. Daarnaast is voor sommige metalen (cadmium, koper, kwik en zink) te zien dat de hoeveelheid metaal in de richting van de Noordzee afneemt.</p>
-<div class="figure" style="text-align: center"><span id="fig:arseenBodem"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:arseenBodem"></span>
 <img src="_main_files/figure-html/arseenBodem-1.png" alt="Arseen in het bodemsediment in de Westerschelde" width="85%" />
 <p class="caption">
 Figuur 6.2: Arseen in het bodemsediment in de Westerschelde
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:cadmiumBodem"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cadmiumBodem"></span>
 <img src="_main_files/figure-html/cadmiumBodem-1.png" alt="Cadmium in het bodemsediment in de Westerschelde" width="85%" />
 <p class="caption">
 Figuur 6.3: Cadmium in het bodemsediment in de Westerschelde
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:chroomBodem"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:chroomBodem"></span>
 <img src="_main_files/figure-html/chroomBodem-1.png" alt="Chroom in het bodemsediment in de Westerschelde" width="85%" />
 <p class="caption">
 Figuur 6.4: Chroom in het bodemsediment in de Westerschelde
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:koperBodem"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:koperBodem"></span>
 <img src="_main_files/figure-html/koperBodem-1.png" alt="Koper in het bodemsediment in de Westerschelde" width="85%" />
 <p class="caption">
 Figuur 6.5: Koper in het bodemsediment in de Westerschelde
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:kwikBodem"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:kwikBodem"></span>
 <img src="_main_files/figure-html/kwikBodem-1.png" alt="Kwik in het bodemsediment in de Westerschelde" width="85%" />
 <p class="caption">
 Figuur 6.6: Kwik in het bodemsediment in de Westerschelde
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:loodBodem"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:loodBodem"></span>
 <img src="_main_files/figure-html/loodBodem-1.png" alt="Lood in het bodemsediment in de Westerschelde" width="85%" />
 <p class="caption">
 Figuur 6.7: Lood in het bodemsediment in de Westerschelde
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:zinkBodem"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zinkBodem"></span>
 <img src="_main_files/figure-html/zinkBodem-1.png" alt="Zink in het bodemsediment in de Westerschelde" width="85%" />
 <p class="caption">
 Figuur 6.8: Zink in het bodemsediment in de Westerschelde
@@ -418,55 +418,55 @@ Figuur 6.8: Zink in het bodemsediment in de Westerschelde
 <p>De PAK’s zijn afzonderlijk weergegeven in Figuur <a href="bodem.html#fig:antraceenBodem">6.9</a> t/m Figuur <a href="bodem.html#fig:indeno-pyreenBodem">6.17</a>. De PAK’s zijn in hogere gehaltes aanwezig richting de Vlaams-Nederlandse grens. Ook bij Hansweert boei OHMG zijn in het verleden hoge gehaltes gemeten. Er is geen consistente temporele trend waar te nemen, maar de gemiddeldes liggen in de periode na 2007 over het algemeen lager dan in de periode voor 2007.
 <!-- %maar de gehaltes in 2016 zijn meestal wel hoger dan in 2013. -->
 <!-- %CHECK THIS STATEMENT! --></p>
-<div class="figure" style="text-align: center"><span id="fig:antraceenBodem"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:antraceenBodem"></span>
 <img src="_main_files/figure-html/antraceenBodem-1.png" alt="Antraceen in het bodemsediment in de Westerschelde" width="85%" />
 <p class="caption">
 Figuur 6.9: Antraceen in het bodemsediment in de Westerschelde
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:benzo-antraceenBodem"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:benzo-antraceenBodem"></span>
 <img src="_main_files/figure-html/benzo-antraceenBodem-1.png" alt="Benzo(a)antraceen in het bodemsediment in de Westerschelde" width="85%" />
 <p class="caption">
 Figuur 6.10: Benzo(a)antraceen in het bodemsediment in de Westerschelde
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:benzo-pyreenBodem"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:benzo-pyreenBodem"></span>
 <img src="_main_files/figure-html/benzo-pyreenBodem-1.png" alt="Benzo(a)pyreen in het bodemsediment in de Westerschelde" width="85%" />
 <p class="caption">
 Figuur 6.11: Benzo(a)pyreen in het bodemsediment in de Westerschelde
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:benzo-peryleenBodem"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:benzo-peryleenBodem"></span>
 <img src="_main_files/figure-html/benzo-peryleenBodem-1.png" alt="Benzo(g,h,i)peryleen in het bodemsediment in de Westerschelde" width="85%" />
 <p class="caption">
 Figuur 6.12: Benzo(g,h,i)peryleen in het bodemsediment in de Westerschelde
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:benzo-fluorantheenBodem"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:benzo-fluorantheenBodem"></span>
 <img src="_main_files/figure-html/benzo-fluorantheenBodem-1.png" alt="Benzo(k)fluorantheen in het bodemsediment in de Westerschelde" width="85%" />
 <p class="caption">
 Figuur 6.13: Benzo(k)fluorantheen in het bodemsediment in de Westerschelde
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:chryseenBodem"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:chryseenBodem"></span>
 <img src="_main_files/figure-html/chryseenBodem-1.png" alt="Chryseen in het bodemsediment in de Westerschelde" width="85%" />
 <p class="caption">
 Figuur 6.14: Chryseen in het bodemsediment in de Westerschelde
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:fenanthreenBodem"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fenanthreenBodem"></span>
 <img src="_main_files/figure-html/fenanthreenBodem-1.png" alt="Fenanthreen in het bodemsediment in de Westerschelde" width="85%" />
 <p class="caption">
 Figuur 6.15: Fenanthreen in het bodemsediment in de Westerschelde
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:fluorantheenBodem"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fluorantheenBodem"></span>
 <img src="_main_files/figure-html/fluorantheenBodem-1.png" alt="Fluorantheen in het bodemsediment in de Westerschelde" width="85%" />
 <p class="caption">
 Figuur 6.16: Fluorantheen in het bodemsediment in de Westerschelde
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:indeno-pyreenBodem"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:indeno-pyreenBodem"></span>
 <img src="_main_files/figure-html/indeno-pyreenBodem-1.png" alt="Indeno(1,2,3-c,d)pyreen in het bodemsediment in de Westerschelde" width="85%" />
 <p class="caption">
 Figuur 6.17: Indeno(1,2,3-c,d)pyreen in het bodemsediment in de Westerschelde
@@ -475,7 +475,7 @@ Figuur 6.17: Indeno(1,2,3-c,d)pyreen in het bodemsediment in de Westerschelde
 </div>
 <div id="bodem-PCB" class="section level2" number="6.4">
 <h2><span class="header-section-number">6.4</span> Polychloorbifenylen (PCB’s)</h2>
-<p>De PCB’s in het bodemsediment worden zowel afzonderlijk als gesommeerd weergegeven. In Figuur <a href="bodem.html#fig:PCB180Bodem">6.18</a> t/m Figuur <a href="#fig:PCB28Bodem"><strong>??</strong></a> zijn de onderstaande PCB’s afzonderlijk weergegeven. In Figuur <a href="bodem.html#fig:SomPCBBodem">6.24</a> is de sommatie van de PCB’s weergegeven. De volgende PCB’s zijn gerapporteerd en gesommeerd:</p>
+<p>De PCB’s in het bodemsediment worden zowel afzonderlijk als gesommeerd weergegeven. In Figuur <a href="bodem.html#fig:PCB180Bodem">6.18</a> t/m Figuur <a href="#fig:PCB28Bodem"><strong>??</strong></a> zijn de onderstaande PCB’s afzonderlijk weergegeven. In Figuur <a href="#fig:SomPCBBodem"><strong>??</strong></a> is de sommatie van de PCB’s weergegeven. De volgende PCB’s zijn gerapporteerd en gesommeerd:</p>
 <ul>
 <li>2,2’,3,4,4’,5,5’-heptachloorbifenyl (PCB180)</li>
 <li>2,2’,3,4,4’,5’-hexachloorbifenyl (PCB138)</li>
@@ -485,37 +485,37 @@ Figuur 6.17: Indeno(1,2,3-c,d)pyreen in het bodemsediment in de Westerschelde
 <li>2,3’,4,4’,5-pentachloorbifenyl (PCB118)</li>
 <li>2,4,4’-trichloorbifenyl (PCB28)</li>
 </ul>
-<div class="figure" style="text-align: center"><span id="fig:PCB180Bodem"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:PCB180Bodem"></span>
 <img src="_main_files/figure-html/PCB180Bodem-1.png" alt="PCB180 in het bodemsediment in de Westerschelde" width="85%" />
 <p class="caption">
 Figuur 6.18: PCB180 in het bodemsediment in de Westerschelde
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:PCB138Bodem"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:PCB138Bodem"></span>
 <img src="_main_files/figure-html/PCB138Bodem-1.png" alt="PCB138 in het bodemsediment in de Westerschelde" width="85%" />
 <p class="caption">
 Figuur 6.19: PCB138 in het bodemsediment in de Westerschelde
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:PCB153Bodem"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:PCB153Bodem"></span>
 <img src="_main_files/figure-html/PCB153Bodem-1.png" alt="PCB153 in het bodemsediment in de Westerschelde" width="85%" />
 <p class="caption">
 Figuur 6.20: PCB153 in het bodemsediment in de Westerschelde
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:PCB101Bodem"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:PCB101Bodem"></span>
 <img src="_main_files/figure-html/PCB101Bodem-1.png" alt="PCB101 in het bodemsediment in de Westerschelde" width="85%" />
 <p class="caption">
 Figuur 6.21: PCB101 in het bodemsediment in de Westerschelde
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:PCB52Bodem"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:PCB52Bodem"></span>
 <img src="_main_files/figure-html/PCB52Bodem-1.png" alt="PCB52 in het bodemsediment in de Westerschelde" width="85%" />
 <p class="caption">
 Figuur 6.22: PCB52 in het bodemsediment in de Westerschelde
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:PCB118Bodem"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:PCB118Bodem"></span>
 <img src="_main_files/figure-html/PCB118Bodem-1.png" alt="PCB118 in het bodemsediment in de Westerschelde" width="85%" />
 <p class="caption">
 Figuur 6.23: PCB118 in het bodemsediment in de Westerschelde
@@ -524,12 +524,6 @@ Figuur 6.23: PCB118 in het bodemsediment in de Westerschelde
 <pre><code>## NULL</code></pre>
 <p>De hoeveelheid PCB’s neemt af in de richting van de Noordzee. Met name bij de oostelijke stations lijken de gehaltes af te nemen in de tijd.%, hoewel de gehaltes in 2016 wel hoger zijn dan in 2013.
 <!-- %CHECK THIS STATEMENT! --></p>
-<div class="figure" style="text-align: center"><span id="fig:SomPCBBodem"></span>
-<img src="Figuren/Fysisch/Bodem/bar_SomPCBs.png" alt="Som van de PCB's in het bodemsediment in de Westerschelde" width="85%" />
-<p class="caption">
-Figuur 6.24: Som van de PCB’s in het bodemsediment in de Westerschelde
-</p>
-</div>
 </div>
 <div id="bodem-organotin" class="section level2" number="6.5">
 <h2><span class="header-section-number">6.5</span> Organotinverbindingen</h2>
@@ -549,7 +543,6 @@ Figuur 6.24: Som van de PCB’s in het bodemsediment in de Westerschelde
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -589,6 +582,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 },

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5 Zwevend stof - Fysisch-chemische parameters | Concept Eerstelijnsrapportage Westerschelde (IN ONTWIKKELING)</title>
   <meta name="description" content="5 Zwevend stof - Fysisch-chemische parameters | Concept Eerstelijnsrapportage Westerschelde (IN ONTWIKKELING)" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5 Zwevend stof - Fysisch-chemische parameters | Concept Eerstelijnsrapportage Westerschelde (IN ONTWIKKELING)" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Deltares" />
 
 
-<meta name="date" content="2022-02-17" />
+<meta name="date" content="2022-03-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -34,7 +34,8 @@
 <link rel="prev" href="fysisch-oppwater.html"/>
 <link rel="next" href="bodem.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -42,7 +43,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -60,7 +60,7 @@
 <script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
+<script src="libs/leaflet-binding-2.1.0/leaflet.js"></script>
 <script src="libs/plotly-binding-4.10.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
@@ -360,9 +360,9 @@
 <div id="zwevend-info-metingen" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> Informatie over de metingen</h2>
 <p>Voor de bepaling van de fysisch-chemische parameters in het zwevend stof vinden in het kader van MWTL maandelijkse vaartochten (tochtnummer 11) plaats, die de locaties Schaar van Ouden Doel en Vlissingen boei SSVH bemonsteren. Bij Schaar van Ouden Doel wordt maandelijks gemeten en bij Vlissingen eens per kwartaal. De monsters worden genomen met een doorstroomcentrifuge, waarbij een bepaalde hoeveelheid slib moet worden verzameld en afgeleverd aan het laboratorium voor analyse. In verband met het getij wordt ook altijd de saliniteit gemeten, zie Paragraaf <a href="fysisch-oppwater.html#saliniteit">4.2</a>. De stations zijn gepresenteerd in Figuur <a href="zwevend-stof.html#fig:meetstationsZwevend">5.1</a> en zijn steeds gerangschikt in stroomafwaartse richting.</p>
-<div class="figure" style="text-align: center"><span id="fig:meetstationsZwevend"></span>
-<div id="htmlwidget-48bb740e25251c3805b1" style="width:85%;height:576px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-48bb740e25251c3805b1">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.3504699785602,51.41288731],[4.25069371004744,3.56579345],10,null,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.2},null,null,null,null,["Schaar van Ouden Doel","Vlissingen boei SSVH"],{"interactive":false,"permanent":true,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[51.3504699785602,51.41288731],"lng":[3.56579345,4.25069371004744]}},"evals":[],"jsHooks":[]}</script>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:meetstationsZwevend"></span>
+<div id="htmlwidget-7a01765e4c3a94e58efb" style="width:85%;height:672px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7a01765e4c3a94e58efb">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.3504699785602,51.41288731],[4.25069371004744,3.56579345],10,null,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.2},null,null,null,null,["Schaar van Ouden Doel","Vlissingen boei SSVH"],{"interactive":false,"permanent":true,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[51.3504699785602,51.41288731],"lng":[3.56579345,4.25069371004744]}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figuur 5.1: Ligging van de meetstations voor het zwevende stof
 </p>
@@ -408,13 +408,13 @@ Figuur 5.1: Ligging van de meetstations voor het zwevende stof
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendKorrelgroottefractietot63um-1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendKorrelgroottefractietot63um-1"></span>
 <img src="_main_files/figure-html/zwevendKorrelgroottefractietot63um-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van de korrelgroottefractie tot 63$\mu$m voor 2 stations." width="85%" />
 <p class="caption">
 Figuur 5.2: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van de korrelgroottefractie tot 63<span class="math inline">\(\mu\)</span>m voor 2 stations.
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:zwevendKorrelgroottefractietot63um-2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendKorrelgroottefractietot63um-2"></span>
 <img src="_main_files/figure-html/zwevendKorrelgroottefractietot63um-2.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van de korrelgroottefractie tot 63$\mu$m voor 2 stations." width="85%" />
 <p class="caption">
 Figuur 5.3: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van de korrelgroottefractie tot 63<span class="math inline">\(\mu\)</span>m voor 2 stations.
@@ -456,7 +456,7 @@ Figuur 5.3: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van 
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendKorrelgroottefractietot2um"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendKorrelgroottefractietot2um"></span>
 <img src="_main_files/figure-html/zwevendKorrelgroottefractietot2um-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van de korrelgroottefractie tot 2$\mu$m voor beide stations" width="85%" />
 <p class="caption">
 Figuur 5.4: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van de korrelgroottefractie tot 2<span class="math inline">\(\mu\)</span>m voor beide stations
@@ -513,13 +513,13 @@ Figuur 5.4: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van 
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendArseen-1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendArseen-1"></span>
 <img src="_main_files/figure-html/zwevendArseen-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Arseen voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.5: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Arseen voor beide stations.
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:zwevendArseen-2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendArseen-2"></span>
 <img src="_main_files/figure-html/zwevendArseen-2.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Arseen voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.6: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Arseen voor beide stations.
@@ -561,13 +561,13 @@ Figuur 5.6: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van 
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendCadmium-1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendCadmium-1"></span>
 <img src="_main_files/figure-html/zwevendCadmium-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Cadmium voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.7: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Cadmium voor beide stations.
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:zwevendCadmium-2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendCadmium-2"></span>
 <img src="_main_files/figure-html/zwevendCadmium-2.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Cadmium voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.8: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Cadmium voor beide stations.
@@ -609,13 +609,13 @@ Figuur 5.8: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van 
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendChroom-1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendChroom-1"></span>
 <img src="_main_files/figure-html/zwevendChroom-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Chroom voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.9: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Chroom voor beide stations.
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:zwevendChroom-2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendChroom-2"></span>
 <img src="_main_files/figure-html/zwevendChroom-2.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Chroom voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.10: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Chroom voor beide stations.
@@ -657,7 +657,7 @@ Figuur 5.10: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendKobalt"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendKobalt"></span>
 <img src="_main_files/figure-html/zwevendKobalt-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Kobalt voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.11: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Kobalt voor beide stations.
@@ -699,7 +699,7 @@ Figuur 5.11: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendKoper"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendKoper"></span>
 <img src="_main_files/figure-html/zwevendKoper-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Koper voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.12: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Koper voor beide stations.
@@ -741,7 +741,7 @@ Figuur 5.12: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendKwik"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendKwik"></span>
 <img src="_main_files/figure-html/zwevendKwik-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Kwik voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.13: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Kwik voor beide stations.
@@ -783,7 +783,7 @@ Figuur 5.13: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendLood"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendLood"></span>
 <img src="_main_files/figure-html/zwevendLood-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Lood voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.14: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Lood voor beide stations.
@@ -825,7 +825,7 @@ Figuur 5.14: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendVanadium"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendVanadium"></span>
 <img src="_main_files/figure-html/zwevendVanadium-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Vanadium voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.15: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Vanadium voor beide stations.
@@ -867,7 +867,7 @@ Figuur 5.15: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendZink"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendZink"></span>
 <img src="_main_files/figure-html/zwevendZink-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Zink voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.16: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Zink voor beide stations.
@@ -926,7 +926,7 @@ Figuur 5.16: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendAntraceen"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendAntraceen"></span>
 <img src="_main_files/figure-html/zwevendAntraceen-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Antraceen voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.17: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Antraceen voor beide stations.
@@ -968,7 +968,7 @@ Figuur 5.17: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendBenzoapyreen"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendBenzoapyreen"></span>
 <img src="_main_files/figure-html/zwevendBenzoapyreen-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Benzoapyreen voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.18: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Benzoapyreen voor beide stations.
@@ -1010,7 +1010,7 @@ Figuur 5.18: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendBenzoghiperyleen"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendBenzoghiperyleen"></span>
 <img src="_main_files/figure-html/zwevendBenzoghiperyleen-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Benzoperyleen voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.19: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Benzoperyleen voor beide stations.
@@ -1052,7 +1052,7 @@ Figuur 5.19: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendBenzoaantraceen"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendBenzoaantraceen"></span>
 <img src="_main_files/figure-html/zwevendBenzoaantraceen-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Benzoaantraceen voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.20: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Benzoaantraceen voor beide stations.
@@ -1116,7 +1116,7 @@ Figuur 5.20: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendChryseen"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendChryseen"></span>
 <img src="_main_files/figure-html/zwevendChryseen-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Chryseen voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.21: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Chryseen voor beide stations.
@@ -1157,7 +1157,7 @@ Figuur 5.21: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendFenanthreen"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendFenanthreen"></span>
 <img src="_main_files/figure-html/zwevendFenanthreen-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Fenanthreen voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.22: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Fenanthreen voor beide stations.
@@ -1198,7 +1198,7 @@ Figuur 5.22: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendFluorantheen"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendFluorantheen"></span>
 <img src="_main_files/figure-html/zwevendFluorantheen-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Fluorantheen voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.23: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Fluorantheen voor beide stations.
@@ -1240,7 +1240,7 @@ Figuur 5.23: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendIndeno"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendIndeno"></span>
 <img src="_main_files/figure-html/zwevendIndeno-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Indeno[*1,2,3-c,d*]pyreen voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.24: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Indeno[<em>1,2,3-c,d</em>]pyreen voor beide stations.
@@ -1273,7 +1273,7 @@ Figuur 5.24: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendNaftaleen"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendNaftaleen"></span>
 <img src="_main_files/figure-html/zwevendNaftaleen-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Naftaleen voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.25: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Naftaleen voor beide stations.
@@ -1329,7 +1329,7 @@ Figuur 5.25: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendPCB180"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendPCB180"></span>
 <img src="_main_files/figure-html/zwevendPCB180-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB180 voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.26: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB180 voor beide stations.
@@ -1370,7 +1370,7 @@ Figuur 5.26: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendPCB138"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendPCB138"></span>
 <img src="_main_files/figure-html/zwevendPCB138-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB138 voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.27: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB138 voor beide stations.
@@ -1412,7 +1412,7 @@ Figuur 5.27: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendPCB153"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendPCB153"></span>
 <img src="_main_files/figure-html/zwevendPCB153-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB153 voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.28: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB153 voor beide stations.
@@ -1453,7 +1453,7 @@ Figuur 5.28: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendPCB101"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendPCB101"></span>
 <img src="_main_files/figure-html/zwevendPCB101-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB101 voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.29: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB101 voor beide stations.
@@ -1494,7 +1494,7 @@ Figuur 5.29: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendPCB52"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendPCB52"></span>
 <img src="_main_files/figure-html/zwevendPCB52-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB52 voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.30: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB52 voor beide stations.
@@ -1535,7 +1535,7 @@ Figuur 5.30: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendPCB118"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendPCB118"></span>
 <img src="_main_files/figure-html/zwevendPCB118-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB118 voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.31: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB118 voor beide stations.
@@ -1576,7 +1576,7 @@ Figuur 5.31: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendPCB28"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendPCB28"></span>
 <img src="_main_files/figure-html/zwevendPCB28-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB28 voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.32: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB28 voor beide stations.
@@ -1619,7 +1619,7 @@ Figuur 5.32: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendDieldrin"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendDieldrin"></span>
 <img src="_main_files/figure-html/zwevendDieldrin-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Dieldrin voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.33: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Dieldrin voor beide stations.
@@ -1661,7 +1661,7 @@ Figuur 5.33: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendHexachloorbenzeen"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendHexachloorbenzeen"></span>
 <img src="_main_files/figure-html/zwevendHexachloorbenzeen-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Hexachloorbenzeen voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.34: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Hexachloorbenzeen voor beide stations.
@@ -1703,7 +1703,7 @@ Figuur 5.34: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
 </tr>
 </tbody>
 </table>
-<div class="figure" style="text-align: center"><span id="fig:zwevendTributyltin"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:zwevendTributyltin"></span>
 <img src="_main_files/figure-html/zwevendTributyltin-1.png" alt="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Tributyltin voor beide stations." width="85%" />
 <p class="caption">
 Figuur 5.35: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Tributyltin voor beide stations.
@@ -1731,7 +1731,6 @@ Figuur 5.35: Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -1771,6 +1770,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 },
