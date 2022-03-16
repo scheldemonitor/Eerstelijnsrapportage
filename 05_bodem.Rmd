@@ -276,7 +276,8 @@ De hoeveelheid PCB’s neemt af in de richting van de Noordzee. Met name bij de 
 <!-- %CHECK THIS STATEMENT! -->
 
 ```{r SomPCBBodem, fig.cap="Som van de PCB's in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_SomPCBs.png")
+
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_SomPCBs.png")
 
 # parname = "Chryseen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 # #plotTrends(df, parname, trend = F)

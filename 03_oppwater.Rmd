@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 	message = FALSE,
 	warning = FALSE,
 	fig.width = 8,
-	fig.height = 6,
+	fig.height = 7,
 	out.width = "85%",
 	fig.align='center'
 )
@@ -23,6 +23,7 @@ require(tidyverse)
 require(lubridate)
 require(sf)
 require(leaflet)
+require(plotly)
 
 source("R/functions.R")
 
@@ -47,8 +48,10 @@ df2 <- df %>%
   mutate(stationname = factor(stationname, levels = trendstations)) %>%
   repair_limits() %>%
   group_by(parametername, stationname) %>%
-  mutate(across(value, remove_outliers))
+  mutate(across(value, remove_outliers)) %>%
+  ungroup()
 
+rm(df)
 ```
 
 # Oppervlaktewater - Fysisch-chemische parameters {#fysisch-oppwater}
@@ -585,7 +588,7 @@ In figuur \@ref(fig:ZSrelatiefAnomalie) is dit weergegeven. Bij Schaar van Ouden
 
 
 ```{r ZSrelatiefAnomalie, fig.cap="Anomalie van gesuspendeerd zwevend stof. De anomalie is berekend als relatieve afwijking (punten) en 13 maanden lopend gemiddelde (lijn) van deze afwijking ten opzichte van het (loggetransformeerde) langjarig gemiddelde. De absolute concentratie zwevend stof is te zien aan de kleur van de punten.  "}
-plotLogAnomalies(df2, parname)
+plotLogAnomalies(df2, parname, sf = F)
 ```
 
 
@@ -970,7 +973,7 @@ newparname = "N/C"
 # calculate ratio; this can be more automized, but perhaps not worth the trouble
 # Later ALLE ratios hierin berekenen en behandelen als parameter
 
-dfm <- df %>%
+dfm <- df2 %>%
   filter(parametername %in% c(parname1a, parname1b, parname2a, parname2b, parname3a, parname3b)) %>%
   pivot_wider(id_cols = c(latitude, longitude, datetime, stationname), names_from = parametername, values_from = value) %>%
   mutate(!!newparname := (!!as.name(parname1a) + !!as.name(parname1b))/(!!as.name(parname2a) + !!as.name(parname2b))) %>%
@@ -1002,7 +1005,7 @@ newparname = "N/C"
 
 # calculate ratio; this can be more automized, but perhaps not worth the trouble
 # Later ALLE ratios hierin berekenen en behandelen als parameter
-dfm <- df %>% #st_drop_geometry() %>%
+dfm <- df2 %>% #st_drop_geometry() %>%
   filter(parametername %in% c(parname1a, parname1b, parname2a, parname2b)) %>%
   pivot_wider(id_cols = c(latitude, longitude, datetime, stationname), names_from = parametername, values_from = value) %>%
   mutate(!!newparname := (!!as.name(parname1a) + !!as.name(parname1b))/(!!as.name(parname2a) + !!as.name(parname2b))) %>%

@@ -10,6 +10,23 @@ require(leaflet)
 #   - Bereken schatting van ontbrekende data per seizoen
 #   - 
 
+###=== plot styles ==============================
+trendplotstyle =   theme(
+  text = element_text(color = "#2E89BF"),
+  line = element_line(color = "#2E89BF"),
+  plot.background = element_rect(fill = "#ebf5ff", color = "transparent"),
+  legend.background = element_rect(fill = "#ebf5ff", color = "transparent"),
+  panel.background = element_rect(fill = "#ebf5ff"),
+  panel.grid.major = element_line(color = "#2E89BF", size = 0.1),
+  panel.grid.minor = element_line(color = "#2E89BF", size = 0.1),
+  strip.background = element_rect(fill = "#ebf5ff", color = "white"),
+  strip.text = element_text(color = "#2E89BF", face = "bold"),
+  axis.text = element_text(color = "#2E89BF")
+)
+
+
+###==== plot functies =============================
+
 plotLocations <- function(df){
   df %>% group_by(stationname) %>%
     summarize(latitude = mean(latitude, na.rm = T), longitude = mean(longitude, na.rm = T)) %>% 
@@ -75,9 +92,7 @@ fytStatTable <- function(df, statname){
 
 
 # Plot trends of nutrients
-plotTrends <- function(df, parname, sf = F, trend = T) {
-  
-  
+plotTrends <- function(df, parname, sf = F, trend = T, beginjaar = 1998, eindjaar = dataJaar) {
   
 if(sf) df <- df %>% st_drop_geometry()
 
@@ -98,13 +113,14 @@ if(anydata == 0){
            `10-perc`) %>%
     dplyr::arrange(-Mediaan) %>%
     ggplot(aes(Jaar, Mediaan)) +
-    geom_ribbon(aes(ymin = `10-perc`, ymax = `90-perc`), fill = "lightgrey") +
+    geom_ribbon(aes(ymin = `10-perc`, ymax = `90-perc`), fill = "lightgrey", alpha = 0.7) +
     geom_line() + geom_point(fill = "white", shape = 21)
-  if(trend)    p <- p + geom_smooth(method = "lm", fill = "blue", alpha = 0.2)
-    p <- p + facet_wrap(~Station, ncol = 2) +
+  if(trend)    p <- p + geom_smooth(method = "lm", color = "#2E89BF", fill = "#2E89BF", alpha = 0.2)
+  p <- p + facet_wrap(~Station, ncol = 2, scales = "free") +
     theme_minimal() +
     ylab(parname) +
-    coord_cartesian(ylim = c(0,NA))
+    coord_cartesian(xlim = c(beginjaar, eindjaar), ylim = c(0,NA)) +
+    trendplotstyle
     return(p)
 }
 
@@ -143,7 +159,8 @@ plotTrendsLimits <- function(df, parname, sf = F, trend = T) {
   p <- p + facet_wrap(~Station, ncol = 2) +
     theme_minimal() +
     ylab(parname) +
-    coord_cartesian(ylim = c(0,NA))
+    coord_cartesian(ylim = c(0,NA)) +
+    trendplotstyle
   return(p)
 }
 
@@ -170,7 +187,8 @@ plotLogTrends <- function(df, parname, sf = F, trend = T) {
     theme_minimal() +
     ylab(parname) +
     coord_cartesian(ylim = c(NA,NA)) +
-    scale_y_log10()
+    scale_y_log10() +
+    trendplotstyle
   return(p)
 }
 
@@ -190,6 +208,7 @@ plotLogAnomalies <- function(df, parname, sf = F) {
     mutate(logwaarde = log(value)+0.001) %>%
     group_by(stationname, year, month) %>% summarize(logmaandgemiddelde = mean(logwaarde, na.rm = T)) %>% ungroup() %>%
     group_by(stationname) %>% mutate(anomalie = logmaandgemiddelde - mean(logmaandgemiddelde, na.rm = T)) %>% 
+    ungroup() %>%
     complete(stationname, year, month, fill = list(logmaandgemiddelde = NA, anomalie = NA)) %>%
     mutate(datum = as.Date(lubridate::ymd(paste(year, month, "15")))) %>%
     arrange(stationname, datum) %>%
@@ -204,7 +223,7 @@ plotLogAnomalies <- function(df, parname, sf = F) {
     scale_color_gradientn(colours = jet.colors(7), name = "maandgemiddelde",
                           trans = "log", breaks = my_breaks, labels = my_breaks) +
     coord_cartesian(ylim = c(0,4)) +
-    theme_minimal()
+    trendplotstyle
 
   return(p)
 }
@@ -232,7 +251,8 @@ plotTrendsWaterstand <- function(df, parname, locname, sf = F) {
     ylab("Jaargemiddeld hoog- en laagwater in cm+NAP") +
     theme(
       legend.position="none",
-      strip.text.y = element_text(angle = 0, face = "bold"))
+      strip.text.y = element_text(angle = 0, face = "bold")) +
+    trendplotstyle
   return(p)
 }
 
@@ -256,7 +276,8 @@ plotTrendsGolven <- function(df, parname, locname, sf = F) {
     #facet_grid(Parameter ~ ., scales="free_y") +
     theme_minimal() +
     ylab(parname) +
-    theme(legend.position="none")
+    theme(legend.position="none") +
+    trendplotstyle
   return(p)
 }
 
@@ -275,7 +296,8 @@ plotTrendsByLocation <- function(df, parname, sf = F) {
     geom_point(aes(fill=Station), color = "white", shape = 21) + 
     #facet_grid(Parameter ~ ., scales="free_y") +
     theme_minimal() +
-    ylab(parname)
+    ylab(parname) +
+    trendplotstyle
   return(p)
 }
 
@@ -297,7 +319,8 @@ plotTrendsByLocationClass <- function(df, parname, classname, sf = F) {
     geom_point(aes(fill=Station), color = "white", shape = 21) + 
     #facet_grid(Parameter ~ ., scales="free_y") +
     theme_minimal() +
-    ylab(paste(parname, classname))
+    ylab(paste(parname, classname)) +
+    trendplotstyle
   return(p)
 }
 
@@ -318,9 +341,9 @@ plotTrendsBar <- function(df, parname, sf = F) {
     ggplot(aes(x = Jaar, y = Mediaan)) +
     geom_col() +
     facet_wrap(~Station) +
-    theme_minimal() +
     ylab(parname) +
-    coord_cartesian(ylim = c(0,NA))
+    coord_cartesian(ylim = c(0,NA)) +
+    trendplotstyle
 }
 
 plotTrendsSeizoen <- function(df, parname, sf = T) {
@@ -349,7 +372,8 @@ plotTrendsSeizoen <- function(df, parname, sf = T) {
     facet_wrap(~Station, ncol = 2) +
     theme_minimal() +
     ylab(parname) +
-    coord_cartesian(ylim = c(0,NA))
+    coord_cartesian(ylim = c(0,NA)) +
+    trendplotstyle
 }
 
 plotLogTrendsSeizoen <- function(df, parname, sf = T) {
@@ -378,7 +402,8 @@ plotLogTrendsSeizoen <- function(df, parname, sf = T) {
     facet_wrap(~Station, ncol = 2) +
     theme_minimal() +
     ylab(parname) +
-    scale_y_log10()
+    scale_y_log10() +
+    trendplotstyle
 }
 
 
@@ -403,7 +428,8 @@ plotTrendsMaand <- function(df, parname, sf = T) {
     facet_wrap(~Maand, ncol = 3) +
     theme_minimal() +
     ylab(parname) +
-    coord_cartesian(ylim = c(0,NA))
+    coord_cartesian(ylim = c(0,NA)) +
+    trendplotstyle
 }
 
 
@@ -434,7 +460,8 @@ plotTrendsCZVMaand <- function(df, parname, sf = T) {
     facet_wrap(~Maand) +
     theme_minimal() +
     ylab(parname) +
-    coord_cartesian(ylim = c(0,60))
+    coord_cartesian(ylim = c(0,60)) +
+    trendplotstyle
 }
 
 plotLogTrendsMaand <- function(df, parname, sf = T) {
@@ -458,7 +485,8 @@ plotLogTrendsMaand <- function(df, parname, sf = T) {
     facet_wrap(~Maand) +
     theme_minimal() +
     ylab(parname) +
-    scale_y_log10()
+    scale_y_log10() +
+    trendplotstyle
 }
 
 
@@ -468,8 +496,11 @@ plotTrendFyto <- function(df, statname){
     mutate(jaar = year(datetime), maand = month(datetime)) %>%
     mutate(seizoen = ifelse(maand %in% c(4:9), "zomer", "winter")) %>%
     group_by(jaar, seizoen, parametername) %>%
-    summarize(`90-perc` = quantile(value, 0.9, na.rm = T)) %>% ungroup() %>% 
-    ggplot(aes(jaar, `90-perc`)) +
+    summarize(
+      `90-perc` = quantile(value, 0.9, na.rm = T),
+      mediaan = median(value, na.rm = T)
+    ) %>% ungroup() %>% 
+    ggplot(aes(jaar, mediaan)) +
     geom_col(aes(fill = seizoen), position = 'dodge') +
     geom_hline(linetype = 2, color = "blue",
                data = df.fyt.groep %>% 
@@ -478,7 +509,29 @@ plotTrendFyto <- function(df, statname){
                  summarize(gemiddelde = mean(value, na.rm = T)) %>% ungroup(),
                aes(yintercept = gemiddelde)
     ) +
-    facet_wrap(~ parametername, ncol = 2, scales = "free_y")
+    facet_wrap(~ parametername, ncol = 2, scales = "free_y") +
+    trendplotstyle
+}
+
+
+plotTrendFytoGroup <- function(df, groupname){
+  df %>% ungroup() %>%
+    filter(parametername == groupname) %>%
+    mutate(jaar = year(datetime)) %>%
+    group_by(jaar, stationname) %>%
+    summarize(
+      `90-perc` = quantile(value, 0.9, na.rm = T),
+      mediaan = median(value, na.rm = T)
+      ) %>% ungroup() %>% 
+    ggplot(aes(jaar, mediaan)) +
+    geom_col(aes(fill = stationname), position = 'dodge') +
+    geom_hline(linetype = 2, color = "blue",
+               data = df.fyt.groep %>%
+                 filter(parametername == groupname) %>%
+                 summarize(mediaan = median(value, na.rm = T)) %>% ungroup(),
+               aes(yintercept = mediaan)
+    ) +
+    trendplotstyle
 }
 
 

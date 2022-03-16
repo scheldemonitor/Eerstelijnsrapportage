@@ -5,8 +5,12 @@ knitr::opts_chunk$set(
 	message = FALSE,
 	warning = FALSE,
 	out.width = "85%",
-	fig.align='center'
+	fig.align='center',
+	fig.width = 8,
+	fig.height = 5
 )
+source("R/functions.R")
+library(lubridate)
 ```
 
 ```{r laadData}
@@ -67,22 +71,6 @@ Ook op taxonomisch niveau is een opdeling zinvol. De belangrijkste groep binnen 
 
 Bovenstaande leidt tot de volgende pragmatische indeling, gepresenteerd in Tabel \@ref(tab:indelingFytoplankton). Deze indeling is opgesteld door Bert Wetsteijn (RWS-WVL).
 
-<!-- \begin{table}[h!]  -->
-<!-- \centering -->
-<!-- \caption[Groepsindeling fytoplankton]{Groepsindeling fytoplankton. Getallen tussen haakjes is de nummering per gedetermineerde groep van deze Eerstelijnsrapportage} -->
-<!-- \label{fytoplankton_indelnig} -->
-<!-- \begin{tabular}{c | c | cl} -->
-<!--   & Trofiegraad         &    \\ -->
-<!--   \rowcolor[HTML]{EFEFEF} -->
-<!-- Autotroof           & Heterotroof         & Mixotroof   \\ -->
-<!-- Blauwwieren (1)      	& Dinoflagellaten (7) & Dinoflagellaten (9) \\ -->
-<!-- Diatomeeën  (2)	 		& Overig (8)          & Overig (10)         \\ -->
-<!-- Dinoflagellaten (3)     &                     &                     \\ -->
-<!-- Phaeocystis (4)     		&                     &                     \\ -->
-<!-- Groenwieren (5)     	&                     &                     \\ -->
-<!-- Overig (6)          		&                     &                     -->
-<!-- \end{tabular} -->
-<!-- \end{table} -->
 
 ```{r indelingFytoplankton}
 # dt <- data.frame(
@@ -94,6 +82,7 @@ Bovenstaande leidt tot de volgende pragmatische indeling, gepresenteerd in Tabel
 
 df.fyt %>% 
   distinct(scientificname, trofie, groep) %>%
+  drop_na(groep) %>%
   group_by(trofie, groep) %>% 
   summarize(n = n()) %>% 
   pivot_wider(id_cols = groep, names_from = trofie, values_from = n, values_fill = 0) %>% 
@@ -312,7 +301,8 @@ In Figuur \@ref(fig:fyto1) is de ontwikkeling van de blauwwieren (autotroof) ove
 <!-- \end{figure}  -->
 
 ```{r fyto1, fig.cap="Jaarlijks gesommeerde waardes voor fytoplankton (autotroof - blauwwieren) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer."}
-knitr::include_graphics("Figuren/Fytoplankton/1_jaar.png")
+# knitr::include_graphics("Figuren/Fytoplankton/1_jaar.png")
+plotTrendFytoGroup(df.fyt.groep, "Autotroof - Blauwwieren")
 ```
 
 ### Autotroof - Diatomeeën {#fyto-resultaten-auto-dia}
@@ -327,7 +317,8 @@ In Figuur \@ref(fig:fyto2) is de ontwikkeling van de diatomeeën (autotroof) ove
 <!-- \end{figure} -->
 
 ```{r fyto2, fig.cap="Jaarlijks gesommeerde waardes voor fytoplankton (autotroof - diatomeeën) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer."}
-knitr::include_graphics("Figuren/Fytoplankton/2_jaar.png")
+# knitr::include_graphics("Figuren/Fytoplankton/2_jaar.png")
+plotTrendFytoGroup(df.fyt.groep, "Autotroof - Diatomeeën")
 ```
 
 ### Autotroof - Dinoflagellaten {#fyto-resultaten-auto-dino}
@@ -342,7 +333,8 @@ In Figuur \@ref(fig:fyto3) is de ontwikkeling van de dinoflagellaten (autotroof)
 <!-- \end{figure}  -->
 
 ```{r fyto3, fig.cap="Jaarlijks gesommeerde waardes voor fytoplankton (autotroof - dinoflagellaten) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer."}
-knitr::include_graphics("Figuren/Fytoplankton/3_jaar.png")
+# knitr::include_graphics("Figuren/Fytoplankton/3_jaar.png")
+plotTrendFytoGroup(df.fyt.groep, "Autotroof - Dinoflagellaten")
 ```
 
 ### Autotroof - Groenwieren {#fyto-resultaten-auto-groen}
@@ -357,7 +349,8 @@ In Figuur \@ref(fig:fyto4) is de ontwikkeling van de groenwieren (autotroof) ove
 <!-- \end{figure}  -->
 
 ```{r fyto4, fig.cap="Jaarlijks gesommeerde waardes voor fytoplankton (autotroof - groenwieren) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer."}
-knitr::include_graphics("Figuren/Fytoplankton/4_jaar.png")
+# knitr::include_graphics("Figuren/Fytoplankton/4_jaar.png")
+plotTrendFytoGroup(df.fyt.groep, "Autotroof - Groenwieren")
 ```
 
 ### Autotroof - Phaeocystis {#fyto-resultaten-auto-phaeo}
@@ -372,7 +365,8 @@ In Figuur \@ref(fig:fyto5) is de ontwikkeling van de phaeocystis (autotroof) ove
 <!-- \end{figure}  -->
 
 ```{r fyto5, fig.cap="Jaarlijks gesommeerde waardes voor fytoplankton (autotroof - phaeocystis) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer."}
-knitr::include_graphics("Figuren/Fytoplankton/5_jaar.png")
+# knitr::include_graphics("Figuren/Fytoplankton/5_jaar.png")
+plotTrendFytoGroup(df.fyt.groep, "Autotroof - Phaeocystis")
 ```
 
 ### Autotroof - overig {#fyto-resultaten-auto-overig}
@@ -387,7 +381,8 @@ In Figuur \@ref(fig:fyto6) is de ontwikkeling van de overige autotroof fytoplank
 <!-- \end{figure}  -->
 
 ```{r fyto6, fig.cap="Jaarlijks gesommeerde waardes voor fytoplankton (autotroof - overig) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer."}
-knitr::include_graphics("Figuren/Fytoplankton/6_jaar.png")
+# knitr::include_graphics("Figuren/Fytoplankton/6_jaar.png")
+plotTrendFytoGroup(df.fyt.groep, "Autotroof - Overig")
 ```
 
 ### Heterotroof - Dinoflagellaten {#fyto-resultaten-hetero-dino}
@@ -402,7 +397,8 @@ In Figuur \@ref(fig:fyto7) is de ontwikkeling van de dinoflagellaten (heterotroo
 <!-- \end{figure}  -->
 
 ```{r fyto7, fig.cap="Jaarlijks gesommeerde waardes voor fytoplankton (heterotroof - dinoflagellaten) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer."}
-knitr::include_graphics("Figuren/Fytoplankton/7_jaar.png")
+# knitr::include_graphics("Figuren/Fytoplankton/7_jaar.png")
+plotTrendFytoGroup(df.fyt.groep, "Heterotroof - Dinoflagellaten")
 ```
 
 ### Heterotroof - overig {#fyto-resultaten-hetero-overig}
@@ -417,7 +413,8 @@ In Figuur \@ref(fig:fyto8) is de ontwikkeling van overige heterotroof fytoplankt
 <!-- \end{figure}  -->
 
 ```{r fyto8, fig.cap="Jaarlijks gesommeerde waardes voor fytoplankton (heterotroof - overig) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer."}
-knitr::include_graphics("Figuren/Fytoplankton/8_jaar.png")
+# knitr::include_graphics("Figuren/Fytoplankton/8_jaar.png")
+plotTrendFytoGroup(df.fyt.groep, "Heterotroof - Overig")
 ```
 
 ### Mixotroof - dinoflagellaten {#fyto-resultaten-mix-dino}
@@ -431,7 +428,8 @@ In Figuur \@ref(fig:fyto9) is de ontwikkeling van de dinoflagellaten (mixotroof)
 <!-- \end{figure}  -->
 
 ```{r fyto9, fig.cap="Jaarlijks gesommeerde waardes voor fytoplankton (mixotroof - dinoflagellaten) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer."}
-knitr::include_graphics("Figuren/Fytoplankton/9_jaar.png")
+# knitr::include_graphics("Figuren/Fytoplankton/9_jaar.png")
+plotTrendFytoGroup(df.fyt.groep, "Mixotroof - Dinoflagellaten")
 ```
 
 ### Mixotroof - overig {#fyto-resultaten-mix-overig}
@@ -446,5 +444,6 @@ In Figuur \@ref(fig:fyto10) is de ontwikkeling van de overige mixotroof fytoplan
 <!-- \end{figure}  -->
 
 ```{r fyto10, fig.cap="Jaarlijks gesommeerde waardes voor fytoplankton (mixotroof - overig) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer."}
-knitr::include_graphics("Figuren/Fytoplankton/10_jaar.png")
+# knitr::include_graphics("Figuren/Fytoplankton/10_jaar.png")
+plotTrendFytoGroup(df.fyt.groep, "Mixotroof - Overig")
 ```
