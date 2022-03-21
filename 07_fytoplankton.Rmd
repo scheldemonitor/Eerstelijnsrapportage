@@ -137,7 +137,7 @@ Bij Schaar van Ouden Doel zien we dat vooral de blauwwieren en groenwieren in ho
 
 fytStatTable(df.fyt.groep,  statname = 'Schaar van Ouden Doel') %>%
   select(-stationname) %>%
-  rename(groepsnaam = parametername) %>% 
+  rename(groepsnaam = parametername) %>%
   knitr::kable(caption = "Gemiddeld celaantal per jaar en groep en trofieniveau bij Schaar van Ouden Doel.")
 ```
 

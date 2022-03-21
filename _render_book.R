@@ -21,8 +21,6 @@ bookdown::render_book("index.Rmd", output_dir = "docs",
                       new_session = F)
 
 
-
-
 # "normal pdf
 # options(tinytex.verbose = TRUE)
 # file.remove("_main.md")

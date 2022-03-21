@@ -48,7 +48,9 @@ Dit hoofdstuk betreft metingen van de waterbeweging in de Westerschelde en de mo
 
 ## Waterstanden {#waterstanden}
 
-```{r getijgolf, fig.cap="Weergave van een getijgolf met aanduiding hoogwater, laagwater, getijslag en dagelijkse ongelijkheid op basis van @VanRijn1994a"}
+(ref:getijgolf) Weergave van een getijgolf met aanduiding hoogwater, laagwater, getijslag en dagelijkse ongelijkheid op basis van @VanRijn1994a. 
+
+```{r getijgolf, fig.cap='(ref:getijgolf)'}
 knitr::include_graphics("Figuren/Inscape/getijgolf.png")
 ```
 

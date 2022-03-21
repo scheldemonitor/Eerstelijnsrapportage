@@ -8,6 +8,7 @@ knitr::opts_chunk$set(
 	echo = FALSE,
 	message = FALSE,
 	warning = FALSE,
+	fig.height = 4,
 	out.width = "85%",
 	fig.align='center'
 )
@@ -93,10 +94,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van korrelgrootte tot 63 $\\mu$m (%) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendKorrelgroottefractietot63um, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van de korrelgroottefractie tot 63$\\mu$m voor 2 stations."}
+```{r zwevendKorrelgroottefractietot63um, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van de korrelgroottefractie tot 63$\\mu$m voor 2 stations. De grootte van de symbolen geven het aantal valide meetwaarden per jaar aan."}
 #knitr::include_graphics("Figuren/Zwevend/Korrelgroottefractietot63um.png")
 
-plotTrends(df, parname, trend = F)
+# plotTrendsLimits(df, parname, trend = F)
 plotTrendsLimits(df, parname, trend = F) + ggtitle("test met aantallen metingen per jaar")
 ```
 
@@ -119,10 +120,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van korrelgrootte tot 2 $\\mu$m (%) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendKorrelgroottefractietot2um, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van de korrelgroottefractie tot 2$\\mu$m voor beide stations"}
+```{r zwevendKorrelgroottefractietot2um, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van de korrelgroottefractie tot 2$\\mu$m voor beide stations"}
 #knitr::include_graphics("Figuren/Zwevend/Korrelgroottefractietot2um.png")
 
-plotTrends(df, parname, trend = F)
+plotTrendsLimits(df, parname, trend = F)
 ```
 
 ## Metalen {#zwevend-metalen}
@@ -158,10 +159,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van arseen (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendArseen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Arseen voor beide stations."}
+```{r zwevendArseen, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Arseen voor beide stations."}
 #knitr::include_graphics("Figuren/Zwevend/Arseen.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 plotTrendsLimits(df, parname)
 ```
 
@@ -185,10 +186,10 @@ knitr::kable(dt,
 ```
 
 
-```{r zwevendCadmium, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Cadmium voor beide stations."}
+```{r zwevendCadmium, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Cadmium voor beide stations."}
 #knitr::include_graphics("Figuren/Zwevend/Cadmium.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 plotTrendsLimits(df, parname)
 ```
 
@@ -211,10 +212,9 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van chroom (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendChroom, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Chroom voor beide stations."}
+```{r zwevendChroom, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Chroom voor beide stations."}
 #knitr::include_graphics("Figuren/Zwevend/Chroom.png")
 
-plotTrends(df, parname)
 plotTrendsLimits(df, parname)
 ```
 
@@ -237,10 +237,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van kobalt (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendKobalt, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Kobalt voor beide stations."}
+```{r zwevendKobalt, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Kobalt voor beide stations."}
 #knitr::include_graphics("Figuren/Zwevend/Kobalt.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
 
 ### Koper {#zwevend-koper}
@@ -262,10 +262,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van koper (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendKoper, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Koper voor beide stations."}
+```{r zwevendKoper, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Koper voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/Koper.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
 
 ### Kwik {#zwevend-kwik} 
@@ -287,10 +287,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van kwik (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendKwik, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Kwik voor beide stations."}
+```{r zwevendKwik, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Kwik voor beide stations."}
 #knitr::include_graphics("Figuren/Zwevend/Kwik.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
 
 ### Lood {#zwevend-lood}
@@ -312,10 +312,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van lood (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendLood, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Lood voor beide stations."}
+```{r zwevendLood, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Lood voor beide stations."}
 #knitr::include_graphics("Figuren/Zwevend/Lood.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
 
 ### Vanadium {#zwevend-vanadium}
@@ -337,10 +337,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van vanadium (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendVanadium, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Vanadium voor beide stations."}
+```{r zwevendVanadium, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Vanadium voor beide stations."}
 #knitr::include_graphics("Figuren/Zwevend/Vanadium.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
 
 ### Zink {#zwevend-zink}
@@ -362,10 +362,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van zink (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendZink, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Zink voor beide stations."}
+```{r zwevendZink, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Zink voor beide stations."}
 #knitr::include_graphics("Figuren/Zwevend/Zink.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
 
 ## Polycyclische aromatische koolwaterstoffen (PAK’s) {#zwevend-PAK}
@@ -404,10 +404,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van antraceen (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendAntraceen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Antraceen voor beide stations."}
+```{r zwevendAntraceen, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Antraceen voor beide stations."}
 #knitr::include_graphics("Figuren/Zwevend/Antraceen.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
 
 ### Benzo[*a*]pyreen {#zwevend-Benzoapyreen}
@@ -427,10 +427,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van benzo(a)pyreen (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendBenzoapyreen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Benzoapyreen voor beide stations."}
+```{r zwevendBenzoapyreen, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Benzoapyreen voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/Benzoapyreen.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
 
 ### Benzo[*g,h,i*]peryleen {#zwevend-Benzoghiperyleen}
@@ -450,10 +450,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van benzo(g,h,i)peryleen (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendBenzoghiperyleen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Benzoperyleen voor beide stations."}
+```{r zwevendBenzoghiperyleen, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Benzoperyleen voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/Benzoperyleen.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
 
 ### Benzo[*a*]antraceen {#zwevend-Benzoaantraceen}
@@ -473,10 +473,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van benzo(a)antraceen (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendBenzoaantraceen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Benzoaantraceen voor beide stations."}
+```{r zwevendBenzoaantraceen, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Benzoaantraceen voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/Benzoaantraceen.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
 
 ### Benzo[*k*]fluorantheen {#zwevend-Benzokfluorantheen}
@@ -498,10 +498,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van benzo(k)fluorantheen (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendBenzokfluorantheen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Benzokfluorantheen voor beide stations."}
+```{r zwevendBenzokfluorantheen, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Benzokfluorantheen voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/Benzokfluorantheen.png")
 
-plotTrends(df, parname)
+# plotTrendsLimits(df, parname)
 ```
 
 ### Chryseen {#zwevend-chryseen}
@@ -521,10 +521,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van chryseen (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendChryseen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Chryseen voor beide stations."}
+```{r zwevendChryseen, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Chryseen voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/Chryseen.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
 
 ### Fenanthreen {#zwevend-fenanthreen}
@@ -544,10 +544,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van fenanthreen (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendFenanthreen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Fenanthreen voor beide stations."}
+```{r zwevendFenanthreen, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Fenanthreen voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/Fenanthreen.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
 
 ### Fluorantheen {#zwevend-fluorantheen}
@@ -568,10 +568,10 @@ knitr::kable(dt,
 ```
 
 
-```{r zwevendFluorantheen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Fluorantheen voor beide stations."}
+```{r zwevendFluorantheen, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Fluorantheen voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/Fluorantheen.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
 
 ### Indeno[*1,2,3-c,d*]pyreen {#zwevend-indeno}
@@ -593,10 +593,10 @@ knitr::kable(dt,
 ```
 
  
-```{r zwevendIndeno, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Indeno[*1,2,3-c,d*]pyreen voor beide stations."}
+```{r zwevendIndeno, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Indeno[*1,2,3-c,d*]pyreen voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/Indeno.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
  
 ### Naftaleen {#zwevend-naftaleen}
@@ -616,10 +616,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van naftaleen (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendNaftaleen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Naftaleen voor beide stations."}
+```{r zwevendNaftaleen, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Naftaleen voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/Naftaleen.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
 
 ## Polychloorbifenylen (PCB’s) {#zwevend-PCB}
@@ -655,10 +655,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van PCB180 (ug/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
  
-```{r zwevendPCB180, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB180 voor beide stations."}
+```{r zwevendPCB180, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van PCB180 voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/PCB180.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
  
 ### PCB138 {#zwevend-PCB138}
@@ -678,10 +678,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van PCB138 (ug/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendPCB138, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB138 voor beide stations."}
+```{r zwevendPCB138, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van PCB138 voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/PCB138.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
 
 ### PCB153 {#zwevend-PCB153}
@@ -703,10 +703,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van PCB153 (ug/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendPCB153, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB153 voor beide stations."}
+```{r zwevendPCB153, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van PCB153 voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/PCB153.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
  
 ### PCB101 {#zwevend-PCB101}
@@ -726,10 +726,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van PCB101 (ug/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendPCB101, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB101 voor beide stations."}
+```{r zwevendPCB101, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van PCB101 voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/PCB101.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 
 ```
 
@@ -750,10 +750,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van PCB52 (ug/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendPCB52, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB52 voor beide stations."}
+```{r zwevendPCB52, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van PCB52 voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/PCB52.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 
 ```
  
@@ -774,10 +774,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van PCB118 (ug/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendPCB118, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB118 voor beide stations."}
+```{r zwevendPCB118, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van PCB118 voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/PCB118.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
 
 ### PCB28 {#zwevend-PCB28}
@@ -797,10 +797,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van PCB28 (ug/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendPCB28, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB28 voor beide stations."}
+```{r zwevendPCB28, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van PCB28 voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/PCB28.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
 
 ## Overige stoffen {#zwevend-overig}
@@ -830,10 +830,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van dieldrin (ug/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendDieldrin, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Dieldrin voor beide stations."}
+```{r zwevendDieldrin, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Dieldrin voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/Dieldrin.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
  
 ### Hexachloorbenzeen {#zwevend-Hexachloorbenzeen}
@@ -855,10 +855,10 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van hexachloorbenzeen (ug/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
  
-```{r zwevendHexachloorbenzeen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Hexachloorbenzeen voor beide stations."}
+```{r zwevendHexachloorbenzeen, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Hexachloorbenzeen voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/Hexachloorbenzeen.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
  
 ### Tributyltin {#zwevend-Tributyltin}
@@ -880,9 +880,9 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van tributyltin (ug/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendTributyltin, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Tributyltin voor beide stations."}
+```{r zwevendTributyltin, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Tributyltin voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/Tributyltin.png")
 
-plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
  
