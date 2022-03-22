@@ -2,6 +2,7 @@
 require(tidyverse)
 require(viridis)
 require(leaflet)
+require(lubridate)
 
 # nog te maken functies
 # filternutriendata
@@ -263,17 +264,20 @@ plotTrendsGolven <- function(df, parname, locname, sf = F) {
     dplyr::filter(parametername %in% parname, stationname %in% locname) %>%
     dplyr::mutate(year = year(datetime), month = month(datetime)) %>%
     dplyr::group_by(stationname, year, month, parametername) %>% 
-    dplyr::summarize(mean = mean(value, na.rm = T)) %>%
+    dplyr::summarize(mean = mean(value, na.rm = T), max = max(value, na.rm = T)) %>%
     dplyr::select(Station = stationname,
                   Jaar = year,
                   Maand = month,
                   Gemiddelde = mean,
+                  Maximum = max,
                   Parameter = parametername) %>%
     dplyr::arrange(-Gemiddelde) %>%
-    ggplot(aes(Jaar, Gemiddelde)) +
-    geom_line(aes(color=Parameter)) + 
-    geom_point(aes(fill=Parameter), color = "white", shape = 21) + 
-    #facet_grid(Parameter ~ ., scales="free_y") +
+    pivot_longer(c(Maximum, Gemiddelde), names_to = "Statistiek", values_to = "Waarde") %>%
+    mutate(datum = lubridate::ymd(paste(Jaar, Maand, "15"))) %>%
+    ggplot(aes(datum, Waarde)) +
+    geom_line(aes(color=Statistiek)) + 
+    geom_point(aes(fill=Statistiek), color = "white", shape = 21) + 
+    facet_grid(Parameter ~ .) +
     theme_minimal() +
     ylab(parname) +
     theme(legend.position="none") +
