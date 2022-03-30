@@ -419,7 +419,7 @@ Maximale significante golfhoogtes voor windgolven worden in de Westerschelde ges
 ```
 
 ```{r gemiddeldeHs, fig.cap="Gemiddelde significante golfhoogte per station berekend op basis van het spectrum voor alle beschikbare data vanaf 1998."}
-#knitr::include_graphics("Figuren/Hydro/Golven/gemiddelde_hm0.png")
+# knitr::include_graphics("Figuren/Hydro/Golven/gemiddelde_hm0.png")
 
 
 ```
@@ -438,7 +438,7 @@ plotTrendsGolven(df, "Gemiddelde golfhoogte uit hoogste 1/3 deel van de golven i
 ```
 
 ```{r hydroHsCadzand, fig.cap="Maandelijks gemiddelde en maximum van de significante golfhoogte $H_{1/3}$ (boven) en $H_{m0}$ (onder) voor station Cadzand"}
-#knitr::include_graphics("Figuren/Hydro/Golven/H_Cadw.png")
+knitr::include_graphics("Figuren/Hydro/Golven/H_Cadw.png")
 ```
 
 ```{r hydroHsWielingen, fig.cap="Maandelijks gemiddelde en maximum van de significante golfhoogte $H_{1/3}$ (boven) en $H_{m0}$ (onder) voor station Wielingen"}
@@ -500,15 +500,15 @@ Voor beide periodeparameters geldt dat de golven in de monding de langste period
 ```
 
 ```{r gemiddeldeTm02, fig.cap="Gemiddelde significante golfperiode per station berekend op basis van het spectrum voor alle beschikbare data vanaf 1998."}
-#knitr::include_graphics("Figuren/Hydro/Golven/gemiddelde_tm02.png")
+knitr::include_graphics("Figuren/Hydro/Golven/gemiddelde_tm02.png")
 ```
 
 ```{r cdfplotTmo2, fig.cap="Empirische distributiefunctie voor de significante golfperiode berekend op basis van het spectrum voor alle beschikbare data vanaf 1998."}
-#knitr::include_graphics("Figuren/Hydro/Golven/cdfplot_tm02.png")
+knitr::include_graphics("Figuren/Hydro/Golven/cdfplot_tm02.png")
 ```
 
 ```{r hydroTDeurloo, fig.cap="Maandelijks gemiddelde en maximum van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Deurloo."}
-#knitr::include_graphics("Figuren/Hydro/Golven/T_Deurloo.png")
+knitr::include_graphics("Figuren/Hydro/Golven/T_Deurloo.png")
 ```
 
 ```{r hydroTCadzand, fig.cap="Maandelijks gemiddelde en maximum van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Cadzand."}
