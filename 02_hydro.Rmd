@@ -31,14 +31,12 @@ dataJaar <- 2020
 trendstations <- c("Europlatform","Vlakte van de Raan","Cadzand","Westkapelle","Breskens Veerhaven","Vlissingen","Gat van Borssele","Overloop van Hansweert", "Terneuzen", "Hansweert", "Walsoorden", "Baalhoek", "Schaar van de Noord", "Bath")
 
 frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_Hydro_1950_2020.csv"
-# frozendatapath <- "c:\\Users\\ronge_bb\\R\\eerstelijnSchelde\\download\\Data_Hydro_1950_2020.csv"
 df <- read_delim(frozendatapath, delim = ",", guess_max = 200000) %>% 
   filter(stationname %in% trendstations) %>%
   mutate(stationname = factor(stationname, levels = trendstations)) %>%
   repair_limits() #%>%
   # group_by(parametername, stationname) #%>%
   # mutate(across(value, remove_outliers))
-
 
 ```
 
@@ -333,10 +331,10 @@ knitr::include_graphics("Figuren/Inscape/spectrum.png")
 
 ```{r downloadHydroGolven, include = F}
 
-trendstations <- c("Deurloo (DELO)","HONTE","Pas van Terneuzen (PVT1)","Overloop van Hansweert","Bath (BAT1)")
+trendstations <- c("Bath (BAT2)","Hansweert (HAWI)","Cadzand (CAWI)","Cadzand (CADW)","Overloop van Hansweert (OVHW)","Deurloo (DELO)","Honte (HNTE)","Hoofdplaat (HFPL)","Overloop van Valkenisse (OVVA)","Pas van Terneuzen (PVT)","Wielingen (WIEL)")
 
-frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_FysChem_opp_test_1998_2020.csv"
-# frozendatapath <- "c:\\Users\\ronge_bb\\R\\Data\\Data_Hydro_Golven_1998_2020.csv"
+# frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_FysChem_opp_test_1998_2020.csv"
+frozendatapath <- "c:\\Users\\ronge_bb\\work\\R\\Data\\download\\Data_Hydro_Golven_1985_2020.csv"
 df <- read_delim(frozendatapath, delim = ",")
 
 # replace below partly by clean function in package smsfs
@@ -419,7 +417,7 @@ Maximale significante golfhoogtes voor windgolven worden in de Westerschelde ges
 ```
 
 ```{r gemiddeldeHs, fig.cap="Gemiddelde significante golfhoogte per station berekend op basis van het spectrum voor alle beschikbare data vanaf 1998."}
-# knitr::include_graphics("Figuren/Hydro/Golven/gemiddelde_hm0.png")
+#knitr::include_graphics("Figuren/Hydro/Golven/gemiddelde_hm0.png")
 
 
 ```
@@ -433,52 +431,61 @@ Maximale significante golfhoogtes voor windgolven worden in de Westerschelde ges
 ```{r hydroHsDeurloo, fig.cap="Maandelijks gemiddelde en maximum van de significante golfhoogte $H_{1/3}$ (boven) en $H_{m0}$ (onder) voor station Deurloo."}
 #knitr::include_graphics("Figuren/Hydro/Golven/H_Deurloo.png")
 
-#plotTrendsGolven(df, "Golfhoogte in dm in oppervlaktewater", "Schaar van Ouden Doel")
-plotTrendsGolven(df, "Gemiddelde golfhoogte uit hoogste 1/3 deel van de golven in cm in oppervlaktewater", "Deurloo (DELO)")
+#plotTrendsGolven(df, "H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm", "Deurloo (DELO)")
 ```
 
 ```{r hydroHsCadzand, fig.cap="Maandelijks gemiddelde en maximum van de significante golfhoogte $H_{1/3}$ (boven) en $H_{m0}$ (onder) voor station Cadzand"}
-knitr::include_graphics("Figuren/Hydro/Golven/H_Cadw.png")
+#knitr::include_graphics("Figuren/Hydro/Golven/H_Cadw.png")
+
+plotTrendsGolven(df, c("H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm","GGH: Gemiddelde golfhoogte in cm"), "Cadzand (CADW)")
 ```
 
 ```{r hydroHsWielingen, fig.cap="Maandelijks gemiddelde en maximum van de significante golfhoogte $H_{1/3}$ (boven) en $H_{m0}$ (onder) voor station Wielingen"}
 #knitr::include_graphics("Figuren/Hydro/Golven/H_Wiel.png")
+
+plotTrendsGolven(df, c("H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm","GGH: Gemiddelde golfhoogte in cm"), "Wielingen (WIEL)")
 ```
 
 ```{r hydroHsHoofdplaat, fig.cap="Maandelijks gemiddelde en maximum van de significante golfhoogte $H_{1/3}$ (boven) en $H_{m0}$ (onder) voor station Hoofdplaat."}
 #knitr::include_graphics("Figuren/Hydro/Golven/H_HFPL.png")
+
+plotTrendsGolven(df, c("H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm","GGH: Gemiddelde golfhoogte in cm"), "Hoofdplaat (HFPL)")
 ```
 
 ```{r hydroHsHonte, fig.cap="Maandelijks gemiddelde en maximum van de significante golfhoogte $H_{1/3}$ (boven) en $H_{m0}$ (onder) voor station Honte."}
 #knitr::include_graphics("Figuren/Hydro/Golven/H_HNTE.png")
 
-plotTrendsGolven(df, "Gemiddelde golfhoogte uit hoogste 1/3 deel van de golven in cm in oppervlaktewater", "HONTE")
+plotTrendsGolven(df, c("H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm","GGH: Gemiddelde golfhoogte in cm"), "Honte (HNTE)")
 ```
 
 ```{r hydroHsPVT, fig.cap="Maandelijks gemiddelde en maximum van de significante golfhoogte $H_{1/3}$ (boven) en $H_{m0}$ (onder) voor station Pas van Terneuzen."}
 #knitr::include_graphics("Figuren/Hydro/Golven/H_PVT.png")
 
-plotTrendsGolven(df, "Gemiddelde golfhoogte uit hoogste 1/3 deel van de golven in cm in oppervlaktewater", "Pas van Terneuzen (PVT1)")
+plotTrendsGolven(df, c("H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm","GGH: Gemiddelde golfhoogte in cm"), "Pas van Terneuzen (PVT)")
 ```
 
 ```{r hydroHsOVHW, fig.cap="Maandelijks gemiddelde en maximum van de significante golfhoogte $H_{1/3}$ (boven) en $H_{m0}$ (onder) voor station Overloop van Hansweert."}
 #knitr::include_graphics("Figuren/Hydro/Golven/H_OVHW.png")
 
-plotTrendsGolven(df, "Gemiddelde golfhoogte uit hoogste 1/3 deel van de golven in cm in oppervlaktewater", "Overloop van Hansweert")
+plotTrendsGolven(df, c("H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm","GGH: Gemiddelde golfhoogte in cm"), "Overloop van Hansweert (OVHW)")
 ```
 
 ```{r hydroHsHansweert, fig.cap="Maandelijks gemiddelde en maximum van de significante golfhoogte $H_{1/3}$ (boven) en $H_{m0}$ (onder) voor station Hansweert."}
 #knitr::include_graphics("Figuren/Hydro/Golven/H_HAWI.png")
+
+plotTrendsGolven(df, c("H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm","GGH: Gemiddelde golfhoogte in cm"), "Hansweert (HAWI)")
 ```
 
 ```{r hydroHsOVVA, fig.cap="Maandelijks gemiddelde en maximum van de significante golfhoogte $H_{1/3}$ (boven) en $H_{m0}$ (onder) voor station Overloop van Valkenisse."}
 #knitr::include_graphics("Figuren/Hydro/Golven/H_OVVA.png")
+
+plotTrendsGolven(df, c("H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm","GGH: Gemiddelde golfhoogte in cm"), "Overloop van Valkenisse (OVVA)")
 ```
 
 ```{r hydroHsBath, fig.cap="Maandelijks gemiddelde en maximum van de significante golfhoogte $H_{1/3}$ (boven) en $H_{m0}$ (onder) voor station Bath."}
 #knitr::include_graphics("Figuren/Hydro/Golven/H_BAT2.png")
 
-plotTrendsGolven(df, "Gemiddelde golfhoogte uit hoogste 1/3 deel van de golven in cm in oppervlaktewater", "Bath (BAT1)")
+plotTrendsGolven(df, c("H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm","GGH: Gemiddelde golfhoogte in cm"), "Bath (BAT2)")
 ```
 
 ### Golfperiode {#golvenPeriode}
@@ -500,49 +507,67 @@ Voor beide periodeparameters geldt dat de golven in de monding de langste period
 ```
 
 ```{r gemiddeldeTm02, fig.cap="Gemiddelde significante golfperiode per station berekend op basis van het spectrum voor alle beschikbare data vanaf 1998."}
-knitr::include_graphics("Figuren/Hydro/Golven/gemiddelde_tm02.png")
+#knitr::include_graphics("Figuren/Hydro/Golven/gemiddelde_tm02.png")
 ```
 
 ```{r cdfplotTmo2, fig.cap="Empirische distributiefunctie voor de significante golfperiode berekend op basis van het spectrum voor alle beschikbare data vanaf 1998."}
-knitr::include_graphics("Figuren/Hydro/Golven/cdfplot_tm02.png")
+#knitr::include_graphics("Figuren/Hydro/Golven/cdfplot_tm02.png")
 ```
 
 ```{r hydroTDeurloo, fig.cap="Maandelijks gemiddelde en maximum van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Deurloo."}
-knitr::include_graphics("Figuren/Hydro/Golven/T_Deurloo.png")
+#knitr::include_graphics("Figuren/Hydro/Golven/T_Deurloo.png")
 ```
 
 ```{r hydroTCadzand, fig.cap="Maandelijks gemiddelde en maximum van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Cadzand."}
 #knitr::include_graphics("Figuren/Hydro/Golven/T_Cadw.png")
+
+plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s","TM02: Periodeparameter berekend uit het spectrum 0.03-0.5 Hz in 0.1 s"), "Cadzand (CADW)")
 ```
 
 ```{r hydroTWiel, fig.cap="Maandelijks gemiddelde en maximum van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Wielingen."}
 #knitr::include_graphics("Figuren/Hydro/Golven/T_Wiel.png")
+
+plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s","TM02: Periodeparameter berekend uit het spectrum 0.03-0.5 Hz in 0.1 s"), "Wielingen (WIEL)")
 ```
 
 ```{r hydroTHFPL, fig.cap="Maandelijks gemiddelde en maximum van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Hoofdplaat."}
 #knitr::include_graphics("Figuren/Hydro/Golven/T_HFPL.png")
+
+plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s","TM02: Periodeparameter berekend uit het spectrum 0.03-0.5 Hz in 0.1 s"), "Hoofdplaat (HFPL)")
 ```
 
 ```{r hydroTHonte, fig.cap="Maandelijks gemiddelde en maximum van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Honte."}
 #knitr::include_graphics("Figuren/Hydro/Golven/T_HNTE.png")
+
+plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s","TM02: Periodeparameter berekend uit het spectrum 0.03-0.5 Hz in 0.1 s"), "Honte (HNTE)")
 ```
 
 ```{r hydroTPVT, fig.cap="Maandelijks gemiddelde en maximum van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Pas van Terneuzen."}
 #knitr::include_graphics("Figuren/Hydro/Golven/T_PVT.png")
+
+plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s","TM02: Periodeparameter berekend uit het spectrum 0.03-0.5 Hz in 0.1 s"), "Pas van Terneuzen (PVT)")
 ```
 
 ```{r hydroTOVHW, fig.cap="Maandelijks gemiddelde en maximum van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Overloop van Hansweert."}
 #knitr::include_graphics("Figuren/Hydro/Golven/T_OVHW.png")
+
+plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s","TM02: Periodeparameter berekend uit het spectrum 0.03-0.5 Hz in 0.1 s"), "Overloop van Hansweert (OVHW)")
 ```
 
 ```{r hydroTHansweert, fig.cap="Maandelijks gemiddelde en maximum van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Hansweert."}
 #knitr::include_graphics("Figuren/Hydro/Golven/T_HAWI.png")
+
+plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s","TM02: Periodeparameter berekend uit het spectrum 0.03-0.5 Hz in 0.1 s"), "Hansweert (HAWI)")
 ```
 
 ```{r hydroTOVVA, fig.cap="Maandelijks gemiddelde en maximum van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Overloop van Valkenisse."}
 #knitr::include_graphics("Figuren/Hydro/Golven/T_OVVA.png")
+
+plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s","TM02: Periodeparameter berekend uit het spectrum 0.03-0.5 Hz in 0.1 s"), "Overloop van Valkenisse (OVVA)")
 ```
 
 ```{r hydroTBath, fig.cap="Maandelijks gemiddelde en maximum van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Bath."}
 #knitr::include_graphics("Figuren/Hydro/Golven/T_BAT2.png")
+
+plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s","TM02: Periodeparameter berekend uit het spectrum 0.03-0.5 Hz in 0.1 s"), "Bath (BAT2)")
 ```
