@@ -90,7 +90,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van saliniteit (DIMSLS) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van saliniteit (DIMSLS) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 Figuur \@ref(fig:fysischSaliJaar) toont de mediane saliniteit per station samen met het 10- en 90-percentiel van de gemeten waarde per jaar. De stations zijn gerangschikt in stroomafwaartse richting. Daarnaast zijn in Tabel \@ref(tab:fysischSaliniteit) deze waardes per station weergegeven.
@@ -153,7 +153,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van temperatuur (oC) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van temperatuur (oC) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 
@@ -229,7 +229,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van zuurstof (%) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van zuurstof (%) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischZuurstofpercentageJaar, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het zuurstofverzadigingspercentage in het oppervlaktewater van de Westerschelde en de monding."}
@@ -254,7 +254,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van zuurstof (mg/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van zuurstof (mg/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischZuurstofJaar, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het zuurstofgehalte in mg/L in het oppervlaktewater van de Westerschelde en de monding."}
@@ -311,7 +311,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van chlorofyl-a (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van chlorofyl-a (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 Figuur \@ref(fig:fysischChlorofylJaar) toont het jaarmediane gehalte chlorofyl-a per station voor de periode 1996-2018, samen met de laagste en de hoogste gemeten waarde. Daarnaast zijn in Tabel \@ref(tab:fysischChlorofyl) de mediaan, 10- en 90-percentiel waardes per station over de hele periode weergegeven.
@@ -362,7 +362,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van feofytine-a (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van feofytine-a (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 Feofytine-a wordt gelijk met chlorofyl-a gemeten. Het is een afbraakproduct van chlorofyl-a, en wordt daarom gezien als een maat voor detritus (dood organisch materiaal). De dataset wordt in Figuur \@ref(fig:fysischFeofytineJaar) weergegeven als jaarmediane waardes, inclusief de minimaal en maximaal gemeten waardes. Daarnaast zijn in Tabel \@ref(tab:fysischFeofytine) zijn de mediaan, 10- en 90-percentiel waardes per station weergegeven.
@@ -415,7 +415,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van chemisch zuurstofverbruik (mg/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van chemisch zuurstofverbruik (mg/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 Figuur \@ref(fig:fysischChemischZuurstofverbruikJaar) toont het jaarmediane  chemisch zuurstofverbruik per station voor de periode 2001-2018, samen met de laagste en de hoogste gemeten waarde. Daarnaast zijn in Tabel \@ref(tab:fysischChemischZuurstofverbruik) zijn de mediaan, 10- en 90-percentiel waardes per station weergegeven.
@@ -466,7 +466,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van biochemisch zuurstofverbruik (mg/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van biochemisch zuurstofverbruik (mg/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischBiochemischZuurstofverbruikJaar, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het biochemisch zuurstofverbruik in het oppervlaktewater van de Westerschelde en de monding. De roze stippellijn is de bepalingsgrens."}
@@ -507,7 +507,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van doorzicht (dm) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van doorzicht (dm) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 In Figuur \@ref(fig:fysischDoorzicht) zijn de jaarmedianen over de periode maart - september in het genoemde tijdvenster van elk jaar weergegeven, samen met de minimaal en maximaal gemeten waardes. In de stations Walcheren 2 km uit de kust en Walcheren 20 km uit de kust wordt het doorzicht niet bepaald. In plaats daarvan worden stations Hoedenskerke boei 4 en Wielingen gepresenteerd. Van deze twee stations is sinds 2009 geen data meer ontvangen. Daarnaast zijn in Tabel \@ref(tab:fysischDoorzichtTab) zijn de mediaan, 10- en 90-percentiel waardes per station weergegeven. De stations zijn gerangschikt in stroomafwaartse richting.
@@ -536,7 +536,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van lichtextinctie (1/m) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van lichtextinctie (1/m) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischExtinctiecoef, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van de extinctiecoefficiënt in het oppervlaktewater van de Westerschelde en de monding."}
@@ -577,7 +577,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van zwevend stof (mg/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van zwevend stof (mg/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 Figuur \@ref(fig:fysischZwevendeStof) toont de jaarmedianen voor 1996-2018 per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischZwevendeStofTab) de mediaan, 10- en 90-percentiel waardes per station weergegeven.
@@ -672,7 +672,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van het opgelost stikstofgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van het opgelost stikstofgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischStikstofFil, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het stikstofgehalte in het oppervlaktewater van de Westerschelde en de monding."}
@@ -701,7 +701,7 @@ dt <- statTable(df2, parname, rounding)
 # dt <- tex2dt("Figuren/Fysisch/Stikstof_par/meanvalues.tex")
 knitr::kable(dt, 
              # col.names = c("Station","Gemiddelde","Maximum","Minimum"),
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel  en de trend en p waarde van de trend van het particulair stikstofgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel  en de trend en p waarde van de trend van het particulair stikstofgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischStikstofPar, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het particulair stikstofgehalte in het oppervlaktewater van de Westerschelde en de monding."}
@@ -728,7 +728,7 @@ In benedenstroomse richting nemen de concentraties van ammonium sterk af, zie Fi
 parname = "Ammonium in mg/l uitgedrukt in stikstof / na filtratie in oppervlaktewater"
 dt <- statTable(df2, parname, 3)
 knitr::kable(dt, 
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel van het ammoniumgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel van het ammoniumgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischAmmonium, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het ammoniumgehalte in het oppervlaktewater van de Westerschelde en de monding."}
@@ -753,7 +753,7 @@ In benedenstroomse richting nemen de concentraties van nitriet af, zie Figuur \@
 parname = "Nitriet in mg/l uitgedrukt in stikstof / na filtratie in oppervlaktewater"
 dt <- statTable(df2, parname, 3)
 knitr::kable(dt,
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel van het nitrietgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel van het nitrietgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischNitriet, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het nitrietgehalte in het oppervlaktewater van de Westerschelde en de monding."}
@@ -779,7 +779,7 @@ Deze resultaten laten zien dat de nitraatgehaltes sterk afnemen in stroomafwaart
 parname <- "Nitraat in mg/l uitgedrukt in stikstof / na filtratie in oppervlaktewater"
 dt <- statTable(df2, parname, 3)
 knitr::kable(dt, 
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel van het nitraatfgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel van het nitraatfgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischNitraat, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het nitraatgehalte in het oppervlaktewater van de Westerschelde en de monding."}
@@ -804,7 +804,7 @@ De orthosfosfaatconcentraties na filtratie nemen af in stroomafwaartse richting,
 parname <- "Orthofosfaat in mg/l Uitgedrukt in Fosfor / Na filtratie in oppervlaktewater" 
 dt <- statTable(df2, parname, 3)
 knitr::kable(dt, 
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel van het orthofosfaatgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel van het orthofosfaatgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischOrthofosfaat, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het orthofosfaatgehalte in het oppervlaktewater van de Westerschelde en de monding."}
@@ -830,7 +830,7 @@ De resultaten lijken sprekend op die van orthofosfaat, vooral op de bovenstrooms
 parname <- "Fosfaat, totaal in mg/l na filtratie in oppervlaktewater"
 dt <- statTable(df2, parname, 3)
 knitr::kable(dt, 
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel van het fosfaatgehalte na filtratie in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel van het fosfaatgehalte na filtratie in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischFosfaatFil, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het fosfaatgehalte in het oppervlaktewater van de Westerschelde en de monding."}
@@ -849,7 +849,7 @@ De concentraties particulair gebonden fosfaat tonen geen duidelijke longitudinal
 parname = "Fosfaat, totaal in mg/l particulair gebonden in oppervlaktewater" 
 dt <- statTable(df2, parname, 3)
 knitr::kable(dt,
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel van het particulair gebonden fosfaatgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel van het particulair gebonden fosfaatgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischFosfaatPar, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het particulair gebonden fosfaatgehalte in het oppervlaktewater van de Westerschelde en de monding."}
@@ -880,7 +880,7 @@ De resultaten laten duidelijk zien dat de concentraties afnemen in de richting v
 parname <- "Silicaat in mg/l uitgedrukt in silicium na filtratie in oppervlaktewater"
 dt <- statTable(df2, parname, 3)
 knitr::kable(dt, 
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel van het silicaatgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel van het silicaatgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischSilicaat, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het silicaatgehalte in het oppervlaktewater van de Westerschelde en de monding."}
@@ -910,7 +910,7 @@ De gehaltes dalen in stroomafwaartse richting (met toenemende saliniteit), zie o
 parname <- "Opgelost organisch koolstof in mg/l na filtratie in oppervlaktewater"
 dt <- statTable(df2, parname, 3)
 knitr::kable(dt, 
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel van het opgelost koolstofhehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel van het opgelost koolstofhehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischKoolstofOpg, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het opgelost koolstofgehalte in het oppervlaktewater van de Westerschelde en de monding."}
@@ -932,7 +932,7 @@ De hoeveelheid particulair organisch koolstof varieert sterk van jaar tot jaar. 
 parname <- "Particulair organisch koolstof in mg/l particulair gebonden in oppervlaktewater"
 dt <- statTable(df2, parname, 3)
 knitr::kable(dt, 
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel van het opgelost koolstofhehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel van het opgelost koolstofhehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r gemiddeldekoolstofpart, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het opgelost koolstofgehalte in het oppervlaktewater van de Westerschelde en de monding."}
@@ -1012,7 +1012,7 @@ dfm <- df2 %>%
 # dt <- statTable(dfm, parname = newparname, rounding)
 # knitr::kable(dt, 
 #              align = 'c',
-#              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van molaire C-N-P-ratio van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+#              caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van molaire C-N-P-ratio van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 
 # dt <- tex2dt("Figuren/Fysisch/CNP/meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Afkorting","C-ratio","N-ratio","P-ratio"),
@@ -1078,7 +1078,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van boor (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van boor (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischMetalenBoorTotaal, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het totale boorgehalte in het oppervlaktewater van de Westerschelde en de monding"}
@@ -1100,7 +1100,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van boor na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van boor na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischMetalenBoor, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het gefilterde boorgehalte in het oppervlaktewater van de Westerschelde en de monding"}
@@ -1139,7 +1139,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van chroom (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van chroom (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischMetalenChroomTotaal, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het totale chroomgehalte in het oppervlaktewater van de Westerschelde en de monding"}
@@ -1164,7 +1164,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van chroom na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van chroom na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischMetalenChroomFil, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het gefilterde chroomgehalte in het oppervlaktewater van de Westerschelde en de monding"}
@@ -1203,7 +1203,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van koper (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van koper (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischMetalenKoperTotaal, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het totale kopergehalte in het oppervlaktewater van de Westerschelde en de monding"}
@@ -1228,7 +1228,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van koper na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van koper na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischMetalenKoperFil, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het gefilterde kopergehalte in het oppervlaktewater van de Westerschelde en de monding"}
@@ -1267,7 +1267,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van uranium (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van uranium (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischMetalenUraniumTotaal, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het totale uraniumgehalte in het oppervlaktewater van de Westerschelde en de monding."}
@@ -1292,7 +1292,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van uranium na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van uranium na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischMetalenUraniumFil, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het gefilterde uraniumgehalte in het oppervlaktewater van de Westerschelde en de monding"}
@@ -1331,7 +1331,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van vanadium (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van vanadium (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischMetalenVanTotaal, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het totale vanadiumgehalte in het oppervlaktewater van de Westerschelde en de monding."}
@@ -1356,7 +1356,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van vanadium na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van vanadium na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischMetalenVanadiumFil, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het gefilterde vanadiumgehalte in het oppervlaktewater van de Westerschelde en de monding."}
@@ -1397,7 +1397,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van zink (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van zink (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischMetalenZinkTotaal, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het totale zinkgehalte in het oppervlaktewater van de Westerschelde en de monding."}
@@ -1422,7 +1422,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van zink na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van zink na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r fysischMetalenZinkFil, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het gefilterde zinkgehalte in het oppervlaktewater van de Westerschelde en de monding."}

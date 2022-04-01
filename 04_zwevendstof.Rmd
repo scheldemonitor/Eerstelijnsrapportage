@@ -27,6 +27,7 @@ trendstations <- c("Schaar van Ouden Doel", "Vlissingen boei SSVH")
 
 frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_FysChem_zwevend_test_1998_2020.csv"
 # frozendatapath <- "c:/Users/ronge_bb/R/Data/Data_FysChem_zwevend_test_1998_2020.csv"
+frozendatapath <- "Data_FysChem_zwevend.csv"
 
 ```
 
@@ -75,7 +76,7 @@ Voor sommige parameters geldt dat de meetwaarde gelijk of lager is dan de detect
 
 In de resultaten hebben we het minerale aandeel van de korrelgrootteverdeling weergegeven, dat wil zeggen dat kalk en organische stof verwijderd zijn, als percentage van het totale gewicht van het monster. De korrelgroottefractie kleiner dan 2 $\mu$m wordt bij Schaar van Ouden Doel enkel vanaf 1998 weergegeven. Na 1997 heeft er een methodiekverandering plaatsgevonden waardoor de gegevens van voor 1998 niet vergelijkbaar zijn met die van na 1998.
 
-### Korrelgroottefractie tot 63 $\mu$m {#korrelgrootteverdeling-tot63}
+### Korrelgroottefractie tot 63 µm {#korrelgrootteverdeling-tot63}
 
 Figuur \@ref(fig:zwevendKorrelgroottefractietot63um) toont het jaargemiddelde korrelgroottefractie tot 63 $\mu$m per station voor de periode vanaf 1997 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendKorrelgroottefractietot63umTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
 
@@ -101,7 +102,7 @@ knitr::kable(dt,
 plotTrendsLimits(df, parname, trend = F) + ggtitle("test met aantallen metingen per jaar")
 ```
 
-### Korrelgroottefractie tot 2 $\mu$m {#korrelgrootteverdeling-tot2}
+### Korrelgroottefractie tot 2 µm {#korrelgrootteverdeling-tot2}
 
 Figuur \@ref(fig:zwevendKorrelgroottefractietot2um) toont het jaargemiddelde korrelgroottefractie tot 2 $\mu$m per station voor de periode vanaf 1997 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendKorrelgroottefractietot2umTab) zijn de gemiddelde, minimale en maximale waardes per station weergegeven. 
 
@@ -368,7 +369,7 @@ knitr::kable(dt,
 plotTrendsLimits(df, parname)
 ```
 
-## Polycyclische aromatische koolwaterstoffen (PAK’s) {#zwevend-PAK}
+## Polycyclische aromatische koolwaterstoffen (PAK's) {#zwevend-PAK}
 
 In deze paragraaf presenteren we de concentraties in zwevend stof van de volgende polycyclische aromatische koolwaterstoffen:
 
@@ -871,6 +872,20 @@ In 2012 worden de waarden van tribultyltin (TBT) bij Schaar van Ouden Doel niet 
 # dt <- tex2dt("Figuren/Zwevend/Tributyltin_meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
 #              caption = "Waardes voor de Tributyltin in $\\mu$g/kg voor beide stations.")
+
+
+
+df <- df %>%
+  mutate(value = case_when(
+    parametername == "Tributyltin in ug/kg Uitgedrukt in Tin / drooggewicht in zwevend stof" ~ value * 2.444,
+    parametername == "Tributyltin in ug/kg drooggewicht in zwevend stof" ~ value
+  )) %>%
+  mutate(parametername = case_when(
+    parametername == "Tributyltin in ug/kg Uitgedrukt in Tin / drooggewicht in zwevend stof" ~ "Tributyltin in ug/kg drooggewicht in zwevend stof",
+    parametername != "Tributyltin in ug/kg Uitgedrukt in Tin / drooggewicht in zwevend stof" ~ parametername,
+    
+  ))
+
 
 parname = "Tributyltin in ug/kg drooggewicht in zwevend stof"
 rounding = 3

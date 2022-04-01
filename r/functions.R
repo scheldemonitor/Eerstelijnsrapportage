@@ -48,8 +48,9 @@ if(anydata == 0){
   
 if(anydata > 0){
   stats <- df %>%
+    drop_na(value) %>%
     filter(parametername == parname) %>%
-    mutate(year = year(datetime), month = month(datetime)) %>%
+    mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
     # group_by(stationname, year, month) %>% 
     # summarize(monthlymean = mean(value)) %>%
     group_by(stationname, year) %>% 
@@ -59,8 +60,9 @@ if(anydata > 0){
     filter(term == "year") 
   
   df %>% 
+    drop_na(value) %>%
     filter(parametername == parname) %>% 
-    mutate(year = year(datetime), month = month(datetime)) %>%
+    mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
     group_by(stationname) %>% 
     summarize(
       median = median(value, na.rm = T), 
@@ -80,6 +82,49 @@ if(anydata > 0){
 }
 }
 
+# Make table with statistics
+statTableParams <- function(df, parnames, statname, rounding, meanorder = "decreasing", sf = F) {
+  
+  if(sf) df <- df %>% st_drop_geometry()
+  
+  anydata <- df %>% filter(parametername %in% parnames & stationname == statname) %>% nrow()
+  if(anydata == 0){
+    return(paste("Er zijn geen data gevonden voor", parnames))
+  }
+  
+  if(anydata > 0){
+    stats <- df %>%
+      filter(parametername %in% parnames & stationname == statname) %>%
+      mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
+      # group_by(stationname, year, month) %>% 
+      # summarize(monthlymean = mean(value)) %>%
+      group_by(parametername, year) %>% 
+      summarize(yearlymedian = median(value)) %>%
+      group_by(parametername) %>%
+      do(broom::tidy(lm(yearlymedian ~ year, data = .))) %>% 
+      filter(term == "year") 
+    
+    df %>% 
+      filter(parametername %in% parnames & stationname == statname) %>% 
+      mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
+      group_by(parametername) %>% 
+      summarize(
+        median = median(value, na.rm = T), 
+        `10-perc` = quantile(value, 0.1, na.rm = T), 
+        `90-perc` = quantile(value, 0.9, na.rm = T)) %>%
+      left_join(stats)  %>%
+      mutate(across(where(is.numeric), round, 3)) %>%
+      mutate(across(where(is.numeric), signif, rounding)) %>%
+      select(Parameter = parametername,
+             Mediaan = median,
+             `90-perc`,
+             `10-perc`,
+             Trend = estimate,
+             p = p.value) #%>%
+    # arrange(-Gemiddelde)
+    
+  }
+}
 
 fytStatTable <- function(df, statname){
   df %>% 
@@ -103,7 +148,7 @@ if(anydata == 0){
 
   p <- df %>%
     dplyr::filter(parametername == parname) %>%
-    dplyr::mutate(year = year(datetime), month = month(datetime)) %>%
+    dplyr::mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
     dplyr::group_by(stationname, year) %>% 
     dplyr::summarize(median = median(value, na.rm = T), `10-perc` = quantile(value, 0.1, na.rm = T), `90-perc` = quantile(value, 0.9, na.rm = T)) %>%
     dplyr::select(Station = stationname,
@@ -128,14 +173,20 @@ if(anydata == 0){
 plotTrendsLimits <- function(df, parname, sf = F, trend = T) {
   
   if(sf) df <- df %>% st_drop_geometry()
+  
+  anydata <- df %>% filter(parametername == parname) %>% nrow()
+  if(anydata == 0){
+    return(paste("Er zijn geen data gevonden voor", parname))
+  } else
+    
   p <- df %>%
     separate(originalvalue, c("limiet", "originalvalue"), " ") %>%
     dplyr::filter(parametername == parname) %>%
-    dplyr::mutate(year = year(datetime), month = month(datetime)) %>%
+    dplyr::mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
     dplyr::group_by(stationname, year) %>% 
     dplyr::summarize(
       `n(<)` = ifelse(sum(limiet == "<") == 0 , NA, sum(limiet == "<")), 
-      `n(=)` = ifelse(sum(limiet == "=") == 0 , NA, sum(limiet == "=")),
+      `n(=)` = ifelse(sum(!limiet %in% c("<", ">")) == 0 , NA, sum(!limiet %in% c("<", ">"))),
       `n(>)` = ifelse(sum(limiet == ">") == 0 , NA, sum(limiet == ">")), 
       median = median(value, na.rm = T), `10-perc` = quantile(value, 0.1, na.rm = T), `90-perc` = quantile(value, 0.9, na.rm = T)
     ) %>%
@@ -151,9 +202,9 @@ plotTrendsLimits <- function(df, parname, sf = F, trend = T) {
     ggplot(aes(Jaar, Mediaan)) +
     geom_ribbon(aes(ymin = `10-perc`, ymax = `90-perc`), fill = "lightgrey") +
     geom_line() + 
-    geom_point(aes(size = `n(=)`), fill = "white", shape = 21) +
-    geom_text(aes(y = 0, label = `n(<)`), size = 4) +
-    geom_text(aes(y = 10, label = `n(>)`), size = 4)
+    geom_point(aes(size = `n(=)`), fill = "white", shape = 21) #+
+    # geom_text(aes(y = 0, label = `n(<)`), size = 4) +
+    # geom_text(aes(y = 10, label = `n(>)`), size = 4)
   
   if(trend)    p <- p + geom_smooth(method = "lm", fill = "blue", alpha = 0.2)
   p <- p + facet_wrap(~Station, ncol = 2) +
@@ -164,13 +215,66 @@ plotTrendsLimits <- function(df, parname, sf = F, trend = T) {
   return(p)
 }
 
+plotTrendsLimitsBiota <- function(df, statname, cat, sciname, sf = F, trend = T) {
+  
+  if(sf) df <- df %>% st_drop_geometry()
+  
+  anydata <- df %>% filter(
+    stationname %in% statname,
+    category %in% cat, 
+    scientificname == sciname
+    ) %>% nrow()
+  if(anydata == 0){
+    return(paste("Er zijn geen data gevonden voor", cat))
+  } else
+    
+    p <- df %>%
+    separate(originalvalue, c("limiet", "originalvalue"), " ") %>%
+    dplyr::filter(
+      stationname %in% statname,
+      category %in% cat, 
+      scientificname == sciname
+    ) %>%
+    dplyr::mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
+    dplyr::group_by(parametername, year) %>% 
+    dplyr::summarize(
+      `n(<)` = ifelse(sum(limiet == "<") == 0 , NA, sum(limiet == "<")), 
+      `n(=)` = ifelse(sum(!limiet %in% c("<", ">")) == 0 , NA, sum(!limiet %in% c("<", ">"))),
+      `n(>)` = ifelse(sum(limiet == ">") == 0 , NA, sum(limiet == ">")), 
+      median = median(value, na.rm = T), `10-perc` = quantile(value, 0.1, na.rm = T), `90-perc` = quantile(value, 0.9, na.rm = T)
+    ) %>%
+    dplyr::select(Parameter = parametername,
+                  Jaar = year,
+                  Mediaan = median,
+                  `90-perc`,
+                  `10-perc`,
+                  `n(=)`,
+                  `n(<)`,
+                  `n(>)`) %>%
+    dplyr::arrange(-Mediaan) %>%
+    ggplot(aes(Jaar, Mediaan)) +
+    geom_ribbon(aes(ymin = `10-perc`, ymax = `90-perc`), fill = "lightgrey") +
+    geom_line() + 
+    geom_point(aes(size = `n(=)`), fill = "white", shape = 21) 
+  
+  if(trend)    p <- p + geom_smooth(method = "lm", fill = "blue", alpha = 0.2)
+  p <- p + facet_wrap(~Parameter, ncol = 2, scales = "free_y") +
+    # ylab() +
+    labs(subtitle = paste(statname, sciname, sep = ", ")) +
+    coord_cartesian(ylim = c(0,NA)) +
+    trendplotstyle
+  return(p)
+}
+
+
+
 # Plot trends of nutrients
 plotLogTrends <- function(df, parname, sf = F, trend = T) {
   
   if(sf) df <- df %>% st_drop_geometry()
   p <- df %>%
     dplyr::filter(parametername == parname) %>%
-    dplyr::mutate(year = year(datetime), month = month(datetime)) %>%
+    dplyr::mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
     dplyr::group_by(stationname, year) %>% 
     dplyr::summarize(median = exp(median(log(value), na.rm = T)), `10-perc` = exp(quantile(log(value), 0.1, na.rm = T)), `90-perc` = exp(quantile(log(value), 0.9, na.rm = T))) %>%
     dplyr::select(Station = stationname,
@@ -204,7 +308,7 @@ plotLogAnomalies <- function(df, parname, sf = F) {
   if(sf) df <- df %>% st_drop_geometry()
   p <- df %>%
     dplyr::filter(parametername == parname) %>%
-    dplyr::mutate(year = year(datetime), month = month(datetime)) %>%
+    dplyr::mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
     mutate(logwaarde = log(value)+0.001) %>%
     group_by(stationname, year, month) %>% summarize(logmaandgemiddelde = mean(logwaarde, na.rm = T)) %>% ungroup() %>%
     group_by(stationname) %>% mutate(anomalie = logmaandgemiddelde - mean(logmaandgemiddelde, na.rm = T)) %>% 
@@ -228,14 +332,12 @@ plotLogAnomalies <- function(df, parname, sf = F) {
   return(p)
 }
 
-
-
 plotTrendsWaterstand <- function(df, parname, locname, sf = F) {
   
   if(sf) df <- df %>% st_drop_geometry()
   p <- df %>%
     dplyr::filter(parametername %in% parname, stationname %in% locname) %>%
-    dplyr::mutate(year = year(datetime), month = month(datetime)) %>%
+    dplyr::mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
     dplyr::group_by(stationname, year, parametername) %>% 
     dplyr::summarize(mean = mean(value, na.rm = T)) %>%
     dplyr::select(Station = stationname,
@@ -261,19 +363,22 @@ plotTrendsGolven <- function(df, parname, locname, sf = F) {
   if(sf) df <- df %>% st_drop_geometry()
   p <- df %>%
     dplyr::filter(parametername %in% parname, stationname %in% locname) %>%
-    dplyr::mutate(year = year(datetime), month = month(datetime)) %>%
+    dplyr::mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
     dplyr::group_by(stationname, year, month, parametername) %>% 
-    dplyr::summarize(mean = mean(value, na.rm = T)) %>%
+    dplyr::summarize(mean = mean(value, na.rm = T), max = max(value, na.rm = T)) %>%
     dplyr::select(Station = stationname,
                   Jaar = year,
                   Maand = month,
                   Gemiddelde = mean,
+                  Maximum = max,
                   Parameter = parametername) %>%
     dplyr::arrange(-Gemiddelde) %>%
-    ggplot(aes(Jaar, Gemiddelde)) +
-    geom_line(aes(color=Parameter)) + 
+    pivot_longer(c(Maximum, Gemiddelde), names_to = "Statistiek", values_to = "Waarde") %>%
+    mutate(datum = lubridate::ymd(paste(Jaar, Maand, "15"))) %>%
+    ggplot(aes(datum, Waarde)) +
+    geom_line(aes(color=Statistiek)) + 
     geom_point(aes(fill=Parameter), color = "white", shape = 21) + 
-    #facet_grid(Parameter ~ ., scales="free_y") +
+    facet_grid(Parameter ~ ., scales="free_y") +
     theme_minimal() +
     ylab(parname) +
     theme(legend.position="none") +
@@ -306,7 +411,7 @@ plotTrendsByLocationClass <- function(df, parname, classname, sf = F) {
   if(sf) df <- df %>% st_drop_geometry()
   p <- df %>%
     dplyr::filter(parametername %in% parname, class %in% classname) %>%
-    dplyr::mutate(year = year(datetime)) %>%
+    dplyr::mutate(year = lubridate::year(datetime)) %>%
     dplyr::group_by(stationname, year, parametername, class) %>% 
     dplyr::summarize(mean = mean(value, na.rm = T)) %>%
     dplyr::select(Station = stationname,
@@ -329,7 +434,7 @@ plotTrendsBar <- function(df, parname, sf = F) {
   if(sf) df <- df %>% st_drop_geometry()
   df %>%
     dplyr::filter(parametername == parname) %>%
-    dplyr::mutate(year = year(datetime), month = month(datetime)) %>%
+    dplyr::mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
     dplyr::group_by(stationname, year) %>% 
     dplyr::summarize(median = median(value, na.rm = T), `10-perc` = quantile(value, 0.1, na.rm = T), `90-perc` = quantile(value, 0.9, na.rm = T)) %>%
     dplyr::select(Station = stationname,
@@ -350,7 +455,7 @@ plotTrendsSeizoen <- function(df, parname, sf = T) {
   if(sf) df <- df %>% st_drop_geometry()
   df %>%
     filter(parametername == parname) %>%
-    mutate(year = year(datetime), month = month(datetime)) %>%
+    mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
     mutate(seizoen = case_when(
       month %in% c(4:9) ~ "zomer",
       !month %in% c(4:9) ~ "winter"
@@ -380,7 +485,7 @@ plotLogTrendsSeizoen <- function(df, parname, sf = T) {
   if(sf) df <- df %>% st_drop_geometry()
   df %>%
     filter(parametername == parname) %>%
-    mutate(year = year(datetime), month = month(datetime)) %>%
+    mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
     mutate(seizoen = case_when(
       month %in% c(4:9) ~ "zomer",
       !month %in% c(4:9) ~ "winter"
@@ -411,7 +516,7 @@ plotTrendsMaand <- function(df, parname, sf = T) {
   if(sf) df <- df %>% st_drop_geometry()
   df %>%
     filter(parametername == parname) %>%
-    mutate(year = year(datetime), month = month(datetime)) %>%
+    mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
     group_by(stationname, year, month) %>% 
     summarize(median = median(value, na.rm = T), `10-perc` = quantile(value, 0.1, na.rm = T), `90-perc` = quantile(value, 0.9, na.rm = T)) %>%
     select(Station = stationname,
@@ -438,7 +543,7 @@ plotTrendsCZVMaand <- function(df, parname, sf = T) {
   df %>%
     filter(parametername %in% c(parname, "Saliniteit in PSU in oppervlaktewater")) %>%
     group_by(datetime, parametername, stationname) %>% summarize(value = mean(value, na.rm = T)) %>%
-    mutate(year = year(datetime), month = month(datetime)) %>%
+    mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
     group_by(stationname, parametername, year, month) %>% 
     summarize(median = median(value, na.rm = T)) %>%
     select(Station = stationname,
@@ -468,7 +573,7 @@ plotLogTrendsMaand <- function(df, parname, sf = T) {
   if(sf) df <- df %>% st_drop_geometry()
   df %>%
     filter(parametername == parname) %>%
-    mutate(year = year(datetime), month = month(datetime)) %>%
+    mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
     group_by(stationname, year, month) %>% 
     summarize(median = exp(median(log(value), na.rm = T)), `10-perc` = exp(quantile(log(value), 0.1, na.rm = T)), `90-perc` = exp(quantile(log(value), 0.9, na.rm = T))) %>%
     select(Station = stationname,
@@ -493,7 +598,7 @@ plotLogTrendsMaand <- function(df, parname, sf = T) {
 plotTrendFyto <- function(df, statname){
   df %>% ungroup() %>%
     filter(stationname == statname) %>%
-    mutate(jaar = year(datetime), maand = month(datetime)) %>%
+    mutate(jaar = lubridate::year(datetime), maand = lubridate::month(datetime)) %>%
     mutate(seizoen = ifelse(maand %in% c(4:9), "zomer", "winter")) %>%
     group_by(jaar, seizoen, parametername) %>%
     summarize(
@@ -517,7 +622,7 @@ plotTrendFyto <- function(df, statname){
 plotTrendFytoGroup <- function(df, groupname){
   df %>% ungroup() %>%
     filter(parametername == groupname) %>%
-    mutate(jaar = year(datetime)) %>%
+    mutate(jaar = lubridate::year(datetime)) %>%
     group_by(jaar, stationname) %>%
     summarize(
       `90-perc` = quantile(value, 0.9, na.rm = T),
@@ -647,4 +752,39 @@ plotLogMedianMap <- function(df, parname) {
     addTiles() %>%
     addCircleMarkers(fillColor = ~pal(Mediaan), fillOpacity = 1, stroke = F, label = ~paste(Station, signif(Mediaan, 2), parname)) %>%
     leaflet::addLegend("topright", pal, values, opacity = 1)
+}
+
+
+
+# Plot trends of nutrients
+plotTrendsBiota <- function(df, parname, sf = F, trend = T, beginjaar = 1998, eindjaar = dataJaar) {
+  
+  if(sf) df <- df %>% st_drop_geometry()
+  
+  anydata <- df %>% filter(parametername == parname) %>% nrow()
+  if(anydata == 0){
+    return(paste("Er zijn geen data gevonden voor", parname))
+  } else
+    
+    p <- df %>%
+    dplyr::filter(parametername == parname) %>%
+    dplyr::mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
+    dplyr::group_by(stationname, year) %>% 
+    dplyr::summarize(median = median(value, na.rm = T), `10-perc` = quantile(value, 0.1, na.rm = T), `90-perc` = quantile(value, 0.9, na.rm = T)) %>%
+    dplyr::select(Station = stationname,
+                  Jaar = year,
+                  Mediaan = median,
+                  `90-perc`,
+                  `10-perc`) %>%
+    dplyr::arrange(-Mediaan) %>%
+    ggplot(aes(Jaar, Mediaan)) +
+    geom_ribbon(aes(ymin = `10-perc`, ymax = `90-perc`), fill = "lightgrey", alpha = 0.7) +
+    geom_line() + geom_point(fill = "white", shape = 21)
+  if(trend)    p <- p + geom_smooth(method = "lm", color = "#2E89BF", fill = "#2E89BF", alpha = 0.2)
+  p <- p + facet_wrap(~Station, ncol = 2, scales = "free") +
+    theme_minimal() +
+    ylab(parname) +
+    coord_cartesian(xlim = c(beginjaar, eindjaar), ylim = c(0,NA)) +
+    trendplotstyle
+  return(p)
 }
