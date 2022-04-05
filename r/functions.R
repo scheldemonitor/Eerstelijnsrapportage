@@ -51,6 +51,7 @@ if(anydata > 0){
     drop_na(value) %>%
     filter(parametername == parname) %>%
     mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
+    filter(year >= 2000) %>%
     # group_by(stationname, year, month) %>% 
     # summarize(monthlymean = mean(value)) %>%
     group_by(stationname, year) %>% 
@@ -96,6 +97,7 @@ statTableParams <- function(df, parnames, statname, rounding, meanorder = "decre
     stats <- df %>%
       filter(parametername %in% parnames & stationname == statname) %>%
       mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
+      filter(year >= 2000) %>%
       # group_by(stationname, year, month) %>% 
       # summarize(monthlymean = mean(value)) %>%
       group_by(parametername, year) %>% 

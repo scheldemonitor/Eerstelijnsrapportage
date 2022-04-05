@@ -1,6 +1,3 @@
- TO DO:
-- bijlage referentie
-- figuren headers bijwerken met percentiele ipv min-max
 
 
 ```{r setupZwevend, include=FALSE}
@@ -21,7 +18,7 @@ require(leaflet)
 source("R/functions.R")
 
 # Set year for use in the report
-dataJaar <- 2019
+dataJaar <- 2020
 
 trendstations <- c("Schaar van Ouden Doel", "Vlissingen boei SSVH")
 
@@ -68,19 +65,19 @@ Voor de bepaling van de fysisch-chemische parameters in het zwevend stof vinden 
 plotLocations(df)
 ```
 
-De meetdata worden gepresenteerd door middel van jaargemiddelden, en de minimale en maximale waarde die in elk jaar gemeten is. Voor sommige parameters zijn ook maandgemiddelden en/of seizoensgemiddelden weergegeven. Als er slechts een meting per maand beschikbaar is (of minder), zijn deze waardes gepresenteerd. Bij het middelen van parameters over een bepaalde periode is de datadichtheid van belang. Een overzicht van het aantal metingen per parameter, per station, per jaar is daarom opgenomen in Bijlage \@ref(BijlageB-meetdichtheid-zwevend).
+De meetdata worden gepresenteerd door middel van medianen, en 10- en 90-percentielen voor elk jaar dat gemeten is. Voor sommige parameters zijn deze waarden ook per maand of seizoen weergegeven. Als er slechts een meting per maand beschikbaar is (of minder), zijn deze waardes gepresenteerd. Bij het berekenen van percentielen over parameters over een bepaalde periode is de datadichtheid van belang. Een overzicht van het aantal metingen per parameter, per station, per jaar is daarom opgenomen in Bijlage \@ref(BijlageB-meetdichtheid-zwevend). Ook is in de figuren aangegeven over hoeveel meetwaarden de statistiek berekend is in de vorm van de grootte van de punten.
 
-Voor sommige parameters geldt dat de meetwaarde gelijk of lager is dan de detectiegrens van het meetinstrument. Indien dit het geval is, wordt dit beschreven in de begeleidende tekst en de detectiegrens meegenomen als meetwaarde. Hierdoor kunnen gemiddelden een iets hogere waarde weergeven dan wanneer gemiddeld was over de waarden die daadwerkelijk hebben plaatsgevonden. Daarnaast is meestal een lineaire trendlijn vanaf het jaar 2000 toegevoegd, zodat de trend niet direct beïnvloed wordt door de tweede verruiming in 1997-1998. Gemiddelde, minimale en maximale waardes in bijgevoegde tabellen zijn gebaseerd over de tijdsperiode weergegeven in de bijbehorende figuren.
+Voor sommige parameters geldt dat de meetwaarde gelijk of lager is dan de detectiegrens van het meetinstrument. Indien dit het geval is, wordt dit beschreven in de begeleidende tekst en de halve detectiegrens meegenomen als meetwaarde. Hierdoor kunnen gemiddelden iets afwijken dan wanneer de mediaan was berekend over de waarden die daadwerkelijk hebben plaatsgevonden. Daarnaast is meestal een lineaire trendlijn vanaf het jaar 2000 toegevoegd, zodat de trend niet direct beïnvloed wordt door de tweede verruiming in 1997-1998. Gemiddelde, minimale en maximale waardes in bijgevoegde tabellen zijn gebaseerd over de tijdsperiode weergegeven in de bijbehorende figuren.
 
 ## Korrelgrootteverdeling {#korrelgrootteverdeling}
 
-In de resultaten hebben we het minerale aandeel van de korrelgrootteverdeling weergegeven, dat wil zeggen dat kalk en organische stof verwijderd zijn, als percentage van het totale gewicht van het monster. De korrelgroottefractie kleiner dan 2 $\mu$m wordt bij Schaar van Ouden Doel enkel vanaf 1998 weergegeven. Na 1997 heeft er een methodiekverandering plaatsgevonden waardoor de gegevens van voor 1998 niet vergelijkbaar zijn met die van na 1998.
+In de resultaten hebben we het minerale aandeel van de korrelgrootteverdeling weergegeven, dat wil zeggen dat kalk en organische stof verwijderd zijn, als percentage van het totale gewicht van het monster. De korrelgroottefractie kleiner dan 2 $\mu m$ wordt bij Schaar van Ouden Doel enkel vanaf 1998 weergegeven. Na 1997 heeft er een methodiekverandering plaatsgevonden waardoor de gegevens van voor 1998 niet vergelijkbaar zijn met die van na 1998.
 
 ### Korrelgroottefractie tot 63 µm {#korrelgrootteverdeling-tot63}
 
-Figuur \@ref(fig:zwevendKorrelgroottefractietot63um) toont het jaargemiddelde korrelgroottefractie tot 63 $\mu$m per station voor de periode vanaf 1997 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendKorrelgroottefractietot63umTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+Figuur \@ref(fig:zwevendKorrelgroottefractietot63um) toont de jaarmediaan van de korrelgroottefractie tot 63 $\mu$m per station voor de periode vanaf 1997 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendKorrelgroottefractietot63umTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. 
 
-De korrelgroottefractie kleiner dan 63 $\mu$m ligt rond 60\% bij Vlissingen boei SSVH en rond de 70\% bij Schaar van Ouden Doel. Er zijn geen significante temporele trends bij beide stations.
+De korrelgroottefractie kleiner dan 63 $\mu$m ligt rond 60\% bij Vlissingen boei SSVH en rond de 70\% bij Schaar van Ouden Doel. Er is een afnemende trend bij Schaar van Ouden Doel, en een oplopende trend bij Vlissingen.
 
 ```{r zwevendKorrelgroottefractietot63umTab}
 # dt <- tex2dt("Figuren/Zwevend/Korrelgroottefractietot63um_meanvalues.tex")
@@ -104,9 +101,9 @@ plotTrendsLimits(df, parname, trend = F) + ggtitle("test met aantallen metingen 
 
 ### Korrelgroottefractie tot 2 µm {#korrelgrootteverdeling-tot2}
 
-Figuur \@ref(fig:zwevendKorrelgroottefractietot2um) toont het jaargemiddelde korrelgroottefractie tot 2 $\mu$m per station voor de periode vanaf 1997 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendKorrelgroottefractietot2umTab) zijn de gemiddelde, minimale en maximale waardes per station weergegeven. 
+Figuur \@ref(fig:zwevendKorrelgroottefractietot2um) toont de jaarmediane korrelgroottefractie tot 2 $\mu$m per station voor de periode vanaf 1997 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendKorrelgroottefractietot2umTab) zijn de mediane, 10- en 90-percentiele waardes per station weergegeven. 
 
-De korrelgroottefractie kleiner dan 2 $\mu$m ligt rond 35\% bij Schaar van Ouden Doel net als bij Vlissingen. 
+De korrelgroottefractie kleiner dan 2 $\mu$m ligt rond 40\% bij Schaar van Ouden Doel en rond de 30 \% \ bij Vlissingen. Er is een toename over de hele periode in Vlissingen, maar niet in Schaar van Ouden Doel. 
 
 ```{r zwevendKorrelgroottefractietot2umTab}
 # dt <- tex2dt("Figuren/Zwevend/Korrelgroottefractietot2um_meanvalues.tex")
@@ -143,9 +140,9 @@ In deze paragraaf presenteren we de volgende metalen gedetecteerd in zwevende st
 
 ### Arseen {#zwevend-arseen}
 
-Figuur \@ref(fig:zwevendArseen) toont het jaargemiddelde arseen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendArseenTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+Figuur \@ref(fig:zwevendArseen) toont de jaarmediaan arseen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiel waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendArseenTab) de mediaan, 10- en 90-percentiele waardes per station weergegeven. 
 
-De concentraties arseen in zwevende stof nemen iets af in stroomafwaartse richting. Bij Schaar van Ouden Doel zijn slechts enkele meetwaarden beschikbaar. Sinds 2011 nemen de waarden af. Over de gehele meetperiode is de trend niet significant. Bij Vlissingen boei SSVH is er een licht dalende trend (-0,18 mg/kg per jaar) in de periode 2000-2012 die  statistisch significant is.
+De concentraties arseen in zwevende stof nemen iets af in stroomafwaartse richting. Bij Schaar van Ouden Doel is de mediane waarde 28 mg/kg. Sinds 2011 nemen de waarden hier af. Over de gehele meetperiode is de trend niet significant. Bij Vlissingen boei SSVH is de mediaan lager (17 mg/kg), en er is een licht dalende trend (-0,14 mg/kg per jaar) in de periode 2000-2012 die  statistisch significant is.
 
 ```{r zwevendArseenTab}
 # dt <- tex2dt("Figuren/Zwevend/Arseen_meanvalues.tex")
@@ -164,14 +161,13 @@ knitr::kable(dt,
 #knitr::include_graphics("Figuren/Zwevend/Arseen.png")
 
 plotTrendsLimits(df, parname)
-plotTrendsLimits(df, parname)
 ```
 
 ### Cadmium {#zwevend-cadmium}
 
-Figuur \@ref(fig:zwevendCadmium) toont het jaargemiddelde Cadmium per station voor de periode vanaf 1997 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendCadmiumTab) zijn de gemiddelde, minimale en maximale waardes per station weergegeven. 
+Figuur \@ref(fig:zwevendCadmium) toont het jaarmediane Cadmiumgehalte per station voor de periode vanaf 1997 t/m `r dataJaar`, samen met de 10- en 90-percentiel gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendCadmiumTab) zijn de mediane, 10- en 90-percentiele waardes per station weergegeven. 
 
-De concentraties cadmium in zwevende stof nemen sterk af in stroomafwaartse richting (factor 5 tussen de twee stations). Bij Schaar van Ouden Doel is er een dalende trend van 0,13 mg/kg per jaar aanwezig die statistisch significant is. De waardes bij Vlissingen zijn constant over tijd.
+De concentraties cadmium in zwevende stof nemen sterk af in stroomafwaartse richting (factor 7 tussen de twee stations). Bij Schaar van Ouden Doel is er een dalende trend van 0,12 mg/kg per jaar aanwezig die statistisch significant is. De waardes bij Vlissingen nemen ook significant af, maar met een lagere snelheid (0.008 mg/kg per jaar).
 
 ```{r zwevendCadmiumTab}
 # dt <- tex2dt("Figuren/Zwevend/Cadmium_meanvalues.tex")
@@ -191,14 +187,13 @@ knitr::kable(dt,
 #knitr::include_graphics("Figuren/Zwevend/Cadmium.png")
 
 plotTrendsLimits(df, parname)
-plotTrendsLimits(df, parname)
 ```
 
 ### Chroom {#zwevend-chroom}
 
-Figuur \@ref(fig:zwevendChroom) toont het jaargemiddelde chroom per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendChroomTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+Figuur \@ref(fig:zwevendChroom) toont het jaarmediane chroomgehalte per station voor de periode vanaf 1998 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendChroomTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. 
 
-De concentraties chroom in zwevende stof nemen af in stroomafwaartse richting. Bij Schaar van Ouden Doel zit sinds 2005 weinig verandering in de gemeten chroomgehaltes. De situatie bij Vlissingen boei SSVH toont voor de periode 1996-2011 een stabiele situatie, maar sinds 2012 liggen de waarden een stuk lager. Over de gehele dataset neemt het hoeveelheid chroom in zwevende stof af met 1,8 mg/kg per jaar. Een trend die statistisch significant is.
+De concentraties chroom in zwevende stof nemen af in stroomafwaartse richting. Bij Schaar van Ouden Doel neem na een periode van gelijke concentratie (2005-2014) weer verder af. Over de hele periode is er een significante afname van 1,6 mg/kg per jaar. De situatie bij Vlissingen boei SSVH toont voor de periode 1996-2011 een stabiele situatie, maar sinds 2012 liggen de waarden een stuk lager. Over de gehele dataset neemt het hoeveelheid chroom in zwevende stof af met 1,6 mg/kg per jaar. Een trend die statistisch significant is.
 
 ```{r zwevendChroomTab}
 # dt <- tex2dt("Figuren/Zwevend/Chroom_meanvalues.tex")
@@ -221,9 +216,9 @@ plotTrendsLimits(df, parname)
 
 ### Kobalt {#zwevend-kobalt}
 
-Figuur \@ref(fig:zwevendKobalt) toont het jaargemiddelde kobalt per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendKobaltTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+Figuur \@ref(fig:zwevendKobalt) toont de jaarmediane waarde voor kobalt per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendKobaltTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. 
 
-De concentraties kobalt in zwevende stof nemen af in stroomafwaartse richting.  Bij Vlissingen is de correlatie in de data het duidelijkst. De kobaltconcentraties nemen af in de tijd, echter wel met lage significantie. Bij Schaar van Ouden Doel is er geen significante trend waarneembaar.
+De concentraties kobalt in zwevende stof nemen af in stroomafwaartse richting.  Bij Vlissingen is het gehalte 8 mg/kg, en is een significante afname van 0,07 mg/kg te zien. De kobaltconcentraties nemen af in de tijd, echter wel met lage significantie. Bij Schaar van Ouden Doel is er geen significante trend waarneembaar en ligt het gehalte op ongeveer 2 keer zo veel.
 
 ```{r zwevendKobaltTab}
 # dt <- tex2dt("Figuren/Zwevend/Kobalt_meanvalues.tex")
@@ -246,9 +241,9 @@ plotTrendsLimits(df, parname)
 
 ### Koper {#zwevend-koper}
 
-Figuur \@ref(fig:zwevendKoper) toont het jaargemiddelde koper per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendKoperTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+Figuur \@ref(fig:zwevendKoper) toont het jaarmediane kopergehalte per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met het 10- en 90-percentiel per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendKoperTab) de mediane, 10- en 90-percentiel waardes per station weergegeven. 
 
-De concentraties koper in zwevende stof nemen sterk af in stroomafwaartse richting (factor 2,7) . Er zijn sterke uitschieters in koperconcentraties op beide stations.De reden hiervoor is onbekend. Dit heeft wel invloed op de analyse van de trend die door de uitschieters niet meer significant is.    
+De concentraties koper in zwevende stof nemen sterk af in stroomafwaartse richting (factor 3) . Er zijn sterke uitschieters in koperconcentraties op beide stations.De reden hiervoor is onbekend. In Schaar van Ouden Doel is desondanks een significante dalende trend te zien van 1,23 mg/kg per jaar.     
 
 ```{r zwevendKoperTab}
 # dt <- tex2dt("Figuren/Zwevend/Koper_meanvalues.tex")
@@ -271,9 +266,9 @@ plotTrendsLimits(df, parname)
 
 ### Kwik {#zwevend-kwik} 
  
-Figuur \@ref(fig:zwevendKwik) toont het jaargemiddelde kwik per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendKwikTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+Figuur \@ref(fig:zwevendKwik) toont de jaarlijkse mediaan kwik per station voor de periode vanaf 1998 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendKwikTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. 
 
-De concentraties kwik in zwevende stof nemen af in stroomafwaartse richting (factor 3). Op beide stations is een dalende trend van 0,01 tot 0,02 mg/kg per jaar aanwezig. Beide trends hebben een hoge statistische correlatie. Dit zijn de grootste correlaties gevonden voor de fyshisch-chemische parameters in zwevende stof.
+De concentraties kwik in zwevende stof nemen af in stroomafwaartse richting (factor 3). Op beide stations is een dalende trend van 0,01 tot 0,02 mg/kg per jaar aanwezig. Beide trends hebben een hoge statistische correlatie.
 
 ```{r zwevendKwikTab}
 # dt <- tex2dt("Figuren/Zwevend/Kwik_meanvalues.tex")
@@ -296,9 +291,9 @@ plotTrendsLimits(df, parname)
 
 ### Lood {#zwevend-lood}
 
-Figuur \@ref(fig:zwevendLood) toont het jaargemiddelde lood per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendLoodTab) zijn de gemiddelde, minimale en maximale waardes per station weergegeven. 
+Figuur \@ref(fig:zwevendLood) toont de jaarmediane waarde lood per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendLoodTab) zijn de mediaan, 10- en 90-percentiele waardes per station weergegeven. 
 
-De concentraties lood in zwevende stof nemen af in stroomafwaartse richting (factor 2,3). Bij Schaar van Ouden Doel is een dalende trend aanwezig, maar lijken de meetwaarden de laatste paar jaar stabiel. Bij Vlissingen boei SSVH zijn de gemeten waarden over de beschouwde periode ongeveer constant. De berekende trend over de gehele dataset is echter voor beide negatief (afname). De afname is sterker voor Schaar van Ouden Doel.
+De concentraties lood in zwevende stof nemen af in stroomafwaartse richting (factor 2,3). Bij Schaar van Ouden Doel is een dalende trend aanwezig, maar lijken de meetwaarden de laatste paar jaar stabiel. Bij Vlissingen boei SSVH is ook een significante daling zichtbaar, maar ook hier lijken de waarden de laatste jaren stabiel. De berekende trend over de gehele dataset is echter voor beide negatief (afname). De afname is sterker voor Schaar van Ouden Doel.
 
 ```{r zwevendLoodTab}
 # dt <- tex2dt("Figuren/Zwevend/Lood_meanvalues.tex")
@@ -321,9 +316,9 @@ plotTrendsLimits(df, parname)
 
 ### Vanadium {#zwevend-vanadium}
 
-Figuur \@ref(fig:zwevendVanadium) toont het jaargemiddelde Vanadium per station voor de periode vanaf 2005 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendVanadiumTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+Figuur \@ref(fig:zwevendVanadium) toont de jaarlijkse mediaan Vanadium per station voor de periode vanaf 2005 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendVanadiumTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. 
 
-De concentraties vanadium in zwevend stof laten geen duidelijke ruimtelijke gradiënt zien. Er lijken weinig veranderingen op de treden. Bij Vlissingen boei SSVH zijn de waarden voor 2012 en 2013 een stuk lager dan de periode daarvoor hetgeen zich uit in een dalende trend van 2,3 mg/kg per jaar met een statistische significantie.
+De concentraties vanadium in zwevend stof laten bijna geen duidelijke ruimtelijke gradiënt zien. Alleen de in de periode vanaf 2012 is de concentratie in Vlissingen duidelijk lager dan in Schaar van Ouden Doel. Bij Vlissingen boei SSVH is voor de hele periode een dalende trend van 1,7 mg/kg per jaar met een statistische significantie. Bij Schaar van Ouden Doel is deze daling lager (0,8 mg/kg per jaar), maar ook nog steeds significant.
 
 ```{r zwevendVanadiumTab}
 # dt <- tex2dt("Figuren/Zwevend/Vanadium_meanvalues.tex")
@@ -346,9 +341,9 @@ plotTrendsLimits(df, parname)
 
 ### Zink {#zwevend-zink}
 
-Figuur \@ref(fig:zwevendZink) toont het jaargemiddelde zink per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendZinkTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+Figuur \@ref(fig:zwevendZink) toont de jaarlijkse mediaan zink per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendZinkTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. 
 
-De concentraties zink in zwevende stof nemen sterk af in stroomafwaartse richting (factor 3,1). Bij beide stations is er een dalende trend die een statistische beperkt correlatie heeft. Bij Schaar van Ouden Doel is deze trend sterker dan bij station Vlissingen, waar de metingen meer constant over tijd zijn.
+De concentraties zink in zwevende stof nemen sterk af in stroomafwaartse richting (factor 3,1). Bij beide stations is er een dalende trend die significant is. Bij Schaar van Ouden Doel is deze trend sterker (5,8 mg/kg per jaar) dan bij station Vlissingen (1,2).
 
 ```{r zwevendZinkTab}
 # dt <- tex2dt("Figuren/Zwevend/Zink_meanvalues.tex")
@@ -390,7 +385,9 @@ Voor alle getoonde PAK’s is er een duidelijke ruimtelijke gradiënt waarneemba
 
 ### Antraceen {#zwevend-antraceen}
 
-Figuur \@ref(fig:zwevendAntraceen) toont het jaargemiddelde antraceen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendAntraceenTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Beide stations hebben een afnemende trend. Voor Schaar van Ouden Doel is de trend sterker en statistisch significanter. In 2019 zien we echter een relatief sterke toename in de jaargemiddeldes van antraceen.
+Figuur \@ref(fig:zwevendAntraceen) toont de jaarlijkse mediaan antraceen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendAntraceenTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. 
+
+Bij Schaar van Ouden Doel is een significante afnemende trend te zien. Bij Vlissingen is het gehalte min of meer constant over de tijd maar wel veel lager (factor 5) dan bij Schaar van Ouden Doel. In 2019 en 2020 zien we opeens een sterke toename in de gehaltes van antraceen bij beide stations.
 
 ```{r zwevendAntraceenTab}
 # dt <- tex2dt("Figuren/Zwevend/Antraceen_meanvalues.tex")
@@ -413,7 +410,9 @@ plotTrendsLimits(df, parname)
 
 ### Benzo[*a*]pyreen {#zwevend-Benzoapyreen}
 <!-- \subsection {\texorpdfstring{Benzo[\textit{a}]pyreen}{Benzo[\textit{a}]pyreen}}  -->
-Figuur \@ref(fig:zwevendBenzoapyreen) toont het jaargemiddelde Benzo[*a*]pyreen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendBenzoapyreenTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Beide stations hebben een afnemende trend. Voor Schaar van Ouden Doel is de trend sterker en statistisch significanter.
+Figuur \@ref(fig:zwevendBenzoapyreen) toont de jaarlijkse mediaan Benzo[*a*]pyreen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendBenzoapyreenTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. 
+
+Beide stations hebben een afnemende trend. Voor Schaar van Ouden Doel is de trend sterker en statistisch significanter.
 
 ```{r zwevendBenzoapyreenTab}
 # dt <- tex2dt("Figuren/Zwevend/Benzoapyreen_meanvalues.tex")
@@ -436,7 +435,9 @@ plotTrendsLimits(df, parname)
 
 ### Benzo[*g,h,i*]peryleen {#zwevend-Benzoghiperyleen}
 <!-- \subsection {\texorpdfstring{Benzo[\textit{g,h,i}]peryleen}{Benzo[\textit{g,h,i}]peryleen}}  -->
-Figuur \@ref(fig:zwevendBenzoghiperyleen) toont het jaargemiddelde Benzo[*g,h,i*]peryleen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendBenzoghiperyleenTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Schaal van Ouden Doel heeft hogere waardes benzoperyleen in zwevend stof vergeleken met Vlissingen. Beide stations hebben een afnemende trend, hoewel de trend en de correlatie verschilt per station.
+Figuur \@ref(fig:zwevendBenzoghiperyleen) toont de jaarlijkse mediaan Benzo[*g,h,i*]peryleen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendBenzoghiperyleenTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. 
+
+Schaal van Ouden Doel heeft hogere waardes benzoperyleen in zwevend stof vergeleken met Vlissingen. Beide stations hebben een afnemende trend, hoewel de trend en de correlatie verschilt per station.
 
 ```{r zwevendBenzoghiperyleenTab}
 # dt <- tex2dt("Figuren/Zwevend/Benzoperyleen_meanvalues.tex")
@@ -459,7 +460,9 @@ plotTrendsLimits(df, parname)
 
 ### Benzo[*a*]antraceen {#zwevend-Benzoaantraceen}
 <!-- \subsection {\texorpdfstring{Benzo[\textit{a}]antraceen}{Benzo[\textit{a}]antraceen}} -->
-Figuur \@ref(fig:zwevendBenzoaantraceen) toont het jaargemiddelde Benzo[*a*]antraceen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendBenzoaantraceenTab) de gemiddelde, minimale en maximale waardes per station weergegeven.  Schaal van Ouden Doel heeft hogere waardes Benzo[*a*]antraceen in zwevend stof vergeleken met Vlissingen. Beide stations hebben een afnemende trend, hoewel de trend en de correlatie verschilt per station.
+Figuur \@ref(fig:zwevendBenzoaantraceen) toont de jaarlijkse mediaan Benzo[*a*]antraceen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendBenzoaantraceenTab) de mediane, 10- en 90-percentiele waardes per station weergegeven.  
+
+Schaal van Ouden Doel heeft hogere waardes Benzo[*a*]antraceen in zwevend stof vergeleken met Vlissingen. Beide stations vertonen een significante afnemende trend, hoewel de trend en de correlatie verschilt per station.
 
 ```{r zwevendBenzoaantraceenTab}
 # dt <- tex2dt("Figuren/Zwevend/Benzoaantraceen_meanvalues.tex")
@@ -482,9 +485,11 @@ plotTrendsLimits(df, parname)
 
 ### Benzo[*k*]fluorantheen {#zwevend-Benzokfluorantheen}
 <!-- \subsection {\texorpdfstring{Benzo[\textit{k}]fluorantheen}{Benzo[\textit{k}]fluorantheen}} -->
-Figuur \@ref(fig:zwevendBenzokfluorantheen) toont het jaargemiddelde Benzo[*k*]fluorantheen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendBenzokfluorantheenTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Schaal van Ouden Doel heeft hogere waardes Benzo[*k*]fluorantheen in zwevend stof vergeleken met Vlissingen en daarnaast neemt deze hoeveelheid sterker af bij Schaar van Ouden Doel. Voor beide stations is deze afnemende trend statistisch significant (R van 0,55 - 0,95). De concentraties bij Vlissingen zijn echter sinds 2016 wel iets toegenomen. Hierdoor is de significantie van de trend ten opzichte van voor 2016 dan ook afgenomen. 
+Figuur \@ref(fig:zwevendBenzokfluorantheen) toont de jaarlijkse mediaan Benzo[*k*]fluorantheen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendBenzokfluorantheenTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. 
 
-*In 2019 is het gemiddelde en maximum bij Vlissingen boei SSVH erg hoog. Dit lijkt op een verkeerde meting, hiaat of een FillValue. In een volgende versie van het rapport zullen we dit uitgezocht hebben.*
+Schaal van Ouden Doel heeft hogere waardes Benzo[*k*]fluorantheen in zwevend stof vergeleken met Vlissingen en daarnaast neemt deze hoeveelheid sterker af bij Schaar van Ouden Doel. Voor beide stations is deze afnemende trend statistisch significant. De concentraties bij Vlissingen zijn echter sinds 2016 wel iets toegenomen. Hierdoor is de significantie van de trend ten opzichte van voor 2016 dan ook afgenomen. 
+
+In 2019 is het gemiddelde en maximum bij Vlissingen boei SSVH erg hoog. 
 
 ```{r zwevendBenzokfluorantheenTab}
 # dt <- tex2dt("Figuren/Zwevend/Benzokfluorantheen_meanvalues.tex")
@@ -502,12 +507,12 @@ knitr::kable(dt,
 ```{r zwevendBenzokfluorantheen, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Benzokfluorantheen voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/Benzokfluorantheen.png")
 
-# plotTrendsLimits(df, parname)
+plotTrendsLimits(df, parname)
 ```
 
 ### Chryseen {#zwevend-chryseen}
 
-Figuur \@ref(fig:zwevendChryseen) toont het jaargemiddelde chryseen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendChryseenTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Beide stations hebben een afnemende trend, hoewel de trend en de correlatie verschilt per station.
+Figuur \@ref(fig:zwevendChryseen) toont de jaarlijkse mediaan chryseen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendChryseenTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. Beide stations hebben een afnemende trend, hoewel de trend en de correlatie verschilt per station.
 
 ```{r zwevendChryseenTab}
 # dt <- tex2dt("Figuren/Zwevend/Chryseen_meanvalues.tex")
@@ -530,7 +535,7 @@ plotTrendsLimits(df, parname)
 
 ### Fenanthreen {#zwevend-fenanthreen}
 
-Figuur \@ref(fig:zwevendFenanthreen) toont het jaargemiddelde fenanthreen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendFenanthreenTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Beide stations hebben een afnemende trend, hoewel de trend en de correlatie verschilt per station.
+Figuur \@ref(fig:zwevendFenanthreen) toont de jaarlijkse mediaan fenanthreen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendFenanthreenTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. Beide stations hebben een afnemende trend, hoewel de trend en de correlatie verschilt per station.
 
 ```{r zwevendFenanthreenTab}
 # dt <- tex2dt("Figuren/Zwevend/Fenanthreen_meanvalues.tex")
@@ -553,7 +558,7 @@ plotTrendsLimits(df, parname)
 
 ### Fluorantheen {#zwevend-fluorantheen}
 
-Figuur \@ref(fig:zwevendFluorantheen) toont het jaargemiddelde fluorantheen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendFluorantheenTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Beide stations constateren we een afnemende trend, hoewel Vlissingen boei SSHV net significant.
+Figuur \@ref(fig:zwevendFluorantheen) toont de jaarlijkse mediaan fluorantheen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendFluorantheenTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. Beide stations constateren we een afnemende trend, hoewel Vlissingen boei SSHV net significant.
 
 ```{r zwevendFluorantheenTab}
 # dt <- tex2dt("Figuren/Zwevend/Fluorantheen_meanvalues.tex")
@@ -577,7 +582,7 @@ plotTrendsLimits(df, parname)
 
 ### Indeno[*1,2,3-c,d*]pyreen {#zwevend-indeno}
 <!-- \subsection {\texorpdfstring{Indeno[\textit{1,2,3-c,d}]pyreen}{Indeno[\textit{1,2,3-c,d}]pyreen}}  -->
-Figuur \@ref(fig:zwevendIndeno) toont het jaargemiddelde Indeno[\textit{1,2,3-c,d}]pyreen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendIndenoTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Deze neemt statistisch significant af bij Schaar van Ouden Doel.
+Figuur \@ref(fig:zwevendIndeno) toont de jaarlijkse mediaan Indeno[\textit{1,2,3-c,d}]pyreen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendIndenoTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. Deze neemt statistisch significant af bij Schaar van Ouden Doel.
 
 
 ```{r zwevendIndenoTab}
@@ -602,7 +607,7 @@ plotTrendsLimits(df, parname)
  
 ### Naftaleen {#zwevend-naftaleen}
 
-Figuur \@ref(fig:zwevendNaftaleen) toont het jaargemiddelde naftaleen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendNaftaleenTab) de gemiddelde, minimale en maximale waardes per station weergegeven. We constateren geen temporale trend.
+Figuur \@ref(fig:zwevendNaftaleen) toont de jaarlijkse mediaan naftaleen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendNaftaleenTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. We constateren geen temporale trend.
 
 ```{r zwevendNaftaleenTab}
 # dt <- tex2dt("Figuren/Zwevend/Naftaleen_meanvalues.tex")
@@ -641,7 +646,7 @@ Voor alle getoonde PCB's is er een duidelijke ruimtelijke gradiënt waarneembaar
 
 ### PCB180 {#zwevend-PCB180}
 
-Figuur \@ref(fig:zwevendPCB180) toont het jaargemiddelde PCB180 per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendPCB180Tab) de gemiddelde, minimale en maximale waardes per station weergegeven. Voor beide stations constateren we een afnemende lineaire trend rond de 0,06 tot 0,26 $\mu$g/kg per jaar. Voor station Vlissingen is deze afname minder groot dan voor station Schaar van Ouden Doel, maar deze trend heeft wel een hogere correlatie coëfficiënt.
+Figuur \@ref(fig:zwevendPCB180) toont de jaarlijkse mediaan PCB180 per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendPCB180Tab) de mediane, 10- en 90-percentiele waardes per station weergegeven. Voor beide stations constateren we een afnemende lineaire trend rond de 0,06 tot 0,26 $\mu$g/kg per jaar. Voor station Vlissingen is deze afname minder groot dan voor station Schaar van Ouden Doel, maar deze trend heeft wel een hogere correlatie coëfficiënt.
 
 ```{r zwevendPCB180Tab}
 # dt <- tex2dt("Figuren/Zwevend/PCB180_meanvalues.tex")
@@ -664,7 +669,7 @@ plotTrendsLimits(df, parname)
  
 ### PCB138 {#zwevend-PCB138}
 
-Figuur \@ref(fig:zwevendPCB138) toont het jaargemiddelde PCB138 per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendPCB138Tab) de gemiddelde, minimale en maximale waardes per station weergegeven. Voor beide stations constateren we een afnemende lineaire trend rond de 0,10 tot 0,59 $\mu$g/kg per jaar. Voor station Vlissingen is de correlatie coëfficient lager.
+Figuur \@ref(fig:zwevendPCB138) toont de jaarlijkse mediaan PCB138 per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendPCB138Tab) de mediane, 10- en 90-percentiele waardes per station weergegeven. Voor beide stations constateren we een afnemende lineaire trend rond de 0,10 tot 0,59 $\mu$g/kg per jaar. Voor station Vlissingen is de correlatie coëfficient lager.
 
 ```{r zwevendPCB138Tab}
 # dt <- tex2dt("Figuren/Zwevend/PCB138_meanvalues.tex")
@@ -687,7 +692,7 @@ plotTrendsLimits(df, parname)
 
 ### PCB153 {#zwevend-PCB153}
 
-Figuur \@ref(fig:zwevendPCB153) toont het jaargemiddelde PCB153 per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendPCB153Tab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+Figuur \@ref(fig:zwevendPCB153) toont de jaarlijkse mediaan PCB153 per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendPCB153Tab) de mediane, 10- en 90-percentiele waardes per station weergegeven. 
 
 Bij station Schaar van Ouden Doel constateren we een afnemende trend met een hoge correlatie. Voor Vlissingen is er een lagere statistische afnemende lineaire trend van 0,1 $\mu$g/kg per jaar. Dit komt door de relatief hoge waardes in 2003 en 2008.
 
@@ -712,7 +717,7 @@ plotTrendsLimits(df, parname)
  
 ### PCB101 {#zwevend-PCB101}
 
-Figuur \@ref(fig:zwevendPCB101) toont het jaargemiddelde PCB101 per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendPCB101Tab) de gemiddelde, minimale en maximale waardes per station weergegeven. Voor beide stations constateren we een afnemende lineaire trend rond de 0,06 tot 0,38 $\mu$g/kg per jaar. Voor station Vlissingen is deze afname minder groot dan voor station Schaar van Ouden Doel.
+Figuur \@ref(fig:zwevendPCB101) toont de jaarlijkse mediaan PCB101 per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendPCB101Tab) de mediane, 10- en 90-percentiele waardes per station weergegeven. Voor beide stations constateren we een afnemende lineaire trend rond de 0,06 tot 0,38 $\mu$g/kg per jaar. Voor station Vlissingen is deze afname minder groot dan voor station Schaar van Ouden Doel.
 
 ```{r zwevendPCB101Tab}
 # dt <- tex2dt("Figuren/Zwevend/PCB101_meanvalues.tex")
@@ -736,7 +741,7 @@ plotTrendsLimits(df, parname)
 
 ### PCB52 {#zwevend-PCB52}
 
-Figuur \@ref(fig:zwevendPCB52) toont het jaargemiddelde PCB52 per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendPCB52Tab)  de gemiddelde, minimale en maximale waardes per station weergegeven. Voor Schaar van Ouden Doel constateren we een afnemende lineaire trend van 0,20 $\mu$g/kg per jaar die beperkt statistisch significant te noemen is. Er is geen significante trend bij Vlissingen. 
+Figuur \@ref(fig:zwevendPCB52) toont de jaarlijkse mediaan PCB52 per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendPCB52Tab)  de mediane, 10- en 90-percentiele waardes per station weergegeven. Voor Schaar van Ouden Doel constateren we een afnemende lineaire trend van 0,20 $\mu$g/kg per jaar die beperkt statistisch significant te noemen is. Er is geen significante trend bij Vlissingen. 
 
 ```{r zwevendPCB52Tab}
 # dt <- tex2dt("Figuren/Zwevend/PCB52_meanvalues.tex")
@@ -760,7 +765,7 @@ plotTrendsLimits(df, parname)
  
 ### PCB118 {#zwevend-PCB118}
 
-Figuur \@ref(fig:zwevendPCB118) toont het jaargemiddelde PCB118 per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendPCB118Tab) de gemiddelde, minimale en maximale waardes per station weergegeven. Voor beide stations constateren we een afnemende lineaire trend rond de 0,04 tot 0,29 $\mu$g/kg per jaar.  Voor station Vlissingen de trend een hogere correlatie coëfficiënt.
+Figuur \@ref(fig:zwevendPCB118) toont de jaarlijkse mediaan PCB118 per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendPCB118Tab) de mediane, 10- en 90-percentiele waardes per station weergegeven. Voor beide stations constateren we een afnemende lineaire trend rond de 0,04 tot 0,29 $\mu$g/kg per jaar.  Voor station Vlissingen de trend een hogere correlatie coëfficiënt.
 
 ```{r zwevendPCB118Tab}
 # dt <- tex2dt("Figuren/Zwevend/PCB118_meanvalues.tex")
@@ -783,7 +788,7 @@ plotTrendsLimits(df, parname)
 
 ### PCB28 {#zwevend-PCB28}
 
-Figuur \@ref(fig:zwevendPCB28) toont het jaargemiddelde PCB28 per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendPCB28Tab) de gemiddelde, minimale en maximale waardes per station weergegeven. Voor beide stations neemt de hoeveelheid PCB28 af. Voor Schaar van Ouden Doel is de trend hoger vergeleken met Vlissingen. De hoge waarde in 2017 bij Schaar van Ouden Doel lijkt een uitschieter. Het is de vraag of deze meegenomen moet worden in de berekening van het gemiddelde.  
+Figuur \@ref(fig:zwevendPCB28) toont de jaarlijkse mediaan PCB28 per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendPCB28Tab) de mediane, 10- en 90-percentiele waardes per station weergegeven. Voor beide stations neemt de hoeveelheid PCB28 af. Voor Schaar van Ouden Doel is de trend hoger vergeleken met Vlissingen. De hoge waarde in 2017 bij Schaar van Ouden Doel lijkt een uitschieter. Het is de vraag of deze meegenomen moet worden in de berekening van het gemiddelde.  
 
 ```{r zwevendPCB28Tab}
 # dt <- tex2dt("Figuren/Zwevend/PCB28_meanvalues.tex")
@@ -814,7 +819,7 @@ In deze paragraaf presenteren we de volgende overige stoffen in zwevende stof:
 
 ### Dieldrin {#zwevend-dieldrin}
 
-Figuur \@ref(fig:zwevendDieldrin) toont het jaargemiddelde dieldrin per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendDieldrinTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+Figuur \@ref(fig:zwevendDieldrin) toont de jaarlijkse mediaan dieldrin per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendDieldrinTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. 
 
 Het gehalte dieldrin wordt alleen bij Schaar van Ouden Doel bepaald en beïnvloed door de detectiegrens van 0,5 mg/l, dit laten de minima duidelijk zien. In werkelijkheid zullen de minima en gemiddelden dus lager zijn. De dalende trend sinds de incidentele piek in 2006 is niet significant. Sinds 2010 volgde uit 40\% van de metingen een waarde van 0,5 mg/l. In 2018, net als in 2016 en 2017, volgde uit alle metingen een waarde van 1 mg/l. Hierdoor zijn de gemiddelde, minimale en maximale waarde gelijk. Dit kan er op duiden dat de detectie grens is verschoven of dat de meetapparatuur niet meer functioneert.
 
@@ -839,7 +844,7 @@ plotTrendsLimits(df, parname)
  
 ### Hexachloorbenzeen {#zwevend-Hexachloorbenzeen}
 
-Figuur \@ref(fig:zwevendHexachloorbenzeen) toont het jaargemiddelde hexachloorbenzeen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendHexachloorbenzeenTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+Figuur \@ref(fig:zwevendHexachloorbenzeen) toont de jaarlijkse mediaan hexachloorbenzeen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendHexachloorbenzeenTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. 
 
 Bij Vlissingen boei SSVH is het gehalte hexachloorbenzeen zeer laag en wordt steeds de detectiegrens van 0,5 mg/l bereikt, waardoor de minima en gemiddelden worden bepaald. In werkelijkheid zijn de gehaltes dus nog lager. Over de gehele dataset is geen trend te herkennen.
 
@@ -864,7 +869,7 @@ plotTrendsLimits(df, parname)
  
 ### Tributyltin {#zwevend-Tributyltin}
 
-Figuur \@ref(fig:zwevendTributyltin) toont het jaargemiddelde tributyltin per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendTributyltinTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
+Figuur \@ref(fig:zwevendTributyltin) toont de jaarlijkse mediaan tributyltin per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendTributyltinTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. 
 
 In 2012 worden de waarden van tribultyltin (TBT) bij Schaar van Ouden Doel niet meer uitgedrukt in tin, de oude metingen (wel uitgedrukt in tin) zijn door te vermenigvuldigen met factor 2,444 omgerekend naar tribultyltin. Bij Schaar van Ouden Doel dalen de gehaltes tribultyltin sterk. Bij Vlissingen boei SSVH is een dalende trend aanwezig. De waarden bij Vlissingen boei SSVH zijn lager dan bij Schaar van Ouden Doel. Bij Vlissingen boei SSVH wordt de laatste jaren zelfs de detectiegrens bereikt (3 $\mu$g/kg). Over de gehele dataset is er een duidelijke dalende trend van -5,2 tot -7,4 $\mu$g/kg te herkennen die voor beide stations een hoge correlatiecoëfficiënt heeft. Deze daling lijkt wel af te nemen met stabiliserende waardes in de laatste jaren. Voor Vlissingen was in 2017 geen data beschikbaar.
 
