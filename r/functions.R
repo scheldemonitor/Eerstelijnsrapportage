@@ -64,6 +64,7 @@ if(anydata > 0){
     drop_na(value) %>%
     filter(parametername == parname) %>% 
     mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
+    filter(year >= 2000) %>%
     group_by(stationname) %>% 
     summarize(
       median = median(value, na.rm = T), 
@@ -109,6 +110,7 @@ statTableParams <- function(df, parnames, statname, rounding, meanorder = "decre
     df %>% 
       filter(parametername %in% parnames & stationname == statname) %>% 
       mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
+      filter(year >= 2000) %>%
       group_by(parametername) %>% 
       summarize(
         median = median(value, na.rm = T), 
@@ -322,13 +324,14 @@ plotLogAnomalies <- function(df, parname, sf = F) {
     group_by(stationname) %>% mutate(rM=rollmean(anomalie,k, na.pad=TRUE, align="center", na.rm = T)) %>%
     # mutate(stationname = factor(stationname, levels = plotlocaties)) %>%
     ggplot(aes(datum, exp(anomalie))) + 
-    geom_point(aes(color = exp(logmaandgemiddelde)), alpha = 0.4) +   #size = `n/year`
-    geom_line(aes(y=exp(rM)), color = "blue")  +
+    geom_point(aes(), alpha = 0.2) +   #size = `n/year` color = exp(logmaandgemiddelde)
+    geom_line(aes(y=exp(rM)), color = "blue", size = 1)  +
     ylab(parname) +
     facet_wrap(~ stationname, scales = "free", ncol = 2) +
     scale_color_gradientn(colours = jet.colors(7), name = "maandgemiddelde",
                           trans = "log", breaks = my_breaks, labels = my_breaks) +
-    coord_cartesian(ylim = c(0,4)) +
+    coord_cartesian(ylim = c(0,NA)) +
+    scale_x_date(breaks = scales::pretty_breaks(), date_minor_breaks = "1 year", date_labels = "%Y") +
     trendplotstyle
 
   return(p)
@@ -682,6 +685,7 @@ plotMeanMap <- function(df, parname) {
   
   values = df %>% #st_drop_geometry() %>%
     filter(parametername == parname) %>%
+    filter(year(datetime) >= 2000) %>%
     group_by(stationname) %>% summarize(mean = mean(value, na.rm = T)) %>%
     select(mean) %>% unlist() %>% unname()
 
@@ -691,6 +695,7 @@ plotMeanMap <- function(df, parname) {
   
   df %>% #st_drop_geometry() %>%
     filter(parametername == parname) %>%
+    filter(year(datetime) >= 2000) %>%
     group_by(stationname) %>% 
     summarize(mean = mean(value, na.rm = T), latitude = mean(latitude), longitude = mean(longitude)) %>%
     select(Station = stationname,
@@ -705,18 +710,21 @@ plotMeanMap <- function(df, parname) {
 }
 
 
-plotMedianMap <- function(df, parname) {
+plotMedianMap <- function(df, parname, reverse_scale = FALSE) {
   values = df %>% #st_drop_geometry() %>%
     filter(parametername == parname) %>%
+    filter(year(datetime) >= 2000) %>%
     group_by(stationname) %>% summarize(median = median(value, na.rm = T)) %>%
     select(median) %>% unlist() %>% unname()
   
-  pal <- colorNumeric(viridis(n = 7),
+  pal <- colorNumeric(viridis(n = 7), 
+                      reverse = reverse_scale,
                       domain = values
   )
   
   df %>% #st_drop_geometry() %>%
     filter(parametername == parname) %>%
+    filter(year(datetime) >= 2000) %>%
     group_by(stationname) %>% 
     summarize(median = median(value, na.rm = T), latitude = mean(latitude, na.rm = T), longitude = mean(longitude, na.rm = T)) %>%
     select(Station = stationname,
@@ -731,18 +739,21 @@ plotMedianMap <- function(df, parname) {
 }
 
 
-plotLogMedianMap <- function(df, parname) {
+plotLogMedianMap <- function(df, parname, reverse_scale = FALSE) {
   values = df %>% #st_drop_geometry() %>%
     filter(parametername == parname) %>%
+    filter(year(datetime) >= 2000) %>%
     group_by(stationname) %>% summarize(median = exp(median(log(value), na.rm = T))) %>%
     select(median) %>% unlist() %>% unname()
   
   pal <- colorNumeric(viridis(n = 7),
+                      reverse = reverse_scale,
                       domain = values
   )
   
   df %>% #st_drop_geometry() %>%
     filter(parametername == parname) %>%
+    filter(year(datetime) >= 2000) %>%
     group_by(stationname) %>% 
     summarize(median = exp(median(log(value), na.rm = T)), latitude = mean(latitude, na.rm = T), longitude = mean(longitude, na.rm = T)) %>%
     select(Station = stationname,
