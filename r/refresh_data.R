@@ -16,6 +16,30 @@ IDs <- lapply(
 ) %>%
   bind_rows()
 
+# Hydrodynamiek - waterstanden
+
+refresh_waterstanden <- function(){
+  Waterstand <- c(9695,9694,2438,2439)
+  
+  base_path <- "waterstanden\\Data_Hydro_"
+  for(jaar in 1950:2020){
+    df <- smwfs::getSMdata(startyear = jaar, endyear = jaar + 1, parID = c(Waterstand), datasetID = c(476,1527,945))
+    write.csv(df, paste(base_path,jaar,'.csv', sep = ""))
+  }
+}
+
+# Hydrodynamiek - golven
+
+refresh_golven <- function(){
+  Golven <- c(2599,2601,1816,2594,2596,2597,2598)
+  
+  base_path <- "golven\\Data_Hydro_Golven_"
+  for(jaar in 1998:2020){
+    df <- smwfs::getSMdata(startyear = jaar, endyear = jaar + 1, parID = c(Golven), datasetID = c(8032))
+    write.csv(df, paste(base_path,jaar,'.csv', sep = ""))
+  }
+}
+
 # Fysisch-chemisch - oppervlaktewater
 
 refresh_fysischchemischoppwater <- function(){

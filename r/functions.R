@@ -644,6 +644,22 @@ plotTrendFytoGroup <- function(df, groupname){
     trendplotstyle
 }
 
+plotCDF <- function(df, parname) {
+    p <- df %>%
+    dplyr::filter(parametername == parname) %>%
+    dplyr::group_by(stationname) %>% 
+    dplyr::select(Station = stationname,
+                  Value = value) %>%
+    ggplot(aes(x=Value,color=Station)) + 
+    stat_ecdf(size=1) +
+    theme_minimal() +
+    xlab(parname) +
+    ylab("F(x)") +
+    coord_cartesian(xlim = c(0,150)) +
+    trendplotstyle
+  return(p)
+}
+
 
 stationMean <- function(df, parname){
   df %>% #st_drop_geometry() %>%
@@ -676,6 +692,18 @@ stationMedian <- function(df, parname){
     summarize(median = median(value, na.rm = T), latitude = mean(latitude), longitude = mean(longitude)) %>%
     select(Station = stationname,
            Mediaan = median,
+           latitude,
+           longitude
+    )
+}
+
+stationMax <- function(df, parname){
+  df %>% #st_drop_geometry() %>%
+    filter(parametername == parname) %>%
+    group_by(stationname) %>% 
+    summarize(max = max(value, na.rm = T), latitude = mean(latitude), longitude = mean(longitude)) %>%
+    select(Station = stationname,
+           Max = max,
            latitude,
            longitude
     )
