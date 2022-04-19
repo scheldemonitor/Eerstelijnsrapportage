@@ -25,6 +25,12 @@ trendplotstyle =   theme(
 )
 
 
+###==== lijsten =============================
+
+maanden <- c("januari", "februari", "maart", "april", "mei", "juni", "juli", 
+             "augustus", "september", "oktober", "november", "december")
+
+
 ###==== plot functies =============================
 
 plotLocations <- function(df){
@@ -530,12 +536,14 @@ plotTrendsMaand <- function(df, parname, sf = T) {
            `90-perc`,
            `10-perc`,
            Maand = month) %>%
+    mutate(MaandNaam = maanden[Maand]) %>%
+    mutate(MaandNaam = factor(MaandNaam, levels = maanden)) %>%
     arrange(-Mediaan) %>%
     ggplot(aes(Jaar, Mediaan)) +
     #geom_ribbon(aes(ymin = `10-perc`, ymax = `90-perc`, fill = month), alpha = 0.4) +
     geom_line(aes(color = Station)) + #geom_point(aes(color = Station), fill = "white", shape = 21) +
     # geom_smooth(method = "lm", fill = "blue", alpha = 0.2) +
-    facet_wrap(~Maand, ncol = 3) +
+    facet_wrap(~MaandNaam, ncol = 3) +
     theme_minimal() +
     ylab(parname) +
     coord_cartesian(ylim = c(0,NA)) +
@@ -556,18 +564,20 @@ plotTrendsCZVMaand <- function(df, parname, sf = T) {
            Jaar = year,
            Mediaan = median,
            Maand = month) %>%
+    mutate(MaandNaam = maanden[Maand]) %>%
+    mutate(MaandNaam = factor(MaandNaam, levels = maanden)) %>%
     arrange(-Mediaan) %>% 
-    pivot_wider(id_cols = c(Jaar, Maand, Station), names_from = parametername, values_from = Mediaan) %>% 
+    pivot_wider(id_cols = c(Jaar, MaandNaam, Station), names_from = parametername, values_from = Mediaan) %>% 
     drop_na() %>%
     mutate(`chloride in g/l` = `Saliniteit in PSU in oppervlaktewater`/1.8066) %>%
     mutate(detectielimiet = `chloride in g/l`*10) %>%
     select(-`Saliniteit in PSU in oppervlaktewater`, -`chloride in g/l`) %>%
     ggplot(aes(Jaar, `Chemisch zuurstofverbruik in mg/l uitgedrukt in Zuurstof (O2) in oppervlaktewater`)) +
     #geom_ribbon(aes(ymin = `10-perc`, ymax = `90-perc`, fill = month), alpha = 0.4) +
-    geom_line(aes(color = Station), size = 1) + #geom_point(aes(color = Station), fill = "white", shape = 21) +
-    geom_line(aes(y = detectielimiet, color = Station), linetype = 2, size = 1) + #geom_point(aes(color = Station), fill = "white", shape = 21) +
+    geom_line(aes(color = Station), size = 0.7) + #geom_point(aes(color = Station), fill = "white", shape = 21) +
+    geom_line(aes(y = detectielimiet, color = Station), linetype = 2, size = 0.7) + #geom_point(aes(color = Station), fill = "white", shape = 21) +
     # geom_smooth(method = "lm", fill = "blue", alpha = 0.2) +
-    facet_wrap(~Maand) +
+    facet_wrap(~MaandNaam) +
     theme_minimal() +
     ylab(parname) +
     coord_cartesian(ylim = c(0,60)) +
@@ -587,12 +597,14 @@ plotLogTrendsMaand <- function(df, parname, sf = T) {
            `90-perc`,
            `10-perc`,
            Maand = month) %>%
+    mutate(MaandNaam = maanden[Maand]) %>%
+    mutate(MaandNaam = factor(MaandNaam, levels = maanden)) %>%
     arrange(-Mediaan) %>%
     ggplot(aes(Jaar, Mediaan)) +
     #geom_ribbon(aes(ymin = `10-perc`, ymax = `90-perc`, fill = month), alpha = 0.4) +
     geom_line(aes(color = Station)) + #geom_point(aes(color = Station), fill = "white", shape = 21) +
     # geom_smooth(method = "lm", fill = "blue", alpha = 0.2) +
-    facet_wrap(~Maand) +
+    facet_wrap(~MaandNaam) +
     theme_minimal() +
     ylab(parname) +
     scale_y_log10() +

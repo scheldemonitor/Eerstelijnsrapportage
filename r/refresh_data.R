@@ -6,7 +6,7 @@ dataIDpath <- "datasetIDs.xlsx"
 sheets <- readxl::excel_sheets(dataIDpath)
 
 # storage path of downloaded data
-datapath = ""
+datapath = getwd()
 
 IDs <- lapply(
   sheets, 
@@ -18,7 +18,7 @@ IDs <- lapply(
 
 # Fysisch-chemisch - oppervlaktewater
 
-refresh_fysischchemischoppwater <- function(){
+refresh_fysischchemischoppwater <- function(startyear = 1998, endyear, filepath = fysChemOppDataPath){
   Saliniteit <- c(998)
   Temperatuur <- c(1046)
   Zuurstof <- c(1214,1213)
@@ -33,15 +33,15 @@ refresh_fysischchemischoppwater <- function(){
   parID <- c(Saliniteit,Temperatuur,Zuurstof,Chlorofyl_a,BZV_BOD_CZV,Lichtklimaat,Zwevende_stof,Nutrienten,Organisch_koolstof,Metalen)
   
   #df <- get_y_SMdata(2019, 2020, parID)
-  df <- smwfs::getSMdata(startyear = startyear, endyear = endyear, parID = parID)
+  df <- smwfs::get_y_SMdata(startyear = startyear, endyear = endyear, parID = parID)
   df <- df[!df$dataprovider == "8", ] # remove metingen van scan-tochten
-  write.csv(df, file.path(datapath, 'Data_FysChem_opp_test.csv'))
+  write_csv(df, file.path(datapath, filepath))
 }
 
 
 # Fysisch-chemisch - zwevende stof
 
-refresh_fysischchemischzwevendstof <- function(){
+refresh_fysischchemischzwevendstof <- function(startyear = 1998, endyear, filepath = fysChemZwevendDataPath){
   parIDs <- IDs %>%
     filter(grepl(" in zwevend stof", Parameternaam, ignore.case = T)) %>%
     select(`(Parameternr)`) %>%
@@ -51,7 +51,7 @@ refresh_fysischchemischzwevendstof <- function(){
                         'dataproviderid', 'imisdatasetid', 'parametername', 'parameterunit',
                         'dataprovider', 'stationname', 'unit', 'valuesign', sep = ",")
   
-  df <- lapply(parIDs, function(x) getSMdata(1998,2020, propname = retrievedcolumns, parID = x)) %>%
+  df <- lapply(parIDs, function(x) getSMdata(startyear,endyear, propname = retrievedcolumns, parID = x)) %>%
     delete.NULLs() %>% 
     # map( ~ mutate(.x, id = as.numeric(id))) %>%
     bind_rows()
@@ -61,7 +61,7 @@ refresh_fysischchemischzwevendstof <- function(){
 
 # Fysisch-chemisch - bodem
 
-refresh_fysischchemischbodem <- function(){
+refresh_fysischchemischbodem <- function(startyear = 1998, endyear, filepath){
   
 parIDs <- IDs %>%
   filter(grepl("in bodem/sediment", Parameternaam, ignore.case = T)) %>%
@@ -72,12 +72,12 @@ retrievedcolumns <- paste('latitude', 'longitude', 'depth', 'datetime', 'value',
                           'dataproviderid', 'imisdatasetid', 'parametername', 'parameterunit',
                           'dataprovider', 'stationname', 'unit', 'valuesign', sep = ",")
 
-df <- lapply(parIDs, function(x) getSMdata(1998,2020, propname = retrievedcolumns, parID = x)) %>%
+df <- lapply(parIDs, function(x) getSMdata(startyear, endyear, propname = retrievedcolumns, parID = x)) %>%
   delete.NULLs() %>% 
   bind_rows()
 
 df <- df[!df$dataprovider == "8", ] # remove metingen van scan-tochten
-write.csv(df, file.path(datapath, 'Data_FysChem_bodem.csv'))
+write.csv(df, filepath)
 
 }
 
