@@ -374,21 +374,17 @@ plotTrendsGolven <- function(df, parname, locname, sf = F) {
   if(sf) df <- df %>% st_drop_geometry()
   p <- df %>%
     dplyr::filter(parametername %in% parname, stationname %in% locname) %>%
-    dplyr::mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
-    dplyr::group_by(stationname, year, month, parametername) %>% 
-    dplyr::summarize(mean = mean(value, na.rm = T), max = max(value, na.rm = T)) %>%
+    dplyr::group_by(stationname, datetime, parametername) %>% 
     dplyr::select(Station = stationname,
-                  Jaar = year,
-                  Maand = month,
-                  Gemiddelde = mean,
-                  Maximum = max,
+                  Maand = datetime,
+                  Gemiddelde = value,
+                  Maximum = value_max,
                   Parameter = parametername) %>%
     dplyr::arrange(-Gemiddelde) %>%
     pivot_longer(c(Maximum, Gemiddelde), names_to = "Statistiek", values_to = "Waarde") %>%
-    mutate(datum = lubridate::ymd(paste(Jaar, Maand, "15"))) %>%
-    ggplot(aes(datum, Waarde)) +
+    ggplot(aes(Maand, Waarde)) +
     geom_line(aes(color=Statistiek)) + 
-    geom_point(aes(fill=Parameter), color = "white", shape = 21) + 
+    geom_point(aes(fill=Statistiek), color = "white", shape = 21) + 
     facet_grid(Parameter ~ ., scales="free_y") +
     theme_minimal() +
     ylab(parname) +
@@ -685,6 +681,18 @@ stationMean <- function(df, parname){
     )
 }
 
+stationWeightedMean <- function(df, parname){
+  df %>% #st_drop_geometry() %>%
+    filter(parametername == parname) %>%
+    group_by(stationname) %>% 
+    summarize(mean = weighted.mean(value, datapoints, na.rm = T), latitude = mean(latitude), longitude = mean(longitude)) %>%
+    select(Station = stationname,
+           Gemiddelde = mean,
+           latitude,
+           longitude
+    )
+}
+
 stationMeanClass <- function(df, parname, classname){
   df %>% #st_drop_geometry() %>%
     filter(parametername == parname, class == classname) %>%
@@ -745,10 +753,37 @@ plotMeanMap <- function(df, parname) {
     ) %>% 
     leaflet() %>%
     addTiles() %>%
-    addCircleMarkers(fillColor = ~pal(Gemiddelde), fillOpacity = 1, stroke = F) %>%
+    addCircleMarkers(fillColor = ~pal(Gemiddelde), fillOpacity = 1, stroke = F, label = ~paste(Station, signif(Gemiddelde, 2), parname)) %>%
     leaflet::addLegend("topright", pal, values, opacity = 1)
 }
 
+plotWeightedMeanMap <- function(df, parname) {
+  
+  values = df %>% #st_drop_geometry() %>%
+    filter(parametername == parname) %>%
+    filter(year(datetime) >= 2000) %>%
+    group_by(stationname) %>% summarize(mean = weighted.mean(value, datapoints, na.rm = T)) %>%
+    select(mean) %>% unlist() %>% unname()
+  
+  pal <- colorNumeric(viridis(n = 7),
+                      domain = values
+  )
+  
+  df %>% #st_drop_geometry() %>%
+    filter(parametername == parname) %>%
+    filter(year(datetime) >= 2000) %>%
+    group_by(stationname) %>% 
+    summarize(mean = weighted.mean(value, datapoints, na.rm = T), latitude = mean(latitude), longitude = mean(longitude)) %>%
+    select(Station = stationname,
+           Gemiddelde = mean,
+           latitude,
+           longitude
+    ) %>% 
+    leaflet() %>%
+    addTiles() %>%
+    addCircleMarkers(fillColor = ~pal(Gemiddelde), fillOpacity = 1, stroke = F, label = ~paste(Station, signif(Gemiddelde, 2), parname)) %>%
+    leaflet::addLegend("topright", pal, values, opacity = 1)
+}
 
 plotMedianMap <- function(df, parname, reverse_scale = FALSE) {
   values = df %>% #st_drop_geometry() %>%
@@ -806,7 +841,6 @@ plotLogMedianMap <- function(df, parname, reverse_scale = FALSE) {
     addCircleMarkers(fillColor = ~pal(Mediaan), fillOpacity = 1, stroke = F, label = ~paste(Station, signif(Mediaan, 2), parname)) %>%
     leaflet::addLegend("topright", pal, values, opacity = 1)
 }
-
 
 
 # Plot trends of nutrients

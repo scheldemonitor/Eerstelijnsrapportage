@@ -185,13 +185,13 @@ Vanaf Terneuzen geven de stations zowel in stroomopwaartse richting als in tijd 
 
 Daarnaast constateren we een toename van gemiddeld hoogwater en een afname van gemiddeld laagwater naar mate men meer stroomopwaarts (i.e. oostelijke richting) van de Westerschelde komt, zoals te zien in Figuur \@ref(fig:hydroGemiddeldLW) en Figuur \@ref(fig:hydroGemiddeldHW). 
 
-```{r hydroGemiddeldLW, fig.cap="Gemiddeld laagwater per station berekend op alle beschikbare data vanaf 1950"}
+```{r hydroGemiddeldLW, fig.cap="Mediaan van laagwater per station berekend op alle beschikbare data vanaf 1950"}
 #knitr::include_graphics("Figuren/Hydro/Waterstanden/gemiddeld_LW.png")
 
 plotMedianMap(df, "Laagwater in cm+NAP")
 ```
 
-```{r hydroGemiddeldHW, fig.cap="Gemiddeld hoogwater per station berekend op alle beschikbare data vanaf 1950"}
+```{r hydroGemiddeldHW, fig.cap="Mediaan van hoogwater per station berekend op alle beschikbare data vanaf 1950"}
 #knitr::include_graphics("Figuren/Hydro/Waterstanden/gemiddeld_HW.png")
 
 plotMedianMap(df, "Hoogwater in cm+NAP")
@@ -217,7 +217,7 @@ knitr::kable(dt,
 
 Sinds 2000 constateren we een toename van de getijslag tot maximaal 1,35 cm/jaar, zie Tabel \@ref(tab:hydroGemiddeldeHWLWGetij) bij station Breskens havenmond. De correlatiecoëfficiënt (i.e. $R$) varieert sterk per station tot station wat betekent dat er andere relevante factoren, naast deze lineaire trend, van invloed zijn op de getijslag. 
 
-```{r hydroGetijslag, fig.height=8, out.height="600px", fig.cap="De gemiddelde getijslag over tijd op de Noordzee, in de monding en in de Westerschelde. Dunnere en transparante kleuren geven jaarlijkse gemiddeldes aan met twee of meer maanden met missende data."}
+```{r hydroGetijslag, fig.height=8, out.height="600px", fig.cap="De mediaan van getijslag over tijd op de Noordzee, in de monding en in de Westerschelde. Dunnere en transparante kleuren geven jaarlijkse gemiddeldes aan met twee of meer maanden met missende data."}
 #knitr::include_graphics("Figuren/Hydro/Waterstanden/Getijslag.png")
 
 df2 <- df %>%
@@ -239,7 +239,7 @@ ggplotly(p)
 
 De 18,6-jarige getijdencyclus, bijvoorbeeld, is van invloed op de resultaten en duidelijk zichtbaar in de figuur. De 18,6-jarige cyclus zorgt voor een periodieke toe en afname van de waterstand en getijslag en is maximaal rond 1960, 1979, 1997 en 2014. De 18,6-jarige cyclus zit ook in de stations buiten de Westerschelde. Verder stroomopwaarts wordt de getijslag groter. De versterking in de stroomopwaartse richting wordt voornamelijk veroorzaakt door de vorm van het estuarium (ondieper en smaller in stroomopwaartse richting). In de jaren ’70 is vooral bij Bath een sterke toename te zien in de getijslag, die waarschijnlijk het gevolg is van de ingrepen in het kader van de ‘eerste verruiming’.
 
-```{r hydroGetijslagGemiddeld, fig.cap="Gemiddelde getijslag per station berekend op alle beschikbare data vanaf 1950"}
+```{r hydroGetijslagGemiddeld, fig.cap="Mediaan van getijslag per station berekend op alle beschikbare data vanaf 1950"}
 #knitr::include_graphics("Figuren/Hydro/Waterstanden/gemiddelde_getijslag.png")
 
 values = df2 %>% #st_drop_geometry() %>%
@@ -356,15 +356,15 @@ ggplotly(p)
 knitr::include_graphics("Figuren/Inscape/spectrum.png")
 ```
 
-```{r downloadHydroGolven, include = F}
-
+```{r golfTrendstations}
 trendstations <- c("Bath (BAT2)","Hansweert (HAWI)","Cadzand (CAWI)","Cadzand (CADW)","Overloop van Hansweert (OVHW)","Deurloo (DEUR)","Honte (HNTE)","Hoofdplaat (HFPL)","Overloop van Valkenisse (OVVA)","Pas van Terneuzen (PVT)","Wielingen (WIEL)")
 
-frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/yearly_golven_new"
-pattern <- ".csv" # of iets anders wat de files karakteriseert die je wilt samenvoegen
+frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_Hydro_Golven_1998_2020"
+```
 
-allFiles <- list.files(file.path(frozendatapath), pattern = pattern, full.names = T)
-
+```{r downloadHydroGolven, include = F, eval = F}
+datapathin <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/yearly_golven_new"
+allFiles <- list.files(file.path(datapathin), pattern = ".csv", full.names = T)
 df <- lapply(
   allFiles, function(x) # nameless function. Wat hierna staat wordt uitgevoerd voor elke elemente van allFiles
     read_delim(x, delim = ",", col_types = cols(.default = "c",
@@ -378,26 +378,52 @@ df <- lapply(
       longitude,
       datetime,
       parametername,
-      value,
-      valuesign
-    ) #%>%
+      value) #%>%
 ) %>% bind_rows() # alles wordt geplakt
+
+cdf_H3 <- plotCDF(df, "H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm")
+ggsave(cdf_H3, "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Figuren/cdf_H3.png")
+cdf_th3 <- plotCDF(df, "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s")
+ggsave(cdf_th3, "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Figuren/cdf_TH3.png")
+
+df <- df %>%
+  mutate(year = year(datetime), month = month(datetime)) %>%
+  group_by(stationname, parametername, year, month) %>% 
+  summarize(mean = mean(value), max = max(value), n = n(), latitude = mean(latitude), longitude = mean(longitude)) %>%
+  mutate(datum = lubridate::ymd(paste(year, month, "15"))) %>%
+  select(stationname,
+         latitude,
+         longitude,
+         parametername,
+         datetime = datum,
+         value = mean,
+         value_max = max,
+         datapoints = n)
   
 # replace below partly by clean function in package smsfs
 df <- df %>%
   filter(stationname %in% trendstations) %>%
   mutate(stationname = factor(stationname, levels = trendstations)) %>%
-  filter(valuesign != ">") %>%
-  mutate(value = case_when(
-    valuesign == "=" ~ value,
-    valuesign == "<" ~ 0.5 * value)) %>%
   mutate(parametername = case_when(
     str_detect(parametername, "TH3") ~ "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s",
     str_detect(parametername, "H3") ~ "H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm",
     str_detect(parametername, "TM02") ~ "TM02: Golfperiode berekend uit het spectrum in 0.1 s",
     str_detect(parametername, "Hm0") ~ "Hm0: Significante golfhoogte uit 10mHz spectrum in cm"))
 
+write_delim(df, frozendatapath, delim = ",")
 ```
+
+```{r importHydroGolven}
+df <- read_delim(frozendatapath, delim = ",", guess_max = 200000) %>% 
+  filter(stationname %in% trendstations) %>%
+  mutate(stationname = factor(stationname, levels = trendstations)) %>%
+  mutate(parametername = case_when(
+    str_detect(parametername, "TH3") ~ "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s",
+    str_detect(parametername, "H3") ~ "H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm",
+    str_detect(parametername, "TM02") ~ "TM02: Golfperiode berekend uit het spectrum in 0.1 s",
+    str_detect(parametername, "Hm0") ~ "Hm0: Significante golfhoogte uit 10mHz spectrum in cm"))
+```
+
 
 Golven die voorkomen op de Noordzee en in de Westerschelde hebben steeds verschillende golfhoogte, -periode en richting. Dit is afhankelijk van de wind (kracht, duur, richting, strijklengte), de waterdiepte en de golfvoortplanting. Van golfmetingen wordt meestal per periode van ongeveer 15 minuten een spectrum afgeleid, waarin golven met verschillende golfhoogte en -periode (in de vorm van een frequentie = 1 / periode) zijn opgenomen, zie Figuur \@ref(fig:golfspectrum). De golven die in deze paragraaf worden meegenomen bevinden zich aan de rechterkant van het in Figuur \@ref(fig:golfspectrum) weergegeven spectrum en zijn aangeduid met deining en wind. Deining wordt veroorzaakt door golfvoortplanting van golven die verder weg zijn opgewekt. Windgolven zijn lokaal opgewekte golven.
 
@@ -461,28 +487,33 @@ Maximale significante golfhoogtes voor windgolven worden in de Westerschelde ges
 #knitr::kable(dt, col.names = c("Station","$H_{1/3,gem}$","$H_{1/3,max}$","$H_{m0,gem}$","$H_{m0,max}$"),
 #             caption = "Gemiddelde en maximale waardes voor de golfperiode (zowel $H_{1/3}$ als  $H_{m0}$) voor alle stations.")
 
-GGH <- stationMedian(df, "Hm0: Significante golfhoogte uit 10mHz spectrum in cm")
-GGHmax <- stationMax(df, "Hm0: Significante golfhoogte uit 10mHz spectrum in cm")
-H3 <- stationMedian(df, "H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm")
-H3max <- stationMax(df, "H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm")
-dt <- data.frame("Station" = GGH$Station, "Hm0 mediaan" = GGH$Mediaan, "Hm0 maximum" = GGHmax$Max, "H1/3 mediaan" = H3$Mediaan, "H1/3 maximum" = H3max$Max)
+GGH <- stationWeightedMean(df, "Hm0: Significante golfhoogte uit 10mHz spectrum in cm") %>%
+  select(Station, `Hm0 mediaan` = Gemiddelde)
+GGHmax <- stationMax(df, "Hm0: Significante golfhoogte uit 10mHz spectrum in cm") %>%
+  select(Station, `Hm0 maximum` = Max)
+H3 <- stationWeightedMean(df, "H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm") %>%
+  select(Station, `H1/3 mediaan` = Gemiddelde)
+H3max <- stationMax(df, "H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm") %>%
+  select(Station, `H1/3 maximum` = Max)
+dt = full_join(GGH, GGHmax) %>% full_join(H3) %>% full_join(H3max)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Gemiddelde en maximale waardes voor de golfperiode (zowel $H_{1/3}$ als  $H_{m0}$) voor alle stations.")
+             caption = "Gewogen gemiddelde en maximale waardes voor de golfperiode (zowel $H_{1/3}$ als  $H_{m0}$) voor alle stations.")
 ```
 
-```{r gemiddeldeHs, fig.cap="Gemiddelde significante golfhoogte per station berekend op basis van het spectrum voor alle beschikbare data vanaf 1998."}
+```{r gemiddeldeHs, fig.cap="Gewogen gemiddelde significante golfhoogte per station berekend op basis van het spectrum voor alle beschikbare data vanaf 1998."}
 #knitr::include_graphics("Figuren/Hydro/Golven/gemiddelde_hm0.png")
 
 #plotMedianMap(df, "Hm0: Significante golfhoogte uit 10mHz spectrum in cm")
-plotMedianMap(df, "H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm")
+plotWeightedMeanMap(df, "H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm")
 ```
 
 ```{r cdfplotHs, fig.cap="Empirische distributiefunctie voor de significante golfhoogte berekend op basis van het spectrum voor alle beschikbare data vanaf 1998."}
 #knitr::include_graphics("Figuren/Hydro/Golven/cdfplot_Hs.png")
 
 #plotCDF(df, "Hm0: Significante golfhoogte uit 10mHz spectrum in cm")
-plotCDF(df, "H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm")
+#plotCDF(df, "H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm")
+knitr::include_graphics("n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Figuren/cdf_H3.png")
 ```
 
 ```{r hydroHsDeurloo, fig.cap="Maandelijks gemiddelde en maximum van de significante golfhoogte $H_{1/3}$ (boven) en $H_{m0}$ (onder) voor station Deurloo."}
@@ -562,27 +593,32 @@ Voor beide periodeparameters geldt dat de golven in de monding de langste period
 #knitr::kable(dt, col.names = c("Station","$T_{H1/3,gem}$","$T_{H1/3,max}$","$T_{m0,gem}$","$T_{m0,max}$"),
 #             caption = "Gemiddelde en maximale waardes voor de golfperiode (zowel $T_{H,1/3}$ als $T_{m02}$) voor alle stations.")
 
-TH3 <- stationMedian(df, "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s")
-TH3max <- stationMax(df, "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s")
-TM02<- stationMedian(df, "TM02: Golfperiode berekend uit het spectrum in 0.1 s")
-TM02max <- stationMax(df, "TM02: Golfperiode berekend uit het spectrum in 0.1 s")
-dt <- data.frame("Station" = TH3$Station, "TH3 mediaan" = TH3$Mediaan, "TH3 maximum" = TH3max$Max, "Tm02 mediaan" = TM02$Mediaan, "Tm02 maximum" = TM02max$Max)
+TH3 <- stationWeightedMean(df, "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s") %>%
+  select(Station, `Th3 mediaan` = Gemiddelde)
+TH3max <- stationMax(df, "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s") %>%
+  select(Station, `Th3 maximum` = Max)
+TM02 <- stationWeightedMean(df, "TM02: Golfperiode berekend uit het spectrum in 0.1 s") %>%
+  select(Station, `Tm02 mediaan` = Gemiddelde)
+TM02max <- stationMax(df, "TM02: Golfperiode berekend uit het spectrum in 0.1 s") %>%
+  select(Station, `Tm02 maximum` = Max)
+dt = full_join(TH3, TH3max) %>% full_join(TM02) %>% full_join(TM02max)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Gemiddelde en maximale waardes voor de golfperiode (zowel $T_{H,1/3}$ als $T_{m02}$) voor alle stations.")
+             caption = "Gewogen gemiddelde en maximale waardes voor de golfperiode (zowel $T_{H,1/3}$ als $T_{m02}$) voor alle stations.")
 ```
 
-```{r gemiddeldeTm02, fig.cap="Gemiddelde significante golfperiode per station berekend op basis van het spectrum voor alle beschikbare data vanaf 1998."}
+```{r gemiddeldeTm02, fig.cap="Gewogen gemiddelde significante golfperiode per station berekend op basis van het spectrum voor alle beschikbare data vanaf 1998."}
 #knitr::include_graphics("Figuren/Hydro/Golven/gemiddelde_tm02.png")
 
-plotMedianMap(df, "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s")
+plotWeightedMeanMap(df, "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s")
 ```
 
 ```{r cdfplotTmo2, fig.cap="Empirische distributiefunctie voor de significante golfperiode berekend op basis van het spectrum voor alle beschikbare data vanaf 1998."}
 #knitr::include_graphics("Figuren/Hydro/Golven/cdfplot_tm02.png")
 
-plotCDF(df, "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s")
 #plotCDF(df, "TM02: Golfperiode berekend uit het spectrum in 0.1 s")
+#plotCDF(df, "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s")
+knitr::include_graphics("n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Figuren/cdf_TH3.png")
 ```
 
 ```{r hydroTDeurloo, fig.cap="Maandelijks gemiddelde en maximum van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Deurloo."}
