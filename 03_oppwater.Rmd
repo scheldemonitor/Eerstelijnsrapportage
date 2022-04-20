@@ -33,15 +33,16 @@ trendstations <- c("Schaar van Ouden Doel", "Hansweert geul", "Terneuzen boei 20
 "Vlissingen boei SSVH", "Walcheren 2 km uit de kust",
 "Walcheren 20 km uit de kust")
 
-frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_FysChem_opp_test_1998_2020.csv"
+# frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_FysChem_opp_test_1998_2020.csv"
 # frozendatapath <- "c:/Users/ronge_bb/R/Data/Data_FysChem_opp_test_1998_2020.csv"
+
+c
 
 ```
 
 ```{r downloadOppWaterdata, include = F}
 # Set year for use in the report
-
-df <- read_delim(frozendatapath, delim = ",", guess_max = 200000) #%>% select(-X1)
+df <- read_delim(fysChemOppDataPath, delim = ",", guess_max = 200000) #%>% select(-X1)
 
 df2 <- df %>% 
   filter(stationname %in% trendstations) %>% 
@@ -51,7 +52,7 @@ df2 <- df %>%
   mutate(across(value, remove_outliers)) %>%
   ungroup()
 
-rm(df)
+# rm(df)
 ```
 
 # Oppervlaktewater - Fysisch-chemische parameters {#fysisch-oppwater}
@@ -290,8 +291,14 @@ De resultaten laten heel duidelijk zien dat het station Schaar van Ouden Doel de
 ```{r fysischZuurstofMaand, fig.width=10, fig.cap="Maandelijkse mediaan voor zuurstofgehalte in mg/L in het oppervlaktewater van de Westerschelde en de monding."}
 #knitr::include_graphics("Figuren/Fysisch/Zuurstof_mg/maand.png")
 
-parname = "Zuurstof in % in oppervlaktewater"
-plotTrendsMaand(df2, parname, sf = F)
+parname = "Zuurstof in mg/l in oppervlaktewater"
+p <- plotTrendsMaand(df2, parname, sf = F)
+ggplotly(p) %>% 
+  layout(
+    legend = list(orientation = "h",   # show entries horizontally
+                  xanchor = "center",  # use center of legend as anchor
+                  x = 0.5, y = -0.05)             # put legend in center of x-axis
+)
 ```
 
 ## Chlorofyl-a {#chlorofyl}
@@ -736,7 +743,7 @@ knitr::kable(dt,
 ```{r fysischAmmonium, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het ammoniumgehalte in het oppervlaktewater van de Westerschelde en de monding. De y-as schaal verschilt per subgrafiek. "}
 
 parname = "Ammonium in mg/l uitgedrukt in stikstof / na filtratie in oppervlaktewater"
-plotTrends(df2, parname) + coord_cartesian(ylim = c(0,NA))
+plotTrends(df2, parname, trend = F) + coord_cartesian(ylim = c(0,NA))
 ```
 
 ```{r gemiddeldeammonium, fig.cap="Mediaan  ammoniumgehalte per station berekend op alle beschikbare data vanaf 1996.", out.height="300px", out.width = "100%"}

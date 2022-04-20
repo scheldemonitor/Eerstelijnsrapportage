@@ -13,10 +13,10 @@
 ```{r setupBodem, include=FALSE}
 knitr::opts_chunk$set(
 	echo = FALSE,
+	fig.align = "center",
 	message = FALSE,
 	warning = FALSE,
-	out.width = "85%",
-	fig.align='center'
+	out.width = "85%"
 )
 require(smwfs)
 require(tidyverse)
@@ -25,7 +25,7 @@ require(sf)
 require(leaflet)
 
 source("R/functions.R")
-
+source("R/refresh_data.R")
 dataJaar <- 2020
 
 trendstations <- c('Schaar van Ouden Doel',
@@ -42,15 +42,20 @@ trendstations <- c('Schaar van Ouden Doel',
 "Wielingen oost"
 )
 
-frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_FysChem_bodem_test_1998_2020.csv"
-# frozendatapath <- "c:/Users/ronge_bb/R/Data/Data_FysChem_bodem_test_1998_2020.csv"
-frozendatapath <- "Data_FysChem_bodem.csv"
+# frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_FysChem_bodem_test_1998_2020.csv"
+# # frozendatapath <- "c:/Users/ronge_bb/R/Data/Data_FysChem_bodem_test_1998_2020.csv"
+# frozendatapath <- "Data_FysChem_bodem.csv"
+# 
+refreshData = F
+fysChemBodemDataPath <- "Data_FysChem_bodem.csv"
+if(refreshData) refresh_fysischchemischbodem(startyear = 1998, endyear = dataJaar, filepath = fysChemBodemDataPath) 
+
 ```
 
 ```{r downloadBodem, include = F}
 # Set year for use in the report
 
-df <- read_delim(frozendatapath, delim = ",")
+df <- read_delim(fysChemBodemDataPath, delim = ",")
 
 df_clean <- df %>% 
   filter(stationname %in% trendstations) %>% 
@@ -212,31 +217,34 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 
 De PCB's in het bodemsediment worden zowel afzonderlijk als gesommeerd weergegeven. In Figuur \@ref(fig:PCB180Bodem) t/m Figuur \@ref(fig:PCB28Bodem) zijn de onderstaande PCB's afzonderlijk weergegeven. In Figuur \@ref(fig:SomPCBBodem) is de sommatie van de PCB's weergegeven. De verschillende PCB's die in deze rapportage zijn gerapporteerd en gesommeerd zijn terug te vinden in tabel \@ref(tab:PCBsoorten).
 
+In eerdere rapportages zijn de volgende PCB's afzonderlijk en als som gepresenteerd: 
+
+* 2,2',3,4,4',5,5'-heptachloorbifenyl (PCB180)
+* 2,2',3,4,4',5'-hexachloorbifenyl (PCB138)
+* 2,2',4,4',5,5'-hexachloorbifenyl (PCB153)
+* 2,2',4,5,5'-pentachloorbifenyl (PCB101)
+* 2,2',5,5'-tetrachloorbifenyl (PCB52)
+* 2,3',4,4',5-pentachloorbifenyl (PCB118)
+* 2,4,4'-trichloorbifenyl (PCB28)
+
+
 ```{r PCBsoorten}
 
+reportingPCBs <- c("(PCB180)", "(PCB138)", "(PCB153)", "(PCB101)",
+                   "(PCB52)", "(PCB118)", "(PCB28)")
+
 knitr::kable(df_clean %>% ungroup() %>% 
-               filter(grepl("PCB", parametername, ignore.case = T)) %>%
+               # filter(grepl("PCB", parametername, ignore.case = T)) %>%
+               filter(grepl(paste(reportingPCBs,collapse="|"), parametername)) %>%
                distinct(parametername) %>% unname(), 
              align = 'l',
-             caption = "Gerapporteerde PCB's in deze rapportage.")
+             caption = "Beschikbare PCB's van bovenstaande lijst in gegevens.")
 
 
 
 ```
 
-<!-- * 2,2',3,4,4',5,5'-heptachloorbifenyl (PCB180) -->
 
-<!-- * 2,2',3,4,4',5'-hexachloorbifenyl (PCB138) -->
-
-<!-- * 2,2',4,4',5,5'-hexachloorbifenyl (PCB153) -->
-
-<!-- * 2,2',4,5,5'-pentachloorbifenyl (PCB101) -->
-
-<!-- * 2,2',5,5'-tetrachloorbifenyl (PCB52) -->
-
-<!-- * 2,3',4,4',5-pentachloorbifenyl (PCB118) -->
-
-<!-- * 2,4,4'-trichloorbifenyl (PCB28) -->
 
 ```{r PCB180Bodem, fig.cap="PCB180 in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',3,4,4',5,5'-heptachloorbifenyl.png")
@@ -254,6 +262,8 @@ parname = "2,2',3,4,4',5'-Hexachloorbifenyl (PCB138) in ug/kg in de fractie < 63
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
+De gegevens voor PCB153 ontbreken. Deze worden mogelijk in een volgende rapportage weer aangevuld. 
+
 ```{r PCB153Bodem, fig.cap="PCB153 in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',4,4',5,5'-hexachloorbifenyl.png")
 
@@ -261,6 +271,9 @@ parname = "2,2',4,4',5,5'-Hexachloorbifenyl (PCB153) in ug/kg drooggewicht in se
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
+
+De gegevens voor PCB101 ontbreken. Deze worden mogelijk in een volgende rapportage weer aangevuld. 
+
 
 ```{r PCB101Bodem, fig.cap="PCB101 in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',4,5,5'-pentachloorbifenyl.png")
@@ -278,6 +291,8 @@ parname = "2,2',5,5'-Tetrachloorbifenyl (PCB52) in ug/kg in de fractie < 63 um d
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
+De gegevens voor PCB118 ontbreken. Deze worden mogelijk in een volgende rapportage weer aangevuld. 
+
 ```{r PCB118Bodem, fig.cap="PCB118 in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,3',4,4',5-pentachloorbifenyl.png")
 
@@ -291,12 +306,12 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 
 parname = "2,4,4'-Trichloorbifenyl (PCB28) in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 
-plotTrends(df_clean, parname, trend = F)
+plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
-De hoeveelheid PCB's neemt af in de richting van de Noordzee. Met name bij de oostelijke stations lijken de gehaltes af te nemen in de tijd.%, hoewel de gehaltes in 2016 wel hoger zijn dan in 2013. <!-- %CHECK THIS STATEMENT! -->
+De hoeveelheid PCB's neemt af in de richting van de Noordzee. Met name bij de oostelijke stations lijken de gehaltes af te nemen in de tijd. <!-- %CHECK THIS STATEMENT! -->
 
-```{r SomPCBBodem, fig.cap="Som van de PCB's in het bodemsediment in de Westerschelde"}
+```{r SomPCBBodem, fig.cap="Som van de PCB's in het bodemsediment in de Westerschelde. Hier is de som genomen van alle PCB's die beschikbaar zijn in de database. "}
 
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_SomPCBs.png")
 
@@ -312,7 +327,7 @@ df_clean %>% ungroup() %>%
 
 Tributyltin is de enige organotinverbinding die wordt gemeten in het bodemsediment. In Figuur \@ref(fig:tributyltinBodem) is de hoeveelheid tributyltin over de jaren weergegeven per station. De gehaltes in 2010, 2013 en 2016 zijn sterk lager dan die van 2001 en 2004. Ruimtelijk gezien zijn er grote variaties. <!-- %CHECK THIS STATEMENT! also, data seems to be missing -->
 
-```{r tributyltinBodem, fig.cap="Tributyltin in het bodemsediment in de Westerschelde"}
+```{r tributyltinBodem, fig.height=7, fig.cap="Tributyltin in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_tributyltin(kation).png")
 
 # df_clean %>% ungroup() %>% 
@@ -321,5 +336,36 @@ Tributyltin is de enige organotinverbinding die wordt gemeten in het bodemsedime
 
 parname = c("Tributyltin in ug/kg Standaard sediment in Bodem/Sediment", "Tributyltin in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment")
 
-plotTrendsWaterstand(df_clean, parname, locname = unique(df_clean$stationname)) + facet_wrap(~Station, ncol = 4)
+plotTrendsWaterstand(df_clean, parname, locname = unique(df_clean$stationname)) + facet_wrap(~Station, ncol = 4) + theme(legend.position = "bottom", legend.direction = 'vertical')
 ```
+
+## Beschikbare gegevens bodem
+
+De algemene beschikbaarheid van data over stoffen in de bodem is te vinden als overzicht per parameter in figuur \@ref(fig:dataParameterBodem), en als overzicht per station in figuur \@ref(fig:dataStationBodem). Voor bijzonderheden over individuele parameters per station, zie de desbetreffende paragrafen. 
+
+```{r dataParameterBodem, fig.height=14, fig.width=8, fig.cap="Overzicht van gemeten parameters door de jaren heen."}
+df_clean %>%
+  group_by(parametername) %>%
+  summarize(start = min(year(datetime)), eind = max(year(datetime))) %>% 
+  ungroup() %>% 
+  mutate(parametername = factor(parametername, levels = sort(.$parametername, decreasing = T))) %>%
+  pivot_longer(c(start, eind)) %>%
+  ggplot(aes(x = parametername, y = value)) +
+  geom_line() +
+  coord_flip()
+```
+
+
+
+```{r dataStationBodem, fig.height=4, fig.cap="Overzicht van gemeten stations door de jaren heen."}
+df_clean %>%
+  group_by(stationname) %>%
+  summarize(start = min(year(datetime)), eind = max(year(datetime))) %>% 
+  ungroup() %>% 
+  mutate(parametername = factor(stationname, levels = sort(.$stationname, decreasing = T))) %>%
+  pivot_longer(c(start, eind)) %>%
+  ggplot(aes(x = stationname, y = value)) +
+  geom_line() +
+  coord_flip()
+```
+

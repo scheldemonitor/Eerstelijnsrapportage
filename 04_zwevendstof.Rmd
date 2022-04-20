@@ -22,15 +22,20 @@ dataJaar <- 2020
 
 trendstations <- c("Schaar van Ouden Doel", "Vlissingen boei SSVH")
 
-frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_FysChem_zwevend_test_1998_2020.csv"
+# frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_FysChem_zwevend_test_1998_2020.csv"
 # frozendatapath <- "c:/Users/ronge_bb/R/Data/Data_FysChem_zwevend_test_1998_2020.csv"
-frozendatapath <- "Data_FysChem_zwevend.csv"
+
+
+refreshData = F
+fysChemZwevendDataPath <- "Data_FysChem_zwevend.csv"
+if(refreshData) refresh_fysischchemischzwevendstof(startyear = 1998, endyear = dataJaar, filepath = fysChemZwevendDataPath) 
+
 
 ```
 
 ```{r downloadZwevend, include = F}
 
-df_original <- read_delim(frozendatapath, delim = ",")
+df_original <- read_delim(fysChemZwevendDataPath, delim = ",")
 
 df <- df_original %>% 
   filter(stationname %in% trendstations) %>% 
@@ -96,7 +101,7 @@ knitr::kable(dt,
 #knitr::include_graphics("Figuren/Zwevend/Korrelgroottefractietot63um.png")
 
 # plotTrendsLimits(df, parname, trend = F)
-plotTrendsLimits(df, parname, trend = F) + ggtitle("test met aantallen metingen per jaar")
+plotTrendsLimits(df, parname, trend = F)
 ```
 
 ### Korrelgroottefractie tot 2 µm {#korrelgrootteverdeling-tot2}
