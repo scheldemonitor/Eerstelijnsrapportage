@@ -659,7 +659,7 @@ plotCDF <- function(df, parname) {
     dplyr::select(Station = stationname,
                   Value = value) %>%
     ggplot(aes(x=Value,color=Station)) + 
-    stat_ecdf(size=1) +
+    stat_ecdf(size=0.7) +
     theme_minimal() +
     xlab(parname) +
     ylab("F(x)") +
