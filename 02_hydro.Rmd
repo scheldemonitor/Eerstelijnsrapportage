@@ -34,8 +34,8 @@ trendstations <- c("Europlatform","Euro Platform","Vlakte van de Raan","Cadzand"
 frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_Hydro_1950_2020_new.csv"
 df <- read_delim(frozendatapath, delim = ",", guess_max = 200000) %>% 
   filter(stationname %in% trendstations) %>%
-  mutate(stationname = factor(stationname, levels = trendstations)) %>%
-  repair_limits() #%>%
+  mutate(stationname = factor(stationname, levels = trendstations)) #%>%
+  # repair_limits() #%>%
   # group_by(parametername, stationname) #%>%
   # mutate(across(value, remove_outliers))
 
