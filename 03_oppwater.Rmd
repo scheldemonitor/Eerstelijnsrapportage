@@ -33,10 +33,9 @@ trendstations <- c("Schaar van Ouden Doel", "Hansweert geul", "Terneuzen boei 20
 "Vlissingen boei SSVH", "Walcheren 2 km uit de kust",
 "Walcheren 20 km uit de kust")
 
-# frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_FysChem_opp_test_1998_2020.csv"
-# frozendatapath <- "c:/Users/ronge_bb/R/Data/Data_FysChem_opp_test_1998_2020.csv"
-
-c
+refreshData = F
+fysChemOppDataPath <- file.path("Data_FysChem_opp.csv")
+if(refreshData) fysChemOppDataPath(startyear = 1998, endyear = dataJaar, filepath = fysChemOppDataPath) 
 
 ```
 
@@ -63,7 +62,7 @@ Voor de bepaling van de fysisch-chemische parameters in het oppervlaktewater en 
 
 ## Informatie over de metingen {#oppInfoMetingen}
 
-De periodieke metingen worden uitgevoerd tijdens vaartochten. In totaal zijn er drie verschillende vaartochten waarbij telkens op vaste locaties in de Westerschelde monsters worden genomen van het oppervlaktewater, zie Figuur \@ref(fig:meetstationsOppervlakte). De frequentie van de vaartochten hangt af van de plaats en het seizoen. Het meetprotocol voor 2015 is terug te vinden in het meetplan MWTL 2015 @Bogaart-Scholte2012. Voor zover bekend is het meetprotocol in `r datajaar`` onveranderd ten opzichte van de jaren daarvoor. Schaar van Ouden Doel valt hierbij onder zoete wateren en wordt elke twee weken bemonsterd (26 metingen per jaar). In de zomermaanden (maart t/m september) wordt vaartocht 11 (Hansweert geulen, Vlissingen boei SSVH) twee keer per maand uitgevoerd en buiten deze periode en voor Terneuzen boei 20 eens per maand. Vaartocht 11 wordt altijd op eenzelfde tijdstip ten opzichte van hoogwater uitgevoerd en start één uur voor hoogwater in Vlissingen. Vaartocht 16 (Walcheren 2 en 20 km uit de kust) wordt maandelijks uitgevoerd en vindt plaats op willekeurige tijdstippen. Wanneer er van een de parameters geen waardes zijn ingewonnen bij deze stations is er getracht het aantal stations dat wordt gepresenteerd aan te vullen met of station Wielingen en/of Hoedekenskerke (zie Figuur \@ref(fig:meetstationsOppervlakte) voor de locaties).  
+De periodieke metingen worden uitgevoerd tijdens vaartochten. In totaal zijn er drie verschillende vaartochten waarbij telkens op vaste locaties in de Westerschelde monsters worden genomen van het oppervlaktewater, zie Figuur \@ref(fig:meetstationsOppervlakte). De frequentie van de vaartochten hangt af van de plaats en het seizoen. Het meetprotocol voor 2015 is terug te vinden in het meetplan MWTL 2015 @Bogaart-Scholte2012. Voor zover bekend is het meetprotocol in `r dataJaar` onveranderd ten opzichte van de jaren daarvoor. Schaar van Ouden Doel valt hierbij onder zoete wateren en wordt elke twee weken bemonsterd (26 metingen per jaar). In de zomermaanden (maart t/m september) wordt vaartocht 11 (Hansweert geulen, Vlissingen boei SSVH) twee keer per maand uitgevoerd en buiten deze periode en voor Terneuzen boei 20 eens per maand. Vaartocht 11 wordt altijd op eenzelfde tijdstip ten opzichte van hoogwater uitgevoerd en start één uur voor hoogwater in Vlissingen. Vaartocht 16 (Walcheren 2 en 20 km uit de kust) wordt maandelijks uitgevoerd en vindt plaats op willekeurige tijdstippen. Wanneer er van een de parameters geen waardes zijn ingewonnen bij deze stations is er getracht het aantal stations dat wordt gepresenteerd aan te vullen met of station Wielingen en/of Hoedekenskerke (zie Figuur \@ref(fig:meetstationsOppervlakte) voor de locaties).  
 
 ```{r meetstationsOppervlakte, fig.cap="Ligging van de meetstations voor het oppervlaktewater.", out.height="300px", out.width = "100%"}
 plotLocations(df2)

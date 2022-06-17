@@ -31,12 +31,12 @@ Voor de rapportage 2020 is daarom besloten om de LaTeX template over te zetten n
 
 Voor de 2021 rapportage wordt ook de code voor grafieken en tabellen overgezet naar R, zodat het aansluit bij de Scheldemonitor. Tegelijk wordt de berekening van indicatoren afgestemd met het Schelde in Beeld consortium, door het delen van code. De huidige werkwijze voor de rapportage bestaat uit:
 
-1) data download van Scheldemonitor met R script. Sommige data worden nog steeds door RWS direct aangeleverd omdat deze niet in de SM worden geladen (bijv fytoplankton)
-2) geen lokaal datamanagement voor data uit Scheldemonitor. (Mogelijk kan gedownloade data bewaard worden als een bevroren set voor latere referentie)
-3) Verwerking van data tot rapport met Rmarkdown. Dit combineert code met beschrijvende tekst. De uitvoer in dit geval is een website.
-4) Voor de verwerking van data zijn R functies gemaakt, gebaseerd op de eerdere Matlab, maar afgestemd met Schelde in Beeld. 
+1) data download van Scheldemonitor met R script. 
+2) geen lokaal datamanagement voor data uit Scheldemonitor. De gedownloade data worden wel als csv bestanden opgeslagen voor consistentie tijdens het maken van de rapportage.
+3) Verwerking van data tot rapport met Rmarkdown. Dit combineert code met beschrijvende tekst. De uitvoer in dit geval is een website. Ook kan er een pdf uitvoer gemaakt worden. 
+4) Voor de verwerking van data zijn R functies gemaakt, gebaseerd op de eerdere Matlab, verbeteringen zijn doorgevoerd in afstemming met RWS en Schelde in Beeld. 
 5) Rmarkdown documenten en functie codes worden beheerd onder versiebeheer op Github.
-5) Het rapport wordt gepubliceerd via de Scheldemonitor. 
+5) Het rapport wordt gepubliceerd via de Scheldemonitor Github omgeving. 
 
 
 ## Proces

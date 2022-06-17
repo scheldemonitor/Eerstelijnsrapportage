@@ -236,7 +236,7 @@ reportingPCBs <- c("(PCB180)", "(PCB138)", "(PCB153)", "(PCB101)",
 knitr::kable(df_clean %>% ungroup() %>% 
                # filter(grepl("PCB", parametername, ignore.case = T)) %>%
                filter(grepl(paste(reportingPCBs,collapse="|"), parametername)) %>%
-               distinct(parametername) %>% unname(), 
+               distinct(parametername) %>% unlist() %>% unname(), 
              align = 'l',
              caption = "Beschikbare PCB's van bovenstaande lijst in gegevens.")
 
