@@ -1,8 +1,9 @@
 ---
-title: "Concept Eerstelijnsrapportage Westerschelde (IN ONTWIKKELING)"
+title: "Concept Eerstelijnsrapportage Westerschelde"
 subtitle: 2020
 author: "Deltares"
 date: '`r Sys.Date()`'
+site: bookdown::bookdown_site
 documentclass: book
 # bibliography: 
 biblio-style: apalike
@@ -22,7 +23,7 @@ De informatie op deze website is op dit moment onder constructie en bedoeld voor
 
 This website is a test version. Nothing from this website may be used.
 
-Deze eerstelijnsrapportage is gemaakt door Deltares in opdracht van Rijkswaterstaat en bevat data t/m `r dataJaar`. De basis voor dit rapport is gemaakt door dr. F.M. Kleissen. Het verwerken, analyseren en toevoegen van de data uit `r dataJaar` in dit rapport is gedaan door dr. W. Stolte en B. van Rongen.
+Deze eerstelijnsrapportage is gemaakt door Deltares in opdracht van Rijkswaterstaat en bevat gegevens t/m `r dataJaar`. De basis voor dit rapport is gemaakt door dr. F.M. Kleissen. Het verwerken, analyseren en toevoegen van de data uit `r dataJaar` in dit rapport is gedaan door dr. W. Stolte en B. van Rongen.
 
 ## Samenvatting
 
@@ -32,7 +33,6 @@ Deze rapportage bevat de beschikbare hydrodynamische, fysisch-chemische en biolo
 
 * Concept versie 28-04-2021: bevat data t/m `r dataJaar`, missend in deze versie is:
   + Golven: locatie Cadzand, 
-  + Bodem: heel hoofdstuk en data, 
   + Biota: alle data voor `r dataJaar`, figuren opgenomen met data t/m `r dataJaar-1`
   + Bijlage: meetdichtheid tabellen hebben nog niet de `r dataJaar` gegevens
   
