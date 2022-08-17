@@ -1,15 +1,18 @@
 
 delete_merged_file: true
 new_session: true
+before_chapter_script: _common.R
 rmd_files: [
   "index.Rmd",
-  #"werkwijze.Rmd",
   "01_inleiding.Rmd",
   "02_hydro.Rmd",
   "03_oppwater.Rmd",
   "04_zwevendstof.Rmd",
   "05_bodem.Rmd",
-  "07_fytoplankton.Rmd" 
+  "06_Biota.Rmd",
+  "07_fytoplankton.Rmd",
+  "08_bijlage.Rmd",
+  "werkwijze.Rmd"
 ]
 
 language:
