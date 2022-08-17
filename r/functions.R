@@ -2,6 +2,7 @@
 require(tidyverse)
 require(viridis)
 require(leaflet)
+require(lubridate)
 
 # nog te maken functies
 # filternutriendata
@@ -11,15 +12,19 @@ require(leaflet)
 #   - 
 
 ###=== plot styles ==============================
+
+# backgroundfill = "#ebf5ff"  # lichtblauw uit Deltares palette, werd minder mooi gevonden.
+backgroundfill = "white"
+
 trendplotstyle =   theme(
   text = element_text(color = "#2E89BF"),
   line = element_line(color = "#2E89BF"),
-  plot.background = element_rect(fill = "#ebf5ff", color = "transparent"),
-  legend.background = element_rect(fill = "#ebf5ff", color = "transparent"),
-  panel.background = element_rect(fill = "#ebf5ff"),
+  plot.background = element_rect(fill = backgroundfill, color = "transparent"),
+  legend.background = element_rect(fill = backgroundfill, color = "transparent"),
+  panel.background = element_rect(fill = backgroundfill),
   panel.grid.major = element_line(color = "#2E89BF", size = 0.1),
   panel.grid.minor = element_line(color = "#2E89BF", size = 0.1),
-  strip.background = element_rect(fill = "#ebf5ff", color = "white"),
+  strip.background = element_rect(fill = backgroundfill, color = "white"),
   strip.text = element_text(color = "#2E89BF", face = "bold"),
   axis.text = element_text(color = "#2E89BF")
 )
@@ -875,3 +880,57 @@ plotTrendsBiota <- function(df, parname, sf = F, trend = T, beginjaar = 1998, ei
     trendplotstyle
   return(p)
 }
+
+
+plotTrendsBiota2 <- function(df, statname, cat, sciname, sf = F, trend = T) {
+  
+  if(sf) df <- df %>% st_drop_geometry()
+  
+  anydata <- df %>% filter(
+    stationname %in% statname,
+    category %in% cat, 
+    scientificname == sciname
+  ) %>% nrow()
+  if(anydata == 0){
+    return(paste("Er zijn geen data gevonden voor", cat))
+  } else
+    
+    p <- df %>%
+    # separate(originalvalue, c("limiet", "originalvalue"), " ") %>%
+    dplyr::filter(
+      stationname %in% statname,
+      category %in% cat, 
+      scientificname == sciname
+    ) %>%
+    dplyr::mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
+    dplyr::group_by(parametername, year) %>% 
+    # dplyr::summarize(
+    #   `n(<)` = ifelse(sum(limiet == "<") == 0 , NA, sum(limiet == "<")), 
+    #   `n(=)` = ifelse(sum(!limiet %in% c("<", ">")) == 0 , NA, sum(!limiet %in% c("<", ">"))),
+    #   `n(>)` = ifelse(sum(limiet == ">") == 0 , NA, sum(limiet == ">")), 
+    #   median = median(value, na.rm = T), `10-perc` = quantile(value, 0.1, na.rm = T), `90-perc` = quantile(value, 0.9, na.rm = T)
+    # ) %>%
+    dplyr::select(Parameter = parametername,
+                  Jaar = year,
+                  gemiddelde = value,
+                  # `90-perc`,
+                  # `10-perc`,
+                  # `n(=)`,
+                  # `n(<)`,
+                  # `n(>)`
+    ) %>%
+    # dplyr::arrange(-Mediaan) %>%
+    ggplot(aes(Jaar, gemiddelde)) +
+    # geom_ribbon(aes(ymin = `10-perc`, ymax = `90-perc`), fill = "lightgrey") +
+    geom_line() + 
+    geom_point(aes(), fill = "white", shape = 21) 
+  
+  if(trend)    p <- p + geom_smooth(method = "lm", fill = "blue", alpha = 0.2)
+  p <- p + facet_wrap(~Parameter, ncol = 2, scales = "free_y") +
+    # ylab() +
+    labs(subtitle = paste(statname, sciname, sep = ", ")) +
+    coord_cartesian(ylim = c(0,NA)) +
+    trendplotstyle
+  return(p)
+}
+
