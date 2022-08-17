@@ -81,7 +81,7 @@ plotLocations(df_clean)
 
 In Figuur \@ref(fig:arseenBodem) t/m Figuur \@ref(fig:zinkBodem) zijn de metalen in het bodemsediment in de Westerschelde weergegeven. Op de horizontale as zijn de stations gerangschikt van west (links) naar oost (rechts). Globaal gezien laten de meeste metalen laten op de meeste stations een afnemende trend in de tijd zien, die voor sommige metalen en stations sterker zijn dan voor andere. Daarnaast is voor sommige metalen (cadmium, koper, kwik en zink) te zien dat de hoeveelheid metaal in de richting van de Noordzee afneemt.
 
-```{r arseenBodem, fig.height = 12, fig.cap="Arseen in het bodemsediment in de Westerschelde"}
+```{r arseenBodem, fig.cap="Arseen in het bodemsediment in de Westerschelde"}
 #knitr::include_graphics("Figuren/Fysisch/Bodem/bar_arseen.png")
 
 parname = "Arseen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
@@ -327,7 +327,7 @@ df_clean %>% ungroup() %>%
 
 Tributyltin is de enige organotinverbinding die wordt gemeten in het bodemsediment. In Figuur \@ref(fig:tributyltinBodem) is de hoeveelheid tributyltin over de jaren weergegeven per station. De gehaltes in 2010, 2013 en 2016 zijn sterk lager dan die van 2001 en 2004. Ruimtelijk gezien zijn er grote variaties. <!-- %CHECK THIS STATEMENT! also, data seems to be missing -->
 
-```{r tributyltinBodem, fig.height=7, fig.cap="Tributyltin in het bodemsediment in de Westerschelde"}
+```{r tributyltinBodem, fig.cap="Tributyltin in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_tributyltin(kation).png")
 
 # df_clean %>% ungroup() %>% 
