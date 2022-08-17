@@ -9,7 +9,7 @@ bookdown::gitbook:
   includes:
     before_body: navbar/navbar.html
     in_header: clickandzoom.html
-  css: ["navbar/navbar.css", "style/deltares.css"]
+  css: ["navbar/navbar.css", "style/deltares.css", "draft.css"]
 
 bookdown::bs4_book:
   # theme:
@@ -20,3 +20,11 @@ bookdown::bs4_book:
     before_body: navbar/navbar.html
     in_header: clickandzoom.html
   css: ["navbar/navbar.css", "style/deltares.css"]
+
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+  template: deltares-report-template.tex
+  latex_engine: pdflatex
+  # citation_package: natbib
+  keep_tex: yes
