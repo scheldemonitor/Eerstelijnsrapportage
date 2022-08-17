@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 ```{r}
 # Load function to write Latex table structure to R 
-source("Rscripts/tex2Rtable.R")
+source("R/tex2Rtable.R")
 
 # Set year for use in the report
 dataJaar <- 2019
