@@ -120,7 +120,7 @@ refresh_fysischchemischbiota <- function(){
     delete.NULLs() %>% 
     bind_rows()
   
-  df <- df[!df$dataprovider == "8", ] # remove metingen van scan-tochten
+  # df <- df[!df$dataprovider == "8", ] # remove metingen van scan-tochten
   write.csv(df, file.path(datapath, 'Data_FysChem_biota.csv'))
   
 }
