@@ -7,12 +7,10 @@ site: bookdown::bookdown_site
 documentclass: book
 bibliography: bib/library.bib
 biblio-style: apalike
-csl: chicago-fullnote-bibliography.csl
-
-
 link-citations: yes
-always_allow_html: true
+always_allow_html: yes
 ---
+
 # Voorwoord
 
 ```{r, message=FALSE, warning=FALSE, include=FALSE}
@@ -25,7 +23,7 @@ dataJaar <- 2020
 
 De informatie op deze website is op dit moment onder constructie en bedoeld voor een beperkt publiek. Niets van deze website mag worden gebruikt door derden.
 
-This website is a test version. Nothing from this website may be used.
+This website is under construction. Nothing from this website may be used.
 
 Deze eerstelijnsrapportage is gemaakt door Deltares in opdracht van Rijkswaterstaat en bevat gegevens t/m `r dataJaar`. De basis voor dit rapport is gemaakt door dr. F.M. Kleissen. Het verwerken, analyseren en toevoegen van de data uit `r dataJaar` in dit rapport is gedaan door dr. W. Stolte en B. van Rongen.
 

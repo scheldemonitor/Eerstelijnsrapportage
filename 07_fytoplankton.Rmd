@@ -1,12 +1,7 @@
 
 ```{r setupFytoplankton, include=FALSE}
+
 knitr::opts_chunk$set(
-	echo = FALSE,
-	message = FALSE,
-	warning = FALSE,
-	out.width = "85%",
-	fig.align='center',
-	fig.width = 8,
 	fig.height = 5
 )
 source("R/functions.R")
@@ -20,6 +15,7 @@ fytoplankton <- read_delim("n:/Projects/1209000/1209394/C. Report - advise/Eerst
 ## FIX STATIONNAMES (ZIJN NU SOMS CODES, SOMS NAMEN). TERUGMELDEN AAN VLIZ EN RWS !!!!
 
 fytoplankton <- fytoplankton %>%
+  filter(dataprovider == "RWS - Rijkswaterstaat") %>%
   mutate(stationname = case_when(
     grepl(pattern = "schaar", stationname, ignore.case = T) ~ "Schaar van Ouden Doel",
     grepl(pattern = "hans", stationname, ignore.case = T) ~ "Hansweert Geul",
@@ -27,6 +23,8 @@ fytoplankton <- fytoplankton %>%
     grepl(pattern = "walcheren 2 ", stationname, ignore.case = T) | stationname == "WALCRN2" ~ "Walcheren 2 km uit de kust",
     grepl(pattern = "walcheren 20", stationname, ignore.case = T) | stationname == "WALCRN20" ~ "Walcheren 20 km uit de kust"
   ))
+
+# fytoplankton %>% group_by(latitude, longitude, stationname) %>% summarize(n = n())
 
 specieslist <- readxl::read_excel(
   "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/generic/Fytoplankton/Specieslist_zelfuitgebreid_jh.xlsx",
@@ -57,8 +55,6 @@ df.fyt.groep <- df.fyt %>%
     parametername = groep,
     value
   ) %>% ungroup()
-
-dataJaar <- 2020
 ```
 
 # Fytoplankton {#fytoplankton}

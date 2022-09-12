@@ -22,9 +22,9 @@ bookdown::bs4_book:
   css: ["navbar/navbar.css", "style/deltares.css"]
 
 bookdown::pdf_book:
+  keep_tex: true
   includes:
     in_header: preamble.tex
   template: deltares-report-template.tex
   latex_engine: pdflatex
-  # citation_package: natbib
-  keep_tex: yes
+  # citation_package: natbib # niet in combinatie met Deltares-template

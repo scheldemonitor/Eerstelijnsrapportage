@@ -1,19 +1,15 @@
 
 
 ```{r setupZwevend, include=FALSE}
+
 knitr::opts_chunk$set(
-	echo = FALSE,
-	message = FALSE,
-	warning = FALSE,
-	fig.height = 4,
-	out.width = "85%",
-	fig.align='center'
+	fig.height = 3
 )
+
 require(smwfs)
 require(tidyverse)
 require(lubridate)
 require(sf)
-require(leaflet)
 
 source("R/functions.R")
 
@@ -22,12 +18,10 @@ dataJaar <- 2020
 
 trendstations <- c("Schaar van Ouden Doel", "Vlissingen boei SSVH")
 
-# frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_FysChem_zwevend_test_1998_2020.csv"
-# frozendatapath <- "c:/Users/ronge_bb/R/Data/Data_FysChem_zwevend_test_1998_2020.csv"
-
-
 refreshData = F
+baseDir <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/"
 fysChemZwevendDataPath <- "Data_FysChem_zwevend.csv"
+fysChemZwevendDataPath <- file.path(baseDir, "Data_FysChem_zwevend.csv")
 if(refreshData) refresh_fysischchemischzwevendstof(startyear = 1998, endyear = dataJaar, filepath = fysChemZwevendDataPath) 
 
 
@@ -59,16 +53,76 @@ df <- df_original %>%
 
 # Zwevend stof - Fysisch-chemische parameters {#zwevend-stof}
 
-Voor de bepaling van de fysisch-chemische parameters in het oppervlaktewater en in zwevend stof vinden in het kader van MWTL vaartochten plaats, waarbij op vaste punten monsters worden genomen op ca. 1,5 m onder het wateroppervlak. In dit hoofdstuk zijn de metingen in zwevend stof opgenomen. In het algemeen geldt dat sinds 1998 de waardes van de verontreinigingen zijn afgenomen. Er zijn indicaties dat deze afnemende trend minder lijkt te worden en dat de concentraties lijken zich te stabiliseren en de data van 2018 passen in dit beeld.
+Voor de bepaling van de fysisch-chemische parameters in het oppervlaktewater en in zwevend stof vinden in het kader van MWTL vaartochten plaats, waarbij op vaste punten monsters worden genomen op ca. 1,5 m onder het wateroppervlak. In dit hoofdstuk zijn de metingen in zwevend stof opgenomen. In het algemeen geldt dat sinds 1998 de waardes van de verontreinigingen zijn afgenomen. Het lijkt erop dat de concentraties zich de laatste jaren stabiliseren.
 
 ## Informatie over de metingen {#zwevend-info-metingen}
 
-Voor de bepaling van de fysisch-chemische parameters in het zwevend stof vinden in het kader van MWTL maandelijkse vaartochten (tochtnummer 11) plaats, die de locaties Schaar van Ouden Doel en Vlissingen boei SSVH bemonsteren. Bij Schaar van Ouden Doel wordt maandelijks gemeten en bij Vlissingen eens per kwartaal. De monsters worden genomen met een doorstroomcentrifuge, waarbij een bepaalde hoeveelheid slib moet worden verzameld en afgeleverd aan het laboratorium voor analyse. In verband met het getij wordt ook altijd de saliniteit gemeten, zie Paragraaf \@ref(saliniteit). De stations zijn gepresenteerd in Figuur \@ref(fig:meetstationsZwevend) en zijn steeds gerangschikt in stroomafwaartse richting.
+Voor de bepaling van de fysisch-chemische parameters in het zwevend stof vinden in het kader van MWTL maandelijkse vaartochten (tochtnummer 11) plaats, die de locaties Schaar van Ouden Doel en Vlissingen boei SSVH bemonsteren. De overige stations worden sinds 2007 niet meer gemonsterd en worden daarom niet meegenomen in dit rapport. Bij Schaar van Ouden Doel wordt maandelijks gemeten en bij Vlissingen eens per kwartaal. De monsters worden genomen met een doorstroomcentrifuge, waarbij een bepaalde hoeveelheid slib moet worden verzameld en afgeleverd aan het laboratorium voor analyse. In verband met het getij wordt ook altijd de saliniteit gemeten, zie Paragraaf \@ref(saliniteit). De stations zijn gepresenteerd in Figuur \@ref(fig:meetstationsZwevend) en zijn steeds gerangschikt in stroomafwaartse richting.
 
 ```{r meetstationsZwevend, fig.cap="Ligging van de meetstations voor het zwevende stof"}
 # knitr::include_graphics("Figuren/Meetstations_zwevend.png")
 plotLocations(df)
 ```
+
+
+```{r, fig.height=12, fig.width=5}
+# statTableParams <- function(df, parnames, statname, rounding, meanorder = "decreasing", sf = F) {
+#   
+#   if(sf) df <- df %>% st_drop_geometry()
+#   
+#   anydata <- df %>% filter(parametername %in% parnames & stationname == statname) %>% nrow()
+#   if(anydata == 0){
+#     return(paste("Er zijn geen data gevonden voor", parnames))
+#   }
+#   
+  # if(anydata > 0){
+  # 
+    stats <- df %>%
+      filter(stationname == "Vlissingen boei SSVH") %>%
+      mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
+      filter(year >= 2000) %>%
+      # group_by(stationname, year, month) %>% 
+      # summarize(monthlymean = mean(value)) %>%
+      group_by(parametername, stationname, year) %>% 
+      summarize(yearlymedian = median(value, na.rm = T), .groups = 'drop') %>%
+  drop_na(yearlymedian) %>%
+      drop_na(yearlymedian) %>%
+      group_by(parametername, stationname) %>%
+      do(broom::tidy(lm(yearlymedian ~ year, data = .))) %>% 
+      filter(term == "year") 
+    
+   p <- df %>% 
+      filter(stationname == "Vlissingen boei SSVH") %>% 
+      mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
+      filter(year >= 2000) %>%
+      group_by(parametername, stationname) %>% 
+      summarize(
+        median = median(value, na.rm = T), 
+        `10-perc` = quantile(value, 0.1, na.rm = T), 
+        `90-perc` = quantile(value, 0.9, na.rm = T), .groups = 'drop') %>%
+      left_join(stats)  %>%
+      mutate(across(where(is.numeric), round, 3)) %>%
+      mutate(across(where(is.numeric), signif, rounding)) %>%
+      select(Parameter = parametername,
+             Mediaan = median,
+             `90-perc`,
+             `10-perc`,
+             Trend = estimate,
+             p = p.value) %>% 
+      mutate(showTrend = as.factor(ifelse(p <= 0.05, sign(Trend), NA))) %>%
+      ggplot(aes(Parameter, "trend")) +
+      geom_tile(aes(fill = showTrend)) +
+      coord_flip() +
+      scale_fill_manual(values = c("green", "white", "red")) +
+     theme(axis.text.y = element_text(size = 7))
+      scale_fill_gradient2(low = "green", high = "red", midpoint = 0, mid = "white", na.value = "grey")
+    
+      p
+#   }
+# }
+```
+
+
 
 De meetdata worden gepresenteerd door middel van medianen, en 10- en 90-percentielen voor elk jaar dat gemeten is. Voor sommige parameters zijn deze waarden ook per maand of seizoen weergegeven. Als er slechts een meting per maand beschikbaar is (of minder), zijn deze waardes gepresenteerd. Bij het berekenen van percentielen over parameters over een bepaalde periode is de datadichtheid van belang. Een overzicht van het aantal metingen per parameter, per station, per jaar is daarom opgenomen in Bijlage \@ref(BijlageB-meetdichtheid-zwevend). Ook is in de figuren aangegeven over hoeveel meetwaarden de statistiek berekend is in de vorm van de grootte van de punten.
 
@@ -84,17 +138,16 @@ Figuur \@ref(fig:zwevendKorrelgroottefractietot63um) toont de jaarmediaan van de
 
 De korrelgroottefractie kleiner dan 63 $\mu$m ligt rond 60\% bij Vlissingen boei SSVH en rond de 70\% bij Schaar van Ouden Doel. Er is een afnemende trend bij Schaar van Ouden Doel, en een oplopende trend bij Vlissingen.
 
+(ref:zwevendKorrelgroottefractietot63umTabLabel) Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van korrelgrootte tot 63 $\mu$m (%) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.
+
 ```{r zwevendKorrelgroottefractietot63umTab}
-# dt <- tex2dt("Figuren/Zwevend/Korrelgroottefractietot63um_meanvalues.tex")
-# knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum"),
-#              caption = "Waardes voor de korrelgroottefractie in \\% tot 63 $\\mu$m voor 2 stations.")
 
 parname = "Korrelgroottefractie tot 63 um in % drooggewicht in zwevend stof"
 rounding = 3
 dt <- statTable(df, parname, rounding)
 knitr::kable(dt, 
-             align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van korrelgrootte tot 63 $\\mu$m (%) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             # align = 'c',
+             caption = '(ref:zwevendKorrelgroottefractietot63umTabLabel)')
 ```
 
 ```{r zwevendKorrelgroottefractietot63um, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van de korrelgroottefractie tot 63$\\mu$m voor 2 stations. De grootte van de symbolen geven het aantal valide meetwaarden per jaar aan."}
@@ -120,7 +173,7 @@ rounding = 3
 dt <- statTable(df, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
-             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van korrelgrootte tot 2 $\\mu$m (%) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van korrelgrootte tot 2 $\\mu$m (\\%) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 ```{r zwevendKorrelgroottefractietot2um, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van de korrelgroottefractie tot 2$\\mu$m voor beide stations"}
@@ -131,25 +184,128 @@ plotTrendsLimits(df, parname, trend = F)
 
 ## Metalen {#zwevend-metalen}
 
-In deze paragraaf presenteren we de volgende metalen gedetecteerd in zwevende stof. 
+In deze paragraaf presenteren we de volgende metalen gedetecteerd in zwevende stof (figuur \@ref(fig:zwevendMetalen)). 
 
-* Arseen (As, Figuur \@ref(fig:zwevendArseen))
-* Cadmium (Cd Figuur \@ref(fig:zwevendCadmium))
-* Chroom (Cr, Figuur \@ref(fig:zwevendChroom))
-* Kobalt (Co,  Figuur \@ref(fig:zwevendKobalt))
-* Koper (Cu,  Figuur \@ref(fig:zwevendKoper))
-* Kwik (Hg,  Figuur \@ref(fig:zwevendKwik))
-* Lood (Pb,  Figuur \@ref(fig:zwevendLood))
-* Vanadium (V,  Figuur \@ref(fig:zwevendVanadium))
-* Zink (Zn,  Figuur \@ref(fig:zwevendZink))
+* Arseen (As)
+* Cadmium (Cd)
+* Chroom (Cr)
+* Kobalt (Co)
+* Koper (Cu)
+* Kwik (Hg)
+* Lood (Pb)
+* Vanadium (V)
+* Zink (Zn)
+
+```{r zwevendMetalen, fig.height=10, fig.cap="Trends voor alle hier behandelde metalen in mg/kg drooggewicht in zwevend stof."}
+parname <- c(
+  "Arseen in mg/kg drooggewicht in zwevend stof",
+  "Cadmium in mg/kg drooggewicht in zwevend stof",
+  "Chroom in mg/kg drooggewicht in zwevend stof",
+  "Kobalt in mg/kg drooggewicht in zwevend stof",
+    "Koper in mg/kg drooggewicht in zwevend stof",
+    "Kwik in mg/kg drooggewicht in zwevend stof",
+    "Lood in mg/kg drooggewicht in zwevend stof",
+    "Vanadium in mg/kg drooggewicht in zwevend stof",
+    "Zink in mg/kg drooggewicht in zwevend stof"
+)
+plotTrendsLimits2(df, 
+  parname = parname
+)
+```
+
+```{r zwevendMetalenTab}
+
+  stats <- df %>%
+      filter(parametername %in% parname & stationname == trendstations[1]) %>%
+      mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
+      filter(year >= 2000) %>%
+      # group_by(stationname, year, month) %>% 
+      # summarize(monthlymean = mean(value)) %>%
+      group_by(parametername, stationname, year) %>% 
+      summarize(yearlymedian = median(value)) %>%
+      drop_na(yearlymedian) %>%
+      group_by(parametername, stationname) %>%
+      do(broom::tidy(sen(yearlymedian ~ year, data = .))) %>% 
+      filter(term == "year") 
+    
+    t1 <- df %>% 
+      filter(parametername %in% parname & stationname == trendstations[1]) %>%
+      mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
+      filter(year >= 2000) %>%
+      group_by(parametername, stationname) %>% 
+      summarize(
+        median = median(value, na.rm = T), 
+        `10-perc` = quantile(value, 0.1, na.rm = T), 
+        `90-perc` = quantile(value, 0.9, na.rm = T)) %>%
+      left_join(stats)  %>%
+      mutate(across(where(is.numeric), round, 2)) %>%
+      mutate(across(where(is.numeric), signif, rounding)) %>%
+      mutate(parametername = str_replace(parametername, " in mg/kg drooggewicht in zwevend stof", "")) %>%
+      select(Parameter = parametername,
+             Mediaan = median,
+             `90-perc`,
+             `10-perc`,
+             Trend = estimate,
+             p = p.value) 
+
+   stats <- df %>%
+      filter(parametername %in% parname & stationname == trendstations[2]) %>%
+      mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
+      filter(year >= 2000) %>%
+      # group_by(stationname, year, month) %>% 
+      # summarize(monthlymean = mean(value)) %>%
+      group_by(parametername, stationname, year) %>% 
+      summarize(yearlymedian = median(value)) %>%
+      drop_na(yearlymedian) %>%
+      group_by(parametername, stationname) %>%
+      do(broom::tidy(sen(yearlymedian ~ year, data = .))) %>% 
+      filter(term == "year") 
+    
+    t2 <- df %>% 
+      filter(parametername %in% parname & stationname == trendstations[2]) %>%
+      mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
+      filter(year >= 2000) %>%
+      group_by(parametername, stationname) %>% 
+      summarize(
+        median = median(value, na.rm = T), 
+        `10-perc` = quantile(value, 0.1, na.rm = T), 
+        `90-perc` = quantile(value, 0.9, na.rm = T)) %>%
+      left_join(stats)  %>%
+      mutate(across(where(is.numeric), round, 2)) %>%
+      mutate(across(where(is.numeric), signif, rounding)) %>%
+    mutate(parametername = str_replace(parametername, " in mg/kg drooggewicht in zwevend stof", "")) %>%
+      select(Parameter = parametername,
+             Mediaan = median,
+             `90-perc`,
+             `10-perc`,
+             Trend = estimate,
+             p = p.value) 
+
+
+    knitr::kables(
+      list(
+        knitr::kable(t1),
+        knitr::kable(SvOD, align = "l", col.names = NULL),
+        knitr::kable(Vlissingen),
+        knitr::kable(trendstations[2], align = "l", col.names = NULL)
+      ), caption = 'Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde metalen in drooggewicht (mg/kg) van het zwevende stof voor station Schaar van Ouden Doel (bovenste tabel) en Vlissingen boei SSVH (onderste tabel) berekend op alle beschikbare data vanaf 2000'
+    )
+
+
+
+```
+
+
+
 
 ### Arseen {#zwevend-arseen}
 
-Figuur \@ref(fig:zwevendArseen) toont de jaarmediaan arseen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiel waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendArseenTab) de mediaan, 10- en 90-percentiele waardes per station weergegeven. 
+Figuur \@ref(fig:zwevendMetalen) toont de jaarmediaan arseen per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiel waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendMetalenTab) de mediaan, 10- en 90-percentiele waardes per station weergegeven. 
 
 De concentraties arseen in zwevende stof nemen iets af in stroomafwaartse richting. Bij Schaar van Ouden Doel is de mediane waarde 28 mg/kg. Sinds 2011 nemen de waarden hier af. Over de gehele meetperiode is de trend niet significant. Bij Vlissingen boei SSVH is de mediaan lager (17 mg/kg), en er is een licht dalende trend (-0,14 mg/kg per jaar) in de periode 2000-2012 die  statistisch significant is.
 
-```{r zwevendArseenTab}
+
+```{r zwevendArseenTab, eval=F}
 # dt <- tex2dt("Figuren/Zwevend/Arseen_meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
 #              caption = "Waardes voor Arseen in mg/kg voor beide stations.")
@@ -162,7 +318,7 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van arseen (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendArseen, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Arseen voor beide stations."}
+```{r zwevendArseen, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Arseen voor beide stations.", eval=F}
 #knitr::include_graphics("Figuren/Zwevend/Arseen.png")
 
 plotTrendsLimits(df, parname)
@@ -170,11 +326,11 @@ plotTrendsLimits(df, parname)
 
 ### Cadmium {#zwevend-cadmium}
 
-Figuur \@ref(fig:zwevendCadmium) toont het jaarmediane Cadmiumgehalte per station voor de periode vanaf 1997 t/m `r dataJaar`, samen met de 10- en 90-percentiel gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendCadmiumTab) zijn de mediane, 10- en 90-percentiele waardes per station weergegeven. 
+Figuur \@ref(fig:zwevendMetalen) toont het jaarmediane Cadmiumgehalte per station voor de periode vanaf 1997 t/m `r dataJaar`, samen met de 10- en 90-percentiel gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendMetalenTab) zijn de mediane, 10- en 90-percentiele waardes per station weergegeven. 
 
 De concentraties cadmium in zwevende stof nemen sterk af in stroomafwaartse richting (factor 7 tussen de twee stations). Bij Schaar van Ouden Doel is er een dalende trend van 0,12 mg/kg per jaar aanwezig die statistisch significant is. De waardes bij Vlissingen nemen ook significant af, maar met een lagere snelheid (0.008 mg/kg per jaar).
 
-```{r zwevendCadmiumTab}
+```{r zwevendCadmiumTab, eval=F}
 # dt <- tex2dt("Figuren/Zwevend/Cadmium_meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
 #              caption = "Waardes voor Cadmium in mg/kg voor beide stations.")
@@ -188,7 +344,8 @@ knitr::kable(dt,
 ```
 
 
-```{r zwevendCadmium, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Cadmium voor beide stations."}
+
+```{r zwevendCadmium, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Cadmium voor beide stations.", eval=F}
 #knitr::include_graphics("Figuren/Zwevend/Cadmium.png")
 
 plotTrendsLimits(df, parname)
@@ -196,11 +353,11 @@ plotTrendsLimits(df, parname)
 
 ### Chroom {#zwevend-chroom}
 
-Figuur \@ref(fig:zwevendChroom) toont het jaarmediane chroomgehalte per station voor de periode vanaf 1998 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendChroomTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. 
+Figuur \@ref(fig:zwevendMetalen) toont het jaarmediane chroomgehalte per station voor de periode vanaf 1998 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendMetalenTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. 
 
 De concentraties chroom in zwevende stof nemen af in stroomafwaartse richting. Bij Schaar van Ouden Doel neem na een periode van gelijke concentratie (2005-2014) weer verder af. Over de hele periode is er een significante afname van 1,6 mg/kg per jaar. De situatie bij Vlissingen boei SSVH toont voor de periode 1996-2011 een stabiele situatie, maar sinds 2012 liggen de waarden een stuk lager. Over de gehele dataset neemt het hoeveelheid chroom in zwevende stof af met 1,6 mg/kg per jaar. Een trend die statistisch significant is.
 
-```{r zwevendChroomTab}
+```{r zwevendChroomTab, eval=F}
 # dt <- tex2dt("Figuren/Zwevend/Chroom_meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
 #              caption = "Waardes voor Chroom in mg/kg voor beide stations.")
@@ -213,7 +370,7 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van chroom (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendChroom, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Chroom voor beide stations."}
+```{r zwevendChroom, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Chroom voor beide stations.", eval=F}
 #knitr::include_graphics("Figuren/Zwevend/Chroom.png")
 
 plotTrendsLimits(df, parname)
@@ -221,11 +378,11 @@ plotTrendsLimits(df, parname)
 
 ### Kobalt {#zwevend-kobalt}
 
-Figuur \@ref(fig:zwevendKobalt) toont de jaarmediane waarde voor kobalt per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendKobaltTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. 
+Figuur \@ref(fig:zwevendMetalen) toont de jaarmediane waarde voor kobalt per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendMetalenTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. 
 
 De concentraties kobalt in zwevende stof nemen af in stroomafwaartse richting.  Bij Vlissingen is het gehalte 8 mg/kg, en is een significante afname van 0,07 mg/kg te zien. De kobaltconcentraties nemen af in de tijd, echter wel met lage significantie. Bij Schaar van Ouden Doel is er geen significante trend waarneembaar en ligt het gehalte op ongeveer 2 keer zo veel.
 
-```{r zwevendKobaltTab}
+```{r zwevendKobaltTab, eval=F}
 # dt <- tex2dt("Figuren/Zwevend/Kobalt_meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
 #              caption = "Waardes voor Kobalt in mg/kg voor beide stations.")
@@ -238,7 +395,7 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van kobalt (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendKobalt, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Kobalt voor beide stations."}
+```{r zwevendKobalt, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Kobalt voor beide stations.", eval=F}
 #knitr::include_graphics("Figuren/Zwevend/Kobalt.png")
 
 plotTrendsLimits(df, parname)
@@ -246,11 +403,11 @@ plotTrendsLimits(df, parname)
 
 ### Koper {#zwevend-koper}
 
-Figuur \@ref(fig:zwevendKoper) toont het jaarmediane kopergehalte per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met het 10- en 90-percentiel per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendKoperTab) de mediane, 10- en 90-percentiel waardes per station weergegeven. 
+Figuur \@ref(fig:zwevendMetalen) toont het jaarmediane kopergehalte per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met het 10- en 90-percentiel per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendMetalenTab) de mediane, 10- en 90-percentiel waardes per station weergegeven. 
 
 De concentraties koper in zwevende stof nemen sterk af in stroomafwaartse richting (factor 3) . Er zijn sterke uitschieters in koperconcentraties op beide stations.De reden hiervoor is onbekend. In Schaar van Ouden Doel is desondanks een significante dalende trend te zien van 1,23 mg/kg per jaar.     
 
-```{r zwevendKoperTab}
+```{r zwevendKoperTab, eval=F}
 # dt <- tex2dt("Figuren/Zwevend/Koper_meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum"),
 #              caption = "Waardes voor Koper in mg/kg voor beide stations.")
@@ -263,7 +420,7 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van koper (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendKoper, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Koper voor beide stations."}
+```{r zwevendKoper, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Koper voor beide stations.", eval = F}
 # knitr::include_graphics("Figuren/Zwevend/Koper.png")
 
 plotTrendsLimits(df, parname)
@@ -271,11 +428,11 @@ plotTrendsLimits(df, parname)
 
 ### Kwik {#zwevend-kwik} 
  
-Figuur \@ref(fig:zwevendKwik) toont de jaarlijkse mediaan kwik per station voor de periode vanaf 1998 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendKwikTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. 
+Figuur \@ref(fig:zwevendMetalen) toont de jaarlijkse mediaan kwik per station voor de periode vanaf 1998 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendMetalenTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. 
 
 De concentraties kwik in zwevende stof nemen af in stroomafwaartse richting (factor 3). Op beide stations is een dalende trend van 0,01 tot 0,02 mg/kg per jaar aanwezig. Beide trends hebben een hoge statistische correlatie.
 
-```{r zwevendKwikTab}
+```{r zwevendKwikTab, eval=F}
 # dt <- tex2dt("Figuren/Zwevend/Kwik_meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
 #              caption = "Waardes voor Kwik in mg/kg voor beide stations.")
@@ -288,7 +445,7 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van kwik (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendKwik, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Kwik voor beide stations."}
+```{r zwevendKwik, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Kwik voor beide stations.", eval=F}
 #knitr::include_graphics("Figuren/Zwevend/Kwik.png")
 
 plotTrendsLimits(df, parname)
@@ -296,11 +453,11 @@ plotTrendsLimits(df, parname)
 
 ### Lood {#zwevend-lood}
 
-Figuur \@ref(fig:zwevendLood) toont de jaarmediane waarde lood per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendLoodTab) zijn de mediaan, 10- en 90-percentiele waardes per station weergegeven. 
+Figuur \@ref(fig:zwevendMetalen) toont de jaarmediane waarde lood per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendMetalenTab) zijn de mediaan, 10- en 90-percentiele waardes per station weergegeven. 
 
 De concentraties lood in zwevende stof nemen af in stroomafwaartse richting (factor 2,3). Bij Schaar van Ouden Doel is een dalende trend aanwezig, maar lijken de meetwaarden de laatste paar jaar stabiel. Bij Vlissingen boei SSVH is ook een significante daling zichtbaar, maar ook hier lijken de waarden de laatste jaren stabiel. De berekende trend over de gehele dataset is echter voor beide negatief (afname). De afname is sterker voor Schaar van Ouden Doel.
 
-```{r zwevendLoodTab}
+```{r zwevendLoodTab, eval=F}
 # dt <- tex2dt("Figuren/Zwevend/Lood_meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
 #              caption = "Waardes voor Lood in mg/kg voor beide stations.")
@@ -313,7 +470,7 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van lood (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendLood, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Lood voor beide stations."}
+```{r zwevendLood, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Lood voor beide stations.", eval = F}
 #knitr::include_graphics("Figuren/Zwevend/Lood.png")
 
 plotTrendsLimits(df, parname)
@@ -321,11 +478,11 @@ plotTrendsLimits(df, parname)
 
 ### Vanadium {#zwevend-vanadium}
 
-Figuur \@ref(fig:zwevendVanadium) toont de jaarlijkse mediaan Vanadium per station voor de periode vanaf 2005 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendVanadiumTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. 
+Figuur \@ref(fig:zwevendMetalen) toont de jaarlijkse mediaan Vanadium per station voor de periode vanaf 2005 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendMetalenTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. 
 
 De concentraties vanadium in zwevend stof laten bijna geen duidelijke ruimtelijke gradiënt zien. Alleen de in de periode vanaf 2012 is de concentratie in Vlissingen duidelijk lager dan in Schaar van Ouden Doel. Bij Vlissingen boei SSVH is voor de hele periode een dalende trend van 1,7 mg/kg per jaar met een statistische significantie. Bij Schaar van Ouden Doel is deze daling lager (0,8 mg/kg per jaar), maar ook nog steeds significant.
 
-```{r zwevendVanadiumTab}
+```{r zwevendVanadiumTab, eval=F}
 # dt <- tex2dt("Figuren/Zwevend/Vanadium_meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
 #              caption = "Waardes voor Vanadium in mg/kg voor beide stations.")
@@ -338,7 +495,7 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van vanadium (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendVanadium, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Vanadium voor beide stations."}
+```{r zwevendVanadium, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Vanadium voor beide stations.", eval = F}
 #knitr::include_graphics("Figuren/Zwevend/Vanadium.png")
 
 plotTrendsLimits(df, parname)
@@ -346,11 +503,11 @@ plotTrendsLimits(df, parname)
 
 ### Zink {#zwevend-zink}
 
-Figuur \@ref(fig:zwevendZink) toont de jaarlijkse mediaan zink per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendZinkTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. 
+Figuur \@ref(fig:zwevendMetalen) toont de jaarlijkse mediaan zink per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendMetalenTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. 
 
 De concentraties zink in zwevende stof nemen sterk af in stroomafwaartse richting (factor 3,1). Bij beide stations is er een dalende trend die significant is. Bij Schaar van Ouden Doel is deze trend sterker (5,8 mg/kg per jaar) dan bij station Vlissingen (1,2).
 
-```{r zwevendZinkTab}
+```{r zwevendZinkTab, eval=F}
 # dt <- tex2dt("Figuren/Zwevend/Zink_meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
 #              caption = "Waardes voor Zink in mg/kg voor beide stations.")
@@ -363,7 +520,7 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van zink (mg/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendZink, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Zink voor beide stations."}
+```{r zwevendZink, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Zink voor beide stations.", eval=F}
 #knitr::include_graphics("Figuren/Zwevend/Zink.png")
 
 plotTrendsLimits(df, parname)

@@ -1,4 +1,3 @@
-# (APPENDIX) Appendix {-} 
 
 # Werkwijze
 
@@ -9,8 +8,6 @@ knitr::opts_chunk$set(echo = FALSE,	message = FALSE, warning = FALSE)
 ```
 
 ## Achtergrond
-
-Tekst RWS
 
 Deze rapportage volgt eerdere rapportages op. Tot 2020 werd de rapportage als volgt opgebouwd:
 
@@ -29,34 +26,19 @@ In 2020 is besloten om deze werkwijze onder de loep te nemen, vanwege
 
 Voor de rapportage 2020 is daarom besloten om de LaTeX template over te zetten naar Rmarkdown. Figuren werden nog gemaakt met Matlab.
 
-Voor de 2021 rapportage wordt ook de code voor grafieken en tabellen overgezet naar R, zodat het aansluit bij de Scheldemonitor. Tegelijk wordt de berekening van indicatoren afgestemd met het Schelde in Beeld consortium, door het delen van code. De huidige werkwijze voor de rapportage bestaat uit:
+Voor de 2021 rapportage wordt ook de code voor grafieken en tabellen overgezet naar R, zodat het aansluit bij de Scheldemonitor. Het doel was om scripts en methodiek af te stemmen met de T rapportages waar mogelijk, door het delen van code. Dit is gedeeltelijk gebeurd, vanwege de verschillende tijdlijnen. De huidige werkwijze voor de rapportage is:
 
-1) data download van Scheldemonitor met R script. 
-2) geen lokaal datamanagement voor data uit Scheldemonitor. De gedownloade data worden wel als csv bestanden opgeslagen voor consistentie tijdens het maken van de rapportage.
-3) Verwerking van data tot rapport met Rmarkdown. Dit combineert code met beschrijvende tekst. De uitvoer in dit geval is een website. Ook kan er een pdf uitvoer gemaakt worden. 
+1) data wordt gedownloadt van Scheldemonitor met R script. Hiervoor is een [package](https://github.com/scheldemonitor/smwfs) gemaakt. 
+2)De gedownloade data worden als csv bestanden opgeslagen voor consistentie tijdens het maken van de rapportage.
+3) Verwerking van data tot rapport met R en Rmarkdown. Dit combineert code met beschrijvende tekst. De uitvoer in dit geval is een website. Ook kan er een pdf uitvoer gemaakt worden. 
 4) Voor de verwerking van data zijn R functies gemaakt, gebaseerd op de eerdere Matlab, verbeteringen zijn doorgevoerd in afstemming met RWS en Schelde in Beeld. 
-5) Rmarkdown documenten en functie codes worden beheerd onder versiebeheer op Github.
+5) Rmarkdown documenten en functie codes worden beheerd onder versiebeheer op [Github](https://github.com/scheldemonitor/Eerstelijnsrapportage).
 5) Het rapport wordt gepubliceerd via de Scheldemonitor Github omgeving. 
-
-
-## Proces
-
-### Datalevering
-
-RWS levert monitoringsdata aan de Scheldemonitor. De data worden uit de Scheldemonitor met een script gedownloadt, en verwerkt tot deze rapportage. Een aantal datasets worden direct door RWS aangeleverd.
-
-```{r dataoverzicht}
-# code om dataoverzicht in nette tabel weer te geven. 
-
-
-```
 
 
 ## Versies van het rapport
 
 In \@ref(rapportversie) wordt de versie van de eerstelijnsrapportage beschreven. Een keer per jaar wordt de rapportage ververst. Eventuele bijzonderheden over deze versie staan hier ook.
-
-De code en tekst van de rapportage wordt bewaard op Github (url) onder versiebeheer. 
 
 ## Versies van de data
 
@@ -64,7 +46,7 @@ Er is op dit moment geen versiebeheer op de data in de Scheldemonitor. Er zal bi
 
 ## Versiebeheer van de code
 
-De code wordt bewaard op Github onder versiebheer (adres)
+De code en tekst van de rapportage wordt bewaard op [Github](https://github.com/scheldemonitor/Eerstelijnsrapportage) onder versiebeheer. 
 
 ## Gebruikte software en packages
 

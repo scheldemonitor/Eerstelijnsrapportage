@@ -5,12 +5,9 @@
 -->
 
 ```{r setupBijlage, include=FALSE}
+
 knitr::opts_chunk$set(
-	echo = FALSE,
-	message = FALSE,
-	warning = FALSE,
-	out.width = "85%",
-	fig.align='center'
+	out.width = "85%"
 )
 ```
 
