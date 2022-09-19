@@ -401,10 +401,22 @@ if(refresh) refresh_golven()
 df <- read_delim(frozendatapath, delim = ",", guess_max = 200000) %>% 
   filter(stationname %in% trendstations) %>%
   mutate(stationname = factor(stationname, levels = trendstations)) %>%
+  mutate(value = case_when(
+    str_detect(parametername, "TH3") ~ value / 10,
+    str_detect(parametername, "H3") ~ value,
+    str_detect(parametername, "TM02") ~ value / 10,
+    str_detect(parametername, "Hm0") ~ value,
+  )) %>%
+  mutate(value_max = case_when(
+    str_detect(parametername, "TH3") ~ value_max / 10,
+    str_detect(parametername, "H3") ~ value_max,
+    str_detect(parametername, "TM02") ~ value_max / 10,
+    str_detect(parametername, "Hm0") ~ value_max,
+  )) %>%
   mutate(parametername = case_when(
-    str_detect(parametername, "TH3") ~ "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s",
+    str_detect(parametername, "TH3") ~ "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in s",
     str_detect(parametername, "H3") ~ "H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm",
-    str_detect(parametername, "TM02") ~ "TM02: Golfperiode berekend uit het spectrum in 0.1 s",
+    str_detect(parametername, "TM02") ~ "TM02: Golfperiode berekend uit het spectrum in s",
     str_detect(parametername, "Hm0") ~ "Hm0: Significante golfhoogte uit 10mHz spectrum in cm"))
 ```
 
@@ -480,7 +492,7 @@ dt = full_join(GGH, GGHmax) %>% full_join(H3) %>% full_join(H3max) %>%
 
 knitr::kable(dt, 
              align = 'lcccc',
-             caption = "Gewogen gemiddelde en maximale waardes voor de golfperiode (zowel $H_{1/3}$ als  $H_{m0}$) voor alle stations.")
+             caption = "Gewogen gemiddelde en maximale waardes voor de golfhoogte in cm (zowel $H_{1/3}$ als  $H_{m0}$) voor alle stations.")
 ```
 
 ```{r gemiddeldeHs, fig.cap="Gewogen gemiddelde significante golfhoogte per station berekend op basis van het spectrum voor alle beschikbare data vanaf 1998."}
@@ -573,13 +585,13 @@ Figuur \@ref(fig:cdfplotTmo2) laat de empirische distributie van gemiddelde golf
 #knitr::kable(dt, col.names = c("Station","$T_{H1/3,gem}$","$T_{H1/3,max}$","$T_{m0,gem}$","$T_{m0,max}$"),
 #             caption = "Gemiddelde en maximale waardes voor de golfperiode (zowel $T_{H,1/3}$ als $T_{m02}$) voor alle stations.")
 
-TH3 <- stationWeightedMean(df, "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s") %>%
+TH3 <- stationWeightedMean(df, "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in s") %>%
   select(Station, `Th3 med` = Gemiddelde)
-TH3max <- stationMax(df, "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s") %>%
+TH3max <- stationMax(df, "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in s") %>%
   select(Station, `Th3 max` = Max)
-TM02 <- stationWeightedMean(df, "TM02: Golfperiode berekend uit het spectrum in 0.1 s") %>%
+TM02 <- stationWeightedMean(df, "TM02: Golfperiode berekend uit het spectrum in s") %>%
   select(Station, `Tm02 med` = Gemiddelde)
-TM02max <- stationMax(df, "TM02: Golfperiode berekend uit het spectrum in 0.1 s") %>%
+TM02max <- stationMax(df, "TM02: Golfperiode berekend uit het spectrum in s") %>%
   select(Station, `Tm02 max` = Max)
 
 dt = full_join(TH3, TH3max) %>% full_join(TM02) %>% full_join(TM02max) %>%
@@ -588,7 +600,7 @@ dt = full_join(TH3, TH3max) %>% full_join(TM02) %>% full_join(TM02max) %>%
 
 knitr::kable(dt, 
              align = 'lcccc',
-             caption = "Gewogen gemiddelde en maximale waardes voor de golfperiode (zowel $T_{H,1/3}$ als $T_{m02}$) voor alle stations.") #%>%
+             caption = "Gewogen gemiddelde en maximale waardes voor de golfperiode in s (zowel $T_{H,1/3}$ als $T_{m02}$) voor alle stations.") #%>%
   # kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
 ```
 
