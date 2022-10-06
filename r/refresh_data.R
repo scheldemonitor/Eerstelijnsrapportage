@@ -31,14 +31,67 @@ refresh_waterstanden <- function(){
 # Hydrodynamiek - golven
 
 refresh_golven <- function(){
+  
   Golven <- c(2599,2601,1816,2594,2596,2597,2598)
   
-  base_path <- "golven\\Data_Hydro_Golven_"
+  # downloaden
+  base_path <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/yearly_golven"
   for(jaar in 1998:2020){
     df <- smwfs::getSMdata(startyear = jaar, endyear = jaar + 1, parID = c(Golven), datasetID = c(8032))
     write.csv(df, paste(base_path,jaar,'.csv', sep = ""))
   }
+
+  # bewerkingen
+  
+allFiles <- list.files(file.path(base_path), pattern = ".csv", full.names = T)
+df <- lapply(
+  allFiles, function(x) # nameless function. Wat hierna staat wordt uitgevoerd voor elke elemente van allFiles
+    read_delim(x, delim = ",", col_types = cols(.default = "c",
+                                                datetime = "T",
+                                                latitude = "d",
+                                                longitude = "d",
+                                                value = "d")) %>%
+    select( # kolomnamen van kolommen die je wilt behouden
+      stationname,
+      latitude,
+      longitude,
+      datetime,
+      parametername,
+      value) #%>%
+) %>% bind_rows() # alles wordt geplakt
+
+cdf_H3 <- plotCDF(df, "H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm")
+ggsave(cdf_H3, width = 7, height = 4, filename = "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Figuren/cdf_H3.png")
+cdf_th3 <- plotCDF(df,"TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s")
+ggsave(cdf_th3, width = 8, height = 4, filename =  "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Figuren/cdf_TH3.png")
+
+df2 <- df %>%
+  mutate(year = year(datetime), month = month(datetime)) %>%
+  group_by(stationname, parametername, year, month) %>% 
+  summarize(mean = mean(value), max = max(value), n = n(), latitude = mean(latitude), longitude = mean(longitude)) %>%
+  mutate(datum = lubridate::ymd(paste(year, month, "15"))) %>%
+  select(stationname,
+         latitude,
+         longitude,
+         parametername,
+         datetime = datum,
+         value = mean,
+         value_max = max,
+         datapoints = n) %>%
+  filter(stationname %in% trendstations) %>%
+  mutate(stationname = factor(stationname, levels = trendstations)) %>%
+  mutate(parametername = case_when(
+    str_detect(parametername, "TH3") ~ "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s",
+    str_detect(parametername, "H3") ~ "H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm",
+    str_detect(parametername, "TM02") ~ "TM02: Golfperiode berekend uit het spectrum in 0.1 s",
+    str_detect(parametername, "Hm0") ~ "Hm0: Significante golfhoogte uit 10mHz spectrum in cm"))
+
+write_delim(df2, frozendatapath, delim = ",")
+rm(df)
+
 }
+
+
 
 # Fysisch-chemisch - oppervlaktewater
 
