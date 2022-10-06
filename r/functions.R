@@ -765,7 +765,7 @@ plotCDF <- function(df, parname) {
     theme_minimal() +
     xlab(parname) +
     ylab("F(x)") +
-    coord_cartesian(xlim = c(0,150)) +
+    #coord_cartesian(xlim = c(0,150)) +
     trendplotstyle
   return(p)
 }

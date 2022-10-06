@@ -48,9 +48,14 @@ Dit hoofdstuk betreft metingen van de waterbeweging in de Westerschelde en de mo
 knitr::include_graphics("Figuren/Inscape/getijgolf.png")
 ```
 
-De waterstanden in de Westerschelde worden voor het grootste deel bepaald door het getij. Het getij ontstaat door de aantrekkende kracht van de maan en de zon op de aarde. De variaties in het getij ontstaan door de draaiing van de aarde en de positie van de aarde t.o.v. de maan en de zon en doordat de maan en de aarde zich in een baan rond de zon bewegen. Daarnaast wordt het getij vervormd door de bodemligging van zeeën en oceanen. Wiskundig gezien is het getij een combinatie van een groot aantal sinusvormige golven: de getijcomponenten. De M2-component ontstaat door de aantrekkingskracht van de maan en is een belangrijke getijcomponent in de Noordzee en de Westerschelde, zie verder Paragraaf \@ref(hydroGetijcomponenten). De belangrijkste periodieke variaties in het getij zorgen voor de zogeheten dagelijkse ongelijkheid (Figuur \@ref(fig:getijgolf)), de springtij-doodtij cyclus en de 18,6-jarige cyclus.
+De waterstanden in de Westerschelde worden voor het grootste deel bepaald door het getij. Het getij ontstaat door de aantrekkende kracht van de maan en de zon op de aarde. De variaties in het getij ontstaan door de draaiing van de aarde en de positie van de aarde t.o.v. de maan en de zon en doordat de maan en de aarde zich in een baan rond de zon bewegen. Daarnaast wordt het getij vervormd door de bodemligging van zeeën en oceanen. Wiskundig gezien is het getij een combinatie van een groot aantal sinusvormige golven: de getijcomponenten. De hoofdcomponent van het getij is de M2-component, die wordt veroorzaakt door de aantrekkingskracht van de maan op de aarde en een periode heeft van ongeveer 12 uur en 25 minuten. De S2 component is een soortgelijke component (een periode van ongeveer 12 uur) maar is gegenereerd door de aantrekkingskracht van de zon op de aarde. De S2-component is samen met M2 verantwoordelijk voor de springtij-doodtij variatie. Hogere harmonische getijcomponenten (zoals M4) worden vaak als 'overtides' aangeduid. M4 is het eerste overtide en is gegenereerd door eerste orde niet-lineaire processen. M4 is de eerste hogere harmonische component en is samen met M2 van belang voor sedimenttransport. De belangrijkste periodieke variaties in het getij zorgen voor de zogeheten dagelijkse ongelijkheid (Figuur \@ref(fig:getijgolf)), de springtij-doodtij cyclus en de 18,6-jarige cyclus. De 18,6-jarige cyclus wordt veroorzaakt wordt door de afwijking van het baanvlak van de maan ten opzichte van het baanvlak van de aarde (de knopen- of drakencyclus). De invloed van de knopencyclus is sinus-vormig en geeft een verhoging of verlaging van de zeespiegel in een willekeurig jaar van maximaal 13 mm. De langjarige trend wordt niet beïnvloed door deze cyclus. Zie Paragraaf \@ref(hydroGetijcomponenten) voor meer informatie over de getijden. 
 
-Het getij wordt verder vervormd in het estuarium. Vanaf de monding dringt het tij als een langgerekte golf het estuarium binnen. De geringer wordende diepte en vernauwing van de bedding vervormen het getij. Door die versmalling ondergaat het vloedwater een opstuwing; de hoogwaters worden hoger naarmate ze het estuarium dieper binnendringen. Energieverliezen ten gevolge van wrijving doen de verhoging door de opstuwing gedeeltelijk weer teniet. Tot slot zijn er nog de weersinvloeden zoals windopzet en luchtdruk. Al deze effecten zijn terug te zien in de gemeten waterstanden van de verschillende meetstations in de Westerschelde.
+Het getij wordt verder vervormd in het estuarium. Vanaf de monding dringt het tij als een langgerekte golf het estuarium binnen. De geringer wordende diepte en vernauwing van de bedding vervormen het getij. Door die versmalling ondergaat het vloedwater een opstuwing; de hoogwaters worden hoger naarmate ze het estuarium dieper binnendringen. Energieverliezen ten gevolge van wrijving doen de verhoging door de opstuwing gedeeltelijk weer teniet. Dit zorgt ervoor dat de symmetrische getijkromme in de monding van de Westerschelde vervormd. Dit wordt getijasymmetrie genoemd. Hierdoor ontstaat er dus een verschil tussen de maximale eb- en vloed snelheid in het esturaium. 
+
+Het gemeten waterstandssignaal kan geanalyseerd worden met een getijanalyse. Hierbij wordt het waterstandssignaal ontleed in verschillende harmonische componenten: sinussen met een zekere amplitude, frequentie en fase. De amplitude en fase van een component verschillen per positie op aarde, de frequentie is altijd gelijk. De amplitude is de uitwijking van de getijcomponent ten opzichte van de middenstand. De fase van de getijcomponent wordt weergegeven ten opzichte van Midden Europese Tijd (MET). Verandering in de fase van een getijcomponent kan van belang zijn voor de interactie met andere getijcomponenten, maar ook voor de looptijd van het getij in het estuarium. Bijvoorbeeld het samenvallen van getijcomponenten zorgt ervoor dat het getij hoger wordt omdat er de krachten elkaar versterken op dat moment. De amplituden en fases van de M2, M4 en S2 componenten worden weergegeven in Figuur \@ref(fig:hydroHarmoM2amp) tot en met \@ref(fig:hydroHarmoS2fase) en in Tabel \@ref(tab:hydroHarmoTab).
+
+Tot slot zijn er nog de weersinvloeden zoals wind en luchtdruk. De verschillen in wind en luchtdruk zorgen voor variaties in de waterstanden van jaar op jaar. Waterstanden zijn hoger in stormsituaties waar de windsnelheden toenemen. De windrichting is hierbij van belang. Wind vanaf de Noordzee stuwt het water op het estuarium in. Wind vanaf land stuwt het water het estuarium uit. Dit zorgt ervoor dat de waterstanden bij eb- en vloed hoger of lager worden. In jaren met veel stormen op de Noordzee zal de gemiddelde waterstand dus hoger zijn dan in rustige jaren.
+
 
 ### Informatie over de metingen {#hydroInfoMeting}
 
@@ -88,7 +93,7 @@ knitr::kable(dt, col.names = c("Landelijk meetstation","Meetperiode","Regionaal 
 
 In de grafieken (Figuur \@ref(fig:hydroJaarEuro) tot en met Figuur \@ref(fig:hydroJaarBath)) onderstaand en op de volgende pagina's zijn de hoog- en laagwaterstanden ten opzichte van NAP per jaar gemiddeld en uitgezet in de tijd. Gemiddelde hoogwaterstanden in blauw corresponderen met de blauwe y-as (links) en gemiddelde laagwaterstanden zijn weergegeven in rood en corresponderen met de rode y-as (rechts). Voor jaren met missende data voor twee of meer maanden worden de gemiddeldes met dunnere en transparante kleuren weergegeven. Aan deze gemiddeldes kan minder waarde gehecht worden. De volgorde waarin de stations zijn weergegeven is stroomopwaarts: vanaf het Europlatform in de Noordzee tot de Belgische grens.
 
-Het station Schaar van de Noord heeft voor 2014 geen data. In 2013 is alleen data beschikbaar voor tot juli 2013, dus slechts ongeveer een half jaar. Het jaar 2013 lijkt voor Schaar van de Noord een lagere waarde te geven (zie Figuur \@ref(fig:hydroJaarSvdn)), maar het kan zijn dat de lengte van de dataset van 2013 dit gemiddelde beïnvloedt. De laatste twee jaren geven waardes die in het verlengde liggen van de jaren voor 2013.
+Het station Schaar van de Noord heeft voor 2014 geen data. In 2013 is alleen data beschikbaar tot juli 2013, dus slechts ongeveer een half jaar. Het jaar 2013 lijkt voor Schaar van de Noord een lagere waarde te geven (zie Figuur \@ref(fig:hydroJaarSvdn)), maar het kan zijn dat de lengte van de dataset van 2013 dit gemiddelde beïnvloedt. De laatste twee jaren geven waardes die in het verlengde liggen van de jaren voor 2013.
 
 *Let op: de y-assen van de figuur van het Europlatform verschillen van de y-assen van de andere stations.*
 
@@ -99,7 +104,7 @@ plotTrendsWaterstand(df, c("Hoogwater in cm+NAP","Laagwater in cm+NAP"), "Europl
 
 ```
 
-```{r hydroJaarRaan,fig.cap="Jaargemiddelde hoog- en laagwaterstanden bij de Vlakte van Raan"}
+```{r hydroJaarRaan,fig.cap="Jaargemiddelde hoog- en laagwaterstanden bij de Vlakte van de Raan"}
 #knitr::include_graphics("Figuren/Hydro/Waterstanden/HWLW/raan.png")
 
 plotTrendsWaterstand(df, c("Hoogwater in cm+NAP","Laagwater in cm+NAP"), "Vlakte van de Raan")+
@@ -179,13 +184,13 @@ plotTrendsWaterstand(df, c("Hoogwater in cm+NAP","Laagwater in cm+NAP"), "Bath")
 
 ```
 
-Het Europlatform dient als referentiestation. Door de ligging in de Noordzee zijn de geregistreerde waterstanden bij dit station niet beïnvloed door vorm van het estuarium en de ligging in het estuarium. Bij het Europlatform bedraagt de gemiddelde hoogwaterstand ongeveer +1 m NAP. Laagwaterstanden bereiken gemiddeld een waarde van -0,75 m NAP.
+Het Europlatform dient als referentiestation. Door de ligging in de Noordzee zijn de geregistreerde waterstanden bij dit station niet beïnvloed door vorm van het estuarium en de ligging in het estuarium. Bij het Europlatform bedraagt de gemiddelde hoogwaterstand tussen +0.9 en +1 m NAP. Laagwaterstanden bereiken gemiddeld een waarde van tussen de -0,75 en -0.65 m NAP.
 
-De gemiddelde hoog- en laagwaterstand in de westelijke meetstations (vanaf de Vlakte van Raan tot het Gat van Borssele) blijft min of meer gelijk gedurende de gehele meetperiode. Vanaf de Vlakte van Raan in oostwaartse richting zakt de gemiddelde laagwaterstand van circa -1,50 m NAP tot circa -1,80 m NAP bij Gat van Borssele. De hoogwaterstand neemt in die richting licht toe, van circa +1,75 m NAP bij de Vlakte van de Raan tot circa +2,25 m NAP bij Gat van Borssele. Hoewel Westkapelle en Cadzand ongeveer even ver in de monding liggen, is de getijslag bij Westkapelle minder groot dan bij Cadzand. Dit komt door de vervorming van het getij in de Noordzee, waardoor de getijslag in de Noordzee niet overal gelijk is.
+De gemiddelde hoog- en laagwaterstand in de westelijke meetstations (vanaf de Vlakte van de Raan tot het Gat van Borssele) is ongeveer gelijk gedurende de gehele meetperiode. Vanaf de Vlakte van de Raan in oostwaartse richting zakt de gemiddelde laagwaterstand van circa -1,50 m NAP tot circa -1,80 m NAP bij Gat van Borssele. De hoogwaterstand neemt in die richting licht toe, van circa +1,75 m NAP bij de Vlakte van de Raan tot circa +2,25 m NAP bij Gat van Borssele. Hoewel Westkapelle en Cadzand ongeveer even ver in de monding liggen, is de getijslag bij Westkapelle minder groot dan bij Cadzand. Dit komt door de vervorming van het getij in de Noordzee, waardoor de getijslag in de Noordzee niet overal gelijk is.
 
 Vanaf Terneuzen geven de stations zowel in stroomopwaartse richting als in tijd een stijgende trend in hoogwaterstanden: van circa +2,0 m NAP tot circa +2,25 m NAP in Terneuzen en van circa +2,50 m NAP tot circa +2,75 m NAP in Bath. Deze stijging vond plaats over de periode 1950 $-$ 1980 bij Terneuzen en lijkt bij Bath nog voort te duren tot ca. 2000. De laagwaterstanden in Bath zijn in de jaren '70 afgenomen van circa -2,0 m NAP tot circa -2,25 m NAP. Voor de andere stations in de Westerschelde lijkt er sinds 2007 een lichte afname te zitten in de laagwaterstanden en een lichte toename in de hoogwaterstanden. Dit is waarschijnlijk de invloed van de 18,6-jarige cyclus, zoals ook duidelijk te zien is in de getijslag (Figuur \@ref(fig:hydroGetijslag)). Bij de getijslag is dit effect duidelijker te zien, omdat dan de hoog- en laagwaterstand bij elkaar worden opgeteld waardoor het effect twee keer wordt meegeteld.
 
-Daarnaast constateren we een toename van gemiddeld hoogwater en een afname van gemiddeld laagwater naar mate men meer stroomopwaarts (i.e. oostelijke richting) van de Westerschelde komt, zoals te zien in Figuur \@ref(fig:hydroGemiddeldLW) en Figuur \@ref(fig:hydroGemiddeldHW).
+Daarnaast constateren we een toename van gemiddeld hoogwater en een afname van gemiddeld laagwater naarmate men meer stroomopwaarts (i.e. oostelijke richting) van de Westerschelde komt, zoals te zien in Figuur \@ref(fig:hydroGemiddeldLW) en Figuur \@ref(fig:hydroGemiddeldHW).
 
 ```{r hydroGemiddeldLW, fig.cap="Mediaan van laagwater per station berekend op alle beschikbare data vanaf 1950."}
 
@@ -205,7 +210,7 @@ plotMedianMap(df, "Hoogwater in cm+NAP") + theme_void()
 
 ### Jaargemiddelde getijslag {#hydroGetijslag}
 
-De getijslag is voor alle meetstations bepaald aan de hand van het verschil tussen de jaargemiddelde hoog- en laagwaterstanden. Op de Noordzee bij het Europlatform bedraagt de getijslag ongeveer 1,65 m en is weinig variatie in de getijslag te zien. In de monding is de getijslag al toegenomen tot 3 à 3,5 m. Verder stroomopwaarts de Westerschelde op blijft de getijslag toenemen tot aan Bath. Daar is de getijslag met een waarde van bijna 5 m het grootst, zie Figuur \@ref(fig:hydroGetijslag), Figuur \@ref(fig:hydroGetijslagGemiddeld) en Tabel \@ref(tab:hydroGemiddeldeHWLWGetij).
+De getijslag is voor alle meetstations bepaald aan de hand van het verschil tussen de jaargemiddelde hoog- en laagwaterstanden. Op de Noordzee bij het Europlatform bedraagt de getijslag ongeveer 1,65 m en is weinig variatie in de getijslag te zien. In de monding is de getijslag al toegenomen tot 3 à 3,5 m. Verder stroomopwaarts de Westerschelde op blijft de getijslag toenemen tot aan Schaar van de Noord. Daar is de getijslag met een waarde van bijna 5 m het grootst, zie Figuur \@ref(fig:hydroGetijslag), Figuur \@ref(fig:hydroGetijslagGemiddeld) en Tabel \@ref(tab:hydroGemiddeldeHWLWGetij).
 
 ```{r hydroGemiddeldeHWLWGetij}
 #dt <- tex2dt("Figuren/Hydro/Waterstanden/meanvalues.tex")
@@ -220,8 +225,6 @@ knitr::kable(dt,
              align = 'lccc',
              caption = "Jaarlijks mediaan van hoogwater, laagwater en getijslag (cm + NAP) van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
-
-Sinds 2000 constateren we een toename van de getijslag tot maximaal 1,35 cm/jaar, zie Tabel \@ref(tab:hydroGemiddeldeHWLWGetij) bij station Breskens havenmond. De correlatiecoëfficiënt (i.e. $R$) varieert sterk per station tot station wat betekent dat er andere relevante factoren, naast deze lineaire trend, van invloed zijn op de getijslag.
 
 ```{r hydroGetijslag, fig.cap="De mediaan van getijslag over tijd op de Noordzee, in de monding en in de Westerschelde. Dunnere en transparante kleuren geven jaarlijkse gemiddeldes aan met twee of meer maanden met missende data."}
 
@@ -246,7 +249,7 @@ if(knitr::is_html_output()){
 } else p
 ```
 
-De 18,6-jarige getijdencyclus, bijvoorbeeld, is van invloed op de resultaten en duidelijk zichtbaar in de figuur. De 18,6-jarige cyclus zorgt voor een periodieke toe en afname van de waterstand en getijslag en is maximaal rond 1960, 1979, 1997 en 2014. De 18,6-jarige cyclus zit ook in de stations buiten de Westerschelde. Verder stroomopwaarts wordt de getijslag groter. De versterking in de stroomopwaartse richting wordt voornamelijk veroorzaakt door de vorm van het estuarium (ondieper en smaller in stroomopwaartse richting). In de jaren '70 is vooral bij Bath een sterke toename te zien in de getijslag, die waarschijnlijk het gevolg is van de ingrepen in het kader van de 'eerste verruiming'.
+De 18,6-jarige getijdencyclus heeft een grote invloed op de resultaten en is duidelijk zichtbaar in de figuren. De 18,6-jarige cyclus zorgt voor een periodieke toe- en afname van de waterstand en getijslag en is maximaal rond 1960, 1979, 1997 en 2014. Dit geldt voor stations zowel binnen als buiten de Westerschelde. De getijslag wordt groter stroomopwaarts. De versterking in de stroomopwaartse richting wordt voornamelijk veroorzaakt door de vorm van het estuarium (ondieper en smaller in stroomopwaartse richting). Daarnaast is er in de jaren '70 vooral bij Bath een sterke toename te zien in de getijslag, die waarschijnlijk het gevolg is van de ingrepen in het kader van de 'eerste verruiming'.
 
 ```{r hydroGetijslagGemiddeld, fig.cap="Mediaan van getijslag per station berekend op alle beschikbare data vanaf 1950"}
 #knitr::include_graphics("Figuren/Hydro/Waterstanden/gemiddelde_getijslag.png")
@@ -278,13 +281,11 @@ df2 %>% #st_drop_geometry() %>%
 
 ```
 
-In 2013 en 2014 werd de licht stijgende trend in de getijslag sinds 2007 doorgezet, conform de 18,6-jarige cyclus. Sinds 2015 neemt de getijslag juist weer licht af (figuur \@ref(fig:hydroGetijslag)), wat strookt met het idee dat de 18,6-jarige cyclus de dominante oorzaak is van de trend in de getijslag. Dit wordt ook door de licht dalende trend in 2017 bevestigd. Dit lijkt niet op te gaan voor Breskens dat nog wel een stijgende lijn laat zien in 2016 ten opzichte van 2015, maar voor de periode na september 2016 zijn voor Breskens geen gegevens beschikbaar en kan de trend hierdoor niet worden bevestigd. In 2018 stijgt de getijslag ten opzichte van 2017 bij bijna alle stations. Terwijl in 2019 t.o.v. 2018 de getijslag weer daalt en daardoor lijkt de trend zich voort te zetten.
+In 2013 en 2014 werd de licht stijgende trend in de getijslag sinds 2007 doorgezet, conform de 18,6-jarige cyclus. Sinds 2015 neemt de getijslag juist weer licht af (figuur \@ref(fig:hydroGetijslag)), wat strookt met het idee dat de 18,6-jarige cyclus de dominante oorzaak is van de trend in de getijslag. Dit wordt ook door de licht dalende trend in 2017 bevestigd. Dit lijkt niet op te gaan voor Breskens dat nog wel een stijgende lijn laat zien in 2016 ten opzichte van 2015, maar voor de periode na september 2016 zijn voor Breskens geen gegevens beschikbaar en kan de trend hierdoor niet worden bevestigd. In 2018 stijgt de getijslag ten opzichte van 2017 bij bijna alle stations. Terwijl in 2019 de getijslag t.o.v. 2018 weer daalt. Hierdoor lijkt de trend zich weer voort te zetten.
 
 ### Getijcomponenten {#hydroGetijcomponenten}
 
-Het gemeten waterstandssignaal kan geanalyseerd worden met een getijanalyse. Hierbij wordt het waterstandssignaal ontleed in verschillende harmonische componenten: sinussen met een zekere amplitude, frequentie en fase. De amplitude en fase van een component verschillen per positie op aarde, de frequentie is altijd gelijk. De hoofdcomponent van het getij is de M2-component, die wordt veroorzaakt door de aantrekkingskracht van de maan op de aarde en een periode heeft van ongeveer 12 uur en 25 minuten. De S2 component is een soortgelijke component (tweedagelijks) maar is gegenereerd door de aantrekkingskracht van de zon op de aarde. Hogere harmonische getijcomponenten (zoals M4) worden vaak als 'overtides' aangeduid. M4 is het eerste overtide en is gegenereerd door eerste orde niet-lineaire processen. De S2-component is het gevolg van de aantrekkingskracht van de zon en is samen met M2 verantwoordelijk voor de springtij-doodtij variatie. M4 is de eerste hogere harmonische component en is samen met M2 van belang voor sedimenttransport.
-
-De amplitude is de uitwijking van de getijcomponent ten opzichte van de middenstand. De fase van de getijcomponent wordt weergegeven ten opzichte van Midden Europese Tijd (MET). Verandering in de fase van een getijcomponent kan van belang zijn voor de interactie met andere getijcomponenten, maar ook voor de looptijd van het getij in het estuarium. De amplituden en fases van de M2, M4 en S2 componenten worden weergegeven in Figuur \@ref(fig:hydroHarmoM2amp) tot en met \@ref(fig:hydroHarmoS2fase) en in Tabel \@ref(tab:hydroHarmoTab).
+Het gemeten waterstandssignaal kan geanalyseerd worden met een getijanalyse. Hierbij wordt het waterstandssignaal ontleed in verschillende harmonische componenten: sinussen met een zekere amplitude, frequentie en fase. De amplituden en fases van de M2, M4 en S2 componenten worden weergegeven in Figuur \@ref(fig:hydroHarmoM2amp) tot en met \@ref(fig:hydroHarmoS2fase) en in Tabel \@ref(tab:hydroHarmoTab).
 
 ```{css, echo = FALSE}
 .verysmall .table{
@@ -317,7 +318,7 @@ De fase van de M2-component lijkt voor de westelijke stations weinig te verander
 
 De amplitude van de M4-component laat een tegenovergestelde ruimtelijke relatie als de M2-component zien. Hiermee wordt bedoeld dat de M4 afneemt voor oostelijkere stations. De S2-component gedraagt zich vergelijkbaar met de M2-component. De amplitude van de S2- en M4-componenten varieert slechts beperkt over de tijd.
 
-De fase van de M4-component bij Hansweert neemt af en Bath neemt toe. De afname bij Hansweert is abrupt. Bij Bath geleidelijker. Vanaf 1980 zou bij Bath dus eerder hoogwater zijn dan bij Hansweert terwijl Hansweert dichter bij zee ligt. Mogelijke aanleiding kan een verandering in de geometrie zijn. Voor meer onderbouwing is een nadere analyse noodzakelijk in een vervolg studie.
+De fase van de M4-component neemt af bij Hansweert en is abrupt. Bij Bath neem de fase van M4 toe is geleidelijker in vergelijking van de verandering bij Hansweert.
 
 ```{r hydroHarmoM2amp, fig.cap="Amplitude van de M2-getijcomponent voor de landelijke meetstations."}
 #knitr::include_graphics("Figuren/Hydro/Waterstanden/Harmonisch/M2_amplitude.png")
@@ -388,14 +389,12 @@ knitr::include_graphics("Figuren/Inscape/spectrum.png")
 ```{r golfTrendstations}
 trendstations <- c("Bath (BAT2)","Hansweert (HAWI)","Cadzand (CAWI)","Cadzand (CADW)","Overloop van Hansweert (OVHW)","Deurloo (DEUR)","Honte (HNTE)","Hoofdplaat (HFPL)","Overloop van Valkenisse (OVVA)","Pas van Terneuzen (PVT)","Wielingen (WIEL)")
 
-frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_Hydro_Golven_1998_2020"
+frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_Hydro_Golven_1998_2020.csv"
 
 refresh = F
 if(refresh) refresh_golven()
 
 ```
-
-
 
 ```{r importHydroGolven}
 df <- read_delim(frozendatapath, delim = ",", guess_max = 200000) %>% 
@@ -420,19 +419,19 @@ df <- read_delim(frozendatapath, delim = ",", guess_max = 200000) %>%
     str_detect(parametername, "Hm0") ~ "Hm0: Significante golfhoogte uit 10mHz spectrum in cm"))
 ```
 
-Golven die voorkomen op de Noordzee en in de Westerschelde hebben steeds verschillende golfhoogte, -periode en richting. Dit is afhankelijk van de wind (kracht, duur, richting, strijklengte), de waterdiepte en de golfvoortplanting. Van golfmetingen wordt meestal per periode van ongeveer 15 minuten een spectrum afgeleid, waarin golven met verschillende golfhoogte en -periode (in de vorm van een frequentie = 1 / periode) zijn opgenomen, zie Figuur \@ref(fig:golfspectrum). De golven die in deze paragraaf worden meegenomen bevinden zich aan de rechterkant van het in Figuur \@ref(fig:golfspectrum) weergegeven spectrum en zijn aangeduid met deining en wind. Deining wordt veroorzaakt door golfvoortplanting van golven die verder weg zijn opgewekt. Windgolven zijn lokaal opgewekte golven.
+Golven die voorkomen op de Noordzee en in de Westerschelde hebben steeds verschillende golfhoogte, -periode en richting. Dit is afhankelijk van de wind (kracht, duur, richting, strijklengte), de waterdiepte en de golfvoortplanting. Van golfmetingen wordt meestal per 15 minuten een spectrum afgeleid, waarin golven met verschillende golfhoogte en -periode (in de vorm van een frequentie = 1 / periode) zijn opgenomen, zie Figuur \@ref(fig:golfspectrum). De golven die in deze paragraaf worden meegenomen bevinden zich aan de rechterkant van het in Figuur \@ref(fig:golfspectrum) weergegeven spectrum en zijn aangeduid met deining en wind. Deining wordt veroorzaakt door golfvoortplanting van golven die verder weg zijn opgewekt. Windgolven zijn lokaal opgewekte golven.
 
-Een belangrijke golfkarakteristiek is de significante golfhoogte. De significante golfhoogte kan op twee verschillende manieren berekend worden: als het gemiddelde van het hoogste 1/3 deel van de golven in een periode van 10 minuten ($H_{1/3}$) of uit het energiedichtheidsspectrum ($H_{m0}$) op basis van viermaal de standaardafwijking. Hoewel beide methodes een andere berekeningswijze hebben (de eerste gaat uit van de hoogte van individuele golven, de tweede wordt berekend uit het energiedichtheidsspectrum), komt het resultaat in hoge mate overeen. De significante golfhoogte komt goed overeen met de op het oog geschatte golfhoogte (@Holthuijsen2007). Vroeger werden golven op die manier gemeten (o.a. vanaf schepen), waardoor het een belangrijke parameter is geworden in de golfstatistiek.
+Een belangrijke golfkarakteristiek is de significante golfhoogte. De significante golfhoogte kan op twee verschillende manieren berekend worden: als het gemiddelde van het hoogste 1/3 deel van de golven in een tijdsbestek van 10 minuten ($H_{1/3}$) of uit het energiedichtheidsspectrum ($H_{m0}$) op basis van viermaal de standaardafwijking. Hoewel beide methodes een andere berekeningswijze hebben (de eerste gaat uit van de hoogte van individuele golven, de tweede wordt berekend uit het energiedichtheidsspectrum), komt het resultaat in hoge mate overeen. De significante golfhoogte komt goed overeen met de op het oog geschatte golfhoogte (@Holthuijsen2007). Vroeger werden golven op die manier gemeten (o.a. vanaf schepen), waardoor het een belangrijke parameter is geworden in de golfstatistiek.
 
 In deze rapportage wordt steeds het maandelijkse gemiddelde en het maandelijkse maximum van de significante golfhoogte weergegeven. Het maximum van de significante golfhoogte per maand betreft dus geen maximum van alle individuele golven in die maand, maar het maximum van het gemiddelde 1/3 hoogste deel in een periode van 10 minuten of het maximum van de significante golfhoogte uit het spectrum.
 
 Naast de golfhoogte wordt ook de golfperiode gerapporteerd, zowel de gemiddelde periode van het hoogste 1/3 deel van de golven ($T_{H,1/3}$), als de gemiddelde golfperiode van alle golven berekend uit het spectrum ($T_{m02}$). $T_{m02}$ wordt bepaald uit het spectrale gemiddelde van het kwadraat van de frequentie en is daarom in het algemeen lager dan $T_{H,1/3}$. $T_{m02}$ is dus niet direct gerelateerd aan $H_{m0}$.
 
-Op verzoek van RWS worden de golfrozen sinds de Eerstelijnsrapportage 2015 niet meer weergegeven. Dit heeft te maken met kleine wijzigingen in rekenparameters in de Evaluatiesystematiek (update 2014). Voor golfrichtinginformatie wordt verwezen naar de Eerstelijnsrapportage 2014 (@ELR2014 & @ELR2015).
+Op verzoek van RWS worden de golfrozen sinds de Eerstelijnsrapportage 2015 niet meer weergegeven. Dit heeft te maken met kleine wijzigingen in rekenparameters in de Evaluatiesystematiek (update 2014). Echter zijn golfrichting metingen van belang voor bijvoorbeeld aanvallen op de kust. Daarom is het verstandig om in de volgende rapportage deze metingen weer op te nemen.
 
 ### Informatie over de metingen {#golvenInfoMeting}
 
-Golven worden in de Westerschelde en in de monding op een aantal stations (zie Figuur \@ref(fig:meetstationsGolven)) gemeten. Niet op alle stations wordt met dezelfde instrumenten gemeten. Ook in de tijd heeft er een verschuiving plaatsgevonden in het frequentiebereik van de metingen. Het frequentiebereik wordt van tevoren ingesteld aan de hand van de te verwachten golfperioden op de betreffende locatie en zijn aangeduid als:
+Golven worden in de Westerschelde en in de monding op een aantal stations (zie Figuur \@ref(fig:meetstationsGolven)) gemeten. Niet op alle stations wordt met dezelfde instrumenten gemeten. Ook in de tijd heeft er een verschuiving plaatsgevonden in het frequentiebereik van de metingen. Het frequentiebereik wordt van tevoren ingesteld aan de hand van de te verwachten golfperioden op de betreffende locatie. Het frequentiebereik is aangeduid als:
 
 -   GSO2 met een frequentiebereik van 0 tot 700 mHz
 -   GHr2 met een frequentiebereik van 0 tot 1000 mHz
@@ -440,7 +439,7 @@ Golven worden in de Westerschelde en in de monding op een aantal stations (zie F
 
 De parameters die uit het spectrum worden bepaald, de significante golfhoogte $H_{m0}$ en periodeparameter $T_{m02}$, zijn berekend uit het deel van het spectrum van 30 mHz tot de bovengrens (700, 1000 en 500 mHz). Voor GSO2 is geen significante golfhoogte uit het spectrum bepaald. In Tabel \@ref(tab:golfstations) zijn de verschillende aanduidingen en meetinstrumenten per station en per meetperiode gegeven. Gemiddelde, minimale en maximale waardes in bijgevoegde tabellen zijn gebaseerd over de tijdsperiode weergegeven in de figuren. In Tabel \@ref(tab:golfstations) is te zien dat voor Hoofdplaat sinds januari 2016 geen nieuwe data beschikbaar is.
 
-```{r meetstationsGolven, fig.cap="Ligging van de meetstations voor de golfhoogte en -periode. Groen is een directional wave rider, rood is een golfbaak en geel is een boei."}
+```{r meetstationsGolven, fig.cap="Ligging van de meetstations voor de golfhoogte en -periode."}
 # knitr::include_graphics("Figuren/Meetstations_golfboei.png")
 plotLocations(df) + theme_void()
 ```
@@ -456,13 +455,13 @@ dt <- data.frame(
 knitr::kable(dt, col.names = c("Meetstation","Code","Meetperiode","Meetinstrument"), caption = "Golfspectrum per meetperiode en locatie en meetinstrument in 2018.")
 ```
 
-Een beschrijving van de verschillende meetinstrumenten in Tabel \@ref(tab:golfstations):
+Voor de metingen van golven worden verschillende meetinstrumenten gebruikt. Hieronder een uitleg over de instrumenten:
 
 **Directional waverider** De directional waverider is een boei die de verticale versnellingen en horizontale plaatsen, 'pitch', 'roll' en 'heave' meet. Bovendien is de boei uitgerust met twee vaste versnellingsmeters, een kompas en een richtingsmeter. Het golffrequentiebereik van de directional waverider wordt verschillend ingesteld afhankelijk van de ligging van de boei en de daarvoor te verwachte golfperioden. Op de Noordzee en de Delta is het golffrequentiebereik van directional waverider ingesteld op 0,03 Hz -- 0,5 Hz (GDr2). Omdat in de Westerschelde de golven over het algemeen korter zijn (kleinere periode dus een grotere frequentie) is het golffrequentiebereik hoger ingesteld namelijk: 0,03 Hz -- 1,0 Hz (GHr2). De bemonsteringsfrequentie van de directional waverider is 1,28 Hz.
 
-**Waverider** De waverider is een bolvormige boei en meet de versnellingen in verticale richting, die worden veroorzaakt door de golfkrachten op de boei. Hieruit kunnen de hoogteveranderingen van het zeeoppervlak worden berekend en daaruit kunnen weer golfkarakteristieken worden bepaald. Het golffrequentiebereik van de waverider wordt verschillend ingesteld afhankelijk van de ligging van de boei en de daarvoor te verwachte golfperioden. Op de Noordzee en de Delta is het golffrequentiebereik van waverider ingesteld op 0,03 Hz -- 0,5 Hz (GDr2). Omdat in de Westerschelde de golven over het algemeen korter zijn (kleinere periode dus een grotere frequentie) is het golffrequentiebereik hoger ingesteld namelijk: 0,03 Hz -- 1,0 Hz (GHr2). De bemonsteringsfrequentie is 2,56 Hz.
+**Waverider** De waverider is een bolvormige boei. Deze boei meet de versnellingen in verticale richting, die worden veroorzaakt door de golfkrachten op de boei. Hieruit kunnen de hoogteveranderingen van het zeeoppervlak worden berekend en daaruit kunnen weer golfkarakteristieken worden bepaald. Het golffrequentiebereik van de waverider wordt verschillend ingesteld afhankelijk van de ligging van de boei en de daarvoor te verwachte golfperioden. Op de Noordzee en de Delta is het golffrequentiebereik van waverider ingesteld op 0,03 Hz -- 0,5 Hz (GDr2). Omdat in de Westerschelde de golven over het algemeen korter zijn (kleinere periode dus een grotere frequentie) is het golffrequentiebereik hoger ingesteld namelijk: 0,03 Hz -- 1,0 Hz (GHr2). De bemonsteringsfrequentie is 2,56 Hz.
 
-**Golfbraak** Een golfbaak is een verticaal gemonteerde kunststofbuis, waaraan op regelmatige afstanden van 5 cm elektroden zijn bevestigd aan de hand waarvan continue wordt gemeten wat de hoogste elektrode is die zich nog onder water bevindt. Daarmee worden de veranderingen van het zeeoppervlak in de tijd vastgelegd en daaruit worden karakteristieken van de golfbeweging bepaald. De golfbaak is gemonteerd aan een platform of een meetpaal. De bemonsteringsfrequentie is 2,56 Hz.
+**Golfbraak** Een golfbraak is een verticaal gemonteerde kunststofbuis, waaraan op regelmatige afstanden van 5 cm elektroden zijn bevestigd aan de hand waarvan continue wordt gemeten wat de hoogste elektrode is die zich nog onder water bevindt. Daarmee worden de veranderingen van het zeeoppervlak in de tijd vastgelegd en daaruit worden karakteristieken van de golfbeweging bepaald. De golfbraak is gemonteerd aan een platform of een meetpaal. De bemonsteringsfrequentie is 2,56 Hz.
 
 ### Golfhoogte {#golvenHoogte}
 
@@ -470,14 +469,14 @@ De maandelijkse gemiddelden en maandelijkse maxima van de significante golfhoogt
 
 De significante golfhoogte, $H_{1/3}$, komt voor windgolven goed overeen met de significante golfhoogte die bepaald is uit het spectrum, $H_{m0}$. Op basis van de tijdseries per station constateren we geen trend in toe of afname van de golfhoogtes.
 
-Zoals te verwachten zijn de golven in de monding (Deurloo, Cadzand, Wielingen) het hoogste, met gemiddelden van \~1 m en maxima net boven de 4 m bij Deurloo, zie ook Figuur \@ref(fig:gemiddeldeHs). Niet al deze golven propageren de Westerschelde in, alleen het deel wat naar het (zuid)oosten propageert. Een deel van de golfenergie die wel richting de Westerschelde propageert, wordt verder gedissipeerd op de ondiepe delen in de monding en de Westerschelde. In de Westerschelde zijn de gemiddelde significante golfhoogtes daardoor een stuk lager, rond 25 cm, met maxima rond de 1 m en 1,5 m bij Hansweert. De meeste golven in de Westerschelde zijn lokaal opgewekte golven (door de wind, maar deels ook door schepen), waarbij de noordelijke boeien (Honte, Hansweert en Bath) een grotere golfhoogte laten zien dan de zuidelijke (Hoofdplaat en Pas van Terneuzen). Dit heeft waarschijnlijk te maken met een overheersende zuidwestenwind, waardoor de strijklengte van de noordelijke stations groter is.
+Zoals te verwachten zijn de golven in de monding (Deurloo, Cadzand, Wielingen) het hoogste, met gemiddelden van \~0.6 t/m 0.9 m en maxima net boven de 1.6 m bij Deurloo, zie ook Figuur \@ref(fig:gemiddeldeHs). Niet al deze golven propageren de Westerschelde in. Alleen de golven die naar het (zuid)oosten bewegen propageren de Westerschelde in. Een deel van de golfenergie die wel richting de Westerschelde propageert, wordt verder gedissipeerd op de ondiepe delen in de monding en de Westerschelde. In de Westerschelde zijn de gemiddelde significante golfhoogtes daardoor een stuk lager, rond 20 cm, met maxima verschillend van 0.2 t/m 0.6 m. De meeste golven in de Westerschelde zijn lokaal opgewekte golven (door de wind, maar deels ook door schepen), waarbij de noordelijke boeien (Honte, Hansweert en Bath) een grotere golfhoogte laten zien dan de zuidelijke (Hoofdplaat en Pas van Terneuzen). Dit heeft waarschijnlijk te maken met een overheersende zuidwestenwind, waardoor de strijklengte van de noordelijke stations groter is.
 
-Maximale significante golfhoogtes voor windgolven worden in de Westerschelde geschat op 1.5 meter op basis van @BreugemHolt2006. Dit is gebaseerd op een strijklengte van 10 kilometer met een wind snelheid van 22 m/s. Golfhoogtes groter dan 1.5 meter zijn daarom te wijten aan schepen en/of meetfouten. Maximale golfhoogtes op de Noordzee zijn in de orde grootte van meerdere meters (e.g. $H_s$ \> 5 meter tijdens een grotere storm). Figuur \@ref(fig:cdfplotHs) laat de empirische distributie van golfhoogte op basis van alle beschikbare data zien. Hierin constateren we dat de mediaan van de significante golfhoogte in de Westerschelde tussen de 9 en 70 centimeter ligt. Voor stations verder vanaf de monding is minder dan 10% groter dan 50 centimeter, terwijl in Deurloo dit 3x zo hoog is (i.e. 150 centimeter). Al met al lijkt de golfhoogte in de Westerschelde veelal lager dan 25 cm, terwijl de golfhoogte in de monding (i.e. Cadzand, Deurloo en Wielingen) tussen de 40 en 70 cm ligt. Voor sommige locaties treedt wel eens een groot verschil tussen $H_{1/3}$ en $H_{m0}$ op. Dit wijst erop dat het scheepsgolven of meetfouten betreft en geen windgolven.
+Maximale significante golfhoogtes voor windgolven worden in de Westerschelde geschat op 1.5 meter op basis van @BreugemHolt2006. Dit is gebaseerd op een strijklengte van 10 kilometer met een wind snelheid van 22 m/s. Golfhoogtes groter dan 1.5 meter zijn daarom te wijten aan schepen en/of meetfouten. Maximale golfhoogtes op de Noordzee zijn in de orde grootte van meerdere meters (e.g. $H_s$ \> 5 meter tijdens een grotere storm). Figuur \@ref(fig:cdfplotHs) laat de empirische distributie van golfhoogte op basis van alle beschikbare data zien. Hierin constateren we dat de mediaan van de significante golfhoogte in de Westerschelde tussen de 10 en 75 centimeter ligt. Voor stations verder vanaf de monding is minder dan 10% groter dan 25 centimeter, terwijl in Deurloo dit 4x zo hoog is (i.e. 100 centimeter). Al met al lijkt de golfhoogte in de Westerschelde veelal lager dan 25 cm, terwijl de golfhoogte in de monding (i.e. Cadzand, Deurloo en Wielingen) tussen de 50 en 75 cm ligt. Voor sommige locaties treedt wel eens een groot verschil tussen $H_{1/3}$ en $H_{m0}$ op. Dit wijst erop dat het scheepsgolven of meetfouten betreft en geen windgolven.
 
 ```{r hydroGolfHs}
 #dt <- tex2dt("Figuren/Hydro/Golven/meanvalues_Hs.tex")
 #knitr::kable(dt, col.names = c("Station","$H_{1/3,gem}$","$H_{1/3,max}$","$H_{m0,gem}$","$H_{m0,max}$"),
-#             caption = "Gemiddelde en maximale waardes voor de golfperiode (zowel $H_{1/3}$ als  $H_{m0}$) voor alle stations.")
+#             caption = "Gemiddelde en maximale waardes voor de golfhoogtes in cm (zowel $H_{1/3}$ als  $H_{m0}$) voor alle stations.")
 
 GGH <- stationWeightedMean(df, "Hm0: Significante golfhoogte uit 10mHz spectrum in cm") %>%
   select(Station, `Hm0 med` = Gemiddelde)
@@ -578,12 +577,12 @@ De golfperiode $T_{H,1/3}$ laat bij Hansweert en Bath een paar breuken in de mee
 
 De gemiddelde golfperiode behorende bij het hoogste 1/3 deel van de golven is duidelijk anders dan de gemiddelde golfperiode uit het spectrum, waarbij het spectrale gemiddelde van het kwadraat van de frequentie van alle golven is bepaald. %alle golven worden meegenomen. Hogere golven hebben een langere periode, zoals blijkt het verschil tussen $T_{H,1/3}$ en $T_{m02}$. Vooral in de Westerschelde is het verschil tussen de twee periodeparameters groot. Mogelijk speelt een rol dat $T_{H,1/3}$ gedomineerd wordt door niet-lokaal opgewekte golven, en $T_{m02}$ door kortere lokaal opgewekte golven. Er is geen voor de hand liggende reden hiervoor te noemen. Voor beide periodeparameters geldt dat de golven in de monding de langste periode hebben, zoals te zien in Figuur \@ref(fig:gemiddeldeTm02). De maximale gemiddelde golfperiode van lokaal opgewekte golven in de Westerschelde wordt, op basis van @BreugemHolt2006, geschat op 4,3 seconden. Dit is gebaseerd op een strijklengte van 10 kilometer met een wind snelheid van 22 m/s. Voor stations op de Noordzee loopt de maximale golfperiode op tot +/- 18 seconden (e.g. swell condities). Langere golfperiodes hoeven niet noodzakelijkerwijs incorrect te zijn, maar het is twijfelachtig dat golfperiodes van meer dan 15 s en soms zelfs 30 s aan windgolven toe te schrijven, zeker als die op slechts op één locatie tegelijk optreden. Het is goed mogelijk dat de waarnemingen als bij Hansweert (Figuur \@ref(fig:hydroTHansweert)) samenhangen met scheepsgolven of met effect van een schip dat voorbij komt.
 
-Figuur \@ref(fig:cdfplotTmo2) laat de empirische distributie van gemiddelde golfperiode op basis van alle beschikbare data zien. Hierin constateren we dat de mediaan van de golfperiode in de Westerschelde tussen de 1,5 en 4,0 seconden ligt. Voor de stations in de Westerschelde heeft 10% van de golven een periode korter dan 2 seconden. Algemeen geldt dat golven in de monding golfperiodes van 3-4 seconden hebben. In de Westerschelde neemt dit af en zijn er golf periodes van 1,5 tot 3 seconden. Opvallend is dat de golfperiode bij Cadzand langer is dan Wielingen.
+Figuur \@ref(fig:cdfplotTmo2) laat de empirische distributie van gemiddelde golfperiode op basis van alle beschikbare data zien. Hierin constateren we dat de mediaan van de golfperiode in de Westerschelde tussen de 3 en 4,5 seconden ligt. Algemeen geldt dat golven in de monding golfperiodes van 3-4 seconden hebben. In de Westerschelde neemt dit af en zijn er golf periodes van 1,5 tot 3 seconden. Opvallend is dat verschillende curves suggereren dat er een duidelijke knik zit bij ongeveer 3.5-4 seconden. Dit suggereert dat het mogelijk moet zijn, via spectrale filtering, om de scheepsgolven en de windgolven van elkaar te scheiden. Dat zou interessante informatie zijn, bijvoorbeeld bij het bepalen van de dijkhoogtes (er zijn geen scheepsgolven bij maatgevende condities).
 
 ```{r hydroGolfTp}
 #dt <- tex2dt("Figuren/Hydro/Golven/meanvalues_Tp.tex")
 #knitr::kable(dt, col.names = c("Station","$T_{H1/3,gem}$","$T_{H1/3,max}$","$T_{m0,gem}$","$T_{m0,max}$"),
-#             caption = "Gemiddelde en maximale waardes voor de golfperiode (zowel $T_{H,1/3}$ als $T_{m02}$) voor alle stations.")
+#             caption = "Gemiddelde en maximale waardes voor de golfperiodes in s (zowel $T_{H,1/3}$ als $T_{m02}$) voor alle stations.")
 
 TH3 <- stationWeightedMean(df, "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in s") %>%
   select(Station, `Th3 med` = Gemiddelde)
@@ -607,73 +606,73 @@ knitr::kable(dt,
 ```{r gemiddeldeTm02, fig.cap="Gewogen gemiddelde significante golfperiode per station berekend op basis van het spectrum voor alle beschikbare data vanaf 1998."}
 #knitr::include_graphics("Figuren/Hydro/Golven/gemiddelde_tm02.png")
 
-plotWeightedMeanMap(df, "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s")
+plotWeightedMeanMap(df, "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in s")
 ```
 
 ```{r cdfplotTmo2, fig.cap="Empirische distributiefunctie voor de significante golfperiode berekend op basis van het spectrum voor alle beschikbare data vanaf 1998."}
 #knitr::include_graphics("Figuren/Hydro/Golven/cdfplot_tm02.png")
 
-#plotCDF(df, "TM02: Golfperiode berekend uit het spectrum in 0.1 s")
-#plotCDF(df, "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s")
+#plotCDF(df, "TM02: Golfperiode berekend uit het spectrum in s")
+#plotCDF(df, "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in s")
 knitr::include_graphics("n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Figuren/cdf_TH3.png")
 ```
 
 ```{r hydroTDeurloo, fig.cap="Maandelijks gemiddelde en maximum van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Deurloo."}
 #knitr::include_graphics("Figuren/Hydro/Golven/T_Deurloo.png")
 
-plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s","TM02: Golfperiode berekend uit het spectrum in 0.1 s"), "Deurloo (DEUR)")
+plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in s","TM02: Golfperiode berekend uit het spectrum in s"), "Deurloo (DEUR)")
 ```
 
 ```{r hydroTCadzand, fig.cap="Maandelijks gemiddelde en maximum van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Cadzand."}
 #knitr::include_graphics("Figuren/Hydro/Golven/T_Cadw.png")
 
-plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s","TM02: Golfperiode berekend uit het spectrum in 0.1 s"), "Cadzand (CADW)")
+plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in s","TM02: Golfperiode berekend uit het spectrum in s"), "Cadzand (CADW)")
 ```
 
 ```{r hydroTWiel, fig.cap="Maandelijks gemiddelde en maximum van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Wielingen."}
 #knitr::include_graphics("Figuren/Hydro/Golven/T_Wiel.png")
 
-plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s","TM02: Golfperiode berekend uit het spectrum in 0.1 s"), "Wielingen (WIEL)")
+plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in s","TM02: Golfperiode berekend uit het spectrum in s"), "Wielingen (WIEL)")
 ```
 
 ```{r hydroTHFPL, fig.cap="Maandelijks gemiddelde en maximum van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Hoofdplaat."}
 #knitr::include_graphics("Figuren/Hydro/Golven/T_HFPL.png")
 
-plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s","TM02: Golfperiode berekend uit het spectrum in 0.1 s"), "Hoofdplaat (HFPL)")
+plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in s","TM02: Golfperiode berekend uit het spectrum in s"), "Hoofdplaat (HFPL)")
 ```
 
 ```{r hydroTHonte, fig.cap="Maandelijks gemiddelde en maximum van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Honte."}
 #knitr::include_graphics("Figuren/Hydro/Golven/T_HNTE.png")
 
-plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s","TM02: Golfperiode berekend uit het spectrum in 0.1 s"), "Honte (HNTE)")
+plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in s","TM02: Golfperiode berekend uit het spectrum in s"), "Honte (HNTE)")
 ```
 
 ```{r hydroTPVT, fig.cap="Maandelijks gemiddelde en maximum van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Pas van Terneuzen."}
 #knitr::include_graphics("Figuren/Hydro/Golven/T_PVT.png")
 
-plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s","TM02: Golfperiode berekend uit het spectrum in 0.1 s"), "Pas van Terneuzen (PVT)")
+plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in s","TM02: Golfperiode berekend uit het spectrum in s"), "Pas van Terneuzen (PVT)")
 ```
 
 ```{r hydroTOVHW, fig.cap="Maandelijks gemiddelde en maximum van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Overloop van Hansweert."}
 #knitr::include_graphics("Figuren/Hydro/Golven/T_OVHW.png")
 
-plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s","TM02: Golfperiode berekend uit het spectrum in 0.1 s"), "Overloop van Hansweert (OVHW)")
+plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in s","TM02: Golfperiode berekend uit het spectrum in s"), "Overloop van Hansweert (OVHW)")
 ```
 
 ```{r hydroTHansweert, fig.cap="Maandelijks gemiddelde en maximum van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Hansweert."}
 #knitr::include_graphics("Figuren/Hydro/Golven/T_HAWI.png")
 
-plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s","TM02: Golfperiode berekend uit het spectrum in 0.1 s"), "Hansweert (HAWI)")
+plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in s","TM02: Golfperiode berekend uit het spectrum in s"), "Hansweert (HAWI)")
 ```
 
 ```{r hydroTOVVA, fig.cap="Maandelijks gemiddelde en maximum van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Overloop van Valkenisse."}
 #knitr::include_graphics("Figuren/Hydro/Golven/T_OVVA.png")
 
-plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s","TM02: Golfperiode berekend uit het spectrum in 0.1 s"), "Overloop van Valkenisse (OVVA)")
+plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in s","TM02: Golfperiode berekend uit het spectrum in s"), "Overloop van Valkenisse (OVVA)")
 ```
 
 ```{r hydroTBath, fig.cap="Maandelijks gemiddelde en maximum van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Bath."}
 #knitr::include_graphics("Figuren/Hydro/Golven/T_BAT2.png")
 
-plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s","TM02: Golfperiode berekend uit het spectrum in 0.1 s"), "Bath (BAT2)")
+plotTrendsGolven(df, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in s","TM02: Golfperiode berekend uit het spectrum in s"), "Bath (BAT2)")
 ```
