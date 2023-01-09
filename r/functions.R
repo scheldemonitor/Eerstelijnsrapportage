@@ -26,6 +26,7 @@ load("data/backgroundmap.Rdata")
 backgroundfill = "white"
 
 trendplotstyle =   theme(
+  plot.title=element_text(size=10, hjust=0.5, face="bold", colour="maroon", vjust=-1),
   text = element_text(color = "#2E89BF"),
   line = element_line(color = "#2E89BF"),
   plot.background = element_rect(fill = backgroundfill, color = "transparent"),
@@ -185,6 +186,70 @@ statTableParams <- function(df, parnames, statname, rounding, meanorder = "decre
   }
 }
 
+statGraphParams <- function(df, parnames, meanorder = "decreasing", sf = F) {
+  
+  if(sf) df <- df %>% st_drop_geometry()
+  
+  anydata <- df %>% filter(parametername %in% parnames) %>% nrow()
+  if(anydata == 0){
+    return(paste("Er zijn geen data gevonden voor", parnames))
+  }
+  
+  if(anydata > 0){
+    
+    stats <- df %>%
+      # filter(stationname == "Vlissingen boei SSVH") %>%
+      filter(parametername %in% parnames) %>%
+      mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
+      filter(year >= 2000) %>%
+      # group_by(stationname, year, month) %>% 
+      # summarize(monthlymean = mean(value)) %>%
+      group_by(parametername, stationname, year) %>% 
+      summarize(yearlymedian = median(value, na.rm = T), .groups = 'drop') %>%
+      drop_na(yearlymedian) %>%
+      drop_na(yearlymedian) %>%
+      group_by(parametername, stationname) %>%
+      do(broom::tidy(lm(yearlymedian ~ year, data = .))) %>% 
+      filter(term == "year") 
+    
+    p <- df %>% 
+      filter(parametername %in% parnames) %>%
+      # filter(stationname == "Vlissingen boei SSVH") %>% 
+      mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
+      filter(year >= 2000) %>%
+      group_by(parametername, stationname) %>% 
+      summarize(
+        median = median(value, na.rm = T), 
+        `10-perc` = quantile(value, 0.1, na.rm = T), 
+        `90-perc` = quantile(value, 0.9, na.rm = T), .groups = 'drop') %>%
+      left_join(stats)  %>%
+      # mutate(across(where(is.numeric), signif, 3)) %>%
+      mutate(parametername = str_replace(parametername, " drooggewicht in zwevend stof", " in zs")) %>%
+      select(Parameter = parametername,
+             Locatie = stationname,
+             Mediaan = median,
+             `90-perc`,
+             `10-perc`,
+             Trend = estimate,
+             p = p.value) %>% 
+      mutate(Locatie = as.factor(Locatie)) %>%
+      mutate(showTrend = as.factor(ifelse(p <= 0.05, sign(Trend), NA))) %>%
+      ggplot(aes(Parameter, Locatie)) +
+      geom_tile(aes(fill = showTrend)) +
+      coord_flip() +
+      scale_fill_manual(values = c("green", "white", "red")) +
+      theme(axis.text.y = element_text(size = 7))
+    scale_fill_gradient2(low = "green", high = "red", midpoint = 0, mid = "white", na.value = "grey")
+    
+    p
+  }
+}
+
+
+
+
+
+
 fytStatTable <- function(df, statname){
   df %>% 
     filter(stationname == statname) %>%
@@ -222,7 +287,7 @@ plotTrends <- function(df, parname, statmethod = sen, sf = F, trend = T, beginja
   if(trend)    p <- p + geom_smooth(method = statmethod, formula = y~x, color = "#2E89BF", fill = "#2E89BF", alpha = 0.2)
   p <- p + facet_wrap(~Station, ncol = 2, scales = "free") +
     theme_minimal() +
-    ylab(parname) +
+    ggtitle(label = parname) +
     coord_cartesian(xlim = c(beginjaar, eindjaar), ylim = c(0,NA)) +
     trendplotstyle
   return(p)
@@ -266,8 +331,9 @@ plotTrendsLimits <- function(df, parname, sf = F, trend = T, statmethod = sen) {
   
   if(trend)    p <- p + geom_smooth(method = statmethod, fill = "blue", alpha = 0.2)
   p <- p + facet_wrap(~Station, ncol = 2) +
-    theme_minimal() +
-    ylab(parname) +
+    # theme_minimal() +
+    labs(title = parname, x = "jaar", y = "mediaan") +
+    # ggtitle(parname) +
     coord_cartesian(ylim = c(0,NA)) +
     trendplotstyle
   return(p)
@@ -294,6 +360,12 @@ plotTrendsLimits2 <- function(df, parname, stations = trendstations, sf = F, tre
       median = median(value, na.rm = T), `10-perc` = quantile(value, 0.1, na.rm = T), `90-perc` = quantile(value, 0.9, na.rm = T)
     ) %>%
     mutate(parametername = str_replace(parametername, " in mg/kg drooggewicht in zwevend stof", "")) %>%
+    mutate(parametername = str_replace(parametername, " in ug/kg drooggewicht in zwevend stof", "")) %>%
+    # mutate(parametername = ifelse(   # werkt niet helemaal goed
+    #   str_detect(parametername, "PCB[0-9]{2,3}"), 
+    #   str_extract(parname, "PCB[0-9]{2,3}" ),
+    #   parametername
+    # )) %>%
     dplyr::select(Station = stationname,
                   parametername,
                   Jaar = year,
@@ -314,7 +386,7 @@ plotTrendsLimits2 <- function(df, parname, stations = trendstations, sf = F, tre
   if(trend)    p <- p + geom_smooth(method = statmethod, fill = "blue", alpha = 0.2)
   p <- p + facet_grid(parametername ~ Station, scales = "free") +
     theme_minimal() +
-    ylab(parname) +
+    ggtitle(label = parname) +
     coord_cartesian(ylim = c(0,NA)) +
     trendplotstyle
   return(p)
@@ -366,7 +438,7 @@ plotTrendsLimitsBiota <- function(df, statname, cat, sciname, sf = F, trend = T,
   if(trend)    p <- p + geom_smooth(method = statmethod, fill = "blue", alpha = 0.2)
   p <- p + facet_wrap(~Parameter, ncol = 2, scales = "free_y") +
     # ylab() +
-    labs(subtitle = paste(statname, sciname, sep = ", ")) +
+    ggtitle(label = paste(statname, sciname, sep = ", ")) +
     coord_cartesian(ylim = c(0,NA)) +
     trendplotstyle
   return(p)
@@ -395,7 +467,7 @@ plotLogTrends <- function(df, parname, sf = F, trend = T, statmethod = sen) {
   if(trend)    p <- p + geom_smooth(method = statmethod, fill = "blue", alpha = 0.2)
   p <- p + facet_wrap(~Station, ncol = 2) +
     theme_minimal() +
-    ylab(parname) +
+    ggtitle(label = parname) +
     coord_cartesian(ylim = c(NA,NA)) +
     scale_y_log10() +
     trendplotstyle
@@ -428,7 +500,7 @@ plotLogAnomalies <- function(df, parname, sf = F) {
     ggplot(aes(datum, exp(anomalie))) + 
     geom_point(aes(), alpha = 0.2) +   #size = `n/year` color = exp(logmaandgemiddelde)
     geom_line(aes(y=exp(rM)), color = "blue", size = 1)  +
-    ylab(parname) +
+    ggtitle(label = parname) +
     facet_wrap(~ stationname, scales = "free", ncol = 2) +
     scale_color_gradientn(colours = jet.colors(7), name = "maandgemiddelde",
                           trans = "log", breaks = my_breaks, labels = my_breaks) +
@@ -485,7 +557,7 @@ plotTrendsGolven <- function(df, parname, locname, sf = F) {
     geom_point(aes(color=Statistiek), fill = "white", shape = 21) + 
     facet_grid(Parameter ~ ., scales="free_y") +
     theme_minimal() +
-    ylab(parname) +
+    ggtitle(label = parname) +
     theme(legend.position="none") +
     trendplotstyle
   return(p)
@@ -506,7 +578,7 @@ plotTrendsByLocation <- function(df, parname, sf = F) {
     geom_point(aes(color=Station), fill = "white", shape = 21) + 
     #facet_grid(Parameter ~ ., scales="free_y") +
     theme_minimal() +
-    ylab(parname) +
+    ggtitle(label = parname) +
     trendplotstyle
   return(p)
 }
@@ -529,7 +601,7 @@ plotTrendsByLocationClass <- function(df, parname, classname, sf = F) {
     geom_point(aes(color=Station), fill = "white", shape = 21) + 
     #facet_grid(Parameter ~ ., scales="free_y") +
     theme_minimal() +
-    ylab(paste(parname, classname)) +
+    ggtitle(label = paste(parname, classname)) +
     trendplotstyle
   return(p)
 }
@@ -551,7 +623,7 @@ plotTrendsBar <- function(df, parname, sf = F) {
     ggplot(aes(x = Jaar, y = Mediaan)) +
     geom_col() +
     facet_wrap(~Station) +
-    ylab(parname) +
+    ggtitle(label = parname) +
     coord_cartesian(ylim = c(0,NA)) +
     trendplotstyle
 }
@@ -577,11 +649,12 @@ plotTrendsSeizoen <- function(df, parname, sf = T) {
     arrange(-Mediaan) %>%
     ggplot(aes(Jaar, Mediaan)) +
     geom_ribbon(aes(ymin = `10-perc`, ymax = `90-perc`, fill = seizoen), alpha = 0.4) +
-    geom_line(aes(color = seizoen)) + geom_point(aes(color = seizoen), fill = "white", shape = 21) +
+    geom_line(aes(color = seizoen), size = 0.75) + 
+    geom_point(aes(color = seizoen), fill = "white", shape = 21, size = 1.5) +
     # geom_smooth(method = "lm", fill = "blue", alpha = 0.2) +
     facet_wrap(~Station, ncol = 2) +
     theme_minimal() +
-    ylab(parname) +
+    ggtitle(label = parname) +
     coord_cartesian(ylim = c(0,NA)) +
     trendplotstyle
 }
@@ -607,11 +680,12 @@ plotLogTrendsSeizoen <- function(df, parname, sf = T) {
     arrange(-Mediaan) %>%
     ggplot(aes(Jaar, Mediaan)) +
     geom_ribbon(aes(ymin = `10-perc`, ymax = `90-perc`, fill = seizoen), alpha = 0.4) +
-    geom_line(aes(color = seizoen)) + geom_point(aes(color = seizoen), fill = "white", shape = 21) +
+    geom_line(aes(color = seizoen), size = 0.75) + 
+    geom_point(aes(color = seizoen), fill = "white", shape = 21, size = 1.5) +
     # geom_smooth(method = "lm", fill = "blue", alpha = 0.2) +
     facet_wrap(~Station, ncol = 2) +
     theme_minimal() +
-    ylab(parname) +
+    ggtitle(label = parname) +
     scale_y_log10() +
     trendplotstyle
 }
@@ -632,14 +706,14 @@ plotTrendsMaand <- function(df, parname, sf = T) {
            Maand = month) %>%
     mutate(MaandNaam = maanden[Maand]) %>%
     mutate(MaandNaam = factor(MaandNaam, levels = maanden)) %>%
-    arrange(-Mediaan) %>%
+    # arrange(-Mediaan) %>%
     ggplot(aes(Jaar, Mediaan)) +
     #geom_ribbon(aes(ymin = `10-perc`, ymax = `90-perc`, fill = month), alpha = 0.4) +
     geom_line(aes(color = Station), size = 0.7) + #geom_point(aes(color = Station), fill = "white", shape = 21) +
     # geom_smooth(method = "lm", fill = "blue", alpha = 0.2) +
     facet_wrap(~MaandNaam, ncol = 3) +
     theme_minimal() +
-    ylab(parname) +
+    ggtitle(label = parname) +
     coord_cartesian(ylim = c(0,NA)) +
     trendplotstyle
 }
@@ -673,7 +747,7 @@ plotTrendsCZVMaand <- function(df, parname, sf = T) {
     # geom_smooth(method = "lm", fill = "blue", alpha = 0.2) +
     facet_wrap(~MaandNaam) +
     theme_minimal() +
-    ylab(parname) +
+    ggtitle(label = parname) +
     coord_cartesian(ylim = c(0,60)) +
     trendplotstyle
 }
@@ -696,11 +770,11 @@ plotLogTrendsMaand <- function(df, parname, sf = T) {
     arrange(-Mediaan) %>%
     ggplot(aes(Jaar, Mediaan)) +
     #geom_ribbon(aes(ymin = `10-perc`, ymax = `90-perc`, fill = month), alpha = 0.4) +
-    geom_line(aes(color = Station)) + #geom_point(aes(color = Station), fill = "white", shape = 21) +
+    geom_line(aes(color = Station), size = 0.75) + #geom_point(aes(color = Station), fill = "white", shape = 21) +
     # geom_smooth(method = "lm", fill = "blue", alpha = 0.2) +
     facet_wrap(~MaandNaam) +
     theme_minimal() +
-    ylab(parname) +
+    ggtitle(label = parname) +
     scale_y_log10() +
     trendplotstyle
 }
@@ -918,7 +992,7 @@ plotWeightedMeanMap <- function(df, parname, html = F) {
     geom_sf(data = backgroundmap, aes(), fill = "lightgrey", alpha = 0.5) +
     geom_sf_label(aes(label = Station), nudge_y = -3000, size = 3)  +
     geom_sf(aes(color = Gemiddelde), size = 6) +
-    labs(subtitle = parname) +
+    ggtitle(label = parname) +
     coord_sf(datum=28992)  +
     scale_color_viridis() +
     theme(axis.title = element_blank(),
@@ -972,7 +1046,7 @@ if(html){  pal <- colorNumeric(viridis(n = 7),
     geom_sf(data = backgroundmap, aes(), fill = "lightgrey", alpha = 0.5) +
     # geom_sf_label(aes(label = Station), nudge_y = -3000, size = 3)  +
     geom_sf(aes(color = Mediaan, size = Mediaan)) +
-    labs(subtitle = parname) +
+    ggtitle(label = parname) +
     coord_sf(datum=28992)  +
     scale_color_viridis() +
     scale_size_continuous(range = c(2,10)) +
@@ -980,7 +1054,12 @@ if(html){  pal <- colorNumeric(viridis(n = 7),
     #       axis.text = element_blank()) +
     # guides(fill = "none", size = "none") +
     mapplotstyle +
-    theme_void()
+    theme_void() +
+    theme(panel.background=element_blank(),
+          panel.spacing = unit(c(0, 0, 0, 0), "cm"),       
+          plot.background = element_rect(fill = "white",colour = NA),
+          plot.margin = unit(c(0, 0, 0, 0), "null"),  # Edited code
+          legend.position = 'none')
   }
 
 
@@ -1028,7 +1107,7 @@ plotLogMedianMap <- function(df, parname, reverse_scale = FALSE, html = F) {
     geom_sf(data = backgroundmap, aes(), fill = "lightgrey", alpha = 0.5) +
     geom_sf_label(aes(label = Station), nudge_y = -3000, size = 3)  +
     geom_sf(aes(color = Mediaan), size = 6) +
-    labs(subtitle = parname) +
+    ggtitle(label = parname) +
     coord_sf(datum=28992)  +
     scale_color_viridis() +
     theme(axis.title = element_blank(),
@@ -1066,7 +1145,7 @@ plotTrendsBiota <- function(df, parname, sf = F, trend = T, statmethod = sen, be
   if(trend)    p <- p + geom_smooth(method = statmethod, color = "#2E89BF", fill = "#2E89BF", alpha = 0.2)
   p <- p + facet_wrap(~Station, ncol = 2, scales = "free") +
     theme_minimal() +
-    ylab(parname) +
+    ggtitle(label = parname) +
     coord_cartesian(xlim = c(beginjaar, eindjaar), ylim = c(0,NA)) +
     trendplotstyle
   return(p)
@@ -1119,7 +1198,7 @@ plotTrendsBiota2 <- function(df, statname, cat, sciname, sf = F, trend = T, stat
   if(trend)    p <- p + geom_smooth(method = statmethod, fill = "blue", alpha = 0.2)
   p <- p + facet_wrap(~Parameter, ncol = 2, scales = "free_y") +
     # ylab() +
-    labs(subtitle = paste(statname, sciname, sep = ", ")) +
+    ggtitle(label = paste(statname, sciname, sep = ", ")) +
     coord_cartesian(ylim = c(0,NA)) +
     trendplotstyle
   return(p)

@@ -3,6 +3,7 @@ output:
   pdf_document: default
   html_document: default
 ---
+
 ```{r setupOppwater, include=FALSE}
 
 knitr::opts_chunk$set(
@@ -27,13 +28,14 @@ trendstations <- c("Schaar van Ouden Doel", "Hansweert geul", "Terneuzen boei 20
 extrastations <- c("Wielingen oost", "Hoedekenskerke boei 4")
 
 verifyStations <- function(df) {
-  if(df %>% filter(parametername == parname) %>% distinct(stationname) %>% right_join(tibble(stationname = trendstations))  %>% nrow() == 6) df2 <- df <- df %>% 
+  if(df %>% filter(parametername == parname) %>% distinct(stationname) %>% right_join(tibble(stationname = trendstations))  %>% nrow() == 6){ 
+    df2 <- df %>% 
       filter(stationname %in% c(trendstations)) %>% 
-      mutate(stationname = factor(stationname, levels = c(trendstations, extrastations))) %>%
+      mutate(stationname = factor(stationname, levels = trendstations)) %>%
       repair_limits() %>%
       group_by(parametername, stationname) %>%
       mutate(across(value, remove_outliers)) %>%
-      ungroup()
+      ungroup()}
   else{
     df2 <- df %>% 
       filter(stationname %in% c(trendstations)) %>% 
@@ -58,11 +60,11 @@ if(refreshData) fysChemOppDataPath(startyear = 1998, endyear = dataJaar, filepat
 df <- read_delim(fysChemOppDataPath, delim = ",", guess_max = 200000) #%>% select(-X1)
 
 df <- df %>% 
-  filter(stationname %in% c(trendstations, extrastations)) %>% 
-  mutate(stationname = factor(stationname, levels = c(trendstations, extrastations))) %>%
+  filter(stationname %in% c(trendstations)) %>% 
+  mutate(stationname = factor(stationname, levels = c(trendstations))) %>%
   # repair_limits() %>%
-  group_by(parametername, stationname) %>%
-  mutate(across(value, remove_outliers)) %>%
+  # group_by(parametername, stationname) %>%
+  # mutate(across(value, remove_outliers)) %>%
   ungroup()
 
 # rm(df)
@@ -105,7 +107,7 @@ knitr::kable(dt,
 
 ```
 
-Figuur \@ref(fig:fysischSaliJaar) toont de mediane saliniteit per station samen met het 10- en 90-percentiel van de gemeten waarde per jaar. De stations zijn gerangschikt in stroomafwaartse richting. Daarnaast zijn in Tabel \@ref(tab:fysischSaliniteit) deze waardes per station weergegeven.
+Figuur \@ref(fig:fysischSaliJaar) toont de resultaten voor salinteit per jaar. De stations zijn gerangschikt in stroomafwaartse richting. Daarnaast zijn in Tabel \@ref(tab:fysischSaliniteit) deze waardes per station weergegeven.
 
 De zoutgehaltes nemen af in stroomopwaartse richting zoals te zien in is in Figuur \@ref(fig:gemiddeldSali) ten gevolge van de zoetwaterafvoer van de Schelde. Bij Schaar van Ouden Doel bedraagt de saliniteit nog circa een kwart van de saliniteit op zee. De variabiliteit in saliniteit neemt toe in stroomopwaartse richting, zowel binnen een jaar, getuige de extreme waardes, als tussen de jaren. Uit de grafieken blijkt dat de jaarmediane saliniteit nabij Hansweert geul rond het jaar 2001 een minimum had. De jaren direct na 2001, tot ca. 2004, tonen een sterke stijging. Na 2004 is de stijging minder sterk. Bij Terneuzen boei 20 is eenzelfde patroon zichtbaar. In meer zeewaartse richting neemt de variatie in saliniteit af, door grotere invloed van het getij. Over alle beschikbare gegevens lijkt er een toename van de saliniteit, met name bij Hansweert geul.
 
@@ -116,7 +118,6 @@ De toenemende trend is significant bij stations Schaar van Ouden Doel en Hanswee
 plotTrends(df2, parname, statmethod = sen)
 
 ```
-
 
 ```{r gemiddeldSali, fig.cap="Mediaan saliniteit per station berekend op alle beschikbare gegevens vanaf 1997."}
 
@@ -199,7 +200,7 @@ plotMedianMap(parname)
 
 ### Zomer- en de winterwaarden {#watertemp-winterzomer}
 
-Figuur \@ref(fig:fysischTempZomerWinter) toont de zomer- en wintermediane watertemperatuur per jaar voor de verschillende stations. Wat betreft de ruimtelijke gradiënten valt op dat in de zomer de temperatuur afneemt in stroomafwaartse richting, omdat het zeewater relatief koel is ten opzichte van het water vanaf de Zeeschelde. In de winter is dit patroon minder duidelijk. 
+Figuur \@ref(fig:fysischTempZomerWinter) toont de zomer- en wintermediane watertemperatuur per jaar voor de verschillende stations. Wat betreft de ruimtelijke gradiënten valt op dat in de zomer de temperatuur afneemt in stroomafwaartse richting, omdat het zeewater relatief koel is ten opzichte van het water vanaf de Zeeschelde. In de winter is dit patroon minder duidelijk.
 
 ```{r fysischTempZomerWinter, fig.cap="Mediaantemperatuur gedurende de zomer en de winter in het oppervlaktewater van de Westerschelde en de monding."}
 #knitr::include_graphics("Figuren/Fysisch/Temperatuur/Zomer_winter.png")
@@ -238,15 +239,15 @@ parname = "Zuurstof in % in oppervlaktewater"
 plotMedianMap(df2, parname)
 ```
 
-Het zuurstofgehalte is van belang bij de beschouwing van biologische parameters. Het zuurstofgehalte wordt 1 meter onder het wateroppervlak gemeten, tegelijkertijd met de saliniteit en de temperatuur. De zuurstofgehaltes worden weergegeven als een absoluut gehalte in mg/l en als een percentage van de verzadigingsconcentratie.
+Het zuurstofgehalte is van belang bij de beschouwing van biologische parameters. Het zuurstofgehalte wordt 1 meter onder het wateroppervlak gemeten, tegelijkertijd met de saliniteit en de temperatuur. De zuurstofgehaltes worden bepaald als een absoluut gehalte in mg/l en als een percentage van de verzadigingsconcentratie. We presenteren hier de resultaten van de laatste, percentage van de verzadigingsconcentratie.
 
-De zuurstofverzadigingsconcentratie neemt af met toenemende temperatuur en toenemend zoutgehalte. Dit zorgt voor een seizoensmatige fluctuatie van het absolute zuurstofgehalte. Het verzadigingspercentage wordt hier niet door beïnvloed. Zuurstofgehaltes onder de verzadigingsconcentratie wijzen op de afbraak van organisch materiaal, terwijl waardes boven de verzadigingsconcentratie kunnen optreden als gevolg van primaire productie. Op zee (i.e. Walcheren 20 en 2 km uit de kust) is de concentratie tegen de 100 % en varieert tot boven de 110 %. Hansweert, Vlissingen en Terneuzen fluctueren rond de 95 %, terwijl Schaar van Ouden Doel rond de 70-80 % hangt, zie Figuur \@ref(fig:gemiddeldZuurstof). In het verleden zijn de zuurstofgehaltes in de Westerschelde erg laag geweest, op sommige plaatsen was zelfs sprake van zuurstofloze situatie, als gevolg van lozingen van huishoudelijk en industrieel afvalwater. Inmiddels is de situatie sterk verbeterd.
+De zuurstofverzadigingsconcentratie neemt af met toenemende temperatuur en toenemend zoutgehalte. Dit zorgt voor een seizoensmatige fluctuatie van het absolute zuurstofgehalte. Het verzadigingspercentage wordt hier niet door beïnvloed. Zuurstofgehaltes onder de verzadigingsconcentratie wijzen op de afbraak van organisch materiaal, terwijl waardes boven de verzadigingsconcentratie kunnen optreden als gevolg van primaire productie. Op zee (i.e. Walcheren 20 en 2 km uit de kust) is de concentratie tegen de 100 % en varieert tot boven de 110 %. Hansweert, Vlissingen en Terneuzen fluctueren rond de 95 %, terwijl Schaar van Ouden Doel rond de 70-80 % hangt, zie Figuur \@ref(fig:gemiddeldZuurstof). In het verleden zijn de zuurstofgehaltes in de Westerschelde erg laag geweest, op sommige plaatsen was zelfs sprake van een zuurstofloze situatie, als gevolg van lozingen van huishoudelijk en industrieel afvalwater. Inmiddels is de situatie sterk verbeterd.
 
-### jaarmediane verzadigingspercentage zuurstof {#zuurstof-jaar-verzadiging}
+### Jaarmediane verzadigingspercentage zuurstof {#zuurstof-jaar-verzadiging}
 
-Figuur \@ref(fig:fysischZuurstofpercentageJaar) toont het jaarmediane zuurstofverzadigingspercentage per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met de laagste en de hoogste gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischZuurstofpercentage) zijn de Mediaan, 10- en 90-percentiel waardes per station weergegeven.
+Figuur \@ref(fig:fysischZuurstofpercentageJaar) toont de jaarlijkse resultaten voor zuurstofverzadigingspercentage per station voor de periode vanaf 1996 t/m `r dataJaar`. Daarnaast zijn in Tabel \@ref(tab:fysischZuurstofpercentage) de resultaten over alle jaren per station weergegeven.
 
-De resultaten laten een (sterke) onderverzadiging zien (waardes \< 100 %) op het station Schaar van Ouden Doel. Op dit station is een duidelijke positieve trend waarneembaar, die de laatste jaren wat lijkt af te vlakken, gezien de gemiddelde waardes. De minimale waardes laten nog wel een stijgende trend zien. Het verzadigingspercentage bij Schaar van Ouden Doel is de afgelopen jaren toegenomen met 2 % per jaar en deze toename is statistisch significant. Dit kan verklaard worden door een verbetering van de waterkwaliteit. In de rest van de Westerschelde is deze toename lager met matige significantie (Hansweert geul) of niet significant aanwezig (Terneuzen en Vlissingen). Op zee lijkt het verzadigingspercentage juist af te nemen met ongeveer 1 % per jaar hoewel deze afname geen significante correlatiecoëfficiënt heeft.
+De resultaten laten een (sterke) onderverzadiging zien (waardes \< 100 %) op het station Schaar van Ouden Doel. Op dit station is wel een duidelijke positieve trend waarneembaar, die de laatste jaren wat lijkt af te vlakken. Het verzadigingspercentage bij Schaar van Ouden Doel is de afgelopen jaren toegenomen met 1.3 % per jaar en deze toename is statistisch significant. Dit kan verklaard worden door een verbetering van de algemene waterkwaliteit. In de rest van de Westerschelde is deze toename lager maar nog steeds significant. Op zee neemt het verzadigingspercentage juist af met ongeveer 2 % per jaar. Ook deze afname is significant.
 
 ```{r fysischZuurstofpercentage}
 
@@ -287,55 +288,6 @@ if(knitr::is_html_output()){
 } else p
 ```
 
-### jaarmediane zuurstofgehalte {#zuurstof-jaar-gehalte}
-
-Figuur \@ref(fig:fysischZuurstofJaar) toont het jaarmediane zuurstofgehalte per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met 10- en 90-percentiel gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischZuurstofJaarTab) de Mediaan, 10- en 90-percentiel waardes per station over de hele periode weergegeven.
-
-De resultaten laten de laagste waardes zien op het station Schaar van Ouden Doel. Op dit station is een duidelijke positieve trend waarneembaar die de laatste jaren afvlakt is en waardes gelijk aan de waardes bij Hansweert geul aanneemt. Op de overige stations liggen de mediane waardes dicht bij elkaar, en de extreme waardes vertonen uitschieters naar ca. 12 mg/l en ca. 15 mg/l. Merk op dat de kleine variaties van jaar tot jaar het gevolg kunnen zijn van temperatuurverschillen die de verzadigingsconcentratie beïnvloeden. In de monding is het zuurstofgehalte iets hoger dan in de Westerschelde.
-
-```{r fysischZuurstofJaarTab}
-
-parname = "Zuurstof in mg/l in oppervlaktewater"
-rounding = 3
-df2 <- verifyStations(df)
-
-dt <- statTable(df2, parname, rounding)
-knitr::kable(dt, 
-             align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van zuurstof (mg/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
-```
-
-```{r fysischZuurstofJaar, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het zuurstofgehalte in mg/L in het oppervlaktewater van de Westerschelde en de monding."}
-#knitr::include_graphics("Figuren/Fysisch/Zuurstof_mg/jaar.png")
-df2 <- verifyStations(df)
-
-plotTrends(df2, parname)
-```
-
-
-### Maandelijkse waarden zuurstofgehalte {#zuurstof-maand-gehalte}
-
-Figuur \@ref(fig:fysischZuurstofMaand) toont de maandelijkse mediaanwaarden van het zuurstofgehalte voor de verschillende stations. Voor Terneuzen boei 20, Walcheren 2 km uit de kust en Walcheren 20 km uit de kust betreft dit meestal maar één meetwaarde, voor Schaar van Ouden Doel meestal twee en voor Hansweert geul en Vlissingen boei SSVH één à twee, afhankelijk van het seizoen.
-
-De resultaten laten heel duidelijk zien dat het station Schaar van Ouden Doel de laagste zuurstofgehaltes heeft, vooral in de zomermaanden. Ook de positieve trend op dit station is duidelijk waarneembaar en deze heeft ervoor gezorgd dat de zuurstofgehaltes de laatste jaren bij Schaar van Ouden Doel meestal gelijk is aan de andere stations. Hoge zuurstofgehaltes, vermoedelijk als gevolg van primaire productie, treden vooral op in het voorjaar. In de maanden april en mei is er ook meer variatie in de zuurstofgehaltes te zien dan in de andere maanden.
-
-```{r fysischZuurstofMaand, fig.width=10, fig.cap="Maandelijkse mediaan voor zuurstofgehalte in mg/L in het oppervlaktewater van de Westerschelde en de monding."}
-#knitr::include_graphics("Figuren/Fysisch/Zuurstof_mg/maand.png")
-
-parname = "Zuurstof in mg/l in oppervlaktewater"
-df2 <- verifyStations(df)
-
-p <- plotTrendsMaand(df2, parname, sf = F)
-if(knitr::is_html_output()){
-  ggplotly(p) %>% 
-    layout(
-      legend = list(orientation = "h",   # show entries horizontally
-                    xanchor = "center",  # use center of legend as anchor
-                    x = 0.5, y = -0.05)             # put legend in center of x-axis
-    )
-} else p
-```
-
 ## Chlorofyl-a {#chlorofyl}
 
 Voor de bepaling van de chlorofyl-a concentratie wordt een monster van het oppervlaktewater genomen dat meteen wordt gekoeld. Vervolgens wordt het naar het laboratorium gebracht voor verdere analyse. De chlorofyl-a concentratie is een maat voor de hoeveelheid algen in het water en vertoont daardoor vooral hoge waardes in het voorjaar, als algen beginnen te groeien. Chlorofyl-a heeft een hoge variabiliteit, doordat de hoeveelheid algen varieert in tijd, maar ook de hoeveelheid chlorofyl-a in algen variabel is afhankelijk van soort en fysiologische staat. Algengroei in de Westerschelde is zelf ook variabel, omdat het vooral wordt gestuurd door de hoeveelheid licht, wat van het weer afhangt, en de lichtbeschikbaarheid, wat grotendeels bepaald wordt door een sterk fluctuerende concentratie zwevend stof. Over het algemeen neemt de hoeveelheid chlorofyl-a toe naarmate men verder stroomopwaarts komt, zie Figuur \@ref(fig:gemiddeldchlorofyl).
@@ -356,7 +308,7 @@ knitr::kable(dt,
 
 Figuur \@ref(fig:fysischChlorofylJaar) toont het jaarmediane gehalte chlorofyl-a per station voor de periode 1996-2018, samen met de laagste en de hoogste gemeten waarde. Daarnaast zijn in Tabel \@ref(tab:fysischChlorofyl) de mediaan, 10- en 90-percentiel waardes per station over de hele periode weergegeven.
 
-De mediane waardes zijn relatief laag (ca. 2 - 5 $\mu g/l$) en schommelen wat over de tijd. De jaarlijkse 90-percentielen laten een grote variatie zien. Bij Schaar van Ouden Doel zijn de 90-percentielen in de periode 2007-2014 hoger dan in de andere jaren. Over de gehele gegevensset constateren we geen significante statistische veranderingen, behalve op stations Vlissingen, waar een toename is, en in Walcheren 20km uit de kust, waar een significante afname lijkt te zijn over de tijd.
+De mediane waardes zijn relatief laag (ca. 2 - 5 $\mu g/l$) en schommelen wat over de tijd. De jaarlijkse 90-percentielen laten een grote variatie zien. Bij Schaar van Ouden Doel zijn de 90-percentielen in de periode 2007-2014 hoger dan in de andere jaren. Over de gehele gegevensset constateren we geen significante statistische veranderingen, behalve op stations Hansweert Boei en Vlissingen, waar een toename is, en in Walcheren 20km uit de kust, waar een significante afname lijkt te zijn over de tijd.
 
 ```{r fysischChlorofylJaar, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van chlorofyl-a in het oppervlaktewater van de Westerschelde en de monding. De y-as is log-getransformeerd."}
 #knitr::include_graphics("Figuren/Fysisch/Chlorofyl/jaar.png")
@@ -368,7 +320,7 @@ plotLogTrends(df2, parname, trend = F)
 
 ### Zomer- en winterwaardes {#chlorofyl-zomerwinter}
 
-Figuur \@ref(fig:fysischChlorofylZomerWinter) toont het seizoensmediane gehalte chlorofyl-a per station voor de periode 1996-2018. De wintergehaltes zijn laag en vertonen weinig variatie, alleen Schaar van Ouden Doel laat zo nu en dan iets hogere waardes zien. In de zomer is de variatie groter en zijn de hogere gemeten waardes bij Schaar van Ouden Doel in de periode 2007-2013 terug te zien.
+Figuur \@ref(fig:fysischChlorofylZomerWinter) toont het seizoensmediane gehalte chlorofyl-a per station voor de periode 1996-2018. De wintergehaltes zijn laag en vertonen weinig variatie, alleen Schaar van Ouden Doel laat zo nu en dan iets hogere waardes zien. In de zomer is de variatie groter met de hoogste waarden bij Vlissingen boei SSVH.
 
 ```{r fysischChlorofylZomerWinter, fig.cap="Gemiddeld waardes voor de chlorofyl-a gedurende de zomer en de winter in het oppervlaktewater van de Westerschelde en de monding. Statistiek is uitgevoerd op log-getransformeerde gegevens. De y-as is log-getransformeerd."}
 #knitr::include_graphics("Figuren/Fysisch/Chlorofyl/Zomer_winter.png")
@@ -412,7 +364,7 @@ knitr::kable(dt,
 
 Feofytine-a wordt gelijk met chlorofyl-a gemeten. Het is een afbraakproduct van chlorofyl-a, en wordt daarom gezien als een maat voor detritus (dood organisch materiaal). De gegevensset wordt in Figuur \@ref(fig:fysischFeofytineJaar) weergegeven als jaarmediane waardes, inclusief de 10- en 90-percentiele gemeten waardes. Daarnaast zijn in Tabel \@ref(tab:fysischFeofytine) zijn de mediaan, 10- en 90-percentiel waardes per station weergegeven.
 
-Voor het station Schaar van Ouden doel zijn slechts enkele waarnemingen in 1996 en 1997 beschikbaar en dat station is daarom niet opgenomen in deze rapportage. De stations zijn gerangschikt in stroomafwaartse richting. In stroomafwaartse richting neemt de hoeveelheid feofytine-a af, zie Figuur \@ref(fig:gemiddeldfeofytine). Ook lijken op Hansweert en Terneuzen de gehaltes feofytine-a licht af te nemen in de tijd. Specifiek voor Terneuzen neemt de hoeveelheid feofytine af met 0.005 $\mu$ g/L per jaar met enige significantie.
+Voor het station Schaar van Ouden doel zijn slechts enkele waarnemingen in 1996 en 1997 beschikbaar en dat station is daarom niet opgenomen in deze rapportage. De stations zijn gerangschikt in stroomafwaartse richting. In stroomafwaartse richting neemt de hoeveelheid feofytine-a af, zie Figuur \@ref(fig:gemiddeldfeofytine). Ook lijken op Hansweert en Terneuzen de gehaltes feofytine-a licht af te nemen in de tijd. Specifiek voor Terneuzen neemt de hoeveelheid feofytine significant af met 0.004 $\mu$ g/L per jaar. Bij Vlissingen is er een significante toename te zien over de hele periode van 0.005 $\mu$ g/L per jaar
 
 ```{r fysischFeofytineJaar, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van feofytine in het oppervlaktewater van de Westerschelde en de monding. Statistiek is uitgevoerd op log-getransformeerde gegevens. De y-as is log-getransformeerd."}
 #knitr::include_graphics("Figuren/Fysisch/Feofytine/jaar.png")
@@ -444,15 +396,11 @@ Metingen van het chemisch zuurstofverbruik (CZV) en biochemisch zuurstofverbruik
 
 ### Chemisch zuurstofgebruik {#chemisch-zuurstofgebruik}
 
-De bepaling van CZV wordt sterk beïnvloed door chloride. Als vuistregel geldt dat een factor 100 moet worden aangehouden tussen chloridegehalte en de CVZ-waarde. Is de CZV-waarde lager dan het chloridegehalte (in mg/l / 100) dan ligt de CZV-waarde beneden de bepalingsgrens. Dit betekent dat de gepresenteerde waardes lager dan de bepalingsgrens niet dienen te worden geïnterpreteerd.
+De bepaling van CZV wordt sterk beïnvloed door chloride . Als vuistregel geldt dat een factor 100 moet worden aangehouden tussen chloridegehalte en de CVZ-waarde [bewerkt uit @VanderHolst2001]. Is de CZV-waarde lager dan het chloridegehalte (in mg/l / 100) dan ligt de CZV-waarde beneden de bepalingsgrens. Dit betekent dat de gepresenteerde waardes lager dan de bepalingsgrens niet dienen te worden geïnterpreteerd.
 
-1.  De saliniteit bij Schaar van Ouden Doel varieert tussen de 5 en 10 PSU. De minimaal te meten CZV-waardes bij deze saliniteit is respectievelijk 28 tot 56 mg/l. De gemeten waardes liggen dus, rekening houdend met de seizoensvariërende saliniteit, rond de bepalingsgrens van de CZV-bepaling.
+1.  De saliniteit bij Schaar van Ouden Doel varieert tussen de 5 en 10 PSU. De minimaal te meten CZV-waardes bij deze saliniteit is respectievelijk 28 tot 56 mg/l. De gemeten waardes liggen dus, rekening houdend met de seizoensvariërende saliniteit, rond de bepalingsgrens van de CZV-bepaling (tabel \@ref(tab:fysischChemischZuurstofverbruik)).
 2.  De saliniteit bij Terneuzen is ongeveer 25 PSU. De minimale te meten CVZ-waarde wordt volgens eenzelfde berekening 138 mg/l. De gemeten CZV-waarde bedraagt ook hier ongeveer 20 mg/l. Dit is dus ver beneden de bepalingsgrens.
 3.  Bij Vlissingen bedraagt de saliniteit ongeveer 30 PSU. Dat komt overeen met een minimale CZV-waarde van 160 mg/l. Er worden echter waardes gemeten van ca. 20 mg/l. De gemeten waarde ligt dus ver beneden de bepalingsgrens.
-
-*In Figuur* \@ref(fig:fysischChemischZuurstofverbruikMaand) *zijn de bepalingsgrenzen ook weergeven in stippellijnen en is duidelijk te zien dat voor Vlissingen en Terneuzen deze buiten de y-assen vallen.*
-
-#### Jaarlijkse waarden {#chemisch-zuurstofgebruik-jaar}
 
 ```{r fysischChemischZuurstofverbruik}
 # dt <- tex2dt("Figuren/Fysisch/Chemisch_zuurstof/meanvalues.tex")
@@ -468,45 +416,13 @@ knitr::kable(dt,
              caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van chemisch zuurstofverbruik (mg/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 ```
 
-Figuur \@ref(fig:fysischChemischZuurstofverbruikJaar) toont het jaarmediane chemisch zuurstofverbruik per station voor de periode 2001-2018, samen met de laagste en de hoogste gemeten waarde. Daarnaast zijn in Tabel \@ref(tab:fysischChemischZuurstofverbruik) zijn de mediaan, 10- en 90-percentiel waardes per station weergegeven.
-
-Het jaarmediane chemisch zuurstofverbruik ligt bij station Schaar van Ouden Doel hoger dan bij Terneuzen boei 20 en Vlissingen boei SSVH. Daarnaast liggen bijna alle waardes onder de bepalingsgrens. Incidenteel wordt deze grens overschreden voor Schaar van Ouden Doel. De laatste jaren leek er een dalende trend te zijn ingezet, maar sinds ongeveer 2014 namen de jaarlijks gemiddelde waardes bij Schaar van Ouden Doel weer toe. Het laatste jaar (2019) is er weer een afname. Vlissingen en Terneuzen laten geen duidelijke trend zien.
-
-```{r fysischChemischZuurstofverbruikJaar, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het chemisch zuurstofverbruik in het oppervlaktewater van de Westerschelde en de monding."}
-#knitr::include_graphics("Figuren/Fysisch/Chemisch_zuurstof/jaar.png")
-
-plotTrends(df2, parname)
-```
-
-#### Maandelijkse waarden {#chemisch-zuurstofgebruik-maand}
-
-Figuur \@ref(fig:fysischChemischZuurstofverbruikMaand) toont de maandelijkse mediaanwaarden van het chemisch zuurstofverbruik per jaar voor de verschillende stations. Er is geen duidelijke relatie per maand te onderscheiden. Bij Schaar van Ouden Doel liggen de gemeten waardes in de zomer altijd onder de bepalingsgrens en in de winter schommelen de gemeten waardes rond de bepalingsgrens. Voor Terneuzen boei 20 en Vlissingen boei SSVH liggen alle metingen onder de bepalingsgrens.
-
-```{r gemiddeldchemischzuurstof, fig.cap="Mediaan van chemisch zuurstofverbruik per station berekend op alle beschikbare gegevens vanaf 2001."}
-#knitr::include_graphics("Figuren/Fysisch/Chemisch_zuurstof/gemiddelde_waardes.png")
-
-plotMedianMap(df2, parname)
-```
-
-```{r fysischChemischZuurstofverbruikMaand, fig.width = 10, fig.cap="Maandelijkse mediaanwaarde van het chemisch zuurstofverbruik in het oppervlaktewater van de Westerschelde en de monding. De stippellijn geeft de bepalingsgrens weer per station in de bijbehorende kleur (valt soms buiten het weergegeven grafiekgebied).", out.width = "100%"}
-# knitr::include_graphics("Figuren/Fysisch/Chemisch_zuurstof/Maand.png")
-
-p <- plotTrendsCZVMaand(df2, parname, sf = F)
-if(knitr::is_html_output()){
-  ggplotly(p) %>% 
-  layout(
-    legend = list(orientation = "h",   # show entries horizontally
-                  xanchor = "center",  # use center of legend as anchor
-                  x = 0.5, y = -0.05)             # put legend in center of x-axis
-)
-} else p
-```
+Omdat het gemeten CZV over het algemeen niet boven de detectielimiet uitkomt (behalve bij Schaar van Ouden Doel in de winter) worden de overige resultaten niet getoond.
 
 ### Biochemisch zuurstofgebruik {#biochemisch-zuurstofgebruik}
 
 #### Jaarlijkse waarden {#biochemisch-zuurstofgebruik-jaar}
 
-De jaarmedianen, minima en maxima van het biochemisch zuurstofverbruik zijn weergegeven in Tabel \@ref(tab:fysischBiochemischZuurstofverbruik) en Figuur \@ref(fig:fysischBiochemischZuurstofverbruikJaar). De waarde van het biochemisch zuurstofverbruik is in de periode 2006-2011 afgerond op hele getallen. In 2018 zijn vrijwel alle waardes onder het bepalingsgrensniveau (roze stippellijn in de figuren = 2 mg/l).
+De jaarmedianen, minima en maxima van het biochemisch zuurstofverbruik zijn weergegeven in Tabel \@ref(tab:fysischBiochemischZuurstofverbruik) en Figuur \@ref(fig:fysischBiochemischZuurstofverbruikJaar). De waarde van het biochemisch zuurstofverbruik is in de periode 2006-2011 afgerond op hele getallen (\@ref(tab:fysischBiochemischZuurstofverbruik)). Gemiddeld over de tijd zijn de waardes onder het bepalingsgrensniveau (2 mg/l). Om die reden worden verder geen resultaten getoond. 
 
 ```{r fysischBiochemischZuurstofverbruik}
 # dt <- tex2dt("Figuren/Fysisch/Biochemisch_zuurstof/meanvalues.tex")
@@ -522,23 +438,6 @@ knitr::kable(dt,
              caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van biochemisch zuurstofverbruik (mg/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 ```
 
-```{r fysischBiochemischZuurstofverbruikJaar, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het biochemisch zuurstofverbruik in het oppervlaktewater van de Westerschelde en de monding. De roze stippellijn is de bepalingsgrens."}
-#knitr::include_graphics("Figuren/Fysisch/Biochemisch_zuurstof/Jaar.png")
-
-plotTrends(df2, parname)
-```
-
-#### Maandelijkse waarden {#biochemisch-zuurstofgebruik-maand}
-
-In Figuur \@ref(fig:fysischBiochemischZuurstofverbruikMaand) zijn de maandelijks gemeten waardes van biochemisch zuurstofverbruik bij Schaar van Ouden Doel weergegeven in groen en de bepalingsgrens als rode onderbroken lijn. Bij Terneuzen en Vlissingen boei SSVH is in 2011 en 2013 ook gemeten. Bijna alle metingen liggen onder of op de bepalingsgrens.
-
-```{r fysischBiochemischZuurstofverbruikMaand, fig.cap="Maandgemiddelde waarde van het biochemisch zuurstofverbruik in het oppervlaktewater van de Westerschelde en de monding. De roze stippellijn is de bepalingsgrens."}
-
-# knitr::include_graphics("Figuren/Fysisch/Biochemisch_zuurstof/Maand.png")
-
-plotTrendsMaand(df2, parname, sf = F) +
-  geom_hline(yintercept = 2, linetype = 2, color = "pink", size = 1)
-```
 
 ## Lichtklimaat {#lichtklimaat}
 
@@ -546,7 +445,7 @@ In deze paragraaf worden de metingen weergegeven van doorzicht en de extinctieco
 
 Het doorzicht wordt gemeten met een Secchi-schijf. Deze visuele waarnemingen zijn enigszins subjectief, maar als onder juiste voorwaardes wordt gemeten blijft de subjectiviteit beperkt. Voor doorzicht heeft een filtering van de meetpunten plaatsgevonden aan de hand van werkdocument RIKZ/ZDE/2007.862.w @Spronk2008. Dit houdt in dat alleen de meetpunten in de zomerperiode (maart - september) in het tijdvenster 12 uur 's middag + of - 5 uur zijn meegenomen in de analyse (dus tussen 7u en 17 u). Daarnaast zijn alle metingen met een waarde 0 verwijderd. De resultaten van het doorzicht kunnen worden gevonden in Paragraaf \@ref(doorzicht).
 
-De extinctiecoëfficiënt geeft aan in welke mate zonlicht doordringt in de waterkolom. Hoe lager deze waarde, hoe meer het zonlicht doordringt in de waterkolom. De extinctiecoëfficiënt wordt bepaald aan de hand van de 'dynamische sferische cel'-methode, waarbij wordt gemeten met twee bolle lichtsensoren. De bepaling van de extinctie bestaat uit een serie metingen waarbij de onderlinge afstand tussen de sensoren varieert. Daarnaast wordt een dieptesensor gebruikt om vast te stellen op welke diepte onder het wateroppervlak de onderste sensor zich bevindt. De lichtintensiteit aan het wateroppervlak wordt gebruikt als referentie (I0) ten opzichte van de lichtintensiteit (I) bij de sensor op een bepaalde diepte (d). Vervolgens worden de meetpunten grafisch uitgezet: $-\ln(I/I_0) = E \times d$. De extinctiecoëfficiënt is dan de helling van de regressielijn door deze punten en door punt (0,0). De extinctiecoëfficiënt is een objectieve meting voor een lichtklimaat, in tegenstelling tot de meting van doorzicht met de Secchi-schijf. Voor de extinctiecoëfficiënt heeft niet dezelfde filtering van meetpunten plaatsgevonden als voor het doorzicht. De resultaten van de extinctiecoëfficiënt kunnen worden gevonden in Paragraaf \@ref(extinctiecoef).
+De extinctiecoëfficiënt geeft aan in welke mate zonlicht uitdooft in de waterkolom. Hoe lager deze waarde, hoe meer het zonlicht doordringt in de waterkolom. De extinctiecoëfficiënt wordt bepaald aan de hand van de 'dynamische sferische cel'-methode, waarbij wordt gemeten met twee bolle lichtsensoren. De bepaling van de extinctie bestaat uit een serie metingen waarbij de onderlinge afstand tussen de sensoren varieert. Daarnaast wordt een dieptesensor gebruikt om vast te stellen op welke diepte onder het wateroppervlak de onderste sensor zich bevindt. De lichtintensiteit aan het wateroppervlak wordt gebruikt als referentie (I0) ten opzichte van de lichtintensiteit (I) bij de sensor op een bepaalde diepte (d). Vervolgens worden de meetpunten grafisch uitgezet: $-\ln(I/I_0) = E \times d$. De extinctiecoëfficiënt is dan de helling van de regressielijn door deze punten en door punt (0,0). De extinctiecoëfficiënt is een objectieve meting voor een lichtklimaat, in tegenstelling tot de meting van doorzicht met de Secchi-schijf. Voor de extinctiecoëfficiënt heeft niet dezelfde filtering van meetpunten plaatsgevonden als voor het doorzicht. De resultaten van de extinctiecoëfficiënt kunnen worden gevonden in Paragraaf \@ref(extinctiecoef).
 
 ### Doorzicht {#doorzicht}
 
@@ -574,7 +473,7 @@ In Figuur \@ref(fig:fysischDoorzicht) zijn de jaarmedianen over de periode maart
 
 Bij het meetpunt Schaar van Ouden Doel is het doorzicht beduidend lager dan bij de andere meetpunten, zie ook Figuur \@ref(fig:gemiddeldedoorz). Het doorzicht bij Schaar van Ouden Doel toont ook weinig variatie. Dit in tegenstelling tot de andere meetpunten, waar het doorzicht over de beschouwde periode sterker varieert. Alleen bij Hansweert lijkt het doorzicht significant te verbeteren.
 
-```{r fysischDoorzicht, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het doorzicht (dm) in het oppervlaktewater van de Westerschelde."}
+```{r fysischDoorzicht, fig.height=5, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het doorzicht (dm) in het oppervlaktewater van de Westerschelde."}
 #knitr::include_graphics("Figuren/Fysisch/Doorzicht/jaar.png")
 
 plotTrendsLimits(df_doorzicht2, parname, trend = F)
@@ -663,7 +562,7 @@ plotLogMedianMap(df2, parname)
 
 Figuur \@ref(fig:fysischZwevendZomerWinter) toont het seizoensgemiddelde gehalte zwevend stof per station voor de periode 1996-2018. De wintergehaltes zijn over het algemeen wat hoger dan de zomergehaltes. Het station met de meeste zwevende stof bij Schaar van Ouden Doel vertoont relatief weinig verschil tussen zomer en winter.
 
-```{r fysischZwevendZomerWinter, fig.cap="Gemiddeld waardes voor de hoeveelheid zwevende stof gedurende de zomer en de winter in het oppervlaktewater van de Westerschelde en de monding."}
+```{r fysischZwevendZomerWinter, fig.height = 6, fig.cap="Gemiddeld waardes voor de hoeveelheid zwevende stof gedurende de zomer en de winter in het oppervlaktewater van de Westerschelde en de monding."}
 #knitr::include_graphics("Figuren/Fysisch/Zwevende_stof/Zomer_winter.png")
 
 plotLogTrendsSeizoen(df2, parname, sf = F)
@@ -671,11 +570,11 @@ plotLogTrendsSeizoen(df2, parname, sf = F)
 
 ### Afwijking van het langjarig gemiddelde (anomalie)
 
-Zwevend stof, wat grotendeels bestaat uit gesuspendeerd sediment, is erg variabel van jaar tot jaar. De variatie wordt bepaald door verschillende processen, maar er is geen verwachting dat deze op lange termijnb af- of toeneemt. Hierom is geen trend berekend voor het verloop van de concentratie zwevend stof. Voor een beter begrip van de achterliggende factoren kan het wel handig zijn om de variatie van zwevend stof uit te drukken als relatieve afwijking van het langjarig gemiddelde ter plaatse. Hierdoor ontstaan patronen die per locatie genormaliseerd zijn, en die daardoor mogelijk gerelateerd kunnen worden aan onderliggende processen die in het hele estuarium spelen.
+Zwevend stof, wat grotendeels bestaat uit gesuspendeerd sediment, is erg variabel van jaar tot jaar. De variatie wordt bepaald door verschillende processen, maar er is geen verwachting dat deze op lange termijnb af- of toeneemt. Hierom is geen trend berekend voor het verloop van de concentratie zwevend stof. Voor een beter begrip van de achterliggende factoren kan het wel handig zijn om de variatie van zwevend stof uit te drukken als relatieve afwijking van het langjarig gemiddelde ter plaatse. Doordat de anomalieën per locatie genormaliseerd zijn zijn ze goed vergelijkbaar tussen locatie, en kunnen deze mogelijk gerelateerd worden aan onderliggende processen die in het hele estuarium spelen.
 
 In figuur \@ref(fig:ZSrelatiefAnomalie) is dit weergegeven. Bij Schaar van Ouden Doel is een geleidelijke relatieve toename te zien, met de hoogste concentraties vanaf 2016. Bij Hansweert Geul, Terneuzen boei 20, en Vlissingen boei SSVH is deze trend niet waarneembaar, maar zijn relatief hoge waarden rond 2003. Bij Vlissingen en Walcheren 20 km uit de kust zijn hoge waarden te zien rond 2005 en 2012.
 
-```{r ZSrelatiefAnomalie, fig.cap="Anomalie van gesuspendeerd zwevend stof. De anomalie is berekend als relatieve afwijking (punten) en 13 maanden lopend gemiddelde (lijn) van deze afwijking ten opzichte van het (log-getransformeerde) langjarig gemiddelde."}
+```{r ZSrelatiefAnomalie, fig.height=6, fig.cap="Anomalie van gesuspendeerd zwevend stof. De anomalie is berekend als relatieve afwijking (punten) en 13 maanden lopend gemiddelde (lijn) van deze afwijking ten opzichte van het (log-getransformeerde) langjarig gemiddelde."}
 plotLogAnomalies(df2, parname, sf = F)
 ```
 
@@ -683,7 +582,15 @@ plotLogAnomalies(df2, parname, sf = F)
 
 Nutriënten zijn vooral van belang voor de biologische activiteit in de Westerschelde. Stikstof (N) en fosfor (P) zijn van belang omdat het voedingsstoffen (nutriënten) zijn, die als gevolg van puntlozingen en diffuse bronnen in verhoogde concentraties aanwezig kunnen zijn, en aanleiding kunnen geven tot eutrofiëring.
 
-Stikstof komt in het oppervlaktewater voor in verschillende vormen: \* anorganisch: + ammonium ($NH_4^+$); + nitriet ($NO_2^-$); + nitraat ($NO_3^-$); \* organisch (meestal gemeten samen met ammonium als 'Kjeldahl-stikstof'): + opgelost, bv. in de vorm van humuszuren; + particulair, bv. materiaal afkomstig van lozingen of van algengroei.
+Stikstof komt in het oppervlaktewater voor in verschillende vormen:
+
+-   anorganisch:
+    -   ammonium ($NH_4^+$)
+    -   nitriet ($NO_2^-$)
+    -   nitraat ($NO_3^-$)
+-   organisch (meestal gemeten samen met ammonium als 'Kjeldahl-stikstof'):
+    -   opgelost, bv. in de vorm van humuszuren;
+    -   particulair, bv. materiaal afkomstig van lozingen of van algengroei.
 
 De som van alle anorganische en organische vormen van stikstof duiden we aan als totaal stikstof. De som van alle vormen van anorganisch stikstof en opgelost organisch stikstof duiden we aan als opgelost stikstof. Particulair stikstof bestaat voor het overgrote deel uit organisch materiaal.
 
@@ -691,7 +598,14 @@ Ammonium wordt in het water door bacteriën omgezet in nitriet en vervolgens in 
 
 Door de menging van relatief nutriëntenrijk zoet water en relatief nutriëntenarm zout water, zijn de concentraties van totaal stikstof in een estuarium als regel bovenstrooms hoger dan benedenstrooms. Voor andere specifieke deelparameters spelen verschillende biochemische processen een rol, die ertoe leiden dat er een minder directe relatie tussen het gemeten gehalte en de gemeten saliniteit kan bestaan. Door seizoensgebonden biochemische processen in de bovenloop laten veel rivieren in hun benedenloop en hun estuarium een seizoensmatige fluctuatie van het stikstofgehalte zien, met hoge gehaltes in de winter en lage gehaltes in de zomer. De opname door algen in het voorjaar kan dit beeld voor de anorganische fractie versterken.
 
-Fosfor komt in het oppervlaktewater in de volgende vormen voor: \* anorganisch + orthofosfaat (opgelost, o-$PO_4^{3-}$); + gebonden aan slib \* organisch + opgelost, bv. in de vorm van humuszuren; + particulair, bv. materiaal afkomstig van lozingen of van algengroei.
+Fosfor komt in het oppervlaktewater in de volgende vormen voor:
+
+-   anorganisch
+    -   orthofosfaat (opgelost, o-$PO_4^{3-}$)
+    -   gebonden aan slib
+-   organisch
+    -   opgelost, bv. in de vorm van humuszuren;
+    -   particulair, bv. materiaal afkomstig van lozingen of van algengroei.
 
 De som van alle anorganische en organische vormen van fosfor duiden we aan als totaal fosfaat. De som van orthofosfaat en opgelost organisch fosfor duiden we aan als opgelost fosfaat. De som van aan slib gebonden anorganisch en organisch fosfor duiden we aan als particulair gebonden fosfaat.
 
@@ -789,6 +703,8 @@ plotTrends(df2, parname, trend = F) + coord_cartesian(ylim = c(0,NA))
 
 plotTrendsMaand(df2, parname) + coord_cartesian(ylim = c(0,NA))
 ```
+
+
 
 ```{r gemiddeldeammonium, fig.cap="Mediaan  ammoniumgehalte per station berekend op alle beschikbare gegevens vanaf 1996."}
 
@@ -958,7 +874,7 @@ In deze paragraaf worden de metingen weergegeven van particulair organisch kools
 
 Figuur \@ref(fig:fysischKoolstofOpg) toont de jaarmedianen per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischKoolstofOpgTab) de mediaan, 10- en 90-percentiel waardes per station weergegeven. De stations zijn gerangschikt in stroomafwaartse richting.
 
-De gehaltes dalen in stroomafwaartse richting (met toenemende saliniteit), zie ook Figuur \@ref(fig:gemiddeldekoolstofopg). In het estuarium treedt een dalende trend op. Specifiek stations Schaar van Ouden Doel, Hansweert geul en Terneuzen boei 20 dalen 0.04 tot 0.09 mg/L per jaar (statistische significant). Deze afname wordt mogelijk verklaard door een afname in DOC lozingen. Voor de Walcheren locaties is een lichte stijging zichtbaar sinds 2015 die niet voor de overige stations wordt waargenomen. Bij Schaar van Ouden Doel treedt het laatste jaar (2020) een verhoging op.
+De gehaltes dalen in stroomafwaartse richting (met toenemende saliniteit), zie ook Figuur \@ref(fig:fysischKoolstofOpg). In het estuarium treedt een dalende trend op. Specifiek stations Schaar van Ouden Doel, Hansweert geul en Terneuzen boei 20 dalen 0.04 tot 0.09 mg/L per jaar (statistische significant). Deze afname wordt mogelijk verklaard door een afname in DOC lozingen. Voor de Walcheren locaties is een lichte stijging zichtbaar sinds 2015 die niet voor de overige stations wordt waargenomen. Bij Schaar van Ouden Doel treedt de laatste twee jaar (2019, 2020) een verhoging op.
 
 ```{r fysischKoolstofOpgTab}
 
@@ -1148,31 +1064,37 @@ plotTrendsSeizoen(dfm, parname = `TPP/POC`, sf = F) +
 
 ## Metalen {#metalen}
 
-Metalen in het oppervlaktewater worden zowel voor als na filtratie gemeten. Voor de volgende metalen in het oppervlaktewater worden de metingen gepresenteerd: \* Boor (B) \* Chroom (Cr) \* Koper (Cu) \* Uranium (U) \* Vanadium (V) \* Zink (Zn)
+Metalen in het oppervlaktewater worden zowel voor als na filtratie gemeten. Voor de volgende metalen in het oppervlaktewater worden de metingen gepresenteerd:
+
+-   Boor (B)
+-   Chroom (Cr)
+-   Koper (Cu)
+-   Uranium (U)
+-   Vanadium (V)
+-   Zink (Zn)
 
 ### Relatie met Saliniteit
 
-In het Scheldeestuarium wordt het zoete zeewater geleidelijk verdund met zeewater. Stoffen die voornamelijk vanuit het zoete water het estuarium in komen, zullen negatief gecorreleerd zijn met saliniteit. Stoffen die voornamelijk als natuurlijke component in zeewater voorkomen zullen een positieve correlatie vertonen met saliniteit. In figuur \@ref(fig:metalenSaliniteitPlot) is deze relatie te zien tussen de verschillende opgeloste en totaal gemeten metalen en de tegelijkertijd gemeten saliniteit voor alle stations bij elkaar. Hieruit kan geconcludeerd worden dat Boor en Uranium als componenten van zeewater het estuarium inkomen. De andere metalen (chroom, koper, vanadium en zink) vertonen een negatieve correlatie met saliniteit en komen dus vanuit het zoete water het estuarium in. 
+In het Scheldeestuarium wordt het zoete zeewater geleidelijk verdund met zeewater. Stoffen die voornamelijk vanuit het zoete water het estuarium in komen, zullen negatief gecorreleerd zijn met saliniteit. Stoffen die voornamelijk als natuurlijke component in zeewater voorkomen zullen een positieve correlatie vertonen met saliniteit. In figuur \@ref(fig:metalenSaliniteitPlot) is deze relatie te zien tussen de verschillende opgeloste en totaal gemeten metalen en de tegelijkertijd gemeten saliniteit voor alle stations bij elkaar. Hieruit kan geconcludeerd worden dat Boor en Uranium als componenten van zeewater het estuarium inkomen. De andere metalen (chroom, koper, vanadium en zink) vertonen een negatieve correlatie met saliniteit en komen dus vanuit het zoete water het estuarium in.
 
+```{r metalenSaliniteitPlot, fig.height=8, fig.width=8, fig.cap=" De concentratie van gemeten metalen uitgezet tegen de gemeten Saliniteit op dezelfde dag."}
 
-```{r metalenSaliniteitPlot, fig.height=8, fig.cap=" De concentratie van gemeten metalen uitgezet tegen de gemeten Saliniteit op dezelfde dag."}
 df2 %>% 
   filter(category == "metalen" | category == "zware metalen" | grepl("saliniteit", parametername, ignore.case = T)) %>%
   select(datetime, stationname, parametername, value) %>%
-  group_by(datetime, stationname, parametername) %>% summarize(value = mean(value)) %>%
-  # mutate(jaar = year(datetime), maand = month(datetime)) %>%
-  # group_by(stationname, jaar, maand, parametername) %>%
+  mutate(date = as.Date(datetime)) %>%
+  group_by(date, stationname, parametername) %>% summarize(value = mean(value)) %>%
   mutate(parametername = str_replace(parametername, " in oppervlaktewater", "")) %>%
-  # summarize(value = median(value), .groups = 'drop') %>%
-  pivot_wider(names_from = parametername, values_from = value, id_cols = c(datetime, stationname)) %>%
-  pivot_longer(-c(datetime, stationname, `Saliniteit in PSU`), names_to = "parametername") %>%
+  pivot_wider(names_from = parametername, values_from = value, id_cols = c(date, stationname)) %>%
+  pivot_longer(-c(date, stationname, `Saliniteit in PSU`), names_to = "parametername") %>%
+  mutate(jaar = year(date)) %>%
   ggplot(aes(`Saliniteit in PSU`, value)) +
   geom_point(aes(color = stationname)) +
   facet_wrap(~ parametername, scales = "free") +
   theme_minimal() +
   theme(legend.position = 'bottom')
-```
 
+```
 
 Voor Schaar van Ouden Doel zijn de meeste meetgegevens beschikbaar, circa twee metingen per maand. Voor de andere stations (Hansweert geul, Terneuzen boei 20, Vlissingen boei SSVH en Walcheren 2 km uit de kust) is pas sinds 2009 maandelijks gemeten. Voor 2010 is maar een enkele meetwaarde aanwezig in de gegevens. Voor station Walcheren 20 km uit de kust zijn geen gegevens beschikbaar. Voor sommige stations vielen in 2009 en 2010 de gemeten waardes steeds onder de detectiegrens van de apparatuur. In 2011 lijkt dit probleem verholpen. Dit betekent wel dat de waardes voor 2009 en 2010 voor alle stations behalve Schaar van Ouden Doel voorzichtig moeten worden geïnterpreteerd, omdat de gemiddelden worden beïnvloed door de detectiegrens van de meetapparatuur. Hierna presenteren we steeds jaarmedianen en 10- en 90-percentielen per jaar. Merk op dat voor sommige metalen een verschillende verticale as is gebruikt voor de totale concentraties versus de gehaltes na filtratie.
 
