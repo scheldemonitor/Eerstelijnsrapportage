@@ -655,7 +655,7 @@ plotTrendsGolven(df_golven, c("TH3: Gemiddelde periode van de golven waaruit H3 
 plotTrendsGolven(df_golven, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in s","TM02: Golfperiode berekend uit het spectrum in s"), "Honte (HNTE)")
 ```
 
-```{r hydroTPVT, fig.cap="Maandelijks gemiddelde en maximum van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Pas van Terneuzen."}
+```{r hydroTPVT, fig.height = 2.5, fig.cap="Maandelijks gemiddelde en maximum van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Pas van Terneuzen."}
 #knitr::include_graphics("Figuren/Hydro/Golven/T_PVT.png")
 
 plotTrendsGolven(df_golven, c("TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in s","TM02: Golfperiode berekend uit het spectrum in s"), "Pas van Terneuzen (PVT)")

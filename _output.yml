@@ -1,15 +1,15 @@
-bookdown::gitbook:
-  # split_by: section
-  config:
-    toc:
-      collapse: section
-    toc_float:
-      collapsed: false
-      smooth_scroll: false
-  includes:
-    before_body: navbar/navbar.html
-    in_header: clickandzoom.html
-  css: ["navbar/navbar.css", "style/deltares.css", "draft.css"]
+# bookdown::gitbook:
+#   # split_by: section
+#   config:
+#     toc:
+#       collapse: section
+#     toc_float:
+#       collapsed: false
+#       smooth_scroll: false
+#   includes:
+#     before_body: navbar/navbar.html
+#     in_header: clickandzoom.html
+#   css: ["navbar/navbar.css", "style/deltares.css", "draft.css"]
 
 bookdown::bs4_book:
   # theme:

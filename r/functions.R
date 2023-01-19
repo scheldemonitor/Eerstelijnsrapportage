@@ -843,7 +843,7 @@ plotTrendFyto <- function(df, statname){
                  summarize(mediaan = median(value, na.rm = T)) %>% ungroup(),
                aes(yintercept = mediaan)
     ) +
-    facet_wrap(~ parametername, ncol = 2) +
+    facet_wrap(~ parametername, ncol = 2, scales = "free") +
     scale_y_log10() +
     labs(subtitle = statname) +
     trendplotstyle +
