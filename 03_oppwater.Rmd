@@ -1,8 +1,4 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
+
 
 ```{r setupOppwater, include=FALSE}
 
@@ -102,7 +98,7 @@ df2 <- verifyStations(df)
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'lrrrrr', booktabs = TRUE,
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van saliniteit (DIMSLS) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996."
+             caption = "Statistiek voor saliniteit (DIMSLS) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996."
              )
 
 ```
@@ -130,7 +126,7 @@ plotMedianMap(df2, parname)
 
 Figuur \@ref(fig:fysischSaliZomerWinter) toont de zomer- en wintermediaan van saliniteit per jaar voor de verschillende stations. Ook hier is te zien hoe de zoutgehaltes afnemen in stroomopwaartse richting. Het zoutgehalte in de zomer is ongeveer gelijk aan het zoutgehalte in de winter. Bij de bovenstroomse stations kunnen in de winter lagere zoutgehaltes optreden dan in de zomer.
 
-```{r fysischSaliZomerWinter, fig.height = 8, fig.cap="Mediaan, 10- en 90-percentiel voor saliniteit gedurende de zomer en de winter in het oppervlaktewater van de Westerschelde en de monding."}
+```{r fysischSaliZomerWinter, fig.height = 8, fig.cap="Resultaten voor saliniteit gedurende de zomer en de winter in het oppervlaktewater van de Westerschelde en de monding."}
 #knitr::include_graphics("Figuren/Fysisch/Saliniteit/Zomer_winter.png")
 
 plotTrendsSeizoen(df2, parname, sf = F)
@@ -174,7 +170,7 @@ dt <- df2 %>%
   filter(year(datetime) >= 2000) %>% statTable(parname, rounding)
 knitr::kable(dt, 
              align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van temperatuur (oC) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 2000.")
+             caption = "Statistiek voor temperatuur (oC) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 2000.")
 ```
 
 Figuur \@ref(fig:fysischTempJaar) toont de jaarmediane watertemperatuur per station voor de periode vanaf 1996 t/m `r dataJaar`, samen met het 10- en 90-percentiel van de gemeten waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischTemp) deze waardes per station weergegeven samen met de trend.
@@ -183,7 +179,7 @@ De jaarmediane watertemperatuur vertoont over de weergegeven periode geen duidel
 
 De mediaantemperatuur is weergegeven in Figuur \@ref(fig:gemiddeldTemp) en ligt rond de 12 graden voor de Walcheren stations en Terneuzen. De temperatuur bij Vlissingen, Hansweert geul en Schaar van Ouden Doel is hoger dan bij Terneuzen en Walcheren. Er is geen significante trend in temperatuur.
 
-```{r fysischTempJaar, fig.cap="Jaarlijkse Mediaan, 10- en 90-percentiel voor temperatuur in de Westerschelde en in de monding vanaf 1998. In 2015 zijn er bij Walcheren alleen metingen gedaan tussen september en december, hierdoor zijn de waarden lager dan in andere jaren."}
+```{r fysischTempJaar, fig.cap="Jaarlijkse Resultaten voor temperatuur in de Westerschelde en in de monding vanaf 1998. In 2015 zijn er bij Walcheren alleen metingen gedaan tussen september en december, hierdoor zijn de waarden lager dan in andere jaren."}
 #knitr::include_graphics("Figuren/Fysisch/Temperatuur/jaar.png")
 
 plotTrends(df2, parname)
@@ -247,7 +243,7 @@ De zuurstofverzadigingsconcentratie neemt af met toenemende temperatuur en toene
 
 Figuur \@ref(fig:fysischZuurstofpercentageJaar) toont de jaarlijkse resultaten voor zuurstofverzadigingspercentage per station voor de periode vanaf 1996 t/m `r dataJaar`. Daarnaast zijn in Tabel \@ref(tab:fysischZuurstofpercentage) de resultaten over alle jaren per station weergegeven.
 
-De resultaten laten een (sterke) onderverzadiging zien (waardes \< 100 %) op het station Schaar van Ouden Doel. Op dit station is wel een duidelijke positieve trend waarneembaar, die de laatste jaren wat lijkt af te vlakken. Het verzadigingspercentage bij Schaar van Ouden Doel is de afgelopen jaren toegenomen met 1.3 % per jaar en deze toename is statistisch significant. Dit kan verklaard worden door een verbetering van de algemene waterkwaliteit. In de rest van de Westerschelde is deze toename lager maar nog steeds significant. Op zee neemt het verzadigingspercentage juist af met ongeveer 2 % per jaar. Ook deze afname is significant.
+De resultaten laten een (sterke) onderverzadiging zien (waardes \< 100 %) op het station Schaar van Ouden Doel. Op dit station is wel een duidelijke positieve trend waarneembaar, die de laatste jaren wat lijkt af te vlakken. Het verzadigingspercentage bij Schaar van Ouden Doel is de afgelopen jaren toegenomen met 1.3 % per jaar en deze toename is statistisch significant. Dit kan verklaard worden door een verbetering van de algemene waterkwaliteit. In de rest van de Westerschelde is deze toename lager maar nog steeds significant. Op zee (Walcheren stations) was zuurstof over het algemeen oververzadigd (> 100%). Over de jeren neemt het verzadigingspercentage af met ongeveer 2 % per jaar. Ook deze afname is significant. 
 
 ```{r fysischZuurstofpercentage}
 
@@ -255,10 +251,10 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van zuurstof (\\%) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+             caption = "Statistiek voor zuurstof (\\%) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 ```
 
-```{r fysischZuurstofpercentageJaar, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het zuurstofverzadigingspercentage in het oppervlaktewater van de Westerschelde en de monding."}
+```{r fysischZuurstofpercentageJaar, fig.cap="Jaarlijkse Resultaten van het zuurstofverzadigingspercentage in het oppervlaktewater van de Westerschelde en de monding."}
 
 #knitr::include_graphics("Figuren/Fysisch/Zuurstof_percentage/jaar.png")
 
@@ -303,14 +299,14 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van chlorofyl-a (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 2000")
+             caption = "Statistiek voor chlorofyl-a (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 2000")
 ```
 
-Figuur \@ref(fig:fysischChlorofylJaar) toont het jaarmediane gehalte chlorofyl-a per station voor de periode 1996-2018, samen met de laagste en de hoogste gemeten waarde. Daarnaast zijn in Tabel \@ref(tab:fysischChlorofyl) de mediaan, 10- en 90-percentiel waardes per station over de hele periode weergegeven.
+Figuur \@ref(fig:fysischChlorofylJaar) toont het jaarmediane gehalte chlorofyl-a per station voor de periode 1996-2018, samen met de laagste en de hoogste gemeten waarde. Daarnaast zijn in Tabel \@ref(tab:fysischChlorofyl) de Resultaten waardes per station over de hele periode weergegeven.
 
 De mediane waardes zijn relatief laag (ca. 2 - 5 $\mu g/l$) en schommelen wat over de tijd. De jaarlijkse 90-percentielen laten een grote variatie zien. Bij Schaar van Ouden Doel zijn de 90-percentielen in de periode 2007-2014 hoger dan in de andere jaren. Over de gehele gegevensset constateren we geen significante statistische veranderingen, behalve op stations Hansweert Boei en Vlissingen, waar een toename is, en in Walcheren 20km uit de kust, waar een significante afname lijkt te zijn over de tijd.
 
-```{r fysischChlorofylJaar, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van chlorofyl-a in het oppervlaktewater van de Westerschelde en de monding. De y-as is log-getransformeerd."}
+```{r fysischChlorofylJaar, fig.cap="Jaarlijkse Resultaten van chlorofyl-a in het oppervlaktewater van de Westerschelde en de monding. De y-as is log-getransformeerd."}
 #knitr::include_graphics("Figuren/Fysisch/Chlorofyl/jaar.png")
 
 df2 <- verifyStations(df)
@@ -350,7 +346,7 @@ if(knitr::is_html_output()){ggplotly(p) %>%
 ```{r fysischFeofytine}
 # dt <- tex2dt("Figuren/Fysisch/Feofytine/meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum"),
-#              caption = "mediaan, 10- en 90-percentiel waardes van feofytine in $\\mu$ g/L in het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+#              caption = "Resultaten waardes van feofytine in $\\mu$ g/L in het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 
 parname = "Feofytine a in ug/l in oppervlaktewater"
 rounding = 3
@@ -359,14 +355,14 @@ df2 <- verifyStations(df)
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van feofytine-a (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+             caption = "Statistiek voor feofytine-a (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 ```
 
-Feofytine-a wordt gelijk met chlorofyl-a gemeten. Het is een afbraakproduct van chlorofyl-a, en wordt daarom gezien als een maat voor detritus (dood organisch materiaal). De gegevensset wordt in Figuur \@ref(fig:fysischFeofytineJaar) weergegeven als jaarmediane waardes, inclusief de 10- en 90-percentiele gemeten waardes. Daarnaast zijn in Tabel \@ref(tab:fysischFeofytine) zijn de mediaan, 10- en 90-percentiel waardes per station weergegeven.
+Feofytine-a wordt gelijk met chlorofyl-a gemeten. Het is een afbraakproduct van chlorofyl-a, en wordt daarom gezien als een maat voor detritus (dood organisch materiaal). De gegevensset wordt in Figuur \@ref(fig:fysischFeofytineJaar) weergegeven als jaarmediane waardes, inclusief de 10- en 90-percentiele gemeten waardes. Daarnaast zijn in Tabel \@ref(tab:fysischFeofytine) zijn de Resultaten waardes per station weergegeven.
 
 Voor het station Schaar van Ouden doel zijn slechts enkele waarnemingen in 1996 en 1997 beschikbaar en dat station is daarom niet opgenomen in deze rapportage. De stations zijn gerangschikt in stroomafwaartse richting. In stroomafwaartse richting neemt de hoeveelheid feofytine-a af, zie Figuur \@ref(fig:gemiddeldfeofytine). Ook lijken op Hansweert en Terneuzen de gehaltes feofytine-a licht af te nemen in de tijd. Specifiek voor Terneuzen neemt de hoeveelheid feofytine significant af met 0.004 $\mu$ g/L per jaar. Bij Vlissingen is er een significante toename te zien over de hele periode van 0.005 $\mu$ g/L per jaar
 
-```{r fysischFeofytineJaar, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van feofytine in het oppervlaktewater van de Westerschelde en de monding. Statistiek is uitgevoerd op log-getransformeerde gegevens. De y-as is log-getransformeerd."}
+```{r fysischFeofytineJaar, fig.cap="Jaarlijkse Resultaten van feofytine in het oppervlaktewater van de Westerschelde en de monding. Statistiek is uitgevoerd op log-getransformeerde gegevens. De y-as is log-getransformeerd."}
 #knitr::include_graphics("Figuren/Fysisch/Feofytine/jaar.png")
 
 plotLogTrends(df2, parname, trend = F)
@@ -405,7 +401,7 @@ De bepaling van CZV wordt sterk beïnvloed door chloride . Als vuistregel geldt 
 ```{r fysischChemischZuurstofverbruik}
 # dt <- tex2dt("Figuren/Fysisch/Chemisch_zuurstof/meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum"),
-#              caption = "mediaan, 10- en 90-percentiel waardes van het chemisch zuurstofverbruik in mg/L in het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+#              caption = "Resultaten waardes van het chemisch zuurstofverbruik in mg/L in het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 
 parname = "Chemisch zuurstofverbruik in mg/l uitgedrukt in Zuurstof (O2) in oppervlaktewater"
 df2 <- verifyStations(df)
@@ -413,7 +409,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van chemisch zuurstofverbruik (mg/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+             caption = "Statistiek voor chemisch zuurstofverbruik (mg/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 ```
 
 Omdat het gemeten CZV over het algemeen niet boven de detectielimiet uitkomt (behalve bij Schaar van Ouden Doel in de winter) worden de overige resultaten niet getoond.
@@ -427,7 +423,7 @@ De jaarmedianen, minima en maxima van het biochemisch zuurstofverbruik zijn weer
 ```{r fysischBiochemischZuurstofverbruik}
 # dt <- tex2dt("Figuren/Fysisch/Biochemisch_zuurstof/meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
-#              caption = "mediaan, 10- en 90-percentiel waardes van het biochemisch zuurstofverbruik in mg/L in het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+#              caption = "Resultaten waardes van het biochemisch zuurstofverbruik in mg/L in het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 
 parname = "Biochemisch zuurstofverbruik met allylthio-ureum in mg/l in oppervlaktewater"
 df2 <- verifyStations(df)
@@ -435,7 +431,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van biochemisch zuurstofverbruik (mg/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+             caption = "Statistiek voor biochemisch zuurstofverbruik (mg/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 ```
 
 
@@ -466,14 +462,14 @@ rounding = 3
 dt <- statTable(df_doorzicht2, parname, rounding)
 knitr::kable(dt, 
              align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van doorzicht (dm) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 2000.")
+             caption = "Statistiek voor doorzicht (dm) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 2000.")
 ```
 
-In Figuur \@ref(fig:fysischDoorzicht) zijn de jaarmedianen over de periode maart - september in het genoemde tijdvenster van elk jaar weergegeven, samen met de 10- en 90-percentiele gemeten waardes.Van de twee Walcheren stations zijn sinds 2009 geen gegevens meer ontvangen. Daarnaast zijn in Tabel \@ref(tab:fysischDoorzichtTab) zijn de mediaan, 10- en 90-percentiel waardes per station weergegeven. De stations zijn gerangschikt in stroomafwaartse richting. Het aantal beschikbare gegevens per station en jaar is in de figuur \@ref(fig:fysischExtinctiecoef) aangegeven als de grootte van de symbolen.
+In Figuur \@ref(fig:fysischDoorzicht) zijn de jaarmedianen over de periode maart - september in het genoemde tijdvenster van elk jaar weergegeven, samen met de 10- en 90-percentiele gemeten waardes.Van de twee Walcheren stations zijn sinds 2009 geen gegevens meer ontvangen. Daarnaast zijn in Tabel \@ref(tab:fysischDoorzichtTab) zijn de Resultaten waardes per station weergegeven. De stations zijn gerangschikt in stroomafwaartse richting. Het aantal beschikbare gegevens per station en jaar is in de figuur \@ref(fig:fysischExtinctiecoef) aangegeven als de grootte van de symbolen.
 
 Bij het meetpunt Schaar van Ouden Doel is het doorzicht beduidend lager dan bij de andere meetpunten, zie ook Figuur \@ref(fig:gemiddeldedoorz). Het doorzicht bij Schaar van Ouden Doel toont ook weinig variatie. Dit in tegenstelling tot de andere meetpunten, waar het doorzicht over de beschouwde periode sterker varieert. Alleen bij Hansweert lijkt het doorzicht significant te verbeteren.
 
-```{r fysischDoorzicht, fig.height=5, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het doorzicht (dm) in het oppervlaktewater van de Westerschelde."}
+```{r fysischDoorzicht, fig.height=5, fig.cap="Jaarlijkse Resultaten van het doorzicht (dm) in het oppervlaktewater van de Westerschelde."}
 #knitr::include_graphics("Figuren/Fysisch/Doorzicht/jaar.png")
 
 plotTrendsLimits(df_doorzicht2, parname, trend = F)
@@ -481,14 +477,14 @@ plotTrendsLimits(df_doorzicht2, parname, trend = F)
 
 ### Extinctiecoefficient {#extinctiecoef}
 
-In Figuur \@ref(fig:fysischExtinctiecoef) zijn de jaarmedianen over de periode maart - september in het genoemde tijdvenster van elk jaar weergegeven, samen met de 10- en 90-percentiele gemeten waardes. Daarnaast zijn in Tabel \@ref(tab:fysischExtinctiecoefTab) de mediaan, 10- en 90-percentiel waardes per station weergegeven. Bij de stations Walcheren 2 en 20 km uit de kust zijn veel minder metingen beschikbaar dan bij de stations in de Westerschelde. Dit is in de figuur \@ref(fig:fysischExtinctiecoef) aangegeven als de grootte van de symbolen.
+In Figuur \@ref(fig:fysischExtinctiecoef) zijn de jaarmedianen over de periode maart - september in het genoemde tijdvenster van elk jaar weergegeven, samen met de 10- en 90-percentiele gemeten waardes. Daarnaast zijn in Tabel \@ref(tab:fysischExtinctiecoefTab) de Resultaten waardes per station weergegeven. Bij de stations Walcheren 2 en 20 km uit de kust zijn veel minder metingen beschikbaar dan bij de stations in de Westerschelde. Dit is in de figuur \@ref(fig:fysischExtinctiecoef) aangegeven als de grootte van de symbolen.
 
 De extinctiecoëfficiënt neemt toe in stroomopwaartse richting, zie ook Figuur \@ref(fig:gemiddeldexti), wat betekent dat de mate van lichtdoordringing in de waterkolom afneemt in stroomopwaartse richting. Bij Schaar van Ouden Doel is de extinctiecoëfficiënt het hoogst en de mate van lichtdoordringing dus het laagst. Dit komt overeen met de meting van het doorzicht met de Secchi-schijf. De mate van variabiliteit neemt toe in stroomopwaartse richting en is bij Schaar van Ouden Doel het hoogst, in tegenstelling tot de variabiliteit van het doorzicht. De concentratie zwevende stof varieert bij Schaar van Ouden Doel ook meer dan bij de andere stations, wat overeenkomt met de variatie van de extinctiecoëfficiënt. Er is een significante afname van extinctiecoëfficiënt bij Terneuzen (het wordt minder troebel), en in mindere mate bij Walcheren 20.
 
 ```{r fysischExtinctiecoefTab}
 # dt <- tex2dt("Figuren/Fysisch/Extinctiecoefficient/meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum"),
-#              caption = "mediaan, 10- en 90-percentiel waardes van de extinctiecoëfficiënt in $m^{-1}$ van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+#              caption = "Resultaten waardes van de extinctiecoëfficiënt in $m^{-1}$ van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 
 parname = "Lichtextinctie in /m in oppervlaktewater"
 df2 <- verifyStations(df)
@@ -497,10 +493,10 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van lichtextinctie (1/m) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+             caption = "Statistiek voor lichtextinctie (1/m) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 ```
 
-```{r fysischExtinctiecoef, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van de extinctiecoefficiënt in het oppervlaktewater van de Westerschelde en de monding."}
+```{r fysischExtinctiecoef, fig.cap="Jaarlijkse Resultaten van de extinctiecoefficiënt in het oppervlaktewater van de Westerschelde en de monding."}
 #knitr::include_graphics("Figuren/Fysisch/Extinctiecoefficient/jaar.png")
 
 plotTrendsLimits(df2, parname, trend = F)
@@ -531,7 +527,7 @@ Net als voor chlorofyl-a is voor zwevend stof een logtransformatie toegepast voo
 ```{r fysischZwevendeStofTab}
 # dt <- tex2dt("Figuren/Fysisch/Zwevende_stof/meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Afkorting","Gemiddelde","Maximum","Minimum","Trend","R"),
-#              caption = "mediaan, 10- en 90-percentiel waardes van de hoeveelheid zwevende stof in mg/L in het het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+#              caption = "Resultaten waardes van de hoeveelheid zwevende stof in mg/L in het het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 
 parname = "Zwevend stof in mg/l in oppervlaktewater"
 df2 <- verifyStations(df)
@@ -539,14 +535,14 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van zwevend stof (mg/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+             caption = "Statistiek voor zwevend stof (mg/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 ```
 
-Figuur \@ref(fig:fysischZwevendeStof) toont de jaarmedianen voor 1996-2018 per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischZwevendeStofTab) de mediaan, 10- en 90-percentiel waardes per station weergegeven.
+Figuur \@ref(fig:fysischZwevendeStof) toont de jaarmedianen voor 1996-2018 per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischZwevendeStofTab) de Resultaten waardes per station weergegeven.
 
 De stations in de Westerschelde laten mediane gehaltes rond de 50 mg/l zien, met een behoorlijke variatie van jaar tot jaar en tussen de stations. De maximale gehaltes kunnen oplopen tot enkele honderden mg/l. Verder op de zee zijn de gemiddelde gehaltes en de maximumwaardes lager (Walcheren 20 km uit de kust), zie ook Figuur \@ref(fig:gemiddeldezwevendestof). Bij station Schaar van Ouden Doel en Walcheren 2 km uit de kust is over de hele periode een stijging vast te stellen van gemiddeld 1,6 resp 0.3 mg/l per jaar. Bij Terneuzen boei is juist een lichte afname waarneembaar (0.8 mg/l per jaar). Voor de andere stations zijn er geen duidelijke trends in zwevend stof waarneembaar.
 
-```{r fysischZwevendeStof, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van de hoeveelheid zwevende stof in het oppervlaktewater van de Westerschelde en de monding."}
+```{r fysischZwevendeStof, fig.cap="Jaarlijkse Resultaten van de hoeveelheid zwevende stof in het oppervlaktewater van de Westerschelde en de monding."}
 #knitr::include_graphics("Figuren/Fysisch/Zwevende_stof/jaar.png")
 
 plotLogTrends(df2, parname, trend = F)
@@ -621,7 +617,7 @@ Net als in de Eerstelijnsrapportage 2015 is ervoor gekozen (in tegenstelling tot
 
 ### Totaal opgelost stikstof {#stikstof}
 
-Opgelost stikstof (DN) is de som van alle vormen van anorganisch stikstof (ammonium, nitriet, nitraat) en opgelost organisch stikstof. Figuur \@ref(fig:fysischStikstofFil) toont de jaarmedianen per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischStikstofFilTab) de mediaan, 10- en 90-percentiel waardes per station weergegeven. In Schaar van Ouden Doel is het opgelost stikstofgehalte niet bepaald. De stations zijn gerangschikt in stroomafwaartse richting.
+Opgelost stikstof (DN) is de som van alle vormen van anorganisch stikstof (ammonium, nitriet, nitraat) en opgelost organisch stikstof. Figuur \@ref(fig:fysischStikstofFil) toont de jaarmedianen per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischStikstofFilTab) de Resultaten waardes per station weergegeven. In Schaar van Ouden Doel is het opgelost stikstofgehalte niet bepaald. De stations zijn gerangschikt in stroomafwaartse richting.
 
 Deze resultaten laten zien dat de opgelost stikstofgehaltes sterk afnemen in stroomafwaartse richting, zie Figuur \@ref(fig:gemiddeldestikstoffil). Op de bovenstroomse stations zijn de gehaltes van opgelost stikstof immers hoger dan benedenstrooms. Daarnaast hebben alle stations een duidelijke seizoensvariatie (niet weergegeven). De hoeveelheden stikstof na filtratie zijn veel hoger dan particulair gebonden stikstof, wat betekent dat het merendeel van het stikstof in de Westerschelde is opgelost. Daarnaast is een dalende trend waarneembaar over de periode vanaf 2000, vooral in het oostelijk deel van de Westerschelde door een afname in stikstof lozingen. Deze dalende trend is het grootst bij Hansweert (-0,09 mg/L per jaar) en statistisch significant, en lijkt de laatste jaren wel wat af te vlakken.
 
@@ -633,7 +629,7 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van het opgelost stikstofgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+             caption = "Statistiek voor het opgelost stikstofgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 ```
 
 ```{r fysischStikstofFil, fig.cap="Resultaten voor het stikstofgehalte in het oppervlaktewater van de Westerschelde en de monding."}
@@ -651,7 +647,7 @@ plotMedianMap(df2, parname = parname)
 
 ### Particulair gebonden stikstof {#part-gebonden-stikstof}
 
-Figuur \@ref(fig:fysischStikstofPar) toont de jaarmedianen per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischStikstofParTab) de mediaan, 10- en 90-percentiel waardes per station weergegeven. In Schaar van Ouden Doel is het particulair gebonden stikstofgehalte niet bepaald. De stations zijn gerangschikt in stroomafwaartse richting.
+Figuur \@ref(fig:fysischStikstofPar) toont de jaarmedianen per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischStikstofParTab) de Resultaten waardes per station weergegeven. In Schaar van Ouden Doel is het particulair gebonden stikstofgehalte niet bepaald. De stations zijn gerangschikt in stroomafwaartse richting.
 
 De concentraties particulair stikstof tonen een totaal ander verloop dan opgelost stikstof. Er zijn geen duidelijke longitudinale of temporele gradiënten waarneembaar, zie Figuur \@ref(fig:gemiddeldestikstofpar). Net als voor zwevend stof fluctueert de concentratie sterk, en zijn de gehaltes op de meeste stations vergelijkbaar, behalve op Walcheren 20 km uit de kust. De gehaltes particulair stikstof vormen maar een heel klein deel van de concentratie totaal stikstof.
 
@@ -663,7 +659,7 @@ dt <- statTable(df2, parname, rounding)
 # dt <- tex2dt("Figuren/Fysisch/Stikstof_par/meanvalues.tex")
 knitr::kable(dt, 
              # col.names = c("Station","Gemiddelde","Maximum","Minimum"),
-             caption = "Mediaan, 10-percentiel en 90-percentiel  en de trend en p waarde van de trend van het particulair stikstofgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+             caption = "Statistiek voor het particulair stikstofgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 ```
 
 ```{r fysischStikstofPar, fig.cap="Resultaten voor het particulair stikstofgehalte in het oppervlaktewater van de Westerschelde en de monding."}
@@ -677,9 +673,9 @@ plotMedianMap(df2, parname)
 
 ### Ammonium {#ammonium}
 
-Figuur \@ref(fig:fysischAmmonium) toont de jaarlijkse mediane ammoniumconcentratie per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischAmmoniumTab) de mediaan, 10- en 90-percentiel waardes per station weergegeven. De stations zijn gerangschikt in stroomafwaartse richting.
+Figuur \@ref(fig:fysischAmmonium) toont de jaarlijkse mediane ammoniumconcentratie per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischAmmoniumTab) de Resultaten waardes per station weergegeven. De stations zijn gerangschikt in stroomafwaartse richting.
 
-In benedenstroomse richting nemen de concentraties van ammonium sterk af, zie Figuur \@ref(fig:gemiddeldeammonium). Op het station Schaar van Ouden Doel, en in mindere mate Hansweert, zijn hoge pieken waarneembaar. Ook zijn bij Schaar van Ouden Doel en Hansweert de maxima over de periode 1996-2006 afgenomen. Sinds 2006 lijkt de situatie stabiel. Ammoniumconcentraties zijn laag en hebben maar een klein aandeel in totaal stikstof. De minima liggen vaak tegen de detectielimiet (0.01 mg/L) waardoor trends moeilijker waar te nemen zijn.
+In benedenstroomse richting nemen de concentraties van ammonium sterk af, zie Figuur \@ref(fig:gemiddeldeammonium). Op het station Schaar van Ouden Doel, en in mindere mate Hansweert, zijn hoge pieken waarneembaar. Ook zijn bij Schaar van Ouden Doel en Hansweert de maxima over de periode 1996-2006 afgenomen. Sinds 2006 lijkt de situatie stabiel. Ammoniumconcentraties zijn laag en hebben maar een klein aandeel in totaal stikstof. De minima liggen vaak tegen de detectielimiet (0.01 mg/L) waardoor trends moeilijker waar te nemen zijn. Oudere metingen bij Schaar van Ouden Doel zijn gekenmerkt door relatief korte hoge pieken, waardoor de mediaan dicht bij het 10-percentiel komt te liggen. Hier moet overwogen worden om niet de mediaan, maar bijv het gemiddelde te gebruiken voor een meer consistent beeld. 
 
 Als gekeken wordt naar het verloop van de concentraties in de tijd voor de afzonderlijke maanden is er een duidelijk patroon dat ammoniumconcentraties bij Schaar van Ouden Doel in de winter en vroege voorjaar (januari - april) sterk zijn afgenomen (figuur \@ref(fig:fysischAmmoniumMaand)). Echter, het patroon in de overige maanden is minder duidelijk en zeer variabel. Dit verklaart dat er over de jaarlijkse mediaan geen significante trend zichtbaar is
 
@@ -714,7 +710,7 @@ plotMedianMap(df2, parname)
 
 ### Nitriet {#nitriet}
 
-Figuur \@ref(fig:fysischNitriet) toont de jaarmedianen nitriet per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischNitrietTab) de mediaan, 10- en 90-percentiel waardes per station weergegeven.
+Figuur \@ref(fig:fysischNitriet) toont de jaarmedianen nitriet per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischNitrietTab) de Resultaten waardes per station weergegeven.
 
 In benedenstroomse richting nemen de concentraties van nitriet af, zie Figuur \@ref(fig:gemiddeldenitriet). Op het station Schaar van Ouden Doel en in mindere mate de stations benedenstrooms, zijn relatief hoge pieken waarneembaar. Nitriet concentraties zijn laag in vergelijking met nitraat. Bij Schaar van Ouden Doel, Hansweert en Terneuzen daalt de concentratie nitriet significant over de hele period. Deze daling vlakt de laatster jaren af. Sinds 2006 wordt bij Schaar van Ouden Doel en de stations in de monding regelmatig de detectiegrens (0.01 mg/L) bereikt, waardoor de jaarmediane waardes beïnvloed worden. Overal is er in het estuarium een licht dalende trend waarneembaar, die het sterkst is bij Schaar van Oude doel.
 
@@ -740,7 +736,7 @@ plotMedianMap(df2, parname)
 
 ### Nitraat {#nitraat}
 
-Figuur \@ref(fig:fysischNitraat) toont de jaarmedianen per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischNitraatTab) de mediaan, 10- en 90-percentiel waardes per station weergegeven.
+Figuur \@ref(fig:fysischNitraat) toont de jaarmedianen per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischNitraatTab) de Resultaten waardes per station weergegeven.
 
 Deze resultaten laten zien dat de nitraatgehaltes sterk afnemen in stroomafwaartse richting, zie ook Figuur \@ref(fig:gemiddeldenitraat). Daarnaast is een dalende trend waarneembaar vanaf 2000, Deze trend is sterk statistisch significant voor alle stations.
 
@@ -764,7 +760,7 @@ plotMedianMap(df2, parname)
 
 ### Orthofosfaat {#orthofosfaat}
 
-Figuur \@ref(fig:fysischOrthofosfaat) toont de jaarmedianen orthofosfaat per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischOrthofosfaatTab) de mediaan, 10- en 90-percentiel waardes per station weergegeven. Voor deze variabele is er slechts gegevens vanaf 2009 tot en met 2018.
+Figuur \@ref(fig:fysischOrthofosfaat) toont de jaarmedianen orthofosfaat per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischOrthofosfaatTab) de Resultaten waardes per station weergegeven. Voor deze variabele is er slechts gegevens vanaf 2009 tot en met 2018.
 
 De orthosfosfaatconcentraties na filtratie nemen af in stroomafwaartse richting, zie ook Figuur \@ref(fig:gemiddeldeorthofosfaat). De concentratie daalt licht (0.001 - 0.003 mg/l per jaar) maar significant voor alle stations over de hele periode. Bij Schaar van Ouden Doel lijkt de concentratie zich vanaf ongeveer 2005 te stabiliseren.
 
@@ -790,7 +786,7 @@ plotMedianMap(df2, parname)
 
 ### Totaal opgelost fosfaat {#totaal-fosfaat}
 
-Figuur \@ref(fig:fysischFosfaatFil) toont de jaarmedianen fosfaat na filtratie per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischFosfaatFilTab) de mediaan, 10- en 90-percentiel waardes per station weergegeven. Bij Schaar van Ouden Doel wordt het fosfaat na filtratie niet bepaald. De stations zijn gerangschikt in stroomafwaartse richting.
+Figuur \@ref(fig:fysischFosfaatFil) toont de jaarmedianen fosfaat na filtratie per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischFosfaatFilTab) de Resultaten waardes per station weergegeven. Bij Schaar van Ouden Doel wordt het fosfaat na filtratie niet bepaald. De stations zijn gerangschikt in stroomafwaartse richting.
 
 De resultaten lijken sprekend op die van orthofosfaat, vooral op de bovenstroomse stations, zie ook Figuur \@ref(fig:gemiddeldefosfaatfil). Dit komt doordat fosfaat na filtratie de som is van orthofosfaat, hydrolysbaar fosfaat en opgelost organisch fosfor. Het gehalte opgelost organisch fosfor is dus blijkbaar laag. In de richting van de zee is de concentratie opgelost fosfaat een beetje hoger dan die van orthofosfaat. Dat verschil is de organische opgeloste fractie, die niet wordt gemeten in de orthofosfaatanalyse. Er is een dalende en significante trend voor alle stations tot 0.003 mg/L . De daling is groter bij de stroomopwaarts gelegen stations.
 
@@ -808,7 +804,7 @@ plotTrends(df2, parname) + coord_cartesian(ylim = c(0,0.25))
 
 ### Particulair gebonden fosfaat {#part-gebonden-fosfaat}
 
-Figuur \@ref(fig:fysischFosfaatPar) toont de jaarmedianen particulair gebonden fosfaat per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischFosfaatParTab) de mediaan, 10- en 90-percentiel waardes per station weergegeven. Bij Schaar van Ouden Doel wordt het particulair gebonden fosfaat niet bepaald. De stations zijn gerangschikt in stroomafwaartse richting.
+Figuur \@ref(fig:fysischFosfaatPar) toont de jaarmedianen particulair gebonden fosfaat per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischFosfaatParTab) de Resultaten waardes per station weergegeven. Bij Schaar van Ouden Doel wordt het particulair gebonden fosfaat niet bepaald. De stations zijn gerangschikt in stroomafwaartse richting.
 
 De concentraties particulair gebonden fosfaat tonen geen duidelijke longitudinale of temporele gradiënten, zie Figuur \@ref(fig:gemiddeldefosfaatpar). Net als voor zwevend stof fluctueert de concentratie sterk, en zijn de gehaltes op de meeste stations vergelijkbaar, behalve op Walcheren 20 km uit de kust, waar de gemeten gehaltes een stuk lager zijn. Bij Hansweert dalen de gemiddelde concentraties particulair gebonden fosfaat. Bij de andere stations zijn geen duidelijke trends te zien.
 
@@ -841,7 +837,7 @@ plotMedianMap(df2, parname)
 
 ### Silicaat {#silicaat}
 
-Figuur \@ref(fig:fysischSilicaat) toont de jaarmedianen silicaat per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischSilicaatTab) de mediaan, 10- en 90-percentiel waardes per station weergegeven. De stations zijn gerangschikt in stroomafwaartse richting.
+Figuur \@ref(fig:fysischSilicaat) toont de jaarmedianen silicaat per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischSilicaatTab) de Resultaten waardes per station weergegeven. De stations zijn gerangschikt in stroomafwaartse richting.
 
 De resultaten laten duidelijk zien dat de concentraties afnemen in de richting van de zee, zie Figuur \@ref(fig:gemiddeldesilicaat). Het valt op dat voor station Schaar van Ouden Doel, Hansweert geul en Terneuzen boei 20 de minima vanaf ca. 2007 tot 2013 naar nul gingen, m.a.w. er trad destijds siliciumuitputting op.
 
@@ -872,7 +868,7 @@ In deze paragraaf worden de metingen weergegeven van particulair organisch kools
 
 ### Opgelost organisch koolstof {#opgelost-organisch-koolstof}
 
-Figuur \@ref(fig:fysischKoolstofOpg) toont de jaarmedianen per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischKoolstofOpgTab) de mediaan, 10- en 90-percentiel waardes per station weergegeven. De stations zijn gerangschikt in stroomafwaartse richting.
+Figuur \@ref(fig:fysischKoolstofOpg) toont de jaarmedianen per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischKoolstofOpgTab) de Resultaten waardes per station weergegeven. De stations zijn gerangschikt in stroomafwaartse richting.
 
 De gehaltes dalen in stroomafwaartse richting (met toenemende saliniteit), zie ook Figuur \@ref(fig:fysischKoolstofOpg). In het estuarium treedt een dalende trend op. Specifiek stations Schaar van Ouden Doel, Hansweert geul en Terneuzen boei 20 dalen 0.04 tot 0.09 mg/L per jaar (statistische significant). Deze afname wordt mogelijk verklaard door een afname in DOC lozingen. Voor de Walcheren locaties is een lichte stijging zichtbaar sinds 2015 die niet voor de overige stations wordt waargenomen. Bij Schaar van Ouden Doel treedt de laatste twee jaar (2019, 2020) een verhoging op.
 
@@ -894,7 +890,7 @@ plotTrends(df2, parname)
 
 #### Jaarlijkse waarden {#part-gebonden-organisch-koolstof-jaar}
 
-Figuur \@ref(fig:gemiddeldekoolstofpart) toont de jaarmedianen particulair gebonden organisch koolstof per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischKoolstofPar) de mediaan, 10- en 90-percentiel waardes per station weergegeven. Bij Schaar van Ouden Doel wordt het particulair organisch koolstof niet bepaald. De stations zijn gerangschikt in stroomafwaartse richting.
+Figuur \@ref(fig:gemiddeldekoolstofpart) toont de jaarmedianen particulair gebonden organisch koolstof per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischKoolstofPar) de Resultaten waardes per station weergegeven. Bij Schaar van Ouden Doel wordt het particulair organisch koolstof niet bepaald. De stations zijn gerangschikt in stroomafwaartse richting.
 
 De hoeveelheid particulair organisch koolstof varieert sterk van jaar tot jaar. Ver uit de kust (Walcheren 20 km uit de kust) is de concentratie een stuk lager dan op de andere stations. In het estuarium zijn geen duidelijke temporele trends waarneembaar, zie ook Figuur \@ref(fig:gemiddeldekoolstofpar).
 
@@ -990,17 +986,17 @@ rounding = 3
 dt <- statTable(dfm, parname = `TPN/POC`, rounding)
 knitr::kable(dt,
              align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van molaire genormaliseerde N-C-ratio van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+             caption = "Statistiek voor molaire genormaliseerde N-C-ratio van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 
 dt <- statTable(dfm, parname = `TPN/POC`, rounding)
 knitr::kable(dt,
              align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van molaire genormaliseerde P-C-ratio van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+             caption = "Statistiek voor molaire genormaliseerde P-C-ratio van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 
 dt <- statTable(dfm, parname = `TPN/TPP`, rounding)
 knitr::kable(dt,
              align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van molaire genormaliseerde N-P-ratio van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+             caption = "Statistiek voor molaire genormaliseerde N-P-ratio van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 ```
 
 ```{r fysischNPJaar, fig.cap="De molaire genormaliseerde N-P-ratio, N uitgedrukt ten opzichte van een gehalte P, gemiddeld over een jaar in het oppervlaktewater van de Westerschelde en de monding."}
@@ -1100,14 +1096,14 @@ Voor Schaar van Ouden Doel zijn de meeste meetgegevens beschikbaar, circa twee m
 
 ### Boor {#boor}
 
-Figuur \@ref(fig:fysischMetalenBoorTotaal) toont de jaarmedianen boor per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischMetalenBoorTotaalTab) zijn de mediaan, 10- en 90-percentiel waardes per station weergegeven.
+Figuur \@ref(fig:fysischMetalenBoorTotaal) toont de jaarmedianen boor per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischMetalenBoorTotaalTab) zijn de Resultaten waardes per station weergegeven.
 
 Voor alle stations geldt dat er lage tot beperkte correlatie is. Het totale boorgehalte stroomopwaarts neemt af, zoals ook te zien in Figuur \@ref(fig:gemiddeldeboortotaal).
 
 ```{r fysischMetalenBoorTotaalTab}
 # dt <- tex2dt("Figuren/Fysisch/Metalen/Boor_totaal_meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
-#              caption = "mediaan, 10- en 90-percentiel waardes van het totale boorgehalte in $\\mu$g/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+#              caption = "Resultaten waardes van het totale boorgehalte in $\\mu$g/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 
 parname = "Boor, totaal in ug/l in oppervlaktewater"
 rounding = 3
@@ -1115,10 +1111,10 @@ df2 <- verifyStations(df)
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van boor (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+             caption = "Statistiek voor boor (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 ```
 
-```{r fysischMetalenBoorTotaal, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het totale boorgehalte in het oppervlaktewater van de Westerschelde en de monding"}
+```{r fysischMetalenBoorTotaal, fig.cap="Jaarlijkse Resultaten van het totale boorgehalte in het oppervlaktewater van de Westerschelde en de monding"}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Boor_totaal_Jaar.png")
 
 plotTrends(df2, parname)
@@ -1126,7 +1122,7 @@ plotTrends(df2, parname)
 
 ### Boor na filtratie {#boor-fil}
 
-Figuur \@ref(fig:fysischMetalenBoor) toont de jaarmedianen boor na filtratie per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischMetalenBoorTab) zijn de mediaan, 10- en 90-percentiel waardes per station weergegeven.
+Figuur \@ref(fig:fysischMetalenBoor) toont de jaarmedianen boor na filtratie per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischMetalenBoorTab) zijn de Resultaten waardes per station weergegeven.
 
 De concentraties van boor na filtratie (opgelost) verschillen qua orde van grootte relatief weinig van de totaalconcentraties, wat betekent dat er relatief weinig boor particulair gebonden is. In stroomafwaartse richting nemen de mediane boorgehaltes na filtratie toe, zie Figuur \@ref(fig:gemiddeldeboorfil). De gegevens laten geen significante temporele trends zien.
 
@@ -1137,10 +1133,10 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van boor na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+             caption = "Statistiek voor boor na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 ```
 
-```{r fysischMetalenBoor, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het gefilterde boorgehalte in het oppervlaktewater van de Westerschelde en de monding"}
+```{r fysischMetalenBoor, fig.cap="Jaarlijkse Resultaten van het gefilterde boorgehalte in het oppervlaktewater van de Westerschelde en de monding"}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Boor_fil_Jaar.png")
 
 plotTrends(df2, parname)
@@ -1162,24 +1158,24 @@ plotMedianMap(df2, parname)
 
 ### Chroom {#chroom}
 
-Figuur \@ref(fig:fysischMetalenChroomTotaal) toont de jaarmedianen chroom per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischMetalenChroomTotaalTab) zijn de mediaan, 10- en 90-percentiel waardes per station weergegeven.
+Figuur \@ref(fig:fysischMetalenChroomTotaal) toont de jaarmedianen chroom per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischMetalenChroomTotaalTab) zijn de Resultaten waardes per station weergegeven.
 
 Het station Schaar van Ouden Doel laat een vrij grote variatie zien tussen de jaren, maar ook binnen een jaar, getuige het grote verschil tussen de 10- en 90-percentielen. Er zijn geen significante temporele trends in chroom concentraties op de verschillende station, bahalve voor Wacheren waar een significante afnemende trend te zien is. Ondanks een verglijkbare R is de afnemende trend bij Vlissingen statistich niet significant. Bij 7 vrijheidsgraden (9 jaren gegevens) is de trend pas significant bij R\>0.666 (p=0.05). In stroomafwaartse richting nemen de concentraties af, zie ook Figuur \@ref(fig:gemiddeldechroomtotaal).
 
 ```{r fysischMetalenChroomTotaalTab}
 # dt <- tex2dt("Figuren/Fysisch/Metalen/Chroom_totaal_meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
-#              caption = "mediaan, 10- en 90-percentiel waardes van het totale chroomgehalte in $\\mu$g/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+#              caption = "Resultaten waardes van het totale chroomgehalte in $\\mu$g/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 
 parname = "Chroom in ug/l in oppervlaktewater"
 rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van chroom (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+             caption = "Statistiek voor chroom (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 ```
 
-```{r fysischMetalenChroomTotaal, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het totale chroomgehalte in het oppervlaktewater van de Westerschelde en de monding"}
+```{r fysischMetalenChroomTotaal, fig.cap="Jaarlijkse Resultaten van het totale chroomgehalte in het oppervlaktewater van de Westerschelde en de monding"}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Chroom_totaal_Jaar.png")
 
 plotTrends(df2, parname)
@@ -1187,24 +1183,24 @@ plotTrends(df2, parname)
 
 ### Chroom na filtratie {#chroom-fil}
 
-Figuur \@ref(fig:fysischMetalenChroomFil) toont de jaarmedianen chroom na filtratie per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischMetalenChroomFilTab) zijn de mediaan, 10- en 90-percentiel waardes per station weergegeven.
+Figuur \@ref(fig:fysischMetalenChroomFil) toont de jaarmedianen chroom na filtratie per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischMetalenChroomFilTab) zijn de Resultaten waardes per station weergegeven.
 
 Voor alle stations zijn de resultaten sterk beïnvloed door de detectiegrens van 1 tot 5 $\mu$g/l. Oudere metingen (van voor 2012) hebben een hogere detectiegrens dan daarna. Uit het overzicht kan duidelijk worden gezien dat een groot deel van de concentraties onder de detectiegrens liggen. De gerapporteerde concentraties zijn dan ook sterk beïnvloed door deze detectiegrens. Wanneer de waardes regelmatig onder de detectiegrens vallen, zullen de minima, trends en gemiddelden hogere waardes tonen dan daadwerkelijk opgetreden.
 
 ```{r fysischMetalenChroomFilTab}
 # dt <- tex2dt("Figuren/Fysisch/Metalen/Chroom_fil_meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
-#              caption = "mediaan, 10- en 90-percentiel waardes van het gefilterde chroomgehalte in $\\mu$g/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+#              caption = "Resultaten waardes van het gefilterde chroomgehalte in $\\mu$g/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 
 parname = "Chroom in ug/l na filtratie in oppervlaktewater"
 rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van chroom na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+             caption = "Statistiek voor chroom na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 ```
 
-```{r fysischMetalenChroomFil, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het gefilterde chroomgehalte in het oppervlaktewater van de Westerschelde en de monding"}
+```{r fysischMetalenChroomFil, fig.cap="Jaarlijkse Resultaten van het gefilterde chroomgehalte in het oppervlaktewater van de Westerschelde en de monding"}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Chroom_fil_Jaar.png")
 
 plotTrends(df2, parname, trend = F)
@@ -1226,24 +1222,24 @@ plotMedianMap(df2, parname)
 
 ### Koper {#koper}
 
-Figuur \@ref(fig:fysischMetalenKoperTotaal) toont de jaarmedianen koper per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischMetalenKoperTotaalTab) zijn de mediaan, 10- en 90-percentiel waardes per station weergegeven.
+Figuur \@ref(fig:fysischMetalenKoperTotaal) toont de jaarmedianen koper per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischMetalenKoperTotaalTab) zijn de Resultaten waardes per station weergegeven.
 
 Het station Schaar van Ouden Doel toont de hoogste concentraties. Het station laat een vrij grote variatie zien tussen de jaren, maar ook binnen een jaar, getuige het grote verschil tussen de 10- en 90-percentielen. In stroomafwaartse richting nemen de concentraties af, zie \@ref(fig:gemiddeldekopertotaal). In 2010 is er maar weinig meetgegevens beschikbaar. Bij Walcheren 2 km uit de kust komen de meetwaardes soms onder de detectiegrens (1 $\mu$g/L). Een significante temporele trend kan echter niet worden afgeleid.
 
 ```{r fysischMetalenKoperTotaalTab}
 # dt <- tex2dt("Figuren/Fysisch/Metalen/Koper_totaal_meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum"),
-#              caption = "mediaan, 10- en 90-percentiel waardes van het totale kopergehalte in $\\mu$g/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+#              caption = "Resultaten waardes van het totale kopergehalte in $\\mu$g/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 
 parname = "Koper in ug/l in oppervlaktewater"
 rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van koper (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+             caption = "Statistiek voor koper (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 ```
 
-```{r fysischMetalenKoperTotaal, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het totale kopergehalte in het oppervlaktewater van de Westerschelde en de monding"}
+```{r fysischMetalenKoperTotaal, fig.cap="Jaarlijkse Resultaten van het totale kopergehalte in het oppervlaktewater van de Westerschelde en de monding"}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Koper_totaal_Jaar.png")
 
 plotTrends(df2, parname)
@@ -1251,24 +1247,24 @@ plotTrends(df2, parname)
 
 ### Koper na filtratie {#koper-fil}
 
-Figuur \@ref(fig:fysischMetalenKoperFil) toont de jaarmedianen koper na filtratie per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischMetalenKoperFilTab) zijn de mediaan, 10- en 90-percentiel waardes per station weergegeven.
+Figuur \@ref(fig:fysischMetalenKoperFil) toont de jaarmedianen koper na filtratie per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischMetalenKoperFilTab) zijn de Resultaten waardes per station weergegeven.
 
 Station Schaar van Ouden Doel laat de hoogste concentraties zien, in stroomafwaartse richting nemen de concentraties af, zie \@ref(fig:gemiddeldekoperfil). Het station Schaar van Ouden Doel laat een vrij grote variatie zien tussen de jaren, maar ook binnen een jaar, getuige het grote verschil tussen de 10- en 90-percentielen. Bij de stations Vlissingen boei SSVH en Walcheren 2 km uit de kust wordt de laatste jaren regelmatig de detectiegrens (1 $\mu$g/L) bereikt. De gemiddelden en minima op dit station zijn dus in werkelijkheid lager dan hier weergegeven. Bij Vlissingen boei SSVH en Walcheren 2 km uit de kust treedt een marginale stijgende trend op met beperkte statistische significantie. Het valt op dat dit niet kan worden gedetecteerd uit de total koperconcentratie, zie Tabel \@ref(tab:fysischMetalenKoperTotaalTab).
 
 ```{r fysischMetalenKoperFilTab}
 # dt <- tex2dt("Figuren/Fysisch/Metalen/Koper_fil_meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
-#              caption = "mediaan, 10- en 90-percentiel waardes van het gefilterde kopergehalte in $\\mu$g/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+#              caption = "Resultaten waardes van het gefilterde kopergehalte in $\\mu$g/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 
 parname = "Koper in ug/l na filtratie in oppervlaktewater"
 rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van koper na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+             caption = "Statistiek voor koper na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 ```
 
-```{r fysischMetalenKoperFil, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het gefilterde kopergehalte in het oppervlaktewater van de Westerschelde en de monding"}
+```{r fysischMetalenKoperFil, fig.cap="Jaarlijkse Resultaten van het gefilterde kopergehalte in het oppervlaktewater van de Westerschelde en de monding"}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Koper_fil_Jaar.png")
 
 plotTrends(df2, parname)
@@ -1290,24 +1286,24 @@ plotMedianMap(df2, parname)
 
 ### Uranium {#uranium}
 
-Figuur \@ref(fig:fysischMetalenUraniumTotaal) toont de jaarmedianen uranium per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischMetalenUraniumTotaalTab) zijn de mediaan, 10- en 90-percentiel waardes per station weergegeven.
+Figuur \@ref(fig:fysischMetalenUraniumTotaal) toont de jaarmedianen uranium per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischMetalenUraniumTotaalTab) zijn de Resultaten waardes per station weergegeven.
 
 Hoewel er slechts een beperkte hoeveelheid meetpunten bekend is, lijkt de hoeveelheid uranium af te nemen wanneer men verder in het estuarium komt (gemiddeld 3,1 $\mu$g/L op zee en 1,6 $\mu$g/L bij Schaar van Ouden Doel), zie ook Figuur \@ref(fig:gemiddeldeuratotaal). De minimale en maximale waardes rondom het gemiddelde (spreiding) is wel vergelijkbaar op zee en in het estuarium. De afname van het uranium bij Hansweert, Terneuzen en Vlissingen van 0,13-0,15 $\mu$g/L per jaar en is statistisch significant.
 
 ```{r fysischMetalenUraniumTotaalTab}
 # dt <- tex2dt("Figuren/Fysisch/Metalen/Uranium_totaal_meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
-#              caption = "mediaan, 10- en 90-percentiel waardes van het totale uraniumgehalte in $\\mu$g/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+#              caption = "Resultaten waardes van het totale uraniumgehalte in $\\mu$g/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 
 parname = "Uranium, totaal in ug/l in oppervlaktewater"
 rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van uranium (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+             caption = "Statistiek voor uranium (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 ```
 
-```{r fysischMetalenUraniumTotaal, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het totale uraniumgehalte in het oppervlaktewater van de Westerschelde en de monding."}
+```{r fysischMetalenUraniumTotaal, fig.cap="Jaarlijkse Resultaten van het totale uraniumgehalte in het oppervlaktewater van de Westerschelde en de monding."}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Uranium_totaal_Jaar.png")
 
 plotTrends(df2, parname)
@@ -1315,24 +1311,24 @@ plotTrends(df2, parname)
 
 ### Uranium na filtratie {#uranium-fil}
 
-Figuur \@ref(fig:fysischMetalenUraniumFil) toont de jaarmedianen uranium na filtratie per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischMetalenUraniumFilTab) zijn de mediaan, 10- en 90-percentiel waardes per station weergegeven.
+Figuur \@ref(fig:fysischMetalenUraniumFil) toont de jaarmedianen uranium na filtratie per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischMetalenUraniumFilTab) zijn de Resultaten waardes per station weergegeven.
 
 Het station Schaar van Ouden Doel laat een vrij constant beeld zien over de gehele periode. In stroomafwaartse richting nemen de gehaltes toe, zie ook Figuur \@ref(fig:gemiddeldeurafil). De concentraties van uranium na filtratie (opgelost) verschillen qua orde van grootte relatief weinig van de totaalconcentraties en derhalve zien we een soortgelijke temporele afname voor stations Hansweert, Terneuzen en Vlissingen als in de vorige paragraaf die statistisch significant is.
 
 ```{r fysischMetalenUraniumFilTab}
 # dt <- tex2dt("Figuren/Fysisch/Metalen/Uranium_fil_meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
-#              caption = "mediaan, 10- en 90-percentiel waardes van het gefilterde uraniumgehalte in $\\mu$g/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+#              caption = "Resultaten waardes van het gefilterde uraniumgehalte in $\\mu$g/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 
 parname = "Uranium in ug/l Na filtratie in oppervlaktewater"
 rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van uranium na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+             caption = "Statistiek voor uranium na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 ```
 
-```{r fysischMetalenUraniumFil, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het gefilterde uraniumgehalte in het oppervlaktewater van de Westerschelde en de monding"}
+```{r fysischMetalenUraniumFil, fig.cap="Jaarlijkse Resultaten van het gefilterde uraniumgehalte in het oppervlaktewater van de Westerschelde en de monding"}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Uranium_fil_Jaar.png")
 
 plotTrends(df2, parname)
@@ -1354,24 +1350,24 @@ plotMedianMap(df2, parname)
 
 ### Vanadium
 
-Figuur \@ref(fig:fysischMetalenVanTotaal) toont de jaarmedianen vanadium per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischMetalenVanTotaalTab) zijn de mediaan, 10- en 90-percentiel waardes per station weergegeven.
+Figuur \@ref(fig:fysischMetalenVanTotaal) toont de jaarmedianen vanadium per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischMetalenVanTotaalTab) zijn de Resultaten waardes per station weergegeven.
 
 Hoewel er slechts beperkte hoeveelheid meetpunten bekend zijn, lijkt de hoeveelheid vanadium toe te nemen wanneer men verder in het estuarium komt (gemiddeld 3,6 $\mu$g/L op zee en 10,2 $\mu$g/L bij Schaar van Ouden Doel), zie ook Figuur \@ref(fig:gemiddeldevanatotaal). Algemeen, constateren we geen duidelijk significante (statistische) lineaire trends over de tijd, hoewel Schaar van Oudel Doel met 0.6 $\mu$g/L afneemt.
 
 ```{r fysischMetalenVanTotaalTab}
 # dt <- tex2dt("Figuren/Fysisch/Metalen/Vanadium_totaal_meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum"),
-#              caption = "mediaan, 10- en 90-percentiel waardes van het totale vanadiumgehalte in $\\mu$g/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+#              caption = "Resultaten waardes van het totale vanadiumgehalte in $\\mu$g/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 
 parname = "Vanadium, totaal in ug/l in oppervlaktewater"
 rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van vanadium (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+             caption = "Statistiek voor vanadium (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 ```
 
-```{r fysischMetalenVanTotaal, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het totale vanadiumgehalte in het oppervlaktewater van de Westerschelde en de monding."}
+```{r fysischMetalenVanTotaal, fig.cap="Jaarlijkse Resultaten van het totale vanadiumgehalte in het oppervlaktewater van de Westerschelde en de monding."}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Vanadium_totaal_Jaar.png")
 
 plotTrends(df2, parname)
@@ -1379,24 +1375,24 @@ plotTrends(df2, parname)
 
 ### Vanadium na filtratie {#vanadium-fil}
 
-Figuur \@ref(fig:fysischMetalenVanadiumFil) toont de jaarmedianen vanadium na filtratie per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischMetalenVanadiumFilTab) zijn de mediaan, 10- en 90-percentiel waardes per station weergegeven.
+Figuur \@ref(fig:fysischMetalenVanadiumFil) toont de jaarmedianen vanadium na filtratie per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischMetalenVanadiumFilTab) zijn de Resultaten waardes per station weergegeven.
 
 Alle stations laten een vrij constant beeld zien. In stroomafwaartse richting nemen de gehaltes af, zie ook Figuur \@ref(fig:gemiddeldevanafil). De concentraties van vanadium na filtratie (opgelost) zijn lager dan de totaalconcentraties. Op bijna alle stations is een significante afname te zien van Vanadium en opgelost Vanadium.
 
 ```{r fysischMetalenVanadiumFilTab}
 # dt <- tex2dt("Figuren/Fysisch/Metalen/Vanadium_fil_meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
-#              caption = "mediaan, 10- en 90-percentiel waardes van het gefilterde vanadiumgehalte in $\\mu$g/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+#              caption = "Resultaten waardes van het gefilterde vanadiumgehalte in $\\mu$g/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 
 parname = "Vanadium in ug/l Na filtratie in oppervlaktewater"
 rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van vanadium na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+             caption = "Statistiek voor vanadium na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 ```
 
-```{r fysischMetalenVanadiumFil, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het gefilterde vanadiumgehalte in het oppervlaktewater van de Westerschelde en de monding."}
+```{r fysischMetalenVanadiumFil, fig.cap="Jaarlijkse Resultaten van het gefilterde vanadiumgehalte in het oppervlaktewater van de Westerschelde en de monding."}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Vanadium_fil_Jaar.png")
 
 plotTrends(df2, parname)
@@ -1418,7 +1414,7 @@ plotMedianMap(df2, parname)
 
 ### Zink {#zink}
 
-Figuur \@ref(fig:fysischMetalenZinkTotaal) toont de jaarmedianen zink per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischMetalenZinkTotaalTab) zijn de mediaan, 10- en 90-percentiel waardes per station weergegeven.
+Figuur \@ref(fig:fysischMetalenZinkTotaal) toont de jaarmedianen zink per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischMetalenZinkTotaalTab) zijn de Resultaten waardes per station weergegeven.
 
 Bij Schaar van Ouden Doel worden veruit de hoogste concentraties gemeten, die over de gehele meetperiode rond hetzelfde gemiddelde schommelen. In stroomafwaartse richting worden de concentraties lager, zie ook Figuur \@ref(fig:gemiddeldezinktotaal). De trends bij deze stations worden sterk beïnvloed door de jaren 2009 en 2010, waarbij respectievelijk de detectiegrens en het aantal metingen meespeelt in de resultaten. Er zijn geen (statistisch) significante veranderingen in de tijd.
 
@@ -1427,7 +1423,7 @@ Bij Schaar van Ouden Doel worden veruit de hoogste concentraties gemeten, die ov
 ```{r fysischMetalenZinkTotaalTab}
 # dt <- tex2dt("Figuren/Fysisch/Metalen/Zink_totaal_meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum"),
-#              caption = "mediaan, 10- en 90-percentiel waardes van het totale zinkgehalte in $\\mu$g/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+#              caption = "Resultaten waardes van het totale zinkgehalte in $\\mu$g/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 
 parname = "Zink in ug/l in oppervlaktewater"
 df2 <- verifyStations(df)
@@ -1435,10 +1431,10 @@ rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van zink (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+             caption = "Statistiek voor zink (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 ```
 
-```{r fysischMetalenZinkTotaal, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het totale zinkgehalte in het oppervlaktewater van de Westerschelde en de monding."}
+```{r fysischMetalenZinkTotaal, fig.cap="Jaarlijkse Resultaten van het totale zinkgehalte in het oppervlaktewater van de Westerschelde en de monding."}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Zink_totaal_Jaar.png")
 
 plotTrends(df2, parname)
@@ -1446,24 +1442,24 @@ plotTrends(df2, parname)
 
 ### Zink na filtratie {#zink-fil}
 
-Figuur \@ref(fig:fysischMetalenZinkFil) toont de jaarmedianen zink na filtratie per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischMetalenZinkFilTab) zijn de mediaan, 10- en 90-percentiel waardes per station weergegeven.
+Figuur \@ref(fig:fysischMetalenZinkFil) toont de jaarmedianen zink na filtratie per station, samen met de 10- en 90-percentiele gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischMetalenZinkFilTab) zijn de Resultaten waardes per station weergegeven.
 
 Het station Schaar van Ouden Doel laat een behoorlijke variatie zien tussen de jaren, maar ook binnen een jaar, gezien de verschillen tussen de minimum en de maximumwaardes. De periode 2000-2008 laat een stijgende trend zien, daarna nemen de concentraties opgelost zink af. In stroomafwaartse richting nemen de gehaltes af, zie ook Figuur \@ref(fig:gemiddeldezinkfil). Voor Schaar van Ouden Doel zijn de concentraties van zink na filtratie (opgelost) veel lager dan de totaalconcentraties, voor de overige stations is dit verschil minder groot. Vooral tot 2009 wordt regelmatig de detectiegrens bereikt. Na enkele uitschieters in de gemeten maxima van 2015, zijn zowel de maxima als de gemiddelden sinds 2016 weer terug op het niveau van de voorgaande jaren. Het lijkt erop dat over de gehele gegevensset de concentratie gefilterd zink op zee toeneemt in de tijd (Walcheren 2 km uit de kust).
 
 ```{r fysischMetalenZinkFilTab}
 # dt <- tex2dt("Figuren/Fysisch/Metalen/Zink_fil_meanvalues.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum"),
-#              caption = "mediaan, 10- en 90-percentiel waardes van het gefilterde zinkgehalte in $\\mu$g/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+#              caption = "Resultaten waardes van het gefilterde zinkgehalte in $\\mu$g/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 
 parname = "Zink in ug/l na filtratie in oppervlaktewater"
 rounding = 3
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'lrrrrr',
-             caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van zink na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+             caption = "Statistiek voor zink na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
 ```
 
-```{r fysischMetalenZinkFil, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het gefilterde zinkgehalte in het oppervlaktewater van de Westerschelde en de monding."}
+```{r fysischMetalenZinkFil, fig.cap="Jaarlijkse Resultaten van het gefilterde zinkgehalte in het oppervlaktewater van de Westerschelde en de monding."}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Zink_fil_Jaar.png")
 
 plotTrends(df2, parname)

@@ -5,6 +5,7 @@ require(leaflet)
 require(lubridate)
 require(mblm)
 require(Kendall)
+require(plotly)
 # require(rworldxtra)
 # require(rworldmap)
 require(sf)
@@ -24,24 +25,26 @@ load("data/backgroundmap.Rdata")
 
 # backgroundfill = "#ebf5ff"  # lichtblauw uit Deltares palette, werd minder mooi gevonden.
 backgroundfill = "white"
+textcolor = "#2E89BF"
 
 trendplotstyle =   theme(
   plot.title=element_text(size=10, hjust=0.5, face="bold", colour="maroon", vjust=-1),
-  text = element_text(color = "#2E89BF"),
-  line = element_line(color = "#2E89BF"),
+  text = element_text(color = textcolor),
+  line = element_line(color = textcolor),
   plot.background = element_rect(fill = backgroundfill, color = "transparent"),
   legend.background = element_rect(fill = backgroundfill, color = "transparent"),
   panel.background = element_rect(fill = backgroundfill),
-  panel.grid.major = element_line(color = "#2E89BF", size = 0.1),
-  panel.grid.minor = element_line(color = "#2E89BF", size = 0.1),
+  panel.border = element_rect(color = textcolor, fill = "transparent"),
+  panel.grid.major = element_line(color = textcolor, size = 0.1),
+  panel.grid.minor = element_line(color = textcolor, size = 0.1),
   strip.background = element_rect(fill = backgroundfill, color = "white"),
-  strip.text = element_text(color = "#2E89BF", face = "bold"),
-  axis.text = element_text(color = "#2E89BF")
+  strip.text = element_text(color = textcolor, face = "bold"),
+  axis.text = element_text(color = textcolor)
 )
 
 mapplotstyle =   theme(
-  text = element_text(color = "#2E89BF"),
-  line = element_line(color = "#2E89BF"),
+  text = element_text(color = textcolor),
+  line = element_line(color = textcolor),
   plot.background = element_rect(fill = backgroundfill, color = "transparent"),
   legend.background = element_rect(fill = backgroundfill, color = "transparent"),
   panel.background = element_rect(fill = backgroundfill),
@@ -85,7 +88,14 @@ plotLocations <- function(df, nudge__x = -1000, nudge__y = -3000, angle__ = 0, h
     geom_sf(size = 4) + 
     coord_sf(datum=28992)  +
     theme(legend.position = "none") +
-    mapplotstyle
+    mapplotstyle +
+    theme_void() +
+    theme(panel.background=element_blank(),
+          panel.spacing = unit(c(0, 0, 0, 0), "cm"),       
+          plot.background = element_rect(fill = "white",colour = NA),
+          plot.margin = unit(c(0, 0, 0, 0), "null"),  # Edited code
+          legend.position = 'none')
+  
 }
 
 # Make table with lm statistics
@@ -133,7 +143,6 @@ statTable <- function(df, parname, rounding, meanorder = "decreasing", sf = F) {
              Trend = estimate,
              p = p.value) #%>%
     # arrange(-Gemiddelde)
-    
   }
 }
 
@@ -254,8 +263,8 @@ fytStatTable <- function(df, statname){
   df %>% 
     filter(stationname == statname) %>%
     group_by(stationname, parametername) %>%
-    summarize(median = median(value, na.rm = T), `10-perc` = quantile(value, 0.1, na.rm = T), `90-perc` = quantile(value, 0.9, na.rm = T)) %>%
-    mutate(across(where(is.double), round, 3)) %>% ungroup()
+    summarize(mediaan = median(value, na.rm = T), `10-perc` = quantile(value, 0.1, na.rm = T), `90-perc` = quantile(value, 0.9, na.rm = T)) %>%
+    mutate(across(where(is.double), round, 2)) %>% ungroup()
 }
 
 
@@ -525,8 +534,8 @@ plotTrendsWaterstand <- function(df, parname, locname, sf = F) {
                   Parameter = parametername) %>%
     dplyr::arrange(-Gemiddelde) %>%
     ggplot(aes(Jaar, Gemiddelde)) +
-    geom_line(aes(color=Parameter), size = 1) + 
-    geom_point(aes(color=Parameter), fill = "white", shape = 21, size = 3) + 
+    geom_line(aes(), size = 1) + #color=Parameter 
+    geom_point(aes(), fill = "white", shape = 21, size = 3) + #color=Parameter 
     facet_grid(Parameter ~ ., scales="free_y") +
     # theme_light() +
     ylab("Jaargemiddeld hoog- en laagwater in cm+NAP")+
@@ -550,15 +559,37 @@ plotTrendsGolven <- function(df, parname, locname, sf = F) {
                   Gemiddelde = value,
                   Maximum = value_max,
                   Parameter = parametername) %>%
+    mutate(shortParam = gsub(":.*$","",Parameter)) %>%
     dplyr::arrange(-Gemiddelde) %>%
     pivot_longer(c(Maximum, Gemiddelde), names_to = "Statistiek", values_to = "Waarde") %>%
     ggplot(aes(Maand, Waarde)) +
     geom_line(aes(color=Statistiek)) + 
     geom_point(aes(color=Statistiek), fill = "white", shape = 21) + 
-    facet_grid(Parameter ~ ., scales="free_y") +
+    facet_grid(shortParam ~ ., scales="free_y") +
     theme_minimal() +
     ggtitle(label = parname) +
     theme(legend.position="none") +
+    trendplotstyle +
+    theme(strip.text.y = element_text(angle = 0))
+  return(p)
+}
+
+plotTrendsByParameter <- function(df, parname, sf = F) {
+  
+  if(sf) df <- df %>% st_drop_geometry()
+  p <- df %>%
+    dplyr::filter(parametername %in% parname) %>%
+    dplyr::select(Station = stationname,
+                  Jaar = jaar,
+                  Value = value,
+                  Parameter = parametername) %>%
+    dplyr::arrange(-Value) %>%
+    ggplot(aes(Jaar, Value)) +
+    geom_line(aes(color=Parameter)) + 
+    geom_point(aes(color=Parameter), fill = "white", shape = 21) + 
+    #facet_grid(Parameter ~ ., scales="free_y") +
+    theme_minimal() +
+    ggtitle(label = parname) +
     trendplotstyle
   return(p)
 }
@@ -788,21 +819,35 @@ plotTrendFyto <- function(df, statname){
     group_by(jaar, seizoen, parametername) %>%
     summarize(
       `90-perc` = quantile(value, 0.9, na.rm = T),
-      mediaan = median(value, na.rm = T)
+      mediaan = median(value, na.rm = T),
+      gemiddelde = mean(value, na.rm = T)
     ) %>% ungroup() %>% 
-    ggplot(aes(jaar, mediaan)) +
+    ggplot(aes(x = jaar, y = mediaan)) +
     geom_point(aes(color = seizoen), size = 3) +
-    # geom_col(aes(fill = seizoen), position = 'dodge') +
+    geom_point(data = df.fyt.groep %>% ungroup() %>%
+                 mutate(jaar = lubridate::year(datetime), maand = lubridate::month(datetime)) %>%
+                 mutate(seizoen = ifelse(maand %in% c(4:9), "zomer", "winter")) %>%
+                 filter(stationname == statname, parametername == "Autotroof - Phaeocystis") %>%
+                 group_by(jaar, parametername, seizoen) %>%
+                 summarize(`90-perc` = quantile(value, probs = 0.9, na.rm = T)) %>% ungroup() %>%
+                 filter(seizoen == "zomer"),
+               aes(x = jaar, y = `90-perc`, color = seizoen),
+               shape = "-", size = 10
+    ) +
+    geom_smooth(aes(color = seizoen), alpha = 0.2) +
+    # geom_line(aes(y = gemiddelde, color = seizoen)) +
     geom_hline(linetype = 2, color = "blue",
                data = df.fyt.groep %>% 
                  filter(stationname == statname) %>%
                  group_by(parametername) %>%
-                 summarize(gemiddelde = mean(value, na.rm = T)) %>% ungroup(),
-               aes(yintercept = gemiddelde)
+                 summarize(mediaan = median(value, na.rm = T)) %>% ungroup(),
+               aes(yintercept = mediaan)
     ) +
     facet_wrap(~ parametername, ncol = 2) +
     scale_y_log10() +
-    trendplotstyle
+    labs(subtitle = statname) +
+    trendplotstyle +
+    ylab(bquote("celaantal in " ~ 10^6 ~ "/l"))
 }
 
 
@@ -817,7 +862,18 @@ plotTrendFytoGroup <- function(df, groupname){
     ) %>% ungroup() %>% 
     ggplot(aes(jaar, mediaan)) +
     geom_point(aes(color = stationname), size = 3) +
-    # geom_col(aes(fill = stationname), position = 'dodge') +
+    # geom_smooth(aes(color = stationname), alpha = 0.2, method = "loess", span = 0.5) +
+    geom_point(data = df.fyt.groep %>% ungroup() %>%
+                 mutate(jaar = lubridate::year(datetime), maand = lubridate::month(datetime)) %>%
+                 filter(parametername == groupname) %>%
+                 filter(maand %in% c(4:9)) %>%
+                 filter(parametername == "Autotroof - Phaeocystis") %>%
+                 group_by(jaar, stationname) %>%
+                 summarize(`90-perc` = quantile(value, probs = 0.9, na.rm = T)) %>% ungroup(),
+               aes(x = jaar, y = `90-perc`, color = stationname),
+               shape = "-", size = 10
+    ) +
+    geom_line(aes(color = stationname)) +
     geom_hline(linetype = 2, color = "blue",
                data = df.fyt.groep %>%
                  filter(parametername == groupname) %>%
@@ -825,7 +881,10 @@ plotTrendFytoGroup <- function(df, groupname){
                aes(yintercept = mediaan)
     ) +
     scale_y_log10() +
-    trendplotstyle
+    labs(subtitle = groupname) +
+    trendplotstyle +
+    ylab(bquote("celaantal in " ~ 10^6 ~ "/l"))
+  
 }
 
 plotCDF <- function(df, parname) {

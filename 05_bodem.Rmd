@@ -262,7 +262,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 
 De gegevens voor PCB153 ontbreken. Deze worden mogelijk in een volgende rapportage weer aangevuld. 
 
-```{r PCB153Bodem, fig.cap="PCB153 in het bodemsediment in de Westerschelde"}
+```{r PCB153Bodem, include=F, fig.cap="PCB153 in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',4,4',5,5'-hexachloorbifenyl.png")
 
 parname = "2,2',4,4',5,5'-Hexachloorbifenyl (PCB153) in ug/kg drooggewicht in sediment"
@@ -273,7 +273,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 De gegevens voor PCB101 ontbreken. Deze worden mogelijk in een volgende rapportage weer aangevuld. 
 
 
-```{r PCB101Bodem, fig.cap="PCB101 in het bodemsediment in de Westerschelde"}
+```{r PCB101Bodem, include = F, fig.cap="PCB101 in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',4,5,5'-pentachloorbifenyl.png")
 
 parname = "2,2',4,5,5'-Pentachloorbifenyl (PCB101) in ug/kg drooggewicht in sediment"
@@ -291,7 +291,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 
 De gegevens voor PCB118 ontbreken. Deze worden mogelijk in een volgende rapportage weer aangevuld. 
 
-```{r PCB118Bodem, fig.cap="PCB118 in het bodemsediment in de Westerschelde"}
+```{r PCB118Bodem, include = F, fig.cap="PCB118 in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,3',4,4',5-pentachloorbifenyl.png")
 
 parname = "2,3',4,4',5-Pentachloorbifenyl (PCB118) in ug/kg drooggewicht in sediment"
@@ -307,7 +307,7 @@ parname = "2,4,4'-Trichloorbifenyl (PCB28) in ug/kg in de fractie < 63 um droogg
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
-De hoeveelheid PCB's neemt af in de richting van de Noordzee. Met name bij de oostelijke stations lijken de gehaltes af te nemen in de tijd. <!-- %CHECK THIS STATEMENT! -->
+De totale hoeveelheid PCB's in het bodemsediment neemt af in de richting van de Noordzee (figuur \@ref(fig:SomPCBBodem)). Met name bij de oostelijke stations Schaar van Ouden Doel, Bath boei 68 en Bath boei  71 is er een afname van totaal PCB in de tijd.
 
 ```{r SomPCBBodem, fig.cap="Som van de PCB's in het bodemsediment in de Westerschelde. Hier is de som genomen van alle PCB's die beschikbaar zijn in de database. "}
 
@@ -323,18 +323,29 @@ df_clean %>% ungroup() %>%
 
 ## Organotinverbindingen {#bodem-organotin}
 
-Tributyltin is de enige organotinverbinding die wordt gemeten in het bodemsediment. In Figuur \@ref(fig:tributyltinBodem) is de hoeveelheid tributyltin over de jaren weergegeven per station. De gehaltes in 2010, 2013 en 2016 zijn sterk lager dan die van 2001 en 2004. Ruimtelijk gezien zijn er grote variaties. <!-- %CHECK THIS STATEMENT! also, data seems to be missing -->
+Tributyltin is de enige organotinverbinding die wordt gemeten in het bodemsediment. In Figuur \@ref(fig:tributyltinBodem) is de hoeveelheid tributyltin over de jaren weergegeven per station. De gehaltes in 2010, 2013 en 2016 zijn sterk lager dan die van 2001 en 2004. Ruimtelijk gezien zijn er grote variaties. Tot en  met 2010 is Tributyltin gemeten in de slibfractie van het bodemsediment, daarna in het totale sediment. 
 
 ```{r tributyltinBodem, fig.cap="Tributyltin in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_tributyltin(kation).png")
 
-# df_clean %>% ungroup() %>% 
-#   filter(grepl("tin", parametername, ignore.case = T)) %>%
-#   distinct(parametername)
-
 parname = c("Tributyltin in ug/kg Standaard sediment in Bodem/Sediment", "Tributyltin in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment")
 
-plotTrendsWaterstand(df_clean, parname, locname = unique(df_clean$stationname)) + facet_wrap(~Station, ncol = 4) + theme(legend.position = "bottom", legend.direction = 'vertical')
+df_clean %>%
+    dplyr::filter(parametername %in% parname) %>%
+    dplyr::rename(Station = stationname,
+                  Value = value,
+                  Parameter = parametername) %>%
+    dplyr::arrange(-Value) %>%
+    ggplot(aes(datetime, Value)) +
+    geom_line(aes(color=Parameter)) + 
+    geom_point(aes(color=Parameter), fill = "white", shape = 21) + 
+    #facet_grid(Parameter ~ ., scales="free_y") +
+    theme_minimal() +
+    ggtitle(label = parname) +
+    trendplotstyle +
+    facet_wrap(~Station, ncol = 4) + 
+  theme(legend.position = "bottom", legend.direction = 'vertical', legend.title = element_blank()) +
+  ylab("waarde in ug/kg sediment")
 ```
 
 ## Beschikbare gegevens bodem
