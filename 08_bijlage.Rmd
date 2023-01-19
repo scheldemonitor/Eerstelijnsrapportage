@@ -47,11 +47,6 @@ Deze rapportage bevat de beschikbare hydrodynamische, fysisch-chemische en biolo
 
 ## Hydrodynamiek {#BijlageA-hydrodynamiek}
 
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--  \includegraphics[width=1\linewidth]{../Figuren/Tabellen/hydro.png} -->
-<!-- \end{figure}  -->
-
 ```{r bijlageAHydroFig}
 knitr::include_graphics("Figuren/Tabellen/hydro.png")
 ```
@@ -60,21 +55,11 @@ knitr::include_graphics("Figuren/Tabellen/hydro.png")
 
 ### Oppervlaktewater (compartiment 10) {#BijlageA-fysisch-oppwater}
 
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--  \includegraphics[width=1\linewidth]{../Figuren/Tabellen/water.png} -->
-<!-- \end{figure}  -->
-
 ```{r bijlageAFysischOppwaterFig}
 knitr::include_graphics("Figuren/Tabellen/water.png")
 ```
 
 ### Zwevend stof (compartiment 50) {#BijlageA-fysisch-zwevend}
-
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--  \includegraphics[width=1\linewidth]{../Figuren/Tabellen/zwevend.png} -->
-<!-- \end{figure}  -->
 
 ```{r bijlageAFysischZwevendFig}
 knitr::include_graphics("Figuren/Tabellen/zwevend.png")
@@ -82,21 +67,11 @@ knitr::include_graphics("Figuren/Tabellen/zwevend.png")
 
 ### Bodem (compartiment 40) {#BijlageA-fysisch-bodem}
 
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--  \includegraphics[width=1\linewidth]{../Figuren/Tabellen/bodem.png} -->
-<!-- \end{figure}  -->
-
 ```{r bijlageAFysischBodemFig}
 knitr::include_graphics("Figuren/Tabellen/bodem.png")
 ```
 
 ### Biota (compartiment 60) {#BijlageA-fysisch-biota}
-
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--  \includegraphics[width=1\linewidth]{../Figuren/Tabellen/biota.png} -->
-<!-- \end{figure}  -->
 
 ```{r bijlageAFysischBiotaFig}
 knitr::include_graphics("Figuren/Tabellen/biota.png")
@@ -108,102 +83,68 @@ knitr::include_graphics("Figuren/Tabellen/biota.png")
 
 ### Schaar van Ouden Doel {#BijlageB-meetdichtheid-oppwater-schaar}
 
-<!-- \begin{table}[!ht] -->
-<!--  \centering -->
-<!--   \caption[Meetdichtheidsmatrices oppervlaktewater Schaar van Ouden Doel]{Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Schaar van Ouden Doel met hierin  het aantal metingen per parameter en per jaar}.  -->
-<!--  \input{../Figuren/Meetdichtheid/schaar_opp.tex} -->
-<!-- \end{table} -->
-
 ```{r meetdichtheidOppwaterSchaar}
 dt <- tex2dt("Figuren/Meetdichtheid/schaar_opp.tex")
-knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Schaar van Ouden Doel met hierin  het aantal metingen per parameter en per jaar.")
+kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Schaar van Ouden Doel met hierin  het aantal metingen per parameter en per jaar.") %>%
+   kableExtra::kable_styling(latex_options = "scale_down")
 ```
 
 ### Hansweert geul {#BijlageB-meetdichtheid-oppwater-hansweertgeul}
 
-<!-- \begin{table}[!ht] -->
-<!--  \centering -->
-<!--   \caption[Meetdichtheidsmatrices oppervlaktewater Hansweert geul]{Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Hansweert geul met hierin het aantal metingen per parameter en per jaar}.  -->
-<!--  \input{../Figuren/Meetdichtheid/hans_opp.tex} -->
-<!-- \end{table} -->
-
 ```{r meetdichtheidOppwaterHans}
 dt <- tex2dt("Figuren/Meetdichtheid/hans_opp.tex")
-knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Hansweert geul met hierin  het aantal metingen per parameter en per jaar.")
+kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Hansweert geul met hierin  het aantal metingen per parameter en per jaar.") %>%
+   kableExtra::kable_styling(latex_options = "scale_down")
 ```
 
 ### Terneuzen boei 20 {#BijlageB-meetdichtheid-oppwater-terneuzen}
 
-<!-- \begin{table}[!ht] -->
-<!--  \centering -->
-<!--   \caption[Meetdichtheidsmatrices oppervlaktewater Terneuzen boei 20]{Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Terneuzen boei 20 met hierin het aantal metingen per parameter en per jaar}.  -->
-<!--  \input{../Figuren/Meetdichtheid/tern_opp.tex} -->
-<!-- \end{table} -->
-
 ```{r meetdichtheidOppwaterTerneuzen}
 dt <- tex2dt("Figuren/Meetdichtheid/tern_opp.tex")
-knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Terneuzen boei 20 met hierin  het aantal metingen per parameter en per jaar.")
+kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Terneuzen boei 20 met hierin  het aantal metingen per parameter en per jaar.") %>%
+   kableExtra::kable_styling(latex_options = "scale_down")
 ```
 
 ### Vlissingen boei SSVH {#BijlageB-meetdichtheid-oppwater-vlissingen}
 
-<!-- \begin{table}[!ht] -->
-<!--  \centering -->
-<!--   \caption[Meetdichtheidsmatrices oppervlaktewater Vlissingen boei SSVH]{Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Vlissingen boei SSVH met hierin het aantal metingen per parameter en per jaar}.  -->
-<!--  \input{../Figuren/Meetdichtheid/vlis_opp.tex} -->
-<!-- \end{table} -->
 
 ```{r meetdichtheidOppwaterVlissingen}
 dt <- tex2dt("Figuren/Meetdichtheid/vlis_opp.tex")
-knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Vlissingen boei SSVH met hierin  het aantal metingen per parameter en per jaar.")
+kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Vlissingen boei SSVH met hierin  het aantal metingen per parameter en per jaar.") %>%
+   kableExtra::kable_styling(latex_options = "scale_down")
 ```
 
 ### Walcheren 2 km uit de kust {#BijlageB-meetdichtheid-oppwater-walcheren2km}
 
-<!-- \begin{table}[!ht] -->
-<!--  \centering -->
-<!--   \caption[Meetdichtheidsmatrices oppervlaktewater Walcheren 2 km uit de kust]{Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Walcheren 2 km uit de kust met hierin het aantal metingen per parameter en per jaar}.  -->
-<!--  \input{../Figuren/Meetdichtheid/w2_opp.tex} -->
-<!-- \end{table} -->
-
 ```{r meetdichtheidOppwaterWal2km}
 dt <- tex2dt("Figuren/Meetdichtheid/w2_opp.tex")
-knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Walcheren 2 km uit de kust met hierin  het aantal metingen per parameter en per jaar.")
+kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Walcheren 2 km uit de kust met hierin  het aantal metingen per parameter en per jaar.") %>%
+   kableExtra::kable_styling(latex_options = "scale_down")
 ```
 
 ### Walcheren 20 km uit de kust {#BijlageB-meetdichtheid-oppwater-walcheren20km}
 
-<!-- \begin{table}[!ht] -->
-<!--  \centering -->
-<!--   \caption[Meetdichtheidsmatrices oppervlaktewater Walcheren 20 km uit de kust]{Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Walcheren 20 km uit de kust met hierin het aantal metingen per parameter en per jaar}.  -->
-<!--  \input{../Figuren/Meetdichtheid/w20_opp.tex} -->
-<!-- \end{table} -->
-
 ```{r meetdichtheidOppwaterWal20km}
 dt <- tex2dt("Figuren/Meetdichtheid/w20_opp.tex")
-knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Walcheren 20 km uit de kust met hierin  het aantal metingen per parameter en per jaar.")
+kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Walcheren 20 km uit de kust met hierin  het aantal metingen per parameter en per jaar.") %>%
+   kableExtra::kable_styling(latex_options = "scale_down")
 ```
 
 ## Zwevende stof {#BijlageB-meetdichtheid-zwevend}
 
 ### Schaar van Ouden Doel {#BijlageB-meetdichtheid-zwevend-schaar}
 
-<!-- \begin{table}[!ht] -->
-<!--  \centering -->
-<!--   \caption[Meetdichtheidsmatrices zwevende stof Schaar van Ouden Doel]{Meetdichtheidsmatrices voor metingen in het zwevende stof bij Schaar van Ouden Doel met hierin het aantal metingen per parameter en per jaar}.  -->
-<!--  \input{../Figuren/Meetdichtheid/schaar_zwevend.tex} -->
-<!-- \end{table} -->
-
 ```{r meetdichtheidZwevendSchaar}
 dt <- tex2dt("Figuren/Meetdichtheid/schaar_zwevend.tex")
-knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen in het zwevende stof bij Schaar van Ouden Doel met hierin  het aantal metingen per parameter en per jaar.")
+kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen in het zwevende stof bij Schaar van Ouden Doel met hierin  het aantal metingen per parameter en per jaar.") %>%
+   kableExtra::kable_styling(latex_options = "scale_down")
 ```
 
 ### Vlissingen boei SSVH {#BijlageB-meetdichtheid-zwevend-vlissingen}
@@ -216,8 +157,9 @@ knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","1
 
 ```{r meetdichtheidZwevendVlissingen}
 dt <- tex2dt("Figuren/Meetdichtheid/vlis_zwevend.tex")
-knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen in het zwevende stof bij Vlissingen boei SSVH met hierin  het aantal metingen per parameter en per jaar.")
+kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen in het zwevende stof bij Vlissingen boei SSVH met hierin  het aantal metingen per parameter en per jaar.") %>%
+   kableExtra::kable_styling(latex_options = "scale_down")
 ```
 
 <!-- %\clearpage -->
@@ -242,8 +184,9 @@ knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","1
 
 ```{r meetdichtheidBiotaBot}
 dt <- tex2dt("Figuren/Meetdichtheid/bot.tex")
-knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota bot bij Middelgat met hierin het aantal metingen per parameter en per jaar.")
+kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen biota bot bij Middelgat met hierin het aantal metingen per parameter en per jaar.") %>%
+   kableExtra::kable_styling(latex_options = "scale_down")
 ```
 
 ### Mosselen {#BijlageB-meetdichtheid-biota-mossel}
@@ -258,8 +201,9 @@ knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","1
 
 ```{r meetdichtheidBiotaMosselMetaal1a}
 dt <- tex2dt("Figuren/Meetdichtheid/metaal_1a.tex")
-knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Hoedekenskerke boei 4 met hierin het aantal metingen per parameter en per jaar.")
+kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Hoedekenskerke boei 4 met hierin het aantal metingen per parameter en per jaar.") %>%
+   kableExtra::kable_styling(latex_options = "scale_down")
 ```
 
 <!-- \begin{table}[!ht] -->
@@ -270,8 +214,9 @@ knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","1
 
 ```{r meetdichtheidBiotaMosselMetaal2a}
 dt <- tex2dt("Figuren/Meetdichtheid/metaal_2a.tex")
-knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Hooge Platen met hierin het aantal metingen per parameter en per jaar.")
+kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Hooge Platen met hierin het aantal metingen per parameter en per jaar.") %>%
+   kableExtra::kable_styling(latex_options = "scale_down")
 ```
 
 <!-- \begin{table}[!ht] -->
@@ -282,8 +227,9 @@ knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","1
 
 ```{r meetdichtheidBiotaMosselMetaal3a}
 dt <- tex2dt("Figuren/Meetdichtheid/metaal_3a.tex")
-knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Knuitershoek met hierin het aantal metingen per parameter en per jaar.")
+kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Knuitershoek met hierin het aantal metingen per parameter en per jaar.") %>%
+   kableExtra::kable_styling(latex_options = "scale_down")
 ```
 
 #### Metaal - drooggewicht {#BijlageB-meetdichtheid-biota-mossel-metaal-droog}
@@ -296,8 +242,9 @@ knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","1
 
 ```{r meetdichtheidBiotaMosselMetaal1b}
 dt <- tex2dt("Figuren/Meetdichtheid/metaal_1b.tex")
-knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Hansweert boei OHMG met hierin het aantal metingen per parameter en per jaar.")
+kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Hansweert boei OHMG met hierin het aantal metingen per parameter en per jaar.") %>%
+   kableExtra::kable_styling(latex_options = "scale_down")
 ```
 
 <!-- \begin{table}[!ht] -->
@@ -308,8 +255,9 @@ knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","1
 
 ```{r meetdichtheidBiotaMosselMetaal2b}
 dt <- tex2dt("Figuren/Meetdichtheid/metaal_2b.tex")
-knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Vlissingen boei SSVH met hierin het aantal metingen per parameter en per jaar.")
+kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Vlissingen boei SSVH met hierin het aantal metingen per parameter en per jaar.") %>%
+   kableExtra::kable_styling(latex_options = "scale_down")
 ```
 
 #### PAK en PCB - drooggewicht {#BijlageB-meetdichtheid-biota-mossel-PAK-PCB-droog}
@@ -322,8 +270,9 @@ knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","1
 
 ```{r meetdichtheidBiotaMosselPCBdroog1}
 dt <- tex2dt("Figuren/Meetdichtheid/droog_1.tex")
-knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen PAK en PCB bij Hansweert boei OHMG met hierin het aantal metingen per parameter en per jaar.")
+kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen biota mosselen PAK en PCB bij Hansweert boei OHMG met hierin het aantal metingen per parameter en per jaar.") %>%
+   kableExtra::kable_styling(latex_options = "scale_down")
 ```
 
 <!-- \begin{table}[!ht] -->
@@ -334,8 +283,9 @@ knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","1
 
 ```{r meetdichtheidBiotaMosselPCBdroog2}
 dt <- tex2dt("Figuren/Meetdichtheid/droog_2.tex")
-knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen PAK en PCB bij Vlissingen boei SSVH met hierin het aantal metingen per parameter en per jaar.")
+kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen biota mosselen PAK en PCB bij Vlissingen boei SSVH met hierin het aantal metingen per parameter en per jaar.") %>%
+   kableExtra::kable_styling(latex_options = "scale_down")
 ```
 
 #### PAK en PCB - natgewicht {#BijlageB-meetdichtheid-biota-mossel-PAK-PCB-nat}
@@ -348,8 +298,9 @@ knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","1
 
 ```{r meetdichtheidBiotaMosselPCBnat1}
 dt <- tex2dt("Figuren/Meetdichtheid/nat_1.tex")
-knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen PCB en PBDEs bij Knuitershoek met hierin het aantal metingen per parameter en per jaar.")
+kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen biota mosselen PCB en PBDEs bij Knuitershoek met hierin het aantal metingen per parameter en per jaar.") %>%
+   kableExtra::kable_styling(latex_options = "scale_down")
 ```
 
 #### Overige {#BijlageB-meetdichtheid-biota-mossel-overig}
@@ -362,16 +313,18 @@ knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","1
 
 ```{r meetdichtheidBiotaMosseloverig}
 dt <- tex2dt("Figuren/Meetdichtheid/overige_1.tex")
-knitr::kable(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen overige bij Knuitershoek met hierin het aantal metingen per parameter en per jaar.")
+kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
+             caption = "Meetdichtheidsmatrices voor metingen biota mosselen overige bij Knuitershoek met hierin het aantal metingen per parameter en per jaar.") %>%
+   kableExtra::kable_styling(latex_options = "scale_down")
 ```
 
 # Indeling fytoplankton {#BijlageC-fytoplankton}
 
 ```{r indelingFytoplanktonBijlage}
 dt <- tex2dt("Figuren/Tabellen/fytoplankton.tex")
-knitr::kable(dt, col.names = c("Naam","Code","BTX","AphiaID","Trofie","Groep"),
-             caption = "Indeling van fytoplankton in trofies en groepen.")
+kableExtra::kbl(dt, col.names = c("Naam","Code","BTX","AphiaID","Trofie","Groep"),
+             caption = "Indeling van fytoplankton in trofies en groepen.") %>%
+   kableExtra::kable_styling(latex_options = "scale_down")
 ```
 
 <!-- % Please add the following required packages to your document preamble: -->
