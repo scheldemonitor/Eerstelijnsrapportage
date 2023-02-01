@@ -799,7 +799,6 @@
         "magrittr",
         "markdown",
         "png",
-        "raster",
         "scales",
         "sp",
         "viridis"
@@ -1034,18 +1033,6 @@
       "Repository": "CRAN",
       "Hash": "5e3c5dc0b071b21fa128676560dbe94d",
       "Requirements": []
-    },
-    "raster": {
-      "Package": "raster",
-      "Version": "3.6-11",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "48f95b0f7e708aa96c8913cadf12eb79",
-      "Requirements": [
-        "Rcpp",
-        "sp",
-        "terra"
-      ]
     },
     "readr": {
       "Package": "readr",
