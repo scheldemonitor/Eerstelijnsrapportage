@@ -17,6 +17,8 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v2
       - name: Install libcurl
         run: sudo apt install -y libcurl4-openssl-dev
+      - name: install gdal-dev-server
+        run: sudo apt install libgdal-dev
       - name: Install rmarkdown
         run: Rscript -e 'install.packages(c("renv"))'
       - name: Render Book
