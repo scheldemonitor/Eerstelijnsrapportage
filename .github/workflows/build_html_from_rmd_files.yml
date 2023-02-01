@@ -1,0 +1,28 @@
+name: build_html_from_rmd_files
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy_job:
+    runs-on: ubuntu-latest
+    name: Build and Deploy Job
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - uses: r-lib/actions/setup-r@v1
+      - uses: r-lib/actions/setup-pandoc@v1
+      - name: Install libcurl
+        run: sudo apt install -y libcurl4-openssl-dev
+      - name: Install rmarkdown
+        run: Rscript -e 'install.packages(c("renv"))'
+      - name: Render Book
+        run: Rscript -e 'renv::restore(); bookdown::render_book("index.Rmd")'
+        working-directory: ./
+      - uses: actions/upload-artifact@v1
+        with:
+          name: _book
+          path: docs/_book
