@@ -21,12 +21,6 @@ jobs:
         run: sudo apt install libgdal-dev
       - name: Install rmarkdown
         run: Rscript -e 'install.packages(c("renv"))'
-      - name: install rstudio/bslib from remotes
-        run: Rscript -e 'remotes::install_github("rstudio/bslib")'
-      - name: install bookdown from remotes
-        run: Rscript -e 'remotes::install_github("rstudio/bookdown")'
-      - name: install downlit from remotes
-        run: Rscript -e 'remotes::install_github("r-lib/downlit")'
       - name: Render Book
         run: Rscript -e 'renv::restore(); bookdown::render_book("index.Rmd")'
         working-directory: ./
