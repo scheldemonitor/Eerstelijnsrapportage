@@ -18,7 +18,7 @@ jobs:
       - name: Install libcurl
         run: sudo apt install -y libcurl4-openssl-dev
       - name: update and install libudunits2-dev libgdal-dev libgeos-dev libproj-dev
-        run: apt-get -y update && apt-get install -y  libudunits2-dev libgdal-dev libgeos-dev libproj-dev
+        run: sudo apt-get -y update && sudo apt-get install -y  libudunits2-dev libgdal-dev libgeos-dev libproj-dev
       - name: Install rmarkdown
         run: Rscript -e 'install.packages(c("renv"))'
       - name: Render Book
