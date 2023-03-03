@@ -87,7 +87,9 @@ Hoofdstuk \@ref(zwevend-stof) bevat de fysisch-chemische monitoring in het zweve
 Hoofdstuk \@ref(bodem) wordt elke drie jaar geactualiseerd met nieuwe gegevens. De laatste bodemmonsters zijn genomen in `r dataJaar` en geanalyseerd in het laboratorium. De resultaten van deze fysisch-chemische monitoring in de bodem zijn opgenomen in dit hoofdstuk.
 <!-- % update: ontbrekende data! -->
 
-Hoofdstuk \@ref(biota) betreft de biota. Voor de biota zijn de metingen in bot (*Platichthys flesus*) en mossel (*Mytilus edulis*) opgenomen. Het monitoringsplan is in 2000 aangepast waarbij er bij twee stations in plaats van drie stations in de Westerschelde biota verzameld worden. 
-<!-- % update: ontbrekende data! -->
+Het hoofdstuk over verontreinigingen in biota is niet opgenomen. De reden is dat er op dit moment niet genoeg gegevens voorhanden zijn in de Scheldemonitor om dit hoofdstuk op een goede manier op te nemen. 
+
+<!-- Hoofdstuk \@ref(biota) betreft de biota. Voor de biota zijn de metingen in bot (*Platichthys flesus*) en mossel (*Mytilus edulis*) opgenomen. Het monitoringsplan is in 2000 aangepast waarbij er bij twee stations in plaats van drie stations in de Westerschelde biota verzameld worden.  -->
+<!-- <!-- % update: ontbrekende data! --> -->
 
 De resultaten van fytoplankton zijn opgenomen in Hoofdstuk \@ref(fytoplankton). Fytoplankton wordt gemonitord bij vijf stations in de Westerschelde sinds 1996. Hoofstuk \@ref(fytoplankton) en Bijlage \@ref(BijlageC-fytoplankton) geven een overzicht van de gehanteerde indeling.

@@ -19,7 +19,6 @@ dataJaar <- 2020
 trendstations <- c("Schaar van Ouden Doel", "Vlissingen boei SSVH")
 
 refreshData = F
-baseDir <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/"
 fysChemZwevendDataPath <- "Data_FysChem_zwevend.csv"
 fysChemZwevendDataPath2 <- "Data_FysChem_zwevend2.csv"
 # fysChemZwevendDataPath <- file.path(baseDir, "Data_FysChem_zwevend.csv")
@@ -29,7 +28,7 @@ if(refreshData) refresh_fysischchemischzwevendstof(startyear = 1998, endyear = d
 
 ```{r downloadZwevend, include = F}
 
-df_original <- read_delim(fysChemZwevendDataPath, delim = ",")
+df_original <- read_delim(file.path(datapath, fysChemZwevendDataPath), delim = ",")
 
 df <- df_original %>% 
   filter(stationname %in% trendstations) %>% 

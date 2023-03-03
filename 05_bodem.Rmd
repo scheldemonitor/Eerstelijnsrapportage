@@ -52,7 +52,7 @@ if(refreshData) refresh_fysischchemischbodem(startyear = 1998, endyear = dataJaa
 ```{r downloadBodem, include = F}
 # Set year for use in the report
 
-df <- read_delim(fysChemBodemDataPath, delim = ",")
+df <- read_delim(file.path(fysChemBodemDataPath), delim = ",")
 
 df_clean <- df %>% 
   filter(stationname %in% trendstations) %>% 

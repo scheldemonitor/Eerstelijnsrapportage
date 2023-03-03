@@ -13,16 +13,15 @@ source("R/functions.R")
 ```
 
 ```{r downloadHydro, include = F}
-# Set year for use in the report
-dataJaar <- 2020
 
 refresh = FALSE
 source("r/refresh_data.R")
-if(refresh) refresh_waterstanden()
+# this step can at the moment only be done at Deltares because of access to the fileserver. 
+if(refresh) refresh_waterstanden(base_path = savepath, datajaar = 2020)
 
 trendstations <- c("Europlatform","Vlakte van de Raan","Cadzand","Westkapelle","Breskens Veerhaven","Vlissingen","Gat van Borssele","Overloop van Hansweert", "Terneuzen", "Hansweert", "Walsoorden", "Baalhoek", "Schaar van de Noord", "Bath")
 
-frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_Hydro_1950_2020_new.csv"
+frozendatapath <- file.path(datapath, "Data_Hydro_1950_2020_new.csv")
 df_waterstanden <- read_delim(frozendatapath, delim = ",", guess_max = 200000) %>%
   mutate(stationname = ifelse(
     stationname == "Euro Platform", "Europlatform", stationname)
@@ -397,7 +396,7 @@ knitr::include_graphics("Figuren/Inscape/spectrum.png")
 ```{r golfTrendstations}
 trendstations <- c("Bath (BAT2)","Hansweert (HAWI)","Cadzand (CAWI)","Cadzand (CADW)","Overloop van Hansweert (OVHW)","Deurloo (DEUR)","Honte (HNTE)","Hoofdplaat (HFPL)","Overloop van Valkenisse (OVVA)","Pas van Terneuzen (PVT)","Wielingen (WIEL)")
 
-frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_Hydro_Golven_1998_2020.csv"
+frozendatapath <- file.path(datapath, "Data_Hydro_Golven_1998_2020.csv")
 
 refresh = F
 if(refresh) refresh_golven()
@@ -509,12 +508,12 @@ knitr::kable(dt,
 plotWeightedMeanMap(df_golven, "H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm")
 ```
 
-```{r cdfplotHs, fig.cap="Empirische distributiefunctie voor de significante golfhoogte berekend op basis van het spectrum voor alle beschikbare data vanaf 1998."}
+```{r cdfplotHs, fig.cap="Empirische distributiefunctie voor de significante golfhoogte berekend op basis van het spectrum voor alle beschikbare data vanaf 1998.", fig.height=7, fig.width=7}
 #knitr::include_graphics("Figuren/Hydro/Golven/cdfplot_Hs.png")
 
-#plotCDF(df_golven, "Hm0: Significante golfhoogte uit 10mHz spectrum in cm")
-#plotCDF(df_golven, "H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm")
-knitr::include_graphics("n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Figuren/cdf_H3.png")
+# plotCDF(df_golven, "Hm0: Significante golfhoogte uit 10mHz spectrum in cm")
+plotCDF(df_golven, "H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm")
+
 ```
 
 ```{r hydroHsDeurloo, fig.cap="Maandelijks gemiddelde en maximum van de significante golfhoogte $H_{1/3}$ (boven) en $H_{m0}$ (onder) voor station Deurloo."}
@@ -617,12 +616,11 @@ knitr::kable(dt,
 plotWeightedMeanMap(df_golven, "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in s")
 ```
 
-```{r cdfplotTmo2, fig.cap="Empirische distributiefunctie voor de significante golfperiode berekend op basis van het spectrum voor alle beschikbare data vanaf 1998."}
+```{r cdfplotTmo2, fig.height=7, fig.width=7, fig.cap="Empirische distributiefunctie voor de significante golfperiode berekend op basis van het spectrum voor alle beschikbare data vanaf 1998."}
 #knitr::include_graphics("Figuren/Hydro/Golven/cdfplot_tm02.png")
 
-#plotCDF(df_golven, "TM02: Golfperiode berekend uit het spectrum in s")
-#plotCDF(df_golven, "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in s")
-knitr::include_graphics("n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Figuren/cdf_TH3.png")
+# plotCDF(df_golven, "TM02: Golfperiode berekend uit het spectrum in s")
+plotCDF(df_golven, "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in s")
 ```
 
 ```{r hydroTDeurloo, fig.cap="Maandelijks gemiddelde (rood) en maximum (blauw) van de golfperiode $T_{H 1/3}$ (boven) en $T_{M02}$ (onder) voor station Deurloo."}

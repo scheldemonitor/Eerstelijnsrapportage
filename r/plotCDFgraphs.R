@@ -22,7 +22,7 @@ df <- read_delim(frozendatapath, delim = ",", guess_max = 200000) %>%
 
 # CDF plot voor golfhoogte
 p1 <- plotCDF(df, "H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm")
-ggsave(filename="n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Figuren/cdf_H3.png", plot=p1)
+ggsave(filename="Figuren/cdf_H3.png", plot=p1)
 
 # CDF plot voor golfperiode
 p2 <- plotCDF(df, "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in s")

@@ -683,7 +683,7 @@ plotTrendsSeizoen <- function(df, parname, sf = T) {
     geom_line(aes(color = seizoen), size = 0.75) + 
     geom_point(aes(color = seizoen), fill = "white", shape = 21, size = 1.5) +
     # geom_smooth(method = "lm", fill = "blue", alpha = 0.2) +
-    facet_wrap(~Station, ncol = 2) +
+    facet_wrap(~Station, ncol = 2, scales = "free") +
     theme_minimal() +
     ggtitle(label = parname) +
     coord_cartesian(ylim = c(0,NA)) +
@@ -1108,7 +1108,7 @@ if(html){  pal <- colorNumeric(viridis(n = 7),
     ggtitle(label = parname) +
     coord_sf(datum=28992)  +
     scale_color_viridis() +
-    scale_size_continuous(range = c(2,10)) +
+    scale_size_continuous(range = c(2,10), guide = "none") +
     # theme(axis.title = element_blank(),
     #       axis.text = element_blank()) +
     # guides(fill = "none", size = "none") +
@@ -1117,8 +1117,9 @@ if(html){  pal <- colorNumeric(viridis(n = 7),
     theme(panel.background=element_blank(),
           panel.spacing = unit(c(0, 0, 0, 0), "cm"),       
           plot.background = element_rect(fill = "white",colour = NA),
-          plot.margin = unit(c(0, 0, 0, 0), "null"),  # Edited code
-          legend.position = 'none')
+          plot.margin = unit(c(0, 0, 0, 0), "null")#,  # Edited code
+          # legend.position = 'none'
+          )
   }
 
 
