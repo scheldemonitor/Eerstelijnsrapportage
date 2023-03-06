@@ -945,7 +945,7 @@ $$ \frac{N}{P}  = \frac{N/C}{P/C}$$ In dit geval duidt een N/C ratio van \<1 een
 
 De Redfield-ratio gaat over de verhoudingen van organisch C, N en P in particulair materiaal. Omdat totaal N en P in particulair materiaal gemeten zijn, zit er ook particulair anorganisch P (PAP) bij. Dit leidt tot een overschatting van de hoeveelheid P in de gegevens ten opzichte van de Redfield-ratio. Er is geen particulair anorganisch N.
 
-Figuur \@ref(fig:fysischNJaar), Figuur \@ref(fig:fysischPJaar) en Figuur \@ref(fig:fysischNPJaar) tonen de jaarwaardes per station. De gemiddelde waardes in de zomer en winter kunnen worden gevonden in Figuur \@ref(fig:fysischNzw), Figuur \@ref(fig:fysischPPzw) en Figuur \@ref(fig:fysischNPzw). Daarnaast zijn in Tabel \@ref(tab:fysischCNP) de gemiddelde waardes te vinden. De gemiddelde waardes uit Figuur \@ref(fig:fysischNJaar) en Figuur \@ref(fig:fysischPJaar) kunnen het best worden vergeleken met Tabel \@ref(tab:fysischCNP).
+Figuur \@ref(fig:fysischNJaar), Figuur \@ref(fig:fysischPJaar) en Figuur \@ref(fig:fysischNPJaar) tonen de jaarwaardes per station. De gemiddelde waardes in de zomer en winter kunnen worden gevonden in Figuur \@ref(fig:fysischNzw), Figuur \@ref(fig:fysischPPzw) en Figuur \@ref(fig:fysischNPzw). Daarnaast zijn in Tabel \@ref(tab:fysischCNP) de gemiddelde waardes te vinden. De gemiddelde waardes uit Figuur \@ref(fig:fysischNJaar) en Figuur \@ref(fig:fysischPJaar) kunnen het best worden vergeleken met Tabel \@ref(tab:fysischNC) en \@ref(tab:fysischPC).
 
 Bij Walcheren 20 km komen de hoogste stikstofratios voor en over het algemeen neemt de N-C-ratio toe naarmate men verder uit het estuarium gaat. Dit kan verklaard worden door een afname van terrestrisch materiaal (met lage N-C ratio) en toename van vers organisch materiaal (hoge N-C ratio) in stroomafwaartse richting. Een zelfde trend is zichtbaar voor de P-C-ratio's aangezien de laagste waarde wordt gevonden bij Walcheren 20 km en over het algemeen neemt de fosforratio toe naarmate men verder in het estuarium komt. Dit kan verklaard worden door een hogere bijdrage van anorganisch particulair P in stroomopwaartse richting. Bij Walcheren 20 km is de stoichiometrische verhouding ook het dichtst bij Redfield. Dit vertaalt zich ook in de N:P ratio die het hoogst is bij Walcheren 20 km en het laagst bij Hansweert Geul.
 
@@ -979,7 +979,7 @@ dfm <- df2 %>% ungroup() %>%
 
 ```
 
-```{r fysischCNP, fig.show='hold' }
+```{r fysischNC}
 
 rounding = 3
 
@@ -987,12 +987,16 @@ dt <- statTable(dfm, parname = `TPN/POC`, rounding)
 knitr::kable(dt,
              align = 'lrrrrr',
              caption = "Statistiek voor molaire genormaliseerde N-C-ratio van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+```
 
+```{r fysischPC}
 dt <- statTable(dfm, parname = `TPP/POC`, rounding)
 knitr::kable(dt,
              align = 'lrrrrr',
              caption = "Statistiek voor molaire genormaliseerde P-C-ratio van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+```
 
+```{r fysischNP}
 dt <- statTable(dfm, parname = `TPN/TPP`, rounding)
 knitr::kable(dt,
              align = 'lrrrrr',

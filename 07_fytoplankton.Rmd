@@ -9,8 +9,7 @@ library(lubridate)
 
 ```{r laadData}
 
-# fytoplankton <- read_delim("n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/fytoplankton.csv", delim = ";")
-fytoplankton <- read_delim("n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/fytoplankton 2023-01-17 .csv", delim = ",")
+fytoplankton <- read_delim(file.path(datapath,"fytoplankton 2023-01-17 .csv"), delim = ",")
 
 fytoplankton <- fytoplankton %>%
   filter(dataprovider == "RWS - Rijkswaterstaat") %>%
@@ -30,8 +29,8 @@ trendstations <- c("Schaar van Ouden Doel", "Hansweert geul",
 
 # fytoplankton %>% group_by(latitude, longitude, stationname) %>% summarize(n = n())
 
-specieslist <- readxl::read_excel(
-  "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/generic/Fytoplankton/Specieslist_zelfuitgebreid_jh.xlsx",
+specieslist <- readr::read_csv2(
+  file.path(datapath, "Specieslist_zelfuitgebreid_jh.csv"),
   col_names = F)
 
 names(specieslist) <- c(
