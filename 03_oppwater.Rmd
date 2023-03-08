@@ -53,7 +53,7 @@ if(refreshData) fysChemOppDataPath(startyear = 1998, endyear = dataJaar, filepat
 
 ```{r downloadOppWaterdata, include = F}
 # Set year for use in the report
-df <- read_delim(fysChemOppDataPath, delim = ",", guess_max = 200000) #%>% select(-X1)
+df <- read_delim(file.path(datapath, fysChemOppDataPath), delim = ",", guess_max = 200000) #%>% select(-X1)
 
 df <- df %>% 
   filter(stationname %in% c(trendstations)) %>% 
@@ -418,7 +418,7 @@ Omdat het gemeten CZV over het algemeen niet boven de detectielimiet uitkomt (be
 
 #### Jaarlijkse waarden {#biochemisch-zuurstofgebruik-jaar}
 
-De jaarmedianen, minima en maxima van het biochemisch zuurstofverbruik zijn weergegeven in Tabel \@ref(tab:fysischBiochemischZuurstofverbruik) en Figuur \@ref(fig:fysischBiochemischZuurstofverbruikJaar). De waarde van het biochemisch zuurstofverbruik is in de periode 2006-2011 afgerond op hele getallen (\@ref(tab:fysischBiochemischZuurstofverbruik)). Gemiddeld over de tijd zijn de waardes onder het bepalingsgrensniveau (2 mg/l). Om die reden worden verder geen resultaten getoond. 
+De jaarmedianen, minima en maxima van het biochemisch zuurstofverbruik zijn weergegeven in Tabel \@ref(tab:fysischBiochemischZuurstofverbruik). Gemiddeld over de tijd zijn de waardes onder het bepalingsgrensniveau (2 mg/l). Om die reden worden verder geen resultaten getoond. 
 
 ```{r fysischBiochemischZuurstofverbruik}
 # dt <- tex2dt("Figuren/Fysisch/Biochemisch_zuurstof/meanvalues.tex")
@@ -935,7 +935,7 @@ plotMedianMap(df2, parname)
 
 ## C:N:P ratio's {#cnp-ratio}
 
-De molaire C:N:P ratio's zijn berekend uit jaarmedianen van particulair organisch koolstof (POC), particulair gebonden stikstof (PN) en particulair gebonden fosfaat (PP). De molaire NC-ratio en de molaire PC-ratio zijn uitgedrukt ten opzichte van een gehalte C van 106, om de vergelijking met de zogenaamde Redfield-ratio (C:N:P = 106:16:1) mogelijk te maken. We presenteren hier de genormaliseerde ratio's:
+De molaire C:N:P ratio's zijn berekend uit jaarmedianen van particulair organisch koolstof (POC), particulair gebonden stikstof (PN) en particulair gebonden fosfaat (PP). De N/C-ratio en de P/C-ratio zijn uitgedrukt ten opzichte van de zogenaamde Redfield-ratio (C:N:P = 106:16:1) mogelijk te maken. De Redfield ratio representeerd de gemiddelde ratio van deze elementen in particulair organisch  materiaal in de oceaan. We presenteren hier de genormaliseerde ratio's:
 
 $$ \frac{N}{C}  = 16 * \frac{PN/14}{POC/12}$$
 
@@ -945,9 +945,9 @@ $$ \frac{N}{P}  = \frac{N/C}{P/C}$$ In dit geval duidt een N/C ratio van \<1 een
 
 De Redfield-ratio gaat over de verhoudingen van organisch C, N en P in particulair materiaal. Omdat totaal N en P in particulair materiaal gemeten zijn, zit er ook particulair anorganisch P (PAP) bij. Dit leidt tot een overschatting van de hoeveelheid P in de gegevens ten opzichte van de Redfield-ratio. Er is geen particulair anorganisch N.
 
-Figuur \@ref(fig:fysischNJaar), Figuur \@ref(fig:fysischPJaar) en Figuur \@ref(fig:fysischNPJaar) tonen de jaarwaardes per station. De gemiddelde waardes in de zomer en winter kunnen worden gevonden in Figuur \@ref(fig:fysischNzw), Figuur \@ref(fig:fysischPPzw) en Figuur \@ref(fig:fysischNPzw). Daarnaast zijn in Tabel \@ref(tab:fysischCNP) de gemiddelde waardes te vinden. De gemiddelde waardes uit Figuur \@ref(fig:fysischNJaar) en Figuur \@ref(fig:fysischPJaar) kunnen het best worden vergeleken met Tabel \@ref(tab:fysischCNP).
+Figuur \@ref(fig:fysischNJaar), Figuur \@ref(fig:fysischPJaar) en Figuur \@ref(fig:fysischNPJaar) tonen de jaarwaardes per station. De gemiddelde waardes in de zomer en winter kunnen worden gevonden in Figuur \@ref(fig:fysischNzw), Figuur \@ref(fig:fysischPPzw) en Figuur \@ref(fig:fysischNPzw). Daarnaast zijn in Tabel \@ref(tab:fysischCNP) de gemiddelde waardes te vinden. De gemiddelde waardes uit Figuur \@ref(fig:fysischNJaar) en Figuur \@ref(fig:fysischPJaar) kunnen het best worden vergeleken met Tabel \@ref(tab:fysischNC) en \@ref(tab:fysischPC).
 
-Bij Walcheren 20 km komen de hoogste stikstofratios voor en over het algemeen neemt de N-C-ratio toe naarmate men verder uit het estuarium gaat. Dit kan verklaard worden door een afname van terrestrisch materiaal (met lage N-C ratio) en toename van vers organisch materiaal (hoge N-C ratio) in stroomafwaartse richting. Een tegenoverstelde trend is zichtbaar voor de P-C-ratio's aangezien de laagste waarde wordt gevonden bij Walcheren 20 km en over het algemeen neemt de fosforratio toe naarmate men verder in het estuarium komt. Dit kan verklaard worden door een hogere bijdrage van anorganisch particulair P in stroomopwaartse richting. Bij Walcheren 20 km is de stoichiometrische verhouding ook het dichtst bij Redfield. Dit vertaalt zich ook in de N:P ratio die het hoogst is bij Walcheren 20 km en het laagst bij Hansweert Geul.
+Bij Walcheren 20 km komen de hoogste stikstofratios voor en over het algemeen neemt de N-C-ratio toe naarmate men verder uit het estuarium gaat. Dit kan verklaard worden door een afname van terrestrisch materiaal (met lage N-C ratio) en toename van vers organisch materiaal (hoge N-C ratio) in stroomafwaartse richting. Een zelfde trend is zichtbaar voor de P-C-ratio's aangezien de laagste waarde wordt gevonden bij Walcheren 20 km en over het algemeen neemt de fosforratio toe naarmate men verder in het estuarium komt. Dit kan verklaard worden door een hogere bijdrage van anorganisch particulair P in stroomopwaartse richting. Bij Walcheren 20 km is de stoichiometrische verhouding ook het dichtst bij Redfield. Dit vertaalt zich ook in de N:P ratio die het hoogst is bij Walcheren 20 km en het laagst bij Hansweert Geul.
 
 De N-C-ratio (stikstof) is over het algemeen hoger in de zomerperiode, als er meer algen zijn. De P-C-ratio (fosfor) is over het algemeen hoger in de winterperiode, als de hoeveelheid particulair gebonden fosfaat over het algemeen hoger is. Dit is ook terug te zien in de N:P ratio, met hogere waarden in de zomer dan in de winter.
 
@@ -971,15 +971,15 @@ TC = "koolstof totaal in mg/l in oppervlaktewater"
 dfm <- df2 %>% ungroup() %>%
   filter(parametername %in% c(TDN, TPN, TDP, TPP, POC, DOC)) %>%
   pivot_wider(id_cols = c(latitude, longitude, datetime, stationname), names_from = parametername, values_from = value) %>%
-  mutate(!!`TPN/POC` := ((106/16) * !!as.name(TPN)/14)/(!!as.name(POC)/12)) %>%
+  mutate(!!`TPN/POC` := (16 * !!as.name(TPN)/14)/(!!as.name(POC)/12)) %>%
   mutate(!!`TPP/POC` := (106 * !!as.name(TPP)/31)/(!!as.name(POC)/12)) %>%
-  mutate(!!`TPN/TPP` := (1/16 * !!as.name(`TPN`)/14)/(!!as.name(`TPP`)/31)) %>%
+  mutate(!!`TPN/TPP` := (16/106 * !!as.name(`TPN`)/14)/(!!as.name(`TPP`)/31)) %>%
   select(latitude, longitude, datetime, stationname, !!as.name(`TPN/POC`), !!as.name(`TPP/POC`), !!as.name(`TPN/TPP`)) %>%
   pivot_longer(cols = -c(latitude, longitude, datetime, stationname), names_to = "parametername")
 
 ```
 
-```{r fysischCNP, fig.show='hold' }
+```{r fysischNC}
 
 rounding = 3
 
@@ -987,12 +987,16 @@ dt <- statTable(dfm, parname = `TPN/POC`, rounding)
 knitr::kable(dt,
              align = 'lrrrrr',
              caption = "Statistiek voor molaire genormaliseerde N-C-ratio van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+```
 
-dt <- statTable(dfm, parname = `TPN/POC`, rounding)
+```{r fysischPC}
+dt <- statTable(dfm, parname = `TPP/POC`, rounding)
 knitr::kable(dt,
              align = 'lrrrrr',
              caption = "Statistiek voor molaire genormaliseerde P-C-ratio van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1996.")
+```
 
+```{r fysischNP}
 dt <- statTable(dfm, parname = `TPN/TPP`, rounding)
 knitr::kable(dt,
              align = 'lrrrrr',
@@ -1006,7 +1010,7 @@ knitr::kable(dt,
 plotTrends(dfm, parname = `TPN/TPP`, sf = F) +
   geom_hline(yintercept = 1, color = "red") +
   annotate('text', x = quantile(year(dfm$datetime), 0.25), y = 1.05, label = 'Redfield', size = 3) +
-  coord_cartesian(ylim = c(0,2))
+  coord_cartesian(ylim = c(0,NA))
 
 ```
 
@@ -1015,7 +1019,7 @@ plotTrends(dfm, parname = `TPN/TPP`, sf = F) +
 # knitr::include_graphics("Figuren/Fysisch/CNP/NP_Zomer_winter.png")
 
 plotTrendsSeizoen(dfm, parname = `TPN/TPP`, sf = F) +
-  coord_cartesian(ylim = c(0,2)) +
+  coord_cartesian(ylim = c(0, NA)) +
   geom_hline(yintercept = 1, color = "red")
 
 ```
@@ -1024,13 +1028,11 @@ plotTrendsSeizoen(dfm, parname = `TPN/TPP`, sf = F) +
 
 plotTrends(dfm, parname = `TPN/POC`, sf = F) +
   geom_hline(yintercept = 1, color = "red") +
-  coord_cartesian(ylim = c(0,1.25))
+  coord_cartesian(ylim = c(0,NA))
 
 ```
 
 ```{r fysischNzw, fig.cap="De molaire genormaliseerde N-C-ratio, N uitgedrukt ten opzichte van een gehalte C, gemiddeld over de zomer en winterperiode in het oppervlaktewater van de Westerschelde en de monding."}
-
-# knitr::include_graphics("Figuren/Fysisch/CNP/NP_Zomer_winter.png")
 
 plotTrendsSeizoen(dfm, parname = `TPN/POC`, sf = F) +
   geom_hline(yintercept = 1, color = "red")
@@ -1038,8 +1040,6 @@ plotTrendsSeizoen(dfm, parname = `TPN/POC`, sf = F) +
 ```
 
 ```{r fysischPJaar, fig.cap="De molaire genormaliseerde P-C-ratio, P uitgedrukt ten opzichte van een gehalte C, gemiddeld over een jaar in het oppervlaktewater van de Westerschelde en de monding."}
-
-# knitr::include_graphics("Figuren/Fysisch/CNP/NP_jaar.png")
 
 plotTrends(dfm, parname = `TPP/POC`, sf = F) +
   geom_hline(yintercept = 1, color = "red") +

@@ -1,21 +1,4 @@
-# bookdown::gitbook:
-#   # split_by: section
-#   config:
-#     toc:
-#       collapse: section
-#     toc_float:
-#       collapsed: false
-#       smooth_scroll: false
-#   includes:
-#     before_body: navbar/navbar.html
-#     in_header: clickandzoom.html
-#   css: ["navbar/navbar.css", "style/deltares.css", "draft.css"]
-
 bookdown::bs4_book:
-  # theme:
-  #   primary: "#982a31"
-  #   fg: "#2b2121"
-  #   bg: "#ffffff"
   includes:
     before_body: navbar/navbar.html
     in_header: clickandzoom.html
@@ -27,4 +10,5 @@ bookdown::pdf_book:
     in_header: preamble.tex
   template: deltares-report-template.tex
   latex_engine: pdflatex
+  toc: yes
   # citation_package: natbib # niet in combinatie met Deltares-template

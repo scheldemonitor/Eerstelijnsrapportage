@@ -24,10 +24,7 @@ frozendataPath <- "Data_FysChem_biota.csv"
 
 ```{r}
 
-# Set year for use in the report - move 
-dataJaar <- 2020
-
-df <- read_delim(file = file.path(frozendataPath), delim = ",")
+df <- read_delim(file = file.path(datapath, frozendataPath), delim = ",")
 
 # databeschikbaarheid
 

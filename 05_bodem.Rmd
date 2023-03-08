@@ -23,7 +23,6 @@ require(leaflet)
 
 source("R/functions.R")
 source("R/refresh_data.R")
-dataJaar <- 2020
 
 trendstations <- c('Schaar van Ouden Doel',
 "Bath boei 68",
@@ -39,10 +38,6 @@ trendstations <- c('Schaar van Ouden Doel',
 "Wielingen oost"
 )
 
-# frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_FysChem_bodem_test_1998_2020.csv"
-# # frozendatapath <- "c:/Users/ronge_bb/R/Data/Data_FysChem_bodem_test_1998_2020.csv"
-# frozendatapath <- "Data_FysChem_bodem.csv"
-# 
 refreshData = F
 fysChemBodemDataPath <- "Data_FysChem_bodem.csv"
 if(refreshData) refresh_fysischchemischbodem(startyear = 1998, endyear = dataJaar, filepath = fysChemBodemDataPath) 
@@ -52,7 +47,7 @@ if(refreshData) refresh_fysischchemischbodem(startyear = 1998, endyear = dataJaa
 ```{r downloadBodem, include = F}
 # Set year for use in the report
 
-df <- read_delim(fysChemBodemDataPath, delim = ",")
+df <- read_delim(file.path(datapath, fysChemBodemDataPath), delim = ",")
 
 df_clean <- df %>% 
   filter(stationname %in% trendstations) %>% 

@@ -5,8 +5,6 @@ require(tidyverse)
 dataIDpath <- "datasetIDs.xlsx"
 sheets <- readxl::excel_sheets(dataIDpath)
 
-# storage path of downloaded data
-datapath = getwd()
 
 IDs <- lapply(
   sheets, 
@@ -18,32 +16,26 @@ IDs <- lapply(
 
 # Hydrodynamiek - waterstanden
 
-refresh_waterstanden <- function(){
+refresh_waterstanden <- function(base_path, datajaar){
   Waterstand <- c(9695,9694,2438,2439)
-  
-  base_path <- "waterstanden\\Data_Hydro_"
-  for(jaar in 1950:2020){
+  for(jaar in 1950:datajaar){
     df <- smwfs::getSMdata(startyear = jaar, endyear = jaar + 1, parID = c(Waterstand), datasetID = c(476,1527,945))
-    write.csv(df, paste(base_path,jaar,'.csv', sep = ""))
+    write.csv(df, paste(savepathh, "Data_Hydro_waterstanden_", jaar,'.csv', sep = ""))
   }
 }
 
 # Hydrodynamiek - golven
 
-refresh_golven <- function(){
-  
+refresh_golven <- function(datajaar){
   Golven <- c(2599,2601,1816,2594,2596,2597,2598)
-  
-  # downloaden
-  base_path <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/yearly_golven"
-  for(jaar in 1998:2020){
+  for(jaar in 1998:datajaar){
     df <- smwfs::getSMdata(startyear = jaar, endyear = jaar + 1, parID = c(Golven), datasetID = c(8032))
-    write.csv(df, paste(base_path,jaar,'.csv', sep = ""))
+    write.csv(df, paste(savepath,"Data_Hydro_golven_", jaar,'.csv', sep = ""))
   }
 
   # bewerkingen
   
-allFiles <- list.files(file.path(base_path), pattern = ".csv", full.names = T)
+allFiles <- list.files(file.path(savepath), pattern = "Data_Hydro_golven_", full.names = T)
 df <- lapply(
   allFiles, function(x) # nameless function. Wat hierna staat wordt uitgevoerd voor elke elemente van allFiles
     read_delim(x, delim = ",", col_types = cols(.default = "c",
@@ -61,9 +53,9 @@ df <- lapply(
 ) %>% bind_rows() # alles wordt geplakt
 
 cdf_H3 <- plotCDF(df, "H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm")
-ggsave(cdf_H3, width = 7, height = 4, filename = "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Figuren/cdf_H3.png")
+ggsave(cdf_H3, width = 7, height = 4, filename = "Figuren/cdf_H3.png")
 cdf_th3 <- plotCDF(df,"TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in 0.1 s")
-ggsave(cdf_th3, width = 8, height = 4, filename =  "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Figuren/cdf_TH3.png")
+ggsave(cdf_th3, width = 8, height = 4, filename =  "Figuren/cdf_TH3.png")
 
 df2 <- df %>%
   mutate(year = year(datetime), month = month(datetime)) %>%
@@ -86,7 +78,7 @@ df2 <- df %>%
     str_detect(parametername, "TM02") ~ "TM02: Golfperiode berekend uit het spectrum in 0.1 s",
     str_detect(parametername, "Hm0") ~ "Hm0: Significante golfhoogte uit 10mHz spectrum in cm"))
 
-write_delim(df2, frozendatapath, delim = ",")
+write_delim(df2, file.path(savepath, "Data_Hydro_, datajaar, .csv"), delim = ",")
 rm(df)
 
 }
@@ -95,7 +87,7 @@ rm(df)
 
 # Fysisch-chemisch - oppervlaktewater
 
-refresh_fysischchemischoppwater <- function(startyear = 1998, endyear, filepath = fysChemOppDataPath){
+refresh_fysischchemischoppwater <- function(startyear = 1998, endyear, filepath = "Data_FysChem_opp.csv"){
   Saliniteit <- c(998)
   Temperatuur <- c(1046)
   Zuurstof <- c(1214,1213)
@@ -112,13 +104,13 @@ refresh_fysischchemischoppwater <- function(startyear = 1998, endyear, filepath 
   #df <- get_y_SMdata(2019, 2020, parID)
   df <- smwfs::get_y_SMdata(startyear = startyear, endyear = endyear, parID = parID)
   df <- df[!df$dataprovider == "8", ] # remove metingen van scan-tochten
-  write_csv(df, file.path(datapath, filepath))
+  write_csv(df, file.path(savepath, filepath))
 }
 
 
 # Fysisch-chemisch - zwevende stof
 
-refresh_fysischchemischzwevendstof <- function(startyear = 1998, endyear, filepath = fysChemZwevendDataPath){
+refresh_fysischchemischzwevendstof <- function(startyear = 1998, endyear, filepath = 'Data_FysChem_zwevend.csv'){
   parIDs <- IDs %>%
     filter(grepl(" in zwevend stof", Parameternaam, ignore.case = T)) %>%
     select(`(Parameternr)`) %>%
@@ -133,12 +125,12 @@ refresh_fysischchemischzwevendstof <- function(startyear = 1998, endyear, filepa
     # map( ~ mutate(.x, id = as.numeric(id))) %>%
     bind_rows()
   df <- df[!df$dataprovider == "8", ] # remove metingen van scan-tochten
-  write.csv(df, file.path(datapath, 'Data_FysChem_zwevend.csv'))
+  write.csv(df, file.path(savepath, filepath))
 }
 
 # Fysisch-chemisch - bodem
 
-refresh_fysischchemischbodem <- function(startyear = 1998, endyear, filepath){
+refresh_fysischchemischbodem <- function(startyear = 1998, endyear, filepath = "Data_FysChem_bodem.csv"){
   
 parIDs <- IDs %>%
   filter(grepl("in bodem/sediment", Parameternaam, ignore.case = T)) %>%
@@ -158,7 +150,7 @@ write.csv(df, filepath)
 
 }
 
-refresh_fysischchemischbiota <- function(){
+refresh_fysischchemischbiota <- function(startyear = 1998, endyear, filepath = "Data_FysChem_biota.csv"){
   
   parIDs <- IDs %>%
     filter(grepl("biota", Parameternaam, ignore.case = T)) %>%
@@ -169,24 +161,24 @@ refresh_fysischchemischbiota <- function(){
                             'dataproviderid', 'imisdatasetid', 'parametername', 'parameterunit', 'class', 'category',
                             'scientificname', 'dataprovider', 'stationname', 'unit', 'valuesign', sep = ",")
   
-  df <- lapply(parIDs, function(x) getSMdata(1998,2020, propname = NULL, parID = x)) %>%
+  df <- lapply(parIDs, function(x) getSMdata(startyear, endyear, propname = NULL, parID = x)) %>%
     delete.NULLs() %>% 
     bind_rows()
   
   # df <- df[!df$dataprovider == "8", ] # remove metingen van scan-tochten
-  write.csv(df, file.path(datapath, 'Data_FysChem_biota.csv'))
+  write.csv(df, file.path(datapath, filepath))
   
 }
 
 
 
-refresh_fytoplanktondata <- function(datapath = 'n:\\Projects\\1209000\\1209394\\C. Report - advise\\Eerstelijnsrapportage\\2021\\Data'){
+refresh_fytoplanktondata <- function(){
   
   url = "http://geo.vliz.be/geoserver/wfs/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=Dataportal%3Abiotic_observations&resultType=results&viewParams=where%3Aobs.context+%26%26+ARRAY%5B1%5D+AND+imisdatasetid+IN+%28949%29%3Bcontext%3A0001%3Bloggedin%3A1&propertyName=stationname%2Caphiaid%2Cscientificname%2Cobservationdate%2Clongitude%2Clatitude%2Cvalue%2Cparametername%2Cdataprovider%2Cimisdatasetid%2Cdatasettitle%2Cdatafichetitle%2Cdataficheid%2Careaname%2Cdateprecision%2Cstadium%2Cgender%2Cvaluesign%2Cdepth%2Cclassunit%2Cclass%2Cstandardparameterid%2Cparameterunit&outputFormat=csv"
 
   df.fytoplankton <- read_csv(url)
   
-  write.csv(df.fytoplankton, file.path(datapath, paste('fytoplankton', today(), '.csv')))
+  write.csv(df.fytoplankton, file.path(savepath, paste('fytoplankton', today(), '.csv')))
   
   
   }

@@ -21,9 +21,9 @@ knitr::opts_chunk$set(echo = FALSE,	message = FALSE, warning = FALSE)
 dataJaar <- 2020
 ```
 
-De informatie op deze website is op dit moment onder constructie en bedoeld voor een beperkt publiek. Niets van deze website mag worden gebruikt door derden.
+<!-- De informatie op deze website is op dit moment onder constructie en bedoeld voor een beperkt publiek. Niets van deze website mag worden gebruikt door derden. -->
 
-This website is under construction. Nothing from this website may be used.
+<!-- This website is under construction. Nothing from this website may be used. -->
 
 Deze eerstelijnsrapportage is gemaakt door Deltares in opdracht van Rijkswaterstaat en bevat gegevens t/m `r dataJaar`. De basis voor dit rapport is gemaakt door dr. F.M. Kleissen en anderen. Het verwerken, analyseren en toevoegen van de data uit `r dataJaar` in dit rapport is gedaan door dr. W. Stolte en B. van Rongen.
 
@@ -35,10 +35,14 @@ Deze rapportage bevat de beschikbare hydrodynamische, fysisch-chemische en biolo
 
 Eerstelijnsrapportages worden elk jaar gemaakt. Hieronder is informatie over de datum van deze rapportage, en tot welk jaar de gegevens zijn verwerkt. 
 
-* Concept versie 28-04-2021: bevat data t/m `r dataJaar`, missend in deze versie is:
+* Eindversie 22-02-2023: bevat data t/m `r dataJaar`, missend in deze versie is:
+  + Golven: locatie Cadzand, 
+  + Biota: De gegevens over verontreinigingen in biota zijn op dit moment onvolledig of ontbrekend. Besloten is om deze voorlopig weg te laten uit de eerstelijnsrapportage. 
+  + Biota hoofdstuk niet toegevoegd. Niet genoeg data beschikbaar uit Scheldemonitor.
+  
+* Concept versie 16-03-2021: bevat data t/m `r dataJaar`, missend in deze versie is:
   + Golven: locatie Cadzand, 
   + Biota: De gegevens over verontreinigingen in biota zijn op dit moment onvolledig of ontbrekend. Besloten is om deze voorlopig weg te laten uit de eerstelijnsrapportage. 
   + Bijlage: meetdichtheid tabellen hebben nog niet de `r dataJaar` gegevens
-  
-## Review
+
 
