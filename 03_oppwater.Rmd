@@ -15,7 +15,6 @@ require(plotly)
 
 source("R/functions.R")
 
-dataJaar <- 2020
 
 trendstations <- c("Schaar van Ouden Doel", "Hansweert geul", "Terneuzen boei 20",
 "Vlissingen boei SSVH", "Walcheren 2 km uit de kust",
