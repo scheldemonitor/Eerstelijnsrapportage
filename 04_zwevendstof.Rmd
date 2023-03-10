@@ -13,9 +13,6 @@ require(sf)
 
 source("R/functions.R")
 
-# Set year for use in the report
-dataJaar <- 2020
-
 trendstations <- c("Schaar van Ouden Doel", "Vlissingen boei SSVH")
 
 refreshData = F
@@ -91,7 +88,7 @@ knitr::kable(dt,
              caption = '(ref:zwevendKorrelgroottefractietot63umTabLabel)')
 ```
 
-```{r zwevendKorrelgroottefractietot63um, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van de korrelgroottefractie tot 63$\\mu$m voor 2 stations. De grootte van de symbolen geven het aantal valide meetwaarden per jaar aan."}
+```{r zwevendKorrelgroottefractietot63um, fig.height = 4, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van de korrelgroottefractie tot 63$\\mu$m voor 2 stations. De grootte van de symbolen geven het aantal valide meetwaarden per jaar aan."}
 #knitr::include_graphics("Figuren/Zwevend/Korrelgroottefractietot63um.png")
 
 plotTrendsLimits(df, parname = parname, trend = F)
@@ -116,7 +113,7 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van korrelgrootte tot 2 $\\mu$m (\\%) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendKorrelgroottefractietot2um, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van de korrelgroottefractie tot 2$\\mu$m voor beide stations"}
+```{r zwevendKorrelgroottefractietot2um, fig.height = 4, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van de korrelgroottefractie tot 2$\\mu$m voor beide stations"}
 #knitr::include_graphics("Figuren/Zwevend/Korrelgroottefractietot2um.png")
 
 plotTrendsLimits(df, parname, trend = F)
@@ -319,7 +316,7 @@ Polycyclische aromatische koolwaterstoffen (PAK's) zijn organische verbindingen 
 Voor alle getoonde PAK’s is er een duidelijke ruimtelijke gradiënt waarneembaar, met hogere concentraties bij Schaar van Ouden Doel en lagere concentraties bij Vlissingen boei SSVH. De verschillen tussen de minimale en maximale waarde zijn bij Schaar van Ouden Doel groter dan bij Vlissingen boei SSVH. Daarnaast is er in alle/veel gevallen een dalende trend zichtbaar, die het sterkst is bij Schaar van Ouden Doel. De meetreeksen bevatten enkele waarden die onder de detectiegrens vallen, waardoor de gemiddelden (en minima) wat hoger zijn uitgevallen.
 
 
-```{r zwevendPAKs, fig.width=6, fig.height=10, fig.width=8, fig.cap="Trends voor alle hier behandelde PAK's in mg/kg drooggewicht in zwevend stof."}
+```{r zwevendPAKs, fig.width=6, fig.height=10, fig.width=7, fig.cap="Trends voor alle hier behandelde PAK's in mg/kg drooggewicht in zwevend stof."}
 parname <- c(
   "Antraceen in mg/kg drooggewicht in zwevend stof",
   "Benzo(a)pyreen in mg/kg drooggewicht in zwevend stof",
@@ -485,7 +482,7 @@ Polychloorbifenylen (PCB’s) zijn vanaf 1930 op grote schaal toegepast in indus
 
 Voor alle getoonde PCB's is er een duidelijke ruimtelijke gradiënt waarneembaar, met hogere concentraties bij Schaar van Ouden Doel en lagere concentraties bij Vlissingen boei SSVH. Daarnaast is er in alle/veel gevallen een dalende trend zichtbaar, die het sterkst is bij Schaar van Ouden Doel. De meetreeksen bevatten enkele waarden die onder de detectiegrens vallen, waardoor de gemiddelden (en minima) wat hoger zijn uitgevallen.
 
-```{r zwevendPCBs, fig.height=8, fig.width=8, fig.cap="Trends voor alle hier behandelde PCB's in mg/kg drooggewicht in zwevend stof."}
+```{r zwevendPCBs, fig.height=10, fig.width=7, fig.cap="Trends voor alle hier behandelde PCB's in mg/kg drooggewicht in zwevend stof."}
 parname <- c(
   "2,2',3,4,4',5,5'-Heptachloorbifenyl (PCB180) in ug/kg drooggewicht in zwevend stof",
   "2,2',3,4,4',5'-Hexachloorbifenyl (PCB138) in ug/kg drooggewicht in zwevend stof",
@@ -637,7 +634,7 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van hexachloorbenzeen (ug/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
  
-```{r zwevendHexachloorbenzeen, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Hexachloorbenzeen voor beide stations."}
+```{r zwevendHexachloorbenzeen, fig.height = 3, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Hexachloorbenzeen voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/Hexachloorbenzeen.png")
 
 plotTrendsLimits(df, parname)
@@ -676,7 +673,7 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van tributyltin (ug/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendTributyltin, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Tributyltin voor beide stations."}
+```{r zwevendTributyltin, fig.height = 3, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Tributyltin voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/Tributyltin.png")
 
 plotTrendsLimits(df, parname)

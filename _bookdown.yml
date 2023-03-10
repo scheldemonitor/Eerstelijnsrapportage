@@ -1,6 +1,5 @@
 
-delete_merged_file: true
-new_session: true
+book_filename: "eerstelijnschelde2021"
 
 rmd_files: [
   "index.Rmd",
@@ -14,25 +13,25 @@ rmd_files: [
   "08_bijlage.Rmd",
   "werkwijze.Rmd"
 ]
-
+delete_merged_file: true
+before_chapter_script: _common.R
 language:
   label:
-    fig: 'Figuur '
-    tab: 'Tabel '
-    eq: 'Vergelijking '
-    thm: 'Theorem '
-    lem: 'Lemma '
-    cor: 'Corollary '
-    prp: 'Proposition '
-    cnj: 'Conjecture '
-    def: 'Definition '
-    exm: 'Example '
-    exr: 'Exercise '
-    hyp: 'Hypothesis '
-    proof: 'Proof. '
-    remark: 'Remark. '
-    solution: 'Solution. '
+    fig: "Figuur "
+    tab: "Tabel "
+    eq: "Vergelijking "
+    thm: "Theorem "
+    lem: "Lemma "
+    cor: "Corollary "
+    prp: "Proposition "
+    cnj: "Conjecture "
+    def: "Definition "
+    exm: "Example "
+    exr: "Exercise "
+    hyp: "Hypothesis "
+    proof: "Proof. "
+    remark: "Remark. "
+    solution: "Solution. "
   ui:
-    edit: Edit
-    chapter_name: ''
-    appendix_name: ''
+    chapter_name: "Hoofdstuk "
+    appendix_name: "Bijlage"

@@ -16,7 +16,7 @@ source("R/functions.R")
 ```{r}
 
 # Set year for use in the report
-dataJaar <- 2019
+
 ```
 
 # Inleiding {#inleiding}
