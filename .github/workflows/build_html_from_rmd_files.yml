@@ -1,0 +1,32 @@
+name: build_html_from_rmd_files
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy_job:
+    runs-on: ubuntu-latest
+    name: Build and Deploy Job
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - uses: r-lib/actions/setup-r@v2
+      - uses: r-lib/actions/setup-pandoc@v2
+      - name: Install libcurl
+        run: sudo apt install -y libcurl4-openssl-dev
+      - name: update and install libudunits2-dev libgdal-dev libgeos-dev libproj-dev
+        run: sudo apt-get -y update && sudo apt-get install -y  libudunits2-dev libgdal-dev libgeos-dev libproj-dev
+      - name: Install downlit
+        run: sudo Rscript -e 'install.packages("downlit", repos = "https://cloud.r-project.org")'
+      - name: Install rmarkdown
+        run: Rscript -e 'install.packages(c("renv"))'
+      - name: Render Book
+        run: Rscript -e 'renv::restore(); bookdown::render_book("index.Rmd")'
+        working-directory: ./
+      - uses: actions/upload-artifact@v1
+        with:
+          name: _book
+          path: docs/_book

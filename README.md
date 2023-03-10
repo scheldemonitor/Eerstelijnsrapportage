@@ -8,7 +8,7 @@ Deltares maakt elk jaar een eerstelijnsrapportage voor Rijkswaterstaat over de m
 
 De rapportage haalt de data uit de Scheldemonitor (https://www.scheldemonitor.org) via een WFS service. Daarna worden bewerkingen op deze data gedaan, grafieken en tabellen gemaakt, en kaartjes gemaakt. De gebruikte software voor de opzet van de rapportage is R met de packages Rmarkdown and Bookdown.
 
-# Betrokkenen
+## Betrokkenen
 
 Deltares: Willem Stolte, Bob van Rongen, Frank Kleissen, Marcel Taal. Bij eerdere rapportages hebben nog vele anderen meegewerkt.
 
