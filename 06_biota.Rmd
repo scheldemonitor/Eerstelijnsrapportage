@@ -12,8 +12,8 @@ knitr::opts_chunk$set(
 	fig.height = 6
 )
 
-source("R/functions.R")
-source("R/refresh_data.R")
+source("r/functions.R")
+source("r/refresh_data.R")
 require(smwfs)
 
 refreshData = F

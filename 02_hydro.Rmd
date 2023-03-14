@@ -9,7 +9,7 @@ require(sf)
 require(viridis)
 require(plotly)
 
-source("R/functions.R")
+source("r/functions.R")
 ```
 
 ```{r downloadHydro, include = F}

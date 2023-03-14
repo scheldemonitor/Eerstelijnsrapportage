@@ -3,7 +3,7 @@
 knitr::opts_chunk$set(
 	fig.height = 5
 )
-source("R/functions.R")
+source("r/functions.R")
 library(lubridate)
 ```
 

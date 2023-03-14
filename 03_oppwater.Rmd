@@ -13,7 +13,8 @@ require(sf)
 require(leaflet)
 require(plotly)
 
-source("R/functions.R")
+source("r/functions.R")
+source("r/refresh_data.R")
 
 
 trendstations <- c("Schaar van Ouden Doel", "Hansweert geul", "Terneuzen boei 20",

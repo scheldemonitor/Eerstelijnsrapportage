@@ -21,8 +21,8 @@ require(lubridate)
 require(sf)
 require(leaflet)
 
-source("R/functions.R")
-source("R/refresh_data.R")
+source("r/functions.R")
+source("r/refresh_data.R")
 
 trendstations <- c('Schaar van Ouden Doel',
 "Bath boei 68",

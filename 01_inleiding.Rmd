@@ -10,7 +10,6 @@ require(lubridate)
 require(sf)
 require(leaflet)
 
-source("R/functions.R")
 ```
 
 ```{r}
