@@ -1,6 +1,7 @@
 # example R options set globally
 options(width = 60)
 
+
 # year for reporting (last data year)
 dataJaar <- 2020
 
@@ -33,5 +34,7 @@ addLegend <- leaflet::addLegend
 dataJaar <- 2020
 
 # bibliographybib <- bibtex::read.bib("bib/library.bib")
+
+# bibliographybib2 <- bibtex::read.bib("bib/westerscheldewillem.bib")
 # bibliographybib2 <- bibtex::read.bib("bib/westerscheldewillem.bib")
 
