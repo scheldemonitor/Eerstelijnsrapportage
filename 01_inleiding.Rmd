@@ -23,15 +23,15 @@ source("R/functions.R")
 
 ## Achtergrond {#achtergrond}
 
-De projecten die in het kader van de OntwikkelingsSchets 2010 (OS2010) zijn uitgevoerd hebben als doel verschillende veranderingen in het Schelde-esturium te bewerkstelligen. Het betreft verruiming van de vaargeul, aanleg van gebieden met gedempt getij en ontpolderingen. Het doel van deze projecten is verbetering van de toegankelijkheid (scheepvaart), vergroting van de veiligheid tegen overstromingen en verbetering van de natuurwaarde en natuurlijkheid van het systeem.
+De projecten die in het kader van de OntwikkelingsSchets 2010 (OS2010) zijn uitgevoerd hebben als doel verschillende veranderingen in het Schelde-estuarium te bewerkstelligen. Het betreft verruiming van de vaargeul, aanleg van gebieden met gedempt getij en ontpolderingen. Het doel van deze projecten is verbetering van de toegankelijkheid (scheepvaart), vergroting van de veiligheid tegen overstromingen en verbetering van de natuurwaarde en natuurlijkheid van het systeem.
 
-Deze projecten kunnen ook niet gewenste neveneffecten hebben op het functioneren van het estuarium. De resultaten van deze projecten worden gemonitord via geïntegreerde systeemmonitoring. Naast OS2010 zijn er nog andere programma’s die invloed hebben op de kwaliteiten van het systeem, zoals maatregelen ten behoeve van de Kaderrichtlijn Water (KRW) en emissievergunningen (e.g. de rioolwaterzuiveringen in Vlaanderen). 
+Deze projecten kunnen ook niet+gewenste neveneffecten hebben op het functioneren van het estuarium. De resultaten van deze projecten worden gemonitord via geïntegreerde systeemmonitoring. Naast OS2010 zijn er nog andere programma’s die invloed hebben op de kwaliteiten van het systeem, zoals maatregelen ten behoeve van de Kaderrichtlijn Water (KRW) en emissievergunningen (e.g. de rioolwaterzuiveringen in Vlaanderen). 
 
 Voor de monitoring en de ontwikkelingen rond de derde verruiming in het kader van de Ontwikkelingsschets 2010 (OS2010) dienen gevalideerde gegevens en gegevensrapporten geleverd te worden. Deze gegevensrapportage betreft de zogenaamde eerstelijnsrapportage van de monitoring van de Westerschelde en de monding. Elk jaar wordt er een nieuwe eerstelijnsrapportage opgeleverd (@ELR2010, @ELR2011, @ELR2012, @ELR2013, @ELR2014, @ELR2015, @ERL2016, @ERL2017). Dit is de negende eerstelijnsrapportage. 
 
 ## Doelstelling {#doelstelling}
 
-De eerstelijnsrapportage is een eerste weergave van de beschikbare gegevens en beschrijft enkel ‘wat men in de meetresultaten ziet’. Het bevat een interpretatie van de gegevens op basis van een eenvoudige analyse. Er worden geen oorzaak-gevolg relaties geanalyseerd. 
+De eerstelijnsrapportage is een eerste weergave van de beschikbare gegevens uit de Nederlandse monitoring in de Westerschelde en de monding en beschrijft enkel ‘wat men in de meetresultaten ziet’. Het bevat een interpretatie van de gegevens op basis van een eenvoudige analyse. Er worden geen oorzaak-gevolg relaties geanalyseerd. 
 
 ## Verwerkte gegevens
 
@@ -40,7 +40,6 @@ In deze eerstelijnsrapportage zijn gegevens die gemeten zijn in de periode 1996 
 Naast deze gegevensrapportage worden er aparte rapportages uitgevoerd voor o.a. macrofauna, vissen, kustbroedvogels, hoogwatervogeltellingen en zeehonden. Daarnaast worden enkele variabelen uitgewerkt door andere instanties. Dit geldt o.a. voor de geomorfologie, primaire productie en vegetatie-ecotopenkaarten. Deze gegevens zijn daarom niet in deze rapportage opgenomen.
 
 Een groot aantal van de fysisch-chemische en biologische variabelen in de Westerschelde wordt gemeten in het kader van de  ‘Monitoring Waterstaatkundige Toestand des Lands' (i.e. MWTL). Deze variabelen kennen de volgende onderverdeling: oppervlaktewater (compartiment 10), zwevende stof (compartiment 50), bodem (compartiment 40; iedere 3 jaar gemeten) en biota (compartiment 60).
-
 
 Bodemgegevens worden iedere 3 jaar gemeten en gerapporteerd.  De meest recente bodemgegevens komen uit 2019, en zijn opgenomen in deze Eerstelijnsrapportage. 
 
@@ -75,21 +74,21 @@ knitr::kable(dt, col.names = c("Groep","Parameter","Locatie","Missend"), caption
 
 ## Leeswijzer
 
-Hoofdstuk \@ref(hydro) bevat de hydrodynamiek. Op een groot aantal stations in de Westerschelde, de monding en de Noordzee worden hoog- en laagwaterstanden gepresenteerd over de periode 1950 tot heden. Ook de getijslag en de M2, M4 en S2-componenten van het getij worden weergegeven. Voor de golven wordt de golfhoogte en golfperiode getoond op meerdere stations in de Westerschelde en de monding. Voor een tweetal stations (Cadzand en Deurloo) in de monding wordt ook de golfrichting weergegeven. 
+Hoofdstuk \@ref(hydro) beschrijft de hydrodynamiek. Op een groot aantal stations in de Westerschelde, de monding en de Noordzee worden hoog- en laagwaterstanden gepresenteerd over de periode 1950 tot heden. Ook de getijslag en de M2, M4 en S2-componenten van het getij worden weergegeven. Voor de golven wordt de golfhoogte en golfperiode getoond op meerdere stations in de Westerschelde en de monding. Voor een tweetal stations (Cadzand en Deurloo) in de monding wordt ook de golfrichting weergegeven. 
 <!-- % update: ontbrekende data! -->
 
-Hoofdstuk \@ref(fysisch-oppwater) bevat de fysisch-chemische variabelen die gemeten zijn in het oppervlaktewater in het kader van MWTL (Monitoring Waterstaatskundige Toestand des Lands) vaartochten. 
+Hoofdstuk \@ref(fysisch-oppwater) beschrijft de fysisch-chemische variabelen die gemeten zijn in het oppervlaktewater in het kader van MWTL (Monitoring Waterstaatskundige Toestand des Lands) vaartochten. 
 <!-- % update: ontbrekende data! -->
 
-Hoofdstuk \@ref(zwevend-stof) bevat de fysisch-chemische monitoring in het zwevende stof. Zwevende stof wordt ook in het kader van het kader van MWTL-vaartochten gemeten. De data wordt gepresenteerd voor twee stations te weten Vlissingen boei SSVH en Schaar van Ouden Doel.
+Hoofdstuk \@ref(zwevend-stof) beschrijft de fysisch-chemische monitoring in het zwevende stof. Zwevende stof wordt ook in het kader van MWTL-vaartochten gemeten. De data wordt gepresenteerd voor twee stations te weten Vlissingen boei SSVH en Schaar van Ouden Doel.
 <!-- % update: ontbrekende data! -->
 
-Hoofdstuk \@ref(bodem) wordt elke drie jaar geactualiseerd met nieuwe gegevens. De laatste bodemmonsters zijn genomen in `r dataJaar` en geanalyseerd in het laboratorium. De resultaten van deze fysisch-chemische monitoring in de bodem zijn opgenomen in dit hoofdstuk.
+Hoofdstuk \@ref(bodem) beschrijft de driejaarlijkse fysisch-chemische monitoring van de bodem in het kader van MWTL. Dit hoofdstuk wordt elke drie jaar geactualiseerd met nieuwe gegevens. De laatste bodemmonsters zijn genomen in `r dataJaar` en geanalyseerd in het laboratorium. De resultaten van deze fysisch-chemische monitoring in de bodem zijn opgenomen in dit hoofdstuk.
 <!-- % update: ontbrekende data! -->
 
-Het hoofdstuk over verontreinigingen in biota is niet opgenomen. De reden is dat er op dit moment niet genoeg gegevens voorhanden zijn in de Scheldemonitor om dit hoofdstuk op een goede manier op te nemen. 
+Het hoofdstuk over verontreinigingen in biota (MWTL) is dit jaar niet opgenomen. De reden is dat er op dit moment niet genoeg gegevens voorhanden zijn in de Scheldemonitor om dit hoofdstuk op een goede manier op te nemen. De bedoeling is om deze gegevens in volgende rapportages weer mee te nemen. 
 
-<!-- Hoofdstuk \@ref(biota) betreft de biota. Voor de biota zijn de metingen in bot (*Platichthys flesus*) en mossel (*Mytilus edulis*) opgenomen. Het monitoringsplan is in 2000 aangepast waarbij er bij twee stations in plaats van drie stations in de Westerschelde biota verzameld worden.  -->
-<!-- <!-- % update: ontbrekende data! --> -->
+<!-- % Hoofdstuk \@ref(biota) betreft de biota. Voor de biota zijn de metingen in bot (*Platichthys flesus*) en mossel (*Mytilus edulis*) opgenomen. Het monitoringsplan is in 2000 aangepast waarbij er bij twee stations in plaats van drie stations in de Westerschelde biota verzameld worden.  -->
+<!-- % update: ontbrekende data! -->
 
-De resultaten van fytoplankton zijn opgenomen in Hoofdstuk \@ref(fytoplankton). Fytoplankton wordt gemonitord bij vijf stations in de Westerschelde sinds 1996. Hoofstuk \@ref(fytoplankton) en Bijlage \@ref(BijlageC-fytoplankton) geven een overzicht van de gehanteerde indeling.
+De resultaten van fytoplankton zijn opgenomen in Hoofdstuk \@ref(fytoplankton). Fytoplankton wordt bepaald in het kader van het MWTL programma bij vijf stations in de Westerschelde sinds 1996. Hoofstuk \@ref(fytoplankton) en Bijlage \@ref(BijlageC-fytoplankton) geven een overzicht van de gehanteerde indeling.
