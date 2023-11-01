@@ -10,18 +10,21 @@ require(viridis)
 require(plotly)
 
 source("r/functions.R")
+
+refreshWaterstanden = FALSE
+refreshGolven = FALSE
+
 ```
 
 ```{r downloadHydro, include = F}
 
-refresh = FALSE
 source("r/refresh_data.R")
 # this step can at the moment only be done at Deltares because of access to the fileserver. 
-if(refresh) refresh_waterstanden(base_path = savepath, datajaar = 2020)
+if(refreshWaterstanden) refresh_waterstanden(base_path = savepath, datajaar = dataJaar)
 
 trendstations <- c("Europlatform","Vlakte van de Raan","Cadzand","Westkapelle","Breskens Veerhaven","Vlissingen","Gat van Borssele","Overloop van Hansweert", "Terneuzen", "Hansweert", "Walsoorden", "Baalhoek", "Schaar van de Noord", "Bath")
 
-frozendatapath <- file.path(datapath, "Data_Hydro_1950_2020_new.csv")
+frozendatapath <- file.path(datapath, paste0("Data_Hydro_waterstanden_all_", dataJaar, ".csv"))
 df_waterstanden <- read_delim(frozendatapath, delim = ",", guess_max = 200000) %>%
   mutate(stationname = ifelse(
     stationname == "Euro Platform", "Europlatform", stationname)
@@ -97,7 +100,7 @@ Het station Schaar van de Noord heeft voor 2014 geen data. In 2013 is alleen dat
 
 *Let op: de y-assen van de figuur van het Europlatform verschillen van de y-assen van de andere stations.*
 
-```{r hydroJaarEuro, fig.cap="Jaargemiddelde hoog- en laagwaterstanden bij het Europlatform"}
+```{r hydroJaarEuro, eval=F, fig.cap="Jaargemiddelde hoog- en laagwaterstanden bij het Europlatform"}
 # knitr::include_graphics("Figuren/Hydro/Waterstanden/HWLW/euro.png")
 
 plotTrendsWaterstand(df_waterstanden, c("Hoogwater in cm+NAP","Laagwater in cm+NAP"), "Europlatform")
@@ -396,15 +399,15 @@ knitr::include_graphics("Figuren/Inscape/spectrum.png")
 ```{r golfTrendstations}
 trendstations <- c("Bath (BAT2)","Hansweert (HAWI)","Cadzand (CAWI)","Cadzand (CADW)","Overloop van Hansweert (OVHW)","Deurloo (DEUR)","Honte (HNTE)","Hoofdplaat (HFPL)","Overloop van Valkenisse (OVVA)","Pas van Terneuzen (PVT)","Wielingen (WIEL)")
 
-frozendatapath <- file.path(datapath, "Data_Hydro_Golven_1998_2020.csv")
+frozendatapath <- file.path(datapath, paste0("Data_Hydro_golven_all_", dataJaar, ".csv"))
 
-refresh = F
-if(refresh) refresh_golven()
+if(refreshGolven) refresh_golven(datajaar = dataJaar)
 
 ```
 
 ```{r importHydroGolven}
-df_golven <- read_delim(frozendatapath, delim = ",", guess_max = 200000) %>% 
+# df_golven <- read_delim(frozendatapath, delim = ",", guess_max = 200000) %>% 
+df_golven <- read_delim("https://watersysteemdata.deltares.nl/thredds/fileServer/watersysteemdata/Westerschelde/Scheldemonitor/2023/Data_Hydro_golven_all2022.csv", delim = ",", guess_max = 200000) %>% 
   filter(stationname %in% trendstations) %>%
   mutate(stationname = factor(stationname, levels = trendstations)) %>%
   mutate(value = case_when(

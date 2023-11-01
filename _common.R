@@ -3,7 +3,7 @@ options(width = 60)
 
 
 # year for reporting (last data year)
-dataJaar <- 2020
+dataJaar <- 2022
 
 # path to frozen datafiles (downloads from Scheldemonitor that are assoiated with report version)
 localDatapath <- "" # local
@@ -31,7 +31,6 @@ screenshot.opts= list(delay = 5)
 select <- dplyr::select
 addLegend <- leaflet::addLegend
 
-dataJaar <- 2020
 
 # bibliographybib <- bibtex::read.bib("bib/library.bib")
 
