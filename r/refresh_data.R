@@ -18,19 +18,39 @@ IDs <- lapply(
 
 refresh_waterstanden <- function(base_path, datajaar){
   Waterstand <- c(9695,9694,2438,2439)
-  for(jaar in 1950:datajaar){
+  for(jaar in 1998:datajaar){
     df <- smwfs::getSMdata(startyear = jaar, endyear = jaar + 1, parID = c(Waterstand), datasetID = c(476,1527,945))
-    write.csv(df, paste(savepathh, "Data_Hydro_waterstanden_", jaar,'.csv', sep = ""))
+    write.csv(df, file = file.path(savepath, paste0("Data_Hydro_waterstanden_", jaar,'.csv', sep = "")))
   }
+  allFiles <- list.files(file.path(savepath), pattern = "Data_Hydro_waterstanden_", full.names = T)
+  df <- lapply(
+    allFiles, function(x) # nameless function. Wat hierna staat wordt uitgevoerd voor elke elemente van allFiles
+      read_delim(x, delim = ",", col_types = cols(.default = "c",
+                                                  datetime = "T",
+                                                  latitude = "d",
+                                                  longitude = "d",
+                                                  value = "d")) %>%
+      select( # kolomnamen van kolommen die je wilt behouden
+        stationname,
+        latitude,
+        longitude,
+        datetime,
+        parametername,
+        value) #%>%
+  ) %>% bind_rows() # alles wordt geplakt
+  
+  write_delim(df, file.path(savepath, paste0("Data_Hydro_waterstanden_all_", dataJaar, ".csv")), delim = ",")
+  rm(df)
+  
 }
 
 # Hydrodynamiek - golven
 
 refresh_golven <- function(datajaar){
   Golven <- c(2599,2601,1816,2594,2596,2597,2598)
-  for(jaar in 1998:datajaar){
+  for(jaar in 2014:datajaar){
     df <- smwfs::getSMdata(startyear = jaar, endyear = jaar + 1, parID = c(Golven), datasetID = c(8032))
-    write.csv(df, paste(savepath,"Data_Hydro_golven_", jaar,'.csv', sep = ""))
+    write.csv(df, file.path(savepath,paste0("Data_Hydro_golven_", jaar,'.csv')))
   }
 
   # bewerkingen
@@ -78,7 +98,7 @@ df2 <- df %>%
     str_detect(parametername, "TM02") ~ "TM02: Golfperiode berekend uit het spectrum in 0.1 s",
     str_detect(parametername, "Hm0") ~ "Hm0: Significante golfhoogte uit 10mHz spectrum in cm"))
 
-write_delim(df2, file.path(savepath, "Data_Hydro_, datajaar, .csv"), delim = ",")
+write_delim(df2, file.path(savepath, paste0("Data_Hydro_golven_all", datajaar, ".csv")), delim = ",")
 rm(df)
 
 }
@@ -166,8 +186,8 @@ refresh_fysischchemischbiota <- function(startyear = 1998, endyear, filepath = "
     bind_rows()
   
   # df <- df[!df$dataprovider == "8", ] # remove metingen van scan-tochten
-  write.csv(df, file.path(datapath, filepath))
   
+  write_csv(df, file.path(savepath, filepath))
 }
 
 
