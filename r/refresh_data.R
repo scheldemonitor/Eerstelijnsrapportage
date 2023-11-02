@@ -23,6 +23,7 @@ refresh_waterstanden <- function(base_path, datajaar){
     write.csv(df, file = file.path(savepath, paste0("Data_Hydro_waterstanden_", jaar,'.csv', sep = "")))
   }
   allFiles <- list.files(file.path(savepath), pattern = "Data_Hydro_waterstanden_", full.names = T)
+  allFiles <- allFiles[!grepl("all", allFiles)]
   df <- lapply(
     allFiles, function(x) # nameless function. Wat hierna staat wordt uitgevoerd voor elke elemente van allFiles
       read_delim(x, delim = ",", col_types = cols(.default = "c",
@@ -36,10 +37,11 @@ refresh_waterstanden <- function(base_path, datajaar){
         longitude,
         datetime,
         parametername,
+        class,
         value) #%>%
   ) %>% bind_rows() # alles wordt geplakt
   
-  write_delim(df, file.path(savepath, paste0("Data_Hydro_waterstanden_all_", dataJaar, ".csv")), delim = ",")
+  write_delim(df, file.path(savepath, paste0("Data_Hydro_waterstanden_all_", ".csv")), delim = ",")
   rm(df)
   
 }
@@ -98,7 +100,7 @@ df2 <- df %>%
     str_detect(parametername, "TM02") ~ "TM02: Golfperiode berekend uit het spectrum in 0.1 s",
     str_detect(parametername, "Hm0") ~ "Hm0: Significante golfhoogte uit 10mHz spectrum in cm"))
 
-write_delim(df2, file.path(savepath, paste0("Data_Hydro_golven_all", datajaar, ".csv")), delim = ",")
+write_delim(df2, file.path(savepath, paste0("Data_Hydro_golven_all", ".csv")), delim = ",")
 rm(df)
 
 }
