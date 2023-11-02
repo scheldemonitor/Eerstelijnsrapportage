@@ -11,7 +11,7 @@ link-citations: yes
 always_allow_html: yes
 ---
 
-# Voorwoord
+# Voorwoord {.unnumbered}
 
 ```{r, message=FALSE, warning=FALSE, include=FALSE}
 # options(tinytex.verbose = TRUE)
@@ -25,9 +25,9 @@ knitr::opts_chunk$set(echo = FALSE,	message = FALSE, warning = FALSE)
 
 Deze eerstelijnsrapportage is gemaakt door Deltares in opdracht van Rijkswaterstaat voor de Vlaams Nederlandse Scheldecommissie (VNSC) en bevat gegevens die in opdracht van Rijkswaterstaat zijn verzameld in het kader van het MWTL programma t/m `r dataJaar`. Het verwerken, analyseren en toevoegen van de gegevens uit `r dataJaar` in dit rapport is gedaan door dr. W. Stolte en B. van Rongen. Aan eerdere rapportages (vanaf 2010) hebben vele anderen gewerkt. De voorliggende rapportage is opgebouwd met scripts vanuit de gegevens in Scheldemonitor.
 
-```{asis, echo = knitr::is_html_output()}
+<!-- ```{asis, echo = knitr::is_html_output()} -->
 
-## Samenvatting
+## Samenvatting {.unnumbered}
 
 Deze rapportage is opgemaakt met door RWS in de Scheldemonitor beschikbaar gemaakte hydrodynamische, fysisch-chemische en biologische gegevens (alleen fytoplankton). De rapportage gaat over gegevens verzameld in de periode 1996 tot en met `r dataJaar` voor de Westerschelde en de monding. De gegevens zijn verkregen in het kader van de Nederlandse MWTL monitoring. Het is een eerste weergave van de beschikbare data en heeft als doel om enkel te beschrijven ‘wat men in de meetresultaten ziet’. Het bevat een korte interpretatie van de gegevens op basis van een eenvoudige analyse. 
 
@@ -35,13 +35,13 @@ De rapportage is opgesteld in het kader van de OntwikkelingsSchets 2010 en vormt
 
 De verdere duiding van deze en Vlaamse gegevens wordt gedaan in de 6-jarige cyclus van analyse- en eveluatierapportage, de zogenaamde T-rapportages. Aangezien deze analyse- en evaluaties een vastgestelde methodiek volgen van waaruit verdere gevolgtrekkingen wordt gedaan, wordt in deze eerstelijnsrapportage verder geen duiding gegeven aan de resultaten. 
 
-```
+<!-- ``` -->
 
 
 
 
 
-## Versie {#rapportversie}
+## Versie {.unnumbered #rapportversie}
 
 Eerstelijnsrapportages worden elk jaar gemaakt. Hieronder is informatie over de datum van deze rapportage, en tot welk jaar de gegevens zijn verwerkt. 
 
