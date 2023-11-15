@@ -110,7 +110,7 @@ rm(df)
 # Fysisch-chemisch - oppervlaktewater
 
 refresh_fysischchemischoppwater <- function(startyear = 1998, endyear, filepath = "Data_FysChem_opp.csv"){
-  Saliniteit <- c(998)
+  Saliniteit <- c(13611) #998
   Temperatuur <- c(1046)
   Zuurstof <- c(1214,1213)
   Chlorofyl_a <- c(238,1800)
