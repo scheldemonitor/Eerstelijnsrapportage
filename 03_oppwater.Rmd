@@ -44,13 +44,14 @@ verifyStations <- function(df) {
   }
 }
   
-  
+fysChemOppDataPath <- "Data_FysChem_opp.csv"
+ 
 refreshData = F
 if(refreshData) refresh_fysischchemischoppwater(startyear = 1998, endyear = dataJaar) 
 
 ```
 
-```{r downloadOppWaterdata, include = F}
+```{r downloadOppWaterdata, include = T}
 # Set year for use in the report
 df <- read_delim(file.path(datapath, fysChemOppDataPath), delim = ",", guess_max = 200000) #%>% select(-X1)
 
