@@ -2,6 +2,8 @@
 require(tidyverse)
 # refresh locally stored data by downloading from Scheldemonitor
 
+source("r/functions.r")
+
 dataIDpath <- "datasetIDs.xlsx"
 sheets <- readxl::excel_sheets(dataIDpath)
 
