@@ -404,7 +404,7 @@ if(refreshGolven) refresh_golven(datajaar = dataJaar)
 
 ```{r importHydroGolven}
 # df_golven <- read_delim(frozendatapath, delim = ",", guess_max = 200000) %>% 
-df_golven <- read_delim("https://watersysteemdata.deltares.nl/thredds/fileServer/watersysteemdata/Westerschelde/Scheldemonitor/2023/Data_Hydro_golven_all2022.csv", delim = ",", guess_max = 200000) %>% 
+df_golven <- read_delim("https://watersysteemdata.deltares.nl/thredds/fileServer/watersysteemdata/Westerschelde/Scheldemonitor/2023/Data_Hydro_golven_all.csv", delim = ",", guess_max = 200000) %>% 
   filter(stationname %in% trendstations) %>%
   mutate(stationname = factor(stationname, levels = trendstations)) %>%
   mutate(value = case_when(
