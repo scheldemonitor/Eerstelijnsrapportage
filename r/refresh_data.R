@@ -170,7 +170,7 @@ df <- lapply(parIDs, function(x) getSMdata(startyear, endyear, propname = retrie
   bind_rows()
 
 df <- df[!df$dataprovider == "8", ] # remove metingen van scan-tochten
-write.csv(df, filepath)
+write.csv(df, file.path(savepath, filepath))
 
 }
 
