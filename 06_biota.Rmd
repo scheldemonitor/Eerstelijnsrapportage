@@ -6,7 +6,7 @@
 -->
 ```
 
-```{r setupBiota, include=FALSE, message=F}
+```{r setupBiota, include=FALSE, message=F, warning=F, }
 
 knitr::opts_chunk$set(
 	fig.height = 6
@@ -16,15 +16,22 @@ source("r/functions.R")
 source("r/refresh_data.R")
 require(smwfs)
 
-refreshData = F
-if(refreshData) refresh_fysischchemischbiota() 
 frozendataPath <- "Data_FysChem_biota.csv"
+
+refreshData = F
+if(refreshData) refresh_fysischchemischbiota(endyear = dataJaar+2, filepath = frozendataPath) 
 
 ```
 
 ```{r}
+require(skimr)
 
 df <- read_delim(file = file.path(datapath, frozendataPath), delim = ",")
+# skim(df)
+```
+
+
+```{r}
 
 # databeschikbaarheid
 
@@ -33,19 +40,56 @@ trendstations <- c("Knuitershoek", "Middelgat, Brouwersplaat, Molenplaat (deelge
 df2 <- df %>% 
   repair_limits() %>%
   ungroup() %>%
-  filter(class %in% c("Lengte > 250 mm - Lengte < 281 mm - Man", "Lengte > 249 mm en Lengte < 300 mm en Man")) %>%
+  # filter(class %in% c("Lengte > 250 mm - Lengte < 281 mm - Man", "Lengte > 249 mm en Lengte < 300 mm en Man")) %>%
   select(FID, id,
     datetime, latitude, longitude, stationname,
     parametername, scientificname,
     class, category, value, originalvalue
   ) %>% ungroup() %>%
     group_by(datetime, latitude, longitude, stationname, parametername, scientificname, class, category) %>%
-  summarize(value = mean(value))
+  summarize(value = mean(value), n = n()) %>%
+  ungroup()
+
+```
+
+
+```{r diagnostiek, fig.height=16, fig.width=10}
+df2 %>%
+  group_by(parametername, category) %>%
+  summarize(n = mean(n)) %>%
+  mutate(tissue = case_when(
+    grepl("vlees", parametername) ~ "vlees",
+    grepl("lever", parametername) ~ "lever",
+    grepl("Lever", parametername) ~ "lever",
+    grepl("gal", parametername) ~ "gal",
+    grepl("spier", parametername) ~ "spier",
+  )) %>%
+  filter(grepl("PCB", parametername)) %>%
+  ggplot(aes(parametername, tissue)) +
+  geom_point(aes(size = n, color = category)) +
+  coord_flip() +
+  theme(
+    legend.position = "top"
+    )
+  # facet_wrap(~ category, nrow = 1) +
+  # theme(strip.text.x = element_text(angle = 90))
+
+```
+
+
+
+```{r}
+
+
+# Namen zijn veranderd vergeleken met vorige keer. 
+# try - alle namen tolower
+# aanpassen andere namen in script
+# this is work in progress for 2023 !!!!!
+
 
 df2.lever <- df2 %>% filter(grepl("lever", parametername, ignore.case = T))
 df2.spier <- df2 %>% filter(grepl("spier", parametername, ignore.case = T))
 df2.organisme <- df2 %>% filter(!grepl("lever", parametername, ignore.case = T) & !grepl("spier", parametername, ignore.case = T) & !grepl("gal", parametername, ignore.case = T))
-
 
 # TODO
 # alle aanduidingen voor vochtgehalte verwerken
@@ -54,16 +98,16 @@ df2.organisme <- df2 %>% filter(!grepl("lever", parametername, ignore.case = T) 
 
 # "Vocht in g/kg (Lever) in Organisme (biota)"
 # "Vocht in g/kg Natgewicht (Lever) in Organisme (biota)"
-# "Percentage drooggewicht in % Natgewicht (Lever) in Organisme (biota)"
+# "Percentage droge stof in % natgewicht (lever) in organisme (biota)"
 
 dwnw.lever <- df2.lever %>%
-              filter(parametername %in% c(
-                "Percentage drooggewicht in % Natgewicht (Lever) in Organisme (biota)",
+              filter(tolower(parametername) %in% tolower(c(
+                "Percentage droge stof in % natgewicht (lever) in organisme (biota)",
                 "Vocht in g/kg Natgewicht (Lever) in Organisme (biota)",
                 "Vocht in g/kg (Lever) in Organisme (biota)"
-              ) ) %>%
+              ))) %>%
               mutate(nat2droogFactor = case_when(
-                parametername == "Percentage drooggewicht in % Natgewicht (Lever) in Organisme (biota)" ~ value / 100,
+                parametername == "Percentage droge stof in % natgewicht (lever) in organisme (biota)" ~ value / 100,
                 parametername == "Vocht in g/kg Natgewicht (Lever) in Organisme (biota)" ~ 1- (value / 1000),
                 parametername == "Vocht in g/kg (Lever) in Organisme (biota)" ~ 1 - (value / 1000)
               )) %>%
@@ -75,11 +119,11 @@ dwnw.lever <- df2.lever %>%
 
 df2.lever2 <- df2.lever %>% 
   filter(grepl("man", class, ignore.case = T)) %>%
-  filter(!parametername %in% c(
-                "Percentage drooggewicht in % Natgewicht (Lever) in Organisme (biota)",
+  filter(!tolower(parametername) %in% tolower(c(
+                "Percentage droge stof in % natgewicht (lever) in organisme (biota)",
                 "Vocht in g/kg Natgewicht (Lever) in Organisme (biota)",
                 "Vocht in g/kg (Lever) in Organisme (biota)"
-              ) ) %>% 
+              ))) %>% 
   left_join(dwnw.lever) %>%
   filter(!category %in% "fysiologische parameter") %>%
   # filter(category %in% c("PBDE", "PCB", "polycyclische aromatische koolwaterstof (PAK)",

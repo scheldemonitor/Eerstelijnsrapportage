@@ -16,7 +16,7 @@ refreshGolven = FALSE
 
 ```
 
-```{r downloadHydro, include = F}
+```{r downloadHydro, include = T}
 
 source("r/refresh_data.R")
 # this step can at the moment only be done at Deltares because of access to the fileserver. 
