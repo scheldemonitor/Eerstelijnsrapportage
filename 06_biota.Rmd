@@ -228,7 +228,7 @@ Figuur \@ref(fig:meetstationsBiota) toont de meetlocaties voor bot (geel) en mos
 
 plotLocations(df3 %>% drop_na(value))
 
-pal <- leaflet::colorFactor("RdYlBu", df3$scientificname, levels = c("Mytilus edulis", "Platichthys flesus"))
+pal <- leaflet::colorFactor("RdYlBu", df$scientificname, levels = c("Mytilus edulis", "Platichthys flesus"))
 
 df3 %>% group_by(stationname, scientificname) %>%
   summarize(latitude = mean(latitude, na.rm = T), longitude = mean(longitude, na.rm = T)) %>% 

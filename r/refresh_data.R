@@ -202,7 +202,8 @@ refresh_fytoplanktondata <- function(){
 
   df.fytoplankton <- read_csv(url)
   
-  write.csv(df.fytoplankton, file.path(savepath, paste('fytoplankton', today(), '.csv')))
+  write.csv(df.fytoplankton, file.path(savepath, paste0('fytoplankton', dataJaar, '.csv')))
   
   
   }
+
