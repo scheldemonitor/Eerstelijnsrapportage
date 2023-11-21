@@ -5,11 +5,14 @@ knitr::opts_chunk$set(
 )
 source("r/functions.R")
 library(lubridate)
+
+refreshData = F
+if(refreshData){refresh_fytoplanktondata()}
 ```
 
 ```{r laadData}
 
-fytoplankton <- read_delim(file.path(datapath,"fytoplankton20230117.csv"), delim = ",")
+fytoplankton <- read_delim(file.path(datapath,"fytoplankton2022.csv"), delim = ",")
 
 fytoplankton <- fytoplankton %>%
   filter(dataprovider == "RWS - Rijkswaterstaat") %>%

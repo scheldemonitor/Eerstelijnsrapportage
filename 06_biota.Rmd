@@ -17,14 +17,14 @@ source("r/refresh_data.R")
 require(smwfs)
 
 refreshData = F
-if(refreshData) refresh_fysischchemischbiota() 
-frozendataPath <- "Data_FysChem_biota.csv"
+if(refreshData) refresh_fysischchemischbiota(endyear = dataJaar) 
+FyschemBiotaDataPath <- "Data_FysChem_biota.csv"
 
 ```
 
 ```{r}
 
-df <- read_delim(file = file.path(datapath, frozendataPath), delim = ",")
+df <- read_delim(file = file.path(datapath, FyschemBiotaDataPath), delim = ",")
 
 # databeschikbaarheid
 
@@ -33,7 +33,8 @@ trendstations <- c("Knuitershoek", "Middelgat, Brouwersplaat, Molenplaat (deelge
 df2 <- df %>% 
   repair_limits() %>%
   ungroup() %>%
-  filter(class %in% c("Lengte > 250 mm - Lengte < 281 mm - Man", "Lengte > 249 mm en Lengte < 300 mm en Man")) %>%
+  #filter(class %in% c("Lengte > 250 mm - Lengte < 281 mm - Man", "Lengte > 249 mm en Lengte < 300 mm en Man")) %>%
+  filter(class %in% c('Lengte > 249 mm en Lengte < 300 mm', 'Lengte > 250 mm en Lengte < 281 mm', '"Lengte > 250 mm en Lengte < 300 mm')) %>% 
   select(FID, id,
     datetime, latitude, longitude, stationname,
     parametername, scientificname,
@@ -184,7 +185,7 @@ Figuur \@ref(fig:meetstationsBiota) toont de meetlocaties voor bot (geel) en mos
 
 plotLocations(df3 %>% drop_na(value))
 
-pal <- leaflet::colorFactor("RdYlBu", df3$scientificname, levels = c("Mytilus edulis", "Platichthys flesus"))
+pal <- leaflet::colorFactor("RdYlBu", df$scientificname, levels = c("Mytilus edulis", "Platichthys flesus"))
 
 df3 %>% group_by(stationname, scientificname) %>%
   summarize(latitude = mean(latitude, na.rm = T), longitude = mean(longitude, na.rm = T)) %>% 
