@@ -11,7 +11,6 @@ if(refreshData){refresh_fytoplanktondata()}
 ```
 
 ```{r laadData}
-
 fytoplankton <- read_delim(file.path(datapath,"fytoplankton2022.csv"), delim = ",")
 
 fytoplankton <- fytoplankton %>%
@@ -36,7 +35,7 @@ trendstations <- c("Schaar van Ouden Doel", "Hansweert geul",
 #   col_names = F)
 
 specieslist <- read_tsv(
-  file.path(datapath, "Specieslist_zelfuitgebreid_jh.csv"),
+  file.path('https://watersysteemdata.deltares.nl/thredds/fileServer/watersysteemdata/Westerschelde/Scheldemonitor/2021', "Specieslist_zelfuitgebreid_jh.csv"),
   col_names = F)
 
 names(specieslist) <- c(
@@ -49,7 +48,24 @@ names(specieslist) <- c(
   "groep",
   "groepcode"
 )
+```
 
+
+```{r checkformissingspecies, include=FALSE}
+
+
+if (!all(fytoplankton$scientificname %in% specieslist$soortnaam)){
+  missing_species <- fytoplankton %>%
+  filter(!scientificname %in% specieslist$soortnaam)
+  print('The following species are missing in the specieslist:')
+  print(missing_species %>% select(scientificname) %>% unique() %>% unlist() %>% unname())
+}
+
+missing_species %>% select(scientificname) %>% table()  %>% as.data.frame()%>% knitr::kable()
+```
+
+
+```{r mergeData}
 df.fyt <- fytoplankton %>% 
   left_join(specieslist, by = c(scientificname = "soortnaam")) %>%
   mutate(groep = trimws(groep))
@@ -72,7 +88,7 @@ df.fyt.groep <- df.fyt %>%
 
 ## Indeling soorten {#fyto-soorten}
 
-De fytoplankton gegevens bestaan uit bijna 500 verschillende soorten. Om deze toch op een compacte en zinvolle manier te kunnen presenteren en analyseren, wordt een indeling gemaakt, waarbij meerdere soorten gegroepeerd kunnen worden. In eerste instantie is een opdeling naar trofiegraad, autotroof of heterotroof, voor de hand liggend. Er zijn echter ook groepen, vooral bij de 'Dinoflagellaten' ('pantserwieren'), bijvoorbeeld de *Gymnodiniaceae*, waarbij het niet altijd duidelijk is wat de trofiegraad is. Daarmee bestaat er nog een derde categorie beide of onbekend, die we mixotroof noemen. Ook de (soms grote) groep ondetermineerbare algen valt in deze categorie.
+De fytoplankton gegevens bestaan uit meer dan 500 verschillende soorten. Om deze toch op een compacte en zinvolle manier te kunnen presenteren en analyseren, wordt een indeling gemaakt, waarbij meerdere soorten gegroepeerd kunnen worden. In eerste instantie is een opdeling naar trofiegraad, autotroof of heterotroof, voor de hand liggend. Er zijn echter ook groepen, vooral bij de 'Dinoflagellaten' ('pantserwieren'), bijvoorbeeld de *Gymnodiniaceae*, waarbij het niet altijd duidelijk is wat de trofiegraad is. Daarmee bestaat er nog een derde categorie beide of onbekend, die we mixotroof noemen. Ook de (soms grote) groep ondetermineerbare algen valt in deze categorie.
 
 Ook op taxonomisch niveau is een opdeling zinvol. De belangrijkste groep binnen het fytoplankton in de Westerschelde wordt gevormd door de 'Diatomeeën' oftewel 'kiezelwieren'. De 'Dinoflagellaten' oftewel 'pantserwieren' zijn wat betreft aantallen veel minder belangrijk. Een belangrijke voorjaarssoort in het mondingsgebied van de Westerschelde is *Phaeocystis globosa*, die als aparte groep 'Phaeocystis' wordt meegenomen. Alleen op de locatie Schaar van Ouden Doel vormen grote aantallen 'Blauwwieren' en 'Groenwieren' soms een belangrijk deel van het fytoplankton, vandaar dat deze ook onderscheiden zijn. Voor de 'Groenwieren' is er van uitgegaan dat deze worden gevormd door de *Chlorophyceaea*, de *Prasinophyceae* en de *Euglenophyceae* (@Tomas1997), alhoewel (@Hoek1995) de *Euglenophycea* weer buiten de groenwieren plaatsen. Soorten die buiten de hierboven genoemde groepen vallen zijn samengenomen als de groep 'Overig'. Niet alle groepen zijn van hetzelfde taxonomische niveau, maar deze indeling is in eerste instantie wel de meest pragmatische. De heterotrofe organismen bevatten wel de heterotrofe 'Dinoflagellaten', maar niet de ciliaten (met uitzondering van *Myrionecta rubra*). *Myrionecta rubra* is een ciliaat (een dier, dus heterotroof) die in de geannoteerde soortenlijst 1990-2008 (@Koeman2009) toch als autotroof is ingedeeld vanwege de in het dier aanwezige endosymbiontische algen. Bij de verdere indeling is in de tabel (zie Bijlage \@ref(BijlageC-fytoplankton)) *Myrionecta rubra* geplaatst onder 'Heterotroof - Overig'.
 
@@ -93,7 +109,7 @@ df.fyt %>%
 
 ### Stations en jaren {#fyto-metingen-stations}
 
-Fytoplankton is gemeten op de stations Schaar van Ouden Doel, Hansweert geul, Vlissingen boei SSVH, Walcheren 2 km uit de kust en Walcheren 20 km uit de kust, zie Figuur \@ref(fig:meetstationsFyto). Er zijn meetgegevens van meer dan 500 soorten fytoplankton over een periode van 1996 tot en met `r dataJaar` voor alle stations.
+Fytoplankton is gemeten op de stations Schaar van Ouden Doel, Hansweert geul, Vlissingen boei SSVH, Walcheren 2 km uit de kust en Walcheren 20 km uit de kust, zie Figuur \@ref(fig:meetstationsFyto). Er zijn meetgegevens van meer dan 500 soorten fytoplankton over een periode van 1998 tot en met `r dataJaar` voor alle stations.
 
 In eerdere rapportages zijn celaantallen gerapporteerd als totalen per seizoen, of als maximum aantallen. Door de scheve verdeling van celaantallen per soort over het jaar, en over de jaren, is dit veranderd naar mediane waarden per jaar of seizoen.
 
@@ -106,7 +122,7 @@ plotLocations(df.fyt)
 
 ### Figuren {#fyto-metingen-figuren}
 
-In de sectie \@ref(aandeelgroepenperstation) is de fractie per groep uitgezet tegen de tijd voor elk station en per seizoen. 
+In de sectie \@ref(aandeelgroepenperstation) is de fractie per groep uitgezet tegen de tijd voor elk station en per seizoen. In de winter van 2019 is er geen data verzameld in Schaar van Ouden Doel. 
 
 In sectie \@ref(aandeelgroepenperstation) wordt per station de mediaan van de gesommeerde hoeveelheid algen per groep per jaar gepresenteerd. Het jaartotaal is opgedeeld in de mediaan van zomer of groeiseizoen (groen)- en wintertotalen per groep (rood). Het totaal over de zomer (groeiseizoen) bevat de mediaan van de sommatie van alle algen in de groep per meetpunt in het groeiseizoen (1 maart t/m 30 september). De punten zijn gefit met een exploratieve LOESS curve om het verloop te verduidelijken. Het wintertotaal loopt van 1 januari tot en met 28 februari en van 1 oktober tot en met 31 december. Daarnaast is er een blauwe horizontale lijn toegevoegd die de mediaan waarde over de gehele periode weergeeft. Voor Phaeocystis zijn ook de 90-percentielwaarden over het groeiseizoen toegevoegd als losse symbolen (-). Hoewel dit geen indicator meer is in de Kaderrichtlijn water, wordt deze meegenomen als maat voor eventueel schadelijke algenbloeien. Als kwantitatieve onderbouwing zijn ook tabellen met mediane waarde, 10-percentiel en 90-percentiel per jaar toegevoegd.
 
@@ -122,15 +138,15 @@ Het relatieve aandeel van de verschillende groepen laat een paar duidelijke tren
 
 Het aandeel diatomeeën is overal goed te zien. Het is het hoogste bij stations Vlissingen en de Walcheren stations. De aandelen zijn in de winter nog zeer hoog in deze stations, wat duidt op een goed vermogen om met laag licht en lage temperaturen om te gaan. 
 
-Het aandeel groenwieren is alleen substantieel bij Schaar van Ouden Doel, vooral in de zomer, hoewel ze bij de andere stations ook nog goeed te onderscheiden zijn. 
+Het aandeel groenwieren is alleen substantieel bij Schaar van Ouden Doel, vooral in de zomer, hoewel ze bij de andere stations ook nog goed te onderscheiden zijn. 
 
-Overige autotrofen lijken de laatste jaren toe te nemen bij Schaar van Ouden Doel en Hansweert geul. Het aandeel is de laatst jaren zelfs meer dan 50% van het totale aantal.
+Overige autotrofen zijn tussen 2016 en 2020 flink toegenomen bij Schaar van Ouden Doel en Hansweert geul, vooral in de zomer. Inmiddels is het aandeel van deze groep weer vrij laag. Het valt op dat de mediane waarde veel varieert over de jaren bij alle stations. 
 
 Het aandeel autotrofe, mixotrofe en heterotrofe dinoflagellaten is op deze schaal niet zichtbaar. Het karakter van deze figuur laat alleen een lineaire schaal toe, waardoor deze groepen geheel verdwijnen. 
 
 Overige heterotrofen zijn afgenomen bij Schaar van Ouden Doel en Hansweert geul. Bij de overige stations is geen eenduidige trend zichtbaar. Er kan echter vanuit worden gegaan dat deze groep niet goed bemonsterd wordt met de huidige methode. 
 
-Phaeocystis tenslotte heeft het hoogste relatieve bij de Walcheren stations en Vlissingen. Dit bevestigt dat het een echt mariene soort is. Het aandeel varieert sterk. Phaeocystis wordt gezien als plaagalg door het schuim wat het produceert. De intensiteit hiervan hangt meer af van incidentele pieken, dan van een hoog aantal over het hele seizoen. Trends hiervan worden in de volgende paragrafen besproken. 
+Phaeocystis tenslotte heeft het hoogste relatieve bij de Walcheren stations en Vlissingen. Dit bevestigt dat het een echt mariene soort is. Pheocystis wordt vooral in de zomer aangetroffen. De afgelopen jaren wordt er in de zomer ook in lagere mate Phaeocystis aangetroffen in Hansweert. Phaeocystis wordt gezien als plaagalg door het schuim wat het produceert. De intensiteit hiervan hangt meer af van incidentele pieken, dan van een hoog aantal over het hele seizoen. Trends hiervan worden in de volgende paragrafen besproken. 
 
 ```{r aandeelGroepen, fig.height=7, fig.width=7, fig.cap="Het relatieve aandeel van alle groepen over de jaren voor alle stations en per seizoen. Waarden zijn gebaseerd op de mediaan van het totaal aantal cellen per groep. "}
   df.fyt.groep %>% ungroup() %>%
@@ -158,7 +174,7 @@ Phaeocystis tenslotte heeft het hoogste relatieve bij de Walcheren stations en V
 
 ### Schaar van Ouden Doel {#fyto-resultaten-schaar}
 
-Bij Schaar van Ouden Doel zien we dat vooral de blauwwieren en groenwieren in hoge aantallen worden gevonden, deze groepen bevatten in de Westerschelde veel zoetwatersoorten (zie Tabel \@ref(tab:fytoSchaarJaarTab)). Beide lijken wel iets af te nemen vanaf ongeveer 2013. Dit valt ongeveer samen met de stijging van de saliniteit over die periode (figuur \@ref(fig:fysischSaliJaar)). De aantallen zijn over het algemeen het grootst in het groeiseizoen, zo laat het kleine verschil tussen het zomertotaal en jaartotaal zien (zie Figuur \@ref(fig:fytoSchaarJaar)), groene vergeleken met rode symbolen). Phaeocystis wordt incidenteel waargenomen bij Schaar van Ouden Doel, de saliniteit is daar te laag voor deze mariene soort. De diatomeeën zijn goed vertegenwoordigd, bijna zo veel als Blauwwieren, en zijn in het groeiseizoen meer vertegenwoordigd dan in de winter. De autotrofe Dinoflagelaten komen sinds 2005 ongeveer 10 keer minder voor dan diatomeeën, en dan vooral in het groeiseizoen. Daarvoor was de aanwezigheid van deze groep veel lager. De overige autrofen lijken toe te nemen, maar er is veel variatie per jaar. De overige heterotrofen laten vanaf circa 2012 een toename zien, die ook terug te zien is bij de groep overige mixotrofen.
+Bij Schaar van Ouden Doel zien we dat vooral de blauwwieren, groenwieren en diatomeeën in hoge aantallen worden gevonden (zie Tabel \@ref(tab:fytoSchaarJaarTab)), met name de blauw- en groenwieren bevatten in de Westerschelde veel zoetwatersoorten. De groenwieren lijken af te nemen vanaf 2013. Dit valt ongeveer samen met de stijging van de saliniteit over die periode (figuur \@ref(fig:fysischSaliJaar)). De aantallen zijn over het algemeen het grootst in het groeiseizoen, zo laat het kleine verschil tussen het zomertotaal en jaartotaal zien (zie Figuur \@ref(fig:fytoSchaarJaar)), groene vergeleken met rode symbolen). Phaeocystis wordt incidenteel waargenomen bij Schaar van Ouden Doel, de saliniteit is daar te laag voor deze mariene soort. De diatomeeën zijn goed vertegenwoordigd, in het groeiseizoen meer dan in de winter. De autotrofe Dinoflagelaten komen sinds 2005 ongeveer 10 keer minder voor dan diatomeeën, en dan vooral in het groeiseizoen. Daarvoor was de aanwezigheid van deze groep veel lager. De overige autrofen lijken toe te nemen, maar er is veel variatie per jaar. De overige heterotrofen laten vanaf circa 2012 een toename zien, terwijl de overige mixotrofen en de mixotrofe dinoflagellaten juist een afname laten zien. 
 
 (ref:fytoSchaarJaarTab-label) Celaantallen per jaar en groep (in 10^6^/l) en trofieniveau bij Schaar van Ouden Doel.
 
@@ -175,6 +191,7 @@ fytStatTable(df.fyt.groep,  statname = 'Schaar van Ouden Doel') %>%
 # knitr::include_graphics("Figuren/Fytoplankton/SchaarvanOudenDoel_jaar.png")
 
 plotTrendFyto(df.fyt.groep, "Schaar van Ouden Doel")
+
 ```
 
 ### Hansweert geul {#fyto-resultaten-hansweert}
