@@ -1,0 +1,107 @@
+#Make a new species list using the protist table and WoRMS Taxon match tool
+
+require(readr)
+require(purrr)
+specieslist <- 
+
+species <- read_csv("P:/11202493--systeemrap-grevelingen/1_data/Westerschelde/Specieslist/missingspecies2022_matched.txt")
+str(specieslist)
+str(species)
+
+species <- species %>% mutate(groep = case_when(
+  Phylum == 'Cyanobacteria' ~ 'Blauwwieren',
+  Class == 'Cyanophyceae' ~ "Blauwwieren", 
+  Class %in% c('Chlorophyceaea', 'Prasinophyceae', 'Euglenophyceae') ~ 'Groenwieren',
+  Class == 'Bacillariophyceae'  ~ 'Diatomeeen',
+  Class %in% c('Ellobiophyceae', 'Psammosea', 'Oxyrrhea', 'Pronoctilucea', 'Duboscquellea', 
+               'Syndiniophyceae', 'Noctiluciphyceae', 'Dinophyceae') ~ 'Dinoflagellaten',
+  Genus == 'Phaeocystis' ~ 'Phaeocystis', 
+  ScientificName...2 == 'Gymnodiniales' ~ 'Dinoflagellaten',
+  ScientificName...2 == 'Prymnesiales' ~ 'Overig',
+  ScientificName...2 =='Leptocylindraceae' ~ 'Diatomeeen', 
+  ScientificName...2 == 'Scenedesmaceae' ~ 'Groenwieren', 
+  ScientificName...2 == 'Thoracosphaeraceae' ~ 'Dinoflagellaten', 
+  ScientificName...2 == 'Plagiotropidaceae' ~ "Diatomeeen", 
+  is.na(AphiaID) | ScientificName...2 == 'Khakista' ~ groep, # keep the current group if AphaID is NA or ScientificName...2 is 'Khakista'
+  TRUE ~ 'Overige'
+  #ScientificName...2 == 'Khakista' ~ 'Diatoms'
+))
+#species_append <- data.frame(matrix(ncol=length(names(specieslist)), nrow=length(nrow(species))))
+#names(species_append) <- names(specieslist)
+#species_append <- species_append %>% mutate(soortnaam = species$ScientificName...2, 
+#                                            groep = species$groep)
+
+
+species_append <- species %>% 
+  select(soortnaam = ScientificName...2, groep = groep)
+
+trofielist <- read_delim("P:/11202493--systeemrap-grevelingen/1_data/Westerschelde/Specieslist/protisttable.csv", 
+                         delim = ";", escape_double = FALSE, trim_ws = TRUE)
+str(trofielist)
+
+species_append %>% filter(soortnaam %in% trofielist$ScientificName)
+species_append %>% filter(!is.na(groep))#90
+species_append %>% filter(!is.na(groep)) %>% filter(soortnaam%in%trofielist$ScientificName)
+
+overeenkomst <- specieslist %>% filter(soortnaam %in% trofielist$ScientificName)
+
+overeenkomst2 <- specieslist %>% filter(soortnaam %in% trofielist$ScientificName|
+                                         soortnaam %in% trofielist$Family|
+                                         soortnaam %in% trofielist$Genus)
+
+overeenkomst <- left_join(overeenkomst %>% select(soortnaam, trofie), 
+                          trofielist %>% select(ScientificName, Trophy), 
+                          by = c("soortnaam" = "ScientificName")) %>% 
+  mutate_at(c('trofie', 'Trophy'), as.factor) %>% 
+  mutate(Trophy = ifelse(Trophy == 'mixoplankton', 'Mixotroof', 
+                         ifelse(Trophy=='phytoplankton', 'Autotroof', 
+                                ifelse(Trophy=='protozooplankton', 'Heterotroof', Trophy)))) %>% 
+  mutate(identical = trofie == Trophy)
+t <- table(overeenkomst$identical) #About 90% is identical 
+overeenkomst %>% filter(identical == FALSE) #of those that are not identical, 95% has been assigned Autotroof instead of Mixotroof
+
+overeenkomst2 <- overeenkomst2 %>%
+  left_join(trofielist %>% select(ScientificName, Trophy), by = c("soortnaam" = "ScientificName"))
+
+overeenkomst2 <- overeenkomst2 %>%
+  filter(is.na(Trophy)) %>%
+  left_join(trofielist %>% select(Family, Trophy), by = c("soortnaam" = "Family")) %>%
+  mutate(Trophy = coalesce(Trophy.x, Trophy.y)) %>%
+  select(-Trophy.x, -Trophy.y)
+
+overeenkomst2 <- overeenkomst2 %>%
+  filter(is.na(Trophy)) %>%
+  left_join(trofielist %>% select(Genus, Trophy), by = c("soortnaam" = "Genus")) %>%
+  mutate(Trophy = coalesce(Trophy.x, Trophy.y)) %>%
+  select(-Trophy.x, -Trophy.y)
+
+
+overeenkomst2 <- left_join(overeenkomst2 %>% select(soortnaam, trofie), 
+                          trofielist %>% select(ScientificName, Trophy), 
+                          by = c("soortnaam" = "ScientificName"))
+
+trofielist %>% distinct(Trophy, Family) %>% filter(!is.na(Family)) %>% select(Family)
+trofielist %>% distinct(Family) %>% filter(!is.na(Family))
+#Whithin a Familiy, differences in trophic level might occur
+
+
+trofielist %>% distinct(Trophy, Genus) %>% filter(!is.na(Genus)) %>% select(Genus)
+trofielist %>% distinct(Genus) %>% filter(!is.na(Genus))
+#Within a Genus, differences in trophic level can occur
+
+trofielist
+
+left_join(overeenkomst2 %>% filter(is.na(Trophy)), 
+          trofielist %>% select(Family, Trophy), 
+          by = c("soortnaam" = "Family"))
+
+
+overeenkomst2 <- overeenkomst2 %>% select(soortnaam, trofie) %>%  
+                           left_join(trofielist %>% select(ScientificName, Trophy), by = c("soortnaam" = "ScientificName")) %>%
+                             left_join(trofielist %>% select(Family, Trophy), by = c("soortnaam" = "Family")) %>%
+                             left_join(trofielist %>% select(Genus, Trophy), by = c("soortnaam" = "Genus")) %>% 
+  mutate_at(c('trofie', 'Trophy'), as.factor) %>% 
+  mutate(Trophy = ifelse(Trophy == 'mixoplankton', 'Mixotroof', 
+                         ifelse(Trophy=='phytoplankton', 'Autotroof', 
+                                ifelse(Trophy=='protozooplankton', 'Heterotroof', Trophy)))) %>% 
+  mutate(identical = trofie == Trophy)
