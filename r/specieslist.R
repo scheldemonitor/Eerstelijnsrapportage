@@ -41,13 +41,9 @@ str(trofielist)
 
 species_append %>% filter(soortnaam %in% trofielist$ScientificName)
 species_append %>% filter(!is.na(groep))#90
-species_append %>% filter(!is.na(groep)) %>% filter(soortnaam%in%trofielist$ScientificName)
+species_append %>% filter(!is.na(groep)) %>% filter(soortnaam%in%trofielist$ScientificName)#35
 
 overeenkomst <- specieslist %>% filter(soortnaam %in% trofielist$ScientificName)
-
-overeenkomst2 <- specieslist %>% filter(soortnaam %in% trofielist$ScientificName|
-                                         soortnaam %in% trofielist$Family|
-                                         soortnaam %in% trofielist$Genus)
 
 overeenkomst <- left_join(overeenkomst %>% select(soortnaam, trofie), 
                           trofielist %>% select(ScientificName, Trophy), 
@@ -57,28 +53,9 @@ overeenkomst <- left_join(overeenkomst %>% select(soortnaam, trofie),
                          ifelse(Trophy=='phytoplankton', 'Autotroof', 
                                 ifelse(Trophy=='protozooplankton', 'Heterotroof', Trophy)))) %>% 
   mutate(identical = trofie == Trophy)
+
 t <- table(overeenkomst$identical) #About 90% is identical 
 overeenkomst %>% filter(identical == FALSE) #of those that are not identical, 95% has been assigned Autotroof instead of Mixotroof
-
-overeenkomst2 <- overeenkomst2 %>%
-  left_join(trofielist %>% select(ScientificName, Trophy), by = c("soortnaam" = "ScientificName"))
-
-overeenkomst2 <- overeenkomst2 %>%
-  filter(is.na(Trophy)) %>%
-  left_join(trofielist %>% select(Family, Trophy), by = c("soortnaam" = "Family")) %>%
-  mutate(Trophy = coalesce(Trophy.x, Trophy.y)) %>%
-  select(-Trophy.x, -Trophy.y)
-
-overeenkomst2 <- overeenkomst2 %>%
-  filter(is.na(Trophy)) %>%
-  left_join(trofielist %>% select(Genus, Trophy), by = c("soortnaam" = "Genus")) %>%
-  mutate(Trophy = coalesce(Trophy.x, Trophy.y)) %>%
-  select(-Trophy.x, -Trophy.y)
-
-
-overeenkomst2 <- left_join(overeenkomst2 %>% select(soortnaam, trofie), 
-                          trofielist %>% select(ScientificName, Trophy), 
-                          by = c("soortnaam" = "ScientificName"))
 
 trofielist %>% distinct(Trophy, Family) %>% filter(!is.na(Family)) %>% select(Family)
 trofielist %>% distinct(Family) %>% filter(!is.na(Family))
@@ -89,19 +66,57 @@ trofielist %>% distinct(Trophy, Genus) %>% filter(!is.na(Genus)) %>% select(Genu
 trofielist %>% distinct(Genus) %>% filter(!is.na(Genus))
 #Within a Genus, differences in trophic level can occur
 
-trofielist
+#We moeten kijken naar genera en families die in trofielist als alleen genus of familie beschreven worden
+overeenkomst_genus <- overeenkomst %>%
+  mutate(genus = ifelse(nchar(gsub("[^ ]", "", soortnaam)) + 1 == 2, 
+                        sapply(strsplit(as.character(soortnaam), " "), `[`, 1), 
+                        NA))
+overeenkomst_genus <- overeenkomst_genus %>% filter(genus %in% trofielist$ScientificName)
+#apparently, scientificname in trofielist does not contain genera names corresponding with genera included in specieslist
+#oh well, this was mostly to check the old specieslist, for the new one it should be easier
 
-left_join(overeenkomst2 %>% filter(is.na(Trophy)), 
-          trofielist %>% select(Family, Trophy), 
-          by = c("soortnaam" = "Family"))
+species <- species %>% mutate(soortnaam= ScientificName...2)
 
+species_sciName <- species %>% filter(soortnaam %in% trofielist$ScientificName) %>% 
+  left_join(trofielist %>% select(ScientificName, Trophy), 
+            by=c('soortnaam' = 'ScientificName'))
+species_genus <- species %>% filter(soortnaam %in% trofielist$Genus) %>% 
+  left_join(trofielist %>% select(Genus, Trophy), 
+            by=c('soortnaam' = 'Genus'))
+species_family <- species %>% filter(soortnaam %in% trofielist$Family) %>% 
+  left_join(trofielist %>% select(Family, Trophy), 
+            by=c('soortnaam' = 'Family'))
+species_order <- species %>% filter(soortnaam %in% trofielist$Order) %>% 
+  left_join(trofielist %>% select(Order, Trophy),
+            by=c('soortnaam'='Order'))
+species_class <- species %>% filter(soortnaam %in% trofielist$Class) %>% 
+  left_join(trofielist %>% select(ScientificName, Class),
+            by=c('soortnaam'='Class'))
 
-overeenkomst2 <- overeenkomst2 %>% select(soortnaam, trofie) %>%  
-                           left_join(trofielist %>% select(ScientificName, Trophy), by = c("soortnaam" = "ScientificName")) %>%
-                             left_join(trofielist %>% select(Family, Trophy), by = c("soortnaam" = "Family")) %>%
-                             left_join(trofielist %>% select(Genus, Trophy), by = c("soortnaam" = "Genus")) %>% 
-  mutate_at(c('trofie', 'Trophy'), as.factor) %>% 
-  mutate(Trophy = ifelse(Trophy == 'mixoplankton', 'Mixotroof', 
-                         ifelse(Trophy=='phytoplankton', 'Autotroof', 
-                                ifelse(Trophy=='protozooplankton', 'Heterotroof', Trophy)))) %>% 
-  mutate(identical = trofie == Trophy)
+df_sciName <- left_join(species_append, species %>% filter(soortnaam %in% trofielist$ScientificName) %>% 
+            left_join(trofielist %>% select(ScientificName, Trophy), 
+                      by=c('soortnaam' = 'ScientificName')) %>% select(soortnaam, Trophy))
+df_genus <- left_join(species_append, species %>% filter(soortnaam %in% trofielist$Genus) %>% 
+            left_join(trofielist %>% select(Genus, Trophy), 
+                      by=c('soortnaam' = 'Genus')) %>% select(soortnaam, Trophy)) %>% 
+  distinct(soortnaam, groep, Trophy)
+df_fam <- left_join(species_append, species %>% filter(soortnaam %in% trofielist$Family) %>% 
+            left_join(trofielist %>% select(Family, Trophy), 
+                      by=c('soortnaam' = 'Family')) %>% select(soortnaam, Trophy)) %>% 
+  distinct(soortnaam, groep, Trophy)
+left_join(species_append, species %>% filter(soortnaam %in% trofielist$Order) %>% 
+            left_join(trofielist %>% select(Order, Trophy),
+                      by=c('soortnaam'='Order')) %>% select(soortnaam, Trophy)) %>% 
+  distinct(soortnaam, groep, Trophy) #This one is longer, within a single order all trophic levels are found
+
+species_append 
+species_append2 <- data.frame(soortnaam = species_append$soortnaam, 
+           soorcode = rep(NA, nrow(species_append)), 
+           TWN = rep(NA, nrow(species_append)), 
+           TWN2 = rep(NA, nrow(species_append)), 
+           soornaam2 = rep(NA, nrow(species_append)), 
+           trofie = coalesce(df_sciName$Trophy, 
+                             df_genus$Trophy, 
+                             df_fam$Trophy), 
+           groep = species_append$groep, 
+           groepcode = rep(NA, nrow(species_append)))
