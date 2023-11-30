@@ -4,7 +4,7 @@ require(readr)
 require(purrr)
 specieslist <- 
 
-species <- read_csv("P:/11202493--systeemrap-grevelingen/1_data/Westerschelde/Specieslist/missingspecies2022_matched.txt")
+species <- read_csv("P:/11202493--systeemrap-grevelingen/1_data/Westerschelde/Specieslist/missingspecies2022_matched.csv")
 str(specieslist)
 str(species)
 
