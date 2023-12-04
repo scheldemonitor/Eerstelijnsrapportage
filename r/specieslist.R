@@ -2,13 +2,29 @@
 
 require(readr)
 require(purrr)
-specieslist <- 
+require(tidyverse)
 
-species <- read_csv("P:/11202493--systeemrap-grevelingen/1_data/Westerschelde/Specieslist/missingspecies2022_matched.txt")
+specieslist <- read_tsv(
+  file.path('https://watersysteemdata.deltares.nl/thredds/fileServer/watersysteemdata/Westerschelde/Scheldemonitor/2021', "Specieslist_zelfuitgebreid_jh.csv"),
+  col_names = F)
+
+names(specieslist) <- c(
+  "soortnaam",
+  "soortcode",
+  "TWN",
+  "TWN2",
+  "soortnaam2",
+  "trofie",
+  "groep",
+  "groepcode"
+)
+
+species <- read_csv("P:/11202493--systeemrap-grevelingen/1_data/Westerschelde/Specieslist/missingspecies2022_matched.csv")
 str(specieslist)
 str(species)
 
-species <- species %>% mutate(groep = case_when(
+species <- species %>% mutate(groep = rep(NA, nrow(species))) %>% 
+  mutate(groep = case_when(
   Phylum == 'Cyanobacteria' ~ 'Blauwwieren',
   Class == 'Cyanophyceae' ~ "Blauwwieren", 
   Class %in% c('Chlorophyceaea', 'Prasinophyceae', 'Euglenophyceae') ~ 'Groenwieren',
@@ -23,7 +39,7 @@ species <- species %>% mutate(groep = case_when(
   ScientificName...2 == 'Thoracosphaeraceae' ~ 'Dinoflagellaten', 
   ScientificName...2 == 'Plagiotropidaceae' ~ "Diatomeeen", 
   is.na(AphiaID) | ScientificName...2 == 'Khakista' ~ groep, # keep the current group if AphaID is NA or ScientificName...2 is 'Khakista'
-  TRUE ~ 'Overige'
+  TRUE ~ 'Overig'
   #ScientificName...2 == 'Khakista' ~ 'Diatoms'
 ))
 #species_append <- data.frame(matrix(ncol=length(names(specieslist)), nrow=length(nrow(species))))
@@ -112,12 +128,35 @@ left_join(species_append, species %>% filter(soortnaam %in% trofielist$Order) %>
 species_append 
 
 species_append2 <- data.frame(soortnaam = species_append$soortnaam, 
-           soorcode = rep(NA, nrow(species_append)), 
+           soortcode = rep(NA, nrow(species_append)), 
            TWN = rep(NA, nrow(species_append)), 
            TWN2 = rep(NA, nrow(species_append)), 
-           soornaam2 = rep(NA, nrow(species_append)), 
+           soortnaam2 = rep(NA, nrow(species_append)), 
            trofie = coalesce(df_sciName$Trophy, 
                              df_genus$Trophy, 
                              df_fam$Trophy), 
            groep = species_append$groep, 
-           groepcode = rep(NA, nrow(species_append)))
+           groepcode = rep(NA, nrow(species_append))) 
+
+groepcodes <- specieslist %>% distinct(trofie, groep, groepcode)
+
+species_append2 <- species_append2 %>% mutate(trofie = ifelse(trofie == 'mixoplankton', 'Mixotroof', 
+                                           ifelse(trofie=='phytoplankton', 'Autotroof', 
+                                                  ifelse(trofie=='protozooplankton', 'Heterotroof', trofie))))  %>% 
+  left_join(groepcodes, by = c('trofie', 'groep')) %>% rename(groepcode = groepcode.y) %>% select(-groepcode.x)
+
+
+species_append3 <- species_append2 %>% mutate(trofie = case_when(
+  soortnaam == 'Myrionecta rubra' ~ 'Heterotroof',
+  soortnaam == 'Gymnodiniales' ~ 'Mixotroof', #Waller&Koreny 2017
+  soortnaam == 'Eucampia zoodiacus' ~ 'Autotroof', #Guiry 2011
+  soortnaam == 'Odontella longicruris' ~ 'Autotroof', #Giury 2011
+  soortnaam == 'Prymnesiales' ~ "Autotroof", #Edvardsen 2011
+  soortnaam == 'Delphineis' ~ 'Autotroof',
+  soortnaam == ' Bellerochea horologicalis' ~ 'Autotroof'
+  ))
+
+write.csv(rbind(specieslist %>% as.data.frame(), species_append3),
+          file.path(savepath,'Specieslist_zelfuitgebreid.csv'))
+
+
