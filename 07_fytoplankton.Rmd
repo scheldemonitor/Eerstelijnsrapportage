@@ -61,7 +61,14 @@ if (!all(fytoplankton$scientificname %in% specieslist$soortnaam)){
   print(missing_species %>% select(scientificname) %>% unique() %>% unlist() %>% unname())
 }
 
-missing_species %>% select(scientificname) %>% table()  %>% as.data.frame()%>% knitr::kable()
+missing_species.t <- missing_species %>% select(scientificname) %>% table() %>% as.data.frame() %>% arrange(desc(Freq))
+
+missingspeciespath <-
+"p://11202493--systeemrap-grevelingen//1_data//Westerschelde//Specieslist/"
+#write.csv(missing_species.t, file.path(missingspeciespath, 
+#                                      paste0('missingspecies', dataJaar,'.csv')))
+
+knitr::kable(missing_species.t)
 ```
 
 
@@ -99,6 +106,7 @@ Bovenstaande leidt tot de volgende pragmatische indeling, gepresenteerd in Tabel
 df.fyt %>% 
   distinct(scientificname, trofie, groep) %>%
   drop_na(groep) %>%
+  drop_na(trofie) %>% 
   group_by(trofie, groep) %>% 
   summarize(n = n()) %>% 
   pivot_wider(id_cols = groep, names_from = trofie, values_from = n, values_fill = 0) %>% 

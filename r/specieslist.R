@@ -110,6 +110,7 @@ left_join(species_append, species %>% filter(soortnaam %in% trofielist$Order) %>
   distinct(soortnaam, groep, Trophy) #This one is longer, within a single order all trophic levels are found
 
 species_append 
+
 species_append2 <- data.frame(soortnaam = species_append$soortnaam, 
            soorcode = rep(NA, nrow(species_append)), 
            TWN = rep(NA, nrow(species_append)), 
