@@ -34,20 +34,7 @@ trendstations <- c("Schaar van Ouden Doel", "Hansweert geul",
 # specieslist <- readxl::read_excel("n:\\Projects\\1209000\\1209394\\C. Report - advise\\Eerstelijnsrapportage\\generic\\Fytoplankton\\Specieslist_zelfuitgebreid_jh.xlsx",
 #   col_names = F)
 
-specieslist <- read_tsv(
-  file.path('https://watersysteemdata.deltares.nl/thredds/fileServer/watersysteemdata/Westerschelde/Scheldemonitor/2021', "Specieslist_zelfuitgebreid_jh.csv"),
-  col_names = F)
-
-names(specieslist) <- c(
-  "soortnaam",
-  "soortcode",
-  "TWN",
-  "TWN2",
-  "soortnaam2",
-  "trofie",
-  "groep",
-  "groepcode"
-)
+specieslist <- read_csv(file.path(datapath, "Specieslist_zelfuitgebreid.csv"))
 ```
 
 
@@ -91,15 +78,15 @@ df.fyt.groep <- df.fyt %>%
   ) %>% ungroup()
 ```
 
-# Fytoplankton {#fytoplankton}
+# Plankton {#fytoplankton}
 
 ## Indeling soorten {#fyto-soorten}
 
-De fytoplankton gegevens bestaan uit meer dan 500 verschillende soorten. Om deze toch op een compacte en zinvolle manier te kunnen presenteren en analyseren, wordt een indeling gemaakt, waarbij meerdere soorten gegroepeerd kunnen worden. In eerste instantie is een opdeling naar trofiegraad, autotroof of heterotroof, voor de hand liggend. Er zijn echter ook groepen, vooral bij de 'Dinoflagellaten' ('pantserwieren'), bijvoorbeeld de *Gymnodiniaceae*, waarbij het niet altijd duidelijk is wat de trofiegraad is. Daarmee bestaat er nog een derde categorie beide of onbekend, die we mixotroof noemen. Ook de (soms grote) groep ondetermineerbare algen valt in deze categorie.
+De planktongegevens bestaan uit meer dan 500 verschillende soorten ééncellige organismen. Om deze toch op een compacte en zinvolle manier te kunnen presenteren en analyseren, wordt een indeling gemaakt, waarbij meerdere soorten gegroepeerd kunnen worden. In eerste instantie is een opdeling naar trofiegraad, autotroof of heterotroof, voor de hand liggend. Deze van oudsher veelgebruikt indeling blijkt echter niet volledig accuraat, omdat een groot aantal ééncelligen mixotroof zijn (d.w.z. een combinatie tussen autotroof en heterotroof). Gezien de lastige definitie van de term mixotroof, wordt in deze rapportage de (duidelijkere) definitie van 'mixoplankton' aangehouden. Deze groep bestaat uit soorten die aan fagocytose en fotosynthese kunnen doen (@Flynn2019). 'Fytoplankton' wordt dan gebruikt om soorten aan te duiden die autotroof zijn, maar niet aan fagocytose kunnen doen (maar in sommige gevallen bijvoorbeeld wel organische stoffen uit de omgeving op kunnen nemen) en 'protozooplankton' wordt gebruikt voor de groep soorten die niet aan fotosynthese doen. Wanneer niet duidelijk is tot welke trofische indeling een soort of soortgroep behoort, is deze niet meegenomen in de analyse.
 
-Ook op taxonomisch niveau is een opdeling zinvol. De belangrijkste groep binnen het fytoplankton in de Westerschelde wordt gevormd door de 'Diatomeeën' oftewel 'kiezelwieren'. De 'Dinoflagellaten' oftewel 'pantserwieren' zijn wat betreft aantallen veel minder belangrijk. Een belangrijke voorjaarssoort in het mondingsgebied van de Westerschelde is *Phaeocystis globosa*, die als aparte groep 'Phaeocystis' wordt meegenomen. Alleen op de locatie Schaar van Ouden Doel vormen grote aantallen 'Blauwwieren' en 'Groenwieren' soms een belangrijk deel van het fytoplankton, vandaar dat deze ook onderscheiden zijn. Voor de 'Groenwieren' is er van uitgegaan dat deze worden gevormd door de *Chlorophyceaea*, de *Prasinophyceae* en de *Euglenophyceae* (@Tomas1997), alhoewel (@Hoek1995) de *Euglenophycea* weer buiten de groenwieren plaatsen. Soorten die buiten de hierboven genoemde groepen vallen zijn samengenomen als de groep 'Overig'. Niet alle groepen zijn van hetzelfde taxonomische niveau, maar deze indeling is in eerste instantie wel de meest pragmatische. De heterotrofe organismen bevatten wel de heterotrofe 'Dinoflagellaten', maar niet de ciliaten (met uitzondering van *Myrionecta rubra*). *Myrionecta rubra* is een ciliaat (een dier, dus heterotroof) die in de geannoteerde soortenlijst 1990-2008 (@Koeman2009) toch als autotroof is ingedeeld vanwege de in het dier aanwezige endosymbiontische algen. Bij de verdere indeling is in de tabel (zie Bijlage \@ref(BijlageC-fytoplankton)) *Myrionecta rubra* geplaatst onder 'Heterotroof - Overig'.
+Ook op taxonomisch niveau is een opdeling zinvol. De belangrijkste groep binnen het plankton in de Westerschelde wordt gevormd door de 'Diatomeeën' oftewel 'kiezelwieren'. Omdat het overgrote deel van de diatomeeën fotoautotroof is, zijn alle diatomeeën tot het fytoplankton gerekend. Ook de superklasse *Khakista* is in deze rapportage is in deze rapportage opgenomen onder de Diatomeeën, hoewel deze groep in werkelijkheid boven de diatomeeën staan en naast de diatomeeën nog een relatief kleine zustergroep van de diatomeeën omvat. De 'Dinoflagellaten' oftewel 'pantserwieren' zijn wat betreft aantallen veel minder belangrijk. Een belangrijke voorjaarssoort in het mondingsgebied van de Westerschelde is *Phaeocystis globosa*, die als aparte groep 'Phaeocystis' wordt meegenomen. Alleen op de locatie Schaar van Ouden Doel vormen grote aantallen 'Blauwwieren' en 'Groenwieren' soms een belangrijk deel van het fytoplankton, vandaar dat deze ook onderscheiden zijn. Voor de 'Groenwieren' is er van uitgegaan dat deze worden gevormd door de *Chlorophyceaea*, de *Prasinophyceae* en de *Euglenophyceae* (@Tomas1997), alhoewel (@Hoek1995) de *Euglenophycea* weer buiten de groenwieren plaatsen. Soorten die buiten de hierboven genoemde groepen vallen zijn samengenomen als de groep 'Overig'. Niet alle groepen zijn van hetzelfde taxonomische niveau, maar deze indeling is in eerste instantie wel de meest pragmatische. De heterotrofe organismen bevatten wel de heterotrofe 'Dinoflagellaten', maar niet de ciliaten (met uitzondering van *Myrionecta rubra*). *Myrionecta rubra* is een ciliaat (een dier, dus heterotroof) die in de geannoteerde soortenlijst 1990-2008 (@Koeman2009) toch als autotroof is ingedeeld vanwege de in het dier aanwezige endosymbiontische algen. Bij de verdere indeling is in de tabel (zie Bijlage \@ref(BijlageC-fytoplankton)) *Myrionecta rubra* geplaatst onder 'Heterotroof - Overig'. 
 
-Bovenstaande leidt tot de volgende pragmatische indeling, gepresenteerd in Tabel \@ref(tab:indelingFytoplankton). Deze indeling is opgesteld door Bert Wetsteijn (RWS-WVL).
+Bovenstaande leidt tot de volgende pragmatische indeling, gepresenteerd in Tabel \@ref(tab:indelingFytoplankton). Deze indeling is opgesteld door Bert Wetsteijn (RWS-WVL) en aangepast op basis van nieuwe inzichten op het gebied van mixoplankton.
 
 ```{r indelingFytoplankton}
 
