@@ -65,7 +65,7 @@ df.fyt <- fytoplankton %>%
   mutate(groep = trimws(groep))
 
 df.fyt.groep <- df.fyt %>% 
-  drop_na(groep) %>%
+  drop_na(groepcode) %>%
   unite("groep", c(trofie, groep), sep = " - ") %>%
   group_by(stationname, observationdate, groep) %>% 
   summarize(value = sum(value)/1e6) %>%
