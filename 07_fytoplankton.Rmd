@@ -47,14 +47,17 @@ if (!all(fytoplankton$scientificname %in% specieslist$soortnaam)){
   filter(!scientificname %in% specieslist$soortnaam)
   print('The following species are missing in the specieslist:')
   print(missing_species %>% select(scientificname) %>% unique() %>% unlist() %>% unname())
-  missing_species.t <- missing_species %>% select(scientificname) %>%
-  table() %>% as.data.frame() %>% arrange(desc(Freq))
-  missingspeciespath <-
+ 
+missing_species.t <- missing_species %>% select(scientificname) %>% table() %>% as.data.frame() %>% arrange(desc(Freq))
+ 
+missingspeciespath <-
 "p://11202493--systeemrap-grevelingen//1_data//Westerschelde//Specieslist/"
 #write.csv(missing_species.t, file.path(missingspeciespath, 
 #                                      paste0('missingspecies', dataJaar,'.csv')))
-  print(knitr::kable(missing_species.t))
-}
+ 
+knitr::kable(missing_species.t)
+ 
+} else print("There are no missing species")
 
 ```
 
