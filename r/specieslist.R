@@ -5,12 +5,12 @@ require(purrr)
 require(tidyverse)
 require(readxl)
 
-# Load the previous species list
-specieslist <- read_tsv(
+# Load the  species list in the previous systeemrapportage 
+specieslist_old <- read_tsv(
   file.path('https://watersysteemdata.deltares.nl/thredds/fileServer/watersysteemdata/Westerschelde/Scheldemonitor/2021', "Specieslist_zelfuitgebreid_jh.csv"),
   col_names = F)
 
-names(specieslist) <- c(
+names(specieslist_old) <- c(
   "soortnaam",
   "soortcode",
   "TWN",
@@ -22,10 +22,10 @@ names(specieslist) <- c(
 )
 
 # Load in the result from the WoRMS Taxon match tool on a missing species list
-species <- read_csv("P:/11202493--systeemrap-grevelingen/1_data/Westerschelde/Specieslist/missingspecies2022_matched.csv")
+missingspecies_matched <- read_csv("P:/11202493--systeemrap-grevelingen/1_data/Westerschelde/Specieslist/missingspecies2022_matched.csv")
 
-
-species <- species %>% mutate(groep = rep(NA, nrow(species))) %>% 
+# Group the species based on taxonomy
+specieslist_new <- missingspecies_matched %>% mutate(groep = rep(NA, nrow(missingspecies_matched))) %>% 
   mutate(groep = case_when(
   Phylum == 'Cyanobacteria' ~ 'Blauwwieren',
   Class == 'Cyanophyceae' ~ "Blauwwieren", 
@@ -44,20 +44,21 @@ species <- species %>% mutate(groep = rep(NA, nrow(species))) %>%
   ScientificName...2 == 'Khakista' ~ 'Diatomeeen',
   TRUE ~ 'Overig'
 ))
+
 #species_append <- data.frame(matrix(ncol=length(names(specieslist)), nrow=length(nrow(species))))
 #names(species_append) <- names(specieslist)
 #species_append <- species_append %>% mutate(soortnaam = species$ScientificName...2, 
 #                                            groep = species$groep)
 
 
-species_append <- species %>% filter(!is.na(...1)) %>% 
+species_append <- specieslist_new %>% filter(!is.na(...1)) %>% 
   select(soortnaam = ScientificName...2, groep = groep)
 
 trofielist <- read_delim("P:/11202493--systeemrap-grevelingen/1_data/Westerschelde/Specieslist/protisttable.csv", 
-                         delim = ";", escape_double = FALSE, trim_ws = TRUE)
+                         delim = ";", escape_double = FALSE, trim_ws = TRUE) %>% mutate(Trophy = ifelse(Trophy == 'phytoplankton','fytoplankton', Trophy))
 
 # Quick check whether the trophic levels of the previous species list correspond with trofielist
-overeenkomst <- specieslist %>% filter(soortnaam %in% trofielist$ScientificName)
+overeenkomst <- specieslist_old %>% filter(soortnaam %in% trofielist$ScientificName)
 
 overeenkomst <- left_join(overeenkomst %>% select(soortnaam, trofie), 
                           trofielist %>% select(ScientificName, Trophy), 
@@ -71,79 +72,57 @@ overeenkomst <- left_join(overeenkomst %>% select(soortnaam, trofie),
 (t <- table(overeenkomst$identical)) #About 90% is identical 
 overeenkomst %>% filter(identical == FALSE) #of those that are not identical, 95% has been assigned Autotroof instead of Mixotroof
 
+#Regardless of the previous outcomes. the trofielist is newer and likely more accurate than our older information. 
+#The values in the old list will be overwritten. Therefore we need to bind the old and the new species lists. 
 
-trofielist %>% distinct(Trophy, Family) %>% filter(!is.na(Family)) %>% select(Family)
-trofielist %>% distinct(Family) %>% filter(!is.na(Family))
-#Whithin a Familiy, differences in trophic level might occur
+#For the new specieslist, we first want to add the trophic information available on genus and family level first, before removing columns including taxonomic information. 
 
+specieslist_new <- specieslist_new %>% mutate(soortnaam= ScientificName...2)
 
-trofielist %>% distinct(Trophy, Genus) %>% filter(!is.na(Genus)) %>% select(Genus)
-trofielist %>% distinct(Genus) %>% filter(!is.na(Genus))
-#Within a Genus, differences in trophic level can occur
-
-#We moeten kijken naar genera en families die in trofielist als alleen genus of familie beschreven worden
-overeenkomst_genus <- overeenkomst %>%
-  mutate(genus = ifelse(nchar(gsub("[^ ]", "", soortnaam)) + 1 == 2, 
-                        sapply(strsplit(as.character(soortnaam), " "), `[`, 1), 
-                        NA))
-overeenkomst_genus <- overeenkomst_genus %>% filter(genus %in% trofielist$ScientificName)
-str(overeenkomst_genus)
-#apparently, scientificname in trofielist does not contain genera names corresponding with genera included in specieslist
-#oh well, this was mostly to check the old specieslist, for the new one it should be easier
-
-species <- species %>% mutate(soortnaam= ScientificName...2)
-
-species_sciName <- species %>% filter(soortnaam %in% trofielist$ScientificName) %>% 
-  left_join(trofielist %>% select(ScientificName, Trophy), 
-            by=c('soortnaam' = 'ScientificName'))
-species_genus <- species %>% filter(soortnaam %in% trofielist$Genus) %>% 
+#species_sciName <- species %>% filter(soortnaam %in% trofielist$ScientificName) %>% 
+#  left_join(trofielist %>% select(ScientificName, Trophy), 
+#           by=c('soortnaam' = 'ScientificName'))
+species_genus <- specieslist_new %>% filter(soortnaam %in% trofielist$Genus) %>% 
   left_join(trofielist %>% select(Genus, Trophy), 
             by=c('soortnaam' = 'Genus'))
-species_family <- species %>% filter(soortnaam %in% trofielist$Family) %>% 
+species_family <- specieslist_new %>% filter(soortnaam %in% trofielist$Family) %>% 
   left_join(trofielist %>% select(Family, Trophy), 
             by=c('soortnaam' = 'Family'))
-species_order <- species %>% filter(soortnaam %in% trofielist$Order) %>% 
+species_order <- specieslist_new %>% filter(soortnaam %in% trofielist$Order) %>% 
   left_join(trofielist %>% select(Order, Trophy),
             by=c('soortnaam'='Order'))
-species_class <- species %>% filter(soortnaam %in% trofielist$Class) %>% 
+species_class <- specieslist_new %>% filter(soortnaam %in% trofielist$Class) %>% 
   left_join(trofielist %>% select(ScientificName, Class),
             by=c('soortnaam'='Class'))
 
-df_sciName <- left_join(species_append, species %>% filter(soortnaam %in% trofielist$ScientificName) %>% 
-            left_join(trofielist %>% select(ScientificName, Trophy), 
-                      by=c('soortnaam' = 'ScientificName')) %>% select(soortnaam, Trophy))
-df_genus <- left_join(species_append, species %>% filter(soortnaam %in% trofielist$Genus) %>% 
-            left_join(trofielist %>% select(Genus, Trophy), 
-                      by=c('soortnaam' = 'Genus')) %>% select(soortnaam, Trophy)) %>% 
+#df_sciName <- left_join(species_append, species %>% filter(soortnaam %in% trofielist$ScientificName) %>% 
+#                          left_join(trofielist %>% select(ScientificName, Trophy), 
+#                                    by=c('soortnaam' = 'ScientificName')) %>% select(soortnaam, Trophy))
+df_genus <- left_join(species_append, specieslist_new %>% filter(soortnaam %in% trofielist$Genus) %>% 
+                        left_join(trofielist %>% select(Genus, Trophy), 
+                                  by=c('soortnaam' = 'Genus')) %>% select(soortnaam, Trophy)) %>% 
   distinct(soortnaam, groep, Trophy)
-df_fam <- left_join(species_append, species %>% filter(soortnaam %in% trofielist$Family) %>% 
-            left_join(trofielist %>% select(Family, Trophy), 
-                      by=c('soortnaam' = 'Family')) %>% select(soortnaam, Trophy)) %>% 
+df_fam <- left_join(species_append, specieslist_new %>% filter(soortnaam %in% trofielist$Family) %>% 
+                      left_join(trofielist %>% select(Family, Trophy), 
+                                by=c('soortnaam' = 'Family')) %>% select(soortnaam, Trophy)) %>% 
   distinct(soortnaam, groep, Trophy)
-left_join(species_append, species %>% filter(soortnaam %in% trofielist$Order) %>% 
+left_join(species_append, specieslist_new %>% filter(soortnaam %in% trofielist$Order) %>% 
             left_join(trofielist %>% select(Order, Trophy),
                       by=c('soortnaam'='Order')) %>% select(soortnaam, Trophy)) %>% 
-  distinct(soortnaam, groep, Trophy) #This one is longer, within a single order all trophic levels are found
+  distinct(soortnaam, groep, Trophy) #This one is longer, within a single order GYmnodiniales all trophic levels are found
 
 species_append2 <- data.frame(soortnaam = species_append$soortnaam, 
-           soortcode = rep(NA, nrow(species_append)), 
-           TWN = rep(NA, nrow(species_append)), 
-           TWN2 = rep(NA, nrow(species_append)), 
-           soortnaam2 = rep(NA, nrow(species_append)), 
-           trofie = coalesce(df_sciName$Trophy, 
-                             df_genus$Trophy, 
-                             df_fam$Trophy), 
-           groep = species_append$groep, 
-           groepcode = rep(NA, nrow(species_append))) 
+                              soortcode = rep(NA, nrow(species_append)), 
+                              TWN = rep(NA, nrow(species_append)), 
+                              TWN2 = rep(NA, nrow(species_append)), 
+                              soortnaam2 = rep(NA, nrow(species_append)), 
+                              trofie = coalesce(df_genus$Trophy, 
+                                                df_fam$Trophy), 
+                              groep = species_append$groep, 
+                              groepcode = rep(NA, nrow(species_append)))
 
-# New mixoplankton list
-
-mixotable <- read_excel("C:/Users/rienstra/Downloads/The Mixoplankton Database - MDB (20230418).xlsx", 
-                        sheet = "MDB - 3Dec2022 ", skip = 3)
-
-species_append3 <- species_append2 %>% mutate(trofie = ifelse(soortnaam %in% mixotable$`Species Name`, 'mixoplankton', trofie))
-
-species_append4 <- species_append3 %>% mutate(trofie = case_when(
+#' Manual adjustment
+species_append3 <- species_append2 %>% mutate(trofie = case_when(
   soortnaam == 'Myrionecta rubra' ~ 'protozooplankton',
   soortnaam == 'Gymnodiniales' ~ 'mixoplankton', #Waller&Koreny 2017
   soortnaam == 'Eucampia zoodiacus' ~ 'fytoplankton', #Guiry 2011
@@ -155,21 +134,33 @@ species_append4 <- species_append3 %>% mutate(trofie = case_when(
   TRUE ~ trofie
 ))
 
+specieslist_full <- rbind(specieslist_old, 
+                           species_append3) %>% mutate(trofie = ifelse(trofie == 'Mixotroof','mixoplankton',  
+                                                                      ifelse(trofie== 'Autotroof','fytoplankton',  
+                                                                             ifelse(trofie=='Heterotroof','protozooplankton',  trofie))))
 
+#now we can add the values of trofie based on the species level in trofielist
 
+specieslist_full <- specieslist_full %>%
+  left_join(trofielist %>% rename(soortnaam = ScientificName) %>% 
+              rename(trofie = Trophy) %>% 
+              select(soortnaam, trofie), by = "soortnaam", suffix = c(".df1", ".df2")) %>%
+  mutate(trofie = coalesce(trofie.df2, trofie.df1)) %>% #priority given to the trofielist values
+  select(-trofie.df1, -trofie.df2) 
 
+#We also heave a mixoplankton database, which is even more recent
+mixotable <- read_excel("P:/11202493--systeemrap-grevelingen/1_data/Westerschelde/Specieslist/The Mixoplankton Database - MDB (20230418).xlsx", 
+                        sheet = "MDB - 3Dec2022 ", skip = 3)
 
+specieslist_full_final <- specieslist_full %>% mutate(trofie = ifelse(soortnaam %in% mixotable$`Species Name`, 'mixoplankton', trofie))
 
-new_specieslist <- rbind(specieslist, species_append4) %>%  mutate(trofie = ifelse(trofie == 'Mixotroof', 'mixoplankton', 
-                                                           ifelse(trofie=='Autotroof', 'fytoplankton',
-                                                                  ifelse(trofie == 'phytoplankton', 'fytoplankton',
-                                                                      ifelse(trofie=='Heterotroof', 'protozooplankton', trofie)))))
-groepcodes <- new_specieslist %>% distinct(trofie, groep, groepcode) %>% filter(!is.na(groepcode))
+specieslist_full_final <- specieslist_full_final %>% mutate(groepcode= NA)
+groepcodes <- specieslist_old %>% distinct(trofie, groep, groepcode) %>% filter(!is.na(groepcode)) %>% mutate(trofie = ifelse(trofie == 'Mixotroof','mixoplankton',  
+                                                                                                                              ifelse(trofie== 'Autotroof','fytoplankton',  
+                                                                                                                                     ifelse(trofie=='Heterotroof','protozooplankton',  trofie))))
+specieslist_full_final <- left_join(specieslist_full_final, groepcodes, by= c('trofie', 'groep')) %>% 
+  rename(groepcode = groepcode.y) %>% select(-groepcode.x) %>% select(names(specieslist_old))
 
-new_specieslist <- left_join(new_specieslist, groepcodes, by= c('trofie', 'groep')) %>% 
-  rename(groepcode = groepcode.x) %>% select(-groepcode.y)
-
-write.csv(new_specieslist,
+write.csv(specieslist_full_final,
           file.path(savepath,'Specieslist_zelfuitgebreid.csv'))
-
 
