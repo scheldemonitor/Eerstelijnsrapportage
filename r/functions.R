@@ -827,7 +827,7 @@ plotTrendFyto <- function(df, statname){
     geom_point(data = df.fyt.groep %>% ungroup() %>%
                  mutate(jaar = lubridate::year(datetime), maand = lubridate::month(datetime)) %>%
                  mutate(seizoen = ifelse(maand %in% c(4:9), "zomer", "winter")) %>%
-                 filter(stationname == statname, parametername == "Autotroof - Phaeocystis") %>%
+                 filter(stationname == statname, parametername == "fytoplankton - Phaeocystis") %>%
                  group_by(jaar, parametername, seizoen) %>%
                  summarize(`90-perc` = quantile(value, probs = 0.9, na.rm = T)) %>% ungroup() %>%
                  filter(seizoen == "zomer"),
@@ -867,7 +867,7 @@ plotTrendFytoGroup <- function(df, groupname){
                  mutate(jaar = lubridate::year(datetime), maand = lubridate::month(datetime)) %>%
                  filter(parametername == groupname) %>%
                  filter(maand %in% c(4:9)) %>%
-                 filter(parametername == "Autotroof - Phaeocystis") %>%
+                 filter(parametername == "fytoplankton - Phaeocystis") %>%
                  group_by(jaar, stationname) %>%
                  summarize(`90-perc` = quantile(value, probs = 0.9, na.rm = T)) %>% ungroup(),
                aes(x = jaar, y = `90-perc`, color = stationname),
