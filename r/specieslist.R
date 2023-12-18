@@ -4,6 +4,7 @@ require(readr)
 require(purrr)
 require(tidyverse)
 require(readxl)
+require(xtable)
 
 # Load the  species list in the previous systeemrapportage 
 specieslist_old <- read_tsv(
@@ -164,3 +165,6 @@ specieslist_full_final <- left_join(specieslist_full_final, groepcodes, by= c('t
 write.csv(specieslist_full_final,
           file.path(savepath,'Specieslist_zelfuitgebreid.csv'))
 
+#print(xtable(specieslist_full_final %>% select(soortnaam, soortcode, TWN, TWN2, trofie, groep) %>% 
+#               rename(Naam = soortnaam, Code = soortcode, BTX = TWN, AphiaID = TWN2, Trofie = trofie, Groep = groep)), 
+#      type = 'latex', file = 'Figuren/Tabellen/fytoplankton1.tex')
