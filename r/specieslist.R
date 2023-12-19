@@ -22,7 +22,7 @@ names(specieslist) <- c(
 )
 
 # Load in the result from the WoRMS Taxon match tool on a missing species list
-species <- read_csv("P:/11202493--systeemrap-grevelingen/1_data/Westerschelde/Specieslist/missingspecies2022_matched.csv")
+species <- read_csv("https://watersysteemdata.deltares.nl/thredds/fileServer/watersysteemdata/Westerschelde/Specieslist/missingspecies2022_matched.csv")
 
 
 species <- species %>% mutate(groep = rep(NA, nrow(species))) %>% 
@@ -53,7 +53,7 @@ species <- species %>% mutate(groep = rep(NA, nrow(species))) %>%
 species_append <- species %>% filter(!is.na(...1)) %>% 
   select(soortnaam = ScientificName...2, groep = groep)
 
-trofielist <- read_delim("P:/11202493--systeemrap-grevelingen/1_data/Westerschelde/Specieslist/protisttable.csv", 
+trofielist <- read_delim("https://watersysteemdata.deltares.nl/thredds/fileServer/watersysteemdata/Westerschelde/Specieslist/protisttable.csv", 
                          delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
 # Quick check whether the trophic levels of the previous species list correspond with trofielist
@@ -138,7 +138,7 @@ species_append2 <- data.frame(soortnaam = species_append$soortnaam,
 
 # New mixoplankton list
 
-mixotable <- read_excel("C:/Users/rienstra/Downloads/The Mixoplankton Database - MDB (20230418).xlsx", 
+mixotable <- read_excel("C:/Users/stolte/Downloads/The Mixoplankton Database - MDB (20230418).xlsx", 
                         sheet = "MDB - 3Dec2022 ", skip = 3)
 
 species_append3 <- species_append2 %>% mutate(trofie = ifelse(soortnaam %in% mixotable$`Species Name`, 'mixoplankton', trofie))
