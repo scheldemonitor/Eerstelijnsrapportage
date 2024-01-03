@@ -138,7 +138,7 @@ species_append2 <- data.frame(soortnaam = species_append$soortnaam,
 
 # New mixoplankton list
 
-mixotable <- read_excel("C:/Users/stolte/Downloads/The Mixoplankton Database - MDB (20230418).xlsx", 
+mixotable <- read_excel("https://watersysteemdata.deltares.nl/thredds/fileServer/watersysteemdata/Westerschelde/Specieslist/The%20Mixoplankton%20Database%20-%20MDB%20(20230418).xlsx", 
                         sheet = "MDB - 3Dec2022 ", skip = 3)
 
 species_append3 <- species_append2 %>% mutate(trofie = ifelse(soortnaam %in% mixotable$`Species Name`, 'mixoplankton', trofie))
