@@ -50,8 +50,8 @@ if (!all(fytoplankton$scientificname %in% specieslist$soortnaam)){
  
 missing_species.t <- missing_species %>% select(scientificname) %>% table() %>% as.data.frame() %>% arrange(desc(Freq))
  
-missingspeciespath <-
-"p://11202493--systeemrap-grevelingen//1_data//Westerschelde//Specieslist/"
+# missingspeciespath <-
+# "p://11202493--systeemrap-grevelingen//1_data//Westerschelde//Specieslist/"
 #write.csv(missing_species.t, file.path(missingspeciespath, 
 #                                      paste0('missingspecies', dataJaar,'.csv')))
  
