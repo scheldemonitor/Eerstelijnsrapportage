@@ -80,7 +80,7 @@ De meetdichtheidsmatrices geven voor ieder jaar aan hoe vaak elke parameter is g
 
 ## Oppervlaktewater {#BijlageB-meetdichtheid-oppwater}
 
-```{r laadData Oppwater}
+```{r laadDataOppwater}
 
 fysChemOppDataPath <- "Data_FysChem_opp.csv"
 
@@ -93,7 +93,7 @@ parnames <- c("Saliniteit in DIMSLS in oppervlaktewater","Temperatuur in graden 
 refreshData = F
 if(refreshData) refresh_fysischchemischoppwater(startyear = 1998, endyear = dataJaar) 
 
-df <- read_delim(file.path(datapath, fysChemOppDataPath), delim = ",", guess_max = 200000) 
+df <- as.data.frame(read_delim(file.path(datapath, fysChemOppDataPath), delim = ",", guess_max = 200000)) 
 
 checkparnames <- T #Apply when certain that the parnames vector contains all the parameters used in the oppwater section
 
