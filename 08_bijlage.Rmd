@@ -5,11 +5,6 @@ knitr::opts_chunk$set(
 	out.width = "85%"
 )
 
-
-```
-
-```{r}
-# Load function to write Latex table structure to R 
 source("r/tex2Rtable.R")
 source("r/functions.R")
 source("r/refresh_data.R")
@@ -19,7 +14,6 @@ require(kable)
 require(ggplot2)
 require(knitr)
 require(kableExtra)
-
 ```
 
 # References
@@ -154,7 +148,7 @@ meetdichtheidOppwater <- function(df, stationname){
   if(knitr::is_html_output()) {
     knitr::kable(dt, col.names = colnames)
 } 
-  else p
+  else print(p)
   
   }
 }
