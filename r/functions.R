@@ -1268,3 +1268,27 @@ plotTrendsBiota2 <- function(df, statname, cat, sciname, sf = F, trend = T, stat
   return(p)
 }
 
+
+meetdichtheid <- function(df, stationName){
+  if (! stationName %in% trendstations) {
+    print ('stationname not found')
+  }
+  {
+    df %>%
+      ungroup() %>%
+      filter(stationname == stationName) %>%
+      group_by(parametername, year, stationname) %>%
+      summarize(n = n()) %>%
+      mutate(date = lubridate::ymd(paste(year, '06', '01'))) %>%
+      ggplot(aes(date, parametername, color=n)) +
+      geom_text(aes(label = n), size = 4) +
+      scale_x_date(
+        position = "top",
+        date_breaks = "1 year", date_labels = "%y"
+      )+
+      scale_color_gradient(low = "#769FCA", high = "#FF6C65") + 
+      theme(legend.position = "none") +xlab('Jaar')+ylab('Parameter')+
+      ggtitle(stationName)
+  }
+}
+

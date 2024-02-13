@@ -113,34 +113,6 @@ df3 <- df2 %>% distinct(id, stationname, parametername, year) #some measurements
 #  group_by(parametername, stationname) %>%
 #  mutate(across(value, remove_outliers))
 
-#meetdichtheidOppwater <- function(df, stationname){
-#  if (! stationname %in% trendstations) {
-#    print ('stationname not found')
-#  }
-#  else {
-#  dt <- df %>% filter(stationname == stationname) %>% select(parametername, year) %>% table() %>%   #as.data.frame.matrix() 
-#  p <- df %>%
-#    filter(stationname == stationname) %>%
-#    select(parametername, year) %>%
-#    table() %>%
-#    as.data.frame() %>%
-#    mutate(year = as.factor(year),
-#         parametername = factor(parametername, levels = rev(sort(unique(parametername))))) %>%
-#    filter(Freq != 0) %>% 
-#    ggplot(aes(x=year, y=parametername, size=Freq, color = Freq)) +
-#    geom_point() +
-#    scale_size_continuous(range = c(1, 4)) +
-#    scale_color_gradient(low = "#769FCA", high = "#FF6C65") +
-#  scale_x_discrete(labels = colnames[-1]) +
-#    theme_bw() +xlab('Jaar')+ylab('Parameter')+ggtitle(paste('Meetdichtheidmatrix oppervlaktewater', stationname))
-#
-#  if(knitr::is_html_output()) {
-#    knitr::kable(dt, col.names = colnames)
-#} 
-#  else print(p)
-#  
-#  }
-#}
 
 meetdichtheidOppwater <- function(df, stationName){
   if (! stationName %in% trendstations) {
@@ -166,7 +138,6 @@ meetdichtheidOppwater <- function(df, stationName){
 }
 
 
-
 ```
 
 
@@ -175,7 +146,7 @@ meetdichtheidOppwater <- function(df, stationName){
 ```{r meetdichtheidOppwaterSchaar}
 stationName <- "Schaar van Ouden Doel"
 
-meetdichtheidOppwater(df3, stationName)
+meetdichtheid(df3, stationName)
 
 ```
 
@@ -184,14 +155,14 @@ meetdichtheidOppwater(df3, stationName)
 ```{r meetdichtheidOppwaterHans}
 
 stationName = 'Hansweert geul'
-meetdichtheidOppwater(df3, stationName)
+meetdichtheid(df3, stationName)
 ```
 
 ### Terneuzen boei 20 {#BijlageB-meetdichtheid-oppwater-terneuzen}
 
 ```{r meetdichtheidOppwaterTerneuzen}
 stationName = 'Terneuzen boei 20'
-meetdichtheidOppwater(df3, stationName)
+meetdichtheid(df3, stationName)
 ```
 
 ### Vlissingen boei SSVH {#BijlageB-meetdichtheid-oppwater-vlissingen}
@@ -199,21 +170,21 @@ meetdichtheidOppwater(df3, stationName)
 
 ```{r meetdichtheidOppwaterVlissingen}
 stationName = 'Vlissingen boei SSVH'
-meetdichtheidOppwater(df3, stationName)
+meetdichtheid(df3, stationName)
 ```
 
 ### Walcheren 2 km uit de kust {#BijlageB-meetdichtheid-oppwater-walcheren2km}
 
 ```{r meetdichtheidOppwaterWal2km}
 stationName = 'Walcheren 2 km uit de kust'
-meetdichtheidOppwater(df3, stationName)
+meetdichtheid(df3, stationName)
 ```
 
 ### Walcheren 20 km uit de kust {#BijlageB-meetdichtheid-oppwater-walcheren20km}
 
 ```{r meetdichtheidOppwaterWal20km}
 stationName = 'Walcheren 20 km uit de kust'
-meetdichtheidOppwater(df3, stationName)
+meetdichtheid(df3, stationName)
 ```
 
 ## Zwevende stof {#BijlageB-meetdichtheid-zwevend}
@@ -315,14 +286,14 @@ meetdichtheidZwevend <- function(df, stationName){
 
 ```{r meetdichtheidZwevendSchaar}
 stationName <- 'Schaar van Ouden Doel'
-meetdichtheidZwevend(df3, stationName)
+meetdichtheid(df3, stationName)
 ```
 
 ### Vlissingen boei SSVH {#BijlageB-meetdichtheid-zwevend-vlissingen}
 
 ```{r meetdichtheidZwevendVlissingen}
-stationname <- 'Vlissingen boei SSVH'
-meetdichtheidZwevend(df3, stationname)
+stationName <- 'Vlissingen boei SSVH'
+meetdichtheid(df3, stationName)
 ```
 
 ## Biota {#BijlageB-meetdichtheid-biota}
