@@ -93,7 +93,7 @@ parnames <- c("Saliniteit in DIMSLS in oppervlaktewater","Temperatuur in graden 
 refreshData = F
 if(refreshData) refresh_fysischchemischoppwater(startyear = 1998, endyear = dataJaar) 
 
-df <- as.data.frame(read_delim(file.path(datapath, fysChemOppDataPath), delim = ",", guess_max = 200000)) 
+df <- data.table::fread(file.path(datapath, fysChemOppDataPath))  
 
 checkparnames <- T #Apply when certain that the parnames vector contains all the parameters used in the oppwater section
 
@@ -103,17 +103,6 @@ if(checkparnames){df2 <- df %>% filter(stationname %in% trendstations) %>% filte
   ungroup() %>% mutate(year = lubridate::year(datetime)) %>% filter(grepl('oppervlaktewater', parametername)) %>% 
   mutate(parametername = gsub(" in oppervlaktewater", "", parametername)) %>% 
   mutate(parametername = gsub(" in het oppervlaktewater", "", parametername))}
-
-#df2 <- df %>% 
-#  filter(stationname %in% c(trendstations)) %>% 
-#  mutate(stationname = factor(stationname, levels = c(trendstations))) %>%
-#  ungroup() %>% mutate(year = lubridate::year(datetime)) %>% filter(grepl('oppervlaktewater', parametername)) %>% 
-#  mutate(parametername = gsub(" in oppervlaktewater", "", parametername)) %>% 
-#  mutate(parametername = gsub(" in het oppervlaktewater", "", parametername))#%>% filter(parametername %in% parameters)
-
-years <- unique(df2$year)
-
-colnames <- c('parameter', substring(as.character(years), 3))
 
 df3 <- df2 %>% distinct(id, stationname, parametername, year) #some measurements are copied in the data, they have different FIDs but the same id
 
@@ -172,7 +161,7 @@ meetdichtheidOppwater <- function(df, stationName){
       )+
       scale_color_gradient(low = "#769FCA", high = "#FF6C65") + 
       theme(legend.position = "none") +xlab('Jaar')+ylab('Parameter')+
-      ggtitle(paste('Oppervlaktewater', stationname))
+      ggtitle(paste('Oppervlaktewater', stationName))
   }
 }
 
@@ -302,7 +291,7 @@ meetdichtheidZwevend <- function(df, stationName){
   if (! stationName %in% trendstations) {
     print ('stationname not found')
   }
-    {
+  {
     df3 %>%
       ungroup() %>%
       filter(stationname == stationName) %>%

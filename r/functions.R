@@ -497,17 +497,21 @@ plotLogAnomalies <- function(df, parname, sf = F) {
     dplyr::filter(parametername == parname) %>%
     dplyr::mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
     mutate(logwaarde = log(value)+0.001) %>%
-    group_by(stationname, year, month) %>% summarize(logmaandgemiddelde = mean(logwaarde, na.rm = T)) %>% ungroup() %>%
-    group_by(stationname) %>% mutate(anomalie = logmaandgemiddelde - mean(logmaandgemiddelde, na.rm = T)) %>% 
+    group_by(stationname, year, month) %>% 
+    summarize(logmaandgemiddelde = mean(logwaarde, na.rm = T)) %>% 
+    ungroup() %>%
+    group_by(stationname) %>% 
+    mutate(anomalie = logmaandgemiddelde - mean(logmaandgemiddelde, na.rm = T)) %>% 
     ungroup() %>%
     complete(stationname, year, month, fill = list(logmaandgemiddelde = NA, anomalie = NA)) %>%
     mutate(datum = as.Date(lubridate::ymd(paste(year, month, "15")))) %>%
     arrange(stationname, datum) %>%
     # mutate(anomalie = oce::fillGap(anomalie)) %>%
-    group_by(stationname) %>% mutate(rM=rollmean(anomalie,k, na.pad=TRUE, align="center", na.rm = T)) %>%
+    group_by(stationname) %>% 
+    mutate(rM = zoo::rollmean(anomalie, k, na.pad=TRUE, align="center", na.rm = T)) %>%
     # mutate(stationname = factor(stationname, levels = plotlocaties)) %>%
     ggplot(aes(datum, exp(anomalie))) + 
-    geom_point(aes(), alpha = 0.2) +   #size = `n/year` color = exp(logmaandgemiddelde)
+    geom_point(aes(color = exp(logmaandgemiddelde)), alpha = 0.2) +   #size = `n/year` color = exp(logmaandgemiddelde)
     geom_line(aes(y=exp(rM)), color = "blue", size = 1)  +
     ggtitle(label = parname) +
     facet_wrap(~ stationname, scales = "free", ncol = 2) +
