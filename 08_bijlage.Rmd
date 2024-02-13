@@ -2,7 +2,7 @@
 ```{r setupBijlage, include=FALSE}
 
 knitr::opts_chunk$set(
-	out.width = "85%"
+	fig.width = 10 
 )
 
 source("r/tex2Rtable.R")
@@ -80,7 +80,7 @@ De meetdichtheidsmatrices geven voor ieder jaar aan hoe vaak elke parameter is g
 
 ## Oppervlaktewater {#BijlageB-meetdichtheid-oppwater}
 
-```{r laadDataOppwater}
+```{r laadDataOppwater, cache.lazy=FALSE}
 
 fysChemOppDataPath <- "Data_FysChem_opp.csv"
 
@@ -124,34 +124,59 @@ df3 <- df2 %>% distinct(id, stationname, parametername, year) #some measurements
 #  group_by(parametername, stationname) %>%
 #  mutate(across(value, remove_outliers))
 
-meetdichtheidOppwater <- function(df, stationname){
-  if (! stationname %in% trendstations) {
+#meetdichtheidOppwater <- function(df, stationname){
+#  if (! stationname %in% trendstations) {
+#    print ('stationname not found')
+#  }
+#  else {
+#  dt <- df %>% filter(stationname == stationname) %>% select(parametername, year) %>% table() %>%   #as.data.frame.matrix() 
+#  p <- df %>%
+#    filter(stationname == stationname) %>%
+#    select(parametername, year) %>%
+#    table() %>%
+#    as.data.frame() %>%
+#    mutate(year = as.factor(year),
+#         parametername = factor(parametername, levels = rev(sort(unique(parametername))))) %>%
+#    filter(Freq != 0) %>% 
+#    ggplot(aes(x=year, y=parametername, size=Freq, color = Freq)) +
+#    geom_point() +
+#    scale_size_continuous(range = c(1, 4)) +
+#    scale_color_gradient(low = "#769FCA", high = "#FF6C65") +
+#  scale_x_discrete(labels = colnames[-1]) +
+#    theme_bw() +xlab('Jaar')+ylab('Parameter')+ggtitle(paste('Meetdichtheidmatrix oppervlaktewater', stationname))
+#
+#  if(knitr::is_html_output()) {
+#    knitr::kable(dt, col.names = colnames)
+#} 
+#  else print(p)
+#  
+#  }
+#}
+
+meetdichtheidOppwater <- function(df, stationName){
+  if (! stationName %in% trendstations) {
     print ('stationname not found')
   }
-  else {
-  dt <- df %>% filter(stationname == stationname) %>% select(parametername, year) %>% table() %>%   as.data.frame.matrix() 
-  p <- df %>%
-    filter(stationname == stationname) %>%
-    select(parametername, year) %>%
-    table() %>%
-    as.data.frame() %>%
-    mutate(year = as.factor(year),
-         parametername = factor(parametername, levels = rev(sort(unique(parametername))))) %>%
-    filter(Freq != 0) %>% 
-    ggplot(aes(x=year, y=parametername, size=Freq, color = Freq)) +
-    geom_point() +
-    scale_size_continuous(range = c(1, 4)) +
-    scale_color_gradient(low = "#769FCA", high = "#FF6C65") +
-  scale_x_discrete(labels = colnames[-1]) +
-    theme_bw() +xlab('Jaar')+ylab('Parameter')+ggtitle(paste('Meetdichtheidmatrix oppervlaktewater', stationname))
-
-  if(knitr::is_html_output()) {
-    knitr::kable(dt, col.names = colnames)
-} 
-  else print(p)
-  
+    {
+    df3 %>%
+      ungroup() %>%
+      filter(stationname == stationName) %>%
+      group_by(parametername, year, stationname) %>%
+      summarize(n = n()) %>%
+      mutate(date = lubridate::ymd(paste(year, '06', '01'))) %>%
+      ggplot(aes(date, parametername, color=n)) +
+      geom_text(aes(label = n), size = 4) +
+      scale_x_date(
+        position = "top",
+        date_breaks = "1 year", date_labels = "%y"
+      )+
+      scale_color_gradient(low = "#769FCA", high = "#FF6C65") + 
+      theme(legend.position = "none") +xlab('Jaar')+ylab('Parameter')+
+      ggtitle(paste('Oppervlaktewater', stationname))
   }
 }
+
+
 
 ```
 
@@ -159,9 +184,9 @@ meetdichtheidOppwater <- function(df, stationname){
 ### Schaar van Ouden Doel {#BijlageB-meetdichtheid-oppwater-schaar}
 
 ```{r meetdichtheidOppwaterSchaar}
-stationname <- "Schaar van Ouden Doel"
+stationName <- "Schaar van Ouden Doel"
 
-meetdichtheidOppwater(df3, stationname)
+meetdichtheidOppwater(df3, stationName)
 
 ```
 
@@ -169,37 +194,37 @@ meetdichtheidOppwater(df3, stationname)
 
 ```{r meetdichtheidOppwaterHans}
 
-stationname = 'Hansweert geul'
-meetdichtheidOppwater(df3, stationname)
+stationName = 'Hansweert geul'
+meetdichtheidOppwater(df3, stationName)
 ```
 
 ### Terneuzen boei 20 {#BijlageB-meetdichtheid-oppwater-terneuzen}
 
 ```{r meetdichtheidOppwaterTerneuzen}
-stationname = 'Terneuzen boei 20'
-meetdichtheidOppwater(df3, stationname)
+stationName = 'Terneuzen boei 20'
+meetdichtheidOppwater(df3, stationName)
 ```
 
 ### Vlissingen boei SSVH {#BijlageB-meetdichtheid-oppwater-vlissingen}
 
 
 ```{r meetdichtheidOppwaterVlissingen}
-stationname = 'Vlissingen boei SSVH'
-meetdichtheidOppwater(df3, stationname)
+stationName = 'Vlissingen boei SSVH'
+meetdichtheidOppwater(df3, stationName)
 ```
 
 ### Walcheren 2 km uit de kust {#BijlageB-meetdichtheid-oppwater-walcheren2km}
 
 ```{r meetdichtheidOppwaterWal2km}
-stationname = 'Walcheren 2 km uit de kust'
-meetdichtheidOppwater(df3, stationname)
+stationName = 'Walcheren 2 km uit de kust'
+meetdichtheidOppwater(df3, stationName)
 ```
 
 ### Walcheren 20 km uit de kust {#BijlageB-meetdichtheid-oppwater-walcheren20km}
 
 ```{r meetdichtheidOppwaterWal20km}
-stationname = 'Walcheren 20 km uit de kust'
-meetdichtheidOppwater(df3, stationname)
+stationName = 'Walcheren 20 km uit de kust'
+meetdichtheidOppwater(df3, stationName)
 ```
 
 ## Zwevende stof {#BijlageB-meetdichtheid-zwevend}
@@ -272,32 +297,26 @@ df3 <- df2 %>% distinct(id, stationname, parametername, year) #some measurements
 #  group_by(parametername, stationname) %>%
 #  mutate(across(value, remove_outliers))
 
-meetdichtheidZwevend <- function(df, stationname){
-  if (! stationname %in% trendstations) {
+
+meetdichtheidZwevend <- function(df, stationName){
+  if (! stationName %in% trendstations) {
     print ('stationname not found')
   }
-  else {
-  dt <- df %>% filter(stationname == stationname) %>% select(parametername, year) %>% table() %>%   as.data.frame.matrix() 
-  p <- df %>%
-    filter(stationname == stationname) %>%
-    select(parametername, year) %>%
-    table() %>%
-    as.data.frame() %>%
-    mutate(year = as.factor(year),
-         parametername = factor(parametername, levels = rev(sort(unique(parametername))))) %>%
-    filter(Freq != 0) %>% 
-    ggplot(aes(x=year, y=parametername, size=Freq, color = Freq)) +
-    geom_point() +
-    scale_size_continuous(range = c(1, 4)) +
-    scale_color_gradient(low = "#769FCA", high = "#FF6C65") +
-  scale_x_discrete(labels = colnames[-1]) +
-    theme_bw() +xlab('Jaar')+ylab('Parameter')+ggtitle(paste('Meetdichtheidmatrix zwevend stof', stationname))
-
-  if(knitr::is_html_output()) {
-    knitr::kable(dt, col.names = colnames)
-} 
-  else p
-  
+    {
+    df3 %>%
+      ungroup() %>%
+      filter(stationname == stationName) %>%
+      group_by(parametername, year, stationname) %>%
+      summarize(n = n()) %>%
+      mutate(date = lubridate::ymd(paste(year, '06', '01'))) %>%
+      ggplot(aes(date, parametername, color=n)) +
+      geom_text(aes(label = n)) +
+      scale_x_date(
+        position = "top",
+        date_breaks = "1 year", date_labels = "%y"
+      )+
+      scale_color_gradient(low = "#769FCA", high = "#FF6C65") + 
+      theme(legend.position = "none")
   }
 }
 
@@ -306,8 +325,8 @@ meetdichtheidZwevend <- function(df, stationname){
 ### Schaar van Ouden Doel {#BijlageB-meetdichtheid-zwevend-schaar}
 
 ```{r meetdichtheidZwevendSchaar}
-stationname <- 'Schaar van Ouden Doel'
-meetdichtheidZwevend(df3, stationname)
+stationName <- 'Schaar van Ouden Doel'
+meetdichtheidZwevend(df3, stationName)
 ```
 
 ### Vlissingen boei SSVH {#BijlageB-meetdichtheid-zwevend-vlissingen}
