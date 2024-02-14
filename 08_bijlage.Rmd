@@ -84,11 +84,48 @@ De meetdichtheidsmatrices geven voor ieder jaar aan hoe vaak elke parameter is g
 
 fysChemOppDataPath <- "Data_FysChem_opp.csv"
 
-trendstations <- c("Schaar van Ouden Doel", "Hansweert geul", "Terneuzen boei 20",
-"Vlissingen boei SSVH", "Walcheren 2 km uit de kust",
-"Walcheren 20 km uit de kust")
+trendstations <- c(
+  "Schaar van Ouden Doel",
+  "Hansweert geul",
+  "Terneuzen boei 20",
+  "Vlissingen boei SSVH",
+  "Walcheren 2 km uit de kust",
+  "Walcheren 20 km uit de kust"
+)
 
-parnames <- c("Saliniteit in DIMSLS in oppervlaktewater","Temperatuur in graden celcius in oppervlaktewater", 'Zuurstof in % in oppervlaktewater', "Chlorofyl a in ug/l in oppervlaktewater", "Feofytine a in ug/l in oppervlaktewater", "Chemisch zuurstofverbruik in mgO2/l in oppervlaktewater", "Biochemisch zuurstofverbruik met allylthio-ureum in mg/l in oppervlaktewater", "Doorzicht in dm in oppervlaktewater", "Lichtextinctie in /m in oppervlaktewater", "Zwevend stof in mg/l in oppervlaktewater", "Stikstof in mg/l na filtratie in oppervlaktewater", "Stikstof in mg/l particulair gebonden in oppervlaktewater", "Ammonium in mgN/l na filtratie in oppervlaktewater", "Nitriet in mgN/l na filtratie in oppervlaktewater", "Nitraat in mgN/l na filtratie in oppervlaktewater", "Orthofosfaat, gefiltreerd in mgP/l in oppervlaktewater", "Fosfaat, totaal in mg/l na filtratie in oppervlaktewater", "Fosfaat, totaal in mg/l particulair gebonden in oppervlaktewater", "Silicaat in mg/l uitgedrukt in silicium na filtratie in oppervlaktewater", "Opgelost organisch koolstof in mgC/l na filtratie in oppervlaktewater", "Particulair organisch koolstof in mg/l particulair gebonden in oppervlaktewater", "Boor, totaal in ug/l in oppervlaktewater", "Boor, opgelost in ug/l na filtratie in oppervlaktewater", "Chroom, totaal in ug/l in oppervlaktewater", "Chroom, opgelost in ug/l na filtratie in oppervlaktewater", "Koper, totaal in ug/l in oppervlaktewater", "Koper, opgelost in ug/l na filtratie in oppervlaktewater", "Uranium, totaal in ug/l in oppervlaktewater", "Uranium, opgelost in ug/l na filtratie in oppervlaktewater", "Vanadium, totaal in ug/l in oppervlaktewater", "Vanadium, opgelost in ug/l na filtratie in oppervlaktewater", "Zink, totaal in ug/l in oppervlaktewater", "Zink, opgelost in ug/l na filtratie in oppervlaktewater")
+parnames <- c("Saliniteit in DIMSLS in oppervlaktewater",
+              "Temperatuur in graden celcius in oppervlaktewater", 
+              "Zuurstof in % in oppervlaktewater",
+              "Chlorofyl a in ug/l in oppervlaktewater",
+              "Feofytine a in ug/l in oppervlaktewater",
+              "Chemisch zuurstofverbruik in mgO2/l in oppervlaktewater",
+              "Biochemisch zuurstofverbruik met allylthio-ureum in mg/l in oppervlaktewater",
+              "Doorzicht in dm in oppervlaktewater", "Lichtextinctie in /m in oppervlaktewater", 
+              "Zwevend stof in mg/l in oppervlaktewater", 
+              "Stikstof in mg/l na filtratie in oppervlaktewater",
+              "Stikstof in mg/l particulair gebonden in oppervlaktewater", 
+              "Ammonium in mgN/l na filtratie in oppervlaktewater", 
+              "Nitriet in mgN/l na filtratie in oppervlaktewater",
+              "Nitraat in mgN/l na filtratie in oppervlaktewater", 
+              "Orthofosfaat, gefiltreerd in mgP/l in oppervlaktewater", 
+              "Fosfaat, totaal in mg/l na filtratie in oppervlaktewater", 
+              "Fosfaat, totaal in mg/l particulair gebonden in oppervlaktewater", 
+              "Silicaat in mg/l uitgedrukt in silicium na filtratie in oppervlaktewater",
+              "Opgelost organisch koolstof in mgC/l na filtratie in oppervlaktewater",
+              "Particulair organisch koolstof in mg/l particulair gebonden in oppervlaktewater",
+              "Boor, totaal in ug/l in oppervlaktewater", 
+              "Boor, opgelost in ug/l na filtratie in oppervlaktewater", 
+              "Chroom, totaal in ug/l in oppervlaktewater", 
+              "Chroom, opgelost in ug/l na filtratie in oppervlaktewater", 
+              "Koper, totaal in ug/l in oppervlaktewater", 
+              "Koper, opgelost in ug/l na filtratie in oppervlaktewater", 
+              "Uranium, totaal in ug/l in oppervlaktewater", 
+              "Uranium, opgelost in ug/l na filtratie in oppervlaktewater", 
+              "Vanadium, totaal in ug/l in oppervlaktewater", 
+              "Vanadium, opgelost in ug/l na filtratie in oppervlaktewater",
+              "Zink, totaal in ug/l in oppervlaktewater", 
+              "Zink, opgelost in ug/l na filtratie in oppervlaktewater"
+)
 
 refreshData = F
 if(refreshData) refresh_fysischchemischoppwater(startyear = 1998, endyear = dataJaar) 
@@ -97,12 +134,24 @@ df <- data.table::fread(file.path(datapath, fysChemOppDataPath))
 
 checkparnames <- T #Apply when certain that the parnames vector contains all the parameters used in the oppwater section
 
-if(checkparnames){df2 <- df %>% filter(stationname %in% trendstations) %>% filter(parametername %in% parnames) %>% mutate(stationname = factor(stationname, levels =c(trendstations))) %>% mutate(parametername = factor(parametername, levels = c(parnames))) %>% mutate(year = lubridate::year(datetime)) %>% ungroup() %>% mutate(parametername = gsub(" in oppervlaktewater", "", parametername))} else {df2 <- df %>% 
+if(checkparnames){
+  df2 <- df %>% 
+  filter(stationname %in% trendstations) %>% 
+    filter(parametername %in% parnames) %>% 
+    mutate(stationname = factor(stationname, levels =c(trendstations))) %>%
+    mutate(parametername = factor(parametername, levels = c(parnames))) %>% 
+    mutate(year = lubridate::year(datetime)) %>% 
+    ungroup() %>% 
+    mutate(parametername = gsub(" in oppervlaktewater", "", parametername))} else {
+      df2 <- df %>% 
   filter(stationname %in% c(trendstations)) %>% 
   mutate(stationname = factor(stationname, levels = c(trendstations))) %>%
-  ungroup() %>% mutate(year = lubridate::year(datetime)) %>% filter(grepl('oppervlaktewater', parametername)) %>% 
-  mutate(parametername = gsub(" in oppervlaktewater", "", parametername)) %>% 
-  mutate(parametername = gsub(" in het oppervlaktewater", "", parametername))}
+  ungroup() %>% 
+      mutate(year = lubridate::year(datetime)) %>% 
+      filter(grepl('oppervlaktewater', parametername)) %>%
+      mutate(parametername = gsub(" in oppervlaktewater", "", parametername)) %>% 
+  mutate(parametername = gsub(" in het oppervlaktewater", "", parametername))
+      }
 
 df3 <- df2 %>% distinct(id, stationname, parametername, year) #some measurements are copied in the data, they have different FIDs but the same id
 
@@ -114,29 +163,29 @@ df3 <- df2 %>% distinct(id, stationname, parametername, year) #some measurements
 #  mutate(across(value, remove_outliers))
 
 
-meetdichtheidOppwater <- function(df, stationName){
-  if (! stationName %in% trendstations) {
-    print ('stationname not found')
-  }
-    {
-    df3 %>%
-      ungroup() %>%
-      filter(stationname == stationName) %>%
-      group_by(parametername, year, stationname) %>%
-      summarize(n = n()) %>%
-      mutate(date = lubridate::ymd(paste(year, '06', '01'))) %>%
-      ggplot(aes(date, parametername, color=n)) +
-      geom_text(aes(label = n), size = 4) +
-      scale_x_date(
-        position = "top",
-        date_breaks = "1 year", date_labels = "%y"
-      )+
-      scale_color_gradient(low = "#769FCA", high = "#FF6C65") + 
-      theme(legend.position = "none") +xlab('Jaar')+ylab('Parameter')+
-      ggtitle(paste('Oppervlaktewater', stationName))
-  }
-}
-
+# meetdichtheid <- function(df, stationName){
+#   if (! stationName %in% trendstations) {
+#     print ('stationname not found')
+#   }
+#     {
+#     df3 %>%
+#       ungroup() %>%
+#       filter(stationname == stationName) %>%
+#       group_by(parametername, year, stationname) %>%
+#       summarize(n = n()) %>%
+#       mutate(date = lubridate::ymd(paste(year, '06', '01'))) %>%
+#       ggplot(aes(date, parametername, color=n)) +
+#       geom_text(aes(label = n), size = 3) +
+#       scale_x_date(
+#         position = "top",
+#         date_breaks = "1 year", date_labels = "%y"
+#       )+
+#       scale_color_gradient(low = "#769FCA", high = "#FF6C65") + 
+#       theme(legend.position = "none") +xlab('Jaar')+ylab('Parameter')+
+#       ggtitle(paste('Oppervlaktewater', stationName))
+#   }
+# }
+# 
 
 ```
 
@@ -195,18 +244,23 @@ refreshData = F
 fysChemZwevendDataPath <- "Data_FysChem_zwevend.csv"
 if(refreshData) refresh_fysischchemischzwevendstof(startyear = 1998, endyear = dataJaar, filepath = fysChemZwevendDataPath)
 
-trendstations <- c("Schaar van Ouden Doel", "Vlissingen boei SSVH")
-parnames <- c("Korrelgroottefractie tot 63 um in % drooggewicht in zwevend stof", 
-              "Korrelgroottefractie tot 2 um in % drooggewicht in zwevend stof", 
-              "Arseen in mg/kg drooggewicht in zwevend stof",
+trendstations <- c(
+  "Schaar van Ouden Doel", 
+  "Vlissingen boei SSVH"
+)
+
+parnames <- c(
+  "Korrelgroottefractie tot 63 um in % drooggewicht in zwevend stof", 
+  "Korrelgroottefractie tot 2 um in % drooggewicht in zwevend stof", 
+  "Arseen in mg/kg drooggewicht in zwevend stof",
   "Cadmium in mg/kg drooggewicht in zwevend stof",
   "Chroom in mg/kg drooggewicht in zwevend stof",
   "Kobalt in mg/kg drooggewicht in zwevend stof",
-    "Koper in mg/kg drooggewicht in zwevend stof",
-    "Kwik in mg/kg drooggewicht in zwevend stof",
-    "Lood in mg/kg drooggewicht in zwevend stof",
-    "Vanadium in mg/kg drooggewicht in zwevend stof",
-    "Zink in mg/kg drooggewicht in zwevend stof",
+  "Koper in mg/kg drooggewicht in zwevend stof",
+  "Kwik in mg/kg drooggewicht in zwevend stof",
+  "Lood in mg/kg drooggewicht in zwevend stof",
+  "Vanadium in mg/kg drooggewicht in zwevend stof",
+  "Zink in mg/kg drooggewicht in zwevend stof",
   "Antraceen in mg/kg drooggewicht in zwevend stof",
   "Benzo(a)pyreen in mg/kg drooggewicht in zwevend stof",
   "Benzo(g,h,i)peryleen in mg/kg drooggewicht in zwevend stof",
@@ -226,59 +280,47 @@ parnames <- c("Korrelgroottefractie tot 63 um in % drooggewicht in zwevend stof"
   "2,4,4'-Trichloorbifenyl (PCB28) in ug/kg drooggewicht in zwevend stof",
   "Dieldrin in ug/kg drooggewicht in zwevend stof",
   "Hexachloorbenzeen in ug/kg drooggewicht in zwevend stof",
-  "Tributyltin in ug/kg drooggewicht in zwevend stof")
+  "Tributyltin in ug/kg drooggewicht in zwevend stof"
+)
 
-df <- read_delim(file.path(datapath, fysChemZwevendDataPath), delim = ",")
+df <- data.table::fread(file.path(datapath, fysChemZwevendDataPath))
 
 df2 <- df %>% 
   filter(stationname %in% c(trendstations)) %>% 
   mutate(stationname = factor(stationname, levels = c(trendstations))) %>%
   filter(parametername %in% parnames) %>% 
   mutate(parametername = gsub(" drooggewicht in zwevend stof", "", parametername)) %>% 
-  mutate(parametername = ifelse(grepl("\\(PCB\\d+\\)", parametername), 
-                                sub(".*\\((PCB\\d+)\\).*", paste("\\1", 'in ug/kg'), parametername), 
-                                parametername)) %>% 
-  ungroup() %>% mutate(year = lubridate::year(datetime))
-
-
-#df <- df %>% 
-#  filter(stationname %in% trendstations) %>% 
-#  mutate(stationname = factor(stationname, levels = trendstations)) %>%
-#  repair_limits() %>%
-#  group_by(parametername, stationname) %>%
-#  mutate(across(value, remove_outliers))
+  mutate(parametername = ifelse(
+    grepl("\\(PCB\\d+\\)", parametername), 
+    sub(".*\\((PCB\\d+)\\).*", paste("\\1", 'in ug/kg'), parametername), 
+    parametername)
+  ) %>% 
+  ungroup() %>% 
+  mutate(year = lubridate::year(datetime))
 
 df3 <- df2 %>% distinct(id, stationname, parametername, year) #some measurements are copied in the data, they have different FIDs but the same id
 
-#df_clean <- df %>% 
-#  filter(stationname %in% trendstations) %>% 
-#  mutate(stationname = factor(stationname, levels = trendstations)) %>%
-#  repair_limits() %>%
-#  group_by(parametername, stationname) %>%
-#  mutate(across(value, remove_outliers))
-
-
-meetdichtheidZwevend <- function(df, stationName){
-  if (! stationName %in% trendstations) {
-    print ('stationname not found')
-  }
-  {
-    df3 %>%
-      ungroup() %>%
-      filter(stationname == stationName) %>%
-      group_by(parametername, year, stationname) %>%
-      summarize(n = n()) %>%
-      mutate(date = lubridate::ymd(paste(year, '06', '01'))) %>%
-      ggplot(aes(date, parametername, color=n)) +
-      geom_text(aes(label = n)) +
-      scale_x_date(
-        position = "top",
-        date_breaks = "1 year", date_labels = "%y"
-      )+
-      scale_color_gradient(low = "#769FCA", high = "#FF6C65") + 
-      theme(legend.position = "none")
-  }
-}
+# meetdichtheid <- function(df, stationName){
+#   if (! stationName %in% trendstations) {
+#     print ('stationname not found')
+#   }
+#   {
+#     df3 %>%
+#       ungroup() %>%
+#       filter(stationname == stationName) %>%
+#       group_by(parametername, year, stationname) %>%
+#       summarize(n = n()) %>%
+#       mutate(date = lubridate::ymd(paste(year, '06', '01'))) %>%
+#       ggplot(aes(date, parametername, color=n)) +
+#       geom_text(aes(label = n), size = 3) +
+#       scale_x_date(
+#         position = "top",
+#         date_breaks = "1 year", date_labels = "%y"
+#       )+
+#       scale_color_gradient(low = "#769FCA", high = "#FF6C65") + 
+#       theme(legend.position = "none")
+#   }
+# }
 
 ```
 
