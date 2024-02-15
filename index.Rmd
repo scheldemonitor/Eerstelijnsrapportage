@@ -23,7 +23,7 @@ knitr::opts_chunk$set(echo = FALSE,	message = FALSE, warning = FALSE)
 
 <!-- This website is under construction. Nothing from this website may be used. -->
 
-Deze eerstelijnsrapportage is gemaakt door Deltares in opdracht van Rijkswaterstaat voor de Vlaams Nederlandse Scheldecommissie (VNSC) en bevat gegevens die in opdracht van Rijkswaterstaat zijn verzameld in het kader van het MWTL programma t/m `r dataJaar`. Het verwerken, analyseren en toevoegen van de gegevens uit `r dataJaar` in dit rapport is gedaan door dr. W. Stolte en B. van Rongen. Aan eerdere rapportages (vanaf 2010) hebben vele anderen gewerkt. De voorliggende rapportage is opgebouwd met scripts vanuit de gegevens in Scheldemonitor.
+Deze eerstelijnsrapportage is gemaakt door Deltares in opdracht van Rijkswaterstaat voor de Vlaams Nederlandse Scheldecommissie (VNSC) en bevat gegevens die in opdracht van Rijkswaterstaat zijn verzameld in het kader van het MWTL programma t/m `r dataJaar`. Het verwerken, analyseren en toevoegen van de gegevens uit `r dataJaar` in dit rapport is gedaan door dr. W. Stolte en J. Rienstra. Aan eerdere rapportages (vanaf 2010) hebben vele anderen gewerkt. De voorliggende rapportage is opgebouwd met scripts vanuit de gegevens in Scheldemonitor.
 
 <!-- ```{asis, echo = knitr::is_html_output()} -->
 

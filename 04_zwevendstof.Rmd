@@ -11,9 +11,6 @@ require(tidyverse)
 require(lubridate)
 require(sf)
 
-source("r/functions.R")
-source("r/refresh_data.R")
-
 trendstations <- c("Schaar van Ouden Doel", "Vlissingen boei SSVH")
 
 refreshData = F

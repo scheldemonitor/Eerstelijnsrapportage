@@ -1,5 +1,5 @@
 
-book_filename: "eerstelijnschelde2021"
+book_filename: "Eerstelijnsrapportage Westerschelde `datajaar+1`"
 
 rmd_files: [
   "index.Rmd",

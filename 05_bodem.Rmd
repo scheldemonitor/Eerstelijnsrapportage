@@ -22,9 +22,6 @@ require(sf)
 require(leaflet)
 require(readr)
 
-source("r/functions.R")
-source("r/refresh_data.R")
-
 trendstations <- c('Schaar van Ouden Doel',
 "Bath boei 68",
 "Bath boei 71",

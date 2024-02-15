@@ -2,7 +2,8 @@
 ```{r setupBijlage, include=FALSE}
 
 knitr::opts_chunk$set(
-	fig.width = 10 
+	# fig.width = 7,
+	cache = F
 )
 
 source("r/tex2Rtable.R")
@@ -136,7 +137,7 @@ checkparnames <- T #Apply when certain that the parnames vector contains all the
 
 if(checkparnames){
   df2 <- df %>% 
-  filter(stationname %in% trendstations) %>% 
+    filter(stationname %in% trendstations) %>% 
     filter(parametername %in% parnames) %>% 
     mutate(stationname = factor(stationname, levels =c(trendstations))) %>%
     mutate(parametername = factor(parametername, levels = c(parnames))) %>% 
@@ -144,14 +145,14 @@ if(checkparnames){
     ungroup() %>% 
     mutate(parametername = gsub(" in oppervlaktewater", "", parametername))} else {
       df2 <- df %>% 
-  filter(stationname %in% c(trendstations)) %>% 
-  mutate(stationname = factor(stationname, levels = c(trendstations))) %>%
-  ungroup() %>% 
-      mutate(year = lubridate::year(datetime)) %>% 
-      filter(grepl('oppervlaktewater', parametername)) %>%
-      mutate(parametername = gsub(" in oppervlaktewater", "", parametername)) %>% 
-  mutate(parametername = gsub(" in het oppervlaktewater", "", parametername))
-      }
+        filter(stationname %in% c(trendstations)) %>% 
+        mutate(stationname = factor(stationname, levels = c(trendstations))) %>%
+        ungroup() %>% 
+        mutate(year = lubridate::year(datetime)) %>% 
+        filter(grepl('oppervlaktewater', parametername)) %>%
+        mutate(parametername = gsub(" in oppervlaktewater", "", parametername)) %>% 
+        mutate(parametername = gsub(" in het oppervlaktewater", "", parametername))
+    }
 
 df3 <- df2 %>% distinct(id, stationname, parametername, year) #some measurements are copied in the data, they have different FIDs but the same id
 

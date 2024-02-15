@@ -1281,14 +1281,23 @@ meetdichtheid <- function(df, stationName){
       summarize(n = n()) %>%
       mutate(date = lubridate::ymd(paste(year, '06', '01'))) %>%
       ggplot(aes(date, parametername, color=n)) +
-      geom_text(aes(label = n), size = 4) +
+      geom_text(aes(label = n), size = 4, nudge_x = -150) +
+      coord_cartesian(
+        xlim = c(
+          as.Date("1998-07-01"),
+          NA_Date_),
+      ) +
       scale_x_date(
         position = "top",
-        date_breaks = "1 year", date_labels = "%y"
-      )+
+        date_breaks = "1 year", 
+        date_labels = "%y"
+      ) +
       scale_color_gradient(low = "#769FCA", high = "#FF6C65") + 
-      theme(legend.position = "none") +xlab('Jaar')+ylab('Parameter')+
-      ggtitle(stationName)
+      ggtitle(stationName) +
+      xlab('Jaar')+
+      ylab('Parameter') +
+      theme_minimal() +
+      theme(legend.position = "none")
   }
 }
 

@@ -12,10 +12,6 @@ knitr::opts_chunk$set(
 	fig.height = 6
 )
 
-source("r/functions.R")
-source("r/refresh_data.R")
-require(smwfs)
-
 frozendataPath <- "Data_FysChem_biota.csv"
 
 refreshData = F

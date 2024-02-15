@@ -22,7 +22,7 @@ refresh_waterstanden <- function(base_path, datajaar){
   Waterstand <- c(9695,9694,2438,2439)
   for(jaar in 1998:datajaar){
     df <- smwfs::getSMdata(startyear = jaar, endyear = jaar + 1, parID = c(Waterstand), datasetID = c(476,1527,945))
-    write.csv(df, file = file.path(savepath, paste0("Data_Hydro_waterstanden_", jaar,'.csv', sep = "")))
+    write.csv(df, file = file.path(savepath, paste0("Data_Hydro_waterstanden_", jaar,'.csv', sep = "")), row.names = F)
   }
   allFiles <- list.files(file.path(savepath), pattern = "Data_Hydro_waterstanden_", full.names = T)
   allFiles <- allFiles[!grepl("all", allFiles)]
@@ -54,7 +54,7 @@ refresh_golven <- function(datajaar){
   Golven <- c(2599,2601,1816,2594,2596,2597,2598)
   for(jaar in 2014:datajaar){
     df <- smwfs::getSMdata(startyear = jaar, endyear = jaar + 1, parID = c(Golven), datasetID = c(8032))
-    write.csv(df, file.path(savepath,paste0("Data_Hydro_golven_", jaar,'.csv')))
+    write.csv(df, file.path(savepath,paste0("Data_Hydro_golven_", jaar,'.csv')), row.names = F)
   }
 
   # bewerkingen
@@ -149,7 +149,7 @@ refresh_fysischchemischzwevendstof <- function(startyear = 1998, endyear, filepa
     # map( ~ mutate(.x, id = as.numeric(id))) %>%
     bind_rows()
   df <- df[!df$dataprovider == "8", ] # remove metingen van scan-tochten
-  write.csv(df, file.path(savepath, filepath))
+  write.csv(df, file.path(savepath, filepath), row.names = F)
 }
 
 # Fysisch-chemisch - bodem
@@ -170,7 +170,7 @@ df <- lapply(parIDs, function(x) getSMdata(startyear, endyear, propname = retrie
   bind_rows()
 
 df <- df[!df$dataprovider == "8", ] # remove metingen van scan-tochten
-write.csv(df, file.path(savepath, filepath))
+write.csv(df, file.path(savepath, filepath), row.names = F)
 
 }
 
@@ -202,7 +202,7 @@ refresh_fytoplanktondata <- function(){
 
   df.fytoplankton <- read_csv(url)
   
-  write.csv(df.fytoplankton, file.path(savepath, paste0('fytoplankton', dataJaar, '.csv')))
+  write.csv(df.fytoplankton, file.path(savepath, paste0('fytoplankton', dataJaar, '.csv')), row.names = F)
   
   
   }

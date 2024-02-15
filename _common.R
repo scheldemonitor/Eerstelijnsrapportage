@@ -1,6 +1,8 @@
 # example R options set globally
 options(width = 60)
 
+source("r/functions.R")
+source("r/refresh_data.R")
 
 # year for reporting (last data year)
 dataJaar <- 2022
@@ -25,6 +27,8 @@ knitr::opts_chunk$set(
   fig.width = 7,
   cache = TRUE
 )
+
+options(bookdown.render.verbose = TRUE)
 
 screenshot.opts= list(delay = 5)
 
