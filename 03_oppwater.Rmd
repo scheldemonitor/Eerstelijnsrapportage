@@ -12,7 +12,7 @@ require(lubridate)
 require(sf)
 require(leaflet)
 require(plotly)
-
+require(data.table)
 
 trendstations <- c("Schaar van Ouden Doel", "Hansweert geul", "Terneuzen boei 20",
 "Vlissingen boei SSVH", "Walcheren 2 km uit de kust",

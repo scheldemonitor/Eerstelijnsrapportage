@@ -128,7 +128,10 @@ refresh_fysischchemischoppwater <- function(startyear = 1998, endyear, filepath 
   #df <- get_y_SMdata(2019, 2020, parID)
   df <- smwfs::get_y_SMdata(startyear = startyear, endyear = endyear, parID = parID)
   df <- df[!df$dataprovider == "8", ] # remove metingen van scan-tochten
-  write_csv(df, file.path(savepath, filepath))
+  if (nrow(df) != nrow(df %>% select(-FID) %>% distinct())) {
+    df <- df %>% select(-FID) %>% distinct()
+  }
+  write.csv(df, file.path(savepath, filepath), row.names=FALSE)
 }
 
 
@@ -149,7 +152,10 @@ refresh_fysischchemischzwevendstof <- function(startyear = 1998, endyear, filepa
     # map( ~ mutate(.x, id = as.numeric(id))) %>%
     bind_rows()
   df <- df[!df$dataprovider == "8", ] # remove metingen van scan-tochten
-  write.csv(df, file.path(savepath, filepath), row.names = F)
+  if (nrow(df) != nrow(df %>% select(-FID) %>% distinct())) {
+    df <- df %>% select(-FID) %>% distinct()
+  }
+  write.csv(df, file.path(savepath, filepath), row.names = FALSE)
 }
 
 # Fysisch-chemisch - bodem
@@ -170,6 +176,9 @@ df <- lapply(parIDs, function(x) getSMdata(startyear, endyear, propname = retrie
   bind_rows()
 
 df <- df[!df$dataprovider == "8", ] # remove metingen van scan-tochten
+if (nrow(df) != nrow(df %>% select(-FID) %>% distinct())) {
+  df <- df %>% select(-FID) %>% distinct()
+}
 write.csv(df, file.path(savepath, filepath), row.names = F)
 
 }
@@ -190,8 +199,10 @@ refresh_fysischchemischbiota <- function(startyear = 1998, endyear, filepath = "
     bind_rows()
   
   # df <- df[!df$dataprovider == "8", ] # remove metingen van scan-tochten
-  
-  write_csv(df, file.path(savepath, filepath))
+  #if (nrow(df) != nrow(df %>% select(-FID) %>% distinct())) {
+  #  df <- df %>% select(-FID) %>% distinct()
+  #}
+  write.csv(df, file.path(savepath, filepath), row.names = FALSE)
 }
 
 
@@ -201,7 +212,9 @@ refresh_fytoplanktondata <- function(){
   url = "http://geo.vliz.be/geoserver/wfs/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=Dataportal%3Abiotic_observations&resultType=results&viewParams=where%3Aobs.context+%26%26+ARRAY%5B1%5D+AND+imisdatasetid+IN+%28949%29%3Bcontext%3A0001%3Bloggedin%3A1&propertyName=stationname%2Caphiaid%2Cscientificname%2Cobservationdate%2Clongitude%2Clatitude%2Cvalue%2Cparametername%2Cdataprovider%2Cimisdatasetid%2Cdatasettitle%2Cdatafichetitle%2Cdataficheid%2Careaname%2Cdateprecision%2Cstadium%2Cgender%2Cvaluesign%2Cdepth%2Cclassunit%2Cclass%2Cstandardparameterid%2Cparameterunit&outputFormat=csv"
 
   df.fytoplankton <- read_csv(url)
-  
+  if (nrow(df.fytoplankton) != nrow(df.fytoplankton %>% select(-FID) %>% distinct())) {
+    df.fytoplankton <- df.fytoplankton %>% select(-FID) %>% distinct()
+  }
   write.csv(df.fytoplankton, file.path(savepath, paste0('fytoplankton', dataJaar, '.csv')), row.names = F)
   
   
