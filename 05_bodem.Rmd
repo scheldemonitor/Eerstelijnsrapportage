@@ -26,9 +26,9 @@ trendstations <- c('Schaar van Ouden Doel',
 "Bath boei 68",
 "Bath boei 71",
 "Speelmansgat",
-"Kruiningen Perkpolder",
+"Kruiningen Perkpolder (drempel)",
 "Hansweert boei OHMG",
-"Hansweert boei 4",
+"Hoedekenskerke boei 4",
 "Baarland drempel",
 "Terneuzen boei WPT2",
 "Borssele drempel",
@@ -342,11 +342,12 @@ df_clean %>%
   ylab("waarde in ug/kg sediment")
 ```
 
+
+```{r dataParameterBodem, fig.height=14, fig.width=8, fig.cap="Overzicht van gemeten parameters door de jaren heen.", include=FALSE, eval=FALSE}
 ## Beschikbare gegevens bodem
 
-De algemene beschikbaarheid van data over stoffen in de bodem is te vinden als overzicht per parameter in figuur \@ref(fig:dataParameterBodem), en als overzicht per station in figuur \@ref(fig:dataStationBodem). Voor bijzonderheden over individuele parameters per station, zie de desbetreffende paragrafen. 
+#'De algemene beschikbaarheid van data over stoffen in de bodem is te vinden als overzicht per parameter in figuur \@ref(fig:dataParameterBodem), en als overzicht per station in figuur \@ref(fig:dataStationBodem). Voor bijzonderheden over individuele parameters per station, zie de desbetreffende paragrafen. 
 
-```{r dataParameterBodem, fig.height=14, fig.width=8, fig.cap="Overzicht van gemeten parameters door de jaren heen."}
 df_clean %>%
   group_by(parametername) %>%
   summarize(start = min(year(datetime)), eind = max(year(datetime))) %>% 
@@ -360,7 +361,7 @@ df_clean %>%
 
 
 
-```{r dataStationBodem, fig.height=4, fig.cap="Overzicht van gemeten stations door de jaren heen."}
+```{r dataStationBodem, fig.height=4, fig.cap="Overzicht van gemeten stations door de jaren heen.", include =F, eval=F}
 df_clean %>%
   group_by(stationname) %>%
   summarize(start = min(year(datetime)), eind = max(year(datetime))) %>% 

@@ -339,6 +339,137 @@ stationName <- 'Vlissingen boei SSVH'
 meetdichtheid(df3, stationName)
 ```
 
+## Bodem {BijlageB-meetdichtheid-bodem}
+
+```{r laaddataBodem}
+refreshData = F
+fysChemBodemDataPath <- "Data_FysChem_bodem.csv"
+if(refreshData) refresh_fysischchemischbodem(startyear = 1998, endyear = dataJaar, filepath = fysChemBodemDataPath) 
+
+trendstations <- c('Schaar van Ouden Doel',
+"Bath boei 68",
+"Bath boei 71",
+"Speelmansgat",
+"Kruiningen Perkpolder (drempel)",
+"Hansweert boei OHMG",
+"Hoedekenskerke boei 4",
+"Baarland drempel",
+"Terneuzen boei WPT2",
+"Borssele drempel",
+"Vlissingen boei SSVH",
+"Wielingen oost"
+)
+
+parnames <- c(
+  "Arseen in mg/kg drooggewicht in bodem/sediment",
+  "Cadmium in mg/kg drooggewicht in bodem/sediment",
+  "Chroom in mg/kg drooggewicht in bodem/sediment",
+  "Koper in mg/kg drooggewicht in bodem/sediment", 
+  "Kwik in mg/kg drooggewicht in bodem/sediment",
+  "Lood in mg/kg drooggewicht in bodem/sediment",
+  "Zink in mg/kg drooggewicht in bodem/sediment",
+  "Antraceen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment",
+  "Benzo(a)antraceen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment",
+  "Benzo(a)pyreen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment",
+  "Benzo(g,h,i)peryleen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment",
+  "Benzo(k)fluorantheen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment",
+  "Chryseen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment",
+  "Fenantreen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment",
+  "Fluorantheen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment",
+  "Indeno(1,2,3-c,d)pyreen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment",
+  "2,2',3,4,4',5,5'-Heptachloorbifenyl (PCB180) in ug/kg drooggewicht in bodem/sediment",
+  "2,2',3,4,4',5'-Hexachloorbifenyl (PCB138) in ug/kg drooggewicht in bodem/sediment",
+  "2,2',4,4',5,5'-Hexachloorbifenyl (PCB153) in ug/kg drooggewicht in sediment",
+  "2,2',4,5,5'-Pentachloorbifenyl (PCB101) in ug/kg drooggewicht in sediment",
+  "2,2',5,5'-Tetrachloorbifenyl (PCB52) in ug/kg drooggewicht in bodem/sediment",
+  "2,3',4,4',5-Pentachloorbifenyl (PCB118) in ug/kg drooggewicht in sediment",
+  "2,4,4'-Trichloorbifenyl (PCB28) in ug/kg drooggewicht in bodem/sediment",
+  "Tributyltin in ug/kg drooggewicht in bodem/sediment", 
+  "Tributyltin in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+)
+
+df <- read_delim(file.path(datapath, fysChemBodemDataPath), delim = ",")
+
+df2 <- df %>% 
+  filter(stationname %in% c(trendstations)) %>% 
+  mutate(stationname = factor(stationname, levels = c(trendstations))) %>%
+  filter(parametername %in% parnames) %>% 
+  mutate(parametername = gsub(" drooggewicht in bodem/sediment", "", parametername)) %>% 
+  #mutate(parametername = ifelse(
+  #  grepl("\\(PCB\\d+\\)", parametername), 
+  #  sub(".*\\((PCB\\d+)\\).*", paste("\\1", 'in ug/kg'), parametername), 
+  #  parametername)
+  #) %>% 
+  ungroup() %>% 
+  mutate(year = lubridate::year(datetime))
+
+```
+
+```{r meetdichtheidBodemSchaar}
+stationName <- 'Schaar van Ouden Doel'
+meetdichtheid(df2, stationName)
+```
+
+```{r meetdichtheidBodemSchaar}
+stationName <- 'Schaar van Ouden Doel'
+meetdichtheid(df2, stationName)
+```
+
+```{r meetdichtheidBodemSchaar}
+stationName <- 'Bath boei 68'
+meetdichtheid(df2, stationName)
+```
+
+```{r meetdichtheidBodemSchaar}
+stationName <- 'Bath boei 71'
+meetdichtheid(df2, stationName)
+```
+
+```{r meetdichtheidBodemSchaar}
+stationName <- 'Speelmansgat'
+meetdichtheid(df2, stationName)
+```
+
+```{r meetdichtheidBodemSchaar}
+stationName <- 'Kruiningen Perkpolder (drempel)'
+meetdichtheid(df2, stationName)
+```
+
+```{r meetdichtheidBodemSchaar}
+stationName <- 'Hansweert boei OHMG'
+meetdichtheid(df2, stationName)
+```
+
+```{r meetdichtheidBodemSchaar}
+stationName <- 'Hoedekenskerke boei 4'
+meetdichtheid(df2, stationName)
+```
+
+```{r meetdichtheidBodemSchaar}
+stationName <- 'Baarland drempel'
+meetdichtheid(df2, stationName)
+```
+
+```{r meetdichtheidBodemSchaar}
+stationName <- 'Terneuzen boei WPT2'
+meetdichtheid(df2, stationName)
+```
+
+```{r meetdichtheidBodemSchaar}
+stationName <- 'Borssele drempel'
+meetdichtheid(df2, stationName)
+```
+
+```{r meetdichtheidBodemSchaar}
+stationName <- 'Vlissingen boei SSVH'
+meetdichtheid(df2, stationName)
+```
+
+```{r meetdichtheidBodemSchaar}
+stationName <- 'Wielingen oost'
+meetdichtheid(df2, stationName)
+```
+
 ## Biota {#BijlageB-meetdichtheid-biota}
 Informatie over de ophoping van stoffen in biota is niet meegenomen in deze rapportage
 
