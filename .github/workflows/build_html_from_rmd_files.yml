@@ -3,7 +3,7 @@ name: build_html_from_rmd_files
 on:
   push:
     branches:
-      - 2023
+      - "2023"
 
 jobs:
   build_and_deploy_job:
@@ -14,6 +14,8 @@ jobs:
         with:
           submodules: true
       - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: '3.6.3'
       - uses: r-lib/actions/setup-pandoc@v2
       - name: Install libcurl
         run: sudo apt install -y libcurl4-openssl-dev
