@@ -405,67 +405,63 @@ df2 <- df %>%
 
 ```
 
-```{r meetdichtheidBodemSchaar}
-stationName <- 'Schaar van Ouden Doel'
-meetdichtheid(df2, stationName)
-```
 
 ```{r meetdichtheidBodemSchaar}
 stationName <- 'Schaar van Ouden Doel'
 meetdichtheid(df2, stationName)
 ```
 
-```{r meetdichtheidBodemSchaar}
+```{r meetdichtheidBodemBath68}
 stationName <- 'Bath boei 68'
 meetdichtheid(df2, stationName)
 ```
 
-```{r meetdichtheidBodemSchaar}
+```{r meetdichtheidBodemBath71}
 stationName <- 'Bath boei 71'
 meetdichtheid(df2, stationName)
 ```
 
-```{r meetdichtheidBodemSchaar}
+```{r meetdichtheidBodemSpeelmansgat}
 stationName <- 'Speelmansgat'
 meetdichtheid(df2, stationName)
 ```
 
-```{r meetdichtheidBodemSchaar}
+```{r meetdichtheidBodemKruiningen}
 stationName <- 'Kruiningen Perkpolder (drempel)'
 meetdichtheid(df2, stationName)
 ```
 
-```{r meetdichtheidBodemSchaar}
+```{r meetdichtheidBodemHansweert}
 stationName <- 'Hansweert boei OHMG'
 meetdichtheid(df2, stationName)
 ```
 
-```{r meetdichtheidBodemSchaar}
+```{r meetdichtheidBodemHoedenkenskerke}
 stationName <- 'Hoedekenskerke boei 4'
 meetdichtheid(df2, stationName)
 ```
 
-```{r meetdichtheidBodemSchaar}
+```{r meetdichtheidBodemBaarland}
 stationName <- 'Baarland drempel'
 meetdichtheid(df2, stationName)
 ```
 
-```{r meetdichtheidBodemSchaar}
+```{r meetdichtheidBodemTerneuzen}
 stationName <- 'Terneuzen boei WPT2'
 meetdichtheid(df2, stationName)
 ```
 
-```{r meetdichtheidBodemSchaar}
+```{r meetdichtheidBodemBorssele}
 stationName <- 'Borssele drempel'
 meetdichtheid(df2, stationName)
 ```
 
-```{r meetdichtheidBodemSchaar}
+```{r meetdichtheidBodemVlissingen}
 stationName <- 'Vlissingen boei SSVH'
 meetdichtheid(df2, stationName)
 ```
 
-```{r meetdichtheidBodemSchaar}
+```{r meetdichtheidBodemWielingen}
 stationName <- 'Wielingen oost'
 meetdichtheid(df2, stationName)
 ```

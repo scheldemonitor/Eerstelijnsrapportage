@@ -3,6 +3,7 @@ options(width = 60)
 
 source("r/functions.R")
 source("r/refresh_data.R")
+library(smwfs)
 
 # year for reporting (last data year)
 dataJaar <- 2022
