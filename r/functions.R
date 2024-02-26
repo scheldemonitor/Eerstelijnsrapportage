@@ -6,10 +6,11 @@ require(lubridate)
 require(mblm)
 require(Kendall)
 require(plotly)
-# require(rworldxtra)
-# require(rworldmap)
 require(sf)
 
+## run once to refresh the backgroundmap
+# require(rworldxtra)
+# require(rworldmap)
 # data(countriesHigh)
 # bbox_scheldt <- st_bbox(c(xmin = 2.5, xmax = 4.7, ymax = 51.7, ymin = 51.2), crs = st_crs(4326))
 # backgroundmap <- countriesHigh %>% st_as_sf() %>%

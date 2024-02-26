@@ -1,10 +1,4 @@
-```{=html}
-<!-- TO DO:
-- Check of alles werkt.
-- bijlage referentie
 
--->
-```
 
 ```{r setupBiota, include=FALSE, message=F, warning=F, }
 
@@ -15,7 +9,10 @@ knitr::opts_chunk$set(
 frozendataPath <- "Data_FysChem_biota.csv"
 
 refreshData = F
-if(refreshData) refresh_fysischchemischbiota(endyear = dataJaar+2, filepath = frozendataPath) 
+if(refreshData){
+    source("r/refresh_data.R") 
+  refresh_fysischchemischbiota(endyear = dataJaar+2, filepath = frozendataPath)
+} 
 
 ```
 
@@ -25,7 +22,6 @@ require(skimr)
 df <- read_delim(file = file.path(datapath, frozendataPath), delim = ",")
 # skim(df)
 ```
-
 
 ```{r}
 
@@ -48,31 +44,71 @@ df2 <- df %>%
 
 ```
 
+## Stoffen in biota - overzicht van de metingen
 
-```{r diagnostiek, fig.height=16, fig.width=10}
+```{r diagnostiek, fig.height=8, fig.width=10}
 df2 %>%
-  group_by(parametername, category) %>%
+  group_by(parametername, scientificname, category) %>%
   summarize(n = mean(n)) %>%
   mutate(tissue = case_when(
-    grepl("vlees", parametername) ~ "vlees",
-    grepl("lever", parametername) ~ "lever",
-    grepl("Lever", parametername) ~ "lever",
-    grepl("gal", parametername) ~ "gal",
-    grepl("spier", parametername) ~ "spier",
+    grepl("vlees", parametername, ignore.case = T) ~ "vlees",
+    grepl("lever", parametername, ignore.case = T) ~ "lever",
+    grepl("gal", parametername, ignore.case = T) ~ "gal",
+    grepl("spier", parametername, ignore.case = T) ~ "spier",
   )) %>%
-  filter(grepl("PCB", parametername)) %>%
-  ggplot(aes(parametername, tissue)) +
-  geom_point(aes(size = n, color = category)) +
+  mutate(meting = case_when(
+    grepl("natgewicht", parametername, ignore.case = T) ~ "natgewicht",
+    grepl("drooggewicht", parametername, ignore.case = T) ~ "drooggewicht"
+  )) %>%
+  # filter(is.na(meting)) %>% distinct(parametername) # rest parameters
+  # filter(is.na(tissue)) %>% distinct(parametername) # rest parameters
+  drop_na(tissue, meting) %>%
+  group_by(scientificname, category, tissue, meting) %>%
+  summarize(n = mean(n)) %>%
+  # filter(grepl("PCB", parametername)) %>%
+  ggplot(aes(category, scientificname)) +
+  geom_point(aes(size = n)) +
   coord_flip() +
   theme(
     legend.position = "top"
-    )
-  # facet_wrap(~ category, nrow = 1) +
+    ) +
+  facet_grid(meting ~ tissue) +
+  theme(axis.text.x = element_text(angle = 90))
   # theme(strip.text.x = element_text(angle = 90))
 
 ```
 
+## overzicht overige parameters
 
+```{r, fig.height=8, fig.width=10}
+df2 %>%
+  group_by(parametername, scientificname, category) %>%
+  summarize(n = mean(n)) %>%
+  mutate(tissue = case_when(
+    grepl("vlees", parametername, ignore.case = T) ~ "vlees",
+    grepl("lever", parametername, ignore.case = T) ~ "lever",
+    grepl("gal", parametername, ignore.case = T) ~ "gal",
+    grepl("spier", parametername, ignore.case = T) ~ "spier",
+  )) %>%
+  mutate(meting = case_when(
+    grepl("natgewicht", parametername, ignore.case = T) & !grepl("percentage", parametername, ignore.case = T) ~ "natgewicht",
+    grepl("drooggewicht", parametername, ignore.case = T) & !grepl("percentage", parametername, ignore.case = T) ~ "drooggewicht"
+  )) %>%
+  filter(is.na(meting) | is.na(tissue)) %>% 
+  group_by(scientificname, parametername, category, tissue, meting) %>%
+  summarize(n = mean(n)) %>%
+  # filter(grepl("PCB", parametername)) %>%
+  ggplot(aes(parametername, scientificname)) +
+  geom_point(aes(size = n)) +
+  coord_flip() +
+  theme(
+    legend.position = "top"
+    ) +
+  facet_grid(. ~ tissue) +
+  theme(axis.text.x = element_text(angle = 90))
+  # theme(strip.text.x = element_text(angle = 90))
+
+```
 
 ```{r}
 
@@ -81,11 +117,13 @@ df2 %>%
 # try - alle namen tolower
 # aanpassen andere namen in script
 # this is work in progress for 2023 !!!!!
+# 
+# metalen in vlees (o.a.) nog niet omgerekend naar droog- of natgewicht. Beide komen voor. 
 
 
 df2.lever <- df2 %>% filter(grepl("lever", parametername, ignore.case = T))
 df2.spier <- df2 %>% filter(grepl("spier", parametername, ignore.case = T))
-df2.organisme <- df2 %>% filter(!grepl("lever", parametername, ignore.case = T) & !grepl("spier", parametername, ignore.case = T) & !grepl("gal", parametername, ignore.case = T))
+df2.vlees <- df2 %>% filter(!grepl("lever", parametername, ignore.case = T) & !grepl("spier", parametername, ignore.case = T) & !grepl("gal", parametername, ignore.case = T))
 
 # TODO
 # alle aanduidingen voor vochtgehalte verwerken
@@ -114,7 +152,7 @@ dwnw.lever <- df2.lever %>%
 #   geom_histogram(aes(nat2droogFactor, fill = orig_param))
 
 df2.lever2 <- df2.lever %>% 
-  filter(grepl("man", class, ignore.case = T)) %>%
+  # filter(grepl("man", class, ignore.case = T)) %>%
   filter(!tolower(parametername) %in% tolower(c(
                 "Percentage droge stof in % natgewicht (lever) in organisme (biota)",
                 "Vocht in g/kg Natgewicht (Lever) in Organisme (biota)",
@@ -141,9 +179,9 @@ df2.lever2 <- df2.lever %>%
 
 dwnw.spier <- df2.spier %>%
   filter(parametername %in% c(
-    "Vocht in g/kg (Spierweefsel) in Organisme (biota)",
-    "Vocht in g/kg Natgewicht (Spierweefsel) in Organisme (biota)",
-    "Percentage drooggewicht in % Natgewicht (Spierweefsel) in Organisme (biota)"
+    "Vocht in g/kg (spierweefsel) in organisme (biota)",
+    "Vocht in g/kg natgewicht (spierweefsel) in organisme (biota)",
+    "Percentage droge stof in % natgewicht (spierweefsel) in organisme (biota)"
   )) %>%
   mutate(nat2droogFactor = case_when(
     parametername == "Percentage drooggewicht in % Natgewicht (Spierweefsel) in Organisme (biota)" ~ value / 100,
@@ -153,7 +191,7 @@ dwnw.spier <- df2.spier %>%
   select(datetime, stationname, scientificname, class, orig_param = parametername, nat2droogFactor)
 
 df2.spier2 <- df2.spier %>% 
-  filter(grepl("man", class, ignore.case = T)) %>%
+  # filter(grepl("man", class, ignore.case = T)) %>%
   filter(!parametername %in% c(
     "Vocht in g/kg (Spierweefsel) in Organisme (biota)",
     "Vocht in g/kg Natgewicht (Spierweefsel) in Organisme (biota)",
@@ -171,20 +209,20 @@ df2.spier2 <- df2.spier %>%
   ) %>%
   mutate(matrix = "spierweefsel")
 
-#==== organisme =============
+#==== vlees =============
 
-dwnw.organisme <- df2.organisme %>%
+dwnw.vlees <- df2.vlees %>%
   filter(parametername %in% c(
-    "Vocht in g/kg in Organisme (biota)", 
-    "Vocht in g/kg Natgewicht in Organisme (biota)")
+    "Vocht in g/kg (vlees) in organisme (biota)",
+    "Vocht in g/kg natgewicht (vlees) in organisme (biota)")
   ) %>%
   mutate(nat2droogFactor =  1 - (value / 1000)) %>%
   select(datetime, stationname, scientificname, orig_param = parametername, nat2droogFactor)
 
-df2.organisme2 <- df2.organisme %>% 
-  filter(grepl("man", class, ignore.case = T)) %>%
+df2.vlees2 <- df2.vlees %>% 
+  # filter(grepl("man", class, ignore.case = T)) %>%
   filter(!grepl("Vocht in g/kg in Organisme (biota)", parametername, ignore.case = T)) %>%
-  left_join(dwnw.organisme) %>% 
+  left_join(dwnw.vlees) %>% 
   filter(category %in% c("PBDE", "PCB", "polycyclische aromatische koolwaterstof (PAK)",
   "metalen", "zware metalen", "organotinverbindingen", "organofluorverbindingen") ) %>%
   mutate(
@@ -197,7 +235,7 @@ df2.organisme2 <- df2.organisme %>%
 
 
 
-df3 <- bind_rows(df2.lever2, df2.spier2, df2.organisme2) %>%
+df3 <- bind_rows(df2.lever2, df2.spier2, df2.vlees2) %>%
   mutate(calcParametername = str_replace(parametername, "Natgewicht", "drooggewicht")) %>%
   rename(oldparametername = parametername,
          oldvalue = value) %>%
@@ -400,7 +438,7 @@ Voor de PCB's is het lastig om een uitspraak te doen over een trend, aangezien d
 sumPCBdfBot <- df3 %>%
   filter(scientificname == "Platichthys flesus") %>% 
   filter(grepl("PCB", parametername)) %>% 
-  filter(grepl("Lever", parametername)) %>% 
+  filter(grepl("lever", parametername, ignore.case = T)) %>% 
   group_by(stationname, datetime, class, category, scientificname, parametername) %>% 
   summarize(value = mean(value, na.rm = T)) %>%
   group_by(stationname, datetime, category, class) %>% 
@@ -469,7 +507,7 @@ Omdat er maar enkele datapunten zijn, kan er moeilijk een harde uitspraak worden
 sumPBDEdfBot <- df2 %>%
   filter(scientificname == "Platichthys flesus") %>%
   filter(grepl("PBDE", parametername)) %>% 
-  filter(grepl("Lever", parametername)) %>% 
+  filter(grepl("lever", parametername, ignore.case = T)) %>% 
   group_by(stationname, datetime, category, class, scientificname, parametername) %>% 
   summarize(value = mean(value, na.rm = T)) %>%
   group_by(stationname, datetime, category, class) %>% 
@@ -485,7 +523,6 @@ knitr::kable(
 )
 ```
 
-
 ```{r botPBDE, fig.cap="Jaarlijks gesommeerde waardes van PBDE's in bot bij Middelgat, Brouwersplaat, Molenplaat in de Westerschelde."}
 # knitr::include_graphics("Figuren/Biota/Bot_PBDE.png")
 plotTrends(sumPBDEdfBot, parname = "somPBDE")
@@ -498,7 +535,6 @@ Figuur \@ref(fig:botOrganochloor) en Tabel \@ref(tab:biotaBotChloor) laat de waa
 -   De gemiddelde hoeveelheden hexachloorbenzeen (HCB) in bot varieerde voor 2012 rond de 2 $\mu$g/kg met uitschieters richting de 8 $\mu$g/kg . In 2012 is er een erg hoge waarde van 20 $\mu$g/kg gemeten, maar in de daaropvolgende jaren is deze waarde weer afgenomen. In 2016 is een lichte verdere daling waargenomen, wat ervoor zorgt dat de hoeveelheid hexachloorbenzeen stabiliseert rond de 1 $\mu$g/kg.
 -   Hexachloorbutadieen wordt pas sinds 2009 gemeten, waardoor het lastig is iets te zeggen over een trend. Tot op heden zitten er grote fluctuaties over tijd in de gehaltes hexachloorbutadieen in bot.
 
-
 ```{r biotaBotChloor}
 # dt <- tex2dt("Figuren/Biota/bot_chloor.tex")
 # knitr::kable(dt, col.names = c("Station","Gemiddelde","Maximum","Minimum","Trend","R"),
@@ -509,11 +545,11 @@ Figuur \@ref(fig:botOrganochloor) en Tabel \@ref(tab:biotaBotChloor) laat de waa
 
 sumHCBdfBot <- df2 %>%
   filter(scientificname == "Platichthys flesus") %>%
-  filter(parametername %in% c(
-    "Hexachloorbenzeen in ug/kg Natgewicht (Lever) in Organisme (biota)", 
-    "Hexachloorbutadieen in ug/kg Natgewicht (Lever) in Organisme (biota)"
-  )) %>% 
-  filter(grepl("Lever", parametername)) %>% 
+  filter(
+    grepl("hexachloorbenzeen", parametername, ignore.case = T) |
+    grepl("hexachloorbutadieen", parametername, ignore.case = T)
+    ) %>%
+  filter(grepl("lever", parametername, ignore.case = T)) %>% 
   group_by(stationname, datetime, class, category, scientificname, parametername) %>% 
   summarize(value = mean(value, na.rm = T))
   # group_by(stationname, datetime, class) %>% 
@@ -522,8 +558,8 @@ sumHCBdfBot <- df2 %>%
 
 knitr::kable(
   statTableParams(sumHCBdfBot, parnames = c(
-    "Hexachloorbenzeen in ug/kg Natgewicht (Lever) in Organisme (biota)", 
-    "Hexachloorbutadieen in ug/kg Natgewicht (Lever) in Organisme (biota)"
+    "Hexachloorbenzeen in ug/kg natgewicht (lever) in organisme (biota)", 
+    "Hexachloorbutadieen in ug/kg natgewicht (lever) in organisme (biota)"
   ), statname = "Middelgat, Brouwersplaat, Molenplaat (deelgebied)",rounding = 3
   ), 
   align = 'c',
@@ -531,14 +567,12 @@ knitr::kable(
 )
 ```
 
-
-
 ```{r botOrganochloor, fig.show='hold', fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van twee type organochloorbestrijdingsmiddelen in bot bij Middelgat, Brouwersplaat, Molenplaat in de Westerschelde."}
 knitr::include_graphics("Figuren/Biota/Bot_hexecloor.png")
 
 
-plotTrends(sumHCBdfBot, parname = "Hexachloorbenzeen in ug/kg Natgewicht (Lever) in Organisme (biota)")
-plotTrends(sumHCBdfBot, parname = "Hexachloorbutadieen in ug/kg Natgewicht (Lever) in Organisme (biota)")
+plotTrends(sumHCBdfBot, parname = "Hexachloorbenzeen in ug/kg natgewicht (lever) in organisme (biota)")
+plotTrends(sumHCBdfBot, parname = "Hexachloorbutadieen in ug/kg natgewicht (lever) in organisme (biota)")
 ```
 
 ## Mosselen {#biota-mosselen}
@@ -556,23 +590,21 @@ De gehalten arseen (zie Figuur \@ref(fig:mosselArseen)) schommelen rond de 10 to
 ```{r biotaMosselArseen}
 
 knitr::kable(
-  statTable(df3, parname = "Arseen in mg/kg drooggewicht in Organisme (biota)", rounding = 3),
+  statTable(df3, parname = C("Arseen in mg/kg drooggewicht (vlees) in organisme (biota)"), rounding = 3),
   caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van het gehalte arseen in mg/kg (drooggewicht) berekend op alle beschikbare data vanaf 1996. ."
 )
 # Metingen voor Hoedekenskerke boei 4, Hooge Platen en Knuitershoek zijn omgerekend van nat naar drooggewicht (aangegeven met een sterretje)
 ```
 
-
 ```{r mosselArseen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor arseen in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd."}
 knitr::include_graphics("Figuren/Biota/arseen.png")
 
-plotTrends(df3, "Arseen in mg/kg drooggewicht in Organisme (biota)", trend = F)
+plotTrends(df3, "Arseen in mg/kg natgewicht (vlees) in organisme (biota)", trend = F)
 ```
 
 #### Cadmium {#biota-mosselen-cadmium}
 
 Bij cadmium (zie Figuur \@ref(fig:mosselCadmium)) zit er een groot verschil in de waarden actieve versus passieve verworven, zoals te zien is in Tabel \@ref(tab:biotaMosselCadmium). Bij actieve monitoring hangen korven met mosselen in het water, terwijl bij passieve monitoring mosselen in contact staan met de bodem. Accumulatie van cadmium in de bodem kan op deze manier ook tot hogere cadmiumgehalten in mosselen leiden. Bij Hansweert boei OHMG neemt cadmium toe, met een beperkte correlatie. Verder is er een grote variatie tussen de verschillende meetstations en jaren te zien. Station Knuitershoek laat een flinke stijging van de hoeveelheid cadmium zien, een stijging die ook statistisch significant is.
-
 
 ```{r biotaMosselCadmium}
 # dt <- tex2dt("Figuren/Biota/cadmium.tex")
@@ -585,8 +617,6 @@ knitr::kable(
   caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van het gehalte cadmium in mg/kg (drooggewicht) berekend op alle beschikbare data vanaf 1996. Metingen voor Hoedekenskerke boei 4, Hooge Platen en Knuitershoek zijn omgerekend van nat naar drooggewicht (aangegeven met een sterretje)."
 )
 ```
-
-
 
 ```{r mosselCadmium, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor cadmium in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd."}
 knitr::include_graphics("Figuren/Biota/cadmium.png")

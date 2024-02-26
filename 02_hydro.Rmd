@@ -18,9 +18,11 @@ refreshGolven = FALSE
 
 ```{r downloadHydro, include = T}
 
-source("r/refresh_data.R")
 # this step can at the moment only be done at Deltares because of access to the fileserver. 
-if(refreshWaterstanden) refresh_waterstanden(base_path = savepath, datajaar = dataJaar)
+if(refreshWaterstanden){
+  source("r/refresh_data.R")
+  refresh_waterstanden(base_path = savepath, datajaar = dataJaar)
+} 
 
 trendstations <- c("Europlatform","Vlakte van de Raan","Cadzand","Westkapelle","Breskens Veerhaven","Vlissingen","Gat van Borssele","Overloop van Hansweert", "Terneuzen", "Hansweert", "Walsoorden", "Baalhoek", "Schaar van de Noord", "Bath")
 
@@ -398,8 +400,10 @@ trendstations <- c("Bath (BAT2)","Hansweert (HAWI)","Cadzand (CAWI)","Cadzand (C
 
 frozendatapath <- file.path(datapath, paste0("Data_Hydro_golven_all_", dataJaar, ".csv"))
 
-if(refreshGolven) refresh_golven(datajaar = dataJaar)
-
+if(refreshGolven){
+  source("r/refresh_data.R") 
+  refresh_golven(datajaar = dataJaar)
+}
 ```
 
 ```{r importHydroGolven}

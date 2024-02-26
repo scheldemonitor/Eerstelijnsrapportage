@@ -38,8 +38,10 @@ trendstations <- c('Schaar van Ouden Doel',
 
 refreshData = F
 fysChemBodemDataPath <- "Data_FysChem_bodem.csv"
-if(refreshData) refresh_fysischchemischbodem(startyear = 1998, endyear = dataJaar, filepath = fysChemBodemDataPath) 
-
+if(refreshData){ 
+  source("r/refresh_data.R") 
+  refresh_fysischchemischbodem(startyear = 1998, endyear = dataJaar, filepath = fysChemBodemDataPath) 
+}
 ```
 
 ```{r downloadBodem, include = F}

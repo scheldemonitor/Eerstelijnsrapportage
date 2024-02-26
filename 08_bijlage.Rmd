@@ -8,7 +8,6 @@ knitr::opts_chunk$set(
 
 source("r/tex2Rtable.R")
 source("r/functions.R")
-source("r/refresh_data.R")
 require(smwfs)
 require(stringr)
 require(kable)
@@ -128,9 +127,6 @@ parnames <- c("Saliniteit in DIMSLS in oppervlaktewater",
               "Zink, opgelost in ug/l na filtratie in oppervlaktewater"
 )
 
-refreshData = F
-if(refreshData) refresh_fysischchemischoppwater(startyear = 1998, endyear = dataJaar) 
-
 df <- data.table::fread(file.path(datapath, fysChemOppDataPath), select = c('id', 'latitude', 'longitude', 'stationname', 'depth', 'datetime', 'value', 'parametername', 'parameternunit', 'valuesign', 'category'))  
 
 checkparnames <- T #Apply when certain that the parnames vector contains all the parameters used in the oppwater section
@@ -241,9 +237,7 @@ meetdichtheid(df3, stationName)
 
 ```{r laaddataZwevendStof}
 
-refreshData = F
 fysChemZwevendDataPath <- "Data_FysChem_zwevend.csv"
-if(refreshData) refresh_fysischchemischzwevendstof(startyear = 1998, endyear = dataJaar, filepath = fysChemZwevendDataPath)
 
 trendstations <- c(
   "Schaar van Ouden Doel", 
@@ -342,9 +336,8 @@ meetdichtheid(df3, stationName)
 ## Bodem {BijlageB-meetdichtheid-bodem}
 
 ```{r laaddataBodem}
-refreshData = F
+
 fysChemBodemDataPath <- "Data_FysChem_bodem.csv"
-if(refreshData) refresh_fysischchemischbodem(startyear = 1998, endyear = dataJaar, filepath = fysChemBodemDataPath) 
 
 trendstations <- c('Schaar van Ouden Doel',
 "Bath boei 68",

@@ -17,7 +17,10 @@ refreshData = F
 fysChemZwevendDataPath <- "Data_FysChem_zwevend.csv"
 fysChemZwevendDataPath2 <- "Data_FysChem_zwevend2.csv"
 # fysChemZwevendDataPath <- file.path(baseDir, "Data_FysChem_zwevend.csv")
-if(refreshData) refresh_fysischchemischzwevendstof(startyear = 1998, endyear = dataJaar, filepath = fysChemZwevendDataPath)
+if(refreshData) {
+  source("r/refresh_data.R") 
+  refresh_fysischchemischzwevendstof(startyear = 1998, endyear = dataJaar, filepath = fysChemZwevendDataPath)
+}
 
 ```
 
