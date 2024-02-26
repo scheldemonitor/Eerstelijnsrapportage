@@ -12,7 +12,6 @@ dataJaar <- 2022
 localDatapath <- "" # local
 
 # saving path only works from within Deltares. Saved files come available via datapath. 
-savepath <- file.path("p:\\11202493--systeemrap-grevelingen\\1_data\\Westerschelde\\Scheldemonitor", dataJaar + 1)
 datapath <- file.path("https://watersysteemdata.deltares.nl/thredds/fileServer/watersysteemdata/Westerschelde/Scheldemonitor", dataJaar + 1)
 
 # chunk options set globally

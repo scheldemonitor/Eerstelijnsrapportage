@@ -131,7 +131,7 @@ parnames <- c("Saliniteit in DIMSLS in oppervlaktewater",
 refreshData = F
 if(refreshData) refresh_fysischchemischoppwater(startyear = 1998, endyear = dataJaar) 
 
-df <- data.table::fread(file.path(datapath, fysChemOppDataPath))  
+df <- data.table::fread(file.path(datapath, fysChemOppDataPath), select = c('id', 'latitude', 'longitude', 'stationname', 'depth', 'datetime', 'value', 'parametername', 'parameternunit', 'valuesign', 'category'))  
 
 checkparnames <- T #Apply when certain that the parnames vector contains all the parameters used in the oppwater section
 
