@@ -15,7 +15,7 @@ jobs:
           submodules: true
       - uses: r-lib/actions/setup-r@v2
         with:
-          r-version: '3.6.3'
+          r-version: "3.6.3"
       - uses: r-lib/actions/setup-pandoc@v2
       - name: Install libcurl
         run: sudo apt install -y libcurl4-openssl-dev
@@ -35,3 +35,8 @@ jobs:
           git add .
           git commit -m "Github action | Rebuild book"
           git push
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_book
