@@ -28,6 +28,8 @@ jobs:
       - name: Render Book
         run: Rscript -e 'renv::restore(); bookdown::render_book("index.Rmd")'
         working-directory: ./
+      - name: add .nojekyll file
+        run: touch ./_book/.nojekyll
       - name: Commit and push changes
         run: |
           git config --local user.email "action@github.com"
