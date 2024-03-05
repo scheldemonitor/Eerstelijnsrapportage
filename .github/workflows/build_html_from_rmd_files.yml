@@ -15,7 +15,7 @@ jobs:
           submodules: true
       - uses: r-lib/actions/setup-r@v2
         with:
-          r-version: '3.6.3'
+          r-version: "3.6.3"
       - uses: r-lib/actions/setup-pandoc@v2
       - name: Install libcurl
         run: sudo apt install -y libcurl4-openssl-dev
@@ -28,7 +28,17 @@ jobs:
       - name: Render Book
         run: Rscript -e 'renv::restore(); bookdown::render_book("index.Rmd")'
         working-directory: ./
-      - uses: actions/upload-artifact@v1
+      - name: add .nojekyll file
+        run: touch ./_book/.nojekyll
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Github action | Rebuild book"
+          git push
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          name: _book
-          path: docs/_book
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_book
