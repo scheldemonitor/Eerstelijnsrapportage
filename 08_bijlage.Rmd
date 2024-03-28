@@ -462,90 +462,175 @@ meetdichtheid(df2, stationName)
 ## Biota {#BijlageB-meetdichtheid-biota}
 Informatie over de ophoping van stoffen in biota is niet meegenomen in deze rapportage
 
-### Bot {#BijlageB-meetdichtheid-biota-bot}
+```{r}
+frozendataPath <- "Data_FysChem_biota.csv"
+df <- read_delim(file = file.path(datapath, frozendataPath), delim = ",")
+df2 <- df %>% 
+  repair_limits() %>%
+  ungroup() %>%
+    group_by(datetime, latitude, longitude, stationname, parametername, parameterunit, scientificname, class, category) %>%
+  summarize(value = mean(value), n = n()) %>%
+  ungroup()
 
-```{r meetdichtheidBiotaBot, include=FALSE}
-dt <- tex2dt("Figuren/Meetdichtheid/bot.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota bot bij Middelgat met hierin het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
 ```
 
-### Mosselen {#BijlageB-meetdichtheid-biota-mossel}
+## Stoffen in biota - overzicht van de metingen (naar bijlage)
 
-#### Metaal - natgewicht {#BijlageB-meetdichtheid-biota-mossel-metaal-nat}
+```{r diagnostiek, fig.height=10, fig.width=10}
+df2 %>%
+  filter(
+    scientificname %in% c("Mytilus edulis", "Platichthys flesus", "Crassostrea gigas")
+  ) %>%
+  mutate(year = year(datetime)) %>%
+  group_by(parametername, scientificname, category, year, stationname) %>%
+  summarize(n = mean(n)) %>%
+  mutate(tissue = case_when(
+    grepl("vlees", parametername, ignore.case = T) ~ "vlees",
+    grepl("lever", parametername, ignore.case = T) ~ "lever",
+    grepl("gal", parametername, ignore.case = T) ~ "gal",
+    grepl("spier", parametername, ignore.case = T) ~ "spier",
+  )) %>%
+  mutate(meting = case_when(
+    grepl("natgewicht", parametername, ignore.case = T) ~ "natgewicht",
+    grepl("drooggewicht", parametername, ignore.case = T) ~ "drooggewicht"
+  )) %>%
+  # filter(is.na(meting)) %>% distinct(parametername) # rest parameters
+  # filter(is.na(tissue)) %>% distinct(parametername) # rest parameters
+  drop_na(tissue, meting) %>%
+  group_by(scientificname, category, tissue, meting, year, stationname) %>%
+  summarize(n = mean(n)) %>%
+  # filter(grepl("PCB", parametername)) %>%
+  ggplot(aes(year, category)) +
+  geom_point(aes(size = n, color = scientificname), alpha = 0.5) +
+  theme(
+    legend.position = "top"
+    ) +
+  facet_wrap(vars(stationname, interaction(tissue, meting))) +
+  theme(
+    axis.text.x = element_text(angle = 90),
+    strip.text.y = element_text(angle = 0)
+    )
 
-```{r meetdichtheidBiotaMosselMetaal1a, include=FALSE}
-dt <- tex2dt("Figuren/Meetdichtheid/metaal_1a.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Hoedekenskerke boei 4 met hierin het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
 ```
 
-```{r meetdichtheidBiotaMosselMetaal2a, include=FALSE}
-dt <- tex2dt("Figuren/Meetdichtheid/metaal_2a.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Hooge Platen met hierin het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
+## overzicht overige parameters
+
+```{r, fig.height=8, fig.width=10}
+df2 %>%
+  group_by(parametername, scientificname, category) %>%
+  summarize(n = mean(n)) %>%
+  mutate(tissue = case_when(
+    grepl("vlees", parametername, ignore.case = T) ~ "vlees",
+    grepl("lever", parametername, ignore.case = T) ~ "lever",
+    grepl("gal", parametername, ignore.case = T) ~ "gal",
+    grepl("spier", parametername, ignore.case = T) ~ "spier",
+  )) %>%
+  mutate(meting = case_when(
+    grepl("natgewicht", parametername, ignore.case = T) & !grepl("percentage", parametername, ignore.case = T) ~ "natgewicht",
+    grepl("drooggewicht", parametername, ignore.case = T) & !grepl("percentage", parametername, ignore.case = T) ~ "drooggewicht"
+  )) %>%
+  filter(is.na(meting) | is.na(tissue)) %>% 
+  group_by(scientificname, parametername, category, tissue, meting) %>%
+  summarize(n = mean(n)) %>%
+  # filter(grepl("PCB", parametername)) %>%
+  ggplot(aes(parametername, scientificname)) +
+  geom_point(aes(size = n)) +
+  coord_flip() +
+  theme(
+    legend.position = "top"
+    ) +
+  facet_grid(. ~ tissue) +
+  theme(axis.text.x = element_text(angle = 90))
+  # theme(strip.text.x = element_text(angle = 90))
+
 ```
 
-```{r meetdichtheidBiotaMosselMetaal3a, include=FALSE}
-dt <- tex2dt("Figuren/Meetdichtheid/metaal_3a.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Knuitershoek met hierin het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
-```
-
-#### Metaal - drooggewicht {#BijlageB-meetdichtheid-biota-mossel-metaal-droog}
 
 
-```{r meetdichtheidBiotaMosselMetaal1b, include=FALSE}
-dt <- tex2dt("Figuren/Meetdichtheid/metaal_1b.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Hansweert boei OHMG met hierin het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
-```
+<!-- ### Bot {#BijlageB-meetdichtheid-biota-bot} -->
 
-```{r meetdichtheidBiotaMosselMetaal2b, include=FALSE}
-dt <- tex2dt("Figuren/Meetdichtheid/metaal_2b.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Vlissingen boei SSVH met hierin het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
-```
+<!-- ```{r meetdichtheidBiotaBot, include=FALSE} -->
+<!-- dt <- tex2dt("Figuren/Meetdichtheid/bot.tex") -->
+<!-- kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"), -->
+<!--              caption = "Meetdichtheidsmatrices voor metingen biota bot bij Middelgat met hierin het aantal metingen per parameter en per jaar.") %>% -->
+<!--    kableExtra::kable_styling(latex_options = "scale_down") -->
+<!-- ``` -->
 
-#### PAK en PCB - drooggewicht {#BijlageB-meetdichtheid-biota-mossel-PAK-PCB-droog}
+<!-- ### Mosselen {#BijlageB-meetdichtheid-biota-mossel} -->
 
-```{r meetdichtheidBiotaMosselPCBdroog1, include=FALSE}
-dt <- tex2dt("Figuren/Meetdichtheid/droog_1.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen PAK en PCB bij Hansweert boei OHMG met hierin het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
-```
+<!-- #### Metaal - natgewicht {#BijlageB-meetdichtheid-biota-mossel-metaal-nat} -->
 
-```{r meetdichtheidBiotaMosselPCBdroog2, include=FALSE}
-dt <- tex2dt("Figuren/Meetdichtheid/droog_2.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen PAK en PCB bij Vlissingen boei SSVH met hierin het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
-```
+<!-- ```{r meetdichtheidBiotaMosselMetaal1a, include=FALSE} -->
+<!-- dt <- tex2dt("Figuren/Meetdichtheid/metaal_1a.tex") -->
+<!-- kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"), -->
+<!--              caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Hoedekenskerke boei 4 met hierin het aantal metingen per parameter en per jaar.") %>% -->
+<!--    kableExtra::kable_styling(latex_options = "scale_down") -->
+<!-- ``` -->
 
-#### PAK en PCB - natgewicht {#BijlageB-meetdichtheid-biota-mossel-PAK-PCB-nat}
+<!-- ```{r meetdichtheidBiotaMosselMetaal2a, include=FALSE} -->
+<!-- dt <- tex2dt("Figuren/Meetdichtheid/metaal_2a.tex") -->
+<!-- kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"), -->
+<!--              caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Hooge Platen met hierin het aantal metingen per parameter en per jaar.") %>% -->
+<!--    kableExtra::kable_styling(latex_options = "scale_down") -->
+<!-- ``` -->
 
-```{r meetdichtheidBiotaMosselPCBnat1, include=FALSE}
-dt <- tex2dt("Figuren/Meetdichtheid/nat_1.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen PCB en PBDEs bij Knuitershoek met hierin het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
-```
+<!-- ```{r meetdichtheidBiotaMosselMetaal3a, include=FALSE} -->
+<!-- dt <- tex2dt("Figuren/Meetdichtheid/metaal_3a.tex") -->
+<!-- kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"), -->
+<!--              caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Knuitershoek met hierin het aantal metingen per parameter en per jaar.") %>% -->
+<!--    kableExtra::kable_styling(latex_options = "scale_down") -->
+<!-- ``` -->
 
-#### Overige {#BijlageB-meetdichtheid-biota-mossel-overig}
+<!-- #### Metaal - drooggewicht {#BijlageB-meetdichtheid-biota-mossel-metaal-droog} -->
 
-```{r meetdichtheidBiotaMosseloverig, include=FALSE}
-dt <- tex2dt("Figuren/Meetdichtheid/overige_1.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen overige bij Knuitershoek met hierin het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
-```
+
+<!-- ```{r meetdichtheidBiotaMosselMetaal1b, include=FALSE} -->
+<!-- dt <- tex2dt("Figuren/Meetdichtheid/metaal_1b.tex") -->
+<!-- kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"), -->
+<!--              caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Hansweert boei OHMG met hierin het aantal metingen per parameter en per jaar.") %>% -->
+<!--    kableExtra::kable_styling(latex_options = "scale_down") -->
+<!-- ``` -->
+
+<!-- ```{r meetdichtheidBiotaMosselMetaal2b, include=FALSE} -->
+<!-- dt <- tex2dt("Figuren/Meetdichtheid/metaal_2b.tex") -->
+<!-- kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"), -->
+<!--              caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Vlissingen boei SSVH met hierin het aantal metingen per parameter en per jaar.") %>% -->
+<!--    kableExtra::kable_styling(latex_options = "scale_down") -->
+<!-- ``` -->
+
+<!-- #### PAK en PCB - drooggewicht {#BijlageB-meetdichtheid-biota-mossel-PAK-PCB-droog} -->
+
+<!-- ```{r meetdichtheidBiotaMosselPCBdroog1, include=FALSE} -->
+<!-- dt <- tex2dt("Figuren/Meetdichtheid/droog_1.tex") -->
+<!-- kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"), -->
+<!--              caption = "Meetdichtheidsmatrices voor metingen biota mosselen PAK en PCB bij Hansweert boei OHMG met hierin het aantal metingen per parameter en per jaar.") %>% -->
+<!--    kableExtra::kable_styling(latex_options = "scale_down") -->
+<!-- ``` -->
+
+<!-- ```{r meetdichtheidBiotaMosselPCBdroog2, include=FALSE} -->
+<!-- dt <- tex2dt("Figuren/Meetdichtheid/droog_2.tex") -->
+<!-- kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"), -->
+<!--              caption = "Meetdichtheidsmatrices voor metingen biota mosselen PAK en PCB bij Vlissingen boei SSVH met hierin het aantal metingen per parameter en per jaar.") %>% -->
+<!--    kableExtra::kable_styling(latex_options = "scale_down") -->
+<!-- ``` -->
+
+<!-- #### PAK en PCB - natgewicht {#BijlageB-meetdichtheid-biota-mossel-PAK-PCB-nat} -->
+
+<!-- ```{r meetdichtheidBiotaMosselPCBnat1, include=FALSE} -->
+<!-- dt <- tex2dt("Figuren/Meetdichtheid/nat_1.tex") -->
+<!-- kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"), -->
+<!--              caption = "Meetdichtheidsmatrices voor metingen biota mosselen PCB en PBDEs bij Knuitershoek met hierin het aantal metingen per parameter en per jaar.") %>% -->
+<!--    kableExtra::kable_styling(latex_options = "scale_down") -->
+<!-- ``` -->
+
+<!-- #### Overige {#BijlageB-meetdichtheid-biota-mossel-overig} -->
+
+<!-- ```{r meetdichtheidBiotaMosseloverig, include=FALSE} -->
+<!-- dt <- tex2dt("Figuren/Meetdichtheid/overige_1.tex") -->
+<!-- kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"), -->
+<!--              caption = "Meetdichtheidsmatrices voor metingen biota mosselen overige bij Knuitershoek met hierin het aantal metingen per parameter en per jaar.") %>% -->
+<!--    kableExtra::kable_styling(latex_options = "scale_down") -->
+<!-- ``` -->
 
 # Indeling fytoplankton {#BijlageC-fytoplankton}
 

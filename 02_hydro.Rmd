@@ -102,7 +102,7 @@ Het station Schaar van de Noord heeft voor 2014 geen data. In 2013 is alleen dat
 ```{r hydroJaarEuro, eval=F, fig.cap="Jaargemiddelde hoog- en laagwaterstanden bij het Europlatform"}
 # knitr::include_graphics("Figuren/Hydro/Waterstanden/HWLW/euro.png")
 
-plotTrendsWaterstand(df_waterstanden, c("Hoogwater in cm+NAP","Laagwater in cm+NAP"), "Europlatform")
+plotTrendsWaterstand(df_waterstanden, parname = c("Hoogwater in cm+MSL","Laagwater in cm+MSL"), locname = "Europlatform")
 
 ```
 
@@ -217,10 +217,10 @@ De getijslag is voor alle meetstations bepaald aan de hand van het verschil tuss
 ```{r hydroGemiddeldeHWLWGetij}
 #dt <- tex2dt("Figuren/Hydro/Waterstanden/meanvalues.tex")
 #knitr::kable(dt, col.names = c("Station","Afkorting","HW (cm)","LW (cm)","Getijslag (cm)","Trend","R"),
-#             caption = "De gemiddelde hoogwater (HW), laagwater (LW) en getijslag op de Noordzee, in de monding en in de Westerschelde. Hoog- en laagwater is gepresenteerd ten opzichte van NAP. Gemiddeldes zijn berekend over alle beschikbare data. Trend en $R$ zijn berekend over de data sinds 2000.")
+#             caption = "De gemiddelde hoogwater (HW), laagwater (LW) en getijslag op de Noordzee, in de monding en in de Westerschelde. Hoog- en laagwater is gepresenteerd ten opzichte van NAP (voor Europlatform t.o.v. MSL). Gemiddeldes zijn berekend over alle beschikbare data. Trend en $R$ zijn berekend over de data sinds 2000.")
 
-HW <- stationMedian(df_waterstanden, "Hoogwater in cm+NAP")
-LW <- stationMedian(df_waterstanden, "Laagwater in cm+NAP")
+HW <- stationMedian(df_waterstanden, "Hoogwater in cm+NAP") %>% bind_rows(stationMedian(df_waterstanden, "Hoogwater in cm+MSL"))
+LW <- stationMedian(df_waterstanden, "Laagwater in cm+NAP") %>% bind_rows(stationMedian(df_waterstanden, "Laagwater in cm+MSL"))
 GS <- HW$Mediaan - LW$Mediaan
 dt <- data.frame("Station" = HW$Station, "Hoogwater" = HW$Mediaan, "Laagwater" = LW$Mediaan, "Getijslag" = GS)
 knitr::kable(dt, 
@@ -238,11 +238,36 @@ df2 <- df_waterstanden %>%
   # filter(jaar != 2021 & jaar > 1970) %>%
   group_by(stationname, jaar, parametername, latitude, longitude) %>%
   summarise(median = median(value, na.rm = T)) %>% ungroup() %>%
-  pivot_wider(id_cols = c(stationname, jaar, latitude, longitude), names_from = parametername, values_from = median) %>%
-  mutate(`Getijslag in cm` = `Hoogwater in cm+NAP` - `Laagwater in cm+NAP`) %>%
-  select(stationname, latitude, longitude, jaar,`Hoogwater in cm+NAP`,`Laagwater in cm+NAP`,`Getijslag in cm`) %>%
-  pivot_longer(cols = c(`Hoogwater in cm+NAP`,`Laagwater in cm+NAP`,`Getijslag in cm`),
-               names_to = 'parametername', values_to = 'value')
+  pivot_wider(id_cols = c(stationname, jaar, latitude, longitude), names_from = parametername, values_from = median) %>% 
+  mutate(
+    `Getijslag in cm` = case_when(
+      !is.na(`Hoogwater in cm+NAP`) ~ `Hoogwater in cm+NAP` - `Laagwater in cm+NAP`,
+      is.na(`Hoogwater in cm+NAP`) ~ `Hoogwater in cm+MSL` - `Laagwater in cm+MSL`
+    )
+  ) %>%
+  select(stationname, latitude, longitude, jaar,`Getijslag in cm`) %>% # `Hoogwater in cm+NAP`,`Laagwater in cm+NAP`,
+  pivot_longer(cols = c(`Getijslag in cm`),   # `Hoogwater in cm+NAP`,`Laagwater in cm+NAP`,
+               names_to = 'parametername', values_to = 'value') %>%
+  arrange(value) %>%
+  mutate(
+    stationname = factor(
+      stationname, levels = c(
+        'Bath',
+        'Schaar van de Noord',
+        'Baalhoek',
+        'Walsoorden',
+        'Hansweert',
+        'Overloop van Hansweert',
+        'Terneuzen',
+        'Gat van Borssele',
+        'Breskens Veerhaven',
+        'Vlissingen',
+        'Cadzand',
+        'Westkapelle',
+        'Vlakte van de Raan',
+        'Europlatform')
+    )
+  )
 
 p <- plotTrendsByLocation(df2, "Getijslag in cm")
 p$layers[[2]] <- NULL # remove dots
