@@ -238,13 +238,13 @@ df2 <- df_waterstanden %>%
   # filter(jaar != 2021 & jaar > 1970) %>%
   group_by(stationname, jaar, parametername, latitude, longitude) %>%
   summarise(median = median(value, na.rm = T)) %>% ungroup() %>%
-  pivot_wider(id_cols = c(stationname, jaar, latitude, longitude), names_from = parametername, values_from = median) %>% 
+  pivot_wider(id_cols = c(stationname, jaar, latitude, longitude), names_from = parametername, values_from = median) %>%
   mutate(
     `Getijslag in cm` = case_when(
       !is.na(`Hoogwater in cm+NAP`) ~ `Hoogwater in cm+NAP` - `Laagwater in cm+NAP`,
-      is.na(`Hoogwater in cm+NAP`) ~ `Hoogwater in cm+MSL` - `Laagwater in cm+MSL`
+      !is.na(`Hoogwater in cm+MSL`) ~ `Hoogwater in cm+MSL` - `Laagwater in cm+MSL`
     )
-  ) %>%
+  ) %>% 
   select(stationname, latitude, longitude, jaar,`Getijslag in cm`) %>% # `Hoogwater in cm+NAP`,`Laagwater in cm+NAP`,
   pivot_longer(cols = c(`Getijslag in cm`),   # `Hoogwater in cm+NAP`,`Laagwater in cm+NAP`,
                names_to = 'parametername', values_to = 'value') %>%
