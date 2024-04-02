@@ -396,13 +396,8 @@ BijlageB-meetdichtheid-zwevend-schaar
 BijlageB-meetdichtheid-zwevend-vlissingen
 bodem-bijlageb-meetdichtheid-bodem
 BijlageB-meetdichtheid-biota
-BijlageB-meetdichtheid-biota-bot
-BijlageB-meetdichtheid-biota-mossel
-BijlageB-meetdichtheid-biota-mossel-metaal-nat
-BijlageB-meetdichtheid-biota-mossel-metaal-droog
-BijlageB-meetdichtheid-biota-mossel-PAK-PCB-droog
-BijlageB-meetdichtheid-biota-mossel-PAK-PCB-nat
-BijlageB-meetdichtheid-biota-mossel-overig
+stoffen-in-biota---overzicht-van-de-metingen-naar-bijlage
+overzicht-overige-parameters
 BijlageC-fytoplankton
 werkwijze
 achtergrond-1
