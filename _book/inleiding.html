@@ -16,8 +16,7 @@
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script><style>
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script><style>
     .zoomDiv {
       opacity: 0;
       position:fixed;
@@ -184,85 +183,33 @@
 <h3>
 <span class="header-section-number">1.3.1</span> Ontbrekende gegevens<a class="anchor" aria-label="anchor" href="#ontbrekende-data"><i class="fas fa-link"></i></a>
 </h3>
-<p>In eerdere rapportage is de beschikbare gegevens van 1 januari 2018 t/m 31 december 2018 toegevoegd aan de gegevens die gepresenteerd zijn in de voorgaande eerstelijnsrapportages van de Westerschelde. De gegevens uit 2018 zijn echter niet volledig. In Tabel <a href="inleiding.html#tab:missingDatatab">1.1</a> staat een overzicht van de ontbrekende gegevens in 2018. Het ontbreken van gegevens kan de resultaten beïnvloeden, vooral als er gemiddelden uit berekend worden. In voorkomende gevallen is een opmerking bij de figuur toegevoegd.</p>
-<p>In de huidige rapportage is de beschikbare data van 1 januari 2019 t/m 31 december 2019 toegevoegd. De enige data die ontbreekt uit dit jaar zijn golf gegevens bij de locatie Cadzand.</p>
+<p>Bij het samenstellen van deze rapportage is ook gelet op compleetheid van gegevens. In bijlage @ref:BijlageB-meetdichtheid is in zogenaamde meetdichtheidsmatrices weergegeven welke gegevens uit de Scheldemonitor zijn gehaald. In Tabel <a href="inleiding.html#tab:missingDatatab">1.1</a> staat een overzicht van de ontbrekende gegevens. Het ontbreken van gegevens kan de resultaten beïnvloeden, vooral als er gemiddelden uit berekend worden. In voorkomende gevallen is een opmerking bij de figuur toegevoegd.</p>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:missingDatatab">Tabel 1.1: </span>De missende data in 2018 voor de Eerstelijnsrapportage van de Westerschelde per groep, parameter en locatie.</caption>
-<colgroup>
-<col width="18%">
-<col width="17%">
-<col width="31%">
-<col width="32%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">Groep</th>
-<th align="left">Parameter</th>
-<th align="left">Locatie</th>
-<th align="left">Missend</th>
+<span id="tab:missingDatatab">Tabel 1.1: </span>Gegevens die wel verwacht werden, maar niet via Scheldemonitor gedownloadt konden worden.
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+parameter
+</th>
+<th style="text-align:left;">
+stations
+</th>
+<th style="text-align:left;">
+jaar
+</th>
 </tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">Hydrodynamiek</td>
-<td align="left">Waterstanden</td>
-<td align="left">Baalhoek</td>
-<td align="left">juli &amp; september 2018</td>
-</tr>
-<tr class="even">
-<td align="left">Hydrodynamiek</td>
-<td align="left">Waterstanden</td>
-<td align="left">Gat van Borssele</td>
-<td align="left">01-07-2018 - 31-12-2018</td>
-</tr>
-<tr class="odd">
-<td align="left">Hydrodynamiek</td>
-<td align="left">Waterstanden</td>
-<td align="left">Breskens voorhaven</td>
-<td align="left">01-01-2018 - 30-04-2018</td>
-</tr>
-<tr class="even">
-<td align="left">Hydrodynamiek</td>
-<td align="left">Waterstanden</td>
-<td align="left">Breskens voorhaven</td>
-<td align="left">juli 2018</td>
-</tr>
-<tr class="odd">
-<td align="left">Hydrodynamiek</td>
-<td align="left">Waterstanden</td>
-<td align="left">Overloop van Hansweert</td>
-<td align="left">01-01-2018 - 07-03-2018</td>
-</tr>
-<tr class="even">
-<td align="left">Hydrodynamiek</td>
-<td align="left">Waterstanden</td>
-<td align="left">Overloop van Hansweert</td>
-<td align="left">juli 2018</td>
-</tr>
-<tr class="odd">
-<td align="left">Hydrodynamiek</td>
-<td align="left">Waterstanden</td>
-<td align="left">Vlakte van de Raan</td>
-<td align="left">juli &amp; september 2018</td>
-</tr>
-<tr class="even">
-<td align="left">Hydrodynamiek</td>
-<td align="left">Waterstanden</td>
-<td align="left">Vlakte van de Raan</td>
-<td align="left">29-11-2018 - 14-12-2018</td>
-</tr>
-<tr class="odd">
-<td align="left">Hydrodynamiek</td>
-<td align="left">Waterstanden</td>
-<td align="left">Schaar van de Noord</td>
-<td align="left">juli &amp; september 2018</td>
-</tr>
-<tr class="even">
-<td align="left">Hydrodynamiek</td>
-<td align="left">Waterstanden</td>
-<td align="left">Walsoorden</td>
-<td align="left">juli &amp; september 2018</td>
-</tr>
-</tbody>
+<tbody><tr>
+<td style="text-align:left;">
+Waterhoogte
+</td>
+<td style="text-align:left;">
+alle stations
+</td>
+<td style="text-align:left;">
+2022
+</td>
+</tr></tbody>
 </table></div>
 </div>
 </div>
@@ -314,7 +261,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Eerstelijnsrapportage Westerschelde</strong>: 2023" was written by Deltares. It was last built on 2024-03-05.</p>
+    <p>"<strong>Eerstelijnsrapportage Westerschelde</strong>: 2023" was written by Deltares. It was last built on 2024-04-02.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
