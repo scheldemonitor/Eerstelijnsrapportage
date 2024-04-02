@@ -232,21 +232,17 @@ knitr::kable(dt,
 
 #knitr::include_graphics("Figuren/Hydro/Waterstanden/Getijslag.png")
 
-df2 <- df_waterstanden %>%
+df_getijslag <- df_waterstanden %>%
+  mutate(parametername2 = str_replace(parametername, pattern = "[+]...", replacement = "")) %>%
   # filter(HL == "L") %>%
   mutate(jaar = year(datetime)) %>%
   # filter(jaar != 2021 & jaar > 1970) %>%
-  group_by(stationname, jaar, parametername, latitude, longitude) %>%
+  group_by(stationname, jaar, parametername2, latitude, longitude) %>%
   summarise(median = median(value, na.rm = T)) %>% ungroup() %>%
-  pivot_wider(id_cols = c(stationname, jaar, latitude, longitude), names_from = parametername, values_from = median) %>%
-  mutate(
-    `Getijslag in cm` = case_when(
-      !is.na(`Hoogwater in cm+NAP`) ~ `Hoogwater in cm+NAP` - `Laagwater in cm+NAP`,
-      !is.na(`Hoogwater in cm+MSL`) ~ `Hoogwater in cm+MSL` - `Laagwater in cm+MSL`
-    )
-  ) %>% 
-  select(stationname, latitude, longitude, jaar,`Getijslag in cm`) %>% # `Hoogwater in cm+NAP`,`Laagwater in cm+NAP`,
-  pivot_longer(cols = c(`Getijslag in cm`),   # `Hoogwater in cm+NAP`,`Laagwater in cm+NAP`,
+  pivot_wider(id_cols = c(stationname, jaar, latitude, longitude), names_from = parametername2, values_from = median) %>%
+  mutate(`Getijslag in cm` = `Hoogwater in cm` - `Laagwater in cm`) %>% 
+  select(stationname, latitude, longitude, jaar,`Getijslag in cm`) %>% 
+  pivot_longer(cols = c(`Getijslag in cm`),
                names_to = 'parametername', values_to = 'value') %>%
   arrange(value) %>%
   mutate(
@@ -269,7 +265,7 @@ df2 <- df_waterstanden %>%
     )
   )
 
-p <- plotTrendsByLocation(df2, "Getijslag in cm")
+p <- plotTrendsByLocation(df_getijslag, "Getijslag in cm")
 p$layers[[2]] <- NULL # remove dots
 if(knitr::is_html_output()){
   ggplotly(p)
@@ -283,7 +279,7 @@ De 18,6-jarige getijdencyclus heeft een grote invloed op de resultaten en is dui
 
 parname = "Getijslag in cm"
 
-df2 %>% #st_drop_geometry() %>%
+df_getijslag %>% #st_drop_geometry() %>%
   filter(parametername == parname) %>%
   filter(jaar >= 2000) %>%
   group_by(stationname) %>% 
