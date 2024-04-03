@@ -99,7 +99,7 @@ Het station Schaar van de Noord heeft voor 2014 geen data. In 2013 is alleen dat
 
 *Let op: de y-assen van de figuur van het Europlatform verschillen van de y-assen van de andere stations.*
 
-```{r hydroJaarEuro, eval=F, fig.cap="Jaargemiddelde hoog- en laagwaterstanden bij het Europlatform"}
+```{r hydroJaarEuro, eval=T, fig.cap="Jaargemiddelde hoog- en laagwaterstanden bij het Europlatform"}
 # knitr::include_graphics("Figuren/Hydro/Waterstanden/HWLW/euro.png")
 
 plotTrendsWaterstand(df_waterstanden, parname = c("Hoogwater in cm+MSL","Laagwater in cm+MSL"), locname = "Europlatform")
@@ -215,17 +215,25 @@ plotMedianMap(df_waterstanden, "Hoogwater in cm+NAP") + theme_void()
 De getijslag is voor alle meetstations bepaald aan de hand van het verschil tussen de jaargemiddelde hoog- en laagwaterstanden. Op de Noordzee bij het Europlatform bedraagt de getijslag ongeveer 1,65 m en is weinig variatie in de getijslag te zien. In de monding is de getijslag al toegenomen tot 3 à 3,5 m. Verder stroomopwaarts de Westerschelde op blijft de getijslag toenemen tot aan Schaar van de Noord. Daar is de getijslag met een waarde van bijna 5 m het grootst, zie Figuur \@ref(fig:hydroGetijslag), Figuur \@ref(fig:hydroGetijslagGemiddeld) en Tabel \@ref(tab:hydroGemiddeldeHWLWGetij).
 
 ```{r hydroGemiddeldeHWLWGetij}
-#dt <- tex2dt("Figuren/Hydro/Waterstanden/meanvalues.tex")
-#knitr::kable(dt, col.names = c("Station","Afkorting","HW (cm)","LW (cm)","Getijslag (cm)","Trend","R"),
-#             caption = "De gemiddelde hoogwater (HW), laagwater (LW) en getijslag op de Noordzee, in de monding en in de Westerschelde. Hoog- en laagwater is gepresenteerd ten opzichte van NAP (voor Europlatform t.o.v. MSL). Gemiddeldes zijn berekend over alle beschikbare data. Trend en $R$ zijn berekend over de data sinds 2000.")
 
-HW <- stationMedian(df_waterstanden, "Hoogwater in cm+NAP") %>% bind_rows(stationMedian(df_waterstanden, "Hoogwater in cm+MSL"))
-LW <- stationMedian(df_waterstanden, "Laagwater in cm+NAP") %>% bind_rows(stationMedian(df_waterstanden, "Laagwater in cm+MSL"))
-GS <- HW$Mediaan - LW$Mediaan
-dt <- data.frame("Station" = HW$Station, "Hoogwater" = HW$Mediaan, "Laagwater" = LW$Mediaan, "Getijslag" = GS)
+dt <- df_waterstanden %>% 
+  filter(grepl("hoogwater", parametername, ignore.case = T) | grepl("laagwater", parametername, ignore.case = T)) %>%
+  tidyr::separate(parametername, c("parametername", "reference"), sep = "\\+") %>%
+  group_by(stationname, parametername) %>%
+  summarize(
+    median = median(value, na.rm = T)
+  ) %>%
+  pivot_wider(c(stationname), names_from = parametername, values_from = median) %>%
+  mutate(Getijslag = `Hoogwater in cm` - `Laagwater in cm`) %>%
+  rename(Station = stationname
+  ) %>% 
+  arrange(Getijslag)
+
 knitr::kable(dt, 
              align = 'lccc',
-             caption = "Jaarlijks mediaan van hoogwater, laagwater en getijslag (cm + NAP) van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Jaarlijks mediaan van hoogwater, laagwater en getijslag (cm) van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996. Hoog- en Laagwater is t.o.v. NAP, behalve voor Europlatform (t.o.v. MSL).")
+
+
 ```
 
 ```{r hydroGetijslag, fig.cap="De mediaan van getijslag over tijd op de Noordzee, in de monding en in de Westerschelde. Dunnere en transparante kleuren geven jaarlijkse gemiddeldes aan met twee of meer maanden met missende data."}
