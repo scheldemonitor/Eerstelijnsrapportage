@@ -18,8 +18,12 @@ IDs <- lapply(
 
 # Hydrodynamiek - waterstanden
 
-refresh_waterstanden <- function(base_path, datajaar){
-  Waterstand <- c(9695,9694,2438,2439)
+refresh_waterstanden <- function(datajaar){
+  Waterstand <- c(
+    9695,9694, # HW, LW NAP
+    10873,10874, # HW, LW MSL
+    2438, 2439   # Amplitude, fase
+  ) 
   for(jaar in 1998:datajaar){
     df <- smwfs::getSMdata(startyear = jaar, endyear = jaar + 1, parID = c(Waterstand), datasetID = c(476,1527,945))
     write.csv(df, file = file.path(savepath, paste0("Data_Hydro_waterstanden_", jaar,'.csv', sep = "")), row.names = F)
@@ -51,7 +55,11 @@ refresh_waterstanden <- function(base_path, datajaar){
 # Hydrodynamiek - golven
 
 refresh_golven <- function(datajaar){
-  Golven <- c(2599,2601,1816,2594,2596,2597,2598)
+  Golven <- c(
+    2599,2601, # Hm0
+    1816, 2594, # H3, TH3
+    2596,2597,2598 # TM02
+  )
   for(jaar in 2014:datajaar){
     df <- smwfs::getSMdata(startyear = jaar, endyear = jaar + 1, parID = c(Golven), datasetID = c(8032))
     write.csv(df, file.path(savepath,paste0("Data_Hydro_golven_", jaar,'.csv')), row.names = F)

@@ -4,7 +4,7 @@ require(viridis)
 require(leaflet)
 require(lubridate)
 require(mblm)
-require(Kendall)
+# require(Kendall)
 require(plotly)
 require(sf)
 
