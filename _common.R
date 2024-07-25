@@ -14,7 +14,7 @@ localDatapath <- "" # local
 
 # saving path only works from within Deltares. Saved files come available via datapath. 
 datapath <- file.path("https://watersysteemdata.deltares.nl/thredds/fileServer/watersysteemdata/Westerschelde/Scheldemonitor", dataJaar + 1)
-
+savepath <- file.path("p:/11202493--systeemrap-grevelingen/1_data/", "Westerschelde/Scheldemonitor", dataJaar + 1)
 # chunk options set globally
 
 knitr::opts_chunk$set(

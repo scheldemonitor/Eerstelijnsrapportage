@@ -18,15 +18,16 @@ refreshGolven = FALSE
 
 ```{r downloadHydro, include = T}
 
+frozendatapath <- file.path(datapath, paste0("Data_Hydro_waterstanden_all_", ".csv"))
+
 # this step can at the moment only be done at Deltares because of access to the fileserver. 
 if(refreshWaterstanden){
   source("r/refresh_data.R")
-  refresh_waterstanden(base_path = savepath, datajaar = dataJaar)
+  refresh_waterstanden(datajaar = dataJaar)
 } 
 
 trendstations <- c("Europlatform","Vlakte van de Raan","Cadzand","Westkapelle","Breskens Veerhaven","Vlissingen","Gat van Borssele","Overloop van Hansweert", "Terneuzen", "Hansweert", "Walsoorden", "Baalhoek", "Schaar van de Noord", "Bath")
 
-frozendatapath <- file.path(datapath, paste0("Data_Hydro_waterstanden_all_", ".csv"))
 df_waterstanden <- read_delim(frozendatapath, delim = ",", guess_max = 200000) %>%
   mutate(stationname = ifelse(
     stationname == "Euro Platform", "Europlatform", stationname)
