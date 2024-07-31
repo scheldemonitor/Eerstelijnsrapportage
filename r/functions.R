@@ -120,6 +120,7 @@ statTable <- function(df, parname, rounding, meanorder = "decreasing", sf = F) {
       group_by(stationname, year) %>% 
       summarize(yearlymedian = median(value)) %>%
       drop_na(yearlymedian) %>%
+      ungroup() %>%
       group_by(stationname) %>%
       do(broom::tidy(sen(yearlymedian ~ year, data = .))) %>% 
       filter(term == "year") 

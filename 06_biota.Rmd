@@ -14,7 +14,32 @@ if(refreshData){
 
 ```
 
-```{r}
+```{r locationTypes}
+
+# definition of locations that are sampled passively or actively for contaminants in mussels. This is a hack!
+# normally the sampling method should be in the data retrieved from Scheldemonitor. At this moment (2024 july) this is 
+# not yet realized. Therefore, distinction is made based on locatioin.
+
+passive_locations <- c(
+  'Knuitershoek'
+)
+
+active_locations  <- c(
+  'Bommenede boei GB2',
+  'Zeelandbrug noord meetpaal',
+  'Hansweert boei OHMG',
+  'Jacobahaven',
+  'Yerseke boei PK3',
+  'Slijkgat Boei SG14',
+  'Terneuzen boei WPT2',
+  'Vlissingen boei SSVH',
+  'Wissenkerke boei 7'
+)
+
+```
+
+
+```{r readBiotaData}
 df <- read_delim(file = file.path(datapath, frozendataPath), delim = ",")
 ```
 ```{r}
@@ -43,7 +68,8 @@ df2 <- df %>%
   ungroup() %>%
     group_by(datetime, latitude, longitude, stationname, parametername, parameterunit, scientificname, class, category) %>%
   summarize(value = mean(value), n = n()) %>%
-  ungroup()
+  ungroup() %>%
+  mutate(bemonstering = ifelse(stationname %in% passive_locations, "passief", "actief"))
 
 ```
 
@@ -211,7 +237,7 @@ Meer informatie over de monitoring in vis is te vinden op [Waterinfo-Extra-veron
 
 if(knitr::is_html_output()){
 pal <- leaflet::colorFactor("RdYlBu", df$scientificname, levels = c("Mytilus edulis", "Platichthys flesus"))
-df2 %>% group_by(stationname, scientificname) %>%
+df2 %>% group_by(stationname, scientificname, bemonstering) %>%
   summarize(latitude = mean(latitude, na.rm = T), longitude = mean(longitude, na.rm = T)) %>% 
   leaflet() %>%
   addTiles() %>%
@@ -222,14 +248,14 @@ df2 %>% group_by(stationname, scientificname) %>%
   angle__ = -30
 df2 %>% 
   filter(scientificname %in% c("Mytilus edulis", "Platichthys flesus")) %>%
-    group_by(stationname, scientificname) %>%
+    group_by(stationname, scientificname, bemonstering) %>%
     summarize(latitude = mean(latitude, na.rm = T), longitude = mean(longitude, na.rm = T)) %>%
     st_as_sf(coords = c("longitude", "latitude"), crs = 4326) %>%
     st_transform(28992) %>%
     ggplot() +
     geom_sf(data = backgroundmap, aes(), fill = "lightgrey", alpha = 0.5) +
     geom_sf_text(aes(label = stationname), hjust = 0, nudge_x = nudge__x, nudge_y = nudge__y, size = 3, angle = angle__)  +
-    geom_sf(aes(color = scientificname), size = 4, alpha = 0.8) + 
+    geom_sf(aes(color = scientificname, shape = bemonstering), size = 4, alpha = 0.8) + 
     coord_sf(datum=28992, xlim = c(20000, 70000), ylim = c(370000, 390000))  +
     # theme(legend.position = "none") +
     mapplotstyle +
@@ -353,8 +379,7 @@ df2_bot %>%
 plotTrendsBiota2(statmethod = "sen",
   statname = "Middelgat, Brouwersplaat, Molenplaat (deelgebied)",
   cat = c("metalen", "zware metalen"),
-  sciname = "Platichthys flesus",
-  n_col = 1
+  sciname = "Platichthys flesus"
   )
 
 ```
@@ -568,7 +593,7 @@ knitr::kable(
 ```
 
 ```{r botOrganochloor, fig.show='hold', fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van twee type organochloorbestrijdingsmiddelen in bot bij Middelgat, Brouwersplaat, Molenplaat in de Westerschelde."}
-knitr::include_graphics("Figuren/Biota/Bot_hexecloor.png")
+# knitr::include_graphics("Figuren/Biota/Bot_hexecloor.png")
 
 
 plotTrends(sumHCBdfBot, parname = "sumHCH in ug/g vet")
@@ -630,9 +655,9 @@ knitr::kable(
 ```
 
 ```{r mosselArseen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor arseen in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd."}
-knitr::include_graphics("Figuren/Biota/arseen.png")
+# knitr::include_graphics("Figuren/Biota/arseen.png")
 
-plotTrends(df2_mossel2, "Arseen in mg/kg drooggewicht (vlees) in organisme (biota)", trend = T, facet_scales = "fixed")
+plotTrends(df2_mossel2, "Arseen in mg/kg drooggewicht (vlees) in organisme (biota)", trend = T)
 ```
 
 #### Cadmium {#biota-mosselen-cadmium}
@@ -652,8 +677,8 @@ knitr::kable(
 ```
 
 ```{r mosselCadmium, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor cadmium in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd."}
-knitr::include_graphics("Figuren/Biota/cadmium.png")
-plotTrends(df2_mossel2, "Cadmium in mg/kg drooggewicht (vlees) in organisme (biota)", trend = F, facet_scales = "fixed")
+# knitr::include_graphics("Figuren/Biota/cadmium.png")
+plotTrends(df2_mossel2, "Cadmium in mg/kg drooggewicht (vlees) in organisme (biota)", trend = F)
 ```
 
 <!-- \begin{figure}[h!]  -->
@@ -669,7 +694,7 @@ plotTrends(df2_mossel2, "Cadmium in mg/kg drooggewicht (vlees) in organisme (bio
 <!-- \end{figure}  -->
 
 ```{r gemiddeldmosselArseen, fig.cap="Gemiddelde arseen in mosselen per station berekend op alle beschikbare data vanaf 1996."}
-knitr::include_graphics("Figuren/Biota/arseen_gemiddelde_waardes.png")
+# knitr::include_graphics("Figuren/Biota/arseen_gemiddelde_waardes.png")
 plotMedianMap(df2_mossel2, "Cadmium in mg/kg drooggewicht (vlees) in organisme (biota)")
 ```
 
@@ -686,7 +711,7 @@ plotMedianMap(df2_mossel2, "Cadmium in mg/kg drooggewicht (vlees) in organisme (
 <!-- \end{figure}  -->
 
 ```{r gemiddeldmosselCadmium, fig.cap="Gemiddelde cadmium in mosselen per station berekend op alle beschikbare data vanaf 1996."}
-knitr::include_graphics("Figuren/Biota/cadmium_gemiddelde_waardes.png")
+# knitr::include_graphics("Figuren/Biota/cadmium_gemiddelde_waardes.png")
 plotMedianMap(df2_mossel2, "Cadmium in mg/kg drooggewicht (vlees) in organisme (biota)")
 ```
 
@@ -728,8 +753,8 @@ knitr::kable(
 <!-- \end{figure}  -->
 
 ```{r mosselChroom, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor chroom in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd."}
-knitr::include_graphics("Figuren/Biota/chroom.png")
-plotTrends(df2_mossel2, "Chroom in mg/kg drooggewicht (vlees) in organisme (biota)", trend = F, facet_scales = "fixed")
+# knitr::include_graphics("Figuren/Biota/chroom.png")
+plotTrends(df2_mossel2, "Chroom in mg/kg drooggewicht (vlees) in organisme (biota)", trend = F)
 ```
 
 #### Koper {#biota-mosselen-koper}
@@ -759,19 +784,20 @@ knitr::kable(
 ```
 
 ```{r mosselKoper, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor koper in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd."}
-knitr::include_graphics("Figuren/Biota/koper.png")
-plotTrends(df2_mossel2, "Koper in mg/kg drooggewicht (vlees) in organisme (biota)", trend = F, facet_scales = "fixed") +
+
+plotTrends(df2_mossel2, "Koper in mg/kg drooggewicht (vlees) in organisme (biota)", trend = F) +
   coord_cartesian(ylim = c(0,30))
 ```
 
 
 ```{r gemiddeldmosselChroom, fig.cap="Gemiddelde chroom in mosselen per station berekend op alle beschikbare data vanaf 1996."}
-knitr::include_graphics("Figuren/Biota/chroom_gemiddelde_waardes.png")
+
 plotMedianMap(df2_mossel2, "Chroom in mg/kg drooggewicht (vlees) in organisme (biota)")
+
 ```
 
 ```{r gemiddeldmosselKoper, fig.cap="Gemiddelde koper in mosselen per station berekend op alle beschikbare data vanaf 1996."}
-knitr::include_graphics("Figuren/Biota/koper_gemiddelde_waardes.png")
+
 plotMedianMap(df2_mossel2, "Koper in mg/kg drooggewicht (vlees) in organisme (biota)")
 
 ```
@@ -791,8 +817,9 @@ knitr::kable(
 ```
 
 ```{r mosselKwik, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor kwik in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd."}
-knitr::include_graphics("Figuren/Biota/kwik.png")
-plotTrends(df2_mossel2, "Kwik in mg/kg drooggewicht (vlees) in organisme (biota)", trend = F, facet_scales = "fixed")
+
+plotTrends(df2_mossel2, "Kwik in mg/kg drooggewicht (vlees) in organisme (biota)", trend = F)
+
 ```
 
 #### Lood {#biota-mossel-lood}
@@ -809,15 +836,16 @@ knitr::kable(
 
 
 ```{r mosselLood, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor lood in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd."}
-knitr::include_graphics("Figuren/Biota/lood.png")
-plotTrends(df2_mossel2, "Lood in mg/kg drooggewicht (vlees) in organisme (biota)", trend = T, facet_scales = "fixed") +
-  coord_cartesian(ylim = c(0,NA), xlim = c(1998, dataJaar))
+
+plotTrends(df2_mossel2, "Lood in mg/kg drooggewicht (vlees) in organisme (biota)", trend = T)
+
 ```
 
 
 ```{r gemiddeldmosselKwik, fig.cap="Gemiddelde kwik in mosselen per station berekend op alle beschikbare data vanaf 1996."}
-knitr::include_graphics("Figuren/Biota/kwik_gemiddelde_waardes.png")
+
 plotMedianMap(df2_mossel2, "Kwik in mg/kg drooggewicht (vlees) in organisme (biota)")
+
 ```
 
 <!-- \begin{figure}[h!]  -->
@@ -833,7 +861,7 @@ plotMedianMap(df2_mossel2, "Kwik in mg/kg drooggewicht (vlees) in organisme (bio
 <!-- \end{figure}  -->
 
 ```{r gemiddeldmosselLood, fig.cap="Gemiddelde lood in mosselen per station berekend op alle beschikbare data vanaf 1996."}
-knitr::include_graphics("Figuren/Biota/lood_gemiddelde_waardes.png")
+
 plotMedianMap(df2_mossel2, "Lood in mg/kg drooggewicht (vlees) in organisme (biota)")
 ```
 
@@ -851,8 +879,9 @@ knitr::kable(
 ```
 
 ```{r mosselNikkel, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor nikkel in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd."}
-knitr::include_graphics("Figuren/Biota/nikkel.png")
-plotTrends(df2_mossel2, "Nikkel in mg/kg drooggewicht (vlees) in organisme (biota)", facet_scales = "fixed")
+
+plotTrends(df2_mossel2, "Nikkel in mg/kg drooggewicht (vlees) in organisme (biota)")
+
 ```
 
 #### Zink {#biota-mossel-zink}
@@ -863,26 +892,29 @@ De gehalten zink variëren zowel over de meetstations als over de tijd. Bij Hoed
 
 knitr::kable(
   statTable(df2_mossel2, parname = "Zink in mg/kg drooggewicht (vlees) in organisme (biota)", rounding = 3),
-  caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van het gehalte zink in mg/kg (drooggewicht) berekend op alle beschikbare data vanaf 1996. ."
+  caption = "Mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van het gehalte zink in mg/kg (drooggewicht) berekend op alle beschikbare data vanaf 1996."
 )
 # Metingen voor Hoedekenskerke boei 4, Hooge Platen en Knuitershoek zijn omgerekend van nat naar drooggewicht (aangegeven met een sterretje)
 ```
 
 ```{r mosselZink, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor zink in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd."}
-knitr::include_graphics("Figuren/Biota/zink.png")
-plotTrends(df2_mossel2, "Zink in mg/kg drooggewicht (vlees) in organisme (biota)", facet_scales = "fixed")
+
+plotTrends(df2_mossel2, "Zink in mg/kg drooggewicht (vlees) in organisme (biota)")
+
 ```
 
 
 ```{r gemiddeldmosselNikkel, fig.cap="Gemiddelde nikkel in mosselen per station berekend op alle beschikbare data vanaf 1996."}
-knitr::include_graphics("Figuren/Biota/nikkel_gemiddelde_waardes.png")
+
 plotMedianMap(df2_mossel2, "Nikkel in mg/kg drooggewicht (vlees) in organisme (biota)")
+
 ```
 
 
 ```{r gemiddeldmosselZink, fig.cap="Gemiddelde zink in mosselen per station berekend op alle beschikbare data vanaf 1996."}
-knitr::include_graphics("Figuren/Biota/zink_gemiddelde_waardes.png")
+
 plotMedianMap(df2_mossel2, "Zink in mg/kg drooggewicht (vlees) in organisme (biota)")
+
 ```
 
 ### Polycyclische Aromatische Koolwaterstoffen (PAK's) {#biota-mossel-PAK}
@@ -944,8 +976,7 @@ sumPAKdfMossel <- df2_mossel2 %>%
   summarize(somPAK = sum(value, na.rm = T), .groups = 'drop') %>%
   pivot_longer(cols = somPAK, names_to = "parametername", values_to = "value")
 
-knitr::include_graphics("Figuren/Biota/Mossel_PAK.png")
-plotTrends(sumPAKdfMossel, "somPAK", facet_scales = "fixed")
+plotTrends(sumPAKdfMossel, "somPAK")
 
 ```
 
@@ -1053,8 +1084,9 @@ sumPCBdroogdfMossel <- df2_mossel2 %>%
   group_by(stationname, datetime, category, class) %>% 
   summarize(somPCBdroog = sum(value, na.rm = T), .groups = 'drop') %>%
   pivot_longer(cols = somPCBdroog, names_to = "parametername", values_to = "value")
-knitr::include_graphics("Figuren/Biota/Mossel_PCB_droog.png")
-plotTrends(sumPCBdroogdfMossel, "somPCBdroog", facet_scales = "fixed")
+
+plotTrends(sumPCBdroogdfMossel, "somPCBdroog")
+
 ```
 
 <!-- \begin{figure}[H] -->
@@ -1103,7 +1135,6 @@ PCBnat <- c(
       grepl(x, df2_mossel2$parametername,ignore.case = T)])[1]),
 "Som PCB 138 en PCB 163 in ug/kg Natgewicht (vlees) in organisme (biota)")
 
-knitr::include_graphics("Figuren/Biota/Mossel_PCB_nat.png")
 
 sumPCBnatdfMossel <- df2_mossel2 %>%
   filter(
@@ -1116,7 +1147,7 @@ sumPCBnatdfMossel <- df2_mossel2 %>%
   summarize(somPCBnat = sum(meanvalue, na.rm = T), .groups = 'drop') %>%
   pivot_longer(cols = somPCBnat, names_to = "parametername", values_to = "value")
 
-plotTrends(sumPCBnatdfMossel, "somPCBnat", facet_scales = "fixed")
+plotTrends(sumPCBnatdfMossel, "somPCBnat")
 ```
 
 ### Gebromeerde vlamvertragers (PBDE's) {#biota-mossel-PBDE}
@@ -1184,8 +1215,9 @@ knitr::kable(
 ```
 
 ```{r mosselPBDEnat, fig.cap="Jaarlijks gesommeerde waarde van de PBDE's in mossel bij Knuitershoek. Waardes zijn in natgewicht gepresenteerd."}
-knitr::include_graphics("Figuren/Biota/Mossel_PBDE.png")
-plotTrends(somPBDEMossel, "somPBDE", facet_scales = "fixed")
+
+plotTrends(somPBDEMossel, "somPBDE")
+
 ```
 
 ### Organotinverbindingen {#biota-mossel-organotin}
@@ -1208,7 +1240,9 @@ somOrganotin <- df2_mossel2 %>%
   summarize(meanvalue = mean(value, na.rm = T), .groups = 'drop') %>%
   group_by(stationname, datetime, category, class) %>% 
   summarize(somOrganotin = sum(meanvalue, na.rm = T), .groups = 'drop') %>%
-  pivot_longer(cols = somOrganotin, names_to = "parametername", values_to = "value")
+  pivot_longer(cols = somOrganotin, names_to = "parametername", values_to = "value") %>%
+  filter(stationname != "Hoedekenskerke boei 4")
+# for some reason, there is only one year at station Hoedekenskerke. This is suspicious. Possibly mixed up with Knuitershoek?
  
 
 knitr::kable(
@@ -1230,8 +1264,9 @@ knitr::kable(
 <!-- \end{figure}  -->
 
 ```{r mosselOrgano, fig.cap="Jaarlijks gesommeerde waarde van de organotinverbindingen in mossel voor 3 stations in de Westerschelde. Waardes zijn in drooggewicht gepresenteerd."}
-knitr::include_graphics("Figuren/Biota/Mossel_organo.png")
-plotTrends(somOrganotin, parname = "somOrganotin", facet_scales = "fixed")
+
+plotTrends(somOrganotin, parname = "somOrganotin")
+
 ```
 
 ### Organochloorbestrijdingsmiddelen {#biota-mossel-organochloor}
@@ -1260,9 +1295,9 @@ knitr::kable(statTable(df2_mossel2, "Hexachloorbenzeen in ug/kg drooggewicht (vl
 ```
 
 ```{r mosselHexachloorbenzeen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) voor het gehalte hexachloorbenzeen in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd."}
-# knitr::include_graphics("Figuren/Biota/hexachloorbenzeen.png")
-plotTrends(df2_mossel2, parname = "Hexachloorbenzeen in ug/kg drooggewicht (vlees) in organisme (biota)", facet_scales = "fixed") +
-  coord_cartesian(ylim = c(0,NA))
+
+plotTrends(df2_mossel2, parname = "Hexachloorbenzeen in ug/kg drooggewicht (vlees) in organisme (biota)")
+
 ```
 
 #### Hexachloorbutadieen {#biota-mossel-Hexachloorbutadieen}
@@ -1281,8 +1316,7 @@ knitr::kable(statTable(df2_mossel2, "Hexachloorbutadieen in ug/kg drooggewicht (
 ```
 
 ```{r mosselHexachloorbutadieen, fig.cap="Jaarlijkse mediaan, 10-percentiel en 90-percentiel voor het gehalte hexachloorbutadieen in mosselen (nat en droog) voor meerdere stations. Waardes zijn in drooggewicht gepresenteerd."}
-# knitr::include_graphics("Figuren/Biota/Hexachloorbutadieen.png")
-plotTrends(df2_mossel2, parname = "Hexachloorbutadieen in ug/kg drooggewicht (vlees) in organisme (biota)", facet_scales = "fixed") +
-  coord_cartesian(ylim = c(0,NA))
+
+plotTrends(df2_mossel2, parname = "Hexachloorbutadieen in ug/kg drooggewicht (vlees) in organisme (biota)")
 
 ```

@@ -43,9 +43,18 @@ De verdere duiding van deze en Vlaamse gegevens wordt gedaan in de 6-jarige cycl
 
 ## Versie {.unnumbered #rapportversie}
 
+```{asis, echo = rapportversie == "draft"}
+Deze rapportage is een conceptversie. Niets mag geciteerd worden zonder toestemming van de makers.  
+```
+
 Eerstelijnsrapportages worden elk jaar gemaakt. Hieronder is informatie over de datum van deze rapportage, en tot welk jaar de gegevens zijn verwerkt. 
 
+```{asis, echo = knitr::is_html_output()}
+Dit is de webversie van de eerstelijnsrapportage. De webversie kan in details afwijken van de eens per jaar geproduceerde rapportage die als pdf beschikbaar is op [Scheldemonitor](https://www.scheldemonitor.org/nl). 
+```
+
+
+
 * Eindversie 22-02-2023: bevat data t/m `r dataJaar`, missend in deze versie is:
-  + Golven: locatie Cadzand, 
-  + Biota: De gegevens over verontreinigingen in biota zijn op dit moment onvolledig of ontbrekend. Besloten is om deze dit jaar weg te laten uit de eerstelijnsrapportage. Het Biota hoofdstuk is daarom in deze versie niet toegevoegd. De verwachting is dat deze in de volgende versie weer toegevoegd gaat worden. 
+  + Hoog en laagwaterstanden 2022 ontbreken nog
 
