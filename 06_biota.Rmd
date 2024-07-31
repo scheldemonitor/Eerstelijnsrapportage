@@ -227,7 +227,7 @@ Dit hoofdstuk gaat over fysisch-chemische parameters in biota in de Westerscheld
 
 De fysisch-chemische parameters in biota worden geanalyseerd aan de hand van Bot (*Platichthys flesus*) en mosselen (*Mytilus edulis*). Bot wordt eens per jaar op een vaste locatie gevangen. In 2010 is de monitoring aangepast en worden mosselen één keer per jaar zowel uitgehangen als verzameld op twee respectievelijk drie verschillende locaties.
 
-Figuur \@ref(fig:meetstationsBiota) toont de meetlocaties voor bot (geel) en mosselen. Bij mosselen wordt een onderscheid gemaakt tussen actieve monitoring (het uithangen van korven met mosselen voor een periode van zes weken; rood) en passieve monitoring, waarbij mosselen worden gezocht (blauw).
+Figuur \@ref(fig:meetstationsBiota) toont de meetlocaties voor bot (blauw) en mosselen (rood). Bij mosselen wordt een onderscheid gemaakt tussen actieve monitoring (het uithangen van korven met mosselen voor een periode van zes weken; cirkel) en passieve monitoring, waarbij mosselen worden gezocht (driehoek).
 
 Meer informatie over de monitoring in vis is te vinden op [Waterinfo-Extra-verontreinigingen-en visziektes-in-bot](https://waterinfo-extra.rws.nl/monitoring/chemie/biota/verontreinigingen-visziektes-bot/) en voor mosselen op [Waterinfo-Extra-Schelpdieren](https://waterinfo-extra.rws.nl/monitoring/chemie/biota/schelpdieren/).
 
@@ -662,7 +662,7 @@ plotTrends(df2_mossel2, "Arseen in mg/kg drooggewicht (vlees) in organisme (biot
 
 #### Cadmium {#biota-mosselen-cadmium}
 
-Bij cadmium (zie Figuur \@ref(fig:mosselCadmium)) zit er een groot verschil in de waarden actieve versus passieve verworven, zoals te zien is in Tabel \@ref(tab:biotaMosselCadmium). Bij actieve monitoring hangen korven met mosselen in het water, terwijl bij passieve monitoring mosselen in contact staan met de bodem. Accumulatie van cadmium in de bodem kan op deze manier ook tot hogere cadmiumgehalten in mosselen leiden. Bij Hansweert boei OHMG neemt cadmium toe, met een beperkte correlatie. Verder is er een grote variatie tussen de verschillende meetstations en jaren te zien. Station Knuitershoek laat een flinke stijging van de hoeveelheid cadmium zien, een stijging die ook statistisch significant is.
+Bij cadmium (zie Figuur \@ref(fig:mosselCadmium)) zit er een groot verschil in de waarden die via actieve versus passieve bemonstering verworven zijn, zoals te zien is in Tabel \@ref(tab:biotaMosselCadmium). Bij actieve monitoring hangen korven met mosselen in het water, terwijl bij passieve monitoring mosselen in contact staan met de bodem. Accumulatie van cadmium in de bodem kan op deze manier ook tot hogere cadmiumgehalten in mosselen leiden. Bij Hansweert boei OHMG neemt cadmium toe, met een beperkte correlatie. Verder is er een grote variatie tussen de verschillende meetstations en jaren te zien. Station Knuitershoek laat een flinke stijging van de hoeveelheid cadmium zien, een stijging die ook statistisch significant is.
 
 ```{r biotaMosselCadmium}
 # dt <- tex2dt("Figuren/Biota/cadmium.tex")
