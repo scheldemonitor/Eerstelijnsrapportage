@@ -24,9 +24,9 @@ jobs:
           wget https://github.com/r-lib/desc/archive/refs/tags/v1.4.3.tar.gz
           wget https://github.com/r-lib/brio/archive/refs/tags/v1.1.3.tar.gz
           wget https://github.com/r-lib/downlit/archive/refs/tags/v0.4.2.tar.gz
-          Rscript -e 'install.packages("desc_1.4.3.tar.gz", repos = NULL, type = "source")'
-          Rscript -e 'install.packages("brio_1.1.3.tar.gz", repos = NULL, type = "source")'
-          Rscript -e 'install.packages("downlit_0.4.2.tar.gz", repos = NULL, type = "source")'
+          Rscript -e 'install.packages("1.4.3.tar.gz", repos = NULL, type = "source")'
+          Rscript -e 'install.packages("1.1.3.tar.gz", repos = NULL, type = "source")'
+          Rscript -e 'install.packages("0.4.2.tar.gz", repos = NULL, type = "source")'
       - name: Install rmarkdown
         run: Rscript -e 'install.packages("rmarkdown", repos = "https://cloud.r-project.org")'
       - name: Render Book
