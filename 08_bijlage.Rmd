@@ -126,7 +126,8 @@ parnames <- c("Saliniteit in DIMSLS in oppervlaktewater",
               "Zink, opgelost in ug/l na filtratie in oppervlaktewater"
 )
 
-df <- data.table::fread(file.path(datapath, fysChemOppDataPath), select = c('id', 'latitude', 'longitude', 'stationname', 'depth', 'datetime', 'value', 'parametername', 'parameternunit', 'valuesign', 'category'))  
+# df <- data.table::fread(file.path(datapath, fysChemOppDataPath), select = c('id', 'latitude', 'longitude', 'stationname', 'depth', 'datetime', 'value', 'parametername', 'parameternunit', 'valuesign', 'category'))  
+df <- readr::read_csv(file.path(datapath, fysChemOppDataPath)) #%>% select(-X1)
 
 checkparnames <- T #Apply when certain that the parnames vector contains all the parameters used in the oppwater section
 

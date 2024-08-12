@@ -296,7 +296,7 @@ plotTrends <- function(df, parname, statmethod = sen, sf = F, trend = T, beginja
     geom_ribbon(aes(ymin = `10-perc`, ymax = `90-perc`), fill = "lightgrey", alpha = 0.7) +
     geom_line() + geom_point(fill = "white", shape = 21)
   if(trend)    p <- p + geom_smooth(method = statmethod, formula = y~x, color = "#2E89BF", fill = "#2E89BF", alpha = 0.2)
-  p <- p + facet_wrap(~Station, ncol = 2, scales = "free") +
+  p <- p + facet_wrap(~Station, ncol = 2, scales = "fixed") +
     theme_minimal() +
     ggtitle(label = parname) +
     coord_cartesian(xlim = c(beginjaar, eindjaar), ylim = c(0,NA)) +

@@ -52,7 +52,8 @@ if(refreshData){
 
 ```{r downloadOppWaterdata, include = F}
 # Set year for use in the report
-df <- data.table::fread(file.path(datapath, fysChemOppDataPath)) #%>% select(-X1)
+# df <- data.table::fread(file.path(datapath, fysChemOppDataPath),  showProgress = T) #%>% select(-X1)
+df <- readr::read_csv(file.path(datapath, fysChemOppDataPath)) #%>% select(-X1)
 
 df <- df %>% 
   filter(stationname %in% c(trendstations)) %>% 
