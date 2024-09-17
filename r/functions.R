@@ -1262,7 +1262,7 @@ plotTrendsBiota2 <- function(df, statname, cat, sciname, sf = F, trend = T, stat
     geom_point(aes(), fill = "white", shape = 21) 
   
   if(trend)    p <- p + geom_smooth(method = statmethod, fill = "blue", alpha = 0.2)
-  p <- p + facet_wrap(~Parameter, ncol = 2, scales = "free_y") +
+  p <- p + facet_wrap(~Parameter, ncol = 1, scales = "free_y") +
     # ylab() +
     ggtitle(label = paste(statname, sciname, sep = ", ")) +
     coord_cartesian(ylim = c(0,NA)) +
