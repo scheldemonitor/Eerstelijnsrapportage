@@ -1114,7 +1114,8 @@ if(refreshData){
 
 ```{r downloadOppWaterdata, include = F}
 # Set year for use in the report
-df <- data.table::fread(file.path(datapath, fysChemOppDataPath)) #%>% select(-X1)
+# df <- data.table::fread(file.path(datapath, fysChemOppDataPath),  showProgress = T) #%>% select(-X1)
+df <- readr::read_csv(file.path(datapath, fysChemOppDataPath)) #%>% select(-X1)
 
 df <- df %>% 
   filter(stationname %in% c(trendstations)) %>% 
@@ -3773,7 +3774,9 @@ if(refreshData){
 # not yet realized. Therefore, distinction is made based on locatioin.
 
 passive_locations <- c(
-  'Knuitershoek'
+  'Knuitershoek',
+  "Hooge Platen",
+  "Hoedekenskerke boei 4"
 )
 
 active_locations  <- c(
@@ -3788,27 +3791,14 @@ active_locations  <- c(
   'Wissenkerke boei 7'
 )
 
+locLevels = c(passive_locations, active_locations)
+
 ```
 
 
 ```{r readBiotaData}
 df <- read_delim(file = file.path(datapath, frozendataPath), delim = ",")
 ```
-```{r}
-df %>% 
-  repair_limits() %>%
-    filter(scientificname == "Mytilus edulis") %>%
-  ungroup() %>%
-  select(datetime, latitude, longitude, stationname, parametername, parameterunit, scientificname, class, category) %>%
-  duplicated() %>%
-  which() %>% 
-  length()
-
-
-
-
-```
-
 
 
 ```{r}
@@ -3821,36 +3811,24 @@ df2 <- df %>%
     group_by(datetime, latitude, longitude, stationname, parametername, parameterunit, scientificname, class, category) %>%
   summarize(value = mean(value), n = n()) %>%
   ungroup() %>%
-  mutate(bemonstering = ifelse(stationname %in% passive_locations, "passief", "actief"))
+  mutate(
+    bemonstering = case_when( 
+      stationname %in% passive_locations & scientificname == "Mytilus edulis" ~ "passief",
+      stationname %in% active_locations  & scientificname == "Mytilus edulis" ~ "actief",
+      scientificname != "Mytilus edulis" ~ ""
+    )
+  )
+
+# df2 %>% distinct(stationname, scientificname, bemonstering)
 
 ```
 
 
 ```{r}
 
-
-# Namen zijn veranderd vergeleken met vorige keer. 
-# try - alle namen tolower
-# aanpassen andere namen in script
-# this is work in progress for 2023 !!!!!
-# 
-# metalen in vlees (o.a.) nog niet omgerekend naar droog- of natgewicht. Beide komen voor. 
-
-
 df2.lever <- df2 %>% filter(grepl("lever", parametername, ignore.case = T))
 df2.spier <- df2 %>% filter(grepl("spier", parametername, ignore.case = T))
 df2.vlees <- df2 %>% filter(grepl("vlees", parametername, ignore.case = T))
-
-# nrow(df2.lever) + nrow(df2.spier) + nrow(df2.vlees)
-
-# TODO
-# alle aanduidingen voor vochtgehalte verwerken
-
-#==== lever =============
-
-# "Vocht in g/kg (Lever) in Organisme (biota)"
-# "Vocht in g/kg Natgewicht (Lever) in Organisme (biota)"
-# "Percentage droge stof in % natgewicht (lever) in organisme (biota)"
 
 dwnw.lever <- df2.lever %>%
               filter(tolower(parametername) %in% tolower(c(
@@ -3988,34 +3966,41 @@ Meer informatie over de monitoring in vis is te vinden op [Waterinfo-Extra-veron
 # knitr::include_graphics("Figuren/Meetstations_biota.png")
 
 if(knitr::is_html_output()){
+  
 pal <- leaflet::colorFactor("RdYlBu", df$scientificname, levels = c("Mytilus edulis", "Platichthys flesus"))
+
 df2 %>% group_by(stationname, scientificname, bemonstering) %>%
   summarize(latitude = mean(latitude, na.rm = T), longitude = mean(longitude, na.rm = T)) %>% 
   leaflet() %>%
   addTiles() %>%
-  addCircleMarkers(color = ~pal(scientificname), label = ~stationname, labelOptions = labelOptions(noHide = T)) %>%
-  leaflet::addLegend(pal = pal, values = c("Mytilus edulis", "Platichthys flesus"))} else{
+  addCircleMarkers(color = ~pal(scientificname), label = ~paste(stationname, bemonstering), labelOptions = labelOptions(noHide = T)) %>%
+  leaflet::addLegend(pal = pal, values = c("Mytilus edulis", "Platichthys flesus"))
+
+} else{
+    
   nudge__x = 1000
   nudge__y = -500
   angle__ = -30
+  
 df2 %>% 
   filter(scientificname %in% c("Mytilus edulis", "Platichthys flesus")) %>%
-    group_by(stationname, scientificname, bemonstering) %>%
-    summarize(latitude = mean(latitude, na.rm = T), longitude = mean(longitude, na.rm = T)) %>%
-    st_as_sf(coords = c("longitude", "latitude"), crs = 4326) %>%
-    st_transform(28992) %>%
-    ggplot() +
-    geom_sf(data = backgroundmap, aes(), fill = "lightgrey", alpha = 0.5) +
-    geom_sf_text(aes(label = stationname), hjust = 0, nudge_x = nudge__x, nudge_y = nudge__y, size = 3, angle = angle__)  +
-    geom_sf(aes(color = scientificname, shape = bemonstering), size = 4, alpha = 0.8) + 
-    coord_sf(datum=28992, xlim = c(20000, 70000), ylim = c(370000, 390000))  +
-    # theme(legend.position = "none") +
-    mapplotstyle +
-    theme_void() +
-    theme(panel.background=element_blank(),
-          panel.spacing = unit(c(0, 0, 0, 0), "cm"),       
-          plot.background = element_rect(fill = "white",colour = NA),
-          plot.margin = unit(c(0, 0, 0, 0), "null"))  
+  group_by(stationname, scientificname, bemonstering) %>%
+  summarize(latitude = mean(latitude, na.rm = T), longitude = mean(longitude, na.rm = T)) %>%
+  st_as_sf(coords = c("longitude", "latitude"), crs = 4326) %>%
+  st_transform(28992) %>%
+  # st_jitter() %>%
+  ggplot() +
+  geom_sf(data = backgroundmap, aes(), fill = "lightgrey", alpha = 0.5) +
+  geom_sf_text(aes(label = stationname), hjust = 0, nudge_x = nudge__x, nudge_y = nudge__y, size = 3, angle = angle__)  +
+  geom_sf(aes(color = scientificname, shape = bemonstering), size = 4, alpha = 0.8) +
+  coord_sf(datum=28992, xlim = c(20000, 70000), ylim = c(370000, 390000))  +
+  # theme(legend.position = "none") +
+  mapplotstyle +
+  theme_void() +
+  theme(panel.background=element_blank(),
+        panel.spacing = unit(c(0, 0, 0, 0), "cm"),       
+        plot.background = element_rect(fill = "white",colour = NA),
+        plot.margin = unit(c(0, 0, 0, 0), "null"))
 }
 
 ```
@@ -4367,12 +4352,13 @@ De gehalten arseen (zie Figuur \@ref(fig:mosselArseen)) schommelen rond de 10 to
 ```{r vocht_mossel}
 
 df2_mossel <- df2 %>%
-  filter(scientificname == "Mytilus edulis")
+  filter(scientificname == "Mytilus edulis") %>%
+  mutate(stationname = factor(stationname, levels = locLevels))
 
-vocht_mossel <- df2_mossel %>% filter(grepl("vocht", parametername, ignore.case = T)) %>% group_by(stationname) %>% summarize(mean_vocht = 0.1*round(mean(value), 0), min_vocht = 0.1*min(value), max_vocht = 0.1*max(value), n = n())
+vocht_mossel <- df2_mossel %>% filter(grepl("vocht", parametername, ignore.case = T)) %>% group_by(stationname, bemonstering) %>% summarize(mean_vocht = 0.1*round(mean(value), 0), min_vocht = 0.1*min(value), max_vocht = 0.1*max(value), n = n())
 
 df2_mossel2 <- df2_mossel %>%
-  group_by(stationname, latitude, longitude, datetime, parametername, category, class) %>% 
+  group_by(stationname, latitude, longitude, datetime, parametername, category, class, bemonstering) %>% 
   summarize(value = mean(value)) %>%
   left_join(vocht_mossel) %>%
   mutate(old_value = value) %>%
@@ -4388,7 +4374,11 @@ df2_mossel2 <- df2_mossel %>%
       !is.na(mean_vocht) ~ str_replace(parametername, "nat", "droog")
     )
   ) %>%
-  ungroup()
+  ungroup() %>%
+  mutate(stationname = case_when(
+          stationname %in% passive_locations ~ paste(stationname, "_P"),
+      stationname %in% active_locations ~ paste(stationname, "_A")
+  ))
 
 
 knitr::kable(vocht_mossel, caption = "vochtgehalte in mosselen op de verschillende locaties")
@@ -4993,7 +4983,7 @@ somOrganotin <- df2_mossel2 %>%
   group_by(stationname, datetime, category, class) %>% 
   summarize(somOrganotin = sum(meanvalue, na.rm = T), .groups = 'drop') %>%
   pivot_longer(cols = somOrganotin, names_to = "parametername", values_to = "value") %>%
-  filter(stationname != "Hoedekenskerke boei 4")
+  filter(!grepl("Hoedekenskerke boei 4", stationname))
 # for some reason, there is only one year at station Hoedekenskerke. This is suspicious. Possibly mixed up with Knuitershoek?
  
 
@@ -5675,7 +5665,8 @@ parnames <- c("Saliniteit in DIMSLS in oppervlaktewater",
               "Zink, opgelost in ug/l na filtratie in oppervlaktewater"
 )
 
-df <- data.table::fread(file.path(datapath, fysChemOppDataPath), select = c('id', 'latitude', 'longitude', 'stationname', 'depth', 'datetime', 'value', 'parametername', 'parameternunit', 'valuesign', 'category'))  
+# df <- data.table::fread(file.path(datapath, fysChemOppDataPath), select = c('id', 'latitude', 'longitude', 'stationname', 'depth', 'datetime', 'value', 'parametername', 'parameternunit', 'valuesign', 'category'))  
+df <- readr::read_csv(file.path(datapath, fysChemOppDataPath)) #%>% select(-X1)
 
 checkparnames <- T #Apply when certain that the parnames vector contains all the parameters used in the oppwater section
 
