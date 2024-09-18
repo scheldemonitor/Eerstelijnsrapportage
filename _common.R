@@ -26,7 +26,7 @@ knitr::opts_chunk$set(
   out.width = "100%",
   fig.align='center',
   fig.width = 7,
-  cache = TRUE
+  cache = FALSE
 )
 
 options(bookdown.render.verbose = TRUE)
