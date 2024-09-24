@@ -638,7 +638,15 @@ S2_amp = stationMeanClass(df_waterstanden, "Amplitude in cm", "COMP 77 S2")
 M2_fase = stationMeanClass(df_waterstanden, "Fase (g) in graden tov MET", "COMP 65 M2")
 M4_fase = stationMeanClass(df_waterstanden, "Fase (g) in graden tov MET", "COMP 113 M4")
 S2_fase = stationMeanClass(df_waterstanden, "Fase (g) in graden tov MET", "COMP 77 S2")
-dt <- data.frame("Station" = M2_amp$Station, "M2 ampl" = M2_amp$Gemiddelde, "M4 ampl" = M4_amp$Gemiddelde, "S2 ampl" = S2_amp$Gemiddelde, "M2 fase" = M2_fase$Gemiddelde, "M4 fase" = M4_fase$Gemiddelde, "S2 fase" = S2_fase$Gemiddelde) %>%
+
+dt <- data.frame(
+  "Station" = M2_amp$Station, 
+  "M2 ampl" = M2_amp$Gemiddelde, 
+  "M4 ampl" = M4_amp$Gemiddelde, 
+  "S2 ampl" = S2_amp$Gemiddelde, 
+  "M2 fase" = M2_fase$Gemiddelde, 
+  "M4 fase" = M4_fase$Gemiddelde, 
+  "S2 fase" = S2_fase$Gemiddelde) %>%
   mutate(across(where(is.double), function(x) {signif(x,2)}))
          
 knitr::kable(dt, 
