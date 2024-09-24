@@ -28,8 +28,10 @@ refresh_waterstanden <- function(datajaar){
     df <- smwfs::getSMdata(startyear = jaar, endyear = jaar + 1, parID = c(Waterstand), datasetID = c(476,1527,945))
     write.csv(df, file = file.path(savepath, paste0("Data_Hydro_waterstanden_", jaar,'.csv', sep = "")), row.names = F)
   }
+  
   allFiles <- list.files(file.path(savepath), pattern = "Data_Hydro_waterstanden_", full.names = T)
   allFiles <- allFiles[!grepl("all", allFiles)]
+
   df <- lapply(
     allFiles, function(x) # nameless function. Wat hierna staat wordt uitgevoerd voor elke elemente van allFiles
       read_delim(x, delim = ",", col_types = cols(.default = "c",
