@@ -219,12 +219,14 @@ fig:meetstationsBiota
 tab:grootteklassenBot
 fig:botMetaal
 tab:vetgehalteBot
+fig:vetgehaltePerJaar
 tab:biotaBotPCB
 fig:botPCB
 tab:biotaBotPBDE
 fig:botPBDE
 tab:biotaBotChloor
 fig:botOrganochloor
+tab:vocht-mossel
 tab:biotaMosselArseen
 fig:mosselArseen
 tab:biotaMosselCadmium
@@ -249,6 +251,7 @@ tab:biotaMosselZink
 fig:mosselZink
 fig:gemiddeldmosselNikkel
 fig:gemiddeldmosselZink
+tab:biotaMosselPAK
 fig:mosselPAK
 fig:mosselPCBdroog
 fig:mosselPCBnat
