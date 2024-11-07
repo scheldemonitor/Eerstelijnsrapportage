@@ -9,11 +9,14 @@ bibliography: [bib/library.bib, bib/westerscheldewillem.bib]
 biblio-style: apalike
 link-citations: yes
 always_allow_html: yes
+params:
+  draft: true
 ---
 
 # Voorwoord {.unnumbered}
 
 ```{r, message=FALSE, warning=FALSE, include=FALSE}
+
 # options(tinytex.verbose = TRUE)
 knitr::opts_chunk$set(echo = FALSE,	message = FALSE, warning = FALSE)
 
@@ -43,7 +46,7 @@ De verdere duiding van deze en Vlaamse gegevens wordt gedaan in de 6-jarige cycl
 
 ## Versie {.unnumbered #rapportversie}
 
-```{asis, echo = rapportversie == "draft"}
+```{asis, echo = params$draft}
 Deze rapportage is een conceptversie. Niets mag geciteerd worden zonder toestemming van de makers.  
 ```
 
@@ -55,6 +58,5 @@ Dit is de webversie van de eerstelijnsrapportage. De webversie kan in details af
 
 
 
-* Eindversie 22-02-2023: bevat data t/m `r dataJaar`, missend in deze versie is:
-  + Hoog en laagwaterstanden 2022 ontbreken nog
+* Eindversie `r lubridate::today()`: bevat data t/m `r dataJaar`.
 

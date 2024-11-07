@@ -4,10 +4,7 @@ options(width = 60)
 source("r/functions.R")
 library(smwfs)
 
-rapportversie = "draft"
-
-# year for reporting (last data year)
-dataJaar <- 2022
+dataJaar = 2022
 
 # path to frozen datafiles (downloads from Scheldemonitor that are assoiated with report version)
 localDatapath <- "" # local
