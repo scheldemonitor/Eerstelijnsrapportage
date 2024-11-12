@@ -2641,7 +2641,7 @@ df <- df_original %>%
 
 # Zwevend stof - Fysisch-chemische parameters {#zwevend-stof}
 
-Voor de bepaling van de fysisch-chemische parameters in het oppervlaktewater en in zwevend stof vinden in het kader van MWTL vaartochten plaats, waarbij op vaste punten monsters worden genomen op ca. 1,5 m onder het wateroppervlak. In dit hoofdstuk zijn de metingen in zwevend stof opgenomen. In het algemeen geldt dat sinds 1998 de waardes van de verontreinigingen zijn afgenomen. Het lijkt erop dat de concentraties zich de laatste jaren stabiliseren.
+Voor de bepaling van de fysisch-chemische parameters in het oppervlaktewater en in zwevend stof vinden in het kader van MWTL vaartochten plaats, waarbij op vaste punten monsters worden genomen op ca. 1 m onder het wateroppervlak. In dit hoofdstuk zijn de metingen in zwevend stof opgenomen. In het algemeen geldt dat sinds 1998 de waardes van de verontreinigingen zijn afgenomen. Het lijkt erop dat de concentraties zich de laatste jaren stabiliseren.
 
 ## Informatie over de metingen {#zwevend-info-metingen}
 
@@ -2713,7 +2713,7 @@ plotTrendsLimits(df, parname, trend = F)
 
 ## Metalen {#zwevend-metalen}
 
-In deze paragraaf presenteren we de volgende metalen gedetecteerd in zwevende stof (figuur \@ref(fig:zwevendMetalen)). Op het eerste gezicht lijkt de concentratie metalen in zwevende stof af te nemen voor de meeste metalen op beide locaties. 
+In deze paragraaf presenteren we de volgende metalen gedetecteerd in zwevende stof (figuur \@ref(fig:zwevendMetalen)). De concentratie metalen in zwevende stof neemt significant af over de hele periode behalve voor Koper bij statin Vlissingen, en Kobalt in station Schaar van Ouden Doel (tabel \@ref(tab:zwevendMetalenTab)). Voor alle metalen zijn de concentraties hoger bij station Schaar van Ouden Doel dan bij Vlissingen, wat illustreert dat de concentraties gedreven worden door het hogere gehalte in het riviergedeelte. 
 
 * Arseen (As)
 * Cadmium (Cd)
@@ -2725,7 +2725,7 @@ In deze paragraaf presenteren we de volgende metalen gedetecteerd in zwevende st
 * Vanadium (V)
 * Zink (Zn)
 
-```{r zwevendMetalen, fig.width=8, fig.height=10, fig.cap="Trends voor alle hier behandelde metalen in mg/kg drooggewicht in zwevend stof."}
+```{r zwevendMetalen, fig.width=8, fig.height=9, fig.cap="Trends voor alle hier behandelde metalen in mg/kg drooggewicht in zwevend stof."}
 parname <- c(
   "Arseen in mg/kg drooggewicht in zwevend stof",
   "Cadmium in mg/kg drooggewicht in zwevend stof",
@@ -3084,7 +3084,11 @@ parname <- c(
   "2,3',4,4',5-Pentachloorbifenyl (PCB118) in ug/kg drooggewicht in zwevend stof",
   "2,4,4'-Trichloorbifenyl (PCB28) in ug/kg drooggewicht in zwevend stof"
 )
-plotTrendsLimits2(df, 
+shortnames = paste(str_extract(parname, "(?<=\\().*(?=\\))"), "in ug/kg drooggewicht in zwevend stof")
+
+df %>%
+  # mutate(parametername = parname) %>%
+  plotTrendsLimits2( 
   parname = parname
 ) +
   labs(title ="polychloorbifenylen in zwevend stof") +
@@ -3119,7 +3123,7 @@ plotTrendsLimits2(df,
       left_join(stats)  %>%
       mutate(across(where(is.numeric), round, 2)) %>%
       mutate(across(where(is.numeric), signif, rounding)) %>%
-      mutate(parametername = str_replace(parametername, " in ug/kg drooggewicht in zwevend stof", "")) %>%
+      mutate(parametername = str_extract(parametername, "(?<=\\().*(?=\\))")) %>%
       select(Parameter = parametername,
              Mediaan = median,
              `90-perc`,
@@ -3152,7 +3156,7 @@ plotTrendsLimits2(df,
       left_join(stats)  %>%
       mutate(across(where(is.numeric), round, 2)) %>%
       mutate(across(where(is.numeric), signif, rounding)) %>%
-    mutate(parametername = str_replace(parametername, " in ug/kg drooggewicht in zwevend stof", "")) %>%
+    mutate(parametername = str_extract(parametername, "(?<=\\().*(?=\\))")) %>%
       select(Parameter = parametername,
              Mediaan = median,
              `90-perc`,
@@ -3211,7 +3215,7 @@ plotTrendsLimits(df, parname)
 
 Figuur \@ref(fig:zwevendHexachloorbenzeen) toont de jaarlijkse mediaan hexachloorbenzeen per station voor de periode vanaf 1998 t/m `r dataJaar`, samen met de 10- en 90-percentiele waarde per jaar. Daarnaast zijn in Tabel \@ref(tab:zwevendHexachloorbenzeenTab) de mediane, 10- en 90-percentiele waardes per station weergegeven. 
 
-Bij Vlissingen boei SSVH is het gehalte hexachloorbenzeen zeer laag en wordt steeds de detectiegrens van 0,5 mg/l bereikt, waardoor de minima en gemiddelden worden bepaald. In werkelijkheid zijn de gehaltes dus nog lager. In Schaar van Ouden Doel is dit sinds 2019 ook het geval. Over de gehele dataset is een significante afname te herkennen in Schaar van Ouden Doel. 
+Bij Vlissingen boei SSVH is het gehalte hexachloorbenzeen zeer laag en wordt steeds de detectiegrens van 0,5 mg/l bereikt, waardoor de minima en gemiddelden worden bepaald. In werkelijkheid zijn de gehaltes dus nog lager. In Schaar van Ouden Doel is dit sinds 2019 ook het geval. In de jaren 2012 en 2013 was de concentratie Hexachloorbenzeen in Schaar van Ouden Doel verhoogd (tot ca 2 $\mu$g/kg drooggewicht zwevend stof) ten opzichte van de jaren ervoor en erna. Over de gehele dataset is een significante afname te herkennen in Schaar van Ouden Doel. 
 
 ```{r zwevendHexachloorbenzeenTab}
 # dt <- tex2dt("Figuren/Zwevend/Hexachloorbenzeen_meanvalues.tex")
