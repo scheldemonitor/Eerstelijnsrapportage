@@ -1110,7 +1110,7 @@ if(html){  pal <- colorNumeric(viridis(n = 7),
     ggplot(aes()) +
     geom_sf(data = backgroundmap, aes(), fill = "lightgrey", alpha = 0.5) +
     # geom_sf_label(aes(label = Station), nudge_y = -3000, size = 3)  +
-    geom_sf(aes(color = Mediaan, size = Mediaan)) +
+    geom_sf(aes(color = Mediaan, size = 3)) +
     ggtitle(label = parname) +
     coord_sf(datum=28992)  +
     scale_color_viridis() +
