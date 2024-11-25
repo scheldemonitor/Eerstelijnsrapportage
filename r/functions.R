@@ -1280,10 +1280,10 @@ meetdichtheid <- function(df, stationName){
       ungroup() %>%
       filter(stationname == stationName) %>%
       group_by(parametername, year, stationname) %>%
-      summarize(n = n()) %>%
+      summarize(n = n(), .groups = "drop") %>%
       mutate(date = lubridate::ymd(paste(year, '06', '01'))) %>%
       ggplot(aes(date, parametername, color=n)) +
-      geom_text(aes(label = n), size = 4, nudge_x = -150) +
+      geom_text(aes(label = n), size = 3, nudge_x = -150) +
       coord_cartesian(
         xlim = c(
           as.Date("1998-07-01"),
@@ -1303,3 +1303,36 @@ meetdichtheid <- function(df, stationName){
   }
 }
 
+meetdichtheid_hydro <- function(df, stationName){
+  if (! stationName %in% trendstations) {
+    print ('stationname not found')
+  }
+  {
+    df %>%
+      ungroup() %>%
+      filter(stationname == stationName) %>%
+      # group_by(parametername, year, stationname) %>%
+      # summarize(n = n(), .groups = "drop") %>%
+      mutate(date = lubridate::ymd(paste(year, '06', '01'))) %>%
+      ggplot(aes(date, parametername)) +
+      geom_line(aes(size = datapoints), color = "steelblue4") +
+      # geom_text(aes(label = datapoints), size = 4, nudge_x = -150) +
+      coord_cartesian(
+        xlim = c(
+          as.Date("1998-07-01"),
+          NA_Date_),
+      ) +
+      scale_x_date(
+        position = "top",
+        date_breaks = "1 year", 
+        date_labels = "%y"
+      ) +
+      # scale_color_gradient(low = "#769FCA", high = "#FF6C65") + 
+      scale_size(range = c(1,6)) +
+      ggtitle(stationName) +
+      xlab('Jaar')+
+      ylab('Parameter') +
+      theme_minimal() +
+      theme(legend.position = "none")
+  }
+}
