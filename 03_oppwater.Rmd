@@ -136,10 +136,11 @@ plotTrendsSeizoen(df2, parname, sf = F)
 
 Figuur \@ref(fig:fysischSaliMaand) toont de maandelijkse medianen van de saliniteit per jaar voor de verschillende stations. Voor de wintermaanden is dit meestal maar één meetwaarde. Voor de zomermaanden zijn het voor Hansweert geul en Vlissingen boei SSVH twee à drie meetwaardes. De fluctuaties tussen de jaren zijn bij de meer bovenstroom gelegen stations gedurende de zomermaanden kleiner dan in de wintermaanden.
 
-```{r fysischSaliMaand, fig.width=10, fig.height=10,  fig.cap="Maandgemiddelde saliniteit in het oppervlaktewater van de Westerschelde en de monding." , out.width = "100%"}
+```{r fysischSaliMaand, fig.width=8, fig.height=10,  fig.cap="Maandgemiddelde saliniteit in het oppervlaktewater van de Westerschelde en de monding." , out.width = "100%"}
 #knitr::include_graphics("Figuren/Fysisch/Saliniteit/Maand.png")
 
-p <- plotTrendsMaand(df2, parname, sf = F)
+p <- plotTrendsMaand(df2, parname, sf = F) +
+  theme(legend.position = "bottom")
 
 # if(knitr::is_html_output()){
 #   ggplotly(p) %>% 
