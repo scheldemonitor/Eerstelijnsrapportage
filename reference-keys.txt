@@ -1,7 +1,5 @@
-tab:missingDatatab
 fig:getijgolf
 fig:metingenWaterstanden
-tab:metingenWaterstandenTab
 fig:hydroJaarEuro
 fig:hydroJaarRaan
 fig:hydroJaarCadz
@@ -447,7 +445,7 @@ fyto-resultaten-mixo-dino
 fyto-resultaten-mixo-overig
 fyto-resultaten-hetero-dino
 fyto-resultaten-hetero-overig
-references
+referenties
 BijlageA-overzicht-data
 BijlageA-gemeten-data
 BijlageA-hydrodynamiek
@@ -457,6 +455,8 @@ BijlageA-fysisch-zwevend
 BijlageA-fysisch-bodem
 BijlageA-fysisch-biota
 BijlageB-meetdichtheid
+hydro---waterstanden
+hydro---golven
 BijlageB-meetdichtheid-oppwater
 BijlageB-meetdichtheid-oppwater-schaar
 BijlageB-meetdichtheid-oppwater-hansweertgeul
