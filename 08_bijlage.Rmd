@@ -103,7 +103,7 @@ df_waterstanden %>%
   group_by(stationname, year, month, parametername) %>%
   summarise(datapoints = n(), .groups = "drop") %>%
   mutate(date = as_date(paste(year, month, "15"))) %>%
-  meetdichtheid_hydro(stationName = trendstations, no_of_columns = 2)
+  meetdichtheid_hydro(stationName = trendstations)
 
 ```
 
