@@ -11,4 +11,4 @@ bookdown::pdf_book:
     in_header: preamble.tex
   template: deltares-report-template.tex
   latex_engine: pdflatex
-  # citation_package: natbib # niet in combinatie met Deltares-template
+  citation_package: natbib # niet in combinatie met Deltares-template
