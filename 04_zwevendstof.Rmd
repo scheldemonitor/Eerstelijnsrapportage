@@ -56,7 +56,7 @@ Voor de bepaling van de fysisch-chemische parameters in het oppervlaktewater en 
 
 Voor de bepaling van de fysisch-chemische parameters in het zwevend stof vinden in het kader van MWTL maandelijkse vaartochten (tochtnummer 11) plaats, die de locaties Schaar van Ouden Doel en Vlissingen boei SSVH bemonsteren. De overige stations worden sinds 2007 niet meer gemonsterd en worden daarom niet meegenomen in dit rapport. Bij Schaar van Ouden Doel wordt maandelijks gemeten en bij Vlissingen eens per kwartaal. De monsters worden genomen met een doorstroomcentrifuge, waarbij een bepaalde hoeveelheid slib moet worden verzameld en afgeleverd aan het laboratorium voor analyse. In verband met het getij wordt ook altijd de saliniteit gemeten, zie Paragraaf \@ref(saliniteit). De stations zijn gepresenteerd in Figuur \@ref(fig:meetstationsZwevend) en zijn steeds gerangschikt in stroomafwaartse richting.
 
-```{r meetstationsZwevend, fig.cap="Ligging van de meetstations voor het zwevende stof"}
+```{r meetstationsZwevend, fig.width = 7, fig.height = 4, fig.cap="Ligging van de meetstations voor het zwevende stof"}
 # knitr::include_graphics("Figuren/Meetstations_zwevend.png")
 plotLocations(df)
 ```

@@ -189,7 +189,7 @@ Vanaf de Vlakte van de Raan in oostwaartse richting zakt de gemiddelde laagwater
 
 Daarnaast constateren we een toename van gemiddeld hoogwater en een afname van gemiddeld laagwater naarmate men meer stroomopwaarts (i.e. oostelijke richting) van de Westerschelde komt, zoals te zien in Figuur \@ref(fig:hydroGemiddeldLW) en Figuur \@ref(fig:hydroGemiddeldHW).
 
-```{r hydroGemiddeldLW, fig.cap="Mediaan van laagwater per station berekend op alle beschikbare data vanaf 1998."}
+```{r hydroGemiddeldLW, fig.width = 7, fig.height = 4, fig.cap="Mediaan van laagwater per station berekend op alle beschikbare data vanaf 1998."}
 
 #knitr::include_graphics("Figuren/Hydro/Waterstanden/gemiddeld_LW.png")
 
@@ -197,7 +197,7 @@ plotMedianMap(df_waterstanden, "Laagwater in cm+NAP") + theme_void()
 
 ```
 
-```{r hydroGemiddeldHW, fig.cap="Mediaan van hoogwater per station berekend op alle beschikbare data vanaf 1998"}
+```{r hydroGemiddeldHW, fig.width = 7, fig.height = 4, fig.cap="Mediaan van hoogwater per station berekend op alle beschikbare data vanaf 1998"}
 
 # knitr::include_graphics("Figuren/Hydro/Waterstanden/gemiddeld_HW.png")
 
@@ -549,7 +549,7 @@ knitr::kable(dt,
              caption = "Gewogen gemiddelde en maximale waardes voor de golfhoogte in cm (zowel $H_{1/3}$ als  $H_{m0}$) voor alle stations.")
 ```
 
-```{r gemiddeldeHs, fig.cap="Gewogen gemiddelde significante golfhoogte per station berekend op basis van het spectrum voor alle beschikbare data vanaf 1998."}
+```{r gemiddeldeHs, fig.width = 7, fig.height = 4, fig.cap="Gewogen gemiddelde significante golfhoogte per station berekend op basis van het spectrum voor alle beschikbare data vanaf 1998."}
 #knitr::include_graphics("Figuren/Hydro/Golven/gemiddelde_hm0.png")
 
 #plotMedianMap(df_golven, "Hm0: Significante golfhoogte uit 10mHz spectrum in cm")

@@ -74,7 +74,7 @@ Voor de bepaling van de fysisch-chemische parameters in het oppervlaktewater en 
 
 In totaal zijn er drie verschillende vaartochten waarbij telkens op vaste locaties in de Westerschelde monsters worden genomen van het oppervlaktewater, zie Figuur \@ref(fig:meetstationsOppervlakte). De frequentie van de vaartochten hangt af van de plaats en het seizoen. Het meetprotocol voor 2015 is terug te vinden in het meetplan MWTL 2015 @Bogaart-Scholte2012. Voor zover bekend is het meetprotocol in `r dataJaar` onveranderd ten opzichte van de jaren daarvoor. Schaar van Ouden Doel valt hierbij onder zoete wateren en wordt elke twee weken bemonsterd (26 metingen per jaar). In de zomermaanden (maart t/m september) wordt vaartocht 11 (Hansweert geulen, Vlissingen boei SSVH) twee keer per maand uitgevoerd en buiten deze periode en voor Terneuzen boei 20 eens per maand. Vaartocht 11 wordt altijd op eenzelfde tijdstip ten opzichte van hoogwater uitgevoerd en start één uur voor hoogwater in Vlissingen. Vaartocht 16 (Walcheren 2 en 20 km uit de kust) wordt maandelijks uitgevoerd en vindt plaats op willekeurige tijdstippen. Wanneer er van een van de parameters geen waardes zijn ingewonnen bij deze stations is er getracht het aantal stations dat wordt gepresenteerd aan te vullen met of station Wielingen en/of Hoedekenskerke, er zijn echter geen jaren waarin dit het geval is. De locaties van de meetstations die in deze sectie beschreven worden zijn weergegeven in Figuur \@ref(fig:meetstationsOppervlakte).
 
-```{r meetstationsOppervlakte, fig.cap="Ligging van de meetstations voor het oppervlaktewater."}
+```{r meetstationsOppervlakte, fig.width = 7, fig.height = 4,fig.cap="Ligging van de meetstations voor het oppervlaktewater."}
 plotLocations(df, angle__ = 30, nudge__y = 1000, nudge__x = 2000)
 ```
 
@@ -115,7 +115,7 @@ plotTrends(df2, parname, statmethod = sen)
 
 ```
 
-```{r gemiddeldSali, fig.cap="Mediaan saliniteit per station berekend op alle beschikbare gegevens vanaf 1998. "}
+```{r gemiddeldSali, fig.width = 7, fig.height = 4, fig.cap="Mediaan saliniteit per station berekend op alle beschikbare gegevens vanaf 1998. "}
 
 
 plotMedianMap(df2, parname)
@@ -184,7 +184,7 @@ De jaarmediane watertemperatuur ligt rond de 12 graden voor de Walcheren station
 plotTrends(df2, parname)
 ```
 
-```{r gemiddeldTemp, fig.cap="Mediaan voor de temperatuur per station berekend op alle beschikbare gegevens vanaf 2000"}
+```{r gemiddeldTemp, fig.width = 7, fig.height = 4, fig.cap="Mediaan voor de temperatuur per station berekend op alle beschikbare gegevens vanaf 2000"}
 #knitr::include_graphics("Figuren/Fysisch/Temperatuur/gemiddelde_waardes.png")
 
 df2 %>%
@@ -253,7 +253,7 @@ knitr::kable(dt,
 plotTrends(df2, parname)
 ```
 
-```{r gemiddeldZuurstof, fig.cap="Mediane verzadigingspercentage zuurstof per station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldZuurstof, fig.width = 7, fig.height = 4, fig.cap="Mediane verzadigingspercentage zuurstof per station berekend op alle beschikbare gegevens vanaf 1998."}
 #knitr::include_graphics("Figuren/Fysisch/Zuurstof_percentage/gemiddelde_waardes.png")
 parname = "Zuurstof in % in oppervlaktewater"
 
@@ -507,14 +507,14 @@ knitr::kable(dt,
 plotTrendsLimits(df2, parname, trend = T)
 ```
 
-```{r gemiddeldedoorz, fig.cap="Mediaan doorzicht per station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldedoorz, fig.width = 7, fig.height = 4, fig.cap="Mediaan doorzicht per station berekend op alle beschikbare gegevens vanaf 1998."}
 #knitr::include_graphics("Figuren/Fysisch/Doorzicht/gemiddelde_waardes.png")
 
 parname = "Doorzicht in dm in oppervlaktewater"
 plotMedianMap(df_doorzicht2, parname, reverse_scale = TRUE)
 ```
 
-```{r gemiddeldexti, fig.cap="Mediane extinctiecoefficiënt per station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldexti, fig.width = 7, fig.height = 4, fig.cap="Mediane extinctiecoefficiënt per station berekend op alle beschikbare gegevens vanaf 1998."}
 #knitr::include_graphics("Figuren/Fysisch/Extinctiecoefficient/gemiddelde_waardes.png")
 
 parname = "Lichtextinctie in /m in oppervlaktewater"
@@ -643,7 +643,7 @@ parname = "Stikstof in mg/l na filtratie in oppervlaktewater"
 plotTrends(df2, parname)
 ```
 
-```{r gemiddeldestikstoffil, fig.cap="Mediaan stikstofgehalte na filtratie per station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldestikstoffil, fig.width = 7, fig.height = 4, fig.cap="Mediaan stikstofgehalte na filtratie per station berekend op alle beschikbare gegevens vanaf 1998."}
 
 parname = "Stikstof in mg/l na filtratie in oppervlaktewater"
 
@@ -671,7 +671,7 @@ knitr::kable(dt,
 plotTrends(df2, parname)
 ```
 
-```{r gemiddeldestikstofpar, fig.cap="Mediane hoeveelheid particulair stikstofgehalte na filtratie per station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldestikstofpar, fig.width = 7, fig.height = 4, fig.cap="Mediane hoeveelheid particulair stikstofgehalte na filtratie per station berekend op alle beschikbare gegevens vanaf 1998."}
 
 plotMedianMap(df2, parname)
 ```
@@ -707,7 +707,7 @@ plotTrendsMaand(df2, parname) + coord_cartesian(ylim = c(0,NA))
 
 
 
-```{r gemiddeldeammonium, fig.cap="Mediaan  ammoniumgehalte per station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldeammonium, fig.width = 7, fig.height = 4, fig.cap="Mediaan  ammoniumgehalte per station berekend op alle beschikbare gegevens vanaf 1998."}
 
 parname = "Ammonium in mgN/l na filtratie in oppervlaktewater"
 plotMedianMap(df2, parname)
@@ -733,7 +733,7 @@ parname = "Nitriet in mgN/l na filtratie in oppervlaktewater"
 plotTrends(df2, parname)
 ```
 
-```{r gemiddeldenitriet, fig.cap="Mediaan  nitrietgehalte per station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldenitriet,fig.width = 7, fig.height = 4,  fig.cap="Mediaan  nitrietgehalte per station berekend op alle beschikbare gegevens vanaf 1998."}
 
 parname = "Nitriet in mgN/l na filtratie in oppervlaktewater"
 plotMedianMap(df2, parname)
@@ -759,7 +759,7 @@ knitr::kable(dt,
 plotTrends(df2, parname) + coord_cartesian(ylim = c(0,6))
 ```
 
-```{r gemiddeldenitraat, fig.cap="Mediaan  nitraatgehalte per station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldenitraat, fig.width = 7, fig.height = 4, fig.cap="Mediaan  nitraatgehalte per station berekend op alle beschikbare gegevens vanaf 1998."}
 plotMedianMap(df2, parname)
 ```
 
@@ -784,7 +784,7 @@ plotTrends(df2, parname) +
   coord_cartesian(ylim = c(0, 0.25))
 ```
 
-```{r gemiddeldeorthofosfaat, fig.cap="Mediaan  orthofosfaatgehalte per station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldeorthofosfaat, fig.width = 7, fig.height = 4, fig.cap="Mediaan  orthofosfaatgehalte per station berekend op alle beschikbare gegevens vanaf 1998."}
 
 plotMedianMap(df2, parname)
 ```
@@ -826,14 +826,14 @@ knitr::kable(dt,
 plotTrends(df2, parname)
 ```
 
-```{r gemiddeldefosfaatfil, fig.cap="Mediaan  fosfaatgehalte na filtratie per station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldefosfaatfil, fig.width = 7, fig.height = 4, fig.cap="Mediaan  fosfaatgehalte na filtratie per station berekend op alle beschikbare gegevens vanaf 1998."}
 
 parname <- "Fosfaat, totaal in mg/l na filtratie in oppervlaktewater"
 df2 <- verifyStations(df)
 plotMedianMap(df2, parname)
 ```
 
-```{r gemiddeldefosfaatpar, fig.cap="Mediaan  particulair gebonden fosfaatgehalte per station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldefosfaatpar, fig.width = 7, fig.height = 4, fig.cap="Mediaan  particulair gebonden fosfaatgehalte per station berekend op alle beschikbare gegevens vanaf 1998."}
 
 parname = "Fosfaat, totaal in mg/l particulair gebonden in oppervlaktewater" 
 df2 <- verifyStations(df)
@@ -862,7 +862,7 @@ knitr::kable(dt,
 plotTrends(df2, parname)
 ```
 
-```{r gemiddeldesilicaat, fig.cap="Mediaan  silicaatgehalte per station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldesilicaat, fig.width = 7, fig.height = 4, fig.cap="Mediaan  silicaatgehalte per station berekend op alle beschikbare gegevens vanaf 1998."}
 
 plotMedianMap(df2, parname)
 ```
@@ -925,13 +925,13 @@ plotTrendsSeizoen(df2, parname, sf = F)
 
 ```
 
-```{r gemiddeldekoolstofopg, fig.cap="Mediaan  opgeloste koolstofgehalte per station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldekoolstofopg, fig.width = 7, fig.height = 4, fig.cap="Mediaan  opgeloste koolstofgehalte per station berekend op alle beschikbare gegevens vanaf 1998."}
 # knitr::include_graphics("Figuren/Fysisch/Koolstof_opg/gemiddelde_waardes.png")
 parname <- "Opgelost organisch koolstof in mgC/l na filtratie in oppervlaktewater"
 plotMedianMap(df2, parname)
 ```
 
-```{r gemiddeldekoolstofpar, fig.cap="Mediaan  particulaire koolstofgehalte per station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldekoolstofpar, fig.width = 7, fig.height = 4, fig.cap="Mediaan  particulaire koolstofgehalte per station berekend op alle beschikbare gegevens vanaf 1998."}
 # knitr::include_graphics("Figuren/Fysisch/Koolstof_par/gemiddelde_waardes.png")
 
 parname <- "Particulair organisch koolstof in mg/l particulair gebonden in oppervlaktewater"
@@ -1127,7 +1127,7 @@ knitr::kable(dt,
 plotTrends(df2, parname)
 ```
 
-```{r gemiddeldeboortotaal, fig.cap="Mediaan totale boorgehalte station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldeboortotaal, fig.width = 7, fig.height = 4, fig.cap="Mediaan totale boorgehalte station berekend op alle beschikbare gegevens vanaf 1998."}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Boor_totaal_gemiddelde_waardes.png")
 
 parname = "Boor, totaal in ug/l in oppervlaktewater"
@@ -1156,7 +1156,7 @@ knitr::kable(dt,
 plotTrends(df2, parname)
 ```
 
-```{r gemiddeldeboorfil, fig.cap="Mediaan gefilterde boorgehalte station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldeboorfil, fig.width = 7, fig.height = 4, fig.cap="Mediaan gefilterde boorgehalte station berekend op alle beschikbare gegevens vanaf 1998."}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Boor_fil_gemiddelde_waardes.png")
 
 parname = "Boor, opgelost in ug/l na filtratie in oppervlaktewater"
@@ -1188,7 +1188,7 @@ knitr::kable(dt,
 plotTrends(df2, parname)
 ```
 
-```{r gemiddeldechroomtotaal, fig.cap="Mediaan totale chroomgehalte station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldechroomtotaal, fig.width = 7, fig.height = 4, fig.cap="Mediaan totale chroomgehalte station berekend op alle beschikbare gegevens vanaf 1998."}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Chroom_totaal_gemiddelde_waardes.png")
 
 parname = "Chroom, totaal in ug/l in oppervlaktewater"
@@ -1220,7 +1220,7 @@ knitr::kable(dt,
 plotTrends(df2, parname, trend = F)
 ```
 
-```{r gemiddeldechroomfil, fig.cap="Mediaan gefilterde chroomgehalte station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldechroomfil, fig.width = 7, fig.height = 4, fig.cap="Mediaan gefilterde chroomgehalte station berekend op alle beschikbare gegevens vanaf 1998."}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Chroom_fil_gemiddelde_waardes.png")
 
 parname = "Chroom, opgelost in ug/l na filtratie in oppervlaktewater"
@@ -1252,7 +1252,7 @@ knitr::kable(dt,
 plotTrends(df2, parname)
 ```
 
-```{r gemiddeldekopertotaal, fig.cap="Mediaan totale kopergehalte station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldekopertotaal, fig.width = 7, fig.height = 4, fig.cap="Mediaan totale kopergehalte station berekend op alle beschikbare gegevens vanaf 1998."}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Koper_totaal_gemiddelde_waardes.png")
 
 parname = "Koper, totaal in ug/l in oppervlaktewater"
@@ -1284,7 +1284,7 @@ knitr::kable(dt,
 plotTrends(df2, parname)
 ```
 
-```{r gemiddeldekoperfil, fig.cap="Mediaan gefilterde kopergehalte station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldekoperfil, fig.width = 7, fig.height = 4, fig.cap="Mediaan gefilterde kopergehalte station berekend op alle beschikbare gegevens vanaf 1998."}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Koper_fil_gemiddelde_waardes.png")
 
 parname = "Koper, opgelost in ug/l na filtratie in oppervlaktewater"
@@ -1316,7 +1316,7 @@ knitr::kable(dt,
 plotTrends(df2, parname)
 ```
 
-```{r gemiddeldeuratotaal, fig.cap="Mediaan totale uraniumgehalte station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldeuratotaal, fig.width = 7, fig.height = 4, fig.cap="Mediaan totale uraniumgehalte station berekend op alle beschikbare gegevens vanaf 1998."}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Uranium_totaal_gemiddelde_waardes.png")
 
 parname = "Uranium, totaal in ug/l in oppervlaktewater"
@@ -1348,7 +1348,7 @@ knitr::kable(dt,
 plotTrends(df2, parname)
 ```
 
-```{r gemiddeldeurafil, fig.cap="Mediaan gefilterde uraniumgehalte station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldeurafil, fig.width = 7, fig.height = 4, fig.cap="Mediaan gefilterde uraniumgehalte station berekend op alle beschikbare gegevens vanaf 1998."}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Uranium_fil_gemiddelde_waardes.png")
 
 parname = "Uranium, opgelost in ug/l na filtratie in oppervlaktewater"
@@ -1380,7 +1380,7 @@ knitr::kable(dt,
 plotTrends(df2, parname)
 ```
 
-```{r gemiddeldevanatotaal, fig.cap="Mediaan totale vanadiumgehalte station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldevanatotaal, fig.width = 7, fig.height = 4, fig.cap="Mediaan totale vanadiumgehalte station berekend op alle beschikbare gegevens vanaf 1998."}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Vanadium_totaal_gemiddelde_waardes.png")
 
 parname = "Vanadium, totaal in ug/l in oppervlaktewater"
@@ -1412,7 +1412,7 @@ knitr::kable(dt,
 plotTrends(df2, parname)
 ```
 
-```{r gemiddeldevanafil, fig.cap="Mediaan gefilterde Vanadiumgehalte station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldevanafil, fig.width = 7, fig.height = 4, fig.cap="Mediaan gefilterde Vanadiumgehalte station berekend op alle beschikbare gegevens vanaf 1998."}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Vanadium_fil_gemiddelde_waardes.png")
 
 parname = "Vanadium, opgelost in ug/l na filtratie in oppervlaktewater"
@@ -1447,7 +1447,7 @@ knitr::kable(dt,
 plotTrends(df2, parname)
 ```
 
-```{r gemiddeldezinkfil, fig.cap="Mediaan van het gefilterde zinkgehalte station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldezinkfil, fig.width = 7, fig.height = 4, fig.cap="Mediaan van het gefilterde zinkgehalte station berekend op alle beschikbare gegevens vanaf 1998."}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Zink_fil_gemiddelde_waardes.png")
 
 parname = "Zink, totaal in ug/l in oppervlaktewater"
@@ -1479,7 +1479,7 @@ knitr::kable(dt,
 plotTrends(df2, parname)
 ```
 
-```{r gemiddeldezinktotaal, fig.cap="Mediaan van het totale zinkgehalte station berekend op alle beschikbare gegevens vanaf 1998."}
+```{r gemiddeldezinktotaal, fig.width = 7, fig.height = 4, fig.cap="Mediaan van het totale zinkgehalte station berekend op alle beschikbare gegevens vanaf 1998."}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Zink_totaal_gemiddelde_waardes.png")
 
 parname = "Zink, opgelost in ug/l na filtratie in oppervlaktewater"
