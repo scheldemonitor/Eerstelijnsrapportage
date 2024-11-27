@@ -1303,17 +1303,17 @@ meetdichtheid <- function(df, stationName){
   }
 }
 
-meetdichtheid_hydro <- function(df, stationName){
+meetdichtheid_hydro <- function(df, stationName, no_of_columns=2){
   if (! stationName %in% trendstations) {
     print ('stationname not found')
   }
   {
     df %>%
       ungroup() %>%
-      filter(stationname == stationName) %>%
+      filter(stationname %in% stationName) %>%
       # group_by(parametername, year, stationname) %>%
       # summarize(n = n(), .groups = "drop") %>%
-      mutate(date = lubridate::ymd(paste(year, '06', '01'))) %>%
+      # mutate(date = lubridate::ymd(paste(year, '06', '01'))) %>%
       ggplot(aes(date, parametername)) +
       geom_line(aes(size = datapoints), color = "steelblue4") +
       # geom_text(aes(label = datapoints), size = 4, nudge_x = -150) +
@@ -1324,15 +1324,17 @@ meetdichtheid_hydro <- function(df, stationName){
       ) +
       scale_x_date(
         position = "top",
-        date_breaks = "1 year", 
+        # breaks = pretty_dates(n = 5),
+        date_breaks = "2 years",
         date_labels = "%y"
       ) +
       # scale_color_gradient(low = "#769FCA", high = "#FF6C65") + 
       scale_size(range = c(1,6)) +
-      ggtitle(stationName) +
+      # ggtitle(stationName) +
       xlab('Jaar')+
       ylab('Parameter') +
       theme_minimal() +
-      theme(legend.position = "none")
+      theme(legend.position = "none") +
+      facet_wrap(facets = "stationname", ncol = no_of_columns)
   }
 }

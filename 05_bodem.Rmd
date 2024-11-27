@@ -65,9 +65,7 @@ df_clean <- df %>%
 Eens in de drie jaar worden monsters genomen van het bodemmateriaal in de Westerschelde. Figuur \@ref(fig:meetstationsBodem) laat de 12 bemonsteringslocaties zien die in 2016 zijn gebruikt. De locatie Walcheren 2 km uit de kust is sinds 2010 niet meer gemeten. Resultaten van dit station zijn terug te vinden in de Eerstelijnsrapportage 2010.
 
 ```{r meetstationsBodem, fig.cap="Ligging van de meetstations voor het bodemmateriaal"}
-plotLocations(df_clean, nudge__y = 000, nudge__x = 1000, angle = 65) +
-  coord_sf(xlim = c(20000, 90000), ylim = c(370000, 400000), datum=28992)
-# knitr::include_graphics("Figuren/Meetstations_bodem.png")
+plotLocations(df_clean, nudge__y = 2000, nudge__x = 1000, angle = 65)
 ```
 
 ## Metalen {#bodem-metalen}
