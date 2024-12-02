@@ -369,7 +369,8 @@ parnames <- c(
   "Tributyltin in ug/kg drooggewicht in zwevend stof"
 )
 
-df <- data.table::fread(file.path(datapath, fysChemZwevendDataPath))
+# df <- data.table::fread(file.path(datapath, fysChemZwevendDataPath))
+df <- readr::read_csv(file.path(datapath, fysChemZwevendDataPath))
 
 df2 <- df %>% 
   filter(stationname %in% c(trendstations)) %>% 
