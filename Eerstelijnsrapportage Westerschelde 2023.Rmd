@@ -4,13 +4,13 @@ subtitle: 2023
 author: "Deltares"
 date: '`r Sys.Date()`'
 site: bookdown::bookdown_site
-documentclass: book
-bibliography: [bib/westerschelde.bib]
+# documentclass: book
+bibliography: bib/westerschelde.bib
 biblio-style: apalike
 link-citations: yes
 always_allow_html: yes
 params:
-  draft: true
+  draft: false
 ---
 ```{r include=FALSE, cache=FALSE}
 # example R options set globally
@@ -56,7 +56,7 @@ addLegend <- leaflet::addLegend
 
 ```
 
-# Voorwoord {.unnumbered}
+# Voorwoord {}
 
 ```{r, message=FALSE, warning=FALSE, include=FALSE}
 
@@ -90,7 +90,10 @@ De verdere duiding van deze en Vlaamse gegevens wordt gedaan in de 6-jarige cycl
 ## Versie {.unnumbered #rapportversie}
 
 ```{asis, echo = params$draft}
-Deze rapportage is een conceptversie. Niets mag geciteerd worden zonder toestemming van de makers.  
+Deze rapportage is een conceptversie. Niets mag geciteerd worden zonder toestemming van de makers.
+```
+```{asis, echo = !params$draft}
+Deze rapportage is een conceptversie. Niets mag geciteerd worden zonder toestemming van de makers.
 ```
 
 Eerstelijnsrapportages worden elk jaar gemaakt. Hieronder is informatie over de datum van deze rapportage, en tot welk jaar de gegevens zijn verwerkt. 
@@ -5418,19 +5421,8 @@ knitr::opts_chunk$set(
 	# fig.width = 7,
 	cache = F
 )
-
-# source("r/tex2Rtable.R")
-source("r/functions.R")
-require(smwfs)
-require(stringr)
-require(ggplot2)
-require(knitr)
 require(kableExtra)
 ```
-
-# Referenties
-
-<div id="refs"></div>
 
 # (APPENDIX) Appendix {-} 
 
@@ -5782,7 +5774,8 @@ parnames <- c(
   "Tributyltin in ug/kg drooggewicht in zwevend stof"
 )
 
-df <- data.table::fread(file.path(datapath, fysChemZwevendDataPath))
+# df <- data.table::fread(file.path(datapath, fysChemZwevendDataPath))
+df <- readr::read_csv(file.path(datapath, fysChemZwevendDataPath))
 
 df2 <- df %>% 
   filter(stationname %in% c(trendstations)) %>% 

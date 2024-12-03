@@ -285,6 +285,7 @@ fig:fyto8
 fig:fyto9
 fig:fyto10
 tab:indelingFytoplanktonBijlage
+voorwoord
 inleiding
 achtergrond
 doelstelling
@@ -445,7 +446,6 @@ fyto-resultaten-mixo-dino
 fyto-resultaten-mixo-overig
 fyto-resultaten-hetero-dino
 fyto-resultaten-hetero-overig
-referenties
 BijlageA-overzicht-data
 BijlageA-gemeten-data
 BijlageA-hydrodynamiek
