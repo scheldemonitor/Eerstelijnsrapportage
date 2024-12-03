@@ -13,12 +13,12 @@ params:
   draft: false
 ---
 
-# Voorwoord {}
+# Voorwoord {.unnumbered}
 
 ```{r, message=FALSE, warning=FALSE, include=FALSE}
 
 # options(tinytex.verbose = TRUE)
-knitr::opts_chunk$set(echo = FALSE,	message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(echo = FALSE,	message = FALSE, warning = FALSE, cache = T)
 
 ```
 

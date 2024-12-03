@@ -26,7 +26,7 @@ De projecten die in het kader van de OntwikkelingsSchets 2010 (OS2010) zijn uitg
 
 Deze projecten kunnen ook niet-gewenste neveneffecten hebben op het functioneren van het estuarium. De resultaten van deze projecten worden gemonitord via geïntegreerde systeemmonitoring. Naast OS2010 zijn er nog andere programma’s die invloed hebben op de kwaliteiten van het systeem, zoals maatregelen ten behoeve van de Kaderrichtlijn Water (KRW) en emissievergunningen (e.g. de rioolwaterzuiveringen in Vlaanderen). 
 
-Voor de monitoring en de ontwikkelingen rond de derde verruiming in het kader van de Ontwikkelingsschets 2010 (OS2010) dienen gevalideerde gegevens en gegevensrapporten geleverd te worden. Deze gegevensrapportage betreft de zogenaamde eerstelijnsrapportage van de monitoring van de Westerschelde en de monding. Elk jaar wordt er een nieuwe eerstelijnsrapportage opgeleverd (@ELR2010, @ELR2011, @ELR2012, @ELR2013, @ELR2014, @ELR2015, @ERL2016, @ERL2017). Dit is de negende eerstelijnsrapportage. 
+Voor de monitoring en de ontwikkelingen rond de derde verruiming in het kader van de Ontwikkelingsschets 2010 (OS2010) dienen gevalideerde gegevens en gegevensrapporten geleverd te worden. Deze gegevensrapportage betreft de zogenaamde eerstelijnsrapportage van de monitoring van de Westerschelde en de monding. Elk jaar wordt er een nieuwe eerstelijnsrapportage opgeleverd (https://www.scheldemonitor.org/nl/eerstelijnsrapportage).
 
 ## Doelstelling {#doelstelling}
 

@@ -1,6 +1,5 @@
 
 book_filename: "Eerstelijnsrapportage Westerschelde 2023"
-
 rmd_files: [
   "index.Rmd",
   "01_inleiding.Rmd",
@@ -10,10 +9,11 @@ rmd_files: [
   "05_bodem.Rmd",
   "06_biota.Rmd",
   "07_fytoplankton.Rmd",
+  "075_referenties.Rmd",
   "08_bijlage.Rmd",
   "werkwijze.Rmd"
 ]
-delete_merged_file: false
+delete_merged_file: true
 before_chapter_script: _common.R
 language:
   label:
@@ -34,4 +34,4 @@ language:
     solution: "Solution. "
   ui:
     chapter_name: "Hoofdstuk "
-    appendix_name: "Bijlage"
+    appendix_name: "Bijlage "
