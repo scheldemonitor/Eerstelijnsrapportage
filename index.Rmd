@@ -4,9 +4,8 @@ subtitle: 2023
 author: "Deltares"
 date: '`r Sys.Date()`'
 site: bookdown::bookdown_site
-documentclass: book
-bibliography:
-- bib/westerscheldewillem.bibtex]
+# documentclass: book
+bibliography: bib/westerschelde.bib
 biblio-style: apalike
 link-citations: yes
 always_allow_html: yes
@@ -14,7 +13,7 @@ params:
   draft: false
 ---
 
-# Voorwoord {.unnumbered}
+# Voorwoord {}
 
 ```{r, message=FALSE, warning=FALSE, include=FALSE}
 

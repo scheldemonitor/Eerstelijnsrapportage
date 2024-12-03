@@ -1,5 +1,6 @@
 \def\tightlist{}
 \documentclass[signature, dutch, biblatex]{deltares_report}
+% \bibliography{bib/westerscheldewillem,bib/library}
 $if(highlighting-macros)$
 $highlighting-macros$
 $endif$
@@ -13,9 +14,9 @@ $if(csl-refs)$
 \setlength{\cslentryspacingunit}{\parskip}
 % for Pandoc 2.8 to 2.10.1
 \newenvironment{cslreferences}%
-  {$if(csl-hanging-indent)$\setlength{\parindent}{0pt}%
-  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces$endif$}%
-  {\par}
+ {$if(csl-hanging-indent)$\setlength{\parindent}{0pt}%
+ \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces$endif$}%
+ {\par}
 % For Pandoc 2.11+
 \newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
  {% don't indent paragraphs
