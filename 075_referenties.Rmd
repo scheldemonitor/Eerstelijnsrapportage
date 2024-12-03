@@ -1,0 +1,7 @@
+# Referenties
+
+<div id="refs"></div>
+
+```{=latex}
+\printallbibliography
+```
