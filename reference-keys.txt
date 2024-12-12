@@ -285,6 +285,8 @@ fig:fyto8
 fig:fyto9
 fig:fyto10
 tab:indelingFytoplanktonBijlage
+samenvatting
+rapportversie
 inleiding
 achtergrond
 doelstelling
