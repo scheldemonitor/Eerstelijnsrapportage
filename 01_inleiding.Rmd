@@ -53,7 +53,7 @@ In de figuren met een kaart wordt gebruik gemaakt van coördinaten in het stelse
 
 ### Ontbrekende gegevens {#ontbrekende-data}
 
-Bij het samenstellen van deze rapportage is ook gelet op compleetheid van gegevens. In bijlage \@ref:BijlageB-meetdichtheid is in zogenaamde meetdichtheidsmatrices weergegeven welke gegevens uit de Scheldemonitor zijn gehaald.
+Bij het samenstellen van deze rapportage is ook gelet op compleetheid van gegevens. In bijlage \@ref(BijlageB-meetdichtheid) is in zogenaamde meetdichtheidsmatrices weergegeven welke gegevens uit de Scheldemonitor zijn gehaald.
 
 <!-- In Tabel \@ref(tab:missingDatatab) staat een overzicht van de ontbrekende gegevens. Het ontbreken van gegevens kan de resultaten beïnvloeden, vooral als er gemiddelden uit berekend worden. In voorkomende gevallen is een opmerking bij de figuur toegevoegd. -->
 

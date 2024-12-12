@@ -79,8 +79,6 @@ plotLocations(df_waterstanden, nudge__y = -1000, nudge__x = 1000, angle = 20) +
 
 In de grafieken (Figuur \@ref(fig:hydroJaarEuro) tot en met Figuur \@ref(fig:hydroJaarBath)) onderstaand en op de volgende pagina's zijn de hoog- en laagwaterstanden ten opzichte van NAP of MSL (Mean Sea Level) per jaar gemiddeld en uitgezet in de tijd. Gemiddelde hoogwaterstanden worden weergegeven in het bovenste gedeelte van de grafiek en gemiddelde laagwaterstanden worden weergegeven in het onderste gedeelte. Voor jaren met missende data voor twee of meer maanden worden de gemiddeldes met lijnen weergegeven. Aan deze gemiddeldes kan minder waarde gehecht worden. De volgorde waarin de stations zijn weergegeven is stroomopwaarts: vanaf het Europlatform in de Noordzee tot de Belgische grens.
 
-Het station Schaar van de Noord heeft voor 2014 geen data. In 2013 is alleen data beschikbaar tot juli 2013, dus slechts ongeveer een half jaar. Het jaar 2013 lijkt voor Schaar van de Noord een lagere waarde te geven (zie Figuur \@ref(fig:hydroJaarSvdn)), maar het kan zijn dat de lengte van de dataset van 2013 dit gemiddelde beïnvloedt. De laatste twee jaren geven waardes die in het verlengde liggen van de jaren voor 2013.
-
 *Let op: de y-assen van de figuren verschillen van elkaar.*
 
 ```{r hydroJaarEuro, eval=T, fig.cap="Jaargemiddelde hoog- en laagwaterstanden bij het Europlatform"}
@@ -275,7 +273,7 @@ if(knitr::is_html_output()){
 } else p
 ```
 
-De 18,6-jarige getijdencyclus heeft een grote invloed op de resultaten en is duidelijk zichtbaar in de figuren. De 18,6-jarige cyclus zorgt voor een periodieke toe- en afname van de waterstand en getijslag en is maximaal rond 1997 en 2014. Dit geldt voor stations zowel binnen als buiten de Westerschelde. Na 2014 is de getijslag weer toegenomen. De getijslag wordt groter stroomopwaarts. De versterking in de stroomopwaartse richting wordt voornamelijk veroorzaakt door de vorm van het estuarium (ondieper en smaller in stroomopwaartse richting).
+De 18,6-jarige getijdencyclus heeft een grote invloed op de resultaten en is duidelijk zichtbaar in de figuren. De 18,6-jarige cyclus zorgt voor een periodieke toe- en afname van de waterstand en getijslag en is maximaal rond 1997 en 2014. Dit geldt voor stations zowel binnen als buiten de Westerschelde. Na 2014 is de getijslag weer afgenomen. De getijslag wordt groter stroomopwaarts. De versterking in de stroomopwaartse richting wordt voornamelijk veroorzaakt door de vorm van het estuarium (ondieper en smaller in stroomopwaartse richting).
 
 ```{r hydroGetijslagGemiddeld, fig.cap="Mediaan van getijslag per station berekend op alle beschikbare data vanaf 1998"}
 #knitr::include_graphics("Figuren/Hydro/Waterstanden/gemiddelde_getijslag.png")
@@ -314,7 +312,6 @@ df_getijslag %>% #st_drop_geometry() %>%
 
 ```
 
-In 2013 en 2014 werd de licht stijgende trend in de getijslag sinds 2007 doorgezet, conform de 18,6-jarige cyclus. Sinds 2015 neemt de getijslag juist weer licht af (figuur \@ref(fig:hydroGetijslag)), wat strookt met het idee dat de 18,6-jarige cyclus de dominante oorzaak is van de trend in de getijslag. Dit wordt ook door de licht dalende trend in 2017 bevestigd. Dit lijkt niet op te gaan voor Breskens dat nog wel een stijgende lijn laat zien in 2016 ten opzichte van 2015, maar voor de periode na september 2016 zijn voor Breskens geen gegevens beschikbaar en kan de trend hierdoor niet worden bevestigd. In 2018 stijgt de getijslag ten opzichte van 2017 bij bijna alle stations. Terwijl in 2019 de getijslag t.o.v. 2018 weer daalt. Hierdoor lijkt de trend zich weer voort te zetten.
 
 ### Getijcomponenten {#hydroGetijcomponenten}
 
