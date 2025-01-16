@@ -2,6 +2,8 @@
 require(tidyverse)
 # refresh locally stored data by downloading from Scheldemonitor
 
+source("r/functions.r")
+
 dataIDpath <- "datasetIDs.xlsx"
 sheets <- readxl::excel_sheets(dataIDpath)
 
@@ -16,21 +18,53 @@ IDs <- lapply(
 
 # Hydrodynamiek - waterstanden
 
-refresh_waterstanden <- function(base_path, datajaar){
-  Waterstand <- c(9695,9694,2438,2439)
-  for(jaar in 1950:datajaar){
+refresh_waterstanden <- function(datajaar){
+  Waterstand <- c(
+    9695,9694, # HW, LW NAP
+    10873,10874, # HW, LW MSL
+    2438, 2439   # Amplitude, fase
+  ) 
+  for(jaar in 1998:datajaar){
     df <- smwfs::getSMdata(startyear = jaar, endyear = jaar + 1, parID = c(Waterstand), datasetID = c(476,1527,945))
-    write.csv(df, paste(savepathh, "Data_Hydro_waterstanden_", jaar,'.csv', sep = ""))
+    write.csv(df, file = file.path(savepath, paste0("Data_Hydro_waterstanden_", jaar,'.csv', sep = "")), row.names = F)
   }
+  
+  allFiles <- list.files(file.path(savepath), pattern = "Data_Hydro_waterstanden_", full.names = T)
+  allFiles <- allFiles[!grepl("all", allFiles)]
+
+  df <- lapply(
+    allFiles, function(x) # nameless function. Wat hierna staat wordt uitgevoerd voor elke elemente van allFiles
+      read_delim(x, delim = ",", col_types = cols(.default = "c",
+                                                  datetime = "T",
+                                                  latitude = "d",
+                                                  longitude = "d",
+                                                  value = "d")) %>%
+      select( # kolomnamen van kolommen die je wilt behouden
+        stationname,
+        latitude,
+        longitude,
+        datetime,
+        parametername,
+        class,
+        value) #%>%
+  ) %>% bind_rows() # alles wordt geplakt
+  
+  write_delim(df, file.path(savepath, paste0("Data_Hydro_waterstanden_all_", ".csv")), delim = ",")
+  rm(df)
+  
 }
 
 # Hydrodynamiek - golven
 
 refresh_golven <- function(datajaar){
-  Golven <- c(2599,2601,1816,2594,2596,2597,2598)
-  for(jaar in 1998:datajaar){
+  Golven <- c(
+    2599,2601, # Hm0
+    1816, 2594, # H3, TH3
+    2596,2597,2598 # TM02
+  )
+  for(jaar in 2014:datajaar){
     df <- smwfs::getSMdata(startyear = jaar, endyear = jaar + 1, parID = c(Golven), datasetID = c(8032))
-    write.csv(df, paste(savepath,"Data_Hydro_golven_", jaar,'.csv', sep = ""))
+    write.csv(df, file.path(savepath,paste0("Data_Hydro_golven_", jaar,'.csv')), row.names = F)
   }
 
   # bewerkingen
@@ -78,7 +112,7 @@ df2 <- df %>%
     str_detect(parametername, "TM02") ~ "TM02: Golfperiode berekend uit het spectrum in 0.1 s",
     str_detect(parametername, "Hm0") ~ "Hm0: Significante golfhoogte uit 10mHz spectrum in cm"))
 
-write_delim(df2, file.path(savepath, "Data_Hydro_, datajaar, .csv"), delim = ",")
+write_delim(df2, file.path(savepath, paste0("Data_Hydro_golven_all", ".csv")), delim = ",")
 rm(df)
 
 }
@@ -88,7 +122,7 @@ rm(df)
 # Fysisch-chemisch - oppervlaktewater
 
 refresh_fysischchemischoppwater <- function(startyear = 1998, endyear, filepath = "Data_FysChem_opp.csv"){
-  Saliniteit <- c(998)
+  Saliniteit <- c(13611) #998
   Temperatuur <- c(1046)
   Zuurstof <- c(1214,1213)
   Chlorofyl_a <- c(238,1800)
@@ -104,7 +138,10 @@ refresh_fysischchemischoppwater <- function(startyear = 1998, endyear, filepath 
   #df <- get_y_SMdata(2019, 2020, parID)
   df <- smwfs::get_y_SMdata(startyear = startyear, endyear = endyear, parID = parID)
   df <- df[!df$dataprovider == "8", ] # remove metingen van scan-tochten
-  write_csv(df, file.path(savepath, filepath))
+  if (nrow(df) != nrow(df %>% select(-FID) %>% distinct())) {
+    df <- df %>% select(-FID) %>% distinct()
+  }
+  write.csv(df, file.path(savepath, filepath), row.names=FALSE)
 }
 
 
@@ -125,7 +162,10 @@ refresh_fysischchemischzwevendstof <- function(startyear = 1998, endyear, filepa
     # map( ~ mutate(.x, id = as.numeric(id))) %>%
     bind_rows()
   df <- df[!df$dataprovider == "8", ] # remove metingen van scan-tochten
-  write.csv(df, file.path(savepath, filepath))
+  if (nrow(df) != nrow(df %>% select(-FID) %>% distinct())) {
+    df <- df %>% select(-FID) %>% distinct()
+  }
+  write.csv(df, file.path(savepath, filepath), row.names = FALSE)
 }
 
 # Fysisch-chemisch - bodem
@@ -146,7 +186,10 @@ df <- lapply(parIDs, function(x) getSMdata(startyear, endyear, propname = retrie
   bind_rows()
 
 df <- df[!df$dataprovider == "8", ] # remove metingen van scan-tochten
-write.csv(df, filepath)
+if (nrow(df) != nrow(df %>% select(-FID) %>% distinct())) {
+  df <- df %>% select(-FID) %>% distinct()
+}
+write.csv(df, file.path(savepath, filepath), row.names = F)
 
 }
 
@@ -166,8 +209,10 @@ refresh_fysischchemischbiota <- function(startyear = 1998, endyear, filepath = "
     bind_rows()
   
   # df <- df[!df$dataprovider == "8", ] # remove metingen van scan-tochten
-  write.csv(df, file.path(datapath, filepath))
-  
+  #if (nrow(df) != nrow(df %>% select(-FID) %>% distinct())) {
+  #  df <- df %>% select(-FID) %>% distinct()
+  #}
+  write.csv(df, file.path(savepath, filepath), row.names = FALSE)
 }
 
 
@@ -177,8 +222,11 @@ refresh_fytoplanktondata <- function(){
   url = "http://geo.vliz.be/geoserver/wfs/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=Dataportal%3Abiotic_observations&resultType=results&viewParams=where%3Aobs.context+%26%26+ARRAY%5B1%5D+AND+imisdatasetid+IN+%28949%29%3Bcontext%3A0001%3Bloggedin%3A1&propertyName=stationname%2Caphiaid%2Cscientificname%2Cobservationdate%2Clongitude%2Clatitude%2Cvalue%2Cparametername%2Cdataprovider%2Cimisdatasetid%2Cdatasettitle%2Cdatafichetitle%2Cdataficheid%2Careaname%2Cdateprecision%2Cstadium%2Cgender%2Cvaluesign%2Cdepth%2Cclassunit%2Cclass%2Cstandardparameterid%2Cparameterunit&outputFormat=csv"
 
   df.fytoplankton <- read_csv(url)
-  
-  write.csv(df.fytoplankton, file.path(savepath, paste('fytoplankton', today(), '.csv')))
+  if (nrow(df.fytoplankton) != nrow(df.fytoplankton %>% select(-FID) %>% distinct())) {
+    df.fytoplankton <- df.fytoplankton %>% select(-FID) %>% distinct()
+  }
+  write.csv(df.fytoplankton, file.path(savepath, paste0('fytoplankton', dataJaar, '.csv')), row.names = F)
   
   
   }
+

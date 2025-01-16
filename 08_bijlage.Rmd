@@ -1,20 +1,8 @@
 
 ```{r setupBijlage, include=FALSE}
 
-knitr::opts_chunk$set(
-	out.width = "85%"
-)
+require(kableExtra)
 ```
-
-```{r}
-# Load function to write Latex table structure to R 
-source("r/tex2Rtable.R")
-
-```
-
-# References
-
-<div id="refs"></div>
 
 # (APPENDIX) Appendix {-} 
 
@@ -24,7 +12,7 @@ Alle gegevens in dit rapport is geleverd door Rijkswaterstaat aan Scheldemonitor
 
 ## Gemeten data {#BijlageA-gemeten-data}
 
-Deze rapportage bevat de beschikbare hydrodynamische, fysisch-chemische en biologische data in de periode 1996 - `r dataJaar` voor de Westerschelde en de monding. Bepaalde data wordt (al enige tijd) niet meer gemeten en opgenomen in de rapportage. Dit betreft:
+Deze rapportage bevat de beschikbare hydrodynamische, fysisch-chemische en biologische data in de periode 1998 - `r dataJaar` voor de Westerschelde en de monding. Bepaalde data wordt (al enige tijd) niet meer gemeten en opgenomen in de rapportage. Dit betreft:
 
 * Continu meting; opgenomen in rapportages tot en met 2016
   + Eerstelijnsrapportage Westerschelde 2015
@@ -66,182 +54,585 @@ knitr::include_graphics("Figuren/Tabellen/bodem.png")
 
 ### Biota (compartiment 60) {#BijlageA-fysisch-biota}
 
-```{r bijlageAFysischBiotaFig}
+```{r bijlageAFysischBiotaFig, include=FALSE}
 knitr::include_graphics("Figuren/Tabellen/biota.png")
 ```
 
 # Meetdichtheidmatrices {#BijlageB-meetdichtheid}
 
+De meetdichtheidsmatrices geven voor ieder jaar aan hoe vaak elke parameter is gemeten.
+
+## Hydro - Waterstanden
+
+```{r}
+frozendatapath <- file.path(datapath, paste0("Data_Hydro_waterstanden_all_", ".csv"))
+
+trendstations <- c("Europlatform","Vlakte van de Raan","Cadzand","Westkapelle","Breskens Veerhaven","Vlissingen","Gat van Borssele","Overloop van Hansweert", "Terneuzen", "Hansweert", "Walsoorden", "Baalhoek", "Schaar van de Noord", "Bath")
+
+df_waterstanden <- read_delim(frozendatapath, delim = ",", guess_max = 200000) %>%
+  mutate(stationname = ifelse(
+    stationname == "Euro Platform", "Europlatform", stationname)
+  ) %>%
+  filter(stationname %in% trendstations)
+
+```
+
+```{r, fig.height=10, fig.width=8}
+df_waterstanden %>%
+  filter(grepl("water", parametername, ignore.case = T)) %>%
+  ungroup() %>%
+  mutate(
+    year = year(datetime),
+    month = month(datetime)
+  ) %>%
+  group_by(stationname, year, month, parametername) %>%
+  summarise(datapoints = n(), .groups = "drop") %>%
+  mutate(date = as_date(paste(year, month, "15"))) %>%
+  meetdichtheid_hydro(stationName = trendstations)
+
+```
+
+
+
+
+
+
+
+## Hydro - Golven
+
+```{r read-golven-md}
+trendstations <- c("Bath (BAT2)","Hansweert (HAWI)","Cadzand (CAWI)","Cadzand (CADW)","Overloop van Hansweert (OVHW)","Deurloo (DEUR)","Honte (HNTE)","Hoofdplaat (HFPL)","Overloop van Valkenisse (OVVA)","Pas van Terneuzen (PVT)","Wielingen (WIEL)")
+
+frozendatapath <- file.path(datapath, paste0("Data_Hydro_golven_all_", dataJaar, ".csv"))
+
+# df_golven <- read_delim(frozendatapath, delim = ",", guess_max = 200000) %>% 
+df_golven <- read_delim(
+  "https://watersysteemdata.deltares.nl/thredds/fileServer/watersysteemdata/Westerschelde/Scheldemonitor/2023/Data_Hydro_golven_all.csv", 
+  delim = ",", 
+  guess_max = 200000, 
+  show_col_types = FALSE
+  )
+
+``` 
+
+
+```{r, fig.height=10, fig.width=8}
+
+# fix names
+df_golven_md <- df_golven %>% 
+  filter(stationname %in% trendstations) %>%
+  mutate(stationname = factor(stationname, levels = trendstations)) %>%
+  mutate(value = case_when(
+    str_detect(parametername, "TH3") ~ value / 10,
+    str_detect(parametername, "H3") ~ value,
+    str_detect(parametername, "TM02") ~ value / 10,
+    str_detect(parametername, "Hm0") ~ value,
+  )) %>%
+  mutate(value_max = case_when(
+    str_detect(parametername, "TH3") ~ value_max / 10,
+    str_detect(parametername, "H3") ~ value_max,
+    str_detect(parametername, "TM02") ~ value_max / 10,
+    str_detect(parametername, "Hm0") ~ value_max,
+  )) %>%
+  mutate(parametername = case_when(
+    str_detect(parametername, "TH3") ~ "TH3: Gemiddelde periode van de golven waaruit H3 bepaald is in s",
+    str_detect(parametername, "H3") ~ "H3: Gemiddelde hoogte van het 1/3 deel hoogste golven in cm",
+    str_detect(parametername, "TM02") ~ "TM02: Golfperiode berekend uit het spectrum in s",
+    str_detect(parametername, "Hm0") ~ "Hm0: Significante golfhoogte uit 10mHz spectrum in cm")) %>%
+  mutate(parametername = gsub(":.*","",parametername)) %>%
+  mutate(date = as.Date(datetime))
+
+# plot
+meetdichtheid_hydro(df_golven_md, stationName = trendstations)
+
+# base::lapply(trendstations, 
+#         function(x){
+# meetdichtheid_hydro(df_golven_md , stationName = x)          
+#         })
+
+```
+lapply()
+
 ## Oppervlaktewater {#BijlageB-meetdichtheid-oppwater}
+
+```{r laadDataOppwater, cache.lazy=FALSE}
+
+fysChemOppDataPath <- "Data_FysChem_opp.csv"
+
+trendstations <- c(
+  "Schaar van Ouden Doel",
+  "Hansweert geul",
+  "Terneuzen boei 20",
+  "Vlissingen boei SSVH",
+  "Walcheren 2 km uit de kust",
+  "Walcheren 20 km uit de kust"
+)
+
+parnames <- c("Saliniteit in DIMSLS in oppervlaktewater",
+              "Temperatuur in graden celcius in oppervlaktewater", 
+              "Zuurstof in % in oppervlaktewater",
+              "Chlorofyl a in ug/l in oppervlaktewater",
+              "Feofytine a in ug/l in oppervlaktewater",
+              "Chemisch zuurstofverbruik in mgO2/l in oppervlaktewater",
+              "Biochemisch zuurstofverbruik met allylthio-ureum in mg/l in oppervlaktewater",
+              "Doorzicht in dm in oppervlaktewater", "Lichtextinctie in /m in oppervlaktewater", 
+              "Zwevend stof in mg/l in oppervlaktewater", 
+              "Stikstof in mg/l na filtratie in oppervlaktewater",
+              "Stikstof in mg/l particulair gebonden in oppervlaktewater", 
+              "Ammonium in mgN/l na filtratie in oppervlaktewater", 
+              "Nitriet in mgN/l na filtratie in oppervlaktewater",
+              "Nitraat in mgN/l na filtratie in oppervlaktewater", 
+              "Orthofosfaat, gefiltreerd in mgP/l in oppervlaktewater", 
+              "Fosfaat, totaal in mg/l na filtratie in oppervlaktewater", 
+              "Fosfaat, totaal in mg/l particulair gebonden in oppervlaktewater", 
+              "Silicaat in mg/l uitgedrukt in silicium na filtratie in oppervlaktewater",
+              "Opgelost organisch koolstof in mgC/l na filtratie in oppervlaktewater",
+              "Particulair organisch koolstof in mg/l particulair gebonden in oppervlaktewater",
+              "Boor, totaal in ug/l in oppervlaktewater", 
+              "Boor, opgelost in ug/l na filtratie in oppervlaktewater", 
+              "Chroom, totaal in ug/l in oppervlaktewater", 
+              "Chroom, opgelost in ug/l na filtratie in oppervlaktewater", 
+              "Koper, totaal in ug/l in oppervlaktewater", 
+              "Koper, opgelost in ug/l na filtratie in oppervlaktewater", 
+              "Uranium, totaal in ug/l in oppervlaktewater", 
+              "Uranium, opgelost in ug/l na filtratie in oppervlaktewater", 
+              "Vanadium, totaal in ug/l in oppervlaktewater", 
+              "Vanadium, opgelost in ug/l na filtratie in oppervlaktewater",
+              "Zink, totaal in ug/l in oppervlaktewater", 
+              "Zink, opgelost in ug/l na filtratie in oppervlaktewater"
+)
+
+# df <- data.table::fread(file.path(datapath, fysChemOppDataPath), select = c('id', 'latitude', 'longitude', 'stationname', 'depth', 'datetime', 'value', 'parametername', 'parameternunit', 'valuesign', 'category'))  
+df <- readr::read_csv(file.path(datapath, fysChemOppDataPath)) #%>% select(-X1)
+
+checkparnames <- T #Apply when certain that the parnames vector contains all the parameters used in the oppwater section
+
+if(checkparnames){
+  df2 <- df %>% 
+    filter(stationname %in% trendstations) %>% 
+    filter(parametername %in% parnames) %>% 
+    mutate(stationname = factor(stationname, levels =c(trendstations))) %>%
+    mutate(parametername = factor(parametername, levels = c(parnames))) %>% 
+    mutate(year = lubridate::year(datetime)) %>% 
+    ungroup() %>% 
+    mutate(parametername = gsub(" in oppervlaktewater", "", parametername))} else {
+      df2 <- df %>% 
+        filter(stationname %in% c(trendstations)) %>% 
+        mutate(stationname = factor(stationname, levels = c(trendstations))) %>%
+        ungroup() %>% 
+        mutate(year = lubridate::year(datetime)) %>% 
+        filter(grepl('oppervlaktewater', parametername)) %>%
+        mutate(parametername = gsub(" in oppervlaktewater", "", parametername)) %>% 
+        mutate(parametername = gsub(" in het oppervlaktewater", "", parametername))
+    }
+
+df3 <- df2 %>% distinct(id, stationname, parametername, year) #some measurements are copied in the data, they have different FIDs but the same id
+
+#df_clean <- df %>% 
+#  filter(stationname %in% trendstations) %>% 
+#  mutate(stationname = factor(stationname, levels = trendstations)) %>%
+#  repair_limits() %>%
+#  group_by(parametername, stationname) %>%
+#  mutate(across(value, remove_outliers))
+
+
+# meetdichtheid <- function(df, stationName){
+#   if (! stationName %in% trendstations) {
+#     print ('stationname not found')
+#   }
+#     {
+#     df3 %>%
+#       ungroup() %>%
+#       filter(stationname == stationName) %>%
+#       group_by(parametername, year, stationname) %>%
+#       summarize(n = n()) %>%
+#       mutate(date = lubridate::ymd(paste(year, '06', '01'))) %>%
+#       ggplot(aes(date, parametername, color=n)) +
+#       geom_text(aes(label = n), size = 3) +
+#       scale_x_date(
+#         position = "top",
+#         date_breaks = "1 year", date_labels = "%y"
+#       )+
+#       scale_color_gradient(low = "#769FCA", high = "#FF6C65") + 
+#       theme(legend.position = "none") +xlab('Jaar')+ylab('Parameter')+
+#       ggtitle(paste('Oppervlaktewater', stationName))
+#   }
+# }
+# 
+
+```
+
 
 ### Schaar van Ouden Doel {#BijlageB-meetdichtheid-oppwater-schaar}
 
 ```{r meetdichtheidOppwaterSchaar}
-dt <- tex2dt("Figuren/Meetdichtheid/schaar_opp.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Schaar van Ouden Doel met hierin  het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
+stationName <- "Schaar van Ouden Doel"
+
+meetdichtheid(df3, stationName)
+
 ```
 
 ### Hansweert geul {#BijlageB-meetdichtheid-oppwater-hansweertgeul}
 
 ```{r meetdichtheidOppwaterHans}
-dt <- tex2dt("Figuren/Meetdichtheid/hans_opp.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Hansweert geul met hierin  het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
+
+stationName = 'Hansweert geul'
+meetdichtheid(df3, stationName)
 ```
 
 ### Terneuzen boei 20 {#BijlageB-meetdichtheid-oppwater-terneuzen}
 
 ```{r meetdichtheidOppwaterTerneuzen}
-dt <- tex2dt("Figuren/Meetdichtheid/tern_opp.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Terneuzen boei 20 met hierin  het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
+stationName = 'Terneuzen boei 20'
+meetdichtheid(df3, stationName)
 ```
 
 ### Vlissingen boei SSVH {#BijlageB-meetdichtheid-oppwater-vlissingen}
 
 
 ```{r meetdichtheidOppwaterVlissingen}
-dt <- tex2dt("Figuren/Meetdichtheid/vlis_opp.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Vlissingen boei SSVH met hierin  het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
+stationName = 'Vlissingen boei SSVH'
+meetdichtheid(df3, stationName)
 ```
 
 ### Walcheren 2 km uit de kust {#BijlageB-meetdichtheid-oppwater-walcheren2km}
 
 ```{r meetdichtheidOppwaterWal2km}
-dt <- tex2dt("Figuren/Meetdichtheid/w2_opp.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Walcheren 2 km uit de kust met hierin  het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
+stationName = 'Walcheren 2 km uit de kust'
+meetdichtheid(df3, stationName)
 ```
 
 ### Walcheren 20 km uit de kust {#BijlageB-meetdichtheid-oppwater-walcheren20km}
 
 ```{r meetdichtheidOppwaterWal20km}
-dt <- tex2dt("Figuren/Meetdichtheid/w20_opp.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen in het oppervlaktewater bij Walcheren 20 km uit de kust met hierin  het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
+stationName = 'Walcheren 20 km uit de kust'
+meetdichtheid(df3, stationName)
 ```
 
 ## Zwevende stof {#BijlageB-meetdichtheid-zwevend}
 
+```{r laaddataZwevendStof}
+
+fysChemZwevendDataPath <- "Data_FysChem_zwevend.csv"
+
+trendstations <- c(
+  "Schaar van Ouden Doel", 
+  "Vlissingen boei SSVH"
+)
+
+parnames <- c(
+  "Korrelgroottefractie tot 63 um in % drooggewicht in zwevend stof", 
+  "Korrelgroottefractie tot 2 um in % drooggewicht in zwevend stof", 
+  "Arseen in mg/kg drooggewicht in zwevend stof",
+  "Cadmium in mg/kg drooggewicht in zwevend stof",
+  "Chroom in mg/kg drooggewicht in zwevend stof",
+  "Kobalt in mg/kg drooggewicht in zwevend stof",
+  "Koper in mg/kg drooggewicht in zwevend stof",
+  "Kwik in mg/kg drooggewicht in zwevend stof",
+  "Lood in mg/kg drooggewicht in zwevend stof",
+  "Vanadium in mg/kg drooggewicht in zwevend stof",
+  "Zink in mg/kg drooggewicht in zwevend stof",
+  "Antraceen in mg/kg drooggewicht in zwevend stof",
+  "Benzo(a)pyreen in mg/kg drooggewicht in zwevend stof",
+  "Benzo(g,h,i)peryleen in mg/kg drooggewicht in zwevend stof",
+  "Benzo(a)antraceen in mg/kg drooggewicht in zwevend stof",
+  "Benzo(k)fluorantheen in mg/kg drooggewicht in zwevend stof",
+  "Chryseen in mg/kg drooggewicht in zwevend stof",
+  "Fenantreen in mg/kg drooggewicht in zwevend stof",
+  "Fluorantheen in mg/kg drooggewicht in zwevend stof",
+  "Indeno(1,2,3-c,d)pyreen in mg/kg drooggewicht in zwevend stof",
+  "Naftaleen in mg/kg drooggewicht in zwevend stof",
+  "2,2',3,4,4',5,5'-Heptachloorbifenyl (PCB180) in ug/kg drooggewicht in zwevend stof",
+  "2,2',3,4,4',5'-Hexachloorbifenyl (PCB138) in ug/kg drooggewicht in zwevend stof",
+  "2,2',4,4',5,5'-Hexachloorbifenyl (PCB153) in ug/kg drooggewicht in zwevend stof",
+  "2,2',4,5,5'-Pentachloorbifenyl (PCB101) in ug/kg drooggewicht in zwevend stof",
+  "2,2',5,5'-Tetrachloorbifenyl (PCB52) in ug/kg drooggewicht in zwevend stof",
+  "2,3',4,4',5-Pentachloorbifenyl (PCB118) in ug/kg drooggewicht in zwevend stof",
+  "2,4,4'-Trichloorbifenyl (PCB28) in ug/kg drooggewicht in zwevend stof",
+  "Dieldrin in ug/kg drooggewicht in zwevend stof",
+  "Hexachloorbenzeen in ug/kg drooggewicht in zwevend stof",
+  "Tributyltin in ug/kg drooggewicht in zwevend stof"
+)
+
+# df <- data.table::fread(file.path(datapath, fysChemZwevendDataPath))
+df <- readr::read_csv(file.path(datapath, fysChemZwevendDataPath))
+
+df2 <- df %>% 
+  filter(stationname %in% c(trendstations)) %>% 
+  mutate(stationname = factor(stationname, levels = c(trendstations))) %>%
+  filter(parametername %in% parnames) %>% 
+  mutate(parametername = gsub(" drooggewicht in zwevend stof", "", parametername)) %>% 
+  mutate(parametername = ifelse(
+    grepl("\\(PCB\\d+\\)", parametername), 
+    sub(".*\\((PCB\\d+)\\).*", paste("\\1", 'in ug/kg'), parametername), 
+    parametername)
+  ) %>% 
+  ungroup() %>% 
+  mutate(year = lubridate::year(datetime))
+
+df3 <- df2 %>% distinct(id, stationname, parametername, year) #some measurements are copied in the data, they have different FIDs but the same id
+
+# meetdichtheid <- function(df, stationName){
+#   if (! stationName %in% trendstations) {
+#     print ('stationname not found')
+#   }
+#   {
+#     df3 %>%
+#       ungroup() %>%
+#       filter(stationname == stationName) %>%
+#       group_by(parametername, year, stationname) %>%
+#       summarize(n = n()) %>%
+#       mutate(date = lubridate::ymd(paste(year, '06', '01'))) %>%
+#       ggplot(aes(date, parametername, color=n)) +
+#       geom_text(aes(label = n), size = 3) +
+#       scale_x_date(
+#         position = "top",
+#         date_breaks = "1 year", date_labels = "%y"
+#       )+
+#       scale_color_gradient(low = "#769FCA", high = "#FF6C65") + 
+#       theme(legend.position = "none")
+#   }
+# }
+
+```
+
 ### Schaar van Ouden Doel {#BijlageB-meetdichtheid-zwevend-schaar}
 
 ```{r meetdichtheidZwevendSchaar}
-dt <- tex2dt("Figuren/Meetdichtheid/schaar_zwevend.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen in het zwevende stof bij Schaar van Ouden Doel met hierin  het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
+stationName <- 'Schaar van Ouden Doel'
+meetdichtheid(df3, stationName)
 ```
 
 ### Vlissingen boei SSVH {#BijlageB-meetdichtheid-zwevend-vlissingen}
 
 ```{r meetdichtheidZwevendVlissingen}
-dt <- tex2dt("Figuren/Meetdichtheid/vlis_zwevend.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen in het zwevende stof bij Vlissingen boei SSVH met hierin  het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
+stationName <- 'Vlissingen boei SSVH'
+meetdichtheid(df3, stationName)
+```
+
+## Bodem {BijlageB-meetdichtheid-bodem}
+
+```{r laaddataBodem}
+
+fysChemBodemDataPath <- "Data_FysChem_bodem.csv"
+
+trendstations <- c('Schaar van Ouden Doel',
+"Bath boei 68",
+"Bath boei 71",
+"Speelmansgat",
+"Kruiningen Perkpolder (drempel)",
+"Hansweert boei OHMG",
+"Hoedekenskerke boei 4",
+"Baarland drempel",
+"Terneuzen boei WPT2",
+"Borssele drempel",
+"Vlissingen boei SSVH",
+"Wielingen oost"
+)
+
+parnames <- c(
+  "Arseen in mg/kg drooggewicht in bodem/sediment",
+  "Cadmium in mg/kg drooggewicht in bodem/sediment",
+  "Chroom in mg/kg drooggewicht in bodem/sediment",
+  "Koper in mg/kg drooggewicht in bodem/sediment", 
+  "Kwik in mg/kg drooggewicht in bodem/sediment",
+  "Lood in mg/kg drooggewicht in bodem/sediment",
+  "Zink in mg/kg drooggewicht in bodem/sediment",
+  "Antraceen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment",
+  "Benzo(a)antraceen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment",
+  "Benzo(a)pyreen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment",
+  "Benzo(g,h,i)peryleen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment",
+  "Benzo(k)fluorantheen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment",
+  "Chryseen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment",
+  "Fenantreen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment",
+  "Fluorantheen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment",
+  "Indeno(1,2,3-c,d)pyreen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment",
+  "2,2',3,4,4',5,5'-Heptachloorbifenyl (PCB180) in ug/kg drooggewicht in bodem/sediment",
+  "2,2',3,4,4',5'-Hexachloorbifenyl (PCB138) in ug/kg drooggewicht in bodem/sediment",
+  "2,2',4,4',5,5'-Hexachloorbifenyl (PCB153) in ug/kg drooggewicht in sediment",
+  "2,2',4,5,5'-Pentachloorbifenyl (PCB101) in ug/kg drooggewicht in sediment",
+  "2,2',5,5'-Tetrachloorbifenyl (PCB52) in ug/kg drooggewicht in bodem/sediment",
+  "2,3',4,4',5-Pentachloorbifenyl (PCB118) in ug/kg drooggewicht in sediment",
+  "2,4,4'-Trichloorbifenyl (PCB28) in ug/kg drooggewicht in bodem/sediment",
+  "Tributyltin in ug/kg drooggewicht in bodem/sediment", 
+  "Tributyltin in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+)
+
+df <- read_delim(file.path(datapath, fysChemBodemDataPath), delim = ",")
+
+df2 <- df %>% 
+  filter(stationname %in% c(trendstations)) %>% 
+  mutate(stationname = factor(stationname, levels = c(trendstations))) %>%
+  filter(parametername %in% parnames) %>% 
+  mutate(parametername = gsub(" drooggewicht in bodem/sediment", "", parametername)) %>% 
+  #mutate(parametername = ifelse(
+  #  grepl("\\(PCB\\d+\\)", parametername), 
+  #  sub(".*\\((PCB\\d+)\\).*", paste("\\1", 'in ug/kg'), parametername), 
+  #  parametername)
+  #) %>% 
+  ungroup() %>% 
+  mutate(year = lubridate::year(datetime))
+
+```
+
+
+```{r meetdichtheidBodemSchaar}
+stationName <- 'Schaar van Ouden Doel'
+meetdichtheid(df2, stationName)
+```
+
+```{r meetdichtheidBodemBath68}
+stationName <- 'Bath boei 68'
+meetdichtheid(df2, stationName)
+```
+
+```{r meetdichtheidBodemBath71}
+stationName <- 'Bath boei 71'
+meetdichtheid(df2, stationName)
+```
+
+```{r meetdichtheidBodemSpeelmansgat}
+stationName <- 'Speelmansgat'
+meetdichtheid(df2, stationName)
+```
+
+```{r meetdichtheidBodemKruiningen}
+stationName <- 'Kruiningen Perkpolder (drempel)'
+meetdichtheid(df2, stationName)
+```
+
+```{r meetdichtheidBodemHansweert}
+stationName <- 'Hansweert boei OHMG'
+meetdichtheid(df2, stationName)
+```
+
+```{r meetdichtheidBodemHoedenkenskerke}
+stationName <- 'Hoedekenskerke boei 4'
+meetdichtheid(df2, stationName)
+```
+
+```{r meetdichtheidBodemBaarland}
+stationName <- 'Baarland drempel'
+meetdichtheid(df2, stationName)
+```
+
+```{r meetdichtheidBodemTerneuzen}
+stationName <- 'Terneuzen boei WPT2'
+meetdichtheid(df2, stationName)
+```
+
+```{r meetdichtheidBodemBorssele}
+stationName <- 'Borssele drempel'
+meetdichtheid(df2, stationName)
+```
+
+```{r meetdichtheidBodemVlissingen}
+stationName <- 'Vlissingen boei SSVH'
+meetdichtheid(df2, stationName)
+```
+
+```{r meetdichtheidBodemWielingen}
+stationName <- 'Wielingen oost'
+meetdichtheid(df2, stationName)
 ```
 
 ## Biota {#BijlageB-meetdichtheid-biota}
+Informatie over de ophoping van stoffen in biota is niet meegenomen in deze rapportage
 
-### Bot {#BijlageB-meetdichtheid-biota-bot}
+```{r}
+frozendataPath <- "Data_FysChem_biota.csv"
+df <- read_delim(file = file.path(datapath, frozendataPath), delim = ",")
+df2 <- df %>% 
+  repair_limits() %>%
+  ungroup() %>%
+    group_by(datetime, latitude, longitude, stationname, parametername, parameterunit, scientificname, class, category) %>%
+  summarize(value = mean(value), n = n()) %>%
+  ungroup()
 
-```{r meetdichtheidBiotaBot}
-dt <- tex2dt("Figuren/Meetdichtheid/bot.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota bot bij Middelgat met hierin het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
 ```
 
-### Mosselen {#BijlageB-meetdichtheid-biota-mossel}
+## Stoffen in biota - overzicht van de metingen (naar bijlage)
 
-#### Metaal - natgewicht {#BijlageB-meetdichtheid-biota-mossel-metaal-nat}
+```{r diagnostiek, fig.height=10, fig.width=10}
+df2 %>%
+  filter(
+    scientificname %in% c("Mytilus edulis", "Platichthys flesus", "Crassostrea gigas")
+  ) %>%
+  mutate(year = year(datetime)) %>%
+  group_by(parametername, scientificname, category, year, stationname) %>%
+  summarize(n = mean(n)) %>%
+  mutate(tissue = case_when(
+    grepl("vlees", parametername, ignore.case = T) ~ "vlees",
+    grepl("lever", parametername, ignore.case = T) ~ "lever",
+    grepl("gal", parametername, ignore.case = T) ~ "gal",
+    grepl("spier", parametername, ignore.case = T) ~ "spier",
+  )) %>%
+  mutate(meting = case_when(
+    grepl("natgewicht", parametername, ignore.case = T) ~ "natgewicht",
+    grepl("drooggewicht", parametername, ignore.case = T) ~ "drooggewicht"
+  )) %>%
+  # filter(is.na(meting)) %>% distinct(parametername) # rest parameters
+  # filter(is.na(tissue)) %>% distinct(parametername) # rest parameters
+  drop_na(tissue, meting) %>%
+  group_by(scientificname, category, tissue, meting, year, stationname) %>%
+  summarize(n = mean(n)) %>%
+  # filter(grepl("PCB", parametername)) %>%
+  ggplot(aes(year, category)) +
+  geom_point(aes(size = n, color = scientificname), alpha = 0.5) +
+  theme(
+    legend.position = "top"
+    ) +
+  facet_wrap(vars(stationname, interaction(tissue, meting))) +
+  theme(
+    axis.text.x = element_text(angle = 90),
+    strip.text.y = element_text(angle = 0)
+    )
 
-```{r meetdichtheidBiotaMosselMetaal1a}
-dt <- tex2dt("Figuren/Meetdichtheid/metaal_1a.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Hoedekenskerke boei 4 met hierin het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
 ```
 
-```{r meetdichtheidBiotaMosselMetaal2a}
-dt <- tex2dt("Figuren/Meetdichtheid/metaal_2a.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Hooge Platen met hierin het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
-```
+## overzicht overige parameters
 
-```{r meetdichtheidBiotaMosselMetaal3a}
-dt <- tex2dt("Figuren/Meetdichtheid/metaal_3a.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Knuitershoek met hierin het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
-```
+```{r, fig.height=8, fig.width=10}
+df2 %>%
+  group_by(parametername, scientificname, category) %>%
+  summarize(n = mean(n)) %>%
+  mutate(tissue = case_when(
+    grepl("vlees", parametername, ignore.case = T) ~ "vlees",
+    grepl("lever", parametername, ignore.case = T) ~ "lever",
+    grepl("gal", parametername, ignore.case = T) ~ "gal",
+    grepl("spier", parametername, ignore.case = T) ~ "spier",
+  )) %>%
+  mutate(meting = case_when(
+    grepl("natgewicht", parametername, ignore.case = T) & !grepl("percentage", parametername, ignore.case = T) ~ "natgewicht",
+    grepl("drooggewicht", parametername, ignore.case = T) & !grepl("percentage", parametername, ignore.case = T) ~ "drooggewicht"
+  )) %>%
+  filter(is.na(meting) | is.na(tissue)) %>% 
+  group_by(scientificname, parametername, category, tissue, meting) %>%
+  summarize(n = mean(n)) %>%
+  ggplot(aes(parametername, scientificname)) +
+  geom_point(aes(size = n)) +
+  coord_flip() +
+  theme(
+    legend.position = "top"
+    ) +
+  facet_grid(. ~ tissue) +
+  theme(axis.text.x = element_text(angle = 90))
 
-#### Metaal - drooggewicht {#BijlageB-meetdichtheid-biota-mossel-metaal-droog}
-
-
-```{r meetdichtheidBiotaMosselMetaal1b}
-dt <- tex2dt("Figuren/Meetdichtheid/metaal_1b.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Hansweert boei OHMG met hierin het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
-```
-
-```{r meetdichtheidBiotaMosselMetaal2b}
-dt <- tex2dt("Figuren/Meetdichtheid/metaal_2b.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen metaal bij Vlissingen boei SSVH met hierin het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
-```
-
-#### PAK en PCB - drooggewicht {#BijlageB-meetdichtheid-biota-mossel-PAK-PCB-droog}
-
-```{r meetdichtheidBiotaMosselPCBdroog1}
-dt <- tex2dt("Figuren/Meetdichtheid/droog_1.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen PAK en PCB bij Hansweert boei OHMG met hierin het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
-```
-
-```{r meetdichtheidBiotaMosselPCBdroog2}
-dt <- tex2dt("Figuren/Meetdichtheid/droog_2.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen PAK en PCB bij Vlissingen boei SSVH met hierin het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
-```
-
-#### PAK en PCB - natgewicht {#BijlageB-meetdichtheid-biota-mossel-PAK-PCB-nat}
-
-```{r meetdichtheidBiotaMosselPCBnat1}
-dt <- tex2dt("Figuren/Meetdichtheid/nat_1.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen PCB en PBDEs bij Knuitershoek met hierin het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
-```
-
-#### Overige {#BijlageB-meetdichtheid-biota-mossel-overig}
-
-```{r meetdichtheidBiotaMosseloverig}
-dt <- tex2dt("Figuren/Meetdichtheid/overige_1.tex")
-kableExtra::kbl(dt, col.names = c("Parameter","08","09","10","11","12","13","14","15","16","17","18","19"),
-             caption = "Meetdichtheidsmatrices voor metingen biota mosselen overige bij Knuitershoek met hierin het aantal metingen per parameter en per jaar.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
 ```
 
 # Indeling fytoplankton {#BijlageC-fytoplankton}
 
 ```{r indelingFytoplanktonBijlage}
-dt <- tex2dt("Figuren/Tabellen/fytoplankton.tex")
-kableExtra::kbl(dt, col.names = c("Naam","Code","BTX","AphiaID","Trofie","Groep"),
-             caption = "Indeling van fytoplankton in trofies en groepen.") %>%
-   kableExtra::kable_styling(latex_options = "scale_down")
+specieslist <- read_csv(file.path(datapath, "Specieslist_zelfuitgebreid.csv"))
+specieslist <- specieslist %>% select(soortnaam, TWN, TWN2, trofie, groep) %>% arrange(soortnaam)
+
+if(knitr::is_html_output()) {
+    knitr::kable(specieslist, col.names = c("Naam","BTX","AphiaID","Trofie","Groep"),
+             caption = "Indeling van fytoplankton in trofies en groepen.")
+ 
+} else {kableExtra::kable(specieslist, longtable = TRUE, booktabs = TRUE, col.names = c("Naam","BTX","AphiaID","Trofie","Groep"),caption = "Indeling van fytoplankton in trofies en groepen.") %>%
+  kable_styling(latex_options = c("repeat_header"))
+}  
+
 ```
 

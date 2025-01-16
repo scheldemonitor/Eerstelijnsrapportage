@@ -1,5 +1,6 @@
 \def\tightlist{}
 \documentclass[signature, dutch, biblatex]{deltares_report}
+% \bibliography{bib/westerscheldewillem,bib/library}
 $if(highlighting-macros)$
 $highlighting-macros$
 $endif$
@@ -13,9 +14,9 @@ $if(csl-refs)$
 \setlength{\cslentryspacingunit}{\parskip}
 % for Pandoc 2.8 to 2.10.1
 \newenvironment{cslreferences}%
-  {$if(csl-hanging-indent)$\setlength{\parindent}{0pt}%
-  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces$endif$}%
-  {\par}
+ {$if(csl-hanging-indent)$\setlength{\parindent}{0pt}%
+ \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces$endif$}%
+ {\par}
 % For Pandoc 2.11+
 \newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
  {% don't indent paragraphs
@@ -40,8 +41,8 @@ $if(csl-refs)$
 $endif$
 \begin{document}
 \title{Eerstelijn Rapportage Westerschelde}
-\subtitle{1998 - 2020}
-\author{W. Stolte, B. van Rongen}
+\subtitle{1998 - 2022}
+\author{W. Stolte, J. Rienstra}
 \partner{}
 
 \client{Rijkswaterstaat WVL, VNSC}
@@ -49,19 +50,19 @@ $endif$
 \reference{}
 \keywords{hydrodynamiek, waterkwaliteit, zwevend stof, sediment, biota, fytoplankton}
 
-\version{2021}
-\date{16-08-2022}
+\version{2023}
+\date{03-12-2023}
 \projectnumber{1209394}
 \documentid{}
 \status{definitief}
 \disclaimer{}
 % \references{References}
 
-\authori{Willem Stolte, Bob van Rongen}
+\authori{Willem Stolte, Jelle Rienstra}
 \organisationi{Deltares}
 \versioni{1.0}
-\datei{22-02-2023}
-\revieweri{Peter Herman}
+\datei{03-12-2023}
+\revieweri{Arno Nolte}
 \approvali{Toon Segeren}
 \publisheri{Deltares}
 

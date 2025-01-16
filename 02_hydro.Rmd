@@ -1,5 +1,3 @@
-
-
 ```{r setupHydro, include=FALSE}
 
 require(smwfs)
@@ -10,18 +8,24 @@ require(viridis)
 require(plotly)
 
 source("r/functions.R")
+
+refreshWaterstanden = FALSE
+refreshGolven = FALSE
+
 ```
 
-```{r downloadHydro, include = F}
+```{r downloadHydro, include = T}
 
-refresh = FALSE
-source("r/refresh_data.R")
+frozendatapath <- file.path(datapath, paste0("Data_Hydro_waterstanden_all_", ".csv"))
+
 # this step can at the moment only be done at Deltares because of access to the fileserver. 
-if(refresh) refresh_waterstanden(base_path = savepath, datajaar = 2020)
+if(refreshWaterstanden){
+  source("r/refresh_data.R")
+  refresh_waterstanden(datajaar = dataJaar)
+} 
 
 trendstations <- c("Europlatform","Vlakte van de Raan","Cadzand","Westkapelle","Breskens Veerhaven","Vlissingen","Gat van Borssele","Overloop van Hansweert", "Terneuzen", "Hansweert", "Walsoorden", "Baalhoek", "Schaar van de Noord", "Bath")
 
-frozendatapath <- file.path(datapath, "Data_Hydro_1950_2020_new.csv")
 df_waterstanden <- read_delim(frozendatapath, delim = ",", guess_max = 200000) %>%
   mutate(stationname = ifelse(
     stationname == "Euro Platform", "Europlatform", stationname)
@@ -31,9 +35,6 @@ df_waterstanden <- read_delim(frozendatapath, delim = ",", guess_max = 200000) %
   # repair_limits() #%>%
   # group_by(parametername, stationname) #%>%
   # mutate(across(value, remove_outliers))
-
-
-
 ```
 
 # Hydrodynamiek {#hydro}
@@ -48,24 +49,23 @@ Dit hoofdstuk betreft metingen van de waterbeweging in de Westerschelde en de mo
 knitr::include_graphics("Figuren/Inscape/getijgolf.png")
 ```
 
-De waterstanden in de Westerschelde worden voor het grootste deel bepaald door het getij. Het getij ontstaat door de aantrekkende kracht van de maan en de zon op de aarde. De variaties in het getij ontstaan door de draaiing van de aarde en de positie van de aarde t.o.v. de maan en de zon en doordat de maan en de aarde zich in een baan rond de zon bewegen. Daarnaast wordt het getij vervormd door de bodemligging van zeeën en oceanen. Wiskundig gezien is het getij een combinatie van een groot aantal sinusvormige golven: de getijcomponenten. De hoofdcomponent van het getij is de M2-component, die wordt veroorzaakt door de aantrekkingskracht van de maan op de aarde en een periode heeft van ongeveer 12 uur en 25 minuten. De S2 component is een soortgelijke component (een periode van ongeveer 12 uur) maar is gegenereerd door de aantrekkingskracht van de zon op de aarde. De S2-component is samen met M2 verantwoordelijk voor de springtij-doodtij variatie. Hogere harmonische getijcomponenten (zoals M4) worden vaak als 'overtides' aangeduid. M4 is het eerste overtide en is gegenereerd door eerste orde niet-lineaire processen. M4 is de eerste hogere harmonische component en is samen met M2 van belang voor sedimenttransport. De belangrijkste periodieke variaties in het getij zorgen voor de zogeheten dagelijkse ongelijkheid (Figuur \@ref(fig:getijgolf)), de springtij-doodtij cyclus en de 18,6-jarige cyclus. De 18,6-jarige cyclus wordt veroorzaakt door de afwijking van het baanvlak van de maan ten opzichte van het baanvlak van de aarde (de knopen- of drakencyclus). De invloed van de knopencyclus is sinus-vormig en geeft een verhoging of verlaging van de zeespiegel in een willekeurig jaar van maximaal 13 mm. De langjarige trend wordt niet beïnvloed door deze cyclus. Zie Paragraaf \@ref(hydroGetijcomponenten) voor meer informatie over de getijden. 
+De waterstanden in de Westerschelde worden voor het grootste deel bepaald door het getij. Het getij ontstaat door de aantrekkende kracht van de maan en de zon op de aarde. De variaties in het getij ontstaan door de draaiing van de aarde en de positie van de aarde t.o.v. de maan en de zon en doordat de maan en de aarde zich in een baan rond de zon bewegen. Daarnaast wordt het getij vervormd door de bodemligging van zeeën en oceanen. Wiskundig gezien is het getij een combinatie van een groot aantal sinusvormige golven: de getijcomponenten. De hoofdcomponent van het getij is de M2-component, die wordt veroorzaakt door de aantrekkingskracht van de maan op de aarde en een periode heeft van ongeveer 12 uur en 25 minuten. De S2 component is een soortgelijke component (een periode van ongeveer 12 uur) maar is gegenereerd door de aantrekkingskracht van de zon op de aarde. De S2-component is samen met M2 verantwoordelijk voor de springtij-doodtij variatie. Hogere harmonische getijcomponenten (zoals M4) worden vaak als 'overtides' aangeduid. M4 is het eerste overtide en is gegenereerd door eerste orde niet-lineaire processen. M4 is de eerste hogere harmonische component en is samen met M2 van belang voor sedimenttransport. De belangrijkste periodieke variaties in het getij zorgen voor de zogeheten dagelijkse ongelijkheid (Figuur \@ref(fig:getijgolf)), de springtij-doodtij cyclus en de 18,6-jarige cyclus. De 18,6-jarige cyclus wordt veroorzaakt door de afwijking van het baanvlak van de maan ten opzichte van het baanvlak van de aarde (de knopen- of drakencyclus). De invloed van de knopencyclus is sinus-vormig en geeft een verhoging of verlaging van de zeespiegel in een willekeurig jaar van maximaal 13 mm langs de Nederlandse kust. De langjarige trend wordt niet beïnvloed door deze cyclus. Zie Paragraaf \@ref(hydroGetijcomponenten) voor meer informatie over de getijden.
 
-Het getij wordt verder vervormd in het estuarium. Vanaf de monding dringt het tij als een langgerekte golf het estuarium binnen. De geringer wordende diepte en vernauwing van de bedding vervormen het getij. Door die versmalling ondergaat het vloedwater een opstuwing; de hoogwaters worden hoger naarmate ze het estuarium dieper binnendringen. Energieverliezen ten gevolge van wrijving doen de verhoging door de opstuwing gedeeltelijk weer teniet. Dit zorgt ervoor dat de symmetrische getijkromme in de monding van de Westerschelde vervormd. Dit wordt getijasymmetrie genoemd. Hierdoor ontstaat er dus een verschil tussen de maximale eb- en vloed snelheid in het esturaium. 
+Het getij wordt verder vervormd in het estuarium. Vanaf de monding dringt het tij als een langgerekte golf het estuarium binnen. De geringer wordende diepte en vernauwing van de bedding vervormen het getij. Door die versmalling ondergaat het vloedwater een opstuwing; de hoogwaters worden hoger naarmate ze het estuarium dieper binnendringen. Energieverliezen ten gevolge van wrijving doen de verhoging door de opstuwing gedeeltelijk weer teniet. Dit zorgt ervoor dat de symmetrische getijkromme in de monding van de Westerschelde vervormd. Dit wordt getijasymmetrie genoemd. Hierdoor ontstaat er dus een verschil tussen de maximale eb- en vloedsnelheid in het estuarium.
 
 Het gemeten waterstandssignaal kan geanalyseerd worden met een getijanalyse. Hierbij wordt het waterstandssignaal ontleed in verschillende harmonische componenten: sinussen met een zekere amplitude, frequentie en fase. De amplitude en fase van een component verschillen per positie op aarde, de frequentie is altijd gelijk. De amplitude is de uitwijking van de getijcomponent ten opzichte van de middenstand. De fase van de getijcomponent wordt weergegeven ten opzichte van Midden Europese Tijd (MET). Verandering in de fase van een getijcomponent kan van belang zijn voor de interactie met andere getijcomponenten, maar ook voor de looptijd van het getij in het estuarium. Bijvoorbeeld het samenvallen van getijcomponenten zorgt ervoor dat het getij hoger wordt omdat er de krachten elkaar versterken op dat moment. De amplituden en fases van de M2, M4 en S2 componenten worden weergegeven in Figuur \@ref(fig:hydroHarmoM2amp) tot en met \@ref(fig:hydroHarmoS2fase) en in Tabel \@ref(tab:hydroHarmoTab).
 
-Tot slot zijn er nog de weersinvloeden zoals wind en luchtdruk. De verschillen in wind en luchtdruk zorgen voor variaties in de waterstanden van jaar op jaar. Waterstanden zijn hoger in stormsituaties waar de windsnelheden toenemen. De windrichting is hierbij van belang. Wind vanaf de Noordzee stuwt het water op het estuarium in. Wind vanaf land stuwt het water het estuarium uit. Dit zorgt ervoor dat de waterstanden bij eb- en vloed hoger of lager worden. In jaren met veel stormen op de Noordzee zal de gemiddelde waterstand dus hoger zijn dan in rustige jaren.
-
+Tot slot zijn er nog de weersinvloeden zoals wind en luchtdruk. De verschillen in wind en luchtdruk zorgen voor variaties in de waterstanden van jaar op jaar. Waterstanden zijn hoger in stormsituaties waar de windsnelheden toenemen. De windrichting is hierbij van belang. Wind vanaf de Noordzee stuwt het water op het estuarium in. Wind vanaf land stuwt het water het estuarium uit. Dit zorgt ervoor dat de waterstanden bij eb- en vloed hoger of lager worden. In jaren met veel stormen uit westelijke richting op de Noordzee zal de gemiddelde waterstand dus hoger zijn dan in rustige jaren.
 
 ### Informatie over de metingen {#hydroInfoMeting}
 
-De waterstand in de Westerschelde wordt tegenwoordig continu gemeten op meerdere vaste stations in de Westerschelde. Van deze continue meting wordt een 10-minuten gemiddelde bepaald. Deze meetreeks wordt gebruikt om o.a. de getijcomponenten te bepalen. Daarnaast worden de maximale hoog- en laagwaterstanden geregistreerd, wat betekent dat ongeveer elke 6 uur een waarde wordt geregistreerd.
+De waterstand in de Westerschelde wordt tegenwoordig continu gemeten op meerdere vaste stations in de Westerschelde. Van deze continue meting wordt een 10-minuten gemiddelde bepaald en opgeslagen in databases. Deze meetreeks wordt gebruikt om o.a. de getijcomponenten te bepalen. Daarnaast worden de maximale hoog- en laagwaterstanden geregistreerd, wat betekent dat ongeveer elke 6 uur een waarde wordt geregistreerd.
 
-De stations zijn zowel landelijke als regionale meetpunten (zie Figuur \@ref(fig:metingenWaterstanden) en Tabel \@ref(tab:metingenWaterstandenTab)), waarvan de meetdata beschikbaar zijn gesteld door het VLIZ (Vlaams Instituut voor de Zee). Alleen voor de landelijke meetpunten wordt een getijanalyse uitgevoerd en daarom worden voor deze stations de getijcomponenten M2, M4 en S2 gerapporteerd.
+De stations zijn zowel landelijke als regionale meetpunten (zie Figuur \@ref(fig:metingenWaterstanden), waarvan de meetdata beschikbaar zijn gesteld door het VLIZ (Vlaams Instituut voor de Zee). Alleen voor de landelijke meetpunten wordt een getijanalyse uitgevoerd en daarom worden voor deze stations de getijcomponenten M2, M4 en S2 gerapporteerd.
 
 In Paragraaf \@ref(hydroHWLW) zijn de jaargemiddelde hoog- en laagwaterstanden per station weergegeven. Het verschil tussen de hoog- en laagwaterstanden geeft de gemiddelde getijslag, zie Paragraaf \@ref(hydroGetijslag). De meetgegevens zijn *niet* gecorrigeerd voor de 18,6-jarige cyclus. Tot slot wordt voor de landelijke meetpunten de amplitude en fase van de M2, M4 en S2 getijcomponenten weergegeven in Paragraaf \@ref(hydroGetijcomponenten).
 
-Om trends in de waterstanden te kunnen herkennen, wordt de data over een lange periode weergegeven: vanaf 1950 tot heden. Sommige stations zijn pas na 1950 in werking getreden. Vanzelfsprekend wordt voor deze stations de gehele beschikbare meetperiode weergegeven. Het waterstandsmeetpunt Schaar van de Noord is van 9 juli 2013 tot 25 juni 2015 niet in gebruik geweest.
+Om trends in de waterstanden te kunnen herkennen, wordt de data over een lange periode weergegeven: vanaf 1998 tot heden. Het waterstandsmeetpunt Schaar van de Noord is van 9 juli 2013 tot 25 juni 2015 niet in gebruik geweest.
 
 ```{r metingenWaterstanden, fig.width=8, fig.cap="Ligging van de meetstations voor de waterstanden"}
 # knitr::include_graphics("Figuren/Meetstations_waterstanden.png")
@@ -75,32 +75,25 @@ plotLocations(df_waterstanden, nudge__y = -1000, nudge__x = 1000, angle = 20) +
   theme_void()
 ```
 
-```{r metingenWaterstandenTab}
-dt <- data.frame(
-  col1 = c("Bath","Hansweert","Terneuzen","Vlissingen","Cadzand","Westkapelle","Europlatform"),
-  col2 = c("1957-heden","1880*-heden","1878*-heden","1881*-heden","1966-heden","1954-heden","1983-heden"),
-  col3 = c("Baalhoek","Gat van Borssele","Breskens voorhaven","Overloop van Hansweert","Vlakte van de Raan","Schaar van de Noord","Walsoorden"),
-  col4 = c("1996-heden","1996, 1998-heden","1996, 1998-2016","1996, 1998-2004, 2008-heden","1996, 1998-heden","1996-2013, 2015-heden","1996, 1998-heden")
-)
-knitr::kable(dt, col.names = c("Landelijk meetstation","Meetperiode","Regionaal meetstation","Meetperiode"), caption = "Overzicht meetperiode van de waterstand per meetstation. Een asterisk (*) betekent dat data vanaf 1950 is gebruikt.")
-```
-
-<!-- %CHECK: -->
-
-<!-- %Het waterstandsmeetpunt Schaar van de Noord is sinds 2014 niet meer in gebruik en daarom is in deze Eerstelijnsrapportage dit meetpunt niet (meer) opgenomen. Voor metingen tot en met 2013 wordt er verwezen naar de Eerstelijnsrapportage 2013. -->
-
 ### Jaargemiddelde hoog- en laagwaterstanden {#hydroHWLW}
 
-In de grafieken (Figuur \@ref(fig:hydroJaarEuro) tot en met Figuur \@ref(fig:hydroJaarBath)) onderstaand en op de volgende pagina's zijn de hoog- en laagwaterstanden ten opzichte van NAP per jaar gemiddeld en uitgezet in de tijd. Gemiddelde hoogwaterstanden in blauw corresponderen met de blauwe y-as (links) en gemiddelde laagwaterstanden zijn weergegeven in rood en corresponderen met de rode y-as (rechts). Voor jaren met missende data voor twee of meer maanden worden de gemiddeldes met dunnere en transparante kleuren weergegeven. Aan deze gemiddeldes kan minder waarde gehecht worden. De volgorde waarin de stations zijn weergegeven is stroomopwaarts: vanaf het Europlatform in de Noordzee tot de Belgische grens.
+In de grafieken (Figuur \@ref(fig:hydroJaarEuro) tot en met Figuur \@ref(fig:hydroJaarBath)) onderstaand en op de volgende pagina's zijn de hoog- en laagwaterstanden ten opzichte van NAP of MSL (Mean Sea Level) per jaar gemiddeld en uitgezet in de tijd. Gemiddelde hoogwaterstanden worden weergegeven in het bovenste gedeelte van de grafiek en gemiddelde laagwaterstanden worden weergegeven in het onderste gedeelte. Voor jaren met missende data voor twee of meer maanden worden de gemiddeldes met lijnen weergegeven. Aan deze gemiddeldes kan minder waarde gehecht worden. De volgorde waarin de stations zijn weergegeven is stroomopwaarts: vanaf het Europlatform in de Noordzee tot de Belgische grens.
 
-Het station Schaar van de Noord heeft voor 2014 geen data. In 2013 is alleen data beschikbaar tot juli 2013, dus slechts ongeveer een half jaar. Het jaar 2013 lijkt voor Schaar van de Noord een lagere waarde te geven (zie Figuur \@ref(fig:hydroJaarSvdn)), maar het kan zijn dat de lengte van de dataset van 2013 dit gemiddelde beïnvloedt. De laatste twee jaren geven waardes die in het verlengde liggen van de jaren voor 2013.
+*Let op: de y-assen van de figuren verschillen van elkaar.*
 
-*Let op: de y-assen van de figuur van het Europlatform verschillen van de y-assen van de andere stations.*
-
-```{r hydroJaarEuro, fig.cap="Jaargemiddelde hoog- en laagwaterstanden bij het Europlatform"}
+```{r hydroJaarEuro, eval=T, fig.cap="Jaargemiddelde hoog- en laagwaterstanden bij het Europlatform"}
 # knitr::include_graphics("Figuren/Hydro/Waterstanden/HWLW/euro.png")
 
-plotTrendsWaterstand(df_waterstanden, c("Hoogwater in cm+NAP","Laagwater in cm+NAP"), "Europlatform")
+## following code can be used if all plots should have the same scale. However, this is not recommenede, as all details will disappear in that case. 
+# dummy <- df_waterstanden %>%
+#   group_by(Jaar = year(datetime), stationname, parametername) %>%
+#   mutate(Gemiddelde = case_when(
+#     grepl("Hoogwater", parametername) ~ max(value),
+#     grepl("Laagwater", parametername) ~ min(value)
+#   ))
+
+plotTrendsWaterstand(df_waterstanden, parname = c("Hoogwater in cm+MSL","Laagwater in cm+MSL"), locname = "Europlatform") #+
+  # geom_blank(data = dummy)
 
 ```
 
@@ -186,13 +179,15 @@ plotTrendsWaterstand(df_waterstanden, c("Hoogwater in cm+NAP","Laagwater in cm+N
 
 Het Europlatform dient als referentiestation. Door de ligging in de Noordzee zijn de geregistreerde waterstanden bij dit station niet beïnvloed door vorm van het estuarium en de ligging in het estuarium. Bij het Europlatform bedraagt de gemiddelde hoogwaterstand tussen +0.9 en +1 m NAP. Laagwaterstanden bereiken gemiddeld een waarde van tussen de -0,75 en -0.65 m NAP.
 
-De gemiddelde hoog- en laagwaterstand in de westelijke meetstations (vanaf de Vlakte van de Raan tot het Gat van Borssele) is ongeveer gelijk gedurende de gehele meetperiode. Vanaf de Vlakte van de Raan in oostwaartse richting zakt de gemiddelde laagwaterstand van circa -1,50 m NAP tot circa -1,80 m NAP bij Gat van Borssele. De hoogwaterstand neemt in die richting licht toe, van circa +1,75 m NAP bij de Vlakte van de Raan tot circa +2,25 m NAP bij Gat van Borssele. Hoewel Westkapelle en Cadzand ongeveer even ver in de monding liggen, is de getijslag bij Westkapelle minder groot dan bij Cadzand. Dit komt door de vervorming van het getij in de Noordzee, waardoor de getijslag in de Noordzee niet overal gelijk is.
+De gemiddelde hoog- en laagwaterstand in Vlakte van de Raan is ongeveer gelijk gedurende de gehele meetperiode. De overige stations vertonenen een onderling vergelijkbaar patroon, waar er van grofweg 2005 tot 2015 een toename is van het gemiddeld hoogwater, en tussen 2005 en 2013 een afname van het gemiddeld laagwater. Na 2015 nemen de gemiddelde hoogwaters weer iets af, en na 2013 nemen de gemiddelde laagwaters weer iets toe.
 
-Vanaf Terneuzen geven de stations zowel in stroomopwaartse richting als in tijd een stijgende trend in hoogwaterstanden: van circa +2,0 m NAP tot circa +2,25 m NAP in Terneuzen en van circa +2,50 m NAP tot circa +2,75 m NAP in Bath. Deze stijging vond plaats over de periode 1950 $-$ 1980 bij Terneuzen en lijkt bij Bath nog voort te duren tot ca. 2000. De laagwaterstanden in Bath zijn in de jaren '70 afgenomen van circa -2,0 m NAP tot circa -2,25 m NAP. Voor de andere stations in de Westerschelde lijkt er sinds 2007 een lichte afname te zitten in de laagwaterstanden en een lichte toename in de hoogwaterstanden. Dit is waarschijnlijk de invloed van de 18,6-jarige cyclus, zoals ook duidelijk te zien is in de getijslag (Figuur \@ref(fig:hydroGetijslag)). Bij de getijslag is dit effect duidelijker te zien, omdat dan de hoog- en laagwaterstand bij elkaar worden opgeteld waardoor het effect twee keer wordt meegeteld.
+Dit is waarschijnlijk de invloed van de 18,6-jarige cyclus, zoals ook duidelijk te zien is in de getijslag (Figuur \@ref(fig:hydroGetijslag)). Bij de getijslag is dit effect duidelijker te zien, omdat dan de hoog- en laagwaterstand bij elkaar worden opgeteld waardoor het effect twee keer wordt meegeteld.
+
+Vanaf de Vlakte van de Raan in oostwaartse richting zakt de gemiddelde laagwaterstand van circa -1,50 m NAP tot circa -1,80 m NAP bij Gat van Borssele. De hoogwaterstand neemt in die richting licht toe, van circa +1,75 m NAP bij de Vlakte van de Raan tot circa +2,25 m NAP bij Gat van Borssele. Hoewel Westkapelle en Cadzand ongeveer even ver in de monding liggen, is de getijslag bij Westkapelle minder groot dan bij Cadzand. Dit komt door de vervorming van het getij in de Noordzee, waardoor de getijslag in de Noordzee niet overal gelijk is.
 
 Daarnaast constateren we een toename van gemiddeld hoogwater en een afname van gemiddeld laagwater naarmate men meer stroomopwaarts (i.e. oostelijke richting) van de Westerschelde komt, zoals te zien in Figuur \@ref(fig:hydroGemiddeldLW) en Figuur \@ref(fig:hydroGemiddeldHW).
 
-```{r hydroGemiddeldLW, fig.cap="Mediaan van laagwater per station berekend op alle beschikbare data vanaf 1950."}
+```{r hydroGemiddeldLW, fig.width = 7, fig.height = 4, fig.cap="Mediaan van laagwater per station berekend op alle beschikbare data vanaf 1998."}
 
 #knitr::include_graphics("Figuren/Hydro/Waterstanden/gemiddeld_LW.png")
 
@@ -200,7 +195,7 @@ plotMedianMap(df_waterstanden, "Laagwater in cm+NAP") + theme_void()
 
 ```
 
-```{r hydroGemiddeldHW, fig.cap="Mediaan van hoogwater per station berekend op alle beschikbare data vanaf 1950"}
+```{r hydroGemiddeldHW, fig.width = 7, fig.height = 4, fig.cap="Mediaan van hoogwater per station berekend op alle beschikbare data vanaf 1998"}
 
 # knitr::include_graphics("Figuren/Hydro/Waterstanden/gemiddeld_HW.png")
 
@@ -213,50 +208,79 @@ plotMedianMap(df_waterstanden, "Hoogwater in cm+NAP") + theme_void()
 De getijslag is voor alle meetstations bepaald aan de hand van het verschil tussen de jaargemiddelde hoog- en laagwaterstanden. Op de Noordzee bij het Europlatform bedraagt de getijslag ongeveer 1,65 m en is weinig variatie in de getijslag te zien. In de monding is de getijslag al toegenomen tot 3 à 3,5 m. Verder stroomopwaarts de Westerschelde op blijft de getijslag toenemen tot aan Schaar van de Noord. Daar is de getijslag met een waarde van bijna 5 m het grootst, zie Figuur \@ref(fig:hydroGetijslag), Figuur \@ref(fig:hydroGetijslagGemiddeld) en Tabel \@ref(tab:hydroGemiddeldeHWLWGetij).
 
 ```{r hydroGemiddeldeHWLWGetij}
-#dt <- tex2dt("Figuren/Hydro/Waterstanden/meanvalues.tex")
-#knitr::kable(dt, col.names = c("Station","Afkorting","HW (cm)","LW (cm)","Getijslag (cm)","Trend","R"),
-#             caption = "De gemiddelde hoogwater (HW), laagwater (LW) en getijslag op de Noordzee, in de monding en in de Westerschelde. Hoog- en laagwater is gepresenteerd ten opzichte van NAP. Gemiddeldes zijn berekend over alle beschikbare data. Trend en $R$ zijn berekend over de data sinds 2000.")
 
-HW <- stationMedian(df_waterstanden, "Hoogwater in cm+NAP")
-LW <- stationMedian(df_waterstanden, "Laagwater in cm+NAP")
-GS <- HW$Mediaan - LW$Mediaan
-dt <- data.frame("Station" = HW$Station, "Hoogwater" = HW$Mediaan, "Laagwater" = LW$Mediaan, "Getijslag" = GS)
+dt <- df_waterstanden %>% 
+  filter(grepl("hoogwater", parametername, ignore.case = T) | grepl("laagwater", parametername, ignore.case = T)) %>%
+  tidyr::separate(parametername, c("parametername", "reference"), sep = "\\+") %>%
+  group_by(stationname, parametername) %>%
+  summarize(
+    median = median(value, na.rm = T)
+  ) %>%
+  pivot_wider(c(stationname), names_from = parametername, values_from = median) %>%
+  mutate(Getijslag = `Hoogwater in cm` - `Laagwater in cm`) %>%
+  rename(Station = stationname
+  ) %>% 
+  arrange(Getijslag)
+
 knitr::kable(dt, 
              align = 'lccc',
-             caption = "Jaarlijks mediaan van hoogwater, laagwater en getijslag (cm + NAP) van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Jaarlijks mediaan van hoogwater, laagwater en getijslag (cm) van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1998. Hoog- en Laagwater is t.o.v. NAP, behalve voor Europlatform (t.o.v. MSL).")
+
+
 ```
 
 ```{r hydroGetijslag, fig.cap="De mediaan van getijslag over tijd op de Noordzee, in de monding en in de Westerschelde. Dunnere en transparante kleuren geven jaarlijkse gemiddeldes aan met twee of meer maanden met missende data."}
 
 #knitr::include_graphics("Figuren/Hydro/Waterstanden/Getijslag.png")
 
-df2 <- df_waterstanden %>%
+df_getijslag <- df_waterstanden %>%
+  mutate(parametername2 = str_replace(parametername, pattern = "[+]...", replacement = "")) %>%
   # filter(HL == "L") %>%
   mutate(jaar = year(datetime)) %>%
   # filter(jaar != 2021 & jaar > 1970) %>%
-  group_by(stationname, jaar, parametername, latitude, longitude) %>%
+  group_by(stationname, jaar, parametername2, latitude, longitude) %>%
   summarise(median = median(value, na.rm = T)) %>% ungroup() %>%
-  pivot_wider(id_cols = c(stationname, jaar, latitude, longitude), names_from = parametername, values_from = median) %>%
-  mutate(`Getijslag in cm` = `Hoogwater in cm+NAP` - `Laagwater in cm+NAP`) %>%
-  select(stationname, latitude, longitude, jaar,`Hoogwater in cm+NAP`,`Laagwater in cm+NAP`,`Getijslag in cm`) %>%
-  pivot_longer(cols = c(`Hoogwater in cm+NAP`,`Laagwater in cm+NAP`,`Getijslag in cm`),
-               names_to = 'parametername', values_to = 'value')
+  pivot_wider(id_cols = c(stationname, jaar, latitude, longitude), names_from = parametername2, values_from = median) %>%
+  mutate(`Getijslag in cm` = `Hoogwater in cm` - `Laagwater in cm`) %>% 
+  select(stationname, latitude, longitude, jaar,`Getijslag in cm`) %>% 
+  pivot_longer(cols = c(`Getijslag in cm`),
+               names_to = 'parametername', values_to = 'value') %>%
+  arrange(value) %>%
+  mutate(
+    stationname = factor(
+      stationname, levels = c(
+        'Bath',
+        'Schaar van de Noord',
+        'Baalhoek',
+        'Walsoorden',
+        'Hansweert',
+        'Overloop van Hansweert',
+        'Terneuzen',
+        'Gat van Borssele',
+        'Breskens Veerhaven',
+        'Vlissingen',
+        'Cadzand',
+        'Westkapelle',
+        'Vlakte van de Raan',
+        'Europlatform')
+    )
+  )
 
-p <- plotTrendsByLocation(df2, "Getijslag in cm")
+p <- plotTrendsByLocation(df_getijslag, "Getijslag in cm")
 p$layers[[2]] <- NULL # remove dots
 if(knitr::is_html_output()){
   ggplotly(p)
 } else p
 ```
 
-De 18,6-jarige getijdencyclus heeft een grote invloed op de resultaten en is duidelijk zichtbaar in de figuren. De 18,6-jarige cyclus zorgt voor een periodieke toe- en afname van de waterstand en getijslag en is maximaal rond 1960, 1979, 1997 en 2014. Dit geldt voor stations zowel binnen als buiten de Westerschelde. De getijslag wordt groter stroomopwaarts. De versterking in de stroomopwaartse richting wordt voornamelijk veroorzaakt door de vorm van het estuarium (ondieper en smaller in stroomopwaartse richting). Daarnaast is er in de jaren '70 vooral bij Bath een sterke toename te zien in de getijslag, die waarschijnlijk het gevolg is van de ingrepen in het kader van de 'eerste verruiming'.
+De 18,6-jarige getijdencyclus heeft een grote invloed op de resultaten en is duidelijk zichtbaar in de figuren. De 18,6-jarige cyclus zorgt voor een periodieke toe- en afname van de waterstand en getijslag en is maximaal rond 1997 en 2014. Dit geldt voor stations zowel binnen als buiten de Westerschelde. Na 2014 is de getijslag weer afgenomen. De getijslag wordt groter stroomopwaarts. De versterking in de stroomopwaartse richting wordt voornamelijk veroorzaakt door de vorm van het estuarium (ondieper en smaller in stroomopwaartse richting).
 
-```{r hydroGetijslagGemiddeld, fig.cap="Mediaan van getijslag per station berekend op alle beschikbare data vanaf 1950"}
+```{r hydroGetijslagGemiddeld, fig.cap="Mediaan van getijslag per station berekend op alle beschikbare data vanaf 1998"}
 #knitr::include_graphics("Figuren/Hydro/Waterstanden/gemiddelde_getijslag.png")
 
 parname = "Getijslag in cm"
 
-df2 %>% #st_drop_geometry() %>%
+df_getijslag %>% #st_drop_geometry() %>%
   filter(parametername == parname) %>%
   filter(jaar >= 2000) %>%
   group_by(stationname) %>% 
@@ -288,7 +312,6 @@ df2 %>% #st_drop_geometry() %>%
 
 ```
 
-In 2013 en 2014 werd de licht stijgende trend in de getijslag sinds 2007 doorgezet, conform de 18,6-jarige cyclus. Sinds 2015 neemt de getijslag juist weer licht af (figuur \@ref(fig:hydroGetijslag)), wat strookt met het idee dat de 18,6-jarige cyclus de dominante oorzaak is van de trend in de getijslag. Dit wordt ook door de licht dalende trend in 2017 bevestigd. Dit lijkt niet op te gaan voor Breskens dat nog wel een stijgende lijn laat zien in 2016 ten opzichte van 2015, maar voor de periode na september 2016 zijn voor Breskens geen gegevens beschikbaar en kan de trend hierdoor niet worden bevestigd. In 2018 stijgt de getijslag ten opzichte van 2017 bij bijna alle stations. Terwijl in 2019 de getijslag t.o.v. 2018 weer daalt. Hierdoor lijkt de trend zich weer voort te zetten.
 
 ### Getijcomponenten {#hydroGetijcomponenten}
 
@@ -299,7 +322,7 @@ Het gemeten waterstandssignaal kan geanalyseerd worden met een getijanalyse. Hie
   font-size: 8px;
 }
 ```
-    
+
 ```{r hydroHarmoTab}
 #dt <- tex2dt("Figuren/Hydro/Waterstanden/Harmonisch/meanvalues.tex")
 #knitr::kable(dt, col.names = c("Station","M2","M4","S2"),
@@ -311,7 +334,15 @@ S2_amp = stationMeanClass(df_waterstanden, "Amplitude in cm", "COMP 77 S2")
 M2_fase = stationMeanClass(df_waterstanden, "Fase (g) in graden tov MET", "COMP 65 M2")
 M4_fase = stationMeanClass(df_waterstanden, "Fase (g) in graden tov MET", "COMP 113 M4")
 S2_fase = stationMeanClass(df_waterstanden, "Fase (g) in graden tov MET", "COMP 77 S2")
-dt <- data.frame("Station" = M2_amp$Station, "M2 ampl" = M2_amp$Gemiddelde, "M4 ampl" = M4_amp$Gemiddelde, "S2 ampl" = S2_amp$Gemiddelde, "M2 fase" = M2_fase$Gemiddelde, "M4 fase" = M4_fase$Gemiddelde, "S2 fase" = S2_fase$Gemiddelde) %>%
+
+dt <- data.frame(
+  "Station" = M2_amp$Station, 
+  "M2 ampl" = M2_amp$Gemiddelde, 
+  "M4 ampl" = M4_amp$Gemiddelde, 
+  "S2 ampl" = S2_amp$Gemiddelde, 
+  "M2 fase" = M2_fase$Gemiddelde, 
+  "M4 fase" = M4_fase$Gemiddelde, 
+  "S2 fase" = S2_fase$Gemiddelde) %>%
   mutate(across(where(is.double), function(x) {signif(x,2)}))
          
 knitr::kable(dt, 
@@ -319,13 +350,13 @@ knitr::kable(dt,
              caption = "Gemiddelde waardes van de drie belangrijkste getijcomponenten voor de landelijke meetstations voor de gehele periode. Amplitude in cm. Fase in graden.")
 ```
 
-De amplitude van de M2-component neemt toe in stroomopwaartse richting: de trechtervorm van het estuarium veroorzaakt een opslingering van het getij. In de tijd zien we in de oostelijkere stations, en vooral bij Bath, een toename van de amplitude. Dit komt overeen met het beeld uit de hoog- en laagwaterstanden. De laatste jaren lijkt de amplitude van de M2-component een licht dalende trend te volgen (met name voor de meer oostelijke stations) met wat kleinere schommelingen. De M2 Bath in 2017 is ongeveer 5cm kleiner dan in 2014.
+De amplitude van de M2-component neemt toe in stroomopwaartse richting: de trechtervorm van het estuarium veroorzaakt een opslingering van het getij. In de tijd zien we in de oostelijkere stations, en vooral bij Bath, een toename van de amplitude. Dit komt overeen met het beeld uit de hoog- en laagwaterstanden. Tussen ongeveer 2014 en 2018 vertoont de amplitude van de M2-component een licht dalende trend (met name voor de meer oostelijke stations) met wat kleinere schommelingen. De dalende trend is daarna afgevlakt.
 
-De fase van de M2-component lijkt voor de westelijke stations weinig te veranderen. Bij Hansweert is de fase in de jaren '50 en '60 afgenomen (ook voor M4-component). Ook in Bath is de fase veranderd, en is de fase afgenomen over de periode 1970-2000. Dit betekent dat de looptijd van het getij, d.w.z. de tijd die zit tussen het moment van hoogwater in Vlissingen en het moment van hoogwater in Bath, is afgenomen.
+De fase van de M2-component hangt af van de positie in het estuarium, door de looptijd van het getij daar doorheen. De M2 fase is in de loop van de jaren 1998-2022 niet veel veranderd.
 
-De amplitude van de M4-component laat een tegenovergestelde ruimtelijke relatie als de M2-component zien. Hiermee wordt bedoeld dat de M4 afneemt voor oostelijkere stations. De S2-component gedraagt zich vergelijkbaar met de M2-component. De amplitude van de S2- en M4-componenten varieert slechts beperkt over de tijd.
+De amplitude van de M4-component laat een tegenovergestelde ruimtelijke relatie als de M2-component zien. Hiermee wordt bedoeld dat de M4 afneemt voor oostelijkere stations. De S2-component gedraagt zich vergelijkbaar met de M2-component. De amplitude van de S2- en M4-componenten varieert slechts beperkt over de tijd, behalve bij Bath, waar een sterke afname is te zien over de getoonde periode voor de M4 amplitude.
 
-De fase van de M4-component neemt af bij Hansweert en is abrupt. Bij Bath neem de fase van M4 toe is geleidelijker in vergelijking van de verandering bij Hansweert.
+Over de getoonde periode (1998-2022) neemt de fase van de M4-component bij Hansweert en bij Bath iets af. Voor de overige stations is de fase gelijk over dze periode.
 
 ```{r hydroHarmoM2amp, fig.cap="Amplitude van de M2-getijcomponent voor de landelijke meetstations."}
 #knitr::include_graphics("Figuren/Hydro/Waterstanden/Harmonisch/M2_amplitude.png")
@@ -396,15 +427,17 @@ knitr::include_graphics("Figuren/Inscape/spectrum.png")
 ```{r golfTrendstations}
 trendstations <- c("Bath (BAT2)","Hansweert (HAWI)","Cadzand (CAWI)","Cadzand (CADW)","Overloop van Hansweert (OVHW)","Deurloo (DEUR)","Honte (HNTE)","Hoofdplaat (HFPL)","Overloop van Valkenisse (OVVA)","Pas van Terneuzen (PVT)","Wielingen (WIEL)")
 
-frozendatapath <- file.path(datapath, "Data_Hydro_Golven_1998_2020.csv")
+frozendatapath <- file.path(datapath, paste0("Data_Hydro_golven_all_", dataJaar, ".csv"))
 
-refresh = F
-if(refresh) refresh_golven()
-
+if(refreshGolven){
+  source("r/refresh_data.R") 
+  refresh_golven(datajaar = dataJaar)
+}
 ```
 
 ```{r importHydroGolven}
-df_golven <- read_delim(frozendatapath, delim = ",", guess_max = 200000) %>% 
+# df_golven <- read_delim(frozendatapath, delim = ",", guess_max = 200000) %>% 
+df_golven <- read_delim("https://watersysteemdata.deltares.nl/thredds/fileServer/watersysteemdata/Westerschelde/Scheldemonitor/2023/Data_Hydro_golven_all.csv", delim = ",", guess_max = 200000) %>% 
   filter(stationname %in% trendstations) %>%
   mutate(stationname = factor(stationname, levels = trendstations)) %>%
   mutate(value = case_when(
@@ -447,19 +480,31 @@ Golven worden in de Westerschelde en in de monding op een aantal stations (zie F
 De parameters die uit het spectrum worden bepaald, de significante golfhoogte $H_{m0}$ en periodeparameter $T_{m02}$, zijn berekend uit het deel van het spectrum van 30 mHz tot de bovengrens (700, 1000 en 500 mHz). Voor GSO2 is geen significante golfhoogte uit het spectrum bepaald. In Tabel \@ref(tab:golfstations) zijn de verschillende aanduidingen en meetinstrumenten per station en per meetperiode gegeven. Gemiddelde, minimale en maximale waardes in bijgevoegde tabellen zijn gebaseerd over de tijdsperiode weergegeven in de figuren. In Tabel \@ref(tab:golfstations) is te zien dat voor Hoofdplaat sinds januari 2016 geen nieuwe data beschikbaar is.
 
 ```{r meetstationsGolven, fig.cap="Ligging van de meetstations voor de golfhoogte en -periode."}
-# knitr::include_graphics("Figuren/Meetstations_golfboei.png")
-plotLocations(df_golven) + theme_void()
+
+plotLocations(df_golven, nudge__y = -1000, nudge__x = 1000, angle = 20) +
+  coord_sf(xlim = c(0, 85000), ylim = c(370000, 410000), datum=28992) +
+  theme_void()
+
 ```
 
 ```{r golfstations}
 dt <- data.frame(
   col1 = c("Bath","Cadzand","Deurloo","Hansweert","Honte","Hoofdplaat","Overloop van Hansweert","Overloop van Valkenisse","Pas van Terneuzen","Wielingen"),
   col2 = c("BAT2","CADW","DEUR","HAWI","HNTE","HFPL","OVHW","OVVA","PVT","WIEL"),
-  col3 = c("jan '98-dec '11, jan '12-heden","jan '97-dec '11, jan '12-heden","jan ’97-jul ’98, jul’98-mrt ’02, mrt’02-dec’02, jan’03-mrt ’03, mrt’03-dec ’11, jan’12-heden","jan’98-dec ’11, jan’12-heden","jan’12-heden","jan’98-dec ’11, jan’12-jan’16","jan’12-heden","jan’13-heden","jan’10-jan’15, jan’16-heden","jan’97-jul ’98, jul’98-dec ’11, jan’12-heden"),
+  # col3 = c("jan '98-dec '11, jan '12-heden","jan '97-dec '11, jan '12-heden","jan ’97-jul ’98, jul’98-mrt ’02, mrt’02-dec’02, jan’03-mrt ’03, mrt’03-dec ’11, jan’12-heden","jan’98-dec ’11, jan’12-heden","jan’12-heden","jan’98-dec ’11, jan’12-jan’16","jan’12-heden","jan’13-heden","jan’10-jan’15, jan’16-heden","jan’97-jul ’98, jul’98-dec ’11, jan’12-heden"),
   col4 = c("Golfbraak","Directional waverider","Directional waverider","Golfbraak","Boei","Golfbraak","Golfbraak","Golfbraak","Waverider","Waverider")
 )
 
-knitr::kable(dt, col.names = c("Meetstation","Code","Meetperiode","Meetinstrument"), caption = "Golfspectrum per meetperiode en locatie en meetinstrument in 2018.")
+knitr::kable(
+  dt, 
+  col.names = c(
+    "Meetstation",
+    "Code",
+    # "Meetperiode",
+    "Meetinstrument"
+    ), 
+  caption = "Golfspectrum per meetperiode en locatie en meetinstrument in 2018."
+  )
 ```
 
 Voor de metingen van golven worden verschillende meetinstrumenten gebruikt. Hieronder een uitleg over de instrumenten:
@@ -501,7 +546,7 @@ knitr::kable(dt,
              caption = "Gewogen gemiddelde en maximale waardes voor de golfhoogte in cm (zowel $H_{1/3}$ als  $H_{m0}$) voor alle stations.")
 ```
 
-```{r gemiddeldeHs, fig.cap="Gewogen gemiddelde significante golfhoogte per station berekend op basis van het spectrum voor alle beschikbare data vanaf 1998."}
+```{r gemiddeldeHs, fig.width = 7, fig.height = 4, fig.cap="Gewogen gemiddelde significante golfhoogte per station berekend op basis van het spectrum voor alle beschikbare data vanaf 1998."}
 #knitr::include_graphics("Figuren/Hydro/Golven/gemiddelde_hm0.png")
 
 #plotMedianMap(df_golven, "Hm0: Significante golfhoogte uit 10mHz spectrum in cm")

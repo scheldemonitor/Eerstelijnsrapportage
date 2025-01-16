@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Hoofdstuk 5 Bodem - Fysisch-chemische parameters | Eerstelijnsrapportage Westerschelde</title>
+<meta name="author" content="Deltares">
+<meta name="generator" content="bookdown 0.28 with bs4_book()">
+<meta property="og:title" content="Hoofdstuk 5 Bodem - Fysisch-chemische parameters | Eerstelijnsrapportage Westerschelde">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hoofdstuk 5 Bodem - Fysisch-chemische parameters | Eerstelijnsrapportage Westerschelde">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script><style>
+    .zoomDiv {
+      opacity: 0;
+      position:fixed;
+      top: 50%;
+      left: 50%;
+      z-index: 50;
+      transform: translate(-50%, -50%);
+      box-shadow: 0px 0px 50px #888888;
+      max-height:100%; 
+      overflow: auto;
+    }
+
+    .zoomImg {
+      width: 100%;
+    }
+
+    .close {
+      color: #777;
+      font: 14px/100% arial, sans-serif;
+      position: absolute;
+      right: 5px;
+      text-decoration: none;
+      text-shadow: 0 1px 0 #fff;
+      top: 5px;
+    }
+
+    .close:after {
+      content: '✖'; /* UTF-8 symbol */
+    }
+
+    img:not(.zoomImg):not(.logo) {
+      cursor: pointer;
+    }
+    </style>
+<script type="text/javascript">
+      $(document).ready(function() {
+        $('body').prepend("<div class=\"zoomDiv\"><img src=\"\" class=\"zoomImg\"><div class=\"close\"></div></div>");
+        // onClick function for all plots (img's)
+        $('img:not(.zoomImg):not(.logo)').click(function() {
+          $('.zoomImg').attr('src', $(this).attr('src'));
+          $('.zoomDiv').css({opacity: '1', width: '60%'});
+        });
+        // onClick function for zoomImg
+        $('img.zoomImg').click(function() {
+          $('.zoomDiv').css({opacity: '0', width: '0%'});
+        });
+        // onClick function for close button
+        $('.close').click(function() {
+          $('.zoomDiv').css({opacity: '0', width: '0%'});
+        });
+      });
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+          margin-bottom: 0em;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="navbar/navbar.css">
+<link rel="stylesheet" href="style/deltares.css">
+<meta name="description" content="5.1 Informatie over de metingen Eens in de drie jaar worden monsters genomen van het bodemmateriaal in de Westerschelde. Figuur 5.1 laat de 12 bemonsteringslocaties zien die in 2016 zijn gebruikt....">
+<meta property="og:description" content="5.1 Informatie over de metingen Eens in de drie jaar worden monsters genomen van het bodemmateriaal in de Westerschelde. Figuur 5.1 laat de 12 bemonsteringslocaties zien die in 2016 zijn gebruikt....">
+<meta name="twitter:description" content="5.1 Informatie over de metingen Eens in de drie jaar worden monsters genomen van het bodemmateriaal in de Westerschelde. Figuur 5.1 laat de 12 bemonsteringslocaties zien die in 2016 zijn gebruikt....">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="2023">Eerstelijnsrapportage Westerschelde</a>:
+        <small class="text-muted">2023</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Voorwoord</a></li>
+<li><a class="" href="inleiding.html"><span class="header-section-number">1</span> Inleiding</a></li>
+<li><a class="" href="hydro.html"><span class="header-section-number">2</span> Hydrodynamiek</a></li>
+<li><a class="" href="fysisch-oppwater.html"><span class="header-section-number">3</span> Oppervlaktewater - Fysisch-chemische parameters</a></li>
+<li><a class="" href="zwevend-stof.html"><span class="header-section-number">4</span> Zwevend stof - Fysisch-chemische parameters</a></li>
+<li><a class="active" href="bodem.html"><span class="header-section-number">5</span> Bodem - Fysisch-chemische parameters</a></li>
+<li><a class="" href="biota.html"><span class="header-section-number">6</span> Biota - Fysisch-chemische parameters</a></li>
+<li><a class="" href="fytoplankton.html"><span class="header-section-number">7</span> Plankton</a></li>
+<li><a class="" href="referenties.html"><span class="header-section-number">8</span> Referenties</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="BijlageA-overzicht-data.html"><span class="header-section-number">A</span> Overzicht gebruikte data</a></li>
+<li><a class="" href="BijlageB-meetdichtheid.html"><span class="header-section-number">B</span> Meetdichtheidmatrices</a></li>
+<li><a class="" href="BijlageC-fytoplankton.html"><span class="header-section-number">C</span> Indeling fytoplankton</a></li>
+<li><a class="" href="werkwijze.html"><span class="header-section-number">D</span> Werkwijze</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="shortcut icon" type="image/jpg" href="navbar/images/icon-deltares.svg">
+<nav class="navigation-bar"><a href="index.html"><i class="fa fa-home"></i></a>
+    <div class="logos">
+        <img class="logo" src="navbar/images/deltares_logo.png"><img class="logo" src="navbar/images/Rijkswaterstaat-logo-e1473888123824-1-300x300.jpg">
+</div>
+</nav><div id="bodem" class="section level1" number="5">
+<h1>
+<span class="header-section-number">Hoofdstuk 5</span> Bodem - Fysisch-chemische parameters<a class="anchor" aria-label="anchor" href="#bodem"><i class="fas fa-link"></i></a>
+</h1>
+<div id="bodem-info-metingen" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Informatie over de metingen<a class="anchor" aria-label="anchor" href="#bodem-info-metingen"><i class="fas fa-link"></i></a>
+</h2>
+<p>Eens in de drie jaar worden monsters genomen van het bodemmateriaal in de Westerschelde. Figuur <a href="bodem.html#fig:meetstationsBodem">5.1</a> laat de 12 bemonsteringslocaties zien die in 2016 zijn gebruikt. De locatie Walcheren 2 km uit de kust is sinds 2010 niet meer gemeten. Resultaten van dit station zijn terug te vinden in de Eerstelijnsrapportage 2010.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:meetstationsBodem"></span>
+<img src="Eerstelijnsrapportage-Westerschelde-2023_files/figure-html/meetstationsBodem-1.png" alt="Ligging van de meetstations voor het bodemmateriaal" width="100%"><p class="caption">
+Figuur 5.1: Ligging van de meetstations voor het bodemmateriaal
+</p>
+</div>
+</div>
+<div id="bodem-metalen" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> Metalen<a class="anchor" aria-label="anchor" href="#bodem-metalen"><i class="fas fa-link"></i></a>
+</h2>
+<p>In Figuur <a href="bodem.html#fig:arseenBodem">5.2</a> t/m Figuur <a href="bodem.html#fig:zinkBodem">5.8</a> zijn de metalen in het bodemsediment in de Westerschelde weergegeven. Op de horizontale as zijn de stations gerangschikt van west (links) naar oost (rechts). Globaal gezien laten de meeste metalen laten op de meeste stations een afnemende trend in de tijd zien, die voor sommige metalen en stations sterker zijn dan voor andere. Daarnaast is voor sommige metalen (cadmium, chroom, koper, kwik en zink) te zien dat de hoeveelheid metaal in de richting van de Noordzee afneemt.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:arseenBodem"></span>
+<img src="Eerstelijnsrapportage-Westerschelde-2023_files/figure-html/arseenBodem-1.png" alt="Arseen in het bodemsediment in de Westerschelde" width="100%"><p class="caption">
+Figuur 5.2: Arseen in het bodemsediment in de Westerschelde
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:cadmiumBodem"></span>
+<img src="Eerstelijnsrapportage-Westerschelde-2023_files/figure-html/cadmiumBodem-1.png" alt="Cadmium in het bodemsediment in de Westerschelde" width="100%"><p class="caption">
+Figuur 5.3: Cadmium in het bodemsediment in de Westerschelde
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:chroomBodem"></span>
+<img src="Eerstelijnsrapportage-Westerschelde-2023_files/figure-html/chroomBodem-1.png" alt="Chroom in het bodemsediment in de Westerschelde" width="100%"><p class="caption">
+Figuur 5.4: Chroom in het bodemsediment in de Westerschelde
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:koperBodem"></span>
+<img src="Eerstelijnsrapportage-Westerschelde-2023_files/figure-html/koperBodem-1.png" alt="Koper in het bodemsediment in de Westerschelde" width="100%"><p class="caption">
+Figuur 5.5: Koper in het bodemsediment in de Westerschelde
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:kwikBodem"></span>
+<img src="Eerstelijnsrapportage-Westerschelde-2023_files/figure-html/kwikBodem-1.png" alt="Kwik in het bodemsediment in de Westerschelde" width="100%"><p class="caption">
+Figuur 5.6: Kwik in het bodemsediment in de Westerschelde
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:loodBodem"></span>
+<img src="Eerstelijnsrapportage-Westerschelde-2023_files/figure-html/loodBodem-1.png" alt="Lood in het bodemsediment in de Westerschelde" width="100%"><p class="caption">
+Figuur 5.7: Lood in het bodemsediment in de Westerschelde
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:zinkBodem"></span>
+<img src="Eerstelijnsrapportage-Westerschelde-2023_files/figure-html/zinkBodem-1.png" alt="Zink in het bodemsediment in de Westerschelde" width="100%"><p class="caption">
+Figuur 5.8: Zink in het bodemsediment in de Westerschelde
+</p>
+</div>
+</div>
+<div id="bodem-PAK" class="section level2" number="5.3">
+<h2>
+<span class="header-section-number">5.3</span> Polycyclische Aromatische Koolwaterstoffen (PAK’s)<a class="anchor" aria-label="anchor" href="#bodem-PAK"><i class="fas fa-link"></i></a>
+</h2>
+<p>De PAK’s zijn afzonderlijk weergegeven in Figuur <a href="bodem.html#fig:antraceenBodem">5.9</a> t/m Figuur <a href="bodem.html#fig:indeno-pyreenBodem">5.17</a>. De PAK’s zijn in hogere gehaltes aanwezig richting de Vlaams-Nederlandse grens. Ook bij Hansweert boei OHMG zijn in het verleden hoge gehaltes gemeten. Er is geen consistente temporele trend waar te nemen, maar de gemiddeldes liggen in de periode na 2007 over het algemeen lager dan in de periode voor 2007. <!-- %maar de gehaltes in 2016 zijn meestal wel hoger dan in 2013. --> <!-- %CHECK THIS STATEMENT! --></p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:antraceenBodem"></span>
+<img src="Eerstelijnsrapportage-Westerschelde-2023_files/figure-html/antraceenBodem-1.png" alt="Antraceen in het bodemsediment in de Westerschelde" width="100%"><p class="caption">
+Figuur 5.9: Antraceen in het bodemsediment in de Westerschelde
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:benzo-antraceenBodem"></span>
+<img src="Eerstelijnsrapportage-Westerschelde-2023_files/figure-html/benzo-antraceenBodem-1.png" alt="Benzo(a)antraceen in het bodemsediment in de Westerschelde" width="100%"><p class="caption">
+Figuur 5.10: Benzo(a)antraceen in het bodemsediment in de Westerschelde
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:benzo-pyreenBodem"></span>
+<img src="Eerstelijnsrapportage-Westerschelde-2023_files/figure-html/benzo-pyreenBodem-1.png" alt="Benzo(a)pyreen in het bodemsediment in de Westerschelde" width="100%"><p class="caption">
+Figuur 5.11: Benzo(a)pyreen in het bodemsediment in de Westerschelde
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:benzo-peryleenBodem"></span>
+<img src="Eerstelijnsrapportage-Westerschelde-2023_files/figure-html/benzo-peryleenBodem-1.png" alt="Benzo(g,h,i)peryleen in het bodemsediment in de Westerschelde" width="100%"><p class="caption">
+Figuur 5.12: Benzo(g,h,i)peryleen in het bodemsediment in de Westerschelde
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:benzo-fluorantheenBodem"></span>
+<img src="Eerstelijnsrapportage-Westerschelde-2023_files/figure-html/benzo-fluorantheenBodem-1.png" alt="Benzo(k)fluorantheen in het bodemsediment in de Westerschelde" width="100%"><p class="caption">
+Figuur 5.13: Benzo(k)fluorantheen in het bodemsediment in de Westerschelde
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:chryseenBodem"></span>
+<img src="Eerstelijnsrapportage-Westerschelde-2023_files/figure-html/chryseenBodem-1.png" alt="Chryseen in het bodemsediment in de Westerschelde" width="100%"><p class="caption">
+Figuur 5.14: Chryseen in het bodemsediment in de Westerschelde
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fenanthreenBodem"></span>
+<img src="Eerstelijnsrapportage-Westerschelde-2023_files/figure-html/fenanthreenBodem-1.png" alt="Fenanthreen in het bodemsediment in de Westerschelde" width="100%"><p class="caption">
+Figuur 5.15: Fenanthreen in het bodemsediment in de Westerschelde
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fluorantheenBodem"></span>
+<img src="Eerstelijnsrapportage-Westerschelde-2023_files/figure-html/fluorantheenBodem-1.png" alt="Fluorantheen in het bodemsediment in de Westerschelde" width="100%"><p class="caption">
+Figuur 5.16: Fluorantheen in het bodemsediment in de Westerschelde
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:indeno-pyreenBodem"></span>
+<img src="Eerstelijnsrapportage-Westerschelde-2023_files/figure-html/indeno-pyreenBodem-1.png" alt="Indeno(1,2,3-c,d)pyreen in het bodemsediment in de Westerschelde" width="100%"><p class="caption">
+Figuur 5.17: Indeno(1,2,3-c,d)pyreen in het bodemsediment in de Westerschelde
+</p>
+</div>
+</div>
+<div id="bodem-PCB" class="section level2" number="5.4">
+<h2>
+<span class="header-section-number">5.4</span> Polychloorbifenylen (PCB’s)<a class="anchor" aria-label="anchor" href="#bodem-PCB"><i class="fas fa-link"></i></a>
+</h2>
+<p>De PCB’s in het bodemsediment worden zowel afzonderlijk als gesommeerd weergegeven. In Figuur <a href="bodem.html#fig:PCB180Bodem">5.18</a> t/m Figuur <a href="bodem.html#fig:PCB28Bodem">5.21</a> zijn de onderstaande PCB’s afzonderlijk weergegeven. In Figuur <a href="bodem.html#fig:SomPCBBodem">5.22</a> is de sommatie van de PCB’s weergegeven. De verschillende PCB’s die in deze rapportage zijn gerapporteerd en gesommeerd zijn terug te vinden in tabel <a href="bodem.html#tab:PCBsoorten">5.1</a>.</p>
+<p>In eerdere rapportages zijn de volgende PCB’s afzonderlijk en als som gepresenteerd:</p>
+<ul>
+<li>2,2’,3,4,4’,5,5’-heptachloorbifenyl (PCB180)</li>
+<li>2,2’,3,4,4’,5’-hexachloorbifenyl (PCB138)</li>
+<li>2,2’,4,4’,5,5’-hexachloorbifenyl (PCB153)</li>
+<li>2,2’,4,5,5’-pentachloorbifenyl (PCB101)</li>
+<li>2,2’,5,5’-tetrachloorbifenyl (PCB52)</li>
+<li>2,3’,4,4’,5-pentachloorbifenyl (PCB118)</li>
+<li>2,4,4’-trichloorbifenyl (PCB28)</li>
+</ul>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:PCBsoorten">Tabel 5.1: </span>Beschikbare PCB’s van bovenstaande lijst in gegevens.</caption>
+<colgroup><col width="100%"></colgroup>
+<thead><tr class="header">
+<th align="left">x</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">2,2’,3,4,4’,5,5’-Heptachloorbifenyl (PCB180) in ug/kg drooggewicht in bodem/sediment</td>
+</tr>
+<tr class="even">
+<td align="left">2,2’,3,4,4’,5’-Hexachloorbifenyl (PCB138) in ug/kg drooggewicht in bodem/sediment</td>
+</tr>
+<tr class="odd">
+<td align="left">2,4,4’-Trichloorbifenyl (PCB28) in ug/kg drooggewicht in bodem/sediment</td>
+</tr>
+<tr class="even">
+<td align="left">2,2’,5,5’-Tetrachloorbifenyl (PCB52) in ug/kg drooggewicht in bodem/sediment</td>
+</tr>
+</tbody>
+</table></div>
+<p>De PCB’s die in deze rapportage zijn meegenomen laten allen een vergelijkbaar beeld zien. De concentratie PCB’s neemt af in stroomafwaartse richting. Verder stroomopwaarts lijkt een afname in de hoeveelheid PCB’s over de tijd zichtbaar te zijn. Met name de stations Schaar van Ouden Doel, Bath boei 68 en Bath boei 71 laten deze afname zien.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:PCB180Bodem"></span>
+<img src="Eerstelijnsrapportage-Westerschelde-2023_files/figure-html/PCB180Bodem-1.png" alt="PCB180 in het bodemsediment in de Westerschelde" width="100%"><p class="caption">
+Figuur 5.18: PCB180 in het bodemsediment in de Westerschelde
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:PCB138Bodem"></span>
+<img src="Eerstelijnsrapportage-Westerschelde-2023_files/figure-html/PCB138Bodem-1.png" alt="PCB138 in het bodemsediment in de Westerschelde" width="100%"><p class="caption">
+Figuur 5.19: PCB138 in het bodemsediment in de Westerschelde
+</p>
+</div>
+<p>De gegevens voor PCB153 ontbreken. Deze worden mogelijk in een volgende rapportage weer aangevuld.</p>
+<p>De gegevens voor PCB101 ontbreken. Deze worden mogelijk in een volgende rapportage weer aangevuld.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:PCB52Bodem"></span>
+<img src="Eerstelijnsrapportage-Westerschelde-2023_files/figure-html/PCB52Bodem-1.png" alt="PCB52 in het bodemsediment in de Westerschelde" width="100%"><p class="caption">
+Figuur 5.20: PCB52 in het bodemsediment in de Westerschelde
+</p>
+</div>
+<p>De gegevens voor PCB118 ontbreken. Deze worden mogelijk in een volgende rapportage weer aangevuld.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:PCB28Bodem"></span>
+<img src="Eerstelijnsrapportage-Westerschelde-2023_files/figure-html/PCB28Bodem-1.png" alt="PCB28 in het bodemsediment in de Westerschelde" width="100%"><p class="caption">
+Figuur 5.21: PCB28 in het bodemsediment in de Westerschelde
+</p>
+</div>
+<p>Net als voor de afzonderlijke PCB’s neemt de totale hoeveelheid PCB’s in het bodemsediment af in de richting van de Noordzee (figuur <a href="bodem.html#fig:SomPCBBodem">5.22</a>). Met name bij de oostelijke stations Schaar van Ouden Doel, Bath boei 68 en Bath boei 71 is er een afname van totaal PCB in de tijd.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:SomPCBBodem"></span>
+<img src="Eerstelijnsrapportage-Westerschelde-2023_files/figure-html/SomPCBBodem-1.png" alt="Som van de PCB's in het bodemsediment in de Westerschelde. Hier is de som genomen van alle PCB's die beschikbaar zijn in de database. " width="100%"><p class="caption">
+Figuur 5.22: Som van de PCB’s in het bodemsediment in de Westerschelde. Hier is de som genomen van alle PCB’s die beschikbaar zijn in de database.
+</p>
+</div>
+</div>
+<div id="bodem-organotin" class="section level2" number="5.5">
+<h2>
+<span class="header-section-number">5.5</span> Organotinverbindingen<a class="anchor" aria-label="anchor" href="#bodem-organotin"><i class="fas fa-link"></i></a>
+</h2>
+<p>Tributyltin is de enige organotinverbinding die wordt gemeten in het bodemsediment. In Figuur <a href="bodem.html#fig:tributyltinBodem">5.23</a> is de hoeveelheid tributyltin over de jaren weergegeven per station. De gehaltes vanaf 2010 zijn op de meeste stations lager dan die van 2001 en 2004. Ruimtelijk gezien zijn er grote variaties. Tot en met 2010 is Tributyltin gemeten in de slibfractie van het bodemsediment, daarna in het totale sediment.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:tributyltinBodem"></span>
+<img src="Eerstelijnsrapportage-Westerschelde-2023_files/figure-html/tributyltinBodem-1.png" alt="Tributyltin in het bodemsediment in de Westerschelde" width="100%"><p class="caption">
+Figuur 5.23: Tributyltin in het bodemsediment in de Westerschelde
+</p>
+</div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="zwevend-stof.html"><span class="header-section-number">4</span> Zwevend stof - Fysisch-chemische parameters</a></div>
+<div class="next"><a href="biota.html"><span class="header-section-number">6</span> Biota - Fysisch-chemische parameters</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#bodem"><span class="header-section-number">5</span> Bodem - Fysisch-chemische parameters</a></li>
+<li><a class="nav-link" href="#bodem-info-metingen"><span class="header-section-number">5.1</span> Informatie over de metingen</a></li>
+<li><a class="nav-link" href="#bodem-metalen"><span class="header-section-number">5.2</span> Metalen</a></li>
+<li><a class="nav-link" href="#bodem-PAK"><span class="header-section-number">5.3</span> Polycyclische Aromatische Koolwaterstoffen (PAK’s)</a></li>
+<li><a class="nav-link" href="#bodem-PCB"><span class="header-section-number">5.4</span> Polychloorbifenylen (PCB’s)</a></li>
+<li><a class="nav-link" href="#bodem-organotin"><span class="header-section-number">5.5</span> Organotinverbindingen</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Eerstelijnsrapportage Westerschelde</strong>: 2023" was written by Deltares. It was last built on 2024-12-12.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

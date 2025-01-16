@@ -24,9 +24,9 @@ require(leaflet)
 
 De projecten die in het kader van de OntwikkelingsSchets 2010 (OS2010) zijn uitgevoerd hebben als doel verschillende veranderingen in het Schelde-estuarium te bewerkstelligen. Het betreft verruiming van de vaargeul, aanleg van gebieden met gedempt getij en ontpolderingen. Het doel van deze projecten is verbetering van de toegankelijkheid (scheepvaart), vergroting van de veiligheid tegen overstromingen en verbetering van de natuurwaarde en natuurlijkheid van het systeem.
 
-Deze projecten kunnen ook niet+gewenste neveneffecten hebben op het functioneren van het estuarium. De resultaten van deze projecten worden gemonitord via geïntegreerde systeemmonitoring. Naast OS2010 zijn er nog andere programma’s die invloed hebben op de kwaliteiten van het systeem, zoals maatregelen ten behoeve van de Kaderrichtlijn Water (KRW) en emissievergunningen (e.g. de rioolwaterzuiveringen in Vlaanderen). 
+Deze projecten kunnen ook niet-gewenste neveneffecten hebben op het functioneren van het estuarium. De resultaten van deze projecten worden gemonitord via geïntegreerde systeemmonitoring. Naast OS2010 zijn er nog andere programma’s die invloed hebben op de kwaliteiten van het systeem, zoals maatregelen ten behoeve van de Kaderrichtlijn Water (KRW) en emissievergunningen (e.g. de rioolwaterzuiveringen in Vlaanderen). 
 
-Voor de monitoring en de ontwikkelingen rond de derde verruiming in het kader van de Ontwikkelingsschets 2010 (OS2010) dienen gevalideerde gegevens en gegevensrapporten geleverd te worden. Deze gegevensrapportage betreft de zogenaamde eerstelijnsrapportage van de monitoring van de Westerschelde en de monding. Elk jaar wordt er een nieuwe eerstelijnsrapportage opgeleverd (@ELR2010, @ELR2011, @ELR2012, @ELR2013, @ELR2014, @ELR2015, @ERL2016, @ERL2017). Dit is de negende eerstelijnsrapportage. 
+Voor de monitoring en de ontwikkelingen rond de derde verruiming in het kader van de Ontwikkelingsschets 2010 (OS2010) dienen gevalideerde gegevens en gegevensrapporten geleverd te worden. Deze gegevensrapportage betreft de zogenaamde eerstelijnsrapportage van de monitoring van de Westerschelde en de monding. Elk jaar wordt er een nieuwe eerstelijnsrapportage opgeleverd (https://www.scheldemonitor.org/nl/eerstelijnsrapportage).
 
 ## Doelstelling {#doelstelling}
 
@@ -40,11 +40,11 @@ Naast deze gegevensrapportage worden er aparte rapportages uitgevoerd voor o.a. 
 
 Een groot aantal van de fysisch-chemische en biologische variabelen in de Westerschelde wordt gemeten in het kader van de  ‘Monitoring Waterstaatkundige Toestand des Lands' (i.e. MWTL). Deze variabelen kennen de volgende onderverdeling: oppervlaktewater (compartiment 10), zwevende stof (compartiment 50), bodem (compartiment 40; iedere 3 jaar gemeten) en biota (compartiment 60).
 
-Bodemgegevens worden iedere 3 jaar gemeten en gerapporteerd.  De meest recente bodemgegevens komen uit 2019, en zijn opgenomen in deze Eerstelijnsrapportage. 
+Bodemgegevens worden iedere 3 jaar gemeten en gerapporteerd.  De meest recente bodemgegevens komen uit 2022, en zijn opgenomen in deze Eerstelijnsrapportage. 
 
 Daarnaast zijn er enkele variabelen die voorheen wel werden gemeten en nu niet meer. Tot en met 2015 werden er continu metingen uitgevoerd om saliniteit, temperatuur, zuurstofgehalte, troebelheid, lichtstraling en fluorescentie te bepalen. Sinds 2016 zijn deze niet meer gemeten. Golfrichting is tot en met 2014 gemeten en gerapporteerd. Daarna zijn deze metingen niet meer uitgevoerd. Een overzicht is te vinden in bijlage \@ref(BijlageA-overzicht-data).
 
-Om de gegevens inzichtelijker te maken zijn voor veel variabelen de parameters mediaan, 90-percentiel en 10-percentiel geschat Wanneer er wordt gesproken over een mediane waarde tijdens de zomer- en winterperiode wordt respectievelijk gesproken over april tot en met september en oktober tot en met maart. Daarnaast is de trend en bijhorende p-waarde berekend. De p-waarde ($p$) vervangt de correlatiecoëfficiënt ($R$) die in de Eerstelijnsrapportage 2015 werd gepresenteerd. De p-waarde is de kans dat de gevonden trend op toeval berust. Dit wordt ook wel de significantie van de correlatie genoemd. De correlatie wordt over het algemeen significant gevonden bij $p \leq 0.05$. 
+Om de gegevens inzichtelijker te maken zijn voor veel variabelen de parameters mediaan, 90-percentiel en 10-percentiel berekend. Wanneer er wordt gesproken over een mediane waarde tijdens de zomer- en winterperiode wordt respectievelijk gesproken over april tot en met september en oktober tot en met maart. Daarnaast is de trend en bijhorende p-waarde berekend. De p-waarde ($p$) vervangt de correlatiecoëfficiënt ($R$) die in de Eerstelijnsrapportage 2015 werd gepresenteerd. De p-waarde is de kans dat de gevonden trend op toeval berust. Dit wordt ook wel de significantie van de correlatie genoemd. De correlatie wordt over het algemeen significant gevonden bij $p \leq 0.05$. 
 
 Het schatten van deze parameters (i.e. medianen, trend en p) is altijd gedaan vanaf 2000 zodat deze niet direct worden beïnvloedt door de tweede verruiming in 1997-1998. De trend wordt weergegeven in een eenheid per jaar en kan zowel negatief (-) als positief zijn (+).
 <!-- Indien er een significante correlatie is geconstateerd, worden de trend en correlatiecoëfficiënt dikgedrukt weergegeven in de tabel. -->
@@ -53,27 +53,13 @@ In de figuren met een kaart wordt gebruik gemaakt van coördinaten in het stelse
 
 ### Ontbrekende gegevens {#ontbrekende-data}
 
-In eerdere rapportage is de beschikbare gegevens van 1 januari 2018 t/m 31 december 2018 toegevoegd aan de gegevens die gepresenteerd zijn in de voorgaande eerstelijnsrapportages van de Westerschelde. De gegevens uit 2018 zijn echter niet volledig. In Tabel \@ref(tab:missingDatatab) staat een overzicht van de ontbrekende gegevens in 2018. Het ontbreken van gegevens kan de resultaten beïnvloeden, vooral als er gemiddelden uit berekend worden. In voorkomende gevallen is een opmerking bij de figuur toegevoegd.
+Bij het samenstellen van deze rapportage is ook gelet op compleetheid van gegevens. In bijlage \@ref(BijlageB-meetdichtheid) is in zogenaamde meetdichtheidsmatrices weergegeven welke gegevens uit de Scheldemonitor zijn gehaald.
 
-In de huidige rapportage is de beschikbare data van 1 januari 2019 t/m 31 december 2019 toegevoegd. De enige data die ontbreekt uit dit jaar zijn golf gegevens bij de locatie Cadzand.
-
-
-```{r missingDatatab}
-
-dt <- data.frame(
-  col1 = c("Hydrodynamiek","Hydrodynamiek","Hydrodynamiek","Hydrodynamiek","Hydrodynamiek","Hydrodynamiek","Hydrodynamiek","Hydrodynamiek","Hydrodynamiek","Hydrodynamiek"),
-  col2 = c("Waterstanden","Waterstanden","Waterstanden","Waterstanden","Waterstanden","Waterstanden","Waterstanden","Waterstanden","Waterstanden","Waterstanden"),
-  col3 = c("Baalhoek","Gat van Borssele","Breskens voorhaven","Breskens voorhaven","Overloop van Hansweert","Overloop van Hansweert","Vlakte van de Raan","Vlakte van de Raan","Schaar van de Noord","Walsoorden"),
-  col4 = c("juli & september 2018","01-07-2018 - 31-12-2018","01-01-2018 - 30-04-2018","juli 2018","01-01-2018 - 07-03-2018","juli 2018","juli & september 2018","29-11-2018 - 14-12-2018","juli & september 2018","juli & september 2018")
-)
-
-knitr::kable(dt, col.names = c("Groep","Parameter","Locatie","Missend"), caption = "De missende data in 2018 voor de Eerstelijnsrapportage van de Westerschelde per groep, parameter en locatie.")
-
-```
+<!-- In Tabel \@ref(tab:missingDatatab) staat een overzicht van de ontbrekende gegevens. Het ontbreken van gegevens kan de resultaten beïnvloeden, vooral als er gemiddelden uit berekend worden. In voorkomende gevallen is een opmerking bij de figuur toegevoegd. -->
 
 ## Leeswijzer
 
-Hoofdstuk \@ref(hydro) beschrijft de hydrodynamiek. Op een groot aantal stations in de Westerschelde, de monding en de Noordzee worden hoog- en laagwaterstanden gepresenteerd over de periode 1950 tot heden. Ook de getijslag en de M2, M4 en S2-componenten van het getij worden weergegeven. Voor de golven wordt de golfhoogte en golfperiode getoond op meerdere stations in de Westerschelde en de monding. Voor een tweetal stations (Cadzand en Deurloo) in de monding wordt ook de golfrichting weergegeven. 
+Hoofdstuk \@ref(hydro) beschrijft de hydrodynamiek. Op een groot aantal stations in de Westerschelde, de monding en de nabijgelegen Noordzeekustzone worden hoog- en laagwaterstanden gepresenteerd over de periode 1950 tot heden. Ook de getijslag en de M2, M4 en S2-componenten van het getij worden weergegeven. Voor de golven wordt de golfhoogte en golfperiode getoond op meerdere stations in de Westerschelde en de monding. Voor een tweetal stations (Cadzand en Deurloo) in de monding wordt ook de golfrichting weergegeven. 
 <!-- % update: ontbrekende data! -->
 
 Hoofdstuk \@ref(fysisch-oppwater) beschrijft de fysisch-chemische variabelen die gemeten zijn in het oppervlaktewater in het kader van MWTL (Monitoring Waterstaatskundige Toestand des Lands) vaartochten. 
@@ -82,7 +68,7 @@ Hoofdstuk \@ref(fysisch-oppwater) beschrijft de fysisch-chemische variabelen die
 Hoofdstuk \@ref(zwevend-stof) beschrijft de fysisch-chemische monitoring in het zwevende stof. Zwevende stof wordt ook in het kader van MWTL-vaartochten gemeten. De data wordt gepresenteerd voor twee stations te weten Vlissingen boei SSVH en Schaar van Ouden Doel.
 <!-- % update: ontbrekende data! -->
 
-Hoofdstuk \@ref(bodem) beschrijft de driejaarlijkse fysisch-chemische monitoring van de bodem in het kader van MWTL. Dit hoofdstuk wordt elke drie jaar geactualiseerd met nieuwe gegevens. De laatste bodemmonsters zijn genomen in `r dataJaar` en geanalyseerd in het laboratorium. De resultaten van deze fysisch-chemische monitoring in de bodem zijn opgenomen in dit hoofdstuk.
+Hoofdstuk \@ref(bodem) beschrijft de driejaarlijkse fysisch-chemische monitoring van de bodem in het kader van MWTL. Dit hoofdstuk wordt elke drie jaar geactualiseerd met nieuwe gegevens. De laatste bodemmonsters zijn genomen in 2022 en geanalyseerd in het laboratorium. De resultaten van deze fysisch-chemische monitoring in de bodem zijn opgenomen in dit hoofdstuk.
 <!-- % update: ontbrekende data! -->
 
 Het hoofdstuk over verontreinigingen in biota (MWTL) is dit jaar niet opgenomen. De reden is dat er op dit moment niet genoeg gegevens voorhanden zijn in de Scheldemonitor om dit hoofdstuk op een goede manier op te nemen. De bedoeling is om deze gegevens in volgende rapportages weer mee te nemen. 

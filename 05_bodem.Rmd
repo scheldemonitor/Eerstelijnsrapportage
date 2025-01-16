@@ -20,17 +20,15 @@ require(tidyverse)
 require(lubridate)
 require(sf)
 require(leaflet)
-
-source("r/functions.R")
-source("r/refresh_data.R")
+require(readr)
 
 trendstations <- c('Schaar van Ouden Doel',
 "Bath boei 68",
 "Bath boei 71",
 "Speelmansgat",
-"Kruiningen Perkpolder",
+"Kruiningen Perkpolder (drempel)",
 "Hansweert boei OHMG",
-"Hansweert boei 4",
+"Hoedekenskerke boei 4",
 "Baarland drempel",
 "Terneuzen boei WPT2",
 "Borssele drempel",
@@ -40,8 +38,10 @@ trendstations <- c('Schaar van Ouden Doel',
 
 refreshData = F
 fysChemBodemDataPath <- "Data_FysChem_bodem.csv"
-if(refreshData) refresh_fysischchemischbodem(startyear = 1998, endyear = dataJaar, filepath = fysChemBodemDataPath) 
-
+if(refreshData){ 
+  source("r/refresh_data.R") 
+  refresh_fysischchemischbodem(startyear = 1998, endyear = dataJaar, filepath = fysChemBodemDataPath) 
+}
 ```
 
 ```{r downloadBodem, include = F}
@@ -64,20 +64,18 @@ df_clean <- df %>%
 
 Eens in de drie jaar worden monsters genomen van het bodemmateriaal in de Westerschelde. Figuur \@ref(fig:meetstationsBodem) laat de 12 bemonsteringslocaties zien die in 2016 zijn gebruikt. De locatie Walcheren 2 km uit de kust is sinds 2010 niet meer gemeten. Resultaten van dit station zijn terug te vinden in de Eerstelijnsrapportage 2010.
 
-```{r meetstationsBodem, fig.cap="Ligging van de meetstations voor het bodemmateriaal"}
-plotLocations(df_clean, nudge__y = 000, nudge__x = 1000, angle = 65) +
-  coord_sf(xlim = c(20000, 90000), ylim = c(370000, 400000), datum=28992)
-# knitr::include_graphics("Figuren/Meetstations_bodem.png")
+```{r meetstationsBodem, fig.width = 7, fig.height = 4, fig.cap="Ligging van de meetstations voor het bodemmateriaal"}
+plotLocations(df_clean, nudge__y = 2000, nudge__x = 1000, angle = 65)
 ```
 
 ## Metalen {#bodem-metalen}
 
-In Figuur \@ref(fig:arseenBodem) t/m Figuur \@ref(fig:zinkBodem) zijn de metalen in het bodemsediment in de Westerschelde weergegeven. Op de horizontale as zijn de stations gerangschikt van west (links) naar oost (rechts). Globaal gezien laten de meeste metalen laten op de meeste stations een afnemende trend in de tijd zien, die voor sommige metalen en stations sterker zijn dan voor andere. Daarnaast is voor sommige metalen (cadmium, koper, kwik en zink) te zien dat de hoeveelheid metaal in de richting van de Noordzee afneemt.
+In Figuur \@ref(fig:arseenBodem) t/m Figuur \@ref(fig:zinkBodem) zijn de metalen in het bodemsediment in de Westerschelde weergegeven. Op de horizontale as zijn de stations gerangschikt van west (links) naar oost (rechts). Globaal gezien laten de meeste metalen laten op de meeste stations een afnemende trend in de tijd zien, die voor sommige metalen en stations sterker zijn dan voor andere. Daarnaast is voor sommige metalen (cadmium, chroom, koper, kwik en zink) te zien dat de hoeveelheid metaal in de richting van de Noordzee afneemt.
 
 ```{r arseenBodem, fig.cap="Arseen in het bodemsediment in de Westerschelde"}
 #knitr::include_graphics("Figuren/Fysisch/Bodem/bar_arseen.png")
 
-parname = "Arseen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "Arseen in mg/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -85,7 +83,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```{r cadmiumBodem, fig.cap="Cadmium in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_cadmium.png")
 
-parname = "Cadmium in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "Cadmium in mg/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -93,7 +91,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```{r chroomBodem, fig.cap="Chroom in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_chroom.png")
 
-parname = "Chroom in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "Chroom in mg/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -101,7 +99,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```{r koperBodem, fig.cap="Koper in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_koper.png")
 
-parname = "Koper in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "Koper in mg/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -109,7 +107,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```{r kwikBodem, fig.cap="Kwik in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_kwik.png")
 
-parname = "Kwik in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "Kwik in mg/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -117,7 +115,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```{r loodBodem, fig.cap="Lood in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_lood.png")
 
-parname = "Lood in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "Lood in mg/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -125,7 +123,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```{r zinkBodem, fig.cap="Zink in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_zink.png")
 
-parname = "Zink in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "Zink in mg/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -237,12 +235,12 @@ knitr::kable(df_clean %>% ungroup() %>%
 
 ```
 
-
+De PCB's die in deze rapportage zijn meegenomen laten allen een vergelijkbaar beeld zien. De concentratie PCB's neemt af in stroomafwaartse richting. Verder stroomopwaarts lijkt een afname in de hoeveelheid PCB's over de tijd zichtbaar te zijn. Met name de stations Schaar van Ouden Doel, Bath boei 68 en Bath boei 71 laten deze afname zien.
 
 ```{r PCB180Bodem, fig.cap="PCB180 in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',3,4,4',5,5'-heptachloorbifenyl.png")
 
-parname = "2,2',3,4,4',5,5'-Heptachloorbifenyl (PCB180) in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "2,2',3,4,4',5,5'-Heptachloorbifenyl (PCB180) in ug/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -250,7 +248,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```{r PCB138Bodem, fig.cap="PCB138 in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',3,4,4',5'-hexachloorbifenyl.png")
 
-parname = "2,2',3,4,4',5'-Hexachloorbifenyl (PCB138) in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "2,2',3,4,4',5'-Hexachloorbifenyl (PCB138) in ug/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -279,7 +277,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```{r PCB52Bodem, fig.cap="PCB52 in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',5,5'-tetrachloorbifenyl.png")
 
-parname = "2,2',5,5'-Tetrachloorbifenyl (PCB52) in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "2,2',5,5'-Tetrachloorbifenyl (PCB52) in ug/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -297,12 +295,12 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```{r PCB28Bodem, fig.cap="PCB28 in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,4,4'-trichloorbifenyl.png")
 
-parname = "2,4,4'-Trichloorbifenyl (PCB28) in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "2,4,4'-Trichloorbifenyl (PCB28) in ug/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
-De totale hoeveelheid PCB's in het bodemsediment neemt af in de richting van de Noordzee (figuur \@ref(fig:SomPCBBodem)). Met name bij de oostelijke stations Schaar van Ouden Doel, Bath boei 68 en Bath boei  71 is er een afname van totaal PCB in de tijd.
+Net als voor de afzonderlijke PCB's neemt de totale hoeveelheid PCB's in het bodemsediment af in de richting van de Noordzee (figuur \@ref(fig:SomPCBBodem)). Met name bij de oostelijke stations Schaar van Ouden Doel, Bath boei 68 en Bath boei  71 is er een afname van totaal PCB in de tijd.
 
 ```{r SomPCBBodem, fig.cap="Som van de PCB's in het bodemsediment in de Westerschelde. Hier is de som genomen van alle PCB's die beschikbaar zijn in de database. "}
 
@@ -318,19 +316,20 @@ df_clean %>% ungroup() %>%
 
 ## Organotinverbindingen {#bodem-organotin}
 
-Tributyltin is de enige organotinverbinding die wordt gemeten in het bodemsediment. In Figuur \@ref(fig:tributyltinBodem) is de hoeveelheid tributyltin over de jaren weergegeven per station. De gehaltes in 2010, 2013 en 2016 zijn sterk lager dan die van 2001 en 2004. Ruimtelijk gezien zijn er grote variaties. Tot en  met 2010 is Tributyltin gemeten in de slibfractie van het bodemsediment, daarna in het totale sediment. 
+Tributyltin is de enige organotinverbinding die wordt gemeten in het bodemsediment. In Figuur \@ref(fig:tributyltinBodem) is de hoeveelheid tributyltin over de jaren weergegeven per station. De gehaltes vanaf 2010 zijn op de meeste stations lager dan die van 2001 en 2004. Ruimtelijk gezien zijn er grote variaties. Tot en met 2010 is Tributyltin gemeten in de slibfractie van het bodemsediment, daarna in het totale sediment. 
 
 ```{r tributyltinBodem, fig.cap="Tributyltin in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_tributyltin(kation).png")
 
-parname = c("Tributyltin in ug/kg Standaard sediment in Bodem/Sediment", "Tributyltin in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment")
+parname = c("Tributyltin in ug/kg drooggewicht in bodem/sediment", "Tributyltin in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment")
 
 df_clean %>%
     dplyr::filter(parametername %in% parname) %>%
     dplyr::rename(Station = stationname,
                   Value = value,
                   Parameter = parametername) %>%
-    dplyr::arrange(-Value) %>%
+    mutate(Value= ifelse(is.na(Value), as.numeric(gsub('=', '', originalvalue)), Value)) %>% 
+    #dplyr::arrange(-Value) %>%
     ggplot(aes(datetime, Value)) +
     geom_line(aes(color=Parameter)) + 
     geom_point(aes(color=Parameter), fill = "white", shape = 21) + 
@@ -343,11 +342,12 @@ df_clean %>%
   ylab("waarde in ug/kg sediment")
 ```
 
+
+```{r dataParameterBodem, fig.height=14, fig.width=8, fig.cap="Overzicht van gemeten parameters door de jaren heen.", include=FALSE, eval=FALSE}
 ## Beschikbare gegevens bodem
 
-De algemene beschikbaarheid van data over stoffen in de bodem is te vinden als overzicht per parameter in figuur \@ref(fig:dataParameterBodem), en als overzicht per station in figuur \@ref(fig:dataStationBodem). Voor bijzonderheden over individuele parameters per station, zie de desbetreffende paragrafen. 
+#'De algemene beschikbaarheid van data over stoffen in de bodem is te vinden als overzicht per parameter in figuur \@ref(fig:dataParameterBodem), en als overzicht per station in figuur \@ref(fig:dataStationBodem). Voor bijzonderheden over individuele parameters per station, zie de desbetreffende paragrafen. 
 
-```{r dataParameterBodem, fig.height=14, fig.width=8, fig.cap="Overzicht van gemeten parameters door de jaren heen."}
 df_clean %>%
   group_by(parametername) %>%
   summarize(start = min(year(datetime)), eind = max(year(datetime))) %>% 
@@ -361,7 +361,7 @@ df_clean %>%
 
 
 
-```{r dataStationBodem, fig.height=4, fig.cap="Overzicht van gemeten stations door de jaren heen."}
+```{r dataStationBodem, fig.height=4, fig.cap="Overzicht van gemeten stations door de jaren heen.", include =F, eval=F}
 df_clean %>%
   group_by(stationname) %>%
   summarize(start = min(year(datetime)), eind = max(year(datetime))) %>% 

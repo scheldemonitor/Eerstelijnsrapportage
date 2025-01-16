@@ -4,12 +4,13 @@ require(viridis)
 require(leaflet)
 require(lubridate)
 require(mblm)
-require(Kendall)
+# require(Kendall)
 require(plotly)
-# require(rworldxtra)
-# require(rworldmap)
 require(sf)
 
+## run once to refresh the backgroundmap
+# require(rworldxtra)
+# require(rworldmap)
 # data(countriesHigh)
 # bbox_scheldt <- st_bbox(c(xmin = 2.5, xmax = 4.7, ymax = 51.7, ymin = 51.2), crs = st_crs(4326))
 # backgroundmap <- countriesHigh %>% st_as_sf() %>%
@@ -119,6 +120,7 @@ statTable <- function(df, parname, rounding, meanorder = "decreasing", sf = F) {
       group_by(stationname, year) %>% 
       summarize(yearlymedian = median(value)) %>%
       drop_na(yearlymedian) %>%
+      ungroup() %>%
       group_by(stationname) %>%
       do(broom::tidy(sen(yearlymedian ~ year, data = .))) %>% 
       filter(term == "year") 
@@ -294,7 +296,7 @@ plotTrends <- function(df, parname, statmethod = sen, sf = F, trend = T, beginja
     geom_ribbon(aes(ymin = `10-perc`, ymax = `90-perc`), fill = "lightgrey", alpha = 0.7) +
     geom_line() + geom_point(fill = "white", shape = 21)
   if(trend)    p <- p + geom_smooth(method = statmethod, formula = y~x, color = "#2E89BF", fill = "#2E89BF", alpha = 0.2)
-  p <- p + facet_wrap(~Station, ncol = 2, scales = "free") +
+  p <- p + facet_wrap(~Station, ncol = 2, scales = "fixed") +
     theme_minimal() +
     ggtitle(label = parname) +
     coord_cartesian(xlim = c(beginjaar, eindjaar), ylim = c(0,NA)) +
@@ -368,8 +370,8 @@ plotTrendsLimits2 <- function(df, parname, stations = trendstations, sf = F, tre
       `n(>)` = ifelse(sum(limiet == ">") == 0 , NA, sum(limiet == ">")), 
       median = median(value, na.rm = T), `10-perc` = quantile(value, 0.1, na.rm = T), `90-perc` = quantile(value, 0.9, na.rm = T)
     ) %>%
-    mutate(parametername = str_replace(parametername, " in mg/kg drooggewicht in zwevend stof", "")) %>%
-    mutate(parametername = str_replace(parametername, " in ug/kg drooggewicht in zwevend stof", "")) %>%
+    mutate(parametername = str_extract(parametername, "(?<=\\().*(?=\\))")) %>%
+    # mutate(parametername = str_replace(parametername, " in ug/kg drooggewicht in zwevend stof", "")) %>%
     # mutate(parametername = ifelse(   # werkt niet helemaal goed
     #   str_detect(parametername, "PCB[0-9]{2,3}"), 
     #   str_extract(parname, "PCB[0-9]{2,3}" ),
@@ -497,17 +499,21 @@ plotLogAnomalies <- function(df, parname, sf = F) {
     dplyr::filter(parametername == parname) %>%
     dplyr::mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
     mutate(logwaarde = log(value)+0.001) %>%
-    group_by(stationname, year, month) %>% summarize(logmaandgemiddelde = mean(logwaarde, na.rm = T)) %>% ungroup() %>%
-    group_by(stationname) %>% mutate(anomalie = logmaandgemiddelde - mean(logmaandgemiddelde, na.rm = T)) %>% 
+    group_by(stationname, year, month) %>% 
+    summarize(logmaandgemiddelde = mean(logwaarde, na.rm = T)) %>% 
+    ungroup() %>%
+    group_by(stationname) %>% 
+    mutate(anomalie = logmaandgemiddelde - mean(logmaandgemiddelde, na.rm = T)) %>% 
     ungroup() %>%
     complete(stationname, year, month, fill = list(logmaandgemiddelde = NA, anomalie = NA)) %>%
     mutate(datum = as.Date(lubridate::ymd(paste(year, month, "15")))) %>%
     arrange(stationname, datum) %>%
     # mutate(anomalie = oce::fillGap(anomalie)) %>%
-    group_by(stationname) %>% mutate(rM=rollmean(anomalie,k, na.pad=TRUE, align="center", na.rm = T)) %>%
+    group_by(stationname) %>% 
+    mutate(rM = zoo::rollmean(anomalie, k, na.pad=TRUE, align="center", na.rm = T)) %>%
     # mutate(stationname = factor(stationname, levels = plotlocaties)) %>%
     ggplot(aes(datum, exp(anomalie))) + 
-    geom_point(aes(), alpha = 0.2) +   #size = `n/year` color = exp(logmaandgemiddelde)
+    geom_point(aes(color = exp(logmaandgemiddelde)), alpha = 0.2) +   #size = `n/year` color = exp(logmaandgemiddelde)
     geom_line(aes(y=exp(rM)), color = "blue", size = 1)  +
     ggtitle(label = parname) +
     facet_wrap(~ stationname, scales = "free", ncol = 2) +
@@ -827,7 +833,7 @@ plotTrendFyto <- function(df, statname){
     geom_point(data = df.fyt.groep %>% ungroup() %>%
                  mutate(jaar = lubridate::year(datetime), maand = lubridate::month(datetime)) %>%
                  mutate(seizoen = ifelse(maand %in% c(4:9), "zomer", "winter")) %>%
-                 filter(stationname == statname, parametername == "Autotroof - Phaeocystis") %>%
+                 filter(stationname == statname, parametername == "fytoplankton - Phaeocystis") %>%
                  group_by(jaar, parametername, seizoen) %>%
                  summarize(`90-perc` = quantile(value, probs = 0.9, na.rm = T)) %>% ungroup() %>%
                  filter(seizoen == "zomer"),
@@ -867,7 +873,7 @@ plotTrendFytoGroup <- function(df, groupname){
                  mutate(jaar = lubridate::year(datetime), maand = lubridate::month(datetime)) %>%
                  filter(parametername == groupname) %>%
                  filter(maand %in% c(4:9)) %>%
-                 filter(parametername == "Autotroof - Phaeocystis") %>%
+                 filter(parametername == "fytoplankton - Phaeocystis") %>%
                  group_by(jaar, stationname) %>%
                  summarize(`90-perc` = quantile(value, probs = 0.9, na.rm = T)) %>% ungroup(),
                aes(x = jaar, y = `90-perc`, color = stationname),
@@ -1104,7 +1110,7 @@ if(html){  pal <- colorNumeric(viridis(n = 7),
     ggplot(aes()) +
     geom_sf(data = backgroundmap, aes(), fill = "lightgrey", alpha = 0.5) +
     # geom_sf_label(aes(label = Station), nudge_y = -3000, size = 3)  +
-    geom_sf(aes(color = Mediaan, size = Mediaan)) +
+    geom_sf(aes(color = Mediaan, size = 3)) +
     ggtitle(label = parname) +
     coord_sf(datum=28992)  +
     scale_color_viridis() +
@@ -1256,7 +1262,7 @@ plotTrendsBiota2 <- function(df, statname, cat, sciname, sf = F, trend = T, stat
     geom_point(aes(), fill = "white", shape = 21) 
   
   if(trend)    p <- p + geom_smooth(method = statmethod, fill = "blue", alpha = 0.2)
-  p <- p + facet_wrap(~Parameter, ncol = 2, scales = "free_y") +
+  p <- p + facet_wrap(~Parameter, ncol = 1, scales = "free_y") +
     # ylab() +
     ggtitle(label = paste(statname, sciname, sep = ", ")) +
     coord_cartesian(ylim = c(0,NA)) +
@@ -1264,3 +1270,71 @@ plotTrendsBiota2 <- function(df, statname, cat, sciname, sf = F, trend = T, stat
   return(p)
 }
 
+
+meetdichtheid <- function(df, stationName){
+  if (! stationName %in% trendstations) {
+    print ('stationname not found')
+  }
+  {
+    df %>%
+      ungroup() %>%
+      filter(stationname == stationName) %>%
+      group_by(parametername, year, stationname) %>%
+      summarize(n = n(), .groups = "drop") %>%
+      mutate(date = lubridate::ymd(paste(year, '06', '01'))) %>%
+      ggplot(aes(date, parametername, color=n)) +
+      geom_text(aes(label = n), size = 3, nudge_x = -150) +
+      coord_cartesian(
+        xlim = c(
+          as.Date("1998-07-01"),
+          NA_Date_),
+      ) +
+      scale_x_date(
+        position = "top",
+        date_breaks = "1 year", 
+        date_labels = "%y"
+      ) +
+      scale_color_gradient(low = "#769FCA", high = "#FF6C65") + 
+      ggtitle(stationName) +
+      xlab('Jaar')+
+      ylab('Parameter') +
+      theme_minimal() +
+      theme(legend.position = "none")
+  }
+}
+
+meetdichtheid_hydro <- function(df, stationName, no_of_columns=2){
+  if (! stationName %in% trendstations) {
+    print ('stationname not found')
+  }
+  {
+    df %>%
+      ungroup() %>%
+      filter(stationname %in% stationName) %>%
+      # group_by(parametername, year, stationname) %>%
+      # summarize(n = n(), .groups = "drop") %>%
+      # mutate(date = lubridate::ymd(paste(year, '06', '01'))) %>%
+      ggplot(aes(date, parametername)) +
+      geom_line(aes(size = datapoints), color = "steelblue4") +
+      # geom_text(aes(label = datapoints), size = 4, nudge_x = -150) +
+      coord_cartesian(
+        xlim = c(
+          as.Date("1998-07-01"),
+          NA_Date_),
+      ) +
+      scale_x_date(
+        position = "top",
+        # breaks = pretty_dates(n = 5),
+        date_breaks = "2 years",
+        date_labels = "%y"
+      ) +
+      # scale_color_gradient(low = "#769FCA", high = "#FF6C65") + 
+      scale_size(range = c(1,6)) +
+      # ggtitle(stationName) +
+      xlab('Jaar')+
+      ylab('Parameter') +
+      theme_minimal() +
+      theme(legend.position = "none") +
+      facet_wrap(facets = "stationname", ncol = no_of_columns)
+  }
+}

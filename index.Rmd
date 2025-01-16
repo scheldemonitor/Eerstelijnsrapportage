@@ -1,33 +1,35 @@
 ---
 title: "Eerstelijnsrapportage Westerschelde"
-subtitle: 2020
+subtitle: 2023
 author: "Deltares"
 date: '`r Sys.Date()`'
 site: bookdown::bookdown_site
-documentclass: book
-bibliography: [bib/library.bib, bib/westerscheldewillem.bib]
+# documentclass: book
+bibliography: bib/westerschelde.bib
 biblio-style: apalike
 link-citations: yes
 always_allow_html: yes
 ---
 
-# Voorwoord
+# Voorwoord {.unnumbered}
 
 ```{r, message=FALSE, warning=FALSE, include=FALSE}
-# options(tinytex.verbose = TRUE)
-knitr::opts_chunk$set(echo = FALSE,	message = FALSE, warning = FALSE)
 
+# options(tinytex.verbose = TRUE)
+knitr::opts_chunk$set(echo = FALSE,	message = FALSE, warning = FALSE, cache = T)
+
+draft = FALSE
 ```
 
 <!-- De informatie op deze website is op dit moment onder constructie en bedoeld voor een beperkt publiek. Niets van deze website mag worden gebruikt door derden. -->
 
 <!-- This website is under construction. Nothing from this website may be used. -->
 
-Deze eerstelijnsrapportage is gemaakt door Deltares in opdracht van Rijkswaterstaat voor de Vlaams Nederlandse Scheldecommissie (VNSC) en bevat gegevens die in opdracht van Rijkswaterstaat zijn verzameld in het kader van het MWTL programma t/m `r dataJaar`. Het verwerken, analyseren en toevoegen van de gegevens uit `r dataJaar` in dit rapport is gedaan door dr. W. Stolte en B. van Rongen. Aan eerdere rapportages (vanaf 2010) hebben vele anderen gewerkt. De voorliggende rapportage is opgebouwd met scripts vanuit de gegevens in Scheldemonitor.
+Deze eerstelijnsrapportage is gemaakt door Deltares in opdracht van Rijkswaterstaat voor de Vlaams Nederlandse Scheldecommissie (VNSC) en bevat gegevens die in opdracht van Rijkswaterstaat zijn verzameld in het kader van het MWTL programma t/m `r dataJaar`. Het verwerken, analyseren en toevoegen van de gegevens uit `r dataJaar` in dit rapport is gedaan door W. Stolte en J. Rienstra. Aan eerdere rapportages (vanaf 2010) hebben vele anderen gewerkt. De voorliggende rapportage is opgebouwd met scripts vanuit de gegevens in Scheldemonitor.
 
 ```{asis, echo = knitr::is_html_output()}
 
-## Samenvatting
+## Samenvatting {}
 
 Deze rapportage is opgemaakt met door RWS in de Scheldemonitor beschikbaar gemaakte hydrodynamische, fysisch-chemische en biologische gegevens (alleen fytoplankton). De rapportage gaat over gegevens verzameld in de periode 1996 tot en met `r dataJaar` voor de Westerschelde en de monding. De gegevens zijn verkregen in het kader van de Nederlandse MWTL monitoring. Het is een eerste weergave van de beschikbare data en heeft als doel om enkel te beschrijven ‘wat men in de meetresultaten ziet’. Het bevat een korte interpretatie van de gegevens op basis van een eenvoudige analyse. 
 
@@ -43,9 +45,20 @@ De verdere duiding van deze en Vlaamse gegevens wordt gedaan in de 6-jarige cycl
 
 ## Versie {#rapportversie}
 
+```{asis, echo = draft}
+Deze rapportage is een conceptversie. Niets mag geciteerd worden zonder toestemming van de makers.
+```
+```{asis, echo = !draft}
+Deze rapportage is de definitieve versie 2023. Het bevat gegevens tot en met 2022. 
+```
+
 Eerstelijnsrapportages worden elk jaar gemaakt. Hieronder is informatie over de datum van deze rapportage, en tot welk jaar de gegevens zijn verwerkt. 
 
-* Eindversie 22-02-2023: bevat data t/m `r dataJaar`, missend in deze versie is:
-  + Golven: locatie Cadzand, 
-  + Biota: De gegevens over verontreinigingen in biota zijn op dit moment onvolledig of ontbrekend. Besloten is om deze dit jaar weg te laten uit de eerstelijnsrapportage. Het Biota hoofdstuk is daarom in deze versie niet toegevoegd. De verwachting is dat deze in de volgende versie weer toegevoegd gaat worden. 
+```{asis, echo = knitr::is_html_output()}
+Dit is de webversie van de eerstelijnsrapportage. De webversie kan in details afwijken van de eens per jaar geproduceerde rapportage die als pdf beschikbaar is op [Scheldemonitor](https://www.scheldemonitor.org/nl). 
+```
+
+
+
+* Eindversie `r lubridate::today()`: bevat data t/m `r dataJaar`.
 
