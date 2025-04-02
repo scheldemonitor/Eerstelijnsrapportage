@@ -57,7 +57,9 @@ Eerstelijnsrapportages worden elk jaar gemaakt. Hieronder is informatie over de 
 ```{asis, echo = knitr::is_html_output()}
 Dit is de webversie van de eerstelijnsrapportage. De webversie kan in details afwijken van de eens per jaar geproduceerde rapportage die als pdf beschikbaar is op [Scheldemonitor](https://www.scheldemonitor.org/nl). 
 ```
+Veranderingen t.o.v. de vorige versie:
 
+- Een aantal figuren (bijv figuur 4.4) werden niet goed weergegeven. Dit is verholpen in de huidige versie.  
 
 
 * Eindversie `r lubridate::today()`: bevat data t/m `r dataJaar`.

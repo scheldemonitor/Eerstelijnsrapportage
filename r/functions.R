@@ -370,7 +370,7 @@ plotTrendsLimits2 <- function(df, parname, stations = trendstations, sf = F, tre
       `n(>)` = ifelse(sum(limiet == ">") == 0 , NA, sum(limiet == ">")), 
       median = median(value, na.rm = T), `10-perc` = quantile(value, 0.1, na.rm = T), `90-perc` = quantile(value, 0.9, na.rm = T)
     ) %>%
-    mutate(parametername = str_extract(parametername, "(?<=\\().*(?=\\))")) %>%
+    mutate(parametername = word(parametername, 1)) %>%
     # mutate(parametername = str_replace(parametername, " in ug/kg drooggewicht in zwevend stof", "")) %>%
     # mutate(parametername = ifelse(   # werkt niet helemaal goed
     #   str_detect(parametername, "PCB[0-9]{2,3}"), 
