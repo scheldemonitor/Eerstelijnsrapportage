@@ -133,7 +133,18 @@ refresh_fysischchemischoppwater <- function(startyear = 1998, endyear, filepath 
   Organisch_koolstof <- c(663,674)
   Metalen <- c(133,1737,259,260,268,269,1178,2014,1181,2018,1201,1202,686,687)
   
-  parID <- c(Saliniteit,Temperatuur,Zuurstof,Chlorofyl_a,BZV_BOD_CZV,Lichtklimaat,Zwevende_stof,Nutrienten,Organisch_koolstof,Metalen)
+  parID <- c(
+    Saliniteit,
+    Temperatuur,
+    # Zuurstof,
+    Chlorofyl_a,
+    BZV_BOD_CZV,
+    Lichtklimaat,
+    Zwevende_stof,
+    Nutrienten,
+    Organisch_koolstof,
+    Metalen
+    )
   
   #df <- get_y_SMdata(2019, 2020, parID)
   df <- smwfs::get_y_SMdata(startyear = startyear, endyear = endyear, parID = parID)
