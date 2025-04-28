@@ -171,10 +171,11 @@
     },
     "bookdown": {
       "Package": "bookdown",
-      "Version": "0.28",
+      "Version": "0.41",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
+        "R",
         "htmltools",
         "jquerylib",
         "knitr",
@@ -183,7 +184,7 @@
         "xfun",
         "yaml"
       ],
-      "Hash": "588be2b78d6887d724e82980c1135a25"
+      "Hash": "d8b74e267a5774ded5c91786d6d777bb"
     },
     "broom": {
       "Package": "broom",
@@ -524,6 +525,18 @@
       "Repository": "CRAN",
       "Hash": "77bd60a6157420d4ffa93b27cf6a58b8"
     },
+    "fontawesome": {
+      "Package": "fontawesome",
+      "Version": "0.5.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "htmltools",
+        "rlang"
+      ],
+      "Hash": "c2efdd5f0bcd1ea861c2d4e2a883a67d"
+    },
     "forcats": {
       "Package": "forcats",
       "Version": "0.5.2",
@@ -718,14 +731,14 @@
     },
     "highr": {
       "Package": "highr",
-      "Version": "0.9",
+      "Version": "0.11",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "xfun"
       ],
-      "Hash": "8eb36c8125038e648e5d111c0d7b2ed4"
+      "Hash": "d65ba49117ca223614f71b60d85b8ab7"
     },
     "hms": {
       "Package": "hms",
@@ -858,7 +871,7 @@
     },
     "knitr": {
       "Package": "knitr",
-      "Version": "1.40",
+      "Version": "1.49",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -866,12 +879,11 @@
         "evaluate",
         "highr",
         "methods",
-        "stringr",
         "tools",
         "xfun",
         "yaml"
       ],
-      "Hash": "caea8b0f899a0b1738444b9bc47067e7"
+      "Hash": "9fcb189926d93c636dea94fbe4f44480"
     },
     "labeling": {
       "Package": "labeling",
@@ -1377,31 +1389,26 @@
     },
     "rmarkdown": {
       "Package": "rmarkdown",
-      "Version": "2.16.1",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteUsername": "rstudio",
-      "RemoteRepo": "rmarkdown",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "b8a9879ca90cf4f15e72e3c0263efa4503e063cb",
-      "RemoteHost": "api.github.com",
+      "Version": "2.29",
+      "Source": "Repository",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "bslib",
         "evaluate",
+        "fontawesome",
         "htmltools",
         "jquerylib",
         "jsonlite",
         "knitr",
         "methods",
-        "stringr",
         "tinytex",
         "tools",
         "utils",
         "xfun",
         "yaml"
       ],
-      "Hash": "e8852e700aa0ec1f6ad070084ef5c43a"
+      "Hash": "df99277f63d01c34e95e3d2f06a79736"
     },
     "rstudioapi": {
       "Package": "rstudioapi",
@@ -1865,14 +1872,16 @@
     },
     "xfun": {
       "Package": "xfun",
-      "Version": "0.32",
+      "Version": "0.49",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
+        "R",
+        "grDevices",
         "stats",
         "tools"
       ],
-      "Hash": "0498af3034691dde715dcd86198efe75"
+      "Hash": "8687398773806cfff9401a2feca96298"
     },
     "xml2": {
       "Package": "xml2",
