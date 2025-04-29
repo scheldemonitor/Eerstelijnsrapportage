@@ -657,8 +657,9 @@ In 2012 worden de waarden van tribultyltin (TBT) bij Schaar van Ouden Doel niet 
 #              caption = "Waardes voor de Tributyltin in $\\mu$g/kg voor beide stations.")
 
 
+# harmonisatie eenheden
 
-df <- df %>%
+df_tbt <- df %>%
   mutate(value = case_when(
     parametername == "Tributyltin in ug/kg Uitgedrukt in Tin / drooggewicht in zwevend stof" ~ value * 2.444,
     parametername == "Tributyltin in ug/kg drooggewicht in zwevend stof" ~ value
@@ -670,9 +671,10 @@ df <- df %>%
   ))
 
 
+
 parname = "Tributyltin in ug/kg drooggewicht in zwevend stof"
 rounding = 3
-dt <- statTable(df, parname, rounding)
+dt <- statTable(df_tbt, parname, rounding)
 knitr::kable(dt, 
              align = 'c',
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van tributyltin (ug/kg) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
@@ -681,6 +683,6 @@ knitr::kable(dt,
 ```{r zwevendTributyltin, fig.height = 3, fig.cap="Jaarlijkse mediaanwaarde, 10-percentiel en 90-percentiel van Tributyltin voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/Tributyltin.png")
 
-plotTrendsLimits(df, parname)
+plotTrendsLimits(df_tbt, parname)
 ```
  

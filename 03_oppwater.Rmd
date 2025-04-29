@@ -771,7 +771,9 @@ De orthosfosfaatconcentraties na filtratie nemen af in stroomafwaartse richting,
 
 ```{r fysischOrthofosfaatTab}
 
-parname <- "Orthofosfaat, gefiltreerd in mgP/l in oppervlaktewater" 
+# parname <- "Orthofosfaat, gefiltreerd in mgP/l in oppervlaktewater" 
+# since 2024 the name has changed to:
+parname <- "Orthofosfaat in mgP/l na filtratie in oppervlaktewater"
 df2 <- verifyStations(df)
 dt <- statTable(df2, parname, 3)
 knitr::kable(dt, 
