@@ -232,6 +232,8 @@ refresh_fytoplanktondata <- function(){
   
   url = "http://geo.vliz.be/geoserver/wfs/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=Dataportal%3Abiotic_observations&resultType=results&viewParams=where%3Aobs.context+%26%26+ARRAY%5B1%5D+AND+imisdatasetid+IN+%28949%29%3Bcontext%3A0001%3Bloggedin%3A1&propertyName=stationname%2Caphiaid%2Cscientificname%2Cobservationdate%2Clongitude%2Clatitude%2Cvalue%2Cparametername%2Cdataprovider%2Cimisdatasetid%2Cdatasettitle%2Cdatafichetitle%2Cdataficheid%2Careaname%2Cdateprecision%2Cstadium%2Cgender%2Cvaluesign%2Cdepth%2Cclassunit%2Cclass%2Cstandardparameterid%2Cparameterunit&outputFormat=csv"
 
+  print(httr::parse_url(url))
+  
   df.fytoplankton <- read_csv(url)
   if (nrow(df.fytoplankton) != nrow(df.fytoplankton %>% select(-FID) %>% distinct())) {
     df.fytoplankton <- df.fytoplankton %>% select(-FID) %>% distinct()

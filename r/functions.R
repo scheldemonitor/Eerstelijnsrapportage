@@ -370,7 +370,8 @@ plotTrendsLimits2 <- function(df, parname, stations = trendstations, sf = F, tre
       `n(>)` = ifelse(sum(limiet == ">") == 0 , NA, sum(limiet == ">")), 
       median = median(value, na.rm = T), `10-perc` = quantile(value, 0.1, na.rm = T), `90-perc` = quantile(value, 0.9, na.rm = T)
     ) %>%
-    mutate(parametername = str_extract(parametername, "(?<=\\().*(?=\\))")) %>%
+    # mutate(parametername = str_extract(parametername, "(?<=\\().*(?=\\))")) %>%
+    mutate(parametername = word(parametername, 1)) %>%
     # mutate(parametername = str_replace(parametername, " in ug/kg drooggewicht in zwevend stof", "")) %>%
     # mutate(parametername = ifelse(   # werkt niet helemaal goed
     #   str_detect(parametername, "PCB[0-9]{2,3}"), 
@@ -821,16 +822,18 @@ plotTrendFyto <- function(df, statname){
   df %>% ungroup() %>%
     filter(stationname == statname) %>%
     mutate(jaar = lubridate::year(datetime), maand = lubridate::month(datetime)) %>%
-    mutate(seizoen = ifelse(maand %in% c(4:9), "zomer", "winter")) %>%
+    mutate(seizoen = ifelse(maand %in% c(3:9), "zomer", "winter")) %>%
+    mutate(seizoen = factor(seizoen, levels = c("zomer", "winter"))) %>%
     group_by(jaar, seizoen, parametername) %>%
     summarize(
       `90-perc` = quantile(value, 0.9, na.rm = T),
       mediaan = median(value, na.rm = T),
       gemiddelde = mean(value, na.rm = T)
     ) %>% ungroup() %>% 
+    filter(seizoen == "zomer") %>%
     ggplot(aes(x = jaar, y = mediaan)) +
     geom_point(aes(color = seizoen), size = 3) +
-    geom_point(data = df.fyt.groep %>% ungroup() %>%
+    geom_point(data = df %>% ungroup() %>%
                  mutate(jaar = lubridate::year(datetime), maand = lubridate::month(datetime)) %>%
                  mutate(seizoen = ifelse(maand %in% c(4:9), "zomer", "winter")) %>%
                  filter(stationname == statname, parametername == "fytoplankton - Phaeocystis") %>%
@@ -842,12 +845,12 @@ plotTrendFyto <- function(df, statname){
     ) +
     geom_smooth(aes(color = seizoen), alpha = 0.2) +
     # geom_line(aes(y = gemiddelde, color = seizoen)) +
-    geom_hline(linetype = 2, color = "blue",
+    geom_hline(linetype = 2, color = "blue", size = 1,
                data = df.fyt.groep %>% 
                  filter(stationname == statname) %>%
                  group_by(parametername) %>%
-                 summarize(mediaan = median(value, na.rm = T)) %>% ungroup(),
-               aes(yintercept = mediaan)
+                 summarize(mean = mean(value, na.rm = T)) %>% ungroup(),
+               aes(yintercept = mean)
     ) +
     facet_wrap(~ parametername, ncol = 2, scales = "free") +
     scale_y_log10() +
@@ -860,7 +863,9 @@ plotTrendFyto <- function(df, statname){
 plotTrendFytoGroup <- function(df, groupname){
   df %>% ungroup() %>%
     filter(parametername == groupname) %>%
-    mutate(jaar = lubridate::year(datetime)) %>%
+    mutate(jaar = lubridate::year(datetime), maand = lubridate::month(datetime)) %>%
+    mutate(seizoen = ifelse(maand %in% c(3:9), "zomer", "winter")) %>%
+    filter(seizoen == "zomer") %>%
     group_by(jaar, stationname) %>%
     summarize(
       `90-perc` = quantile(value, 0.9, na.rm = T),
@@ -869,10 +874,10 @@ plotTrendFytoGroup <- function(df, groupname){
     ggplot(aes(jaar, mediaan)) +
     geom_point(aes(color = stationname), size = 3) +
     # geom_smooth(aes(color = stationname), alpha = 0.2, method = "loess", span = 0.5) +
-    geom_point(data = df.fyt.groep %>% ungroup() %>%
+    geom_point(data = df %>% ungroup() %>%
                  mutate(jaar = lubridate::year(datetime), maand = lubridate::month(datetime)) %>%
                  filter(parametername == groupname) %>%
-                 filter(maand %in% c(4:9)) %>%
+                 filter(maand %in% c(3:9)) %>%
                  filter(parametername == "fytoplankton - Phaeocystis") %>%
                  group_by(jaar, stationname) %>%
                  summarize(`90-perc` = quantile(value, probs = 0.9, na.rm = T)) %>% ungroup(),
@@ -880,13 +885,41 @@ plotTrendFytoGroup <- function(df, groupname){
                shape = "-", size = 10
     ) +
     geom_line(aes(color = stationname)) +
-    geom_hline(linetype = 2, color = "blue",
+    geom_hline(linetype = 2, color = "blue", size = 1,
                data = df.fyt.groep %>%
                  filter(parametername == groupname) %>%
                  summarize(mediaan = median(value, na.rm = T)) %>% ungroup(),
                aes(yintercept = mediaan)
     ) +
     scale_y_log10() +
+    labs(subtitle = groupname) +
+    trendplotstyle +
+    ylab(bquote("celaantal in " ~ 10^6 ~ "/l"))
+  
+}
+
+plotTrendMonthFytoGroup <- function(df, groupname){
+  require(scales)
+  df %>% ungroup() %>%
+    filter(parametername == groupname) %>%
+    mutate(
+      maand = lubridate::month(datetime),
+      jaar = lubridate::year(datetime)
+           ) %>% ungroup() %>%
+    group_by(maand, stationname) %>%
+    summarize(
+      `90-perc` = quantile(value, 0.9, na.rm = T),
+      mediaan = median(value, na.rm = T)
+    ) %>% ungroup() %>% 
+    ggplot(aes(maand, mediaan)) +
+    geom_point(aes(color = stationname), size = 3) +
+    # geom_smooth(aes(color = stationname), alpha = 0.2, method = "loess", span = 0.5) +
+    # geom_point(aes(x = maand, y = `90-perc`, color = stationname),
+    #            shape = "-", size = 10
+    # ) +
+    geom_line(aes(color = stationname), size = 1) +
+    scale_y_log10() +
+    scale_x_continuous(breaks = pretty_breaks()) +
     labs(subtitle = groupname) +
     trendplotstyle +
     ylab(bquote("celaantal in " ~ 10^6 ~ "/l"))
