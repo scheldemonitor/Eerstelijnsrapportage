@@ -1,6 +1,6 @@
 ---
 title: "Eerstelijnsrapportage Westerschelde"
-subtitle: 2023
+subtitle: 2024
 author: "Deltares"
 date: '`r Sys.Date()`'
 site: bookdown::bookdown_site
@@ -39,26 +39,34 @@ De verdere duiding van deze en Vlaamse gegevens wordt gedaan in de 6-jarige cycl
 
 ```
 
-
-
-
-
 ## Versie {#rapportversie}
 
 ```{asis, echo = draft}
 Deze rapportage is een conceptversie. Niets mag geciteerd worden zonder toestemming van de makers.
 ```
-```{asis, echo = !draft}
-Deze rapportage is de definitieve versie 2023. Het bevat gegevens tot en met 2022. 
-```
+
 
 Eerstelijnsrapportages worden elk jaar gemaakt. Hieronder is informatie over de datum van deze rapportage, en tot welk jaar de gegevens zijn verwerkt. 
+
+```{r conditional, eval = !draft, results = 'asis', echo = FALSE}
+cat(
+  paste0(
+    "Deze rapportage is de definitieve versie 2023, gemaakt op ", 
+    lubridate::today(), 
+    ". Het bevat gegevens tot en met ", 
+    dataJaar, 
+    "."
+    )
+  ) 
+
+```
+
 
 ```{asis, echo = knitr::is_html_output()}
 Dit is de webversie van de eerstelijnsrapportage. De webversie kan in details afwijken van de eens per jaar geproduceerde rapportage die als pdf beschikbaar is op [Scheldemonitor](https://www.scheldemonitor.org/nl). 
 ```
+## Veranderingen ten opzichte van de vorige rapportages
 
+1. Voor fytoplankton (\@ref(#fytoplankton)) is in vorige rapportages abusiefelijk het zomergemiddelde berekend over april t/m september. Dit is nu hersteld, en zomergemiddelden zijn nu berekend over de periode maart t/m september. 
 
-
-* Eindversie `r lubridate::today()`: bevat data t/m `r dataJaar`.
 
