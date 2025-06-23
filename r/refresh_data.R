@@ -62,7 +62,7 @@ refresh_golven <- function(datajaar){
     1816, 2594, # H3, TH3
     2596,2597,2598 # TM02
   )
-  for(jaar in 2014:datajaar){
+  for(jaar in 1998:datajaar){
     df <- smwfs::getSMdata(startyear = jaar, endyear = jaar + 1, parID = c(Golven), datasetID = c(8032))
     write.csv(df, file.path(savepath,paste0("Data_Hydro_golven_", jaar,'.csv')), row.names = F)
   }
@@ -124,7 +124,7 @@ rm(df)
 refresh_fysischchemischoppwater <- function(startyear = 1998, endyear, filepath = "Data_FysChem_opp.csv"){
   Saliniteit <- c(13611) #998
   Temperatuur <- c(1046)
-  Zuurstof <- c(1214,1213)
+  Zuurstof <- c(1213)    #1214 (O2 in mg/l wordt niet meer opgenomen)
   Chlorofyl_a <- c(238,1800)
   BZV_BOD_CZV <- c(125,178)
   Lichtklimaat <- c(461,495)
@@ -136,7 +136,7 @@ refresh_fysischchemischoppwater <- function(startyear = 1998, endyear, filepath 
   parID <- c(
     Saliniteit,
     Temperatuur,
-    # Zuurstof,
+    Zuurstof,
     Chlorofyl_a,
     BZV_BOD_CZV,
     Lichtklimaat,
