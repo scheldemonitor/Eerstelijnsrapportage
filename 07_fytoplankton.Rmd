@@ -186,6 +186,37 @@ Overig protozooplankton is juist in minder grote aantallen aanwezig in de period
 ```
 
 
+## De verdeling van groepen over het seizoen
+
+in figuur \@ref(fig:fytoSeizoen1) is de verdeling van de verschillende groepen over het seizoen te zien. Er moet bedacht worden dat er na 2011, behalve bij Schaar van Ouden Doel, geen metingen zijn verricht in de wintermaanden (oktober - februari). 
+
+De verschillende groepen plankton vertonen een verschillend gemiddeld seizoenspatroon. Diatomeeën zijn de eerste bloeiers, met een piek al in maart in de Walcheren stations. Verder in het estuarium is de diatomeeënpiek steeds iets opgeschoven in de tijd. Bij Schaar van Ouden Doel zijn de hoogste waarden te vinden in mei, juni en juli. In de Walcheren stations i ook nog een najaarspiek te zien. Deze ontbreekt in de meer estuariene stations. 
+
+*Phaeocystis* piekt direct na de diatomeeën, dat wil zeggen in april in het kustwater en bij Vlissingen. Er is nauwelijks een najaarspiek te zien. De hoogste pieken zijn te zien bij de Walcheren stations, gevolgd door Vlissingen. Bij Schaar van OUden Doel is *Phaeocystis* nagenoeg afwezig. 
+
+Blauwwieren zijn vooral aanwezig bij Schaar van Ouden Doel en vertoont een piek in april en augustus. De hoge waarde bij Wacheren 20 km uit de kust moet als uitschieter beschouwd worden. 
+
+Groenwieren volgen de trend van blauwwieren. De hoogste waarden zijn te vinden in juni bij Schaar van Ouden Doel. 
+
+Fototrofe dinoflagellaten zijn het hele jaar aanwezig, zonder sterke piek, maar minder in de winter. 
+
+Mixotroof plankton (mixoplankton) is vooral aanwezig vanaf het midden van de zomer, ongeveer van juni - september. 
+
+Voor de overige groepen is het patroon niet zo duidelijk, of het varieert te veel over de jaren. 
+
+
+
+```{r fytoSeizoen1, fig.height=12, fig.width = 10, fig.cap="Maandelijkse gemiddelden voor fytoplankton (fototroof - Diatomeeën) voor alle stations."}
+
+groepen <- df.fyt.groep %>% distinct(parametername) %>% unlist %>% unname
+plotTrendMonthFytoGroup(df.fyt.groep, groepen) +
+  theme(
+    legend.position = "top", 
+    legend.title = element_blank()
+    )
+
+```
+
 ## Resultaten per station {#fyto-resultaten-station}
 
 ### Schaar van Ouden Doel {#fyto-resultaten-schaar}
@@ -387,12 +418,5 @@ In Figuur \@ref(fig:fyto10) is de ontwikkeling van het overige protozoöplankton
 plotTrendFytoGroup(df.fyt.groep, "protozooplankton - Overig")
 ```
 
-# Per groep over het seizoen
 
-```{r fytoSeizoen1, fig.height=4, fig.width = 8, fig.cap="Maandelijkse gemiddelden voor fytoplankton (fototroof - Diatomeeën) voor alle stations."}
-
-groepen <- df.fyt.groep %>% distinct(parametername) %>% unlist %>% unname
-
-lapply(groepen, function(x) plotTrendMonthFytoGroup(df.fyt.groep, x))
-```
 
