@@ -390,8 +390,9 @@ plotTrendFytoGroup(df.fyt.groep, "protozooplankton - Overig")
 # Per groep over het seizoen
 
 ```{r fytoSeizoen1, fig.height=4, fig.width = 8, fig.cap="Maandelijkse gemiddelden voor fytoplankton (fototroof - Diatomeeën) voor alle stations."}
-plotTrendMonthFytoGroup(df.fyt.groep, "fytoplankton - Diatomeeen")
+
+groepen <- df.fyt.groep %>% distinct(parametername) %>% unlist %>% unname
+
+lapply(groepen, function(x) plotTrendMonthFytoGroup(df.fyt.groep, x))
 ```
-
-
 

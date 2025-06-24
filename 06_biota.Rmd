@@ -1108,7 +1108,7 @@ somOrganotin <- df2_mossel2 %>%
   group_by(stationname, datetime, class, category, parametername) %>% 
   summarize(meanvalue = mean(value, na.rm = T), .groups = 'drop') %>%
   group_by(stationname, datetime, category, class) %>% 
-  summarize(somOrganotin = sum(meanvalue, na.rm = T), .groups = 'drop') %>% View
+  summarize(somOrganotin = sum(meanvalue, na.rm = T), .groups = 'drop') %>%
   pivot_longer(cols = somOrganotin, names_to = "parametername", values_to = "value") %>%
   filter(!grepl("Hoedekenskerke boei 4", stationname))
 # for some reason, there is only one year at station Hoedekenskerke. This is suspicious. Possibly mixed up with Knuitershoek?
