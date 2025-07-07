@@ -901,16 +901,17 @@ plotTrendFytoGroup <- function(df, groupname){
 plotTrendMonthFytoGroup <- function(df, groupname){
   require(scales)
   df %>% ungroup() %>%
-    filter(parametername == groupname) %>%
+    filter(parametername %in% groupname) %>%
     mutate(
       maand = lubridate::month(datetime),
       jaar = lubridate::year(datetime)
            ) %>% ungroup() %>%
-    group_by(maand, stationname) %>%
+    group_by(maand, parametername, stationname) %>%
     summarize(
       `90-perc` = quantile(value, 0.9, na.rm = T),
-      mediaan = median(value, na.rm = T)
-    ) %>% ungroup() %>% 
+      mediaan = median(value, na.rm = T), 
+      .groups = "drop"
+    ) %>%
     ggplot(aes(maand, mediaan)) +
     geom_point(aes(color = stationname), size = 3) +
     # geom_smooth(aes(color = stationname), alpha = 0.2, method = "loess", span = 0.5) +
@@ -920,7 +921,8 @@ plotTrendMonthFytoGroup <- function(df, groupname){
     geom_line(aes(color = stationname), size = 1) +
     scale_y_log10() +
     scale_x_continuous(breaks = pretty_breaks()) +
-    labs(subtitle = groupname) +
+    # labs(subtitle = groupname) +
+    facet_wrap(~ parametername, ncol = 2, scales = "free") +
     trendplotstyle +
     ylab(bquote("celaantal in " ~ 10^6 ~ "/l"))
   
