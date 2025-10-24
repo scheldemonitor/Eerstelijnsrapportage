@@ -62,7 +62,7 @@ df_clean <- df %>%
 
 ## Informatie over de metingen {#bodem-info-metingen}
 
-Eens in de drie jaar worden monsters genomen van het bodemmateriaal in de Westerschelde. Figuur \@ref(fig:meetstationsBodem) laat de 12 bemonsteringslocaties zien die in 2016 zijn gebruikt. De locatie Walcheren 2 km uit de kust is sinds 2010 niet meer gemeten. Resultaten van dit station zijn terug te vinden in de Eerstelijnsrapportage 2010.
+Eens in de drie jaar worden monsters genomen van het bodemmateriaal in de Westerschelde. Figuur \@ref(fig:meetstationsBodem) laat de 12 bemonsteringslocaties zien die in 2016 zijn gebruikt. De locatie Walcheren 2 km uit de kust is sinds 2010 niet meer gemeten. Resultaten van dit station zijn terug te vinden in de Eerstelijnsrapportage 2010.Na 2019 zijn er weer enkele aanpassingen gemaakt aan de meetstrategie, waardoor niet meer bij alle stations elke 3 jaar wordt gemeten.  
 
 ```{r meetstationsBodem, fig.width = 7, fig.height = 4, fig.cap="Ligging van de meetstations voor het bodemmateriaal"}
 plotLocations(df_clean, nudge__y = 2000, nudge__x = 1000, angle = 65)
