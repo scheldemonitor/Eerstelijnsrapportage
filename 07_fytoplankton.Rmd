@@ -15,7 +15,7 @@ if(refreshData){
 ```
 
 ```{r laadData}
-fytoplankton <- read_delim(file.path(datapath,"fytoplankton2022.csv"), delim = ",")
+fytoplankton <- read_delim(file.path(datapath,paste0("fytoplankton", dataJaar, ".csv")), delim = ",")
 
 fytoplankton <- fytoplankton %>%
   filter(dataprovider == "RWS - Rijkswaterstaat") %>%

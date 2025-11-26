@@ -575,7 +575,8 @@ df2 %>%
   # filter(is.na(tissue)) %>% distinct(parametername) # rest parameters
   drop_na(tissue, meting) %>%
   group_by(scientificname, category, tissue, meting, year, stationname) %>%
-  summarize(n = mean(n)) %>%
+  summarize(n = mean(n)) %>% 
+  ungroup() %>% 
   # filter(grepl("PCB", parametername)) %>%
   ggplot(aes(year, category)) +
   geom_point(aes(size = n, color = scientificname), alpha = 0.5) +
