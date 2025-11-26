@@ -134,7 +134,7 @@ In deze paragraaf presenteren we de volgende metalen gedetecteerd in zwevende st
 * Vanadium (V)
 * Zink (Zn)
 
-```{r zwevendMetalen, fig.width=8, fig.height=9, fig.cap="Trends voor alle hier behandelde metalen in mg/kg drooggewicht in zwevend stof."}
+```{r zwevendMetalen, fig.width=8, fig.height=12, fig.cap="Trends voor alle hier behandelde metalen in mg/kg drooggewicht in zwevend stof."}
 parname <- c(
   "Arseen in mg/kg drooggewicht in zwevend stof",
   "Cadmium in mg/kg drooggewicht in zwevend stof",

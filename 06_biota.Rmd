@@ -7,6 +7,7 @@ knitr::opts_chunk$set(
 frozendataPath <- "Data_FysChem_biota.csv"
 
 refreshData = F
+
 if(refreshData){
     source("r/refresh_data.R") 
   refresh_fysischchemischbiota(endyear = dataJaar+2, filepath = frozendataPath)
@@ -195,7 +196,7 @@ df3 <- bind_rows(df2.lever2, df2.spier2, df2.vlees2) %>%
 
 ## Informatie over de metingen {#biota-metingen}
 
-Vanaf 2017 (?) meet RWS de prioritaire stoffen waarvoor een biotanorm is vastgesteld ook in biota. Het gaat om PBDE's. HCB, PFOS, heptachloor + -epoxide, dioxines, fluorantheen, BaP, hexachloorbutadieen, Hg, dicofol en HBCDD. Er wordt gemonitord op 18 RWS-locaties in gehele vis (blankvoorn of bot) en wild gevangen mosselen, plus voor PAK's in mosselvlees van 6 weken uitgehangen mosselen. Meer informatie is te vinden in @Postma2015 en @Hoijtink2020.
+Vanaf 2017 meet RWS de prioritaire stoffen waarvoor een biotanorm is vastgesteld ook in biota. Het gaat om PBDE's. HCB, PFOS, heptachloor + -epoxide, dioxines, fluorantheen, BaP, hexachloorbutadieen, Hg, dicofol en HBCDD. Er wordt gemonitord op 18 RWS-locaties in gehele vis (blankvoorn of bot) en wild gevangen mosselen, plus voor PAK's in mosselvlees van 6 weken uitgehangen mosselen. Meer informatie is te vinden in @Postma2015 en @Hoijtink2020.
 
 Dit hoofdstuk gaat over fysisch-chemische parameters in biota in de Westerschelde. Het gaat hierbij voornamelijk over schadelijke verontreinigingen, als indicator voor de verontreiniging in het ecosysteem. De metingen dragen bij aan verschillende beoordelingsprogramma's. .
 
@@ -208,7 +209,7 @@ Figuur \@ref(fig:meetstationsBiota) toont de meetlocaties voor bot (blauw) en mo
 
 Meer informatie over de monitoring in vis is te vinden op [Waterinfo-Extra-verontreinigingen-en visziektes-in-bot](https://waterinfo-extra.rws.nl/monitoring/chemie/biota/verontreinigingen-visziektes-bot/) en voor mosselen op [Waterinfo-Extra-Schelpdieren](https://waterinfo-extra.rws.nl/monitoring/chemie/biota/schelpdieren/).
 
-```{r meetstationsBiota, fig.cap="Ligging van de meetstations voor biota. Locaties van bemonstering mossel zijn gecodeerd met kleur (actief=rood, passief=blauw) en bot (geel)."}
+```{r meetstationsBiota, fig.cap="Ligging van de meetstations voor biota."}
 
 # knitr::include_graphics("Figuren/Meetstations_biota.png")
 

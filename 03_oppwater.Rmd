@@ -178,7 +178,7 @@ Figuur \@ref(fig:fysischTempJaar) toont de jaarmediane watertemperatuur per stat
 
 De jaarmediane watertemperatuur ligt rond de 12 graden voor de Walcheren stations en Terneuzen. De temperatuur bij Vlissingen, Hansweert geul en Schaar van Ouden Doel is hoger dan bij Terneuzen en Walcheren (zie ook Figuur \@ref(fig:gemiddeldTemp)). De 10- en 90- percentielwaarden tonen dat in de zomer de watertemperatuur in het oostelijk deel van de Westerschelde kan pieken tot waardes boven de 20 graden Celsius. Aan de zeezijde van het estuarium wordt de temperatuur 's zomers meestal niet hoger dan 20 graden Celsius. In de winter kan de temperatuur tot 5 graden Celsius dalen. Voor verschillende stations is een licht dalende of stijgende trend waarneembaar. Deze trend over de gehele periode is significant en licht positief voor Terneuzen, en licht negatief voor station Hansweert en beide stations uit de kust bij Walcheren. 
 
-```{r fysischTempJaar, fig.cap="Jaarlijkse Resultaten voor temperatuur in de Westerschelde en in de monding vanaf 1998. In 2015 zijn er bij Walcheren alleen metingen gedaan tussen september en december, hierdoor zijn de waarden lager dan in andere jaren."}
+```{r fysischTempJaar, fig.cap="Jaarlijkse resultaten voor temperatuur in de Westerschelde en in de monding vanaf 1998. In 2015 zijn er bij Walcheren alleen metingen gedaan tussen september en december, hierdoor zijn de waarden lager dan in andere jaren."}
 #knitr::include_graphics("Figuren/Fysisch/Temperatuur/jaar.png")
 
 plotTrends(df2, parname)
@@ -246,7 +246,7 @@ knitr::kable(dt,
              caption = "Statistiek voor zuurstof (\\%) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1998.")
 ```
 
-```{r fysischZuurstofpercentageJaar, fig.cap="Jaarlijkse Resultaten van het zuurstofverzadigingspercentage in het oppervlaktewater van de Westerschelde en de monding."}
+```{r fysischZuurstofpercentageJaar, fig.cap="Jaarlijkse resultaten van het zuurstofverzadigingspercentage in het oppervlaktewater van de Westerschelde en de monding."}
 
 #knitr::include_graphics("Figuren/Fysisch/Zuurstof_percentage/jaar.png")
 
@@ -308,7 +308,7 @@ Figuur \@ref(fig:fysischChlorofylJaar) toont het jaarmediane gehalte chlorofyl-a
 
 De mediane waardes zijn relatief laag (ca. 2 - 5 $\mu g/l$) en schommelen wat over de tijd. De jaarlijkse 90-percentielen laten een grote variatie zien. Bij Schaar van Ouden Doel zijn de 90-percentielen in de periode 2007-2014 hoger dan in de andere jaren. Over de gehele gegevensset constateren we een significante statistische toenamen op stations Hansweert geul, Terneuzen boei en Vlissingen. Op de stations buiten Walcheren, net neme de verst gelegen van de kust is tussen 2019 en 2021 een sterke toename in chlorofyl te zien. In 2022 is deze waarde weer op het oude niveau. Een tegenovergesteld parton is zichtbaar bij Schaar van OUden Doel, waar tot 2021 juist een afname zichtbaar was. 
 
-```{r fysischChlorofylJaar, fig.cap="Jaarlijkse Resultaten van chlorofyl-a in het oppervlaktewater van de Westerschelde en de monding. De y-as is log-getransformeerd."}
+```{r fysischChlorofylJaar, fig.cap="Jaarlijkse resultaten van chlorofyl-a in het oppervlaktewater van de Westerschelde en de monding. De y-as is log-getransformeerd."}
 #knitr::include_graphics("Figuren/Fysisch/Chlorofyl/jaar.png")
 
 df2 <- verifyStations(df)
@@ -376,7 +376,7 @@ Feofytine-a wordt gelijk met chlorofyl-a gemeten. Het is een afbraakproduct van 
 
 Voor het station Schaar van Ouden doel zijn in sommige jaren slechts enkele waarnemingen beschikbaar en dat station is daarom niet opgenomen in deze rapportage. De stations zijn gerangschikt in stroomafwaartse richting. In stroomafwaartse richting neemt de hoeveelheid feofytine-a af, zie Figuur \@ref(fig:gemiddeldfeofytine). Ook lijken op Hansweert en Terneuzen en bij Walcheren 2 km uit de kust de gehaltes feofytine-a licht af te nemen in de tijd. Op deze locaties neemt de hoeveelheid feofytine significant af met 0.002 $\mu$ g/L per jaar. 
 
-```{r fysischFeofytineJaar, fig.cap="Jaarlijkse Resultaten van feofytine in het oppervlaktewater van de Westerschelde en de monding. Statistiek is uitgevoerd op log-getransformeerde gegevens. De y-as is log-getransformeerd."}
+```{r fysischFeofytineJaar, fig.cap="Jaarlijkse resultaten van feofytine in het oppervlaktewater van de Westerschelde en de monding. Statistiek is uitgevoerd op log-getransformeerde gegevens. De y-as is log-getransformeerd."}
 #knitr::include_graphics("Figuren/Fysisch/Feofytine/jaar.png")
 
 plotLogTrends(df2, parname, trend = F)
@@ -474,7 +474,7 @@ In Figuur \@ref(fig:fysischDoorzicht) zijn de jaarmedianen over de periode maart
 
 Bij het meetpunt Schaar van Ouden Doel is het doorzicht beduidend lager dan bij de andere meetpunten, zie ook Figuur \@ref(fig:gemiddeldedoorz). Het doorzicht bij Schaar van Ouden Doel toont ook weinig variatie. Dit in tegenstelling tot de andere meetpunten, waar het doorzicht over de beschouwde periode sterker varieert. Alleen bij Hansweert lijkt het doorzicht significant te verbeteren.
 
-```{r fysischDoorzicht, fig.height=5, fig.cap="Jaarlijkse Resultaten van het doorzicht (dm) in het oppervlaktewater van de Westerschelde."}
+```{r fysischDoorzicht, fig.height=5, fig.cap="Jaarlijkse resultaten van het doorzicht (dm) in het oppervlaktewater van de Westerschelde."}
 #knitr::include_graphics("Figuren/Fysisch/Doorzicht/jaar.png")
 
 plotTrendsLimits(df_doorzicht2, parname, trend =T)
@@ -501,7 +501,7 @@ knitr::kable(dt,
              caption = "Statistiek voor lichtextinctie (1/m) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1998.")
 ```
 
-```{r fysischExtinctiecoef, fig.cap="Jaarlijkse Resultaten van de extinctiecoefficiënt in het oppervlaktewater van de Westerschelde en de monding."}
+```{r fysischExtinctiecoef, fig.cap="Jaarlijkse resultaten van de extinctiecoefficiënt in het oppervlaktewater van de Westerschelde en de monding."}
 #knitr::include_graphics("Figuren/Fysisch/Extinctiecoefficient/jaar.png")
 
 plotTrendsLimits(df2, parname, trend = T)
@@ -547,7 +547,7 @@ Figuur \@ref(fig:fysischZwevendeStof) toont de jaarmedianen van 1998 tot heden p
 
 De stations in de Westerschelde laten mediane gehaltes rond de 40 mg/l zien, met een behoorlijke variatie van jaar tot jaar en tussen de stations. Bij meetpunt Schaar van Ouden Doel is dit hoger (meer dan 60 mg/l). De maximale gehaltes kunnen oplopen tot ruim boven de 100 mg/l. Verder op de zee zijn de mediane gehaltes en de maximumwaardes lager (Walcheren 20 km uit de kust), zie ook Figuur \@ref(fig:gemiddeldezwevendestof). 
 
-```{r fysischZwevendeStof, fig.cap="Jaarlijkse Resultaten van de hoeveelheid zwevende stof in het oppervlaktewater van de Westerschelde en de monding."}
+```{r fysischZwevendeStof, fig.cap="Jaarlijkse resultaten van de hoeveelheid zwevende stof in het oppervlaktewater van de Westerschelde en de monding."}
 #knitr::include_graphics("Figuren/Fysisch/Zwevende_stof/jaar.png")
 
 plotLogTrends(df2, parname, trend = F)
@@ -772,6 +772,8 @@ De orthosfosfaatconcentraties na filtratie nemen af in stroomafwaartse richting,
 ```{r fysischOrthofosfaatTab}
 
 parname <- "Orthofosfaat, gefiltreerd in mgP/l in oppervlaktewater" 
+parname <- "Orthofosfaat in mgP/l na filtratie in oppervlaktewater" # apparently changed... 
+
 df2 <- verifyStations(df)
 dt <- statTable(df2, parname, 3)
 knitr::kable(dt, 
@@ -963,6 +965,7 @@ De N-C-ratio (stikstof) is over het algemeen hoger in de zomerperiode, als er me
 TDN = "Stikstof in mg/l na filtratie in oppervlaktewater"
 TPN = "Stikstof in mg/l particulair gebonden in oppervlaktewater"
 TDP = "Fosfaat, totaal in mg/l na filtratie in oppervlaktewater"
+
 TPP = "Fosfaat, totaal in mg/l particulair gebonden in oppervlaktewater"
 POC <- "Particulair organisch koolstof in mg/l particulair gebonden in oppervlaktewater"
 DOC <- "Opgelost organisch koolstof in mg/l na filtratie in oppervlaktewater"
@@ -1121,7 +1124,7 @@ knitr::kable(dt,
              caption = "Statistiek voor boor (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1998.")
 ```
 
-```{r fysischMetalenBoorTotaal, fig.cap="Jaarlijkse Resultaten van het totale boorgehalte in het oppervlaktewater van de Westerschelde en de monding"}
+```{r fysischMetalenBoorTotaal, fig.cap="Jaarlijkse resultaten van het totale boorgehalte in het oppervlaktewater van de Westerschelde en de monding"}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Boor_totaal_Jaar.png")
 
 plotTrends(df2, parname)
@@ -1150,7 +1153,7 @@ knitr::kable(dt,
              caption = "Statistiek voor boor na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1998.")
 ```
 
-```{r fysischMetalenBoor, fig.cap="Jaarlijkse Resultaten van het gefilterde boorgehalte in het oppervlaktewater van de Westerschelde en de monding"}
+```{r fysischMetalenBoor, fig.cap="Jaarlijkse resultaten van het gefilterde boorgehalte in het oppervlaktewater van de Westerschelde en de monding"}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Boor_fil_Jaar.png")
 
 plotTrends(df2, parname)
@@ -1182,7 +1185,7 @@ knitr::kable(dt,
              caption = "Statistiek voor chroom (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1998.")
 ```
 
-```{r fysischMetalenChroomTotaal, fig.cap="Jaarlijkse Resultaten van het totale chroomgehalte in het oppervlaktewater van de Westerschelde en de monding"}
+```{r fysischMetalenChroomTotaal, fig.cap="Jaarlijkse resultaten van het totale chroomgehalte in het oppervlaktewater van de Westerschelde en de monding"}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Chroom_totaal_Jaar.png")
 
 plotTrends(df2, parname)
@@ -1214,7 +1217,7 @@ knitr::kable(dt,
              caption = "Statistiek voor chroom na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1998.")
 ```
 
-```{r fysischMetalenChroomFil, fig.cap="Jaarlijkse Resultaten van het gefilterde chroomgehalte in het oppervlaktewater van de Westerschelde en de monding"}
+```{r fysischMetalenChroomFil, fig.cap="Jaarlijkse resultaten van het gefilterde chroomgehalte in het oppervlaktewater van de Westerschelde en de monding"}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Chroom_fil_Jaar.png")
 
 plotTrends(df2, parname, trend = F)
@@ -1246,7 +1249,7 @@ knitr::kable(dt,
              caption = "Statistiek voor koper (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1998.")
 ```
 
-```{r fysischMetalenKoperTotaal, fig.cap="Jaarlijkse Resultaten van het totale kopergehalte in het oppervlaktewater van de Westerschelde en de monding"}
+```{r fysischMetalenKoperTotaal, fig.cap="Jaarlijkse resultaten van het totale kopergehalte in het oppervlaktewater van de Westerschelde en de monding"}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Koper_totaal_Jaar.png")
 
 plotTrends(df2, parname)
@@ -1278,7 +1281,7 @@ knitr::kable(dt,
              caption = "Statistiek voor koper na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1998.")
 ```
 
-```{r fysischMetalenKoperFil, fig.cap="Jaarlijkse Resultaten van het gefilterde kopergehalte in het oppervlaktewater van de Westerschelde en de monding"}
+```{r fysischMetalenKoperFil, fig.cap="Jaarlijkse resultaten van het gefilterde kopergehalte in het oppervlaktewater van de Westerschelde en de monding"}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Koper_fil_Jaar.png")
 
 plotTrends(df2, parname)
@@ -1310,7 +1313,7 @@ knitr::kable(dt,
              caption = "Statistiek voor uranium (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1998.")
 ```
 
-```{r fysischMetalenUraniumTotaal, fig.cap="Jaarlijkse Resultaten van het totale uraniumgehalte in het oppervlaktewater van de Westerschelde en de monding."}
+```{r fysischMetalenUraniumTotaal, fig.cap="Jaarlijkse resultaten van het totale uraniumgehalte in het oppervlaktewater van de Westerschelde en de monding."}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Uranium_totaal_Jaar.png")
 
 plotTrends(df2, parname)
@@ -1342,7 +1345,7 @@ knitr::kable(dt,
              caption = "Statistiek voor uranium na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1998.")
 ```
 
-```{r fysischMetalenUraniumFil, fig.cap="Jaarlijkse Resultaten van het gefilterde uraniumgehalte in het oppervlaktewater van de Westerschelde en de monding"}
+```{r fysischMetalenUraniumFil, fig.cap="Jaarlijkse resultaten van het gefilterde uraniumgehalte in het oppervlaktewater van de Westerschelde en de monding"}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Uranium_fil_Jaar.png")
 
 plotTrends(df2, parname)
@@ -1374,7 +1377,7 @@ knitr::kable(dt,
              caption = "Statistiek voor vanadium (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1998.")
 ```
 
-```{r fysischMetalenVanTotaal, fig.cap="Jaarlijkse Resultaten van het totale vanadiumgehalte in het oppervlaktewater van de Westerschelde en de monding."}
+```{r fysischMetalenVanTotaal, fig.cap="Jaarlijkse resultaten van het totale vanadiumgehalte in het oppervlaktewater van de Westerschelde en de monding."}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Vanadium_totaal_Jaar.png")
 
 plotTrends(df2, parname)
@@ -1406,7 +1409,7 @@ knitr::kable(dt,
              caption = "Statistiek voor vanadium na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1998.")
 ```
 
-```{r fysischMetalenVanadiumFil, fig.cap="Jaarlijkse Resultaten van het gefilterde vanadiumgehalte in het oppervlaktewater van de Westerschelde en de monding."}
+```{r fysischMetalenVanadiumFil, fig.cap="Jaarlijkse resultaten van het gefilterde vanadiumgehalte in het oppervlaktewater van de Westerschelde en de monding."}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Vanadium_fil_Jaar.png")
 
 plotTrends(df2, parname)
@@ -1441,7 +1444,7 @@ knitr::kable(dt,
              caption = "Statistiek voor zink (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1998.")
 ```
 
-```{r fysischMetalenZinkTotaal, fig.cap="Jaarlijkse Resultaten van het totale zinkgehalte in het oppervlaktewater van de Westerschelde en de monding."}
+```{r fysischMetalenZinkTotaal, fig.cap="Jaarlijkse resultaten van het totale zinkgehalte in het oppervlaktewater van de Westerschelde en de monding."}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Zink_totaal_Jaar.png")
 
 plotTrends(df2, parname)
@@ -1473,7 +1476,7 @@ knitr::kable(dt,
              caption = "Statistiek voor zink na filtratie (ug/l) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1998.")
 ```
 
-```{r fysischMetalenZinkFil, fig.cap="Jaarlijkse Resultaten van het gefilterde zinkgehalte in het oppervlaktewater van de Westerschelde en de monding."}
+```{r fysischMetalenZinkFil, fig.cap="Jaarlijkse resultaten van het gefilterde zinkgehalte in het oppervlaktewater van de Westerschelde en de monding."}
 #knitr::include_graphics("Figuren/Fysisch/Metalen/Zink_fil_Jaar.png")
 
 plotTrends(df2, parname)
