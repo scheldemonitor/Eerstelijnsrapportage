@@ -212,7 +212,7 @@ refresh_fysischchemischbiota <- function(startyear = 1998, endyear, filepath = "
   #if (nrow(df) != nrow(df %>% select(-FID) %>% distinct())) {
   #  df <- df %>% select(-FID) %>% distinct()
   #}
-  write.csv(df, file.path(savepath, filepath), row.names = FALSE)
+  write_csv(df, file = file.path(savepath, filepath))
 }
 
 
