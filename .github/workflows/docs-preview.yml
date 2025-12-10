@@ -5,6 +5,7 @@ on:
     branches:
       - feature/2025
       - '2025'
+      - '2024'
       # Add more year branches as you create them:
       # - feature/2026
       # - '2026'
