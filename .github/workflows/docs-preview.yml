@@ -57,6 +57,10 @@ jobs:
           fi
       - name: Install rmarkdown
         run: Rscript -e 'install.packages("rmarkdown", repos = "https://cloud.r-project.org")'
+      - name: Install cpp11 and older svglite
+        run: |
+          Rscript -e 'install.packages(c("cpp11", "remotes"), repos = "https://cloud.r-project.org")'
+          Rscript -e 'remotes::install_version("svglite", version = "2.1.0", repos = "https://cloud.r-project.org")'
       - name: Render Book
         run: Rscript -e 'renv::restore(); bookdown::render_book("index.Rmd")'
         working-directory: ./
