@@ -57,8 +57,10 @@ jobs:
           fi
       - name: Install rmarkdown
         run: Rscript -e 'install.packages("rmarkdown", repos = "https://cloud.r-project.org")'
+      - name: Install devtools
+        run: Rscript -e 'install.packages("devtools", repos = "https://cloud.r-project.org")'
       - name: Install svglite from GitHub
-        run: Rscript -e 'install.packages("devtools", repos = "https://cloud.r-project.org"); devtools::install_github("r-lib/svglite")'
+        run: Rscript -e 'library(devtools); install_github("r-lib/svglite")'
       - name: Render Book
         run: Rscript -e 'renv::restore(); bookdown::render_book("index.Rmd")'
         working-directory: ./
