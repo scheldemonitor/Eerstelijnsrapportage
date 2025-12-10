@@ -3,12 +3,7 @@ name: Docs Preview
 on:
   pull_request:
     branches:
-      - feature/2025
-      - '2025'
-      - '2024'
-      # Add more year branches as you create them:
-      # - feature/2026
-      # - '2026'
+      - main
 
 jobs:
   build-preview:
@@ -62,6 +57,8 @@ jobs:
           fi
       - name: Install rmarkdown
         run: Rscript -e 'install.packages("rmarkdown", repos = "https://cloud.r-project.org")'
+      - name: Install svglite from GitHub
+        run: Rscript -e 'install.packages("devtools", repos = "https://cloud.r-project.org"); devtools::install_github("r-lib/svglite")'
       - name: Render Book
         run: Rscript -e 'renv::restore(); bookdown::render_book("index.Rmd")'
         working-directory: ./
