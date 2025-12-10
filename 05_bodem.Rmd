@@ -192,7 +192,7 @@ De PAK's zijn afzonderlijk weergegeven in Figuur \@ref(fig:antraceenBodem) t/m F
 ```{r antraceenBodem, fig.cap="Antraceen in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_antraceen.png")
 
-parname = "Antraceen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "Antraceen in mg/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -200,7 +200,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```{r benzo-antraceenBodem, fig.cap="Benzo(a)antraceen in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_benzo(a)antraceen.png")
 
-parname = "Benzo(a)antraceen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "Benzo(a)antraceen in mg/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -208,7 +208,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```{r benzo-pyreenBodem, fig.cap="Benzo(a)pyreen in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_benzo(a)pyreen.png")
 
-parname = "Benzo(a)pyreen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "Benzo(a)pyreen in mg/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -216,7 +216,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```{r benzo-peryleenBodem, fig.cap="Benzo(g,h,i)peryleen in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_benzo(g,h,i)peryleen.png")
 
-parname = "Benzo(g,h,i)peryleen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "Benzo(g,h,i)peryleen in mg/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -224,7 +224,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```{r benzo-fluorantheenBodem, fig.cap="Benzo(k)fluorantheen in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_benzo(k)fluorantheen.png")
 
-parname = "Benzo(k)fluorantheen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "Benzo(k)fluorantheen in mg/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -232,7 +232,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```{r chryseenBodem, fig.cap="Chryseen in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_chryseen.png")
 
-parname = "Chryseen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "Chryseen in mg/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -240,7 +240,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```{r fenanthreenBodem, fig.cap="Fenanthreen in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_fenanthreen.png")
 
-parname = "Fenantreen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "Fenantreen in mg/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -248,7 +248,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```{r fluorantheenBodem, fig.cap="Fluorantheen in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_fluorantheen.png")
 
-parname = "Fluorantheen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "Fluorantheen in mg/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -256,7 +256,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```{r indeno-pyreenBodem, fig.cap="Indeno(1,2,3-c,d)pyreen in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_indeno(1,2,3-c,d)pyreen.png")
 
-parname = "Indeno(1,2,3-c,d)pyreen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "Indeno(1,2,3-c,d)pyreen in mg/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```

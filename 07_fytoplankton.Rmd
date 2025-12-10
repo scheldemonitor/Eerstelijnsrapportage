@@ -367,9 +367,9 @@ In Figuur \@ref(fig:fyto5) is de ontwikkeling van *Phaeocystis* (fytoplankton) o
 
 *Phaeocystis wordt voornamelijk nabij de kust gevonden (Vlissingen & Walcheren) en kende in 2013 en 2019 een grote piek bij Vlissingen. Voor het station Schaar van Ouden Doel wordt er niet tot nauwelijks *Phaeocystis gevonden. Vanaf 2016 neemt het a antal in Hansweert geul weer toe, met een piek in 2021. 
 
-```{r fyto5, fig.height=4, fig.cap="Zomergemiddelde waardes voor fytoplankton (fytoplankton - *Phaeocystis) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer. De 90-percentiel waarde is aangegeven (-). "}
+```{r fyto5, fig.height=4, fig.cap="Zomergemiddelde waardes voor fytoplankton (fytoplankton - *Phaeocystis*) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer. De 90-percentiel waarde is aangegeven (-). "}
 # knitr::include_graphics("Figuren/Fytoplankton/5_jaar.png")
-plotTrendFytoGroup(df.fyt.groep, "fytoplankton - *Phaeocystis")
+plotTrendFytoGroup(df.fyt.groep, "fytoplankton - Phaeocystis")
 ```
 
 ### Fytoplankton - Overig {#fyto-resultaten-auto-overig}

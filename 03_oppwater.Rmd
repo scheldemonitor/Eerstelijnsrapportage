@@ -98,7 +98,7 @@ df2 <- verifyStations(df)
 dt <- statTable(df2, parname, rounding)
 knitr::kable(dt, 
              align = 'lrrrrr', booktabs = TRUE,
-             caption = "Statistiek voor saliniteit van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1998."
+             caption = "Statistiek voor saliniteit (PSU) van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1998."
              )
 
 ```
@@ -342,10 +342,11 @@ plotLogTrendsSeizoen(df2, parname, sf = F)
 
 Figuur \@ref(fig:fysischChlorofylMaand) toont het maandelijkse mediane gehalte chlorofyl-a per station voor de periode 1998-`r dataJaar`. Voor Terneuzen boei 20, Walcheren 2 km uit de kust en Walcheren 20 km uit de kust betreft dit meestal maar één meetwaarde, voor Schaar van Ouden Doel meestal twee en voor Hansweert geul en Vlissingen boei SSVH één à twee, afhankelijk van het seizoen. Het typische seizoensmatige verloop (met een piek in het voorjaar) is voor de meeste stations goed herkenbaar kijkend naar de maandelijkse mediaanwaarden.
 
-```{r fysischChlorofylMaand, fig.width=10, fig.cap="Maandgemiddelde chlorofyl-a in het oppervlaktewater van de Westerschelde en de monding. Statistiek is uitgevoerd op log-getransformeerde gegevens. De y-as is log-getransformeerd.", out.width = "100%"}
+```{r fysischChlorofylMaand, fig.width=10,fig.height=10, fig.cap="Maandgemiddelde chlorofyl-a in het oppervlaktewater van de Westerschelde en de monding. Statistiek is uitgevoerd op log-getransformeerde gegevens. De y-as is log-getransformeerd.", out.width = "100%"}
 #knitr::include_graphics("Figuren/Fysisch/Chlorofyl/maand.png")
 
-p <- plotLogTrendsMaand(df2, parname, sf = F)
+p <- plotLogTrendsMaand(df2, parname, sf = F) +
+  theme(legend.position = "bottom")
 if(knitr::is_html_output()){ggplotly(p) %>% 
     layout(
       legend = list(orientation = "h",   # show entries horizontally

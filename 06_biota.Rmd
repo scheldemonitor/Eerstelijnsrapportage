@@ -415,7 +415,7 @@ df2_bot %>%
 ```
 
 
-```{r vetgehaltePerJaar, fig.height = 4, fig.cap = "Variatie van vetgehalte in g/kg natgewicht (lever) in organisme (biota) voor Bot (Platichthys flesus over de meeperiode."}
+```{r vetgehaltePerJaar, fig.height = 4, fig.cap = "Variatie van vetgehalte in g/kg natgewicht (lever) in organisme (biota) voor Bot (Platichthys flesus over de meetperiode inclusief Loess regressie voor verduidelijjking van het patroon."}
 vetgehalte_lever <- df2_bot %>% 
   filter(grepl("vet", parametername, ignore.case = T)) %>%
   group_by(year=year(datetime)) %>%

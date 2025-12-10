@@ -11,5 +11,10 @@ bookdown::pdf_book:
   template: deltares-report-template.tex
   latex_engine: pdflatex
   keep_tex: true
-  citation_package: natbib
+  # citation_package: natbib
+  citation_package: biblatex
+  pandoc_args: --top-level-division=chapter
 
+bookdown::word_document2: default
+
+  

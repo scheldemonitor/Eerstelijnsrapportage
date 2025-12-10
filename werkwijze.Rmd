@@ -29,9 +29,9 @@ Voor de rapportage 2020 is daarom besloten om de LaTeX template over te zetten n
 Voor de 2021 rapportage wordt ook de code voor grafieken en tabellen overgezet naar R, zodat het aansluit bij de Scheldemonitor. Het doel was om scripts en methodiek af te stemmen met de T rapportages waar mogelijk, door het delen van code. Dit is gedeeltelijk gebeurd, vanwege de verschillende tijdlijnen. De huidige werkwijze voor de rapportage is:
 
 1) data wordt gedownloadt van Scheldemonitor met R script. Hiervoor is een [package](https://github.com/scheldemonitor/smwfs) gemaakt. 
-2)De gedownloade data worden als csv bestanden opgeslagen voor consistentie tijdens het maken van de rapportage. Ze zijn [hier](https://watersysteemdata.deltares.nl/thredds/catalog/watersysteemdata/Westerschelde/Scheldemonitor/2021/catalog.html) terug te vinden.
+2) De gedownloade data worden als csv bestanden opgeslagen voor consistentie tijdens het maken van de rapportage. Ze zijn [hier](https://watersysteemdata.deltares.nl/thredds/catalog/watersysteemdata/Westerschelde/Scheldemonitor/2021/catalog.html) terug te vinden.
 3) Verwerking van data tot rapport met R en Rmarkdown. Dit combineert code met beschrijvende tekst. De uitvoer in dit geval is een website. Ook wordt een pdf uitvoer gemaakt ter archivering.   
-4) Voor de verwerking van data zijn R functies gemaakt, gebaseerd op de eerdere Matlab, verbeteringen zijn doorgevoerd in afstemming met RWS en Schelde in Beeld. 
+4) Voor de verwerking van data zijn R functies gemaakt, gebaseerd op de eerdere Matlab code, verbeteringen zijn doorgevoerd in afstemming met RWS en Schelde in Beeld. 
 5) Rmarkdown documenten en functie codes worden beheerd onder versiebeheer op [Github](https://github.com/scheldemonitor/Eerstelijnsrapportage).
 5) Het rapport wordt gepubliceerd via de Scheldemonitor. 
 
