@@ -513,7 +513,7 @@ plotTrends(sumPBDEdfBot, parname = "sumPBDE in ug/g vet")
 
 Figuur \@ref(fig:botOrganochloor) en Tabel \@ref(tab:biotaBotChloor) laat de gesommeerde waardes voor hexachloorbenzeen en hexachloorbutadieen (als sumHCB) in bot bij Middelgat, Brouwersplaat, Molenplaat in de Westerschelde zien.
 
-De mediane hoeveelheden somHCB in bot is 0.9 met uitschieters tot ongeveer 7 $\mu$g/kg. In 2022 was de mediane concentratie ongeveer 0.5 $\mu$g/kg. In 2012 is er een hoge mediaanwaarde van 3 $\mu$g/kg gemeten, maar in de daaropvolgende jaren is deze waarde weer afgenomen. Vanaf 2016 is een lichte verdere daling waargenomen, wat ervoor zorgt dat de hoeveelheid hexachloorbenzenen stabiliseert rond de 0.5 $\mu$g/kg.
+De mediane hoeveelheden somHCB in bot is 0.9 met uitschieters tot ongeveer 7 $\mu$g/kg. De laatste jaren schommelt de mediane concentratie rond 0.5 $\mu$g/kg. In 2012 is er een hoge mediaanwaarde van 3 $\mu$g/kg gemeten, maar in de daaropvolgende jaren is deze waarde weer afgenomen. Vanaf 2016 is een lichte verdere daling waargenomen, wat ervoor zorgt dat de hoeveelheid hexachloorbenzenen stabiliseert rond de 0.5 $\mu$g/kg.
 
 ```{r biotaBotChloor}
 

@@ -34,8 +34,26 @@ select <- dplyr::select
 addLegend <- leaflet::addLegend
 
 
-# bibliographybib <- bibtex::read.bib("bib/library.bib")
 
-# bibliographybib2 <- bibtex::read.bib("bib/westerscheldewillem.bib")
-# bibliographybib2 <- bibtex::read.bib("bib/westerscheldewillem.bib")
+
+bibliographybib <- bibtex::read.bib("bib/westerscheldewillem.bib")
+# 
+duplicated(names(bibliographybib))
+names(bibliographybib)[which(duplicated(names(bibliographybib)))]
+# 
+# bibtex::write.bib(bibliographybib, "bib/westerschelde.bib")
+# # library <- bibtex::read.bib("bib/library.bib")
+# # bibtex::write.bib(library, "bib/westerschelde.bib", append = T)
+
+
+unlink(c(
+  "Eerstelijnsrapportage_Westerschelde.aux", "Eerstelijnsrapportage_Westerschelde.toc", "Eerstelijnsrapportage_Westerschelde.out",
+  "Eerstelijnsrapportage_Westerschelde.lof", "Eerstelijnsrapportage_Westerschelde.lot", "Eerstelijnsrapportage_Westerschelde.bbl",
+  "Eerstelijnsrapportage_Westerschelde.blg", "Eerstelijnsrapportage_Westerschelde.bcf", "Eerstelijnsrapportage_Westerschelde.run.xml"
+), force = TRUE)
+
+# Also clear Bookdown cache
+unlink("_bookdown_files", recursive = TRUE, force = TRUE)
+
+# Then render again
 

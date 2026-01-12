@@ -927,7 +927,7 @@ plotTrends(df2, parname)
 
 #### jaarmedianen per seizoen {#part-gebonden-organisch-koolstof-zomerwinter}
 
-Figuur \@ref(fig:fysischKoolstofParZomerWinter) toont het seizoensgemiddelde gehalte particulaire koolstofgehalte per station voor de periode 1998-2022. Vooral stroomopwaarts is te zien dat particulair koolstof in de wintermaanden hoger is dan in de zomermaanden. Het effect van de fytoplanktonbloei valt hier waarschijnlijk weg tegen de achtergrondwaarden. Het verschil tussen de seizoen per station is beperkt in vergelijking met de variatie binnen het seizoen.
+Figuur \@ref(fig:fysischKoolstofParZomerWinter) toont het seizoensgemiddelde gehalte particulaire koolstofgehalte per station voor de periode 1998-`r dataJaar`. Vooral stroomopwaarts is te zien dat particulair koolstof in de wintermaanden hoger is dan in de zomermaanden. Het effect van de fytoplanktonbloei valt hier waarschijnlijk weg tegen de achtergrondwaarden. Het verschil tussen de seizoen per station is beperkt in vergelijking met de variatie binnen het seizoen.
 
 ```{r fysischKoolstofParZomerWinter, fig.cap="Gemiddeld waardes voor de hoeveelheid particulaire koolstofgehalte gedurende de zomer en de winter in het oppervlaktewater van de Westerschelde en de monding."}
 
