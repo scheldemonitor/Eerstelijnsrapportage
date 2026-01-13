@@ -1339,10 +1339,10 @@ meetdichtheid <- function(df, stationName){
 }
 
 meetdichtheid_hydro <- function(df, stationName, no_of_columns=2){
-  if (! stationName %in% trendstations) {
-    print ('stationname not found')
-  }
-  {
+  # if (!stationName %in% trendstations) {
+  #   print ('stationname not found')
+  # } else
+  # {
     df %>%
       ungroup() %>%
       filter(stationname %in% stationName) %>%
@@ -1371,5 +1371,5 @@ meetdichtheid_hydro <- function(df, stationName, no_of_columns=2){
       theme_minimal() +
       theme(legend.position = "none") +
       facet_wrap(facets = "stationname", ncol = no_of_columns)
-  }
+  # }
 }
