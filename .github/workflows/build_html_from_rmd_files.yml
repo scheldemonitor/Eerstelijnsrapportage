@@ -22,7 +22,7 @@ jobs:
       - name: install textshaping package
         run: sudo apt install libharfbuzz-dev libfribidi-dev
       - name: Install R dependencies from CRAN
-        run: Rscript -e 'install.packages(c("cli", "R6", "digest", "fansi", "memoise", "rlang", "vctrs", "withr", "yaml", "renv", "Kendall"), repos = "https://cloud.r-project.org")'
+        run: Rscript -e 'install.packages(c("downlit", "cli", "R6", "digest", "fansi", "memoise", "rlang", "vctrs", "withr", "yaml", "renv", "Kendall"), repos = "https://cloud.r-project.org")'
     #  - name: Download and install specific package versions
         #run: |
           #wget -O desc_1.4.3.tar.gz https://github.com/r-lib/desc/archive/refs/tags/v1.4.3.tar.gz
