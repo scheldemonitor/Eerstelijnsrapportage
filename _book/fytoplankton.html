@@ -6,20 +6,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Hoofdstuk 7 Plankton | Eerstelijnsrapportage Westerschelde</title>
 <meta name="author" content="Deltares">
-<meta name="generator" content="bookdown 0.41 with bs4_book()">
+<meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content="Hoofdstuk 7 Plankton | Eerstelijnsrapportage Westerschelde">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hoofdstuk 7 Plankton | Eerstelijnsrapportage Westerschelde">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.11.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
 <script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
 <script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
-<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="libs/leaflet-binding-2.2.3/leaflet.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script><style>
     .zoomDiv {
       opacity: 0;
@@ -161,111 +162,54 @@
 <h2>
 <span class="header-section-number">7.1</span> Indeling soorten<a class="anchor" aria-label="anchor" href="#fyto-soorten"><i class="fas fa-link"></i></a>
 </h2>
-<p>De planktongegevens bestaan uit meer dan 500 verschillende soorten ééncellige organismen. Om deze toch op een compacte en zinvolle manier te kunnen presenteren en analyseren, wordt een indeling gemaakt, waarbij meerdere soorten gegroepeerd kunnen worden. In eerste instantie is een opdeling naar trofiegraad, autotroof of heterotroof, voor de hand liggend. Deze van oudsher veelgebruikt indeling blijkt echter niet volledig accuraat, omdat een groot aantal ééncelligen mixotroof zijn (d.w.z. een combinatie tussen autotroof en heterotroof). Gezien de lastige definitie van de term mixotroof, wordt in deze rapportage de (duidelijkere) definitie van ‘mixoplankton’ aangehouden. Deze groep bestaat uit soorten die aan fagocytose en fotosynthese kunnen doen (<span class="citation">Flynn et al. (<a href="referenties.html#ref-flynn2019mixotrophic">2019</a>)</span>). ‘Fytoplankton’ wordt dan gebruikt om soorten aan te duiden die autotroof zijn, maar niet aan fagocytose kunnen doen (maar in sommige gevallen bijvoorbeeld wel organische stoffen uit de omgeving op kunnen nemen) en ‘protozooplankton’ wordt gebruikt voor de groep soorten die niet aan fotosynthese doen. Wanneer niet duidelijk is tot welke trofische indeling een soort of soortgroep behoort, is deze niet meegenomen in de analyse.</p>
-<p>Ook op taxonomisch niveau is een opdeling zinvol. De belangrijkste groep binnen het plankton in de Westerschelde wordt gevormd door de ‘Diatomeeën’ oftewel ‘kiezelwieren’. Omdat het overgrote deel van de diatomeeën fotoautotroof is, zijn alle diatomeeën tot het fytoplankton gerekend. Ook de superklasse <em>Khakista</em> is in deze rapportage opgenomen onder de Diatomeeën, hoewel deze groep in werkelijkheid boven de diatomeeën staan en naast de diatomeeën nog een relatief kleine zustergroep van de diatomeeën omvat. De ‘Dinoflagellaten’ oftewel ‘pantserwieren’ zijn wat betreft aantallen veel minder belangrijk. Een belangrijke voorjaarssoort in het mondingsgebied van de Westerschelde is <em>Phaeocystis globosa</em>, die als aparte groep ‘<em>Phaeocystis’ wordt meegenomen. Alleen op de locatie Schaar van Ouden Doel vormen grote aantallen ’Blauwwieren’ en ’Groenwieren’ soms een belangrijk deel van het fytoplankton, vandaar dat deze ook onderscheiden zijn. Voor de ’Groenwieren’ is er van uitgegaan dat deze worden gevormd door de </em>Chlorophyceaea<em>, de </em>Prasinophyceae* en de <em>Euglenophyceae</em> (<span class="citation">Tomas (<a href="referenties.html#ref-Tomas1997">1997</a>)</span>), alhoewel (<span class="citation">Hoek, Mann, and Jahns (<a href="referenties.html#ref-Hoek1995">1995</a>)</span>) de <em>Euglenophycea</em> weer buiten de groenwieren plaatsen. Soorten die buiten de hierboven genoemde groepen vallen zijn samengenomen als de groep ’Overig’. Niet alle groepen zijn van hetzelfde taxonomische niveau, maar deze indeling is in eerste instantie wel de meest pragmatische. De heterotrofe organismen bevatten wel de heterotrofe ‘Dinoflagellaten’, maar niet de ciliaten (met uitzondering van <em>Myrionecta rubra</em>). <em>Myrionecta rubra</em> is een ciliaat (een dier, dus heterotroof) die in de geannoteerde soortenlijst 1990-2008 (<span class="citation">Koeman et al. (<a href="referenties.html#ref-Koeman2009">2009</a>)</span>) toch als autotroof is ingedeeld vanwege de in het dier aanwezige endosymbiontische algen. Bij de verdere indeling is in de tabel (zie Bijlage <a href="BijlageC-fytoplankton.html#BijlageC-fytoplankton">C</a>) <em>Myrionecta rubra</em> geplaatst onder ‘Heterotroof - Overig’. Verder is informatie wat betreft trofiegraad overgenomen vanuit een dataset voor aquatische protisten (<span class="citation">Schneider et al. (<a href="referenties.html#ref-Schneider2020">2020</a>)</span>) en dataset die bevestigde soorten mixoplankton bevat (<span class="citation">Mitra et al. (<a href="referenties.html#ref-mitra2023mixoplankton">2023</a>)</span>).</p>
+<p>De planktongegevens bestaan uit meer dan 500 verschillende soorten ééncellige organismen. Om deze toch op een compacte en zinvolle manier te kunnen presenteren en analyseren, wordt een indeling gemaakt, waarbij meerdere soorten gegroepeerd kunnen worden. In eerste instantie is een opdeling naar trofiegraad, autotroof of heterotroof, voor de hand liggend. Deze van oudsher veelgebruikt indeling blijkt echter niet volledig accuraat, omdat een groot aantal ééncelligen mixotroof zijn (d.w.z. een combinatie tussen autotroof en heterotroof). Gezien de lastige definitie van de term mixotroof, wordt in deze rapportage de (duidelijkere) definitie van ‘mixoplankton’ aangehouden. Deze groep bestaat uit soorten die aan fagocytose en fotosynthese kunnen doen (<span class="citation">Flynn et al. (2019)</span>). ‘Fytoplankton’ wordt dan gebruikt om soorten aan te duiden die autotroof zijn, maar niet aan fagocytose kunnen doen (maar in sommige gevallen bijvoorbeeld wel organische stoffen uit de omgeving op kunnen nemen) en ‘protozooplankton’ wordt gebruikt voor de groep soorten die niet aan fotosynthese doen. Wanneer niet duidelijk is tot welke trofische indeling een soort of soortgroep behoort, is deze niet meegenomen in de analyse.</p>
+<p>Ook op taxonomisch niveau is een opdeling zinvol. De belangrijkste groep binnen het plankton in de Westerschelde wordt gevormd door de ‘Diatomeeën’ oftewel ‘kiezelwieren’. Omdat het overgrote deel van de diatomeeën fotoautotroof is, zijn alle diatomeeën tot het fytoplankton gerekend. Ook de superklasse <em>Khakista</em> is in deze rapportage opgenomen onder de Diatomeeën, hoewel deze groep in werkelijkheid boven de diatomeeën staan en naast de diatomeeën nog een relatief kleine zustergroep van de diatomeeën omvat. De ‘Dinoflagellaten’ oftewel ‘pantserwieren’ zijn wat betreft aantallen veel minder belangrijk. Een belangrijke voorjaarssoort in het mondingsgebied van de Westerschelde is <em>Phaeocystis globosa</em>, die als aparte groep ‘<em>Phaeocystis’ wordt meegenomen. Alleen op de locatie Schaar van Ouden Doel vormen grote aantallen ’Blauwwieren’ en ’Groenwieren’ soms een belangrijk deel van het fytoplankton, vandaar dat deze ook onderscheiden zijn. Voor de ’Groenwieren’ is er van uitgegaan dat deze worden gevormd door de </em>Chlorophyceaea<em>, de </em>Prasinophyceae* en de <em>Euglenophyceae</em> (<span class="citation">Tomas (1997)</span>), alhoewel (<span class="citation">Hoek, Mann, and Jahns (1995)</span>) de <em>Euglenophycea</em> weer buiten de groenwieren plaatsen. Soorten die buiten de hierboven genoemde groepen vallen zijn samengenomen als de groep ’Overig’. Niet alle groepen zijn van hetzelfde taxonomische niveau, maar deze indeling is in eerste instantie wel de meest pragmatische. De heterotrofe organismen bevatten wel de heterotrofe ‘Dinoflagellaten’, maar niet de ciliaten (met uitzondering van <em>Myrionecta rubra</em>). <em>Myrionecta rubra</em> is een ciliaat (een dier, dus heterotroof) die in de geannoteerde soortenlijst 1990-2008 (<span class="citation">Koeman et al. (2009)</span>) toch als autotroof is ingedeeld vanwege de in het dier aanwezige endosymbiontische algen. Bij de verdere indeling is in de tabel (zie Bijlage <a href="BijlageC-fytoplankton.html#BijlageC-fytoplankton">C</a>) <em>Myrionecta rubra</em> geplaatst onder ‘Heterotroof - Overig’. Verder is informatie wat betreft trofiegraad overgenomen vanuit een dataset voor aquatische protisten (<span class="citation">Schneider et al. (2020)</span>) en dataset die bevestigde soorten mixoplankton bevat (<span class="citation">Mitra et al. (2023)</span>).</p>
 <p>Bovenstaande leidt tot de volgende pragmatische indeling, gepresenteerd in Tabel <a href="fytoplankton.html#tab:indelingFytoplankton">7.1</a>. Deze indeling is opgesteld door Bert Wetsteijn (RWS-WVL) en aangepast op basis van nieuwe inzichten op het gebied van mixoplankton.</p>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:indelingFytoplankton">Tabel 7.1: </span>Aantal soorten per groep en trofieniveau
-</caption>
-<thead><tr>
-<th style="text-align:left;">
-groep
-</th>
-<th style="text-align:right;">
-fytoplankton
-</th>
-<th style="text-align:right;">
-mixoplankton
-</th>
-<th style="text-align:right;">
-protozooplankton
-</th>
+<span id="tab:indelingFytoplankton">Tabel 7.1: </span>Aantal soorten per groep en trofieniveau</caption>
+<thead><tr class="header">
+<th align="left">groep</th>
+<th align="right">fytoplankton</th>
+<th align="right">mixoplankton</th>
+<th align="right">protozooplankton</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Blauwwieren
-</td>
-<td style="text-align:right;">
-17
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="odd">
+<td align="left">Blauwwieren</td>
+<td align="right">17</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Diatomeeen
-</td>
-<td style="text-align:right;">
-242
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="even">
+<td align="left">Diatomeeen</td>
+<td align="right">242</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Dinoflagellaten
-</td>
-<td style="text-align:right;">
-29
-</td>
-<td style="text-align:right;">
-33
-</td>
-<td style="text-align:right;">
-64
-</td>
+<tr class="odd">
+<td align="left">Dinoflagellaten</td>
+<td align="right">29</td>
+<td align="right">33</td>
+<td align="right">64</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Groenwieren
-</td>
-<td style="text-align:right;">
-50
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="even">
+<td align="left">Groenwieren</td>
+<td align="right">50</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Overig
-</td>
-<td style="text-align:right;">
-35
-</td>
-<td style="text-align:right;">
-11
-</td>
-<td style="text-align:right;">
-11
-</td>
+<tr class="odd">
+<td align="left">Overig</td>
+<td align="right">35</td>
+<td align="right">11</td>
+<td align="right">11</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Phaeocystis
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="even">
+<td align="left">Phaeocystis</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
 </tbody>
 </table></div>
@@ -300,7 +244,7 @@ Figuur 7.1: Ligging van de meetstations voor fytoplankton
 <h3>
 <span class="header-section-number">7.2.3</span> Trendbreuk<a class="anchor" aria-label="anchor" href="#fyto-metingen-trendbreuk"><i class="fas fa-link"></i></a>
 </h3>
-<p>Bij de interpretatie van de MWTL biomonitoringsgegevens fytoplankton zout dient rekening te worden gehouden met een trendbreuk. Deze trendbreuk wordt veroorzaakt doordat vanaf het monsterjaar 2000 de monsters door een ander bureau worden geanalyseerd en gerapporteerd dan in de periode daarvoor. Over deze trendbreuk wordt in verschillende stukken ingegaan (<span class="citation">Peperzak (<a href="referenties.html#ref-Peperzak2010">2010</a>)</span>, <span class="citation">Zuur et al. (<a href="referenties.html#ref-Zuur2009">2009</a>)</span>). Deze trendbreuk is voor sommige soortgroepen terug te zien in de figuren op de volgende pagina’s.</p>
+<p>Bij de interpretatie van de MWTL biomonitoringsgegevens fytoplankton zout dient rekening te worden gehouden met een trendbreuk. Deze trendbreuk wordt veroorzaakt doordat vanaf het monsterjaar 2000 de monsters door een ander bureau worden geanalyseerd en gerapporteerd dan in de periode daarvoor. Over deze trendbreuk wordt in verschillende stukken ingegaan (<span class="citation">Peperzak (2010)</span>, <span class="citation">Zuur et al. (2009)</span>). Deze trendbreuk is voor sommige soortgroepen terug te zien in de figuren op de volgende pagina’s.</p>
 </div>
 </div>
 <div id="aandeelgroepenperstation" class="section level2" number="7.3">
@@ -328,6 +272,14 @@ Figuur 7.2: Het relatieve aandeel van alle groepen over de jaren voor alle stati
 <h2>
 <span class="header-section-number">7.4</span> De verdeling van groepen over het seizoen<a class="anchor" aria-label="anchor" href="#de-verdeling-van-groepen-over-het-seizoen"><i class="fas fa-link"></i></a>
 </h2>
+<p>in figuur <a href="fytoplankton.html#fig:fytoSeizoen1">7.3</a> is de verdeling van de verschillende groepen over het seizoen te zien. Er moet bedacht worden dat er na 2011, behalve bij Schaar van Ouden Doel, geen metingen zijn verricht in de wintermaanden (oktober - februari).</p>
+<p>De verschillende groepen plankton vertonen een verschillend gemiddeld seizoenspatroon. Diatomeeën zijn de eerste bloeiers, met een piek al in maart in de Walcheren stations. Verder in het estuarium is de diatomeeënpiek steeds iets opgeschoven in de tijd. Bij Schaar van Ouden Doel zijn de hoogste waarden te vinden in mei, juni en juli. In de Walcheren stations i ook nog een najaarspiek te zien. Deze ontbreekt in de meer estuariene stations.</p>
+<p><em>Phaeocystis</em> piekt direct na de diatomeeën, dat wil zeggen in april in het kustwater en bij Vlissingen. Er is nauwelijks een najaarspiek te zien. De hoogste pieken zijn te zien bij de Walcheren stations, gevolgd door Vlissingen. Bij Schaar van OUden Doel is <em>Phaeocystis</em> nagenoeg afwezig.</p>
+<p>Blauwwieren zijn vooral aanwezig bij Schaar van Ouden Doel en vertoont een piek in april en augustus. De hoge waarde bij Wacheren 20 km uit de kust moet als uitschieter beschouwd worden.</p>
+<p>Groenwieren volgen de trend van blauwwieren. De hoogste waarden zijn te vinden in juni bij Schaar van Ouden Doel.</p>
+<p>Fototrofe dinoflagellaten zijn het hele jaar aanwezig, zonder sterke piek, maar minder in de winter.</p>
+<p>Mixotroof plankton (mixoplankton) is vooral aanwezig vanaf het midden van de zomer, ongeveer van juni - september.</p>
+<p>Voor de overige groepen is het patroon niet zo duidelijk, of het varieert te veel over de jaren.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fytoSeizoen1"></span>
 <img src="Eerstelijnsrapportage_Westerschelde_files/figure-html/fytoSeizoen1-1.png" alt="Maandelijkse gemiddelden voor fytoplankton (fototroof - Diatomeeën) voor alle stations." width="100%"><p class="caption">
@@ -347,162 +299,73 @@ Figuur 7.3: Maandelijkse gemiddelden voor fytoplankton (fototroof - Diatomeeën)
 
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:fytoSchaarJaarTab">Tabel 7.2: </span>Celaantallen per jaar en groep (in 10<sup>6</sup>/l) en trofieniveau bij Schaar van Ouden Doel.
-</caption>
-<thead><tr>
-<th style="text-align:left;">
-groepsnaam
-</th>
-<th style="text-align:right;">
-mediaan
-</th>
-<th style="text-align:right;">
-10-perc
-</th>
-<th style="text-align:right;">
-90-perc
-</th>
+<span id="tab:fytoSchaarJaarTab">Tabel 7.2: </span>Celaantallen per jaar en groep (in 10<sup>6</sup>/l) en trofieniveau bij Schaar van Ouden Doel.</caption>
+<thead><tr class="header">
+<th align="left">groepsnaam</th>
+<th align="right">mediaan</th>
+<th align="right">10-perc</th>
+<th align="right">90-perc</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Blauwwieren
-</td>
-<td style="text-align:right;">
-0.54
-</td>
-<td style="text-align:right;">
-0.03
-</td>
-<td style="text-align:right;">
-7.05
-</td>
+<tr class="odd">
+<td align="left">fytoplankton - Blauwwieren</td>
+<td align="right">0.54</td>
+<td align="right">0.03</td>
+<td align="right">7.05</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Diatomeeen
-</td>
-<td style="text-align:right;">
-1.28
-</td>
-<td style="text-align:right;">
-0.21
-</td>
-<td style="text-align:right;">
-3.94
-</td>
+<tr class="even">
+<td align="left">fytoplankton - Diatomeeen</td>
+<td align="right">1.28</td>
+<td align="right">0.21</td>
+<td align="right">3.94</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Dinoflagellaten
-</td>
-<td style="text-align:right;">
-0.04
-</td>
-<td style="text-align:right;">
-0.00
-</td>
-<td style="text-align:right;">
-0.15
-</td>
+<tr class="odd">
+<td align="left">fytoplankton - Dinoflagellaten</td>
+<td align="right">0.04</td>
+<td align="right">0.00</td>
+<td align="right">0.15</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Groenwieren
-</td>
-<td style="text-align:right;">
-0.63
-</td>
-<td style="text-align:right;">
-0.07
-</td>
-<td style="text-align:right;">
-5.64
-</td>
+<tr class="even">
+<td align="left">fytoplankton - Groenwieren</td>
+<td align="right">0.63</td>
+<td align="right">0.07</td>
+<td align="right">5.64</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Overig
-</td>
-<td style="text-align:right;">
-0.22
-</td>
-<td style="text-align:right;">
-0.03
-</td>
-<td style="text-align:right;">
-2.00
-</td>
+<tr class="odd">
+<td align="left">fytoplankton - Overig</td>
+<td align="right">0.22</td>
+<td align="right">0.03</td>
+<td align="right">2.00</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Phaeocystis
-</td>
-<td style="text-align:right;">
-0.01
-</td>
-<td style="text-align:right;">
-0.00
-</td>
-<td style="text-align:right;">
-0.20
-</td>
+<tr class="even">
+<td align="left">fytoplankton - Phaeocystis</td>
+<td align="right">0.01</td>
+<td align="right">0.00</td>
+<td align="right">0.20</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-mixoplankton - Dinoflagellaten
-</td>
-<td style="text-align:right;">
-0.01
-</td>
-<td style="text-align:right;">
-0.00
-</td>
-<td style="text-align:right;">
-0.08
-</td>
+<tr class="odd">
+<td align="left">mixoplankton - Dinoflagellaten</td>
+<td align="right">0.01</td>
+<td align="right">0.00</td>
+<td align="right">0.08</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-mixoplankton - Overig
-</td>
-<td style="text-align:right;">
-0.56
-</td>
-<td style="text-align:right;">
-0.07
-</td>
-<td style="text-align:right;">
-6.61
-</td>
+<tr class="even">
+<td align="left">mixoplankton - Overig</td>
+<td align="right">0.56</td>
+<td align="right">0.07</td>
+<td align="right">6.61</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-protozooplankton - Dinoflagellaten
-</td>
-<td style="text-align:right;">
-0.00
-</td>
-<td style="text-align:right;">
-0.00
-</td>
-<td style="text-align:right;">
-0.01
-</td>
+<tr class="odd">
+<td align="left">protozooplankton - Dinoflagellaten</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.01</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-protozooplankton - Overig
-</td>
-<td style="text-align:right;">
-0.24
-</td>
-<td style="text-align:right;">
-0.00
-</td>
-<td style="text-align:right;">
-1.49
-</td>
+<tr class="even">
+<td align="left">protozooplankton - Overig</td>
+<td align="right">0.24</td>
+<td align="right">0.00</td>
+<td align="right">1.49</td>
 </tr>
 </tbody>
 </table></div>
@@ -521,162 +384,73 @@ Figuur 7.4: Jaarlijkse waardes voor fytoplankton in de zomer en jaargemiddeld (b
 
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:fytoHansJaarTab">Tabel 7.3: </span>Celaantal per jaar en groep (in 10<sup>6</sup>/l) en trofieniveau bij Hansweert Geul.
-</caption>
-<thead><tr>
-<th style="text-align:left;">
-groepsnaam
-</th>
-<th style="text-align:right;">
-mediaan
-</th>
-<th style="text-align:right;">
-10-perc
-</th>
-<th style="text-align:right;">
-90-perc
-</th>
+<span id="tab:fytoHansJaarTab">Tabel 7.3: </span>Celaantal per jaar en groep (in 10<sup>6</sup>/l) en trofieniveau bij Hansweert Geul.</caption>
+<thead><tr class="header">
+<th align="left">groepsnaam</th>
+<th align="right">mediaan</th>
+<th align="right">10-perc</th>
+<th align="right">90-perc</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Blauwwieren
-</td>
-<td style="text-align:right;">
-0.15
-</td>
-<td style="text-align:right;">
-0.01
-</td>
-<td style="text-align:right;">
-2.18
-</td>
+<tr class="odd">
+<td align="left">fytoplankton - Blauwwieren</td>
+<td align="right">0.15</td>
+<td align="right">0.01</td>
+<td align="right">2.18</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Diatomeeen
-</td>
-<td style="text-align:right;">
-1.63
-</td>
-<td style="text-align:right;">
-0.27
-</td>
-<td style="text-align:right;">
-5.00
-</td>
+<tr class="even">
+<td align="left">fytoplankton - Diatomeeen</td>
+<td align="right">1.63</td>
+<td align="right">0.27</td>
+<td align="right">5.00</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Dinoflagellaten
-</td>
-<td style="text-align:right;">
-0.03
-</td>
-<td style="text-align:right;">
-0.00
-</td>
-<td style="text-align:right;">
-0.14
-</td>
+<tr class="odd">
+<td align="left">fytoplankton - Dinoflagellaten</td>
+<td align="right">0.03</td>
+<td align="right">0.00</td>
+<td align="right">0.14</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Groenwieren
-</td>
-<td style="text-align:right;">
-0.13
-</td>
-<td style="text-align:right;">
-0.02
-</td>
-<td style="text-align:right;">
-2.25
-</td>
+<tr class="even">
+<td align="left">fytoplankton - Groenwieren</td>
+<td align="right">0.13</td>
+<td align="right">0.02</td>
+<td align="right">2.25</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Overig
-</td>
-<td style="text-align:right;">
-0.15
-</td>
-<td style="text-align:right;">
-0.01
-</td>
-<td style="text-align:right;">
-1.95
-</td>
+<tr class="odd">
+<td align="left">fytoplankton - Overig</td>
+<td align="right">0.15</td>
+<td align="right">0.01</td>
+<td align="right">1.95</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Phaeocystis
-</td>
-<td style="text-align:right;">
-0.13
-</td>
-<td style="text-align:right;">
-0.03
-</td>
-<td style="text-align:right;">
-4.27
-</td>
+<tr class="even">
+<td align="left">fytoplankton - Phaeocystis</td>
+<td align="right">0.13</td>
+<td align="right">0.03</td>
+<td align="right">4.27</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-mixoplankton - Dinoflagellaten
-</td>
-<td style="text-align:right;">
-0.02
-</td>
-<td style="text-align:right;">
-0.00
-</td>
-<td style="text-align:right;">
-0.10
-</td>
+<tr class="odd">
+<td align="left">mixoplankton - Dinoflagellaten</td>
+<td align="right">0.02</td>
+<td align="right">0.00</td>
+<td align="right">0.10</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-mixoplankton - Overig
-</td>
-<td style="text-align:right;">
-0.75
-</td>
-<td style="text-align:right;">
-0.07
-</td>
-<td style="text-align:right;">
-8.43
-</td>
+<tr class="even">
+<td align="left">mixoplankton - Overig</td>
+<td align="right">0.75</td>
+<td align="right">0.07</td>
+<td align="right">8.43</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-protozooplankton - Dinoflagellaten
-</td>
-<td style="text-align:right;">
-0.00
-</td>
-<td style="text-align:right;">
-0.00
-</td>
-<td style="text-align:right;">
-0.01
-</td>
+<tr class="odd">
+<td align="left">protozooplankton - Dinoflagellaten</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.01</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-protozooplankton - Overig
-</td>
-<td style="text-align:right;">
-0.19
-</td>
-<td style="text-align:right;">
-0.01
-</td>
-<td style="text-align:right;">
-1.01
-</td>
+<tr class="even">
+<td align="left">protozooplankton - Overig</td>
+<td align="right">0.19</td>
+<td align="right">0.01</td>
+<td align="right">1.01</td>
 </tr>
 </tbody>
 </table></div>
@@ -695,162 +469,73 @@ Figuur 7.5: Jaarlijkse waardes voor fytoplankton in zomer (groen), winter (rood)
 
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:fytoVlisJaarTab">Tabel 7.4: </span>Celaantallen per jaar en groep (in 10<sup>6</sup>/l) en trofieniveau bij Vlissingen Boei SSVH.
-</caption>
-<thead><tr>
-<th style="text-align:left;">
-groepsnaam
-</th>
-<th style="text-align:right;">
-mediaan
-</th>
-<th style="text-align:right;">
-10-perc
-</th>
-<th style="text-align:right;">
-90-perc
-</th>
+<span id="tab:fytoVlisJaarTab">Tabel 7.4: </span>Celaantallen per jaar en groep (in 10<sup>6</sup>/l) en trofieniveau bij Vlissingen Boei SSVH.</caption>
+<thead><tr class="header">
+<th align="left">groepsnaam</th>
+<th align="right">mediaan</th>
+<th align="right">10-perc</th>
+<th align="right">90-perc</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Blauwwieren
-</td>
-<td style="text-align:right;">
-0.03
-</td>
-<td style="text-align:right;">
-0.00
-</td>
-<td style="text-align:right;">
-0.62
-</td>
+<tr class="odd">
+<td align="left">fytoplankton - Blauwwieren</td>
+<td align="right">0.03</td>
+<td align="right">0.00</td>
+<td align="right">0.62</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Diatomeeen
-</td>
-<td style="text-align:right;">
-1.85
-</td>
-<td style="text-align:right;">
-0.28
-</td>
-<td style="text-align:right;">
-6.32
-</td>
+<tr class="even">
+<td align="left">fytoplankton - Diatomeeen</td>
+<td align="right">1.85</td>
+<td align="right">0.28</td>
+<td align="right">6.32</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Dinoflagellaten
-</td>
-<td style="text-align:right;">
-0.03
-</td>
-<td style="text-align:right;">
-0.00
-</td>
-<td style="text-align:right;">
-0.15
-</td>
+<tr class="odd">
+<td align="left">fytoplankton - Dinoflagellaten</td>
+<td align="right">0.03</td>
+<td align="right">0.00</td>
+<td align="right">0.15</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Groenwieren
-</td>
-<td style="text-align:right;">
-0.12
-</td>
-<td style="text-align:right;">
-0.02
-</td>
-<td style="text-align:right;">
-0.89
-</td>
+<tr class="even">
+<td align="left">fytoplankton - Groenwieren</td>
+<td align="right">0.12</td>
+<td align="right">0.02</td>
+<td align="right">0.89</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Overig
-</td>
-<td style="text-align:right;">
-0.18
-</td>
-<td style="text-align:right;">
-0.02
-</td>
-<td style="text-align:right;">
-1.51
-</td>
+<tr class="odd">
+<td align="left">fytoplankton - Overig</td>
+<td align="right">0.18</td>
+<td align="right">0.02</td>
+<td align="right">1.51</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Phaeocystis
-</td>
-<td style="text-align:right;">
-0.23
-</td>
-<td style="text-align:right;">
-0.03
-</td>
-<td style="text-align:right;">
-10.97
-</td>
+<tr class="even">
+<td align="left">fytoplankton - Phaeocystis</td>
+<td align="right">0.23</td>
+<td align="right">0.03</td>
+<td align="right">10.97</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-mixoplankton - Dinoflagellaten
-</td>
-<td style="text-align:right;">
-0.03
-</td>
-<td style="text-align:right;">
-0.00
-</td>
-<td style="text-align:right;">
-0.13
-</td>
+<tr class="odd">
+<td align="left">mixoplankton - Dinoflagellaten</td>
+<td align="right">0.03</td>
+<td align="right">0.00</td>
+<td align="right">0.13</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-mixoplankton - Overig
-</td>
-<td style="text-align:right;">
-0.42
-</td>
-<td style="text-align:right;">
-0.08
-</td>
-<td style="text-align:right;">
-3.35
-</td>
+<tr class="even">
+<td align="left">mixoplankton - Overig</td>
+<td align="right">0.42</td>
+<td align="right">0.08</td>
+<td align="right">3.35</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-protozooplankton - Dinoflagellaten
-</td>
-<td style="text-align:right;">
-0.00
-</td>
-<td style="text-align:right;">
-0.00
-</td>
-<td style="text-align:right;">
-0.01
-</td>
+<tr class="odd">
+<td align="left">protozooplankton - Dinoflagellaten</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.01</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-protozooplankton - Overig
-</td>
-<td style="text-align:right;">
-0.19
-</td>
-<td style="text-align:right;">
-0.03
-</td>
-<td style="text-align:right;">
-0.72
-</td>
+<tr class="even">
+<td align="left">protozooplankton - Overig</td>
+<td align="right">0.19</td>
+<td align="right">0.03</td>
+<td align="right">0.72</td>
 </tr>
 </tbody>
 </table></div>
@@ -869,162 +554,73 @@ Figuur 7.6: Jaarlijkse waardes voor fytoplankton in zomer (groen), winter (rood)
 
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:fytoWal2JaarTab">Tabel 7.5: </span>Celaantallen per jaar en groep (in 10<sup>6</sup>/l) en trofieniveau bij Walcheren 2 km uit de kust.
-</caption>
-<thead><tr>
-<th style="text-align:left;">
-groepsnaam
-</th>
-<th style="text-align:right;">
-mediaan
-</th>
-<th style="text-align:right;">
-10-perc
-</th>
-<th style="text-align:right;">
-90-perc
-</th>
+<span id="tab:fytoWal2JaarTab">Tabel 7.5: </span>Celaantallen per jaar en groep (in 10<sup>6</sup>/l) en trofieniveau bij Walcheren 2 km uit de kust.</caption>
+<thead><tr class="header">
+<th align="left">groepsnaam</th>
+<th align="right">mediaan</th>
+<th align="right">10-perc</th>
+<th align="right">90-perc</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Blauwwieren
-</td>
-<td style="text-align:right;">
-0.10
-</td>
-<td style="text-align:right;">
-0.06
-</td>
-<td style="text-align:right;">
-0.15
-</td>
+<tr class="odd">
+<td align="left">fytoplankton - Blauwwieren</td>
+<td align="right">0.10</td>
+<td align="right">0.06</td>
+<td align="right">0.15</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Diatomeeen
-</td>
-<td style="text-align:right;">
-1.37
-</td>
-<td style="text-align:right;">
-0.17
-</td>
-<td style="text-align:right;">
-5.59
-</td>
+<tr class="even">
+<td align="left">fytoplankton - Diatomeeen</td>
+<td align="right">1.37</td>
+<td align="right">0.17</td>
+<td align="right">5.59</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Dinoflagellaten
-</td>
-<td style="text-align:right;">
-0.02
-</td>
-<td style="text-align:right;">
-0.00
-</td>
-<td style="text-align:right;">
-0.08
-</td>
+<tr class="odd">
+<td align="left">fytoplankton - Dinoflagellaten</td>
+<td align="right">0.02</td>
+<td align="right">0.00</td>
+<td align="right">0.08</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Groenwieren
-</td>
-<td style="text-align:right;">
-0.10
-</td>
-<td style="text-align:right;">
-0.02
-</td>
-<td style="text-align:right;">
-0.65
-</td>
+<tr class="even">
+<td align="left">fytoplankton - Groenwieren</td>
+<td align="right">0.10</td>
+<td align="right">0.02</td>
+<td align="right">0.65</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Overig
-</td>
-<td style="text-align:right;">
-0.21
-</td>
-<td style="text-align:right;">
-0.02
-</td>
-<td style="text-align:right;">
-1.74
-</td>
+<tr class="odd">
+<td align="left">fytoplankton - Overig</td>
+<td align="right">0.21</td>
+<td align="right">0.02</td>
+<td align="right">1.74</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Phaeocystis
-</td>
-<td style="text-align:right;">
-0.28
-</td>
-<td style="text-align:right;">
-0.03
-</td>
-<td style="text-align:right;">
-16.71
-</td>
+<tr class="even">
+<td align="left">fytoplankton - Phaeocystis</td>
+<td align="right">0.28</td>
+<td align="right">0.03</td>
+<td align="right">16.71</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-mixoplankton - Dinoflagellaten
-</td>
-<td style="text-align:right;">
-0.03
-</td>
-<td style="text-align:right;">
-0.00
-</td>
-<td style="text-align:right;">
-0.13
-</td>
+<tr class="odd">
+<td align="left">mixoplankton - Dinoflagellaten</td>
+<td align="right">0.03</td>
+<td align="right">0.00</td>
+<td align="right">0.13</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-mixoplankton - Overig
-</td>
-<td style="text-align:right;">
-0.46
-</td>
-<td style="text-align:right;">
-0.07
-</td>
-<td style="text-align:right;">
-4.73
-</td>
+<tr class="even">
+<td align="left">mixoplankton - Overig</td>
+<td align="right">0.46</td>
+<td align="right">0.07</td>
+<td align="right">4.73</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-protozooplankton - Dinoflagellaten
-</td>
-<td style="text-align:right;">
-0.00
-</td>
-<td style="text-align:right;">
-0.00
-</td>
-<td style="text-align:right;">
-0.02
-</td>
+<tr class="odd">
+<td align="left">protozooplankton - Dinoflagellaten</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.02</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-protozooplankton - Overig
-</td>
-<td style="text-align:right;">
-0.17
-</td>
-<td style="text-align:right;">
-0.01
-</td>
-<td style="text-align:right;">
-0.98
-</td>
+<tr class="even">
+<td align="left">protozooplankton - Overig</td>
+<td align="right">0.17</td>
+<td align="right">0.01</td>
+<td align="right">0.98</td>
 </tr>
 </tbody>
 </table></div>
@@ -1043,162 +639,73 @@ Figuur 7.7: Jaarlijkse waardes voor fytoplankton in zomer (groen), winter (rood)
 
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:fytoWal20JaarTab">Tabel 7.6: </span>Celaantallen per jaar en groep (in 10<sup>6</sup>/l) en trofieniveau bij Walcheren 20 km uit de kust.
-</caption>
-<thead><tr>
-<th style="text-align:left;">
-groepsnaam
-</th>
-<th style="text-align:right;">
-mediaan
-</th>
-<th style="text-align:right;">
-10-perc
-</th>
-<th style="text-align:right;">
-90-perc
-</th>
+<span id="tab:fytoWal20JaarTab">Tabel 7.6: </span>Celaantallen per jaar en groep (in 10<sup>6</sup>/l) en trofieniveau bij Walcheren 20 km uit de kust.</caption>
+<thead><tr class="header">
+<th align="left">groepsnaam</th>
+<th align="right">mediaan</th>
+<th align="right">10-perc</th>
+<th align="right">90-perc</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Blauwwieren
-</td>
-<td style="text-align:right;">
-0.10
-</td>
-<td style="text-align:right;">
-0.00
-</td>
-<td style="text-align:right;">
-5.09
-</td>
+<tr class="odd">
+<td align="left">fytoplankton - Blauwwieren</td>
+<td align="right">0.10</td>
+<td align="right">0.00</td>
+<td align="right">5.09</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Diatomeeen
-</td>
-<td style="text-align:right;">
-0.44
-</td>
-<td style="text-align:right;">
-0.05
-</td>
-<td style="text-align:right;">
-1.64
-</td>
+<tr class="even">
+<td align="left">fytoplankton - Diatomeeen</td>
+<td align="right">0.44</td>
+<td align="right">0.05</td>
+<td align="right">1.64</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Dinoflagellaten
-</td>
-<td style="text-align:right;">
-0.01
-</td>
-<td style="text-align:right;">
-0.00
-</td>
-<td style="text-align:right;">
-0.11
-</td>
+<tr class="odd">
+<td align="left">fytoplankton - Dinoflagellaten</td>
+<td align="right">0.01</td>
+<td align="right">0.00</td>
+<td align="right">0.11</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Groenwieren
-</td>
-<td style="text-align:right;">
-0.05
-</td>
-<td style="text-align:right;">
-0.01
-</td>
-<td style="text-align:right;">
-0.34
-</td>
+<tr class="even">
+<td align="left">fytoplankton - Groenwieren</td>
+<td align="right">0.05</td>
+<td align="right">0.01</td>
+<td align="right">0.34</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Overig
-</td>
-<td style="text-align:right;">
-0.20
-</td>
-<td style="text-align:right;">
-0.04
-</td>
-<td style="text-align:right;">
-1.38
-</td>
+<tr class="odd">
+<td align="left">fytoplankton - Overig</td>
+<td align="right">0.20</td>
+<td align="right">0.04</td>
+<td align="right">1.38</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-fytoplankton - Phaeocystis
-</td>
-<td style="text-align:right;">
-0.21
-</td>
-<td style="text-align:right;">
-0.03
-</td>
-<td style="text-align:right;">
-11.68
-</td>
+<tr class="even">
+<td align="left">fytoplankton - Phaeocystis</td>
+<td align="right">0.21</td>
+<td align="right">0.03</td>
+<td align="right">11.68</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-mixoplankton - Dinoflagellaten
-</td>
-<td style="text-align:right;">
-0.03
-</td>
-<td style="text-align:right;">
-0.00
-</td>
-<td style="text-align:right;">
-0.15
-</td>
+<tr class="odd">
+<td align="left">mixoplankton - Dinoflagellaten</td>
+<td align="right">0.03</td>
+<td align="right">0.00</td>
+<td align="right">0.15</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-mixoplankton - Overig
-</td>
-<td style="text-align:right;">
-0.27
-</td>
-<td style="text-align:right;">
-0.03
-</td>
-<td style="text-align:right;">
-2.71
-</td>
+<tr class="even">
+<td align="left">mixoplankton - Overig</td>
+<td align="right">0.27</td>
+<td align="right">0.03</td>
+<td align="right">2.71</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-protozooplankton - Dinoflagellaten
-</td>
-<td style="text-align:right;">
-0.00
-</td>
-<td style="text-align:right;">
-0.00
-</td>
-<td style="text-align:right;">
-0.01
-</td>
+<tr class="odd">
+<td align="left">protozooplankton - Dinoflagellaten</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.01</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-protozooplankton - Overig
-</td>
-<td style="text-align:right;">
-0.10
-</td>
-<td style="text-align:right;">
-0.01
-</td>
-<td style="text-align:right;">
-0.64
-</td>
+<tr class="even">
+<td align="left">protozooplankton - Overig</td>
+<td align="right">0.10</td>
+<td align="right">0.01</td>
+<td align="right">0.64</td>
 </tr>
 </tbody>
 </table></div>
@@ -1271,8 +778,8 @@ Figuur 7.12: Zomergemiddelde waardes voor fytoplankton (fytoplankton - groenwier
 <p><em>Phaeocystis wordt voornamelijk nabij de kust gevonden (Vlissingen &amp; Walcheren) en kende in 2013 en 2019 een grote piek bij Vlissingen. Voor het station Schaar van Ouden Doel wordt er niet tot nauwelijks </em>Phaeocystis gevonden. Vanaf 2016 neemt het a antal in Hansweert geul weer toe, met een piek in 2021.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fyto5"></span>
-<img src="Eerstelijnsrapportage_Westerschelde_files/figure-html/fyto5-1.png" alt="Zomergemiddelde waardes voor fytoplankton (fytoplankton - *Phaeocystis) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer. De 90-percentiel waarde is aangegeven (-). " width="100%"><p class="caption">
-Figuur 7.13: Zomergemiddelde waardes voor fytoplankton (fytoplankton - *Phaeocystis) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer. De 90-percentiel waarde is aangegeven (-).
+<img src="Eerstelijnsrapportage_Westerschelde_files/figure-html/fyto5-1.png" alt="Zomergemiddelde waardes voor fytoplankton (fytoplankton - *Phaeocystis*) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer. De 90-percentiel waarde is aangegeven (-). " width="100%"><p class="caption">
+Figuur 7.13: Zomergemiddelde waardes voor fytoplankton (fytoplankton - <em>Phaeocystis</em>) voor alle stations. Zwarte lijn geeft het gemiddelde voor deze groep voor de gehele dataset weer. De 90-percentiel waarde is aangegeven (-).
 </p>
 </div>
 </div>
@@ -1395,7 +902,7 @@ Figuur 7.18: Zomergemiddelde waardes voor fytoplankton (protozooplankton - overi
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Eerstelijnsrapportage Westerschelde</strong>: 2024" was written by Deltares. It was last built on 2025-06-24.</p>
+    <p>"<strong>Eerstelijnsrapportage Westerschelde</strong>: 2024" was written by Deltares. It was last built on 2026-01-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
