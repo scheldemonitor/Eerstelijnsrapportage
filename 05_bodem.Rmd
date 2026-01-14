@@ -62,10 +62,67 @@ df_clean <- df %>%
 
 ## Informatie over de metingen {#bodem-info-metingen}
 
-Eens in de drie jaar worden monsters genomen van het bodemmateriaal in de Westerschelde. Figuur \@ref(fig:meetstationsBodem) laat de 12 bemonsteringslocaties zien die in 2016 zijn gebruikt. De locatie Walcheren 2 km uit de kust is sinds 2010 niet meer gemeten. Resultaten van dit station zijn terug te vinden in de Eerstelijnsrapportage 2010.
+Eens in de drie jaar worden monsters genomen van het bodemmateriaal in de Westerschelde. Figuur \@ref(fig:meetstationsBodem) laat de 12 bemonsteringslocaties zien die in 2016 zijn gebruikt. De locatie Walcheren 2 km uit de kust is sinds 2010 niet meer gemeten. Resultaten van dit station zijn terug te vinden in de Eerstelijnsrapportage 2010. Na 2019 zijn er weer enkele aanpassingen gemaakt aan de meetstrategie, waardoor sindsdien afgeweken is van het driejaarlijks meetpatroon bij de meeste stations. Sommige gegevens van korrelgrootteverdelingen die in de Scheldemonitor zijn opgenomen, zijn verwarrend of verouderd. Sinds 2024 is hierover opheldering ontstaan en zijn de correcte gegevens in de rapportage opgenomen.
 
 ```{r meetstationsBodem, fig.width = 7, fig.height = 4, fig.cap="Ligging van de meetstations voor het bodemmateriaal"}
 plotLocations(df_clean, nudge__y = 2000, nudge__x = 1000, angle = 65)
+```
+
+## Korrelgrootteverdeling {#bodem-korrelgrootte}
+
+Korrelgrootte is een maat voor de diameter van sedimentdeeltjes en is een belangrijke parameter om de fysieke eigenschappen van de bodem te beschrijven. Wanneer de korrelgrootte groter is dan 63 µm spreken we van zand. Sediment met korrelgroottes tussen 2 en 63 µm wordt aangeduid als silt en bij korrelgroottes kleiner dan 2 µm wordt sediment geclassificeerd als klei. Omdat sediment doorgaans heterogeen is, wordt meestal de korrelgroottefractie vermeldt, dat wil zeggen, de fractie van het sediment dat zich binnen een range van bepaalde diameters bevindt. In de Eerstelijnsrapportage worden de volgende fracties opgenomen: 
+
+-   korrelgroottefractie > 63 µm (Figuur \@ref(fig:korrelvanaf63Bodem))
+-   korrelgroottefractie tot 63 µm (Figuur \@ref(fig:korreltot63Bodem))
+-   korrelgroottefractie tot 16 µm (Figuur \@ref(fig:korreltot16Bodem))
+-   korrelgroottefractie tot 2 µm (Figuur \@ref(fig:korreltot2Bodem))
+
+Voordat de korrelgroottefractie wordt bepaald vindt er een zeving plaats over 63 µm. Voor de analyse van de korrelgroottefractie > 63 µm wordt het residu gebruikt. Voor de metingen van de overige korrelgroottefracties wordt het gezeefde materiaal gebruikt. De analyse wordt Voor het bepalen van de korrelgroottefractie tot 2 mu is de STIBOKA-methode gebruikt, laserdiffractie wordt toegepast om de korrelgroottefracies tot 16 µm, tot 63 µm en > 63 µm te bepalen. 
+
+Daarnaast is ook het percentage organisch koolstof meegenomen in deze rapportage (Figuur \@ref(fig:OrganischCBodem)). Dit percentage is bepaald middels katalytische oxidatie. 
+
+
+```{r korrelvanaf63Bodem, fig.cap="Korrelgroottefractie > 63 µm in het bodemsediment in de Westerschelde"}
+#knitr::include_graphics("Figuren/Fysisch/Bodem/korrelgroottegroter63um.png")
+
+parname = "Korrelgroottefractie >63 um in % drooggewicht in bodem/sediment"
+
+plotTrends(df_clean %>% 
+             filter(datetime >= as.POSIXct("2013-01-01 00:00:00") &
+                      datetime <= as.POSIXct("2022-12-31 23:59:59")), 
+           parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+```{r korreltot63Bodem, fig.cap="Korrelgroottefractie tot 63 µm in het bodemsediment in de Westerschelde"}
+#knitr::include_graphics("Figuren/Fysisch/Bodem/korrelgroottetot63um.png")
+
+parname = "Korrelgroottefractie tot 63 um in % drooggewicht in bodem/sediment"
+
+plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+```{r korreltot16Bodem, fig.cap="Korrelgroottefractie tot 16 µm in het bodemsediment in de Westerschelde"}
+#knitr::include_graphics("Figuren/Fysisch/Bodem/korrelgroottetot16um.png")
+
+parname = "Korrelgroottefractie tot 16 um in % drooggewicht in bodem/sediment"
+
+plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+```{r korreltot2Bodem, fig.cap="Korrelgroottefractie tot 2 µm in het bodemsediment in de Westerschelde"}
+#knitr::include_graphics("Figuren/Fysisch/Bodem/korrelgroottetot2um.png")
+
+parname = "Korrelgroottefractie tot 2 um in % drooggewicht in bodem/sediment"
+
+plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+```
+
+```{r OrganischCBodem, fig.cap="Percentage organisch koolstof in het bodemsediment in de Westerschelde"}
+#knitr::include_graphics("Figuren/Fysisch/Bodem/OrganischKoolstof.png")
+
+parname = "Organische koolstof in % drooggewicht in bodem/sediment"
+
+plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
 ## Metalen {#bodem-metalen}
@@ -135,7 +192,7 @@ De PAK's zijn afzonderlijk weergegeven in Figuur \@ref(fig:antraceenBodem) t/m F
 ```{r antraceenBodem, fig.cap="Antraceen in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_antraceen.png")
 
-parname = "Antraceen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "Antraceen in mg/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -143,7 +200,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```{r benzo-antraceenBodem, fig.cap="Benzo(a)antraceen in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_benzo(a)antraceen.png")
 
-parname = "Benzo(a)antraceen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "Benzo(a)antraceen in mg/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -151,7 +208,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```{r benzo-pyreenBodem, fig.cap="Benzo(a)pyreen in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_benzo(a)pyreen.png")
 
-parname = "Benzo(a)pyreen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "Benzo(a)pyreen in mg/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -159,7 +216,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```{r benzo-peryleenBodem, fig.cap="Benzo(g,h,i)peryleen in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_benzo(g,h,i)peryleen.png")
 
-parname = "Benzo(g,h,i)peryleen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "Benzo(g,h,i)peryleen in mg/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -167,7 +224,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```{r benzo-fluorantheenBodem, fig.cap="Benzo(k)fluorantheen in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_benzo(k)fluorantheen.png")
 
-parname = "Benzo(k)fluorantheen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "Benzo(k)fluorantheen in mg/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -175,7 +232,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```{r chryseenBodem, fig.cap="Chryseen in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_chryseen.png")
 
-parname = "Chryseen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "Chryseen in mg/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -183,7 +240,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```{r fenanthreenBodem, fig.cap="Fenanthreen in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_fenanthreen.png")
 
-parname = "Fenantreen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "Fenantreen in mg/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -191,7 +248,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```{r fluorantheenBodem, fig.cap="Fluorantheen in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_fluorantheen.png")
 
-parname = "Fluorantheen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "Fluorantheen in mg/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
@@ -199,7 +256,7 @@ plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```{r indeno-pyreenBodem, fig.cap="Indeno(1,2,3-c,d)pyreen in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_indeno(1,2,3-c,d)pyreen.png")
 
-parname = "Indeno(1,2,3-c,d)pyreen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+parname = "Indeno(1,2,3-c,d)pyreen in mg/kg drooggewicht in bodem/sediment"
 
 plotTrends(df_clean, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```

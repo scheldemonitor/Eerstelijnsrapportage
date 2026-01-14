@@ -62,7 +62,7 @@ refresh_golven <- function(datajaar){
     1816, 2594, # H3, TH3
     2596,2597,2598 # TM02
   )
-  for(jaar in 2014:datajaar){
+  for(jaar in 1998:datajaar){
     df <- smwfs::getSMdata(startyear = jaar, endyear = jaar + 1, parID = c(Golven), datasetID = c(8032))
     write.csv(df, file.path(savepath,paste0("Data_Hydro_golven_", jaar,'.csv')), row.names = F)
   }
@@ -124,7 +124,7 @@ rm(df)
 refresh_fysischchemischoppwater <- function(startyear = 1998, endyear, filepath = "Data_FysChem_opp.csv"){
   Saliniteit <- c(13611) #998
   Temperatuur <- c(1046)
-  Zuurstof <- c(1214,1213)
+  Zuurstof <- c(1213)    #1214 (O2 in mg/l wordt niet meer opgenomen)
   Chlorofyl_a <- c(238,1800)
   BZV_BOD_CZV <- c(125,178)
   Lichtklimaat <- c(461,495)
@@ -133,7 +133,18 @@ refresh_fysischchemischoppwater <- function(startyear = 1998, endyear, filepath 
   Organisch_koolstof <- c(663,674)
   Metalen <- c(133,1737,259,260,268,269,1178,2014,1181,2018,1201,1202,686,687)
   
-  parID <- c(Saliniteit,Temperatuur,Zuurstof,Chlorofyl_a,BZV_BOD_CZV,Lichtklimaat,Zwevende_stof,Nutrienten,Organisch_koolstof,Metalen)
+  parID <- c(
+    Saliniteit,
+    Temperatuur,
+    Zuurstof,
+    Chlorofyl_a,
+    BZV_BOD_CZV,
+    Lichtklimaat,
+    Zwevende_stof,
+    Nutrienten,
+    Organisch_koolstof,
+    Metalen
+    )
   
   #df <- get_y_SMdata(2019, 2020, parID)
   df <- smwfs::get_y_SMdata(startyear = startyear, endyear = endyear, parID = parID)
@@ -221,6 +232,8 @@ refresh_fytoplanktondata <- function(){
   
   url = "http://geo.vliz.be/geoserver/wfs/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=Dataportal%3Abiotic_observations&resultType=results&viewParams=where%3Aobs.context+%26%26+ARRAY%5B1%5D+AND+imisdatasetid+IN+%28949%29%3Bcontext%3A0001%3Bloggedin%3A1&propertyName=stationname%2Caphiaid%2Cscientificname%2Cobservationdate%2Clongitude%2Clatitude%2Cvalue%2Cparametername%2Cdataprovider%2Cimisdatasetid%2Cdatasettitle%2Cdatafichetitle%2Cdataficheid%2Careaname%2Cdateprecision%2Cstadium%2Cgender%2Cvaluesign%2Cdepth%2Cclassunit%2Cclass%2Cstandardparameterid%2Cparameterunit&outputFormat=csv"
 
+  print(httr::parse_url(url))
+  
   df.fytoplankton <- read_csv(url)
   if (nrow(df.fytoplankton) != nrow(df.fytoplankton %>% select(-FID) %>% distinct())) {
     df.fytoplankton <- df.fytoplankton %>% select(-FID) %>% distinct()

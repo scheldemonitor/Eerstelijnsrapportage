@@ -415,7 +415,7 @@ df2_bot %>%
 ```
 
 
-```{r vetgehaltePerJaar, fig.height = 4, fig.cap = "Variatie van vetgehalte in g/kg natgewicht (lever) in organisme (biota) voor Bot (Platichthys flesus over de meeperiode."}
+```{r vetgehaltePerJaar, fig.height = 4, fig.cap = "Variatie van vetgehalte in g/kg natgewicht (lever) in organisme (biota) voor Bot (Platichthys flesus over de meetperiode inclusief Loess regressie voor verduidelijjking van het patroon."}
 vetgehalte_lever <- df2_bot %>% 
   filter(grepl("vet", parametername, ignore.case = T)) %>%
   group_by(year=year(datetime)) %>%
@@ -475,7 +475,7 @@ De polybroomdifenylethers (PBDE's) zijn gemeten in de lever van bot. De volgende
 -   2,2',4,4',6-pentabroomdifenylether
 -   2,2',4,4'-tetrabroomdifenylether
 
-Omdat er maar enkele datapunten zijn, kan er moeilijk een harde uitspraak worden gedaan over de hoeveelheden PBDE's in bot. Ten opzichte van 2010 treedt een significante daling op van 0.03 $\mu$g/kg per jaar. Dit lijkt sterk samen te hangen met de incidentele (?) hoge waarde van 2000. Wanneer dit jaar niet meegenomen wordt in de analyse is er geen significante afname te zien (waarden niet in rapport opgenomen). De gemiddelde, minimale en maximale jaarlijks gesommeerde waardes voor PBDE's zijn te vinden in Tabel \@ref(tab:biotaBotPBDE).
+Omdat er maar enkele datapunten zijn, kan er moeilijk een harde uitspraak worden gedaan over de hoeveelheden PBDE's in bot. Ten opzichte van 2010 treedt een significante daling op van 0.03 $\mu$g/kg per jaar. Dit lijkt sterk samen te hangen met de incidentele (?) hoge waarde van 2ug/g vet. Wanneer dit jaar niet meegenomen wordt in de analyse is er geen significante afname te zien (waarden niet in rapport opgenomen). De gemiddelde, minimale en maximale jaarlijks gesommeerde waardes voor PBDE's zijn te vinden in Tabel \@ref(tab:biotaBotPBDE).
 
 ```{r biotaBotPBDE}
 
@@ -513,7 +513,7 @@ plotTrends(sumPBDEdfBot, parname = "sumPBDE in ug/g vet")
 
 Figuur \@ref(fig:botOrganochloor) en Tabel \@ref(tab:biotaBotChloor) laat de gesommeerde waardes voor hexachloorbenzeen en hexachloorbutadieen (als sumHCB) in bot bij Middelgat, Brouwersplaat, Molenplaat in de Westerschelde zien.
 
-De mediane hoeveelheden somHCB in bot is 0.9 met uitschieters tot ongeveer 7 $\mu$g/kg. In 2022 was de mediane concentratie ongeveer 0.5 $\mu$g/kg. In 2012 is er een hoge mediaanwaarde van 3 $\mu$g/kg gemeten, maar in de daaropvolgende jaren is deze waarde weer afgenomen. Vanaf 2016 is een lichte verdere daling waargenomen, wat ervoor zorgt dat de hoeveelheid hexachloorbenzenen stabiliseert rond de 0.5 $\mu$g/kg.
+De mediane hoeveelheden somHCB in bot is 0.9 met uitschieters tot ongeveer 7 $\mu$g/kg. De laatste jaren schommelt de mediane concentratie rond 0.5 $\mu$g/kg. In 2012 is er een hoge mediaanwaarde van 3 $\mu$g/kg gemeten, maar in de daaropvolgende jaren is deze waarde weer afgenomen. Vanaf 2016 is een lichte verdere daling waargenomen, wat ervoor zorgt dat de hoeveelheid hexachloorbenzenen stabiliseert rond de 0.5 $\mu$g/kg.
 
 ```{r biotaBotChloor}
 
@@ -558,7 +558,7 @@ Voor de analyse van verontreinigingen in mossel is bij de actieve monitoring (ui
 
 #### Arseen {#biota-mosselen-arseen}
 
-De gehalten arseen (zie Figuur \@ref(fig:mosselArseen)) schommelen rond de 10 tot 15 mg/kg (zie Tabel \@ref(tab:biotaMosselArseen)). In de metingen in drooggewicht, bij Vlissingen boei SSVH, neemt de hoeveelheid arseen enigszins (maar niet significant) af. Bij de metingen in natgewicht (omgerekend naar drooggewicht; Hoedekenskerke boei 4, Hooge Platen en Knuitershoek) nemen de arseengehaltes toe. Deze toename is significant bij de passief bemonsterde locaties Hoedekenskerke en Knuitershoek waar de hoeveelheid arseen met respectievelijk 0.15 en 0.82 $\mu$g/kg per jaar toeneemt. 
+De gehalten arseen (zie Figuur \@ref(fig:mosselArseen)) schommelen rond de 10 tot 15 mg/kg (zie Tabel \@ref(tab:biotaMosselArseen)). In de metingen in drooggewicht, bij Vlissingen boei SSVH, neemt de hoeveelheid arseen enigszins (maar niet significant) af. Bij de metingen in natgewicht (omgerekend naar drooggewicht; Hoedekenskerke boei 4, Hooge Platen en Knuitershoek) nemen de arseengehaltes toe. Deze toename is significant bij de passief bemonsterde locatie Knuitershoek waar de hoeveelheid arseen met 0.4 $\mu$g/kg per jaar toe is genomen.
 
 ```{r vocht-mossel}
 
@@ -665,7 +665,7 @@ plotTrends(df2_mossel2, "Chroom in mg/kg drooggewicht (vlees) in organisme (biot
 
 #### Koper {#biota-mosselen-koper}
 
-Het mediaangehalte koper in mossel (zie Figuur \@ref(fig:mosselKoper)) varieert van 9-13 mg/kg (zie Tabel \@ref(tab:biotaMosselKoper)). Bij Hansweert en Vlissingen (actief bemonsterd) neemt  het kopergehalte significant af. Bij Knuitershoek (passief bemonsterd) neemt koper juist significant toe. 
+Het mediaangehalte koper in mossel (zie Figuur \@ref(fig:mosselKoper)) varieert van 9-13 mg/kg (zie Tabel \@ref(tab:biotaMosselKoper)). Bij Hansweert en Vlissingen (actief bemonsterd) neemt  het kopergehalte significant af. Bij Knuitershoek (passief bemonsterd) neemt koper juist significant toe over de hele gemeten periode. De laatste jaren is overigens weer een afname te zien.  
 
 ```{r biotaMosselKoper}
 
@@ -822,7 +822,7 @@ Polycyclische Aromatische Koolwaterstoffen (PAK's) behoren tot een groep van enk
 
 Naast de verschillen in fysisch-chemische eigenschappen zijn er onderling grote verschillen in risico's voor mensen en ecosystemen. Voor het vaststellen van risico's worden daarom veelal één of meerdere PAK's geselecteerd als gidsstoffen voor de blootstelling aan PAK-mengsels. Hier is som van de concentraties van 6 PAK's ("de 6 van Borneff") gebruikt om de trends in ruimte en tijd te bekijken. De 6 PAK's van Borneff zijn: benzo[*a*]pyreen, benzo[*b*]fluorantheen, benzo[*g,h,i*]peryleen, benzo[*k*]fluorantheen, fluorantheen, indeno[*1,2,3-c,d*]pyreen.
 
-Tussen 1995-2008 werden monsters bij Hoedenskerke boei 4 geanalyeerd op PAK. Sinds 2011 wordt dit gedaan bij Knuitershoek. Figuur \@ref(fig:mosselPAK) toont de gemeten gehalten van PAK's in mosselen (6 van Borneff) bij beide stations. De fluctatie over tijd is groot en de gemiddelde waarde bij Hoedekenskerke verschilt niet significant met die bij Knuitershoek, zie Tabel \@ref(tab:biotaMosselPAK). De hoeveelheid PAK's in mosselen namen af bij Hoedenskerke boei 4, maar lijken bij Knuitershoek sinds 2014 toe te nemen. De tijdreeks is echter nog te kort om harde uitspraken te doen over trends bij Knuitershoek.
+Tussen 1995-2008 werden monsters bij Hoedenskerke boei 4 geanalyeerd op PAK. Sinds 2009 wordt dit gedaan bij Knuitershoek (passieve bemonstering) en recent ook weer bij Hansweert boei OHMG (actieve bemonstering). Figuur \@ref(fig:mosselPAK) toont de gemeten gehalten van PAK's in mosselen (6 van Borneff) bij alle stations. De gemiddelde waarde bij Hoedekenskerke verschilt niet significant met die bij Knuitershoek, zie Tabel \@ref(tab:biotaMosselPAK). Bij Knuitershoek was er een relatief hoge piek rond 2017, waarna de concentratie weer stabiliseerde tot het niveau van vóór de piek. Over het geheel is de concentratie stabiel of neemt af (Hansweert boei OHMG).
 
 ```{r biotaMosselPAK}
 
@@ -947,7 +947,7 @@ De volgende polychloorbifenylen zijn regelmatig gemeten bij de passieve monitori
 -   2,4,4'-trichloorbifenyl\
 -   Som PCB138 en PCB163
 
-De hoeveelheden PCB's nemen bij Hansweert boei OHMG en Vlissingen boei SSVH af in de tijd (Figuur \@ref(fig:mosselPCBdroog)). Daarnaast zijn de waarden bij het meer bovenstroomse station Hansweert boei OHMG groter dan bij Vlissingen boei SSVH. Bij de passieve monitoring (Knuitershoek) constateren we juist een stijging, zie Figuur \@ref(fig:mosselPCBnat), al heeft deze laatste trend een beperkte correlatie. De gesommeerde PCB waardes bij Knuitershoek zijn niet omgerekend van natgewicht naar droogewicht, aangezien er bij passieve monitoring gedeeltelijk andere PCB's worden gesommeerd dan voor actieve monitoring. Een dergelijke omgerekende gesommeerde waarde zal dus niet leiden tot een mogelijke vergelijking tussen stations Hansweert boei OHMG en Vlissingen boei SSVH (actief gemeten) en Knuitershoek (passief gemeten).
+De hoeveelheden PCB's nemen bij Hansweert boei OHMG en Vlissingen boei SSVH af in de tijd (Figuur \@ref(fig:mosselPCBdroog)). Daarnaast zijn de waarden bij het meer bovenstroomse station Hansweert boei OHMG groter dan bij Vlissingen boei SSVH. Bij de passieve monitoring (Knuitershoek) constateren weeen stijging tot 2017, 2018, waarna de concentraties weer dalen, zie Figuur \@ref(fig:mosselPCBnat). De gesommeerde PCB waardes bij Knuitershoek zijn omgerekend van natgewicht naar droogewicht. Aangezien er bij passieve monitoring gedeeltelijk andere PCB's worden gesommeerd dan voor actieve monitoring kan een dergelijke omgerekende gesommeerde waarde niet direct vergeleken worden tussen stations Hansweert boei OHMG en Vlissingen boei SSVH (actief gemeten) en Knuitershoek (passief gemeten).
 
 ```{r mosselPCBdroog, fig.cap="Jaarlijks gesommeerde waarde van de PCB's in mossel bij Hansweert boei OHMG en Vlissingen boei SSVH. Waardes zijn in drooggewicht gepresenteerd."}
 
@@ -979,19 +979,9 @@ plotTrends(sumPCBdroogdfMossel, "somPCBdroog")
 
 ```
 
-<!-- \begin{figure}[H] -->
 
-<!--  \centering  -->
 
-<!--  \includegraphics[width=1\linewidth]{../Figuren/Biota/Mossel_PCB_nat.png}  -->
-
-<!-- \caption[Jaarlijks gesommeerde waardes voor PCB's (nat) in mosselen]{Jaarlijks gesommeerde waarde van de PCB's in mossel bij Knuitershoek. Waardes zijn in natgewicht gepresenteerd.}  -->
-
-<!-- \label{fig:mossel_PCB_nat}  -->
-
-<!-- \end{figure}  -->
-
-```{r mosselPCBnat, fig.cap="Jaarlijks gesommeerde waarde van de PCB's in mossel bij Hansweert boei OHMG en Vlissingen boei SSVH. Waardes zijn in natgewicht gepresenteerd."}
+```{r mosselPCBnat, eval=FALSE, fig.cap="Jaarlijks gesommeerde waarde van de PCB's in mossel bij Hansweert boei OHMG en Vlissingen boei SSVH. Waardes zijn in natgewicht gepresenteerd."}
 
 pcbnat <- c("2,2',3,3',4,4',5,5',6-nonachloorbifenyl",
             "2,2',3,3',4,4',5,5'-octachloorbifenyl",
@@ -1053,7 +1043,7 @@ De gebromeerde vlamvertragers (polybroomdifenylethers, PBDE's) zijn gemeten in m
 -   2,3',4,4'-tetrabroomdifenylether\
 -   2,4,4'-tribroomdifenylether
 
-Er is gemeten vanaf 2010. Er werden toen waarden gemeten van 9 $\mu$g/kg. Na een kleine daling in 2014 was de waarden van 2015 weer rond de 4 - 5 $\mu$g/kg (vergelijkbaar met de waarde in 2012 en 2013). In 2016 en 2017 is de waarde verder toegenomen tot boven de 5 $\mu$g/kg. In 2018 en 2019 is er echter weer een afname tot ongeveer 3 $\mu$g/kg gemeten. Over de hele periode is er een statisch significante afname.
+Er is gemeten vanaf 2009. Er werden toen waarden gemeten van 9 $\mu$g/kg. Na een kleine daling in 2014 was de waarden van 2015 weer rond de 4 - 5 $\mu$g/kg (vergelijkbaar met de waarde in 2012 en 2013). In recente jaren schommelt de concentratie  rond de 3 $\mu$g/kg. Over de hele periode is er een statisch significante afname, deze is vooral veroorzaakt door de afname in de periode 2009 - 2014.
 
 ```{r biotaMosselPBDE}
 
@@ -1079,11 +1069,11 @@ somPBDEMossel <- df2_mossel2 %>%
   group_by(stationname, datetime, class, category, parametername) %>% 
   summarize(meanvalue = mean(value, na.rm = T), .groups = 'drop') %>%
   group_by(stationname, datetime, category, class) %>% 
-  summarize(somPBDE = sum(meanvalue, na.rm = T), .groups = 'drop') %>%
+  summarize(somPBDE = sum(meanvalue, na.rm = T), n = n(), .groups = 'drop') %>%
   pivot_longer(cols = somPBDE, names_to = "parametername", values_to = "value")
 
 knitr::kable(
-  statTableParams(somPBDEMossel, parnames = "somPBDE", statname = "Knuitershoek", rounding = 3),
+  statTableParams(somPBDEMossel, parnames = "somPBDE", statname = "Knuitershoek _P", rounding = 3),
   caption = "Mediane, 10-percentiel en 90-percentiel waardes van PBDE's in mossel bij Knuitershoek berekend op alle beschikbare data vanaf 1996. Waardes zijn in natgewicht gepresenteerd.") %>%
   kableExtra::kable_styling(latex_options="scale_down")
 
@@ -1095,13 +1085,13 @@ knitr::kable(
 
 ```{r mosselPBDEnat, fig.height=4, fig.cap="Jaarlijks gesommeerde waarde van de PBDE's in mossel bij Knuitershoek. Waardes zijn in natgewicht gepresenteerd."}
 
-plotTrends(somPBDEMossel, "somPBDE")
+plotTrends(somPBDEMossel %>% filter(stationname =="Knuitershoek _P"), "somPBDE")
 
 ```
 
 ### Organotinverbindingen {#biota-mossel-organotin}
 
-De organotinverbindingen (dibutyltin, difenyltin, monobutyltin, monofenyltin, trifenyltin, tributyltin) in mossel worden gesommeerd weergegeven. Bij de locaties Hansweert boei OHMG en Vlissingen boei SSVH (de actieve monitoring) wordt bij de metingen van difenyltin en monofenyltin regelmatig de detectiegrens bereikt. De sommatie van de waarden geeft hierdoor een hogere waarde dan in werkelijkheid (zie Tabel \@ref(tab:biotaMosselOrgano)). Er is bij deze stations wel een duidelijke afnemende trend te zien, zie Figuur \@ref(fig:mosselOrgano). Bij de locatie Knuitershoek (passieve monitoring; omgerekend van nat naar drooggewicht) is de waarde na 2015, na een uitschieter in 2014, weer gestabiliseerd rond 180 tot 200 $\mu$g/kg. Over de hele tijdserie van 2009 - nu is de afname significant. 
+De organotinverbindingen (dibutyltin, difenyltin, monobutyltin, monofenyltin, trifenyltin, tributyltin) in mossel worden gesommeerd weergegeven. Bij de locaties Hansweert boei OHMG en Vlissingen boei SSVH (de actieve monitoring) wordt bij de metingen van difenyltin en monofenyltin de laatste jaren regelmatig de detectiegrens bereikt. De sommatie van de waarden geeft hierdoor een hogere waarde dan in werkelijkheid (zie Tabel \@ref(tab:biotaMosselOrgano)). Er is bij deze stations wel een duidelijke afnemende trend te zien, zie Figuur \@ref(fig:mosselOrgano). Bij de locatie Knuitershoek (passieve monitoring; omgerekend van nat naar drooggewicht) is de waarde na 2015, na een uitschieter in 2014, weer gestabiliseerd tussen 60-100 $\mu$g/kg. Over de hele tijdserie van 2009 - nu is de afname significant. 
 
 ```{r biotaMosselOrgano}
 
@@ -1153,7 +1143,7 @@ plotTrends(somOrganotin, parname = "somOrganotin")
 
 #### Hexachloorbenzeen {#biota-mossel-Hexachloorbenzeen}
 
-Voor hexachloorbenzeen (HCB) zien we bij Hansweert boei OHMG en Hoedekenskerke boei 4 en in mindere mate bij Vlissingen boei SSVH een daling van de hoeveelheden tot ca. 2010, daarna zien we een lichte stijging. Vooral bij Vlissingen boei SSVH zijn de metingen beïnvloed door de detectiegrens van de meetapparatuur, bij andere stations is dit voor enkele jaren ook zo. Over de gehele periode is er geen significante trend, behalve bij Hooge Platen. De Hooge Platen wordt pas sinds 2009 bemeten. Sindsdien is er een forse stijging waar te nemen (0,22 $\mu$g/kg), maar die is vooral beïnvloed door de meetwaarde van 2013. De ordegrootte van de waarden is voor de meeste stations vergelijkbaar, alleen Hoedekenskerke boei 4 (2013), Hooge Platen (2013) en Knuitershoek (2013 en 2015) laten enkele hogere waarden zien, zie Tabel \@ref(tab:biotaMosselHexachloorbenzeen) en Figuur \@ref(fig:mosselHexachloorbenzeen). In 2016 was de waarde van Knuitershoek weer in de orde grootte van de waarde in 2014 en de waardes voor 2013 maar vervolgens is de concentratie in 2017 weer op het niveau van 2012 en 2015 en in 2018 en 2019 weer afgenomen naar eerdere lage waardes. Er is bij Knuitershoek dus een grote variatie te zien.
+Voor hexachloorbenzeen (HCB) zien we bij Hansweert boei OHMG en Hoedekenskerke boei 4 en in mindere mate bij Vlissingen boei SSVH een daling van de hoeveelheden tot ca. 2010, daarna zien we een lichte stijging. Vooral bij Vlissingen boei SSVH zijn de metingen beïnvloed door de detectiegrens van de meetapparatuur, bij andere stations is dit voor enkele jaren ook zo. In recente jaren zijn alleen metingen voor Knuitershook (passief) aanwezig. De gemeten waarden variëren sterk van tegen de detectiegrens (0.02-0.04), tot bijna 1 $\mu$g/kg. Figuur \@ref(fig:mosselHexachloorbenzeen). Er is geen significante stijging of daling over de hele tijdsperiode. 
 
 <!-- \begin{table}[H] -->
 

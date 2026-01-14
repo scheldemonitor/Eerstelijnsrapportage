@@ -1,5 +1,5 @@
 
-book_filename: "Eerstelijnsrapportage Westerschelde 2023"
+book_filename: "Eerstelijnsrapportage_Westerschelde"
 rmd_files: [
   "index.Rmd",
   "01_inleiding.Rmd",
