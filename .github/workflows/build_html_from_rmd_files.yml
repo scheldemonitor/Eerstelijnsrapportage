@@ -3,7 +3,7 @@ name: build_html_from_rmd_files
 on:
   push:
     branches:
-      - "2023"
+      - main
 
 jobs:
   build_and_deploy_job:
@@ -21,38 +21,38 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libudunits2-dev libgdal-dev libgeos-dev libproj-dev cmake libfreetype6-dev libfontconfig1-dev xclip
       - name: Install R dependencies from CRAN
         run: Rscript -e 'install.packages(c("cli", "R6", "digest", "fansi", "memoise", "rlang", "vctrs", "withr", "yaml", "renv", "Kendall"), repos = "https://cloud.r-project.org")'
-      - name: Download and install specific package versions
-        run: |
-          wget -O desc_1.4.3.tar.gz https://github.com/r-lib/desc/archive/refs/tags/v1.4.3.tar.gz
-          wget -O brio_1.1.3.tar.gz https://github.com/r-lib/brio/archive/refs/tags/v1.1.3.tar.gz
-          wget -O downlit_0.4.2.tar.gz https://github.com/r-lib/downlit/archive/refs/tags/v0.4.2.tar.gz
-          wget -O evaluate_0.23.tar.gz https://github.com/r-lib/evaluate/archive/refs/tags/v0.23.tar.gz
-      - name: Install specific package versions
-        run: |
-          if [ -f "desc_1.4.3.tar.gz" ]; then
-            R CMD INSTALL desc_1.4.3.tar.gz
-          else
-            echo "desc_1.4.3.tar.gz not found"
-            exit 1
-          fi
-          if [ -f "brio_1.1.3.tar.gz" ]; then
-            R CMD INSTALL brio_1.1.3.tar.gz
-          else
-            echo "brio_1.1.3.tar.gz not found"
-            exit 1
-          fi
-          if [ -f "evaluate_0.23.tar.gz" ]; then
-            R CMD INSTALL evaluate_0.23.tar.gz
-          else
-            echo "evaluate_0.23.tar.gz not found"
-            exit 1
-          fi
-          if [ -f "downlit_0.4.2.tar.gz" ]; then
-            R CMD INSTALL downlit_0.4.2.tar.gz
-          else
-            echo "downlit_0.4.2.tar.gz not found"
-            exit 1
-          fi
+    #  - name: Download and install specific package versions
+        #run: |
+          #wget -O desc_1.4.3.tar.gz https://github.com/r-lib/desc/archive/refs/tags/v1.4.3.tar.gz
+          #wget -O brio_1.1.3.tar.gz https://github.com/r-lib/brio/archive/refs/tags/v1.1.3.tar.gz
+          #wget -O downlit_0.4.2.tar.gz https://github.com/r-lib/downlit/archive/refs/tags/v0.4.2.tar.gz
+          #wget -O evaluate_0.23.tar.gz https://github.com/r-lib/evaluate/archive/refs/tags/v0.23.tar.gz
+  #    - name: Install specific package versions
+  #      run: |
+  #        if [ -f "desc_1.4.3.tar.gz" ]; then
+  #          R CMD INSTALL desc_1.4.3.tar.gz
+  #        else
+  #          echo "desc_1.4.3.tar.gz not found"
+  #          exit 1
+  #        fi
+  #        if [ -f "brio_1.1.3.tar.gz" ]; then
+  #          R CMD INSTALL brio_1.1.3.tar.gz
+  #        else
+  #          echo "brio_1.1.3.tar.gz not found"
+  #          exit 1
+  #        fi
+  #        if [ -f "evaluate_0.23.tar.gz" ]; then
+  #          R CMD INSTALL evaluate_0.23.tar.gz
+  #        else
+  #          echo "evaluate_0.23.tar.gz not found"
+  #          exit 1
+  #        fi
+  #        if [ -f "downlit_0.4.2.tar.gz" ]; then
+  #          R CMD INSTALL downlit_0.4.2.tar.gz
+  #        else
+  #          echo "downlit_0.4.2.tar.gz not found"
+  #          exit 1
+  #        fi
       - name: Install rmarkdown
         run: Rscript -e 'install.packages("rmarkdown", repos = "https://cloud.r-project.org")'
       - name: Render Book
