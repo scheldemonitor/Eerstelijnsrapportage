@@ -1,21 +1,22 @@
-name: build_html_from_rmd_files
+name: Docs Deploy
 
 on:
   push:
     branches:
-      - "2023"
+      - main
 
 jobs:
-  build_and_deploy_job:
+  deploy:
     runs-on: ubuntu-latest
-    name: Build and Deploy Job
+    permissions:
+      contents: write
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           submodules: true
       - uses: r-lib/actions/setup-r@v2
         with:
-          r-version: "4.5.2"
+          r-version: "3.6.3"
       - uses: r-lib/actions/setup-pandoc@v2
       - name: Install system dependencies
         run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libudunits2-dev libgdal-dev libgeos-dev libproj-dev cmake libfreetype6-dev libfontconfig1-dev xclip
@@ -60,24 +61,11 @@ jobs:
         working-directory: ./
       - name: Add .nojekyll file
         run: touch ./_book/.nojekyll
-      - name: Commit and push changes
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add .
-          git commit -m "Github action | Rebuild book"
-          git push
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_book
-          name: _book
-          path: docs/_book
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.5
-        with:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: docs/_book
-          CLEAN: true
+          destination_dir: /
+          keep_files: false
+

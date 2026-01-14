@@ -1,21 +1,28 @@
-name: build_html_from_rmd_files
+name: Docs Preview
 
 on:
-  push:
+  pull_request:
     branches:
-      - "2023"
+      - feature/2025
+      - '2025'
+      - '2024'
+      # Add more year branches as you create them:
+      # - feature/2026
+      # - '2026'
 
 jobs:
-  build_and_deploy_job:
+  build-preview:
     runs-on: ubuntu-latest
-    name: Build and Deploy Job
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           submodules: true
       - uses: r-lib/actions/setup-r@v2
         with:
-          r-version: "4.5.2"
+          r-version: "3.6.3"
       - uses: r-lib/actions/setup-pandoc@v2
       - name: Install system dependencies
         run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libudunits2-dev libgdal-dev libgeos-dev libproj-dev cmake libfreetype6-dev libfontconfig1-dev xclip
@@ -60,24 +67,43 @@ jobs:
         working-directory: ./
       - name: Add .nojekyll file
         run: touch ./_book/.nojekyll
-      - name: Commit and push changes
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add .
-          git commit -m "Github action | Rebuild book"
-          git push
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Deploy preview to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_book
-          name: _book
-          path: docs/_book
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.5
+          destination_dir: preview/pr-${{ github.event.pull_request.number }}
+          keep_files: true
+      - name: Comment preview URL on PR
+        uses: actions/github-script@v7
         with:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: docs/_book
-          CLEAN: true
+          script: |
+            const url = `https://${context.repo.owner}.github.io/${context.repo.repo}/preview/pr-${context.payload.pull_request.number}/`;
+            const comment = `## 📚 Preview Deployed!\n\n🔗 **[View Preview](${url})**\n\nThis preview will be available until the PR is closed.`;
+            
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            
+            const existing = comments.data.find(c => 
+              c.user.type === 'Bot' && c.body.includes('Preview Deployed')
+            );
+            
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body: comment
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: comment
+              });
+            }
+
