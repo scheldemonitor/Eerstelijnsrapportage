@@ -19,7 +19,7 @@ jobs:
           r-version: "4.5.2"
       - uses: r-lib/actions/setup-pandoc@v2
       - name: Install system dependencies
-        run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libudunits2-dev libgdal-dev libgeos-dev libproj-dev cmake libfreetype6-dev libfontconfig1-dev xclip
+        run: sudo apt-get update && sudo apt-get install -y build-essential libcurl4-openssl-dev libudunits2-dev libgdal-dev libgeos-dev libproj-dev cmake libfreetype6-dev libfontconfig1-dev xclip
       - name: Install R dependencies from CRAN
         run: Rscript -e 'install.packages(c("cli", "R6", "digest", "fansi", "memoise", "rlang", "vctrs", "withr", "yaml", "renv", "Kendall"), repos = "https://cloud.r-project.org")'
       - name: Download and install specific package versions
@@ -56,6 +56,10 @@ jobs:
           fi
       - name: Install rmarkdown
         run: Rscript -e 'install.packages("rmarkdown", repos = "https://cloud.r-project.org")'
+      - name: Install cpp11 and older svglite
+        run: |
+          Rscript -e 'install.packages(c("cpp11", "remotes"), repos = "https://cloud.r-project.org")'
+          Rscript -e 'remotes::install_version("svglite", version = "2.1.0", repos = "https://cloud.r-project.org")'
       - name: Render Book
         run: Rscript -e 'renv::restore(); bookdown::render_book("index.Rmd")'
         working-directory: ./
