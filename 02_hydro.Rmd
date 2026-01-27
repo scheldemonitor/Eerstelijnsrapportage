@@ -9,8 +9,8 @@ require(plotly)
 
 source("r/functions.R")
 
-refreshWaterstanden = FALSE
-refreshGolven = FALSE
+refreshWaterstanden = !refreshData
+refreshGolven = !refreshData
 
 ```
 

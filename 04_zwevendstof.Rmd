@@ -13,7 +13,6 @@ require(sf)
 
 trendstations <- c("Schaar van Ouden Doel", "Vlissingen boei SSVH")
 
-refreshData = F
 fysChemZwevendDataPath <- "Data_FysChem_zwevend.csv"
 fysChemZwevendDataPath2 <- "Data_FysChem_zwevend2.csv"
 # fysChemZwevendDataPath <- file.path(baseDir, "Data_FysChem_zwevend.csv")

@@ -8,7 +8,6 @@ knitr::opts_chunk$set(
 source("r/functions.R")
 library(lubridate)
 
-refreshData = F
 if(refreshData){
   source("r/refresh_data.R") 
   refresh_fytoplanktondata()

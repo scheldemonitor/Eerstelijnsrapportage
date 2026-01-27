@@ -43,7 +43,7 @@ verifyStations <- function(df) {
   
 fysChemOppDataPath <- "Data_FysChem_opp.csv"
  
-refreshData = F
+
 if(refreshData){ 
   source("r/refresh_data.R") 
   refresh_fysischchemischoppwater(startyear = 1998, endyear = dataJaar) 

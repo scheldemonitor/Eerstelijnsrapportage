@@ -36,7 +36,6 @@ trendstations <- c('Schaar van Ouden Doel',
 "Wielingen oost"
 )
 
-refreshData = F
 fysChemBodemDataPath <- "Data_FysChem_bodem.csv"
 if(refreshData){ 
   source("r/refresh_data.R") 

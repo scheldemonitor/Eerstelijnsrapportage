@@ -4,7 +4,9 @@ options(width = 60)
 source("r/functions.R")
 library(smwfs)
 
-dataJaar = 2023
+dataJaar = 2024
+
+refreshData = T
 
 # path to frozen datafiles (downloads from Scheldemonitor that are assoiated with report version)
 localDatapath <- "" # local
