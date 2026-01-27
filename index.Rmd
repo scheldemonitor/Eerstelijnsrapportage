@@ -4,6 +4,7 @@ subtitle: 2024
 author: "Deltares"
 date: '`r Sys.Date()`'
 site: bookdown::bookdown_site
+cover-image: Figuren/cover/getijdenland.jpg
 # documentclass: book
 bibliography: bib/westerschelde.bib
 # biblio-style: apalike # alleen voor natbib

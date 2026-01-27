@@ -631,7 +631,7 @@ if(knitr::is_html_output()) {
              caption = "Indeling van fytoplankton in trofies en groepen.")
  
 } else {kableExtra::kable(specieslist, longtable = TRUE, booktabs = TRUE, col.names = c("Naam","BTX","AphiaID","Trofie","Groep"),caption = "Indeling van fytoplankton in trofies en groepen.") %>%
-  kable_styling(latex_options = c("repeat_header"))
+  kableExtra::kable_styling(font_size = 7, latex_options = c("repeat_header"))
 }  
 
 ```
