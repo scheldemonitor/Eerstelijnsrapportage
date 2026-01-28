@@ -36,7 +36,7 @@ verifyStations <- function(df) {
       repair_limits() %>%
       group_by(parametername, stationname) %>%
       mutate(across(value, remove_outliers)) %>%
-      ungroup()  
+      ungroup()
     return(df2)
   }
 }
@@ -802,7 +802,7 @@ De resultaten lijken op die van orthofosfaat, vooral op de bovenstroomse station
 ```{r fysischFosfaatFilTab}
 parname <- "Fosfaat, totaal in mg/l na filtratie in oppervlaktewater"
 df2 <- verifyStations(df)
-dt <- statTable(df2, parname, 3)
+dt <- statTable(df2, parname, 3, exclude_station = "Schaar van Ouden Doel")
 knitr::kable(dt, 
              caption = "Resultaten voor het fosfaatgehalte na filtratie in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare gegevens vanaf 1998.")
 ```

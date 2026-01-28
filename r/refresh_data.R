@@ -56,13 +56,13 @@ refresh_waterstanden <- function(datajaar){
 
 # Hydrodynamiek - golven
 
-refresh_golven <- function(datajaar){
+refresh_golven <- function(startjaar, datajaar){
   Golven <- c(
     2599,2601, # Hm0
     1816, 2594, # H3, TH3
     2596,2597,2598 # TM02
   )
-  for(jaar in 1998:datajaar){
+  for(jaar in startjaar:datajaar){
     df <- smwfs::getSMdata(startyear = jaar, endyear = jaar + 1, parID = c(Golven), datasetID = c(8032))
     write.csv(df, file.path(savepath,paste0("Data_Hydro_golven_", jaar,'.csv')), row.names = F)
   }

@@ -100,7 +100,7 @@ plotLocations <- function(df, nudge__x = -1000, nudge__y = -3000, angle__ = 0, h
 }
 
 # Make table with lm statistics
-statTable <- function(df, parname, rounding, meanorder = "decreasing", sf = F) {
+statTable <- function(df, parname, rounding, meanorder = "decreasing", sf = F, exclude_station = "none") {
   
   if(sf) df <- df %>% st_drop_geometry()
   
@@ -113,12 +113,13 @@ statTable <- function(df, parname, rounding, meanorder = "decreasing", sf = F) {
     stats <- df %>%
       drop_na(value) %>%
       filter(parametername == parname) %>%
+      filter(stationname != exclude_station) %>%
       mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
       filter(year >= 2000) %>%
       # group_by(stationname, year, month) %>% 
       # summarize(monthlymean = mean(value)) %>%
       group_by(stationname, year) %>% 
-      summarize(yearlymedian = median(value)) %>%
+      summarize(yearlymedian = median(value, na.rm = T)) %>%
       drop_na(yearlymedian) %>%
       ungroup() %>%
       group_by(stationname) %>%
@@ -128,6 +129,7 @@ statTable <- function(df, parname, rounding, meanorder = "decreasing", sf = F) {
     df %>% 
       drop_na(value) %>%
       filter(parametername == parname) %>% 
+      filter(stationname != exclude_station) %>%
       mutate(year = lubridate::year(datetime), month = lubridate::month(datetime)) %>%
       filter(year >= 2000) %>%
       group_by(stationname) %>% 
