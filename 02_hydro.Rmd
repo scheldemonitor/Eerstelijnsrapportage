@@ -9,8 +9,8 @@ require(plotly)
 
 source("r/functions.R")
 
-refreshWaterstanden = !refreshData
-refreshGolven = !refreshData
+refreshWaterstanden = refreshData
+refreshGolven = refreshData
 
 ```
 
@@ -307,8 +307,9 @@ df_getijslag %>% #st_drop_geometry() %>%
   theme(panel.background=element_blank(),
         panel.spacing = unit(c(0, 0, 0, 0), "cm"),       
         plot.background = element_rect(fill = "white",colour = NA),
-        plot.margin = unit(c(0, 0, 0, 0), "null"),  # Edited code
-        legend.position = 'none')
+        plot.margin = unit(c(0, 0, 0, 0), "null")#,  # Edited code
+        # legend.position = 'none'
+        )
 
 ```
 

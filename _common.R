@@ -4,7 +4,7 @@ options(width = 60)
 source("r/functions.R")
 library(smwfs)
 
-dataJaar = 2024
+dataJaar = 2023
 
 refreshData = F
 
