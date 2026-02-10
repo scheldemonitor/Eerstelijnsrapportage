@@ -2,6 +2,9 @@
 
 <div id="refs"></div>
 
+
+
+
 ```{=latex}
-\printallbibliography
+\bibliography{bib/westerschelde.bib}
 ```

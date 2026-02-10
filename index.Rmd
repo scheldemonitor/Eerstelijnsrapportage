@@ -7,8 +7,8 @@ site: bookdown::bookdown_site
 cover-image: Figuren/cover/getijdenland.jpg
 # documentclass: book
 bibliography: bib/westerschelde.bib
-# biblio-style: apalike # alleen voor natbib
-# link-citations: yes   # alleen voor natbib
+biblio-style: apalike # alleen voor natbib
+link-citations: yes   # alleen voor natbib
 always_allow_html: yes
 ---
 
@@ -19,7 +19,7 @@ always_allow_html: yes
 # options(tinytex.verbose = TRUE)
 knitr::opts_chunk$set(echo = FALSE,	message = FALSE, warning = FALSE, cache = T)
 
-draft = TRUE
+draft = FALSE
 ```
 
 <!-- De informatie op deze website is op dit moment onder constructie en bedoeld voor een beperkt publiek. Niets van deze website mag worden gebruikt door derden. -->
@@ -70,6 +70,8 @@ Dit is de webversie van de eerstelijnsrapportage. De webversie kan in details af
 ```
 
 ## Veranderingen ten opzichte van de vorige rapportages
+
+De volgende veranderingen zijn toegepast ten opzichte van de vorige versie:
 
 1. De gegevens voor korrelgrootte in bodem/sediment zijn toegevoegd in zoverre beschikbaar
 
