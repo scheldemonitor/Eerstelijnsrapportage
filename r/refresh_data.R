@@ -18,13 +18,13 @@ IDs <- lapply(
 
 # Hydrodynamiek - waterstanden
 
-refresh_waterstanden <- function(datajaar){
+refresh_waterstanden <- function(startjaar, datajaar){
   Waterstand <- c(
     9695,9694, # HW, LW NAP
     10873,10874, # HW, LW MSL
     2438, 2439   # Amplitude, fase
   ) 
-  for(jaar in 1998:datajaar){
+  for(jaar in startjaar:datajaar){
     df <- smwfs::getSMdata(startyear = jaar, endyear = jaar + 1, parID = c(Waterstand), datasetID = c(476,1527,945))
     write.csv(df, file = file.path(savepath, paste0("Data_Hydro_waterstanden_", jaar,'.csv', sep = "")), row.names = F)
   }
@@ -70,6 +70,7 @@ refresh_golven <- function(startjaar, datajaar){
   # bewerkingen
   
 allFiles <- list.files(file.path(savepath), pattern = "Data_Hydro_golven_", full.names = T)
+allFiles <- allFiles[allFiles != "p:/11202493--systeemrap-grevelingen/1_data//Westerschelde/Scheldemonitor/2025/Data_Hydro_golven_all.csv"]
 df <- lapply(
   allFiles, function(x) # nameless function. Wat hierna staat wordt uitgevoerd voor elke elemente van allFiles
     read_delim(x, delim = ",", col_types = cols(.default = "c",

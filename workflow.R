@@ -1,7 +1,5 @@
-
-update_to = 2025
-
-stopifnot(newversion > existingversion)
+source("_common.R")
+source("r/refresh_data.R")
 
 update = FALSE
 
@@ -14,23 +12,17 @@ if(update){
   ## update version
   # e.g. set dataJaar
   
-  update.year <- function(report_year = 2025){
-    dataJaar <- report_year - 1
-  }
-  
-  if(passes) version = version.required
   
   ## update data
   # fetch all data needed for a new report
   
-  source("r/refresh_data.R")
   
   # waterstanden
-  refresh_waterstanden(datajaar = dataJaar)
+  refresh_waterstanden(startjaar = 2023, datajaar = dataJaar)
   
   # golven
   refresh_golven(
-    startjaar = 2018, # only when partly update is done
+    startjaar = 2022, # only when partly update is done
     datajaar = dataJaar
   )
   
