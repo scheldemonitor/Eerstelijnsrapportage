@@ -1,0 +1,55 @@
+---
+title: "Untitled"
+author: "Willem Stolte"
+date: "2026-05-13"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+source("_common.R")
+source("r/refresh_data.R")
+source("r/functions.R")
+```
+
+## Haal afvoer data op uit Scheldemonitor
+
+```{r}
+
+# refresh_afvoeren(endyear = 2025) # if year is added
+filepath = "Data_Afvoeren.csv"
+df_afvoer <- read.csv(file.path(savepath, filepath))
+
+df_afvoer_mod <- make_summary_nested(df_afvoer)
+ 
+```
+## Maandelijkse gemiddelden
+
+```{r}
+plot_monthly_median_ribbon(df_afvoer_mod)
+```
+
+
+## Jaarlijkse gemiddelden
+
+```{r}
+plot_yearly_median_ribbon(df_afvoer_mod)
+```
+
+
+## Z-scores
+
+```{r}
+plot_monthly_anomaly(df_afvoer_mod, log_transform = F)
+```
+
+```{r}
+
+plot_monthly_anomaly(df_afvoer_mod, log_transform = T)
+
+```
+
+
+
+

@@ -127,6 +127,8 @@ make_summary_nested <- function(df,
       summarise(
         n = sum(!is.na(value)),
         median = median(value, na.rm = TRUE),
+        mean = mean(value, na.rm = TRUE),
+        sd = sd(value, na.rm = TRUE),
         p10 = quantile(value, 0.10, na.rm = TRUE, names = FALSE),
         p90 = quantile(value, 0.90, na.rm = TRUE, names = FALSE),
         .groups = "drop"
@@ -140,6 +142,8 @@ make_summary_nested <- function(df,
       summarise(
         n = sum(!is.na(value)),
         median = median(value, na.rm = TRUE),
+        mean = mean(value, na.rm = TRUE),
+        sd = sd(value, na.rm = TRUE),
         p10 = quantile(value, 0.10, na.rm = TRUE, names = FALSE),
         p90 = quantile(value, 0.90, na.rm = TRUE, names = FALSE),
         .groups = "drop"
@@ -196,6 +200,119 @@ plot_monthly_median_ribbon <- function(result_df) {
     theme_minimal()
 }
 
+# Plot monthly means based on output from make_nested_summary()
+# 
+
+plot_yearly_median_ribbon <- function(result_df) {
+  
+  # unnest maanddata
+  df_plot <- result_df %>%
+    unnest(yearly_data) %>%
+    mutate(
+      date = as.Date(paste(year, 6, 1, sep = "-"))
+    )
+  
+  # plot
+  ggplot(df_plot, aes(x = date)) +
+    
+    geom_ribbon(
+      aes(ymin = 0, ymax = median),
+      alpha = 0.3,
+      fill = "steelblue"
+    ) +
+    
+    geom_line(
+      aes(y = median),
+      color = "steelblue",
+      linewidth = 0.4
+    ) +
+    
+    facet_wrap(~ stationname + parametername, scales = "free_y") +
+    
+    labs(
+      x = "Datum",
+      y = "Jaarmediaan",
+      title = "Jaarmedianen (ribbon vanaf 0)"
+    ) +
+    
+    theme_minimal()
+}
+
+
+plot_monthly_anomaly <- function(result_df, log_transform = FALSE) {
+  
+  df_plot <- result_df %>%
+    unnest(monthly_data) %>%
+    mutate(
+      date = as.Date(date),
+      group_id = paste(stationname, parametername, sep = " | ")
+    )
+  
+  # ---- kies schaal ----
+  if (log_transform) {
+    
+    df_plot <- df_plot %>%
+      mutate(
+        # kleine offset om log(0) te vermijden
+        median_log = log(median + 1e-6)
+      ) %>%
+      group_by(group_id) %>%
+      mutate(
+        mean_val = mean(median_log, na.rm = TRUE),
+        sd_val   = sd(median_log, na.rm = TRUE),
+        z = (median_log - mean_val) / sd_val
+      ) %>%
+      ungroup()
+    
+    subtitle_txt <- "Z-score op log(median) (scheefheid gecorrigeerd)"
+    
+  } else {
+    
+    df_plot <- df_plot %>%
+      group_by(group_id) %>%
+      mutate(
+        mean_val = mean(median, na.rm = TRUE),
+        sd_val   = sd(median, na.rm = TRUE),
+        z = (median - mean_val) / sd_val
+      ) %>%
+      ungroup()
+    
+    subtitle_txt <- "Z-score op originele schaal"
+  }
+  
+  # ---- plot ----
+  ggplot(df_plot, aes(x = date, y = z)) +
+    
+    # positieve afwijking
+    geom_ribbon(
+      aes(ymin = 0, ymax = pmax(z, 0)),
+      fill = "steelblue",
+      alpha = 0.3
+    ) +
+    
+    # negatieve afwijking
+    geom_ribbon(
+      aes(ymin = pmin(z, 0), ymax = 0),
+      fill = "tomato",
+      alpha = 0.3
+    ) +
+    
+    geom_line(color = "black", linewidth = 0.5) +
+    
+    geom_hline(yintercept = 0) +
+    geom_hline(yintercept = c(-1, 1), linetype = "dashed") +
+    
+    facet_wrap(~ stationname + parametername, scales = "free_x") +
+    
+    labs(
+      x = "Datum",
+      y = "Z-score",
+      title = "Maandelijkse anomalies",
+      subtitle = subtitle_txt
+    ) +
+    
+    theme_minimal()
+}
 
 ###==== plot functies =============================
 
