@@ -118,7 +118,20 @@ rm(df)
 
 }
 
-
+refresh_afvoeren <- function(startyear = 1998, endyear, filepath = "Data_Afvoeren.csv"){
+  
+  url = "http://geo.vliz.be/geoserver/Dataportal/wfs?service=wfs&version=1.1.0&typeName=abiotic_observations&request=GetFeature&outputFormat=text%2Fcsv&viewParams=where%3Aobs.context+%26%26+ARRAY%5B1%5D+AND+standardparameterid+IN+%2813569%29+AND+imisdatasetid+IN+%281269%29"
+  
+  df <- readr::read_csv(url)
+  
+  if (nrow(df) != nrow(df %>% select(-FID) %>% distinct())) {
+    df <- df %>% select(-FID) %>% distinct()
+  }
+  df <- df %>% filter(stationname == "Grens België-Nederland calc/Zeeschelde")
+  
+  write.csv(df, file.path(savepath, filepath), row.names=FALSE)
+  
+}
 
 # Fysisch-chemisch - oppervlaktewater
 
