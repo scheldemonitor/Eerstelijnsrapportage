@@ -68,6 +68,135 @@ maanden <- c("januari", "februari", "maart", "april", "mei", "juni", "juli",
              "augustus", "september", "oktober", "november", "december")
 
 
+###==== databewerkingen ====== NIEUW ========================
+#
+# Makes summary dataframe with 
+# original data 
+# monthly statistics
+# yearly statistics
+
+make_summary_nested <- function(df,
+                                station_col = "stationname",
+                                lat_col = "latitude",
+                                lon_col = "longitude",
+                                param_col = "parametername",
+                                unit_col = "parameterunit",
+                                time_col = "datetime",
+                                value_col = "value") {
+  
+  df_clean <- df %>%
+    transmute(
+      stationname = .data[[station_col]],
+      latitude = .data[[lat_col]],
+      longitude = .data[[lon_col]],
+      parametername = .data[[param_col]],
+      parameterunit = .data[[unit_col]],
+      datetime = as.POSIXct(.data[[time_col]]),
+      value = .data[[value_col]]
+    )
+  
+  groups <- df_clean %>%
+    group_by(stationname, latitude, longitude, parametername, parameterunit) %>%
+    group_split()
+  
+  result <- map_dfr(groups, function(d) {
+    
+    # metadata
+    meta <- d %>%
+      summarise(
+        stationname = first(stationname),
+        latitude = first(latitude),
+        longitude = first(longitude),
+        parametername = first(parametername),
+        parameterunit = first(parameterunit)
+      )
+    
+    # ---- originele data ----
+    original_data <- d %>%
+      mutate(date = as.Date(datetime)) %>%
+      select(datetime, date, value)
+    
+    # ---- maand ----
+    monthly_data <- d %>%
+      mutate(
+        date = as.Date(datetime),
+        year = year(datetime),
+        month = month(datetime)
+      ) %>%
+      group_by(year, month) %>%
+      summarise(
+        n = sum(!is.na(value)),
+        median = median(value, na.rm = TRUE),
+        p10 = quantile(value, 0.10, na.rm = TRUE, names = FALSE),
+        p90 = quantile(value, 0.90, na.rm = TRUE, names = FALSE),
+        .groups = "drop"
+      ) %>%
+      mutate(date = as.Date(paste(year, month, 1, sep = "-")))
+    
+    # ---- jaar ----
+    yearly_data <- d %>%
+      mutate(year = year(datetime)) %>%
+      group_by(year) %>%
+      summarise(
+        n = sum(!is.na(value)),
+        median = median(value, na.rm = TRUE),
+        p10 = quantile(value, 0.10, na.rm = TRUE, names = FALSE),
+        p90 = quantile(value, 0.90, na.rm = TRUE, names = FALSE),
+        .groups = "drop"
+      )
+    
+    meta %>%
+      mutate(
+        original_data = list(original_data),
+        monthly_data = list(monthly_data),
+        yearly_data = list(yearly_data)
+      )
+  })
+  
+  return(result)
+}
+
+###==== plot functies ===NIEUW==========================
+
+# Plot monthly means based on output from make_nested_summary()
+# 
+
+plot_monthly_median_ribbon <- function(result_df) {
+  
+  # unnest maanddata
+  df_plot <- result_df %>%
+    unnest(monthly_data) %>%
+    mutate(
+      date = as.Date(paste(year, month, 1, sep = "-"))
+    )
+  
+  # plot
+  ggplot(df_plot, aes(x = date)) +
+    
+    geom_ribbon(
+      aes(ymin = 0, ymax = median),
+      alpha = 0.3,
+      fill = "steelblue"
+    ) +
+    
+    geom_line(
+      aes(y = median),
+      color = "steelblue",
+      linewidth = 0.4
+    ) +
+    
+    facet_wrap(~ stationname + parametername, scales = "free_y") +
+    
+    labs(
+      x = "Datum",
+      y = "Maandmediaan",
+      title = "Maandmedianen (ribbon vanaf 0)"
+    ) +
+    
+    theme_minimal()
+}
+
+
 ###==== plot functies =============================
 
 plotLocations <- function(df, nudge__x = -1000, nudge__y = -3000, angle__ = 0, html = F){
